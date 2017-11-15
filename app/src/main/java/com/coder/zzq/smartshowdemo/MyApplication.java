@@ -2,7 +2,10 @@ package com.coder.zzq.smartshowdemo;
 
 import android.app.Application;
 import android.graphics.Color;
+import android.support.design.widget.Snackbar;
+import android.widget.TextView;
 
+import com.coder.zzq.smartshow.snackbar.ProcessViewCallback;
 import com.coder.zzq.smartshow.snackbar.SmartSnackbar;
 
 
@@ -41,7 +44,13 @@ public class MyApplication extends Application {
                 .msgTextColorRes(R.color.colorAccent)
                 .actionColor(Color.GREEN)
                 .msgTextSizeSp(18)
-                .actionSizeSp(20);
+                .actionSizeSp(20)
+                .processView(new ProcessViewCallback() {
+                    @Override
+                    public void processSnackbarView(Snackbar.SnackbarLayout layout, TextView msgView, TextView actionView) {
+                        layout.setBackgroundColor(Color.YELLOW);
+                    }
+                });
 
     }
 }

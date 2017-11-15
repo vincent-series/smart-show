@@ -37,6 +37,8 @@ public class SmartSnackbar extends Snackbar.Callback implements SnackbarSetting,
     private int mActionColor;
     private int mActionSizeSp;
 
+    private ProcessViewCallback mProcessViewCallback;
+
     private SmartSnackbar(Context context) {
         if (context == null) {
             throw new NullPointerException("初始化SmartSnackbar的Context不可以为null！");
@@ -110,6 +112,10 @@ public class SmartSnackbar extends Snackbar.Callback implements SnackbarSetting,
         }
         if (mActionSizeSp != -1){
             actionView.setTextSize(TypedValue.COMPLEX_UNIT_SP,mActionSizeSp);
+        }
+
+        if (mProcessViewCallback != null){
+            mProcessViewCallback.processSnackbarView((Snackbar.SnackbarLayout) mSnackbar.getView(),msgView,actionView);
         }
     }
 
@@ -256,6 +262,12 @@ public class SmartSnackbar extends Snackbar.Callback implements SnackbarSetting,
     @Override
     public SnackbarSetting actionSizeSp(int textSizeSp) {
         mActionSizeSp = textSizeSp;
+        return this;
+    }
+
+    @Override
+    public SnackbarSetting processView(ProcessViewCallback callback) {
+        mProcessViewCallback = callback;
         return this;
     }
 

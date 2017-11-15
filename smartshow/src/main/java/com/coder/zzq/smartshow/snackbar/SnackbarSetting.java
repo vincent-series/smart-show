@@ -23,4 +23,6 @@ public interface SnackbarSetting {
     SnackbarSetting actionColorRes(@ColorRes int colorRes);
 
     SnackbarSetting actionSizeSp(int textSizeSp);
+
+    SnackbarSetting processView(ProcessViewCallback callback);
 }
