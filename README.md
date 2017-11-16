@@ -20,7 +20,7 @@ allprojects {
 4.可对Toast原有布局的风格进行修改，如背景颜色，文字大小和颜色等</br>
 5.可为Toast设置自定义布局，并进行处理</br>
 ### 使用：
-第一步，初始化</br>
+第一步，在Application的onCreate()方法中初始化</br>
 方式 1：<br/>
 <pre><code>
         //使用默认布局的普通Toast
