@@ -58,8 +58,10 @@ allprojects {
         返回CustomToastSetting对象
         SmartToast.customToast(this)
                 //设置自定义布局，有重载方法，可直接以View为参数
+                //在你的自定义布局中，一定要设置显示文本提示的TextView的Id为
+                //android:id="@id/custom_toast_msg"
                 .view(R.layout.custom_toast)
-                //
+                //对自定义布局进行代码处理
                 .processCustomView(new ProcessViewCallback() {
                     @Override
                     public void processCustomView(View view) {
@@ -67,3 +69,27 @@ allprojects {
                     }
                 });
 </pre></code>
+第二步，调用show方法显示Toast<br/>
+显示短暂Toast<br/>
+<pre><code>
+        //在默认位置显示
+        SmartToast.show("我是朱志强！");
+        //在屏幕顶部显示，距离顶部位置为Toast在Y方向默认的偏移距离
+        SmartToast.showAtTop("我是朱志强!");
+        //在屏幕中央显示
+        SmartToast.showInCenter("我是朱志强！");
+        //在指定位置显示，x,y方向偏移量单位为dp
+        SmartToast.showAtLocation("我是朱志强",Gravity.LEFT | Gravity.TOP,10,10);
+</pre></code>
+显示较长时间的Toast<br/>
+<pre><code>
+        //在默认位置显示
+        SmartToast.showLong("我是朱志强！");
+        //在屏幕顶部显示，距离顶部位置为Toast在Y方向默认的偏移距离
+        SmartToast.showLongAtTop("我是朱志强!");
+        //在屏幕中央显示
+        SmartToast.showLongInCenter("我是朱志强！");
+        //在指定位置显示，x,y方向偏移量单位为dp
+        SmartToast.showLongAtLocation("我是朱志强",Gravity.LEFT | Gravity.TOP,10,10);
+</pre></code>
+

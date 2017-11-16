@@ -158,9 +158,9 @@ public final class SmartToast implements PlainToastSetting, CustomToastSetting, 
         showHelper(msg, Gravity.CENTER,0,0,Toast.LENGTH_SHORT);
     }
 
-    public static void showAtLocation(CharSequence msg,int gravity,int xOffset,int yOffset){
+    public static void showAtLocation(CharSequence msg,int gravity,int xOffsetDp,int yOffsetDp){
         getToast();
-        showHelper(msg, gravity,xOffset,yOffset,Toast.LENGTH_SHORT);
+        showHelper(msg, gravity,xOffsetDp,yOffsetDp,Toast.LENGTH_SHORT);
     }
 
 
