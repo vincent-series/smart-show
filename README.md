@@ -2,13 +2,12 @@
 对Toast和Snackbar的封装，提高性能和用户体验！<br/>
 ## 添加依赖
 1.在项目gradle文件中<br/>
-allprojects {<br/>
-    repositories {<br/>
-        ...<br/>
-        maven { url 'https://jitpack.io' }<br/>
-    }<br/>
-}<br/>
-在
+        allprojects {
+            repositories {
+                ...
+                maven { url 'https://jitpack.io' }
+         }
+        }
 一、Toast部分<br/>
 1.全局始终使用一个Toast实例，节省内存<br/>
 2.如果Toast正在显示，再次触发同一内容的Toast，不会重复弹出</br>
