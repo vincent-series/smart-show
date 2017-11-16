@@ -21,14 +21,20 @@ allprojects {
 5.可为Toast设置自定义布局，并进行处理</br>
 使用：</br>
 第一步，初始化</br>
+方式1：<br/>
 <pre><code>
-        //使用默认布局的普通Toast，返回PlainToastSetting对象，对布局进行各种风格设置
+        //使用默认布局的普通Toast
+        SmartToast.plainToast(this);
+</code></pre>
+如果你想对布局风格进行修改,可继续链式调用，不过这并不是必须的<br/>
+<pre><code>
+        //返回PlainToastSetting对象，对布局进行各种风格设置
         SmartToast.plainToast(this)
                 //设置背景颜色，有可选方法，可直接以颜色值为参数
                 .backgroundColorRes(R.color.colorPrimary)
                 //设置文本颜色，有可选方法，可直接以颜色值为参数
                 .textColorRes(R.color.colorAccent)
-                //蛇者文本字体大小，单位为sp
+                //设置文本字体大小，单位为sp
                 .textSizeSp(17)
                 //设置是否加粗文本
                 .textBold(true)
@@ -42,8 +48,14 @@ allprojects {
                     }
                 });
 </pre></code>
+方式2：<br/>
 <pre><code>
-        使用自定义布局的Toast，返回CustomToastSetting对象
+        使用自定义布局的Toast
+        SmartToast.customToast(this)
+</code></pre>
+如果你想对自定义的布局进行代码处理,可继续链式调用，不过这并不是必须的<br/>
+<pre><code>
+        返回CustomToastSetting对象
         SmartToast.customToast(this)
                 //设置自定义布局，有重载方法，可直接以View为参数
                 .view(R.layout.custom_toast)
