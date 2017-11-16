@@ -6,8 +6,8 @@ allprojects {<br/>
     repositories {<br/>
         ...<br/>
         maven { url 'https://jitpack.io' }<br/>
-    }
-}
+    }<br/>
+}<br/>
 2.在Module的grable文件中<br/>
 
 ## Toast部分<br/>
