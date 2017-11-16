@@ -98,4 +98,4 @@ allprojects {
 </pre></code>
 ### 效果图
 当前Toast正在显示，重复触发同一内容的Toast，以及触发内容改变的Toast
-<video src="01.mp4" controls="controls">
+<video src="https://github.com/the-pig-of-jungle/SmartShow/blob/master/01.mp4" controls="controls">
