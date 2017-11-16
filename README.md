@@ -56,14 +56,15 @@ allprojects {
 <pre><code>
         使用自定义布局的Toast
         SmartToast.customToast(this)
+                        //设置自定义布局，有重载方法，可直接以View为参数
+                        //在你的自定义布局中，一定要设置显示文本提示的TextView的Id为android:id="@id/custom_toast_msg"
+                        .view(R.layout.custom_toast);
 </code></pre>
 如果你想对自定义的布局进行代码处理,可继续链式调用，不过这并不是必须的<br/>
 <pre><code>
         返回CustomToastSetting对象
         SmartToast.customToast(this)
-                //设置自定义布局，有重载方法，可直接以View为参数
-                //在你的自定义布局中，一定要设置显示文本提示的TextView的Id为
-                //android:id="@id/custom_toast_msg"
+                //填充布局
                 .view(R.layout.custom_toast)
                 //对自定义布局进行代码处理
                 .processCustomView(new ProcessViewCallback() {
@@ -97,5 +98,8 @@ allprojects {
         SmartToast.showLongAtLocation("我是朱志强",Gravity.LEFT | Gravity.TOP,10,10);
 </pre></code>
 ### 效果图
-当前Toast正在显示，重复触发同一内容的Toast，以及触发内容改变的Toast
-<video src="https://github.com/the-pig-of-jungle/SmartShow/01.mp4" controls="controls">
+当前Toast正在显示，重复触发同一内容的Toast，以及触发内容改变的Toast<br/>
+
+改变显示位置<br/>
+
+
