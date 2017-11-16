@@ -3,10 +3,10 @@
 ## 添加依赖
 1.在Project的gradle文件中<br/>
 allprojects {<br/>
-    repositories {<br/>
-        ...<br/>
-        maven { url 'https://jitpack.io' }<br/>
-    }<br/>
+>>    repositories {<br/>
+>>>        ...<br/>
+>>>        maven { url 'https://jitpack.io' }<br/>
+>>    }<br/>
 }<br/>
 2.在Module的grable文件中<br/>
 
