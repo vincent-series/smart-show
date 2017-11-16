@@ -101,7 +101,7 @@ public final class SmartToast implements PlainToastSetting, CustomToastSetting, 
         mVerticalAxisOffset = mYOffset = mToast.getYOffset();
     }
 
-    private void updateToast(){
+    private void updateToast() {
         if (mCustomMsgView != null) {
             mCustomMsgView.setText(mCurMsg);
         } else {
@@ -145,47 +145,53 @@ public final class SmartToast implements PlainToastSetting, CustomToastSetting, 
         mCurMsg = "";
     }
 
-    public static void show(CharSequence msg){
+    public static void show(CharSequence msg) {
         getToast();
-        showHelper(msg, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL,0,sSmartToast.mVerticalAxisOffset,Toast.LENGTH_SHORT);
-    }
-    public static void showAtTop(CharSequence msg){
-        getToast();
-        showHelper(msg, Gravity.TOP | Gravity.CENTER_HORIZONTAL,0,sSmartToast.mVerticalAxisOffset,Toast.LENGTH_SHORT);
-    }
-    public static void showInCenter(CharSequence msg){
-        getToast();
-        showHelper(msg, Gravity.CENTER,0,0,Toast.LENGTH_SHORT);
+        showHelper(msg, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, sSmartToast.mVerticalAxisOffset, Toast.LENGTH_SHORT);
     }
 
-    public static void showAtLocation(CharSequence msg,int gravity,int xOffsetDp,int yOffsetDp){
+    public static void showAtTop(CharSequence msg) {
         getToast();
-        showHelper(msg, gravity,xOffsetDp,yOffsetDp,Toast.LENGTH_SHORT);
+        showHelper(msg, Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, sSmartToast.mVerticalAxisOffset, Toast.LENGTH_SHORT);
     }
 
-
-
-    public static void showLong(CharSequence msg){
+    public static void showInCenter(CharSequence msg) {
         getToast();
-        showHelper(msg, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL,0,sSmartToast.mVerticalAxisOffset,Toast.LENGTH_LONG);
-    }
-    public static void showLongAtTop(CharSequence msg){
-        getToast();
-        showHelper(msg, Gravity.TOP | Gravity.CENTER_HORIZONTAL,0,sSmartToast.mVerticalAxisOffset,Toast.LENGTH_LONG);
-    }
-    public static void showLongInCenter(CharSequence msg){
-        getToast();
-        showHelper(msg, Gravity.CENTER,0,0,Toast.LENGTH_LONG);
+        showHelper(msg, Gravity.CENTER, 0, 0, Toast.LENGTH_SHORT);
     }
 
-    public static void showLongAtLocation(CharSequence msg,int gravity,int xOffset,int yOffset){
+    public static void showAtLocation(CharSequence msg, int gravity, int xOffsetDp, int yOffsetDp) {
         getToast();
-        showHelper(msg, gravity,xOffset,yOffset,Toast.LENGTH_LONG);
+        int xOffset = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, xOffsetDp, sSmartToast.mAppContext.getResources().getDisplayMetrics()));
+        int yOffset = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, yOffsetDp, sSmartToast.mAppContext.getResources().getDisplayMetrics()));
+        showHelper(msg, gravity, xOffset, yOffset, Toast.LENGTH_SHORT);
     }
 
 
+    public static void showLong(CharSequence msg) {
+        getToast();
+        showHelper(msg, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, sSmartToast.mVerticalAxisOffset, Toast.LENGTH_LONG);
+    }
 
-    private static void showHelper(CharSequence msg, int gravity, int xOffsetDp, int yOffsetDp, int duration) {
+    public static void showLongAtTop(CharSequence msg) {
+        getToast();
+        showHelper(msg, Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, sSmartToast.mVerticalAxisOffset, Toast.LENGTH_LONG);
+    }
+
+    public static void showLongInCenter(CharSequence msg) {
+        getToast();
+        showHelper(msg, Gravity.CENTER, 0, 0, Toast.LENGTH_LONG);
+    }
+
+    public static void showLongAtLocation(CharSequence msg, int gravity, int xOffsetDp, int yOffsetDp) {
+        getToast();
+        int xOffset = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, xOffsetDp, sSmartToast.mAppContext.getResources().getDisplayMetrics()));
+        int yOffset = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, yOffsetDp, sSmartToast.mAppContext.getResources().getDisplayMetrics()));
+        showHelper(msg, gravity, xOffset, yOffset, Toast.LENGTH_LONG);
+    }
+
+
+    private static void showHelper(CharSequence msg, int gravity, int xOffset, int yOffset, int duration) {
 
         if (sSmartToast.mCustomView != null && sSmartToast.mCustomMsgView == null) {
             return;
@@ -194,18 +200,18 @@ public final class SmartToast implements PlainToastSetting, CustomToastSetting, 
         msg = msg == null ? "" : msg;
         getToast().setDuration(duration);
 
-        boolean locationChanged = sSmartToast.locationChanged(gravity,xOffsetDp,yOffsetDp);
+        boolean locationChanged = sSmartToast.locationChanged(gravity, xOffset, yOffset);
         boolean contentChanged = !sSmartToast.mCurMsg.equals(msg);
 
         sSmartToast.mCurMsg = msg;
         sSmartToast.mGravity = gravity;
-        sSmartToast.mXOffset = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,xOffsetDp,sSmartToast.mAppContext.getResources().getDisplayMetrics()));
-        sSmartToast.mYOffset = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,yOffsetDp,sSmartToast.mAppContext.getResources().getDisplayMetrics()));;
+        sSmartToast.mXOffset = xOffset;
+        sSmartToast.mYOffset = yOffset;
 
         if (ViewCompat.isAttachedToWindow(getToast().getView()) && (contentChanged || locationChanged)) {
             SmartToast.dismiss();
             getToast().getView().postDelayed(sSmartToast, 150);
-        }else {
+        } else {
             sSmartToast.updateToast();
             getToast().show();
         }
@@ -295,7 +301,6 @@ public final class SmartToast implements PlainToastSetting, CustomToastSetting, 
         mProcessViewCallback = callback;
         return this;
     }
-
 
 
     @Override

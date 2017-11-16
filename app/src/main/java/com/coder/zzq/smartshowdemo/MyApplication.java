@@ -35,14 +35,14 @@ public class MyApplication extends Application {
                     }
                 });
 
-        SmartToast.customToast(this)
-                .view(R.layout.custom_toast)
-                .processCustomView(new ProcessViewCallback() {
-                    @Override
-                    public void processCustomView(View view) {
-
-                    }
-                });
+//        SmartToast.customToast(this)
+//                .view(R.layout.custom_toast)
+//                .processCustomView(new ProcessViewCallback() {
+//                    @Override
+//                    public void processCustomView(View view) {
+//
+//                    }
+//                });
 
 //        SmartSnackbar.init(this)
 //                .backgroundColorRes(R.color.colorPrimary)

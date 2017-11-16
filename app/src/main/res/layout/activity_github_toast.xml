@@ -8,20 +8,24 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="在默认位置显示"/>
+        android:text="在默认位置显示"
+        android:onClick="onDefaultClick"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="//在屏幕顶部显示，距离顶部位置为Toast在Y方向默认的偏移距离"/>
+        android:text="//在屏幕顶部显示，距离顶部位置为Toast在Y方向默认的偏移距离"
+        android:onClick="onTopClick"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="在屏幕中央显示"/>
+        android:text="在屏幕中央显示"
+        android:onClick="onCenterClick"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="//自定义位置（左上角，x,y方向偏移量均为10dp）"/>
+        android:text="//自定义位置（左上角，x,y方向偏移量均为10dp）"
+        android:onClick="onCustomClick"/>
 </LinearLayout>
