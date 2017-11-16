@@ -58,6 +58,7 @@ allprojects {
         SmartToast.customToast(this)
                         //设置自定义布局，有重载方法，可直接以View为参数
                         //在你的自定义布局中，一定要设置显示文本提示的TextView的Id为android:id="@id/custom_toast_msg"
+                        //如果不调用该方法，那么上面的调用与SmartToast.plainToast(this)等效
                         .view(R.layout.custom_toast);
 </code></pre>
 如果你想对自定义的布局进行代码处理,可继续链式调用，不过这并不是必须的<br/>
