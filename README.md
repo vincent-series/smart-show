@@ -21,7 +21,7 @@ allprojects {
 5.可为Toast设置自定义布局，并进行处理</br>
 ### 使用：
 第一步，初始化</br>
-方式1：<br/>
+方式 1：<br/>
 <pre><code>
         //使用默认布局的普通Toast
         SmartToast.plainToast(this);
@@ -48,7 +48,7 @@ allprojects {
                     }
                 });
 </pre></code>
-方式2：<br/>
+方式 2：<br/>
 <pre><code>
         使用自定义布局的Toast
         SmartToast.customToast(this)
