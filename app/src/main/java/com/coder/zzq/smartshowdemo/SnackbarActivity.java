@@ -8,6 +8,7 @@ import android.view.View;
 import com.coder.zzq.smartshow.snackbar.SmartSnackbar;
 import com.coder.zzq.smartshow.snackbar.SnackbarCallback;
 
+
 public class SnackbarActivity extends BaseActivity implements SnackbarCallback {
 
     @Override
@@ -25,7 +26,7 @@ public class SnackbarActivity extends BaseActivity implements SnackbarCallback {
     }
 
     public void onNextPageClick(View view) {
-        startActivity(new Intent(this,SnackbarActivity.class));
+
     }
 
 

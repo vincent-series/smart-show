@@ -4,7 +4,7 @@ import android.support.annotation.LayoutRes;
 import android.view.View;
 
 /**
- * Created by 喜欢、陪你看风景 on 2017/11/13.
+ * Created by 朱志强 on 2017/11/13.
  */
 
 public interface CustomToastSetting {

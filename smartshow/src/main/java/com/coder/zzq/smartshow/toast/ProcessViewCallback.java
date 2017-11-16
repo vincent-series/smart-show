@@ -5,7 +5,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
- * Created by 喜欢、陪你看风景 on 2017/11/13.
+ * Created by 朱志强 on 2017/11/13.
  */
 
 public abstract class ProcessViewCallback {

@@ -24,7 +24,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
- * Created by Administrator on 2017/11/14.
+ * Created by 朱志强 on 2017/11/14.
  */
 
 public final class SmartToast implements PlainToastSetting, CustomToastSetting, Runnable {
@@ -185,7 +185,7 @@ public final class SmartToast implements PlainToastSetting, CustomToastSetting, 
 
 
 
-    private static void showHelper(CharSequence msg, int gravity, int xOffset, int yOffset, int duration) {
+    private static void showHelper(CharSequence msg, int gravity, int xOffsetDp, int yOffsetDp, int duration) {
 
         if (sSmartToast.mCustomView != null && sSmartToast.mCustomMsgView == null) {
             return;
@@ -194,13 +194,13 @@ public final class SmartToast implements PlainToastSetting, CustomToastSetting, 
         msg = msg == null ? "" : msg;
         getToast().setDuration(duration);
 
-        boolean locationChanged = sSmartToast.locationChanged(gravity,xOffset,yOffset);
+        boolean locationChanged = sSmartToast.locationChanged(gravity,xOffsetDp,yOffsetDp);
         boolean contentChanged = !sSmartToast.mCurMsg.equals(msg);
 
         sSmartToast.mCurMsg = msg;
         sSmartToast.mGravity = gravity;
-        sSmartToast.mXOffset = xOffset;
-        sSmartToast.mYOffset = yOffset;
+        sSmartToast.mXOffset = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,xOffsetDp,sSmartToast.mAppContext.getResources().getDisplayMetrics()));
+        sSmartToast.mYOffset = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,yOffsetDp,sSmartToast.mAppContext.getResources().getDisplayMetrics()));;
 
         if (ViewCompat.isAttachedToWindow(getToast().getView()) && (contentChanged || locationChanged)) {
             SmartToast.dismiss();
