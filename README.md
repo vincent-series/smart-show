@@ -21,7 +21,7 @@ allprojects {
 5.可为Toast设置自定义布局，并进行代码处理</br>
 6.内部实现上,除了所必须的Toast单例外，为了减少创建不必要的对象，PlainToastSetting、CustomToastSetting、Runnable三个接口全部由单例SmartToast实现，对外需要暴露何种功能，则返回何种接口类型
 ### 使用：
-第一步，在Application的onCreate()方法中初始化</br>
+第一步，必须初始化，在Application的onCreate()方法中初始化</br>
 方式 1：<br/>
 <pre><code>
         //使用默认布局的普通Toast
@@ -52,7 +52,7 @@ allprojects {
                         msgView.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
                     }
                 });
-</pre></code>
+</code></pre>
 方式 2：<br/>
 <pre><code>
         使用自定义布局的Toast
@@ -76,7 +76,7 @@ allprojects {
                         ...
                     }
                 });
-</pre></code>
+</code></pre>
 第二步，调用show方法显示Toast<br/>
 显示短暂Toast<br/>
 <pre><code>
@@ -99,7 +99,7 @@ allprojects {
         SmartToast.showLongInCenter("我是朱志强！");
         //在指定位置显示，x,y方向偏移量单位为dp
         SmartToast.showLongAtLocation("我是朱志强",Gravity.LEFT | Gravity.TOP,10,10);
-</pre></code>
+</code></pre>
 ### 效果图
 当前Toast正在显示，重复触发同一内容的Toast，以及触发内容改变的Toast<br/>
 
@@ -111,9 +111,9 @@ allprojects {
 2.同一页面，如果Snackbar正在显示，再次触发同一内容的Snackbar，不会重复弹出</br>
 3.同一页面，如果Snackbar正在显示，再次触发Snackbar，如果内容发生了变化（不会重建Snackbar实例）或内嵌的容器发生了变化（会重建Snackbar实例），会重新弹出，具有切换效果。<br/>
 4.可对布局的风格进行修改，如背景颜色，文字大小和颜色等</br>
-5.内部实现上,除了必要的Snackbar，为了减少创建不必要的对象，SnackbarSetting、SnackbarShow、Runnable三个接口全部由单例SmartSnackbar实现，对外需要暴露何种功能，则返回何种接口类型
+5.内部实现上,除了必要的Snackbar，为了减少创建不必要的对象，SnackbarSetting、SnackbarShow、Runnable,View.OnClickListener四个接口全部由单例SmartSnackbar实现，对外需要暴露何种功能，则返回何种接口类型
 ### 使用：
-初始化不是必须的，如果你想对Snackbar的风格进行修改，则在Application的onCreate()方法中初始化<br/>
+第一步，初始化。这不是必须的，如果你想对Snackbar的风格进行修改，则在Application的onCreate()方法中初始化<br/>
 <pre><code>
         //返回SnackbarSetting对象，对布局进行各种风格设置
         SmartSnackbar.init(this)
@@ -136,4 +136,38 @@ allprojects {
                         ...
                     }
                 });
-</pre></code>
+</code></pre>
+第二步，在你BaseActivity的onDestroy()方法里回收资源
+<pre><code>
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //如果当前页面创建过Snackbar，则退出页面时，回收资源。如果没有，则不会回收资源，
+        //比如Activity A 显示过Snackbar，然后启动了B，B没有显示过Snackbar，当B销毁回到A时，再显示Snackbar，可复用，不用再次创建，提高效率
+        SmartSnackbar.destroy(this);
+    }
+</code></pre>
+第三步，获取当前页面的Snackbar，并调用show方法显示<br/>
+Short Snackbar<br/>
+<pre><code>
+        //传入Activity，获取当前页面的Snackbar，显示消息
+        SmartSnackbar.get(this).show("我是朱志强");
+</code></pre>
+Long Snackbar<br/>
+<pre><code>
+        //传入Activity，获取当前页面的Snackbar，显示消息
+        SmartSnackbar.get(this).showLong("我是朱志强");
+</code></pre>
+Indefinite Snackbar<br/>
+<pre><code>
+        //传入Activity，获取当前页面的Snackbar，显示消息和动作文本，传入点击动作文本的回调代码
+        SmartSnackbar.get(this).showIndefinite("我是朱志强", "打赏", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("SmartShow","Thank you !");
+            }
+        });
+
+        //传入Activity，获取当前页面的Snackbar，显示消息和动作文本，不传第三个参数，默认行为为Snackar消失
+        SmartSnackbar.get(this).show("我是朱志强","打赏");
+</code></pre>
