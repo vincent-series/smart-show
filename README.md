@@ -178,3 +178,5 @@ Indefinite Snackbar<br/>
 #### SmartSnackbar获取方式的说明
 以上实例使用的是public static SnackbarShow get(Activity activity)方式，<br/>
 还可使用public static SnackbarShow get(CoordinatorLayout view)方式。<br/>
+根据谷歌源码，我们知道创建Snackbar时需传入一个当前页面的某个View，实际上，Snackar会以该View为基点，沿着整个View Tree上溯，直到找到CoordinatorLayout容器或android.R.id.content
+容器，将视图嵌入其中。为了提高效率，直接将android.R.id.content或者CoordinatorLayout传入会更好。<br/>
