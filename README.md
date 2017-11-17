@@ -180,6 +180,11 @@ Indefinite Snackbar<br/>
 
 显示Short和Long Snackbar时，通常不会显示动作文本，而Indefinite Snackbar通常不会只显示消息文本，但实际上该库为三种Snackbar均提供了以上参数个数为1或2或3的方法。
 
+<pre><code>
+        //隐藏当前Snackbar
+        SmartSnackbar.dismiss();
+</code></pre>
+
 #### SmartSnackbar获取方式的说明
 以上实例使用的是public static SnackbarShow get(Activity activity)方式，<br/>
 还可使用public static SnackbarShow get(CoordinatorLayout view)方式。<br/>
@@ -188,8 +193,3 @@ Indefinite Snackbar<br/>
 以CoordinatorLayout为内嵌容器时，Snackbar会有一些特殊的行为，如可以用手指手动滑动移除，显示时会导致FloatActionButton升高等。
 所以建议，在使用SmartSnackbar时，如果你的页面想以某个具体CoordinatorLayout作为容器，则调用public static SnackbarShow get(CoordinatorLayout view)。否则调用public static SnackbarShow get(Activity activity)，内部会自动将
 android.R.id.content作为容器。<br/>
-
-<pre><code>
-        //隐藏当前Snackbar
-        SmartSnackbar.dismiss();
-</code></pre>
