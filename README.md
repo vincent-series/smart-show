@@ -1,5 +1,5 @@
 # SmartShow
-对Toast和Snackbar的封装，提高性能和用户体验！<br/>
+对Toast和Snackbar的封装，提高性能和用户体验！作者：朱志强<br/>
 ## 添加依赖
 1.在Project的gradle文件中<br/>
 <pre><code>
