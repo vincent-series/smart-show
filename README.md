@@ -110,3 +110,26 @@ allprojects {
 3.同一页面，如果Snackbar正在显示，再次触发Snackbar，如果内容发生了变化（不会重建Snackbar实例）或内嵌的容器发生了变化（会重建Snackbar实例），会重新弹出，具有切换效果。<br/>
 4.可对布局的风格进行修改，如背景颜色，文字大小和颜色等</br>
 5.内部实现上,除了必要的Snackbar，为了减少创建不必要的对象，SnackbarSetting、SnackbarShow、Runnable三个接口全部由单例SmartSnackbar实现，对外需要暴露何种功能，则返回何种接口类型
+### 使用：
+初始化不是必须的，如果你想对Snackbar的方格进行修改，则在Application的onCreate()方法中初始化<br/>
+<pre><code>
+        //返回SnackbarSetting对象，对布局进行各种风格设置
+        SmartSnackbar.init(this)
+                //设置背景颜色，有可选方法，可直接以颜色值为参数
+                .backgroundColorRes(R.color.colorPrimary)
+                //设置消息文本颜色，有可选方法，可直接以颜色值为参数
+                .msgTextColorRes(R.color.white)
+                //设置动作文本颜色，有可选方法，可直接以颜色值为参数
+                .actionColorRes(R.color.colorAccent)
+                //设置消息文本字体大小，单位为sp
+                .msgTextSizeSp(18)
+                //设置动作文本字体大小，单位为sp
+                .actionSizeSp(18)
+                //如果以上还不够，可调用该方法进行处理
+                .processView(new ProcessViewCallback() {
+                    @Override
+                    public void processSnackbarView(Snackbar.SnackbarLayout layout, TextView msgView, TextView actionView) {
+
+                    }
+                });
+</pre></code>
