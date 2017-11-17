@@ -17,7 +17,7 @@ allprojects {
         exclude group: 'com.android.support'
     }
 
-    //如果想使用SmartSnackbar，还需添加design包的依赖
+    //如果想使用SmartSnackbar，还需添加design包的依赖，添加适合你的版本即可
     compile 'com.android.support:design:x.y.z'
 </code></pre>
 ## SmartToast部分
