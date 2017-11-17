@@ -44,7 +44,8 @@ public class MyApplication extends Application {
 //
 //                    }
 //                });
-
+        //隐藏当前Snackbar
+        SmartSnackbar.dismiss();
         SmartSnackbar.init(this)
                 .backgroundColorRes(R.color.colorPrimary)
                 .msgTextColorRes(R.color.white)

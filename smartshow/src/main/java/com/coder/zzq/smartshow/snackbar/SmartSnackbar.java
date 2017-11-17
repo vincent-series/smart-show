@@ -133,6 +133,12 @@ public class SmartSnackbar extends Snackbar.Callback implements SnackbarSetting,
         }
     }
 
+    public static void dismiss(){
+        if (sSmartSnackbar != null && sSmartSnackbar.mSnackbar != null){
+            sSmartSnackbar.mSnackbar.dismiss();
+        }
+    }
+
     private void showHelper(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener,int duration){
 
         msg = msg == null ? "" : msg;
