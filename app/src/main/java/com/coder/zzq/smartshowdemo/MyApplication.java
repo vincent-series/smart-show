@@ -24,6 +24,15 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Utils.init(this);
+                /*
+                设置背景颜色，有可选方法，可直接以颜色值为参数
+
+                Toast的默认背景是一个圆角图片，当你设置了背景颜色时，原有背景失效
+
+                我们内部用ShapeDrawable实现背景，可以保证大小与你手机系统Toast一致，
+
+                但是不同品牌手机的Toast的圆角半径不尽相同，我们统一使用2.5dp
+                */
 //        SmartToast.plainToast(this)
 //                .backgroundColorRes(R.color.colorPrimary)
 //                .textColorRes(R.color.colorAccent)
