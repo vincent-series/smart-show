@@ -104,5 +104,6 @@ allprojects {
 改变显示位置<br/>
 
 ## SmartSnackbar部分
-
+### 特点：
+1.Snackbar的原理与Toast不同，Toast内部通过Window显示，全局可复用一个实例，Snackbar是把视图内嵌到当前Activity的android.R.id.content容器或某个CoordinatorLayout中，但在获取方式不变（容器不变）的情况下，同一页面仍然可以始终使用一个Snackbar实例
 
