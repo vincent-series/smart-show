@@ -128,7 +128,8 @@ allprojects {
                 //如果以上还不够，可调用该方法进行处理
                 .processView(new ProcessViewCallback() {
                     @Override
-                    public void processSnackbarView(Snackbar.SnackbarLayout layout, TextView msgView, TextView actionView) {
+                    public void processSnackbarView(Snackbar.SnackbarLayout layout,
+                     TextView msgView, TextView actionView) {
 
                     }
                 });
