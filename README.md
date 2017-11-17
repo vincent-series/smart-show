@@ -47,7 +47,8 @@ allprojects {
                     @Override
                     //outParent为显示文本的TextView的父布局，msgView为显示文本的TextView
                     public void processPlainView(LinearLayout outParent, TextView msgView) {
-                        //设置下划线
+                        //处理代码
+                        ...
                         msgView.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
                     }
                 });
@@ -71,7 +72,8 @@ allprojects {
                 .processCustomView(new ProcessViewCallback() {
                     @Override
                     public void processCustomView(View view) {
-
+                        //处理代码
+                        ...
                     }
                 });
 </pre></code>
@@ -130,7 +132,8 @@ allprojects {
                     @Override
                     public void processSnackbarView(Snackbar.SnackbarLayout layout,
                      TextView msgView, TextView actionView) {
-
+                        //处理代码
+                        ...
                     }
                 });
 </pre></code>
