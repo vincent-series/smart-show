@@ -11,7 +11,15 @@ allprojects {
 }
 </code></pre>
 2.在Module的grable文件中<br/>
+<pre></code>
+    compile ( 'com.github.the-pig-of-jungle:SmartShow:v1.0.0' ){
+        //排除com.android.support:design的依赖，其一，你不一定用到SmartSnackbar；其二，你项目使用的版本不一定和库中使用的相同
+        exclude group: 'com.android.support'
+    }
 
+    //如果想使用SmartSnackbar，还需添加design包的依赖
+    compile 'com.android.support:design:x.y.z'
+</code></pre>
 ## SmartToast部分
 ### 特点：
 1.全局始终使用一个Toast实例，节省内存<br/>
