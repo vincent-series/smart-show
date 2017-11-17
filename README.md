@@ -78,7 +78,7 @@ allprojects {
                 });
 </code></pre>
 第二步，调用show方法显示Toast<br/>
-显示短暂Toast<br/>
+Short Toast<br/>
 <pre><code>
         //在默认位置显示
         SmartToast.show("我是朱志强！");
@@ -89,7 +89,7 @@ allprojects {
         //在指定位置显示，x,y方向偏移量单位为dp
         SmartToast.showAtLocation("我是朱志强",Gravity.LEFT | Gravity.TOP,10,10);
 </pre></code>
-显示较长时间的Toast<br/>
+Long Toast<br/>
 <pre><code>
         //在默认位置显示
         SmartToast.showLong("我是朱志强！");
@@ -143,7 +143,8 @@ allprojects {
     protected void onDestroy() {
         super.onDestroy();
         //如果当前页面创建过Snackbar，则退出页面时，回收资源。如果没有，则不会回收资源，
-        //比如Activity A 显示过Snackbar，然后启动了B，B没有显示过Snackbar，当B销毁回到A时，再显示Snackbar，可复用，不用再次创建，提高效率
+        //比如Activity A 显示过Snackbar，然后启动了B，B没有显示过Snackbar，当B销毁回到A时，
+        //再显示Snackbar，可复用，不用再次创建，提高效率
         SmartSnackbar.destroy(this);
     }
 </code></pre>
@@ -171,3 +172,9 @@ Indefinite Snackbar<br/>
         //传入Activity，获取当前页面的Snackbar，显示消息和动作文本，不传第三个参数，默认行为为Snackar消失
         SmartSnackbar.get(this).show("我是朱志强","打赏");
 </code></pre>
+
+显示Short和Long Snackbar时，通常不会显示动作文本，而Indefinite Snackbar通常不会只显示消息文本，但实际上该库为三种Snackbar均提供了以上参数个数为1或2或3的方法。
+
+#### SmartSnackbar获取方式的说明
+以上实例使用的是public static SnackbarShow get(Activity activity)方式，<br/>
+还可使用public static SnackbarShow get(CoordinatorLayout view)方式。<br/>
