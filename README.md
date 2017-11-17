@@ -20,7 +20,7 @@ allprojects {
 
     compile ( 'com.github.the-pig-of-jungle:SmartShow:v1.0.0' ){
 
-    //排除com.android.support:design的依赖，其一，你不一定用到SmartSnackbar；其二，你项目使用的版本不一定和库中使用的相同
+        //排除design包的依赖，其一，你不一定用到SmartSnackbar；其二，你项目使用的版本不一定和库中使用的相同
 
         exclude group: 'com.android.support'
 
@@ -43,6 +43,7 @@ allprojects {
 方式 1：<br/>
 <pre><code>
         //使用默认布局的普通Toast
+
         SmartToast.plainToast(this);
 </code></pre>
 如果你想对布局风格进行修改,可继续链式调用，不过这并不是必须的<br/>
