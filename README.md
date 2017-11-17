@@ -180,9 +180,6 @@ Long Toast<br/>
          SmartToast.dismiss();
 </code></pre>
 ### 效果图
-当前Toast正在显示，重复触发同一内容的Toast，以及触发内容改变的Toast<br/>
-
-改变显示位置<br/>
 
 ## SmartSnackbar部分
 ### 特点：
