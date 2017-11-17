@@ -4,21 +4,30 @@
 1.在Project的gradle文件中<br/>
 <pre><code>
 allprojects {
+
     repositories {
+
         ...
+
         maven { url 'https://jitpack.io' }
+
     }
+
 }
 </code></pre>
 2.在Module的grable文件中<br/>
 <pre></code>
+
     compile ( 'com.github.the-pig-of-jungle:SmartShow:v1.0.0' ){
-        //排除com.android.support:design的依赖，其一，你不一定用到SmartSnackbar；其二，你项目使用的版本不一定和库中使用
-        //的相同
+
+    //排除com.android.support:design的依赖，其一，你不一定用到SmartSnackbar；其二，你项目使用的版本不一定和库中使用的相同
+
         exclude group: 'com.android.support'
+
     }
 
     //如果想使用SmartSnackbar，还需添加design包的依赖，添加适合你的版本即可
+
     compile 'com.android.support:design:x.y.z'
 </code></pre>
 ## SmartToast部分
@@ -44,11 +53,11 @@ allprojects {
 
                 /*
 
-                设置背景颜色，有可选方法，可直接以颜色值为参数。Toast的默认背景是一个圆角图片，当你设置了背景颜色时，原有背景失效
+                设置背景颜色，有可选方法，可直接以颜色值为参数。Toast的默认背景是一个圆角图片，当你设置了背景颜色时，原有背景
 
-                我们内部用ShapeDrawable实现背景，可以保证大小与你手机系统Toast一致，
+                失效，我们内部用ShapeDrawable实现背景，可以保证大小与你手机系统Toast一致，但是不同品牌手机的Toast的圆角半径不
 
-                但是不同品牌手机的Toast的圆角半径不尽相同，我们统一使用2.5dp
+                尽相同，将统一使用2.5dp
 
                 */
 
@@ -90,23 +99,39 @@ allprojects {
 
         SmartToast.customToast(this)
 
-                        //设置自定义布局，有重载方法，可直接以View为参数
-                        //在你的自定义布局中，一定要设置显示文本提示的TextView的Id为android:id="@id/custom_toast_msg"
-                        //如果不调用该方法，那么上面的调用与SmartToast.plainToast(this)等效
+                        /*
+
+                        设置自定义布局，有重载方法，可直接以View为参数。在你的自定义布局中，一定要设置显示文本提示的TextView
+
+                        的Id为android:id="@id/custom_toast_msg"。如果不调用该方法，那么上面的调用与SmartToast.plainToast(this)
+
+                        等效
+
+                        */
+
                         .view(R.layout.custom_toast);
 </code></pre>
 如果你想对自定义的布局进行代码处理,可继续链式调用，不过这并不是必须的<br/>
 <pre><code>
         返回CustomToastSetting对象
+
         SmartToast.customToast(this)
+
                 //填充布局
+
                 .view(R.layout.custom_toast)
+
                 //对自定义布局进行代码处理
+
                 .processCustomView(new ProcessViewCallback() {
+
                     @Override
                     public void processCustomView(View view) {
+
                         //处理代码
+
                         ...
+
                     }
                 });
 </code></pre>
@@ -114,28 +139,43 @@ allprojects {
 Short Toast<br/>
 <pre><code>
         //在默认位置显示
+
         SmartToast.show("我是朱志强！");
+
         //在屏幕顶部显示，距离顶部位置为Toast在Y方向默认的偏移距离
+
         SmartToast.showAtTop("我是朱志强!");
+
         //在屏幕中央显示
+
         SmartToast.showInCenter("我是朱志强！");
+
         //在指定位置显示，x,y方向偏移量单位为dp
+
         SmartToast.showAtLocation("我是朱志强",Gravity.LEFT | Gravity.TOP,10,10);
 </pre></code>
 Long Toast<br/>
 <pre><code>
         //在默认位置显示
+
         SmartToast.showLong("我是朱志强！");
+
         //在屏幕顶部显示，距离顶部位置为Toast在Y方向默认的偏移距离
+
         SmartToast.showLongAtTop("我是朱志强!");
+
         //在屏幕中央显示
+
         SmartToast.showLongInCenter("我是朱志强！");
+
         //在指定位置显示，x,y方向偏移量单位为dp
+
         SmartToast.showLongAtLocation("我是朱志强",Gravity.LEFT | Gravity.TOP,10,10);
 </code></pre>
 
 <pre><code>
          //隐藏Toast
+
          SmartToast.dismiss();
 </code></pre>
 ### 效果图
@@ -154,24 +194,42 @@ Long Toast<br/>
 第一步，初始化。这不是必须的，如果你想对Snackbar的风格进行修改，则在Application的onCreate()方法中初始化<br/>
 <pre><code>
         //返回SnackbarSetting对象，对布局进行各种风格设置
+
         SmartSnackbar.init(this)
+
                 //设置背景颜色，有可选方法，可直接以颜色值为参数
+
                 .backgroundColorRes(R.color.colorPrimary)
+
                 //设置消息文本颜色，有可选方法，可直接以颜色值为参数
+
                 .msgTextColorRes(R.color.white)
+
                 //设置动作文本颜色，有可选方法，可直接以颜色值为参数
+
                 .actionColorRes(R.color.colorAccent)
+
                 //设置消息文本字体大小，单位为sp
+
                 .msgTextSizeSp(18)
+
                 //设置动作文本字体大小，单位为sp
+
                 .actionSizeSp(18)
+
                 //如果以上还不够，可调用该方法进行处理
+
                 .processView(new ProcessViewCallback() {
+
                     @Override
                     public void processSnackbarView(Snackbar.SnackbarLayout layout,
+
                      TextView msgView, TextView actionView) {
+
                         //处理代码
+
                         ...
+
                     }
                 });
 </code></pre>
@@ -179,10 +237,17 @@ Long Toast<br/>
 <pre><code>
     @Override
     protected void onDestroy() {
+
         super.onDestroy();
-        //如果当前页面创建过Snackbar，则退出页面时，回收资源。如果没有，则不会回收资源，
-        //比如Activity A 显示过Snackbar，然后启动了B，B没有显示过Snackbar，当B销毁回到A时，
-        //再显示Snackbar，可复用，不用再次创建，提高效率
+
+        /*
+
+        如果当前页面创建过Snackbar，则退出页面时，回收资源。如果没有，则不会回收资源，比如Activity A 显示过Snackbar，然后
+
+        启动了B，B没有显示过Snackbar，当B销毁回到A时，再显示Snackbar，可复用，不用再次创建，提高效率
+
+        */
+
         SmartSnackbar.destroy(this);
     }
 </code></pre>
@@ -190,31 +255,40 @@ Long Toast<br/>
 Short Snackbar<br/>
 <pre><code>
         //传入Activity，获取当前页面的Snackbar，显示消息
+
         SmartSnackbar.get(this).show("我是朱志强");
 </code></pre>
 Long Snackbar<br/>
 <pre><code>
         //传入Activity，获取当前页面的Snackbar，显示消息
+
         SmartSnackbar.get(this).showLong("我是朱志强");
 </code></pre>
 Indefinite Snackbar<br/>
 <pre><code>
         //传入Activity，获取当前页面的Snackbar，显示消息和动作文本，传入点击动作文本的回调代码
+
         SmartSnackbar.get(this).showIndefinite("我是朱志强", "打赏", new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+
                 Log.d("SmartShow","Thank you !");
+
             }
         });
 
         //传入Activity，获取当前页面的Snackbar，显示消息和动作文本，不传第三个参数，默认行为为Snackar消失
+
         SmartSnackbar.get(this).show("我是朱志强","打赏");
 </code></pre>
 
 显示Short和Long Snackbar时，通常不会显示动作文本，而Indefinite Snackbar通常不会只显示消息文本，但实际上该库为三种Snackbar均提供了以上参数个数为1或2或3的方法。
 
 <pre><code>
+
         //隐藏当前Snackbar
+
         SmartSnackbar.dismiss();
 </code></pre>
 
