@@ -16,7 +16,7 @@ allprojects {
 ### 特点：
 1.全局始终使用一个Toast实例，节省内存<br/>
 2.如果Toast正在显示，再次触发同一内容的Toast，不会重复弹出</br>
-3.如果Toast正在显示，再次触发Toat，如果内容或位置发生了变化，会重新弹出，具有切换效果，并且上一个Toast会立即消失，不会等到其duration耗尽再弹出另一个<br/>
+3.如果Toast正在显示，再次触发Toast，如果内容或位置发生了变化，会重新弹出，只具有切换效果，但不会新建Toast，并且上一个Toast会立即消失，不会等到其duration耗尽再弹出另一个<br/>
 4.可对Toast原有布局的风格进行修改，如背景颜色，文字大小和颜色等</br>
 5.可为Toast设置自定义布局，并进行代码处理</br>
 6.内部实现上,除了所必须的Toast单例外，为了减少创建不必要的对象，PlainToastSetting、CustomToastSetting、Runnable三个接口全部由单例SmartToast实现，对外需要暴露何种功能，则返回何种接口类型
@@ -105,5 +105,8 @@ allprojects {
 
 ## SmartSnackbar部分
 ### 特点：
-1.Snackbar的原理与Toast不同，Toast内部通过Window显示，全局可复用一个实例，Snackbar是把视图内嵌到当前Activity的android.R.id.content容器或某个CoordinatorLayout中，但在获取方式不变（容器不变）的情况下，同一页面仍然可以始终使用一个Snackbar实例
-
+1.Snackbar的原理与Toast不同，Toast内部通过Window显示，全局可复用一个实例，Snackbar是把视图内嵌到当前Activity的android.R.id.content容器或某个CoordinatorLayout中，但在获取方式不变（容器不变）的情况下，同一页面仍然可以复用一个Snackbar实例，节省内存<br/>
+2.同一页面，如果Snackbar正在显示，再次触发同一内容的Snackbar，不会重复弹出</br>
+3.同一页面，如果Snackbar正在显示，再次触发Snackbar，如果内容发生了变化（不会重建Snackbar实例）或内嵌的容器发生了变化（会重建Snackbar实例），会重新弹出，具有切换效果。<br/>
+4.可对布局的风格进行修改，如背景颜色，文字大小和颜色等</br>
+5.内部实现上,除了必要的Snackbar，为了减少创建不必要的对象，SnackbarSetting、SnackbarShow、Runnable三个接口全部由单例SmartSnackbar实现，对外需要暴露何种功能，则返回何种接口类型
