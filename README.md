@@ -13,7 +13,8 @@ allprojects {
 2.在Module的grable文件中<br/>
 <pre></code>
     compile ( 'com.github.the-pig-of-jungle:SmartShow:v1.0.0' ){
-        //排除com.android.support:design的依赖，其一，你不一定用到SmartSnackbar；其二，你项目使用的版本不一定和库中使用的相同
+        //排除com.android.support:design的依赖，其一，你不一定用到SmartSnackbar；其二，你项目使用的版本不一定和库中使用
+        //的相同
         exclude group: 'com.android.support'
     }
 
