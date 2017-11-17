@@ -136,7 +136,7 @@ allprojects {
                     }
                 });
 </code></pre>
-第二步，调用show方法显示Toast<br/>
+第二步，调用show方法显示Toast，只需传入要显示的消息即可<br/>
 Short Toast<br/>
 <pre><code>
         //在默认位置显示
