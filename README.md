@@ -76,7 +76,7 @@ allprojects {
 
                 .textBold(true)
 
-                //如果你想进一步对布局做处理，调用此方法
+                //如果以上还不够，可调用此方法
 
                 .processPlainView(new ProcessViewCallback() {
 
