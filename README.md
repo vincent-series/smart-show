@@ -1,5 +1,5 @@
 # SmartShow
-Smart Toast & Snackbar : 简化调用的同时，处理Toast和Snackbar的常见问题，提高性能和用户体验！作者：朱志强<br/>
+Smart Toast & Snackbar : 简化调用，并处理常见问题，提高性能和用户体验！作者：朱志强<br/>
 ## 添加依赖
 1.在Project的gradle文件中<br/>
 <pre><code>
