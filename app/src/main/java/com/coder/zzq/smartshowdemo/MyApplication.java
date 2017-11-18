@@ -1,18 +1,11 @@
 package com.coder.zzq.smartshowdemo;
 
 import android.app.Application;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.support.design.widget.Snackbar;
-import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-
 
 import com.coder.zzq.smartshow.snackbar.ProcessViewCallback;
 import com.coder.zzq.smartshow.snackbar.SmartSnackbar;
-
-import com.coder.zzq.smartshow.toast.SmartToast;
 
 
 /**
