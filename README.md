@@ -20,7 +20,9 @@ allprojects {
 
     compile ( 'com.github.the-pig-of-jungle:SmartShow:v1.0.0' ){
 
-        //去除design包的依赖，其一，你不一定用到SmartSnackbar；其二，你项目使用的版本不一定和库中使用的相同
+        //去除design包的依赖，其一，你不一定用到SmartSnackbar；其二，你项目使用的版本不一定和库中使用
+
+        //的相同
 
         exclude group: 'com.android.support'
 
@@ -54,11 +56,11 @@ allprojects {
 
                 /*
 
-                设置背景颜色，有可选方法，可直接以颜色值为参数。Toast的默认背景是一个圆角图片，当你设置了背景颜色时，
+                设置背景颜色，有可选方法，可直接以颜色值为参数。Toast的默认背景是一个圆角图片，当你设置
 
-                原有背景失效，我们内部用ShapeDrawable实现背景，可以保证大小与你手机系统Toast一致，但是不同品牌手机的
+                了背景颜色时，原有背景失效，我们内部用ShapeDrawable实现背景，可以保证大小与你手机系统
 
-                Toast的圆角半径不尽相同，将统一使用2.5dp
+                Toast一致，但是不同品牌手机的Toast的圆角半径不尽相同，将统一使用2.5dp
 
                 */
 
@@ -100,15 +102,17 @@ allprojects {
 
         SmartToast.customToast(this)
 
-                        /*
+                       /*
 
-                        设置自定义布局，有重载方法，可直接以View为参数。在你的自定义布局中，一定要设置显示文本提示的
+                       设置自定义布局，有重载方法，可直接以View为参数。在你的自定义布局中，一定要设置
 
-                        TextView的Id为android:id="@id/custom_toast_msg"。如果不调用该方法，那么上面的调用与
+                       显示文本提示的TextView的Id为android:id="@id/custom_toast_msg"。如果不调用该方法，
 
-                        SmartToast.plainToast(this)等效
+                       那么上面的调用与
 
-                        */
+                       SmartToast.plainToast(this)等效
+
+                       */
 
                         .view(R.layout.custom_toast);
 </code></pre>
