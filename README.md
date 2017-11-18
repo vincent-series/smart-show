@@ -26,7 +26,7 @@ allprojects {
 
     }
 
-    //如果想使用SmartSnackbar，还需添加design包的依赖，添加适合你项目的版本即可
+    //若要使用SmartSnackbar，还需添加design包的依赖，添加适合你项目的版本即可
 
     compile 'com.android.support:design:x.y.z'
 </code></pre>
