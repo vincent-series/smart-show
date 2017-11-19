@@ -207,7 +207,29 @@ Toast的视图是通过独立的Window来显示的，并不依赖于任何Activi
 </code></pre>
 然而很遗憾，这么做无济于事。没有Toast显示时，先后调用cancel和show不会显示Toast。当前正在显示Toast时，先后调用cancel和
 show，虽会显示，但新的Toast(新内容或新位置)不会显示足额时间便消失，体验不好。<br/>
-![image](images/abc.gif)
+![image](images/abc.gif)<br/>
+你还有可能这么实现：<br/>
+<pre><code>
+    public void onShowClick(View view) {
+        mToast.setText("苹果!");
+        mToast.show();
+    }
+
+    public void onAnotherShow(View view) {
+        mToast.setText("香蕉!");
+        mToast.show();
+    }
+
+
+    public void onShowInCenterClick(View view) {
+        mToast.setGravity(Gravity.CENTER,0,0);
+        mToast.setText("桔子!");
+        mToast.show();
+    }
+</code></pre>
+但这样会有两个问题,内容改变后没有切换效果，如果Toast正在显示，调用setText可以立即生效，但setGravity并不是立即生效，
+要等到下一次显示才生效，就导致本次位置改变失败。<br/>
+![image](images/f_2.gif)<br/>
 show方法调用时
 ### 效果图
 

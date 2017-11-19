@@ -9,6 +9,7 @@
     android:gravity="center"
     tools:context="com.coder.zzq.smartshowdemo.TestToastActivity">
     <Button
+        android:visibility="gone"
         android:layout_marginBottom="30dp"
         android:textAllCaps="false"
         android:layout_width="wrap_content"
@@ -27,4 +28,10 @@
         android:layout_height="wrap_content"
         android:text="show another"
         android:onClick="onAnotherShow"/>
+    <Button
+        android:textAllCaps="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="showInCenter"
+        android:onClick="onShowInCenterClick"/>
 </LinearLayout>
