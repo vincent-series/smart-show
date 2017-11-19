@@ -1,10 +1,11 @@
 package com.coder.zzq.smartshowdemo;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
+
+import com.coder.zzq.smartshow.toast.SmartToast;
 
 public class TestToastActivity extends AppCompatActivity {
     private Toast mToast;
@@ -21,21 +22,15 @@ public class TestToastActivity extends AppCompatActivity {
     }
 
     public void onShowClick(View view) {
-        mToast.cancel();
-        mToast.setText("苹果!");
-        mToast.show();
+        SmartToast.show("苹果！");
     }
 
     public void onAnotherShow(View view) {
-        mToast.cancel();
-        mToast.setText("香蕉!");
-        mToast.show();
+        SmartToast.show("香蕉！");
     }
 
 
     public void onShowInCenterClick(View view) {
-        mToast.setGravity(Gravity.CENTER,0,0);
-        mToast.setText("桔子!");
-        mToast.show();
+        SmartToast.showInCenter("桔子！");
     }
 }

@@ -368,6 +368,22 @@ show方法逻辑
 
     }
 </code></pre>
+测试下
+<pre><code>
+    public void onShowClick(View view) {
+        SmartToast.show("苹果！");
+    }
+
+    public void onAnotherShow(View view) {
+        SmartToast.show("香蕉！");
+    }
+
+
+    public void onShowInCenterClick(View view) {
+        SmartToast.showInCenter("桔子！");
+    }
+</code></pre>
+![图片加载失败](images/t_2.gif)<br/>
 ### 效果图
 
 ## SmartSnackbar部分

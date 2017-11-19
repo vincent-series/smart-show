@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.coder.zzq.smartshow.snackbar.ProcessViewCallback;
 import com.coder.zzq.smartshow.snackbar.SmartSnackbar;
+import com.coder.zzq.smartshow.toast.SmartToast;
 
 
 /**
@@ -16,6 +17,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        SmartToast.plainToast(this);
         Utils.init(this);
                 /*
                 设置背景颜色，有可选方法，可直接以颜色值为参数
