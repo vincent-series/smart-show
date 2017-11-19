@@ -179,10 +179,10 @@ Long Toast<br/>
 
          SmartToast.dismiss();
 </code></pre>
-###实现
-1.全局使用一个Toast。
+### 实现
+1.全局使用一个Toast。<br/>
 Toast的视图是通过独立的Window来显示的，并不依赖于任何Activity，在任何Activity未启动的情况下，依然可以显示Toast。所以用Application
-的Context创建Toast，就可以全局使用一个
+级的Context创建Toast，就可以全局使用一个Toast实例了。<br/>
 ### 效果图
 
 ## SmartSnackbar部分
