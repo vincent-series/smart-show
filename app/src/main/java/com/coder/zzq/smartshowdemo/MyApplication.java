@@ -1,7 +1,9 @@
 package com.coder.zzq.smartshowdemo;
 
 import android.app.Application;
+import android.graphics.Color;
 import android.view.View;
+import android.widget.TextView;
 
 import com.coder.zzq.smartshow.toast.ProcessViewCallback;
 import com.coder.zzq.smartshow.toast.SmartToast;
@@ -57,7 +59,7 @@ public class MyApplication extends Application {
                 .processCustomView(new ProcessViewCallback() {
                     @Override
                     public void processCustomView(View view) {
-                        //这里没做处理
+                        ((TextView) view.findViewById(R.id.custom_toast_msg)).setTextColor(Color.WHITE);
                     }
                 });
 //        //隐藏当前Snackbar
