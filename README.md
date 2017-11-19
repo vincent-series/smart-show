@@ -409,6 +409,7 @@ show方法逻辑
         TextView msgView = (TextView) outParent.findViewById(android.R.id.message);
 
         //如果设置了背景色
+
         if (mBgColor != -1) {
 
             /*
@@ -420,25 +421,45 @@ show方法逻辑
             原来的.9图有padding我们将追加到显示消息的TextView上。圆角半径统一为2.5dp
 
             */
+
             NinePatchDrawable ninePatchDrawable = (NinePatchDrawable) ContextCompat.getDrawable(mAppContext, android.R.drawable.toast_frame);
+
             Rect rect = new Rect();
+
             ninePatchDrawable.getPadding(rect);
+
             msgView.setPadding(msgView.getPaddingLeft() + rect.left, msgView.getPaddingTop(), msgView.getPaddingRight() + rect.right, msgView.getPaddingBottom());
+
             GradientDrawable gradientDrawable = new GradientDrawable();
+
             gradientDrawable.setColor(mBgColor);
+
             gradientDrawable.setCornerRadius(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2.5f, mAppContext.getResources().getDisplayMetrics()));
+
             ViewCompat.setBackground(outParent, gradientDrawable);
+
         }
+
         if (mTextColor != -1) {
+
             msgView.setTextColor(mTextColor);
+
         }
+
         if (mTextSizeSp != -1) {
+
             msgView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTextSizeSp);
+
         }
+
         msgView.getPaint().setFakeBoldText(mTextBold);
+
         if (mProcessViewCallback != null) {
+
             mProcessViewCallback.processPlainView(outParent, msgView);
+
         }
+
     }
 </code></pre>
 ### 效果图
