@@ -44,6 +44,6 @@ public class TestToastActivity extends AppCompatActivity {
 
     public void onShowAtSomeLocationClick(View view) {
         //左上角，x,y偏移量均为10dp
-        SmartToast.showAtLocation("荔枝", Gravity.LEFT | Gravity.TOP,10,10);
+        SmartToast.showAtLocation("荔枝！", Gravity.LEFT | Gravity.TOP,10,10);
     }
 }

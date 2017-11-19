@@ -130,6 +130,7 @@ public final class SmartToast implements PlainToastSetting, CustomToastSetting, 
         if (mTextSizeSp != -1) {
             msgView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTextSizeSp);
         }
+        msgView.setGravity(Gravity.CENTER);
         msgView.getPaint().setFakeBoldText(mTextBold);
         if (mProcessViewCallback != null) {
             mProcessViewCallback.processPlainView(outParent, msgView);

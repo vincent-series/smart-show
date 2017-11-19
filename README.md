@@ -462,6 +462,25 @@ show方法逻辑
 
     }
 </code></pre>
+<pre><code>
+        SmartToast.plainToast(this)
+                .backgroundColorRes(R.color.colorPrimary)
+                .textColorRes(R.color.colorAccent)
+                .textBold(true)
+                .processPlainView(new com.coder.zzq.smartshow.toast.ProcessViewCallback() {
+                    @Override
+                    public void processPlainView(LinearLayout outParent, TextView msgView) {
+                        //添加左图标
+                        Drawable d = ContextCompat.getDrawable(msgView.getContext(),android.R.drawable.ic_menu_add);
+                        d.setBounds(0,0,d.getIntrinsicWidth(),d.getIntrinsicHeight());
+                        msgView.setGravity(Gravity.CENTER);
+                        msgView.setCompoundDrawables(d,null,null,null);
+                    }
+                });
+</code></pre>
+
+5.为Toast设置自定义布局，并进行代码处理</br>
+
 ### 效果图
 
 ## SmartSnackbar部分
