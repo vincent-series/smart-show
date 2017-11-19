@@ -2,6 +2,7 @@ package com.coder.zzq.smartshowdemo;
 
 import android.app.Application;
 
+import com.coder.zzq.smartshow.snackbar.SmartSnackbar;
 import com.coder.zzq.smartshow.toast.SmartToast;
 
 
@@ -64,5 +65,10 @@ public class MyApplication extends Application {
 //                    }
 //                });
 //
+        SmartSnackbar.init(this)
+                .backgroundColorRes(R.color.colorPrimary)
+                .actionColorRes(R.color.colorAccent)
+                .msgTextSizeSp(16)
+                .actionSizeSp(16);
     }
 }
