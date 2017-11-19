@@ -637,8 +637,7 @@ Indefinite Snackbar<br/>
 
         SmartSnackbar.dismiss();
 </code></pre>
-一般情况下，我们不会对对Snackbar的显示和消失做监听,但如果有此需要，将当前页面的Activity实现SnackbarCallback接口，然后重写方法即可.<br/>
-在SmartSnackbar显示时，会检测当前页面是否实现该接口，然后回调。
+一般情况下，我们不会对对Snackbar的显示和消失做监听,但如果有此需要，将当前页面的Activity实现SnackbarCallback接口，然后重写方法即可。在SmartSnackbar显示时，会检测当前页面是否实现该接口，然后回调。
 <pre><code>
 public class SnackbarActivity extends BaseActivity implements SnackbarCallback {
 
