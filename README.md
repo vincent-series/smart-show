@@ -526,29 +526,9 @@ show方法逻辑
                     }
                 });
 </code></pre>
-布局代码
-<pre>
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/colorPrimary"
-              android:gravity="center_vertical"
-              android:orientation="horizontal"
-              android:padding="10dp">
+布局代码<br/>
+![图片加载失败](images/p_1.png)<br/>
 
-    <ProgressBar
-        style="?android:attr/progressBarStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:paddingLeft="10dp"
-        android:id="@id/custom_toast_msg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-</LinearLayout>
-</pre>
 ### 效果图
 
 ## SmartSnackbar部分
