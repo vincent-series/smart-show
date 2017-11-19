@@ -399,6 +399,7 @@ show方法逻辑
 4.对Toast原有布局的风格进行修改，如背景颜色，文字大小和颜色等</br>
 <pre><code>
    private void setupPlainToast() {
+
         //获取父布局
 
         LinearLayout outParent = (LinearLayout) mToast.getView();
