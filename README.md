@@ -741,6 +741,44 @@ android.R.id.content作为容器。<br/>
         }
     }
 </code></pre>
+Snackbar的msg和actionText未发生改变且Snackbar正在显示，多次触发不会重复弹出。若发生改变，则有切换效果。
+<pre><code>
+    private void showHelper(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener,int duration){
 
+        msg = msg == null ? "" : msg;
+        actionText = actionText == null ? "" : actionText;
+        onActionClickListener = onActionClickListener == null ? this : onActionClickListener;
+        //样貌是否发生变化
+        boolean appearanceChanged = appearanceChanged(msg,actionText);
+        //重新设置Snackbar
+        setting(msg, actionText, onActionClickListener, duration);
+        //如果样貌发生变化且Snackbar正在显示
+        if (appearanceChanged && mSnackbar.isShown()){
+            先隐藏掉再显示，具有切换效果
+            dismissAndShowAgain();
+        }else {
+            //如果Snackbar没有显示或者“样貌”没有发生改变，正常显示即可
+            normalShow();
+        }
+    }
+</code></pre>
+<pre><code>
+   private boolean appearanceChanged(CharSequence msg, CharSequence actionText) {
+        return !mCurMsg.equals(msg) || !mCurActionText.equals(actionText);
+    }
+</code></pre>
+<pre><code>
+    //先隐藏再显示
+    private void dismissAndShowAgain() {
+        mSnackbar.dismiss();
+        mBaseTraceView.postDelayed(this, 400);
+    }
+</code></pre>
+<pre><code>
+    //正常显示Snackbar
+    private void normalShow() {
+        mSnackbar.setText(mCurMsg).setAction(mCurActionText, mOnActionClickListener).setDuration(mDuration).show();
+    }
+</code></pre>
 
 
