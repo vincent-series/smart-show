@@ -34,4 +34,16 @@
         android:layout_height="wrap_content"
         android:text="showInCenter"
         android:onClick="onShowInCenterClick"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="showAtTop"
+        android:onClick="onShowAtTopClick"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="showAtSomeLocation"
+        android:textAllCaps="false"
+        android:onClick="onShowAtSomeLocationClick"/>
 </LinearLayout>
