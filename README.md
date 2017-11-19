@@ -36,8 +36,6 @@ allprojects {
 1.全局始终使用一个Toast实例，节省内存<br/>
 2.如果Toast正在显示，多次触发同一内容的Toast，不会重复弹出</br>
 3.新的Toast(内容或位置发生了变化)来临时，会立即弹出，不会等到当前显示的Toast的duration耗尽再弹出，虽不会创建新的Toast实例，但具有切换效果<br/>
-1，2，3如下图：<br/>
-![图片加载失败](images/g_1.gif)
 4.可对Toast原有布局的风格进行修改，如背景颜色，文字大小和颜色等</br>
 5.可为Toast设置自定义布局，并进行代码处理</br>
 ### 使用：
@@ -179,6 +177,13 @@ Long Toast<br/>
 
          SmartToast.dismiss();
 </code></pre>
+### 效果图
+①全局始终使用一个Toast实例，节省内存<br/>
+②如果Toast正在显示，多次触发同一内容的Toast，不会重复弹出</br>
+③新的Toast(内容或位置发生了变化)来临时，会立即弹出，不会等到当前显示的Toast的duration耗尽再弹出，虽不会创建新的Toast实例，但具有切换效果<br/>
+![图片加载失败](images/g_1.gif)<br/>
+对Toast原有布局的风格进行修改，如背景颜色，文字大小和颜色等</br>
+![图片加载失败](images/g_2.gif)<br/>
 ## SmartSnackbar部分
 ### 特点：
 1.Snackbar的原理与Toast不同，Toast内部通过Window显示，全局可复用一个实例，Snackbar是把视图内嵌到当前Activity的android.R.id.content容器或某个CoordinatorLayout中，但在获取方式不变（容器不变）的情况下，同一页面仍然可以复用一个Snackbar实例，节省内存<br/>
