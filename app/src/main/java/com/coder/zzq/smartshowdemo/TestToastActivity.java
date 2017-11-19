@@ -21,11 +21,13 @@ public class TestToastActivity extends AppCompatActivity {
     }
 
     public void onShowClick(View view) {
+        mToast.cancel();
         mToast.setText("苹果!");
         mToast.show();
     }
 
     public void onAnotherShow(View view) {
+        mToast.cancel();
         mToast.setText("香蕉!");
         mToast.show();
     }

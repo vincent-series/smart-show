@@ -195,13 +195,13 @@ Toast的视图是通过独立的Window来显示的，并不依赖于任何Activi
 
     public void onShowClick(View view) {
         mToast.cancel();
-        mToast.setText("Hello!");
+        mToast.setText("苹果!");
         mToast.show();
     }
 
     public void onAnotherShow(View view) {
         mToast.cancel();
-        mToast.setText("你好!");
+        mToast.setText("香蕉!");
         mToast.show();
     }
 </code></pre>
