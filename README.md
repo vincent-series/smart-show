@@ -527,8 +527,7 @@ show方法逻辑
                 });
 </code></pre>
 布局代码
-<pre><code>
-"
+<pre>
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
@@ -549,8 +548,7 @@ show方法逻辑
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 </LinearLayout>
-"
-</code></pre>
+</pre>
 ### 效果图
 
 ## SmartSnackbar部分
