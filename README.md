@@ -490,7 +490,65 @@ show方法逻辑
 </code></pre>
 ![图片加载失败](images/t_3.gif)<br/>
 5.为Toast设置自定义布局，并进行代码处理</br>
+<pre><code>
+    private void setupCustomToast() {
 
+        if (mProcessViewCallback != null) {
+
+            mProcessViewCallback.processCustomView(mCustomView);
+
+        }
+
+        //将你自定义布局中显示消息的TextView的id设为R.id.custom_toast_msg
+
+        mCustomMsgView = (TextView) mCustomView.findViewById(R.id.custom_toast_msg);
+
+        mToast.setView(mCustomView);
+
+        mCurMsg = "";
+
+    }
+</code></pre>
+<pre><code>
+        SmartToast.customToast(this)
+
+                .view(R.layout.custom_toast)
+
+                //下面的方法不是必须调用的
+
+                .processCustomView(new ProcessViewCallback() {
+
+                    @Override
+                    public void processCustomView(View view) {
+
+                        //这里没做处理
+
+                    }
+                });
+</code></pre>
+布局代码
+<pre><code>
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/colorPrimary"
+              android:gravity="center_vertical"
+              android:orientation="horizontal"
+              android:padding="10dp">
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:paddingLeft="10dp"
+        android:id="@id/custom_toast_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
+</code></pre>
 ### 效果图
 
 ## SmartSnackbar部分
