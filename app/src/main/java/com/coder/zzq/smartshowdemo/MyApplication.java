@@ -3,10 +3,10 @@ package com.coder.zzq.smartshowdemo;
 import android.app.Application;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
-import android.view.Gravity;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.coder.zzq.smartshow.toast.ProcessViewCallback;
 import com.coder.zzq.smartshow.toast.SmartToast;
 
 
@@ -23,14 +23,14 @@ public class MyApplication extends Application {
         SmartToast.plainToast(this)
                 .backgroundColorRes(R.color.colorPrimary)
                 .textColorRes(R.color.colorAccent)
+                .textSizeSp(18)
                 .textBold(true)
-                .processPlainView(new com.coder.zzq.smartshow.toast.ProcessViewCallback() {
+                .processPlainView(new ProcessViewCallback() {
                     @Override
                     public void processPlainView(LinearLayout outParent, TextView msgView) {
                         //添加左图标
                         Drawable d = ContextCompat.getDrawable(msgView.getContext(),android.R.drawable.ic_menu_add);
                         d.setBounds(0,0,d.getIntrinsicWidth(),d.getIntrinsicHeight());
-                        msgView.setGravity(Gravity.CENTER);
                         msgView.setCompoundDrawables(d,null,null,null);
                     }
                 });
