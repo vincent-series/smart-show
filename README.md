@@ -715,6 +715,64 @@ android.R.id.content作为容器。<br/>
 
     }
 </code></pre>
+<pre><code>
+    private void rebuildSnackbar(View view) {
+
+        mCurMsg = "";
+
+        mCurActionText = "";
+
+        mBaseTraceView = view;
+
+        sSmartSnackbar.mSnackbar = Snackbar.make(mBaseTraceView,mCurMsg,Snackbar.LENGTH_SHORT);
+
+        if (mPageContext instanceof SnackbarCallback){
+
+            sSmartSnackbar.mSnackbar.addCallback(this);
+
+        }
+
+        if (mBgColor != -1){
+
+            sSmartSnackbar.mSnackbar.getView().setBackgroundColor(mBgColor);
+
+        }
+
+        TextView msgView = (TextView) sSmartSnackbar.mSnackbar.getView().findViewById(android.support.design.R.id.snackbar_text);
+
+        if (mMsgColor != -1){
+
+            msgView.setTextColor(mMsgColor);
+
+        }
+
+        if (mMsgTextSizeSp != -1){
+
+            msgView.setTextSize(TypedValue.COMPLEX_UNIT_SP,mMsgTextSizeSp);
+
+        }
+
+        TextView actionView = (TextView) sSmartSnackbar.mSnackbar.getView().findViewById(android.support.design.R.id.snackbar_action);
+
+        if (mActionColor != -1){
+
+            actionView.setTextColor(mActionColor);
+
+        }
+        if (mActionSizeSp != -1){
+
+            actionView.setTextSize(TypedValue.COMPLEX_UNIT_SP,mActionSizeSp);
+
+        }
+
+        if (mProcessViewCallback != null){
+
+            mProcessViewCallback.processSnackbarView((Snackbar.SnackbarLayout) mSnackbar.getView(),msgView,actionView);
+
+        }
+
+    }
+</code></pre>
 如此，在同一页面获取方式不变的情况下，始终复用同一个实例。<br/>
 若启动新的页面，新页面销毁回到旧页面的情形是怎样的呢。
 <pre><code>
@@ -839,3 +897,4 @@ Snackbar的msg和actionText未发生改变且Snackbar正在显示，多次触发
     }
 </code></pre>
 ![图片加载失败](images/t_5.gif)<br/>
+修改布局风格<br/>
