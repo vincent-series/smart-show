@@ -67,17 +67,31 @@ public class SmartSnackbar extends Snackbar.Callback implements SnackbarSetting,
 
 
     public static SnackbarShow get(Activity activity){
+        //保存当前页面的Context
         getSmartSnackbar(activity).mPageContext = activity;
+        //取出android.R.id.content
         View view = activity.findViewById(android.R.id.content);
         return get(view);
     }
 
     public static SnackbarShow get(CoordinatorLayout view){
+        //保存当前页面的Context
         getSmartSnackbar(view.getContext()).mPageContext = view.getContext();
         return get(view);
     }
 
     private static SnackbarShow get(View view){
+        /*
+
+        如果Snackbar尚未创建创建，则创建之
+
+        mBaseTraceView 用来保存创建Snackbar的View，由于入口做了控制，所以只可能是android.R.id.content
+
+        或者CoordinatorLayout。它发生变化包括两种情形：1.同一页面，本次获取方式与上次不同，导致容纳Snackbar
+
+        的容器改变 2.进入新的页面，两种情况都需要重建Snackbar
+
+         */
         if (sSmartSnackbar.mSnackbar == null || sSmartSnackbar.mBaseTraceView != view){
             sSmartSnackbar.rebuildSnackbar(view);
         }

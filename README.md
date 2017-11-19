@@ -590,7 +590,7 @@ show方法逻辑
 
         如果当前页面创建过Snackbar，则退出页面时，回收资源。如果没有，则不会回收资源，比如Activity A 显示过Snackbar，然后
 
-        启动了B，B没有显示过Snackbar，当B销毁回到A时，再显示Snackbar，可复用，不用再次创建，提高效率
+        启动了B，B没有显示过Snackbar，当B销毁时，不会回收资源，回到再显示Snackbar，可复用，不用再次创建，提高效率
 
         */
 
@@ -647,4 +647,79 @@ Indefinite Snackbar<br/>
 所以建议，在使用SmartSnackbar时，如果你的页面想以某个具体CoordinatorLayout作为容器，则调用public static SnackbarShow get(CoordinatorLayout view)。否则调用public static SnackbarShow get(Activity activity)，内部会自动将
 android.R.id.content作为容器。<br/>
 ## 实现
+<pre><code>
+    public static SnackbarShow get(Activity activity){
+
+        //保存当前页面的Context
+
+        getSmartSnackbar(activity).mPageContext = activity;
+
+        //取出android.R.id.content
+
+        View view = activity.findViewById(android.R.id.content);
+
+        return get(view);
+
+    }
+
+    public static SnackbarShow get(CoordinatorLayout view){
+
+        //保存当前页面的Context
+
+        getSmartSnackbar(view.getContext()).mPageContext = view.getContext();
+
+        return get(view);
+
+    }
+
+    private static SnackbarShow get(View view){
+        /*
+
+        如果Snackbar尚未创建创建，则创建之
+
+        mBaseTraceView 用来保存创建Snackbar的View，由于入口做了控制，所以只可能是android.R.id.content
+
+        或者CoordinatorLayout。它发生变化包括两种情形：1.同一页面，本次获取方式与上次不同，导致容纳Snackbar
+
+        的容器改变 2.进入新的页面，两种情况都需要重建Snackbar
+
+         */
+        if (sSmartSnackbar.mSnackbar == null || sSmartSnackbar.mBaseTraceView != view){
+
+            sSmartSnackbar.rebuildSnackbar(view);
+
+        }
+
+        return sSmartSnackbar;
+
+    }
+</code></pre>
+如此，在同一页面获取方式不变的情况下，始终复用同一个实例。<br/>
+若启动新的页面，新页面销毁回到旧页面的情形是怎样的呢。
+<pre><code>
+    public static void destroy(Activity activity){
+        /*
+
+        若mPageContext 与当前页面相等，则表示在当前页面显示过Snackbar，则回收资源，回到上一页面，
+
+        显示Snackbar时必然重建，之后继续复用(获取方式不变的话);若不等，则表示在当前页面未显示过Snackbar,
+
+        则不必回收资源，回到上一页面可继续复用(获取方式不变的话)。
+
+        */
+
+        if (sSmartSnackbar != null && sSmartSnackbar.mPageContext == activity){
+
+            sSmartSnackbar.mCurMsg = "";
+            sSmartSnackbar.mCurActionText = "";
+            sSmartSnackbar.mOnActionClickListener = null;
+
+            sSmartSnackbar.mSnackbar = null;
+            sSmartSnackbar.mPageContext = null;
+            sSmartSnackbar.mBaseTraceView = null;
+        }
+    }
+</code></pre>
+
+
 
