@@ -527,7 +527,7 @@ show方法逻辑
 </code></pre>
 布局代码<br/>
 ![图片加载失败](images/p_1.png)<br/>
-![图片加载失败](images/t_4.png)<br/>
+![图片加载失败](images/t_4.gif)<br/>
 6.内部实现上,除了所必须的Toast单例外，为了减少创建不必要的对象，PlainToastSetting、CustomToastSetting、Runnable三个接口全部由单例SmartToast实现，对外需要暴露何种功能，则返回何种接口类型
 ### 效果图
 
