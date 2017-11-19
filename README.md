@@ -637,7 +637,29 @@ Indefinite Snackbar<br/>
 
         SmartSnackbar.dismiss();
 </code></pre>
+一般情况下，我们不会对对Snackbar的显示和消失做监听,但如果有此需要，将当前页面的Activity实现SnackbarCallback接口，然后重写方法即可.<br/>
+在SmartSnackbar显示时，会检测当前页面是否实现该接口，然后回调。
+<pre><code>
+public class SnackbarActivity extends BaseActivity implements SnackbarCallback {
 
+
+    @Override
+    protected int contentLayout() {
+        return R.layout.activity_smart_show;
+    }
+
+    @Override
+    public void onSnackbarShown(Snackbar sb) {
+        Log.d("Main", "shown");
+    }
+
+    @Override
+    public void onSnackbarDismissed(Snackbar sb, int event) {
+        Log.d("Main", "dismiss");
+    }
+
+}
+</code></pre>
 #### SmartSnackbar获取方式的说明
 以上实例使用的是public static SnackbarShow get(Activity activity)方式，<br/>
 还可使用public static SnackbarShow get(CoordinatorLayout view)方式。<br/>
@@ -646,7 +668,7 @@ Indefinite Snackbar<br/>
 以CoordinatorLayout为内嵌容器时，Snackbar会有一些特殊的行为，如可以用手指手动滑动移除，显示时会导致FloatActionButton升高等。
 所以建议，在使用SmartSnackbar时，如果你的页面想以某个具体CoordinatorLayout作为容器，则调用public static SnackbarShow get(CoordinatorLayout view)。否则调用public static SnackbarShow get(Activity activity)，内部会自动将
 android.R.id.content作为容器。<br/>
-## 实现
+### 实现
 <pre><code>
     public static SnackbarShow get(Activity activity){
 
