@@ -189,20 +189,31 @@ Toast的视图是通过独立的Window来显示的，并不依赖于任何Activi
 很容易会想到这么做，全局使用一个Toast实例的基础上，然后如此写代码：<br/>
 <pre><code>
     public void onNormalShowFirstClick(View view) {
+
         mToast.setText("Showing!");
+
         mToast.show();
+
     }
 
     public void onShowClick(View view) {
+
         mToast.cancel();
+
         mToast.setText("苹果!");
+
         mToast.show();
+
     }
 
     public void onAnotherShow(View view) {
+
         mToast.cancel();
+
         mToast.setText("香蕉!");
+
         mToast.show();
+
     }
 </code></pre>
 然而很遗憾，这么做无济于事。没有Toast显示时，先后调用cancel和show不会显示Toast。当前正在显示Toast时，先后调用cancel和
@@ -211,20 +222,30 @@ show，虽会显示，但新的Toast(新内容或新位置)不会显示足额时
 你还有可能这么实现：<br/>
 <pre><code>
     public void onShowClick(View view) {
+
         mToast.setText("苹果!");
+
         mToast.show();
+
     }
 
     public void onAnotherShow(View view) {
+
         mToast.setText("香蕉!");
+
         mToast.show();
+
     }
 
 
     public void onShowInCenterClick(View view) {
+
         mToast.setGravity(Gravity.CENTER,0,0);
+
         mToast.setText("桔子!");
+
         mToast.show();
+
     }
 </code></pre>
 但这样会有两个问题,内容改变后没有切换效果，如果Toast正在显示，调用setText可以立即生效，但setGravity并不是立即生效，
@@ -237,14 +258,23 @@ show，虽会显示，但新的Toast(新内容或新位置)不会显示足额时
 Toast视图的显示和消失是交给内部类TN管理的，并保存为成员变量，我们通过反射拿到TN，然后每次都只隐藏视图，不发起队列移除操作，问题就解决了。
 <pre><code>
    public static void dismiss() {
+
         if (sSmartToast != null && sSmartToast.mToast != null) {
+
             try {
+
                 Field tnField = Toast.class.getDeclaredField("mTN");
+
                 tnField.setAccessible(true);
+
                 Object tn = tnField.get(sSmartToast.mToast);
+
                 Method hideMethod = tn.getClass().getDeclaredMethod("hide");
+
                 hideMethod.setAccessible(true);
+
                 hideMethod.invoke(tn);
+
             } catch (NoSuchFieldException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
@@ -262,48 +292,80 @@ show方法逻辑
  private static void showHelper(CharSequence msg, int gravity, int xOffset, int yOffset, int duration) {
 
         if (sSmartToast.mCustomView != null && sSmartToast.mCustomMsgView == null) {
+
             return;
+
         }
 
         msg = msg == null ? "" : msg;
+
         getToast().setDuration(duration);
+
         //位置是否改变
+
         boolean locationChanged = sSmartToast.locationChanged(gravity, xOffset, yOffset);
+
         //内容是否改变
+
         boolean contentChanged = !sSmartToast.mCurMsg.equals(msg);
 
         sSmartToast.mCurMsg = msg;
+
         sSmartToast.mGravity = gravity;
+
         sSmartToast.mXOffset = xOffset;
+
         sSmartToast.mYOffset = yOffset;
+
         //如果Toast正在显示，且内容或位置发生了变化
+
         if (ViewCompat.isAttachedToWindow(getToast().getView()) && (contentChanged || locationChanged)) {
+
             //先隐藏
+
             SmartToast.dismiss();
+
             //再显示，为了体验更好，延时150毫秒发送Runnable执行
+
             getToast().getView().postDelayed(sSmartToast, 150);
+
         } else {
+
             //否则更新Toast的内容并正常显示即可
+
             sSmartToast.updateToast();
+
             getToast().show();
+
         }
+
     }
 </code></pre>
 <pre><code>
     @Override
     public void run() {
+
         updateToast();
+
         getToast().show();
+
     }
 </code></pre>
 <pre><code>
     private void updateToast() {
+
         if (mCustomMsgView != null) {
+
             mCustomMsgView.setText(mCurMsg);
+
         } else {
+
             getToast().setText(mCurMsg);
+
         }
+
         getToast().setGravity(mGravity, mXOffset, mYOffset);
+
     }
 </code></pre>
 ### 效果图
