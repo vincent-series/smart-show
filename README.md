@@ -230,7 +230,82 @@ show，虽会显示，但新的Toast(新内容或新位置)不会显示足额时
 但这样会有两个问题,内容改变后没有切换效果，如果Toast正在显示，调用setText可以立即生效，但setGravity并不是立即生效，
 要等到下一次显示才生效，就导致本次位置改变失败。<br/>
 ![图片加载失败](images/f_2.gif)<br/>
-show方法调用时
+之所以出现这样的问题，与Toast的显示原理有关。<br/>
+调用Toast的show方法时，内部会做两件事，一是显示视图，而是将Toast加入队列，待duration耗尽后移除。调用cancel方法时，一是
+视图消失，二是将Toast从队列移除。但是前者执行完后只是发起移除队列的行为，移除代码不一定紧接着执行，代码会继续往下走，执行其他任务。
+如果此时再次调用show方法，视图得以显示，然后紧接着执行移除代码，Toast很快消失。<br/>
+Toast视图的显示和消失是交给内部类TN管理的，并保存为成员变量，我们通过反射拿到TN，然后每次都只隐藏视图，不发起队列移除操作，就解决问题了。
+<pre><code>
+   public static void dismiss() {
+        if (sSmartToast != null && sSmartToast.mToast != null) {
+            try {
+                Field tnField = Toast.class.getDeclaredField("mTN");
+                tnField.setAccessible(true);
+                Object tn = tnField.get(sSmartToast.mToast);
+                Method hideMethod = tn.getClass().getDeclaredMethod("hide");
+                hideMethod.setAccessible(true);
+                hideMethod.invoke(tn);
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+</code></pre>
+show方法逻辑
+<pre><code>
+ private static void showHelper(CharSequence msg, int gravity, int xOffset, int yOffset, int duration) {
+
+        if (sSmartToast.mCustomView != null && sSmartToast.mCustomMsgView == null) {
+            return;
+        }
+
+        msg = msg == null ? "" : msg;
+        getToast().setDuration(duration);
+        //位置是否改变
+        boolean locationChanged = sSmartToast.locationChanged(gravity, xOffset, yOffset);
+        //内容是否改变
+        boolean contentChanged = !sSmartToast.mCurMsg.equals(msg);
+
+        sSmartToast.mCurMsg = msg;
+        sSmartToast.mGravity = gravity;
+        sSmartToast.mXOffset = xOffset;
+        sSmartToast.mYOffset = yOffset;
+        //如果Toast正在显示，且内容或位置发生了变化
+        if (ViewCompat.isAttachedToWindow(getToast().getView()) && (contentChanged || locationChanged)) {
+            //先隐藏
+            SmartToast.dismiss();
+            //再显示，为了体验更好，延时150毫秒发送Runnable执行
+            getToast().getView().postDelayed(sSmartToast, 150);
+        } else {
+            //否则更新Toast的内容并正常显示即可
+            sSmartToast.updateToast();
+            getToast().show();
+        }
+    }
+</code></pre>
+<pre><code>
+    @Override
+    public void run() {
+        updateToast();
+        getToast().show();
+    }
+</code></pre>
+<pre><code>
+    private void updateToast() {
+        if (mCustomMsgView != null) {
+            mCustomMsgView.setText(mCurMsg);
+        } else {
+            getToast().setText(mCurMsg);
+        }
+        getToast().setGravity(mGravity, mXOffset, mYOffset);
+    }
+</code></pre>
 ### 效果图
 
 ## SmartSnackbar部分
