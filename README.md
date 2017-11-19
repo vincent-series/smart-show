@@ -535,7 +535,6 @@ show方法逻辑
 2.同一页面，如果Snackbar正在显示，多次触发同一内容的Snackbar，不会重复弹出</br>
 3.同一页面，如果Snackbar正在显示，再次触发Snackbar，如果内容发生了变化（不会重建Snackbar实例）或内嵌的容器发生了变化（会重建Snackbar实例），会重新弹出，具有切换效果。<br/>
 4.可对布局的风格进行修改，如背景颜色，文字大小和颜色等</br>
-5.内部实现上,除了必要的Snackbar，为了减少创建不必要的对象，SnackbarSetting、SnackbarShow、Runnable,View.OnClickListener四个接口全部由单例SmartSnackbar实现，对外需要暴露何种功能，则返回何种接口类型
 ### 使用：
 第一步，初始化。这不是必须的，如果你想对Snackbar的风格进行修改，则在Application的onCreate()方法中初始化<br/>
 <pre><code>
@@ -910,5 +909,6 @@ Snackbar的msg和actionText未发生改变且Snackbar正在显示，多次触发
                 .actionSizeSp(16);
 </code></pre>
 ![图片加载失败](images/t_6.gif)<br/>
+内部实现上,除了必要的Snackbar，为了减少创建不必要的对象，SnackbarSetting、SnackbarShow、Runnable,View.OnClickListener四个接口全部由单例SmartSnackbar实现，对外需要暴露何种功能，则返回何种接口类型
 ## 完整源码
 github地址：https://github.com/the-pig-of-jungle/SmartShow
