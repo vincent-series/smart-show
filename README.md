@@ -34,7 +34,7 @@ allprojects {
 ### 特点：
 1.全局始终使用一个Toast实例，节省内存<br/>
 2.如果Toast正在显示，多次触发同一内容的Toast，不会重复弹出</br>
-3.新的Toast(内容或位置发生了变化)来临时，会立即弹出，不会等当前显示的Toast的duration耗尽再弹出，虽不会创建新的Toast实例，但具有切换效果<br/>
+3.新的Toast(内容或位置发生了变化)来临时，会立即弹出，不会等到当前显示的Toast的duration耗尽再弹出，虽不会创建新的Toast实例，但具有切换效果<br/>
 4.可对Toast原有布局的风格进行修改，如背景颜色，文字大小和颜色等</br>
 5.可为Toast设置自定义布局，并进行代码处理</br>
 6.内部实现上,除了所必须的Toast单例外，为了减少创建不必要的对象，PlainToastSetting、CustomToastSetting、Runnable三个接口全部由单例SmartToast实现，对外需要暴露何种功能，则返回何种接口类型
@@ -185,7 +185,30 @@ Toast的视图是通过独立的Window来显示的，并不依赖于任何Activi
 级的Context创建Toast，就可以全局使用一个Toast实例了。<br/>
 2.如果Toast正在显示，多次触发同一内容的Toast，不会重复弹出</br>
 全局使用一个Toast实例即可解决此问题。同一Toast实例，如果当前正在显示，再次调用show方法，并不会重复弹出。<br/>
-3.
+3.新的Toast(内容或位置发生了变化)来临时，会立即弹出，不会等到当前显示的Toast的duration耗尽再弹出，虽不会创建新的Toast实例，但具有切换效果<br/>
+很容易会想到这么做，全局使用一个Toast实例的基础上，然后如此写代码：<br/>
+<pre><code>
+    public void onNormalShowFirstClick(View view) {
+        mToast.setText("Showing!");
+        mToast.show();
+    }
+
+    public void onShowClick(View view) {
+        mToast.cancel();
+        mToast.setText("Hello!");
+        mToast.show();
+    }
+
+    public void onAnotherShow(View view) {
+        mToast.cancel();
+        mToast.setText("你好!");
+        mToast.show();
+    }
+</code></pre>
+然而很遗憾，这么做无济于事。没有Toast显示时，先后调用cancel和show不会显示Toast。当前正在显示Toast时，先后调用cancel和
+show，虽会显示，但新的Toast(新内容或新位置)不会显示足额时间便消失，体验不好。<br/>
+![image](images/abc.gif)
+show方法调用时
 ### 效果图
 
 ## SmartSnackbar部分
