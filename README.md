@@ -396,6 +396,50 @@ show方法逻辑
     }
 </code></pre>
 ![图片加载失败](images/t_2.gif)<br/>
+4.对Toast原有布局的风格进行修改，如背景颜色，文字大小和颜色等</br>
+<pre><code>
+   private void setupPlainToast() {
+        //获取父布局
+
+        LinearLayout outParent = (LinearLayout) mToast.getView();
+
+        //获取显示消息的View
+
+        TextView msgView = (TextView) outParent.findViewById(android.R.id.message);
+
+        //如果设置了背景色
+        if (mBgColor != -1) {
+
+            /*
+
+            Toast视图的背景是一个.9圆角图片，不同的手机系统圆角半径不同，而且.9图有的有padding，有的没padding，
+
+            当你设置了背景颜色，我们将创建GradientDrawable作为背景，为了保持与你手机系统的Toast大小一致，如果
+
+            原来的.9图有padding我们将追加到显示消息的TextView上。圆角半径统一为2.5dp
+
+            */
+            NinePatchDrawable ninePatchDrawable = (NinePatchDrawable) ContextCompat.getDrawable(mAppContext, android.R.drawable.toast_frame);
+            Rect rect = new Rect();
+            ninePatchDrawable.getPadding(rect);
+            msgView.setPadding(msgView.getPaddingLeft() + rect.left, msgView.getPaddingTop(), msgView.getPaddingRight() + rect.right, msgView.getPaddingBottom());
+            GradientDrawable gradientDrawable = new GradientDrawable();
+            gradientDrawable.setColor(mBgColor);
+            gradientDrawable.setCornerRadius(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2.5f, mAppContext.getResources().getDisplayMetrics()));
+            ViewCompat.setBackground(outParent, gradientDrawable);
+        }
+        if (mTextColor != -1) {
+            msgView.setTextColor(mTextColor);
+        }
+        if (mTextSizeSp != -1) {
+            msgView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTextSizeSp);
+        }
+        msgView.getPaint().setFakeBoldText(mTextBold);
+        if (mProcessViewCallback != null) {
+            mProcessViewCallback.processPlainView(outParent, msgView);
+        }
+    }
+</code></pre>
 ### 效果图
 
 ## SmartSnackbar部分
