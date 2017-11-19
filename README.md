@@ -910,4 +910,5 @@ Snackbar的msg和actionText未发生改变且Snackbar正在显示，多次触发
                 .actionSizeSp(16);
 </code></pre>
 ![图片加载失败](images/t_6.gif)<br/>
-## 完整源码——github地址：https://github.com/the-pig-of-jungle/SmartShow
+## 完整源码
+github地址：https://github.com/the-pig-of-jungle/SmartShow
