@@ -803,5 +803,39 @@ Snackbar的msg和actionText未发生改变且Snackbar正在显示，多次触发
 
     }
 </code></pre>
+测试代码
+<pre><code>
+    public void onAppleClick(View view) {
+
+        SmartSnackbar.get(this).show("苹果");
+
+    }
+
+    public void onBananaClick(View view) {
+
+        SmartSnackbar.get(this).showLong("香蕉");
+
+    }
 
 
+    public void onOrangeClick(View view) {
+
+        SmartSnackbar.get(this).showIndefinite("桔子","好吃");
+
+    }
+
+    public void onNameClick(View view) {
+
+        SmartSnackbar.get(this).show("我是朱志强", "打赏", new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                SmartToast.showInCenter("Thank you ！");
+
+            }
+
+        });
+    }
+</code></pre>
+![图片加载失败](images/t_5.gif)<br/>
