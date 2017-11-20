@@ -64,7 +64,7 @@ allprojects {
 
                 .backgroundColorRes(R.color.colorPrimary)
 
-                //设置文本颜色，有可选方法，可直接以颜色值为参数
+                //设置文本颜色，有可选方法，直接以颜色值为参数
 
                 .textColorRes(R.color.colorAccent)
 
@@ -100,7 +100,7 @@ allprojects {
 
                         /*
 
-                        设置自定义布局，有重载方法，可直接以View为参数。在你的自定义布局中，一定要设置显示文本提示的
+                        设置自定义布局，有重载方法，直接以View为参数。在你的自定义布局中，一定要设置显示文本提示的
 
                         TextView的Id为android:id="@id/custom_toast_msg"。如果不调用该方法，那么上面的调用与
 
@@ -110,7 +110,7 @@ allprojects {
 
                         .view(R.layout.custom_toast);
 </code></pre>
-如果你想对自定义的布局进行代码处理,可继续链式调用，不过这并不是必须的<br/>
+若想对自定义的布局进行代码处理,可继续链式调用，不过这并不是必须的<br/>
 <pre><code>
         返回CustomToastSetting对象
 
@@ -134,7 +134,7 @@ allprojects {
                     }
                 });
 </code></pre>
-第二步，调用show方法显示Toast，非常简便<br/>
+第二步，调用show方法显示Toast，常用的显示位置和duration体现在方法名上，而不是传参，使得调用非常简易<br/>
 Short Toast<br/>
 <pre><code>
         //在默认位置显示
