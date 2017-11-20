@@ -182,7 +182,7 @@ Long Toast<br/>
 ②如果Toast正在显示，多次触发同一内容的Toast，不会重复弹出</br>
 ③新的Toast(内容或位置发生了变化)来临时，会立即弹出，不会等到当前显示的Toast的duration耗尽再弹出，虽不会创建新的Toast实例，但具有切换效果<br/><br/><br/>
 ![图片加载失败](images/g_1.gif)<br/><br/><br/>
-对Toast原有布局的风格进行修改，如背景颜色，文字大小和颜色等</br><br/><br/>
+④对Toast原有布局的风格进行修改，如背景颜色，文字大小和颜色等</br><br/><br/>
 ![图片加载失败](images/g_2.gif)<br/>
 ## SmartSnackbar部分
 ### 特点：
