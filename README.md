@@ -186,26 +186,26 @@ Long Toast<br/>
 ![图片加载失败](images/g_2.gif)<br/>
 ## SmartSnackbar部分
 ### 特点：
-1.Snackbar的原理与Toast不同，Toast内部通过Window显示，全局可复用一个实例，Snackbar是把视图内嵌到当前Activity的android.R.id.content容器或某个CoordinatorLayout中，但在获取方式不变（容器不变）的情况下，同一页面仍然可以复用一个Snackbar实例，节省内存<br/>
+1.Snackbar的显示原理与Toast不同，Toast通过Window展示视图，全局可复用一个实例。Snackbar则是把视图内嵌到当前Activity的android.R.id.content容器或某个CoordinatorLayout中。在获取方式不变（容器不变）的情况下，同一页面可复用一个Snackbar实例，节省内存<br/>
 2.同一页面，如果Snackbar正在显示，多次触发同一内容的Snackbar，不会重复弹出</br>
 3.同一页面，如果Snackbar正在显示，再次触发Snackbar，如果内容发生了变化（不会重建Snackbar实例）或内嵌的容器发生了变化（会重建Snackbar实例），会重新弹出，具有切换效果。<br/>
-4.可对布局的风格进行修改，如背景颜色，文字大小和颜色等</br>
+4.可修改布局风格，如背景颜色，文字大小和颜色等</br>
 ### 使用：
-第一步，初始化。这不是必须的，如果你想对Snackbar的风格进行修改，则在Application的onCreate()方法中初始化<br/>
+第一步，初始化。这不是必须的，若想修改Snackbar布局的默认风格，则在Application的onCreate()方法中初始化<br/>
 <pre><code>
         //返回SnackbarSetting对象，对布局进行各种风格设置
 
         SmartSnackbar.init(this)
 
-                //设置背景颜色，有可选方法，可直接以颜色值为参数
+                //设置背景颜色，有可选方法，直接以颜色值为参数
 
                 .backgroundColorRes(R.color.colorPrimary)
 
-                //设置消息文本颜色，有可选方法，可直接以颜色值为参数
+                //设置消息文本颜色，有可选方法，直接以颜色值为参数
 
                 .msgTextColorRes(R.color.white)
 
-                //设置动作文本颜色，有可选方法，可直接以颜色值为参数
+                //设置动作文本颜色，有可选方法，直接以颜色值为参数
 
                 .actionColorRes(R.color.colorAccent)
 
@@ -217,7 +217,7 @@ Long Toast<br/>
 
                 .actionSizeSp(18)
 
-                //如果以上还不够，可调用该方法进行处理
+                //如果以上还不够，可调用该方法
 
                 .processView(new ProcessViewCallback() {
 
@@ -233,7 +233,7 @@ Long Toast<br/>
                     }
                 });
 </code></pre>
-第二步，在你BaseActivity的onDestroy()方法里回收资源
+第二步，在你的BaseActivity的onDestroy()方法里回收资源
 <pre><code>
     @Override
     protected void onDestroy() {
@@ -244,7 +244,7 @@ Long Toast<br/>
 
         如果当前页面创建过Snackbar，则退出页面时，回收资源。如果没有，则不会回收资源，比如Activity A 显示过Snackbar，然后
 
-        启动了B，B没有显示过Snackbar，当B销毁时，不会回收资源，回到再显示Snackbar，可复用，不用再次创建，提高效率
+        启动了B，B没有显示过Snackbar，当B销毁时，不会回收资源，回到A再次显示Snackbar，可复用，不必再次创建Snackbar实例，提高效率
 
         */
 
