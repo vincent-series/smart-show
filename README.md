@@ -322,3 +322,6 @@ public class SnackbarActivity extends BaseActivity implements SnackbarCallback {
 以CoordinatorLayout为内嵌容器时，Snackbar会有一些特殊的行为，如可以用手指手动滑动移除，显示时会导致FloatActionButton升高等。<br/>
 所以建议，在使用SmartSnackbar时，如果你的页面想以某个具体CoordinatorLayout作为容器，则调用public static SnackbarShow get(CoordinatorLayout view)。<br/>
 否则调用public static SnackbarShow get(Activity activity)，内部会自动将 android.R.id.content作为容器。<br/>
+# 打赏
+您的肯定，是我不懈努力的动力！<br/>
+![图片加载失败](images/alipay.jpg)![图片加载失败](images/wechat.png)
