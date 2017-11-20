@@ -184,6 +184,8 @@ Long Toast<br/>
 ![图片加载失败](images/g_1.gif)<br/><br/><br/>
 ④对Toast原有布局的风格进行修改，如背景颜色，文字大小和颜色等</br><br/><br/>
 ![图片加载失败](images/g_2.gif)<br/>
+⑤为Toast设置自定义布局
+![图片加载失败](images/g_3.gif)<br/>
 ## SmartSnackbar部分
 ### 特点：
 1.Snackbar的显示原理与Toast不同，Toast通过Window展示视图，全局可复用一个实例。Snackbar则是把视图内嵌到当前Activity的android.R.id.content容器或某个CoordinatorLayout中。在获取方式不变（容器不变）的情况下，同一页面可复用一个Snackbar实例，节省内存<br/>

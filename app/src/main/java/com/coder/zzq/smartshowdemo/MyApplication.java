@@ -1,9 +1,8 @@
 package com.coder.zzq.smartshowdemo;
 
 import android.app.Application;
-import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
-import android.widget.LinearLayout;
+import android.graphics.Color;
+import android.view.View;
 import android.widget.TextView;
 
 import com.coder.zzq.smartshow.snackbar.SmartSnackbar;
@@ -19,27 +18,27 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        SmartToast.plainToast(this)
-                .backgroundColorRes(R.color.colorPrimary)
-                .textColorRes(R.color.colorAccent)
-                .textSizeSp(18)
-                .textBold(true)
-                .processPlainView(new ProcessViewCallback() {
-                    @Override
-                    public void processPlainView(LinearLayout outParent, TextView msgView) {
-                        //添加左图标
-
-                        Drawable d =
-
-                                ContextCompat.getDrawable(msgView.getContext(),
-
-                                        android.R.drawable.ic_menu_add);
-
-                        d.setBounds(0,0,d.getIntrinsicWidth(),d.getIntrinsicHeight());
-
-                        msgView.setCompoundDrawables(d,null,null,null);
-                    }
-                });
+//        SmartToast.plainToast(this)
+//                .backgroundColorRes(R.color.colorPrimary)
+//                .textColorRes(R.color.colorAccent)
+//                .textSizeSp(18)
+//                .textBold(true)
+//                .processPlainView(new ProcessViewCallback() {
+//                    @Override
+//                    public void processPlainView(LinearLayout outParent, TextView msgView) {
+//                        //添加左图标
+//
+//                        Drawable d =
+//
+//                                ContextCompat.getDrawable(msgView.getContext(),
+//
+//                                        android.R.drawable.ic_menu_add);
+//
+//                        d.setBounds(0,0,d.getIntrinsicWidth(),d.getIntrinsicHeight());
+//
+//                        msgView.setCompoundDrawables(d,null,null,null);
+//                    }
+//                });
         Utils.init(this);
                 /*
                 设置背景颜色，有可选方法，可直接以颜色值为参数
@@ -62,15 +61,15 @@ public class MyApplication extends Application {
 //                    }
 //                });
 
-//        SmartToast.customToast(this)
-//                .view(R.layout.custom_toast)
-//                //下面的方法不是必须调用的
-//                .processCustomView(new ProcessViewCallback() {
-//                    @Override
-//                    public void processCustomView(View view) {
-//                        ((TextView) view.findViewById(R.id.custom_toast_msg)).setTextColor(Color.WHITE);
-//                    }
-//                });
+        SmartToast.customToast(this)
+                .view(R.layout.custom_toast)
+                //下面的方法不是必须调用的
+                .processCustomView(new ProcessViewCallback() {
+                    @Override
+                    public void processCustomView(View view) {
+                        ((TextView) view.findViewById(R.id.custom_toast_msg)).setTextColor(Color.WHITE);
+                    }
+                });
 //        //隐藏当前Snackbar
 //        SmartSnackbar.dismiss();
 //        SmartSnackbar.init(this)
