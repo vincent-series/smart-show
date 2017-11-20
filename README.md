@@ -327,7 +327,9 @@ public class SnackbarActivity extends BaseActivity implements SnackbarCallback {
     @Override
     public void run() {
         if (mSnackbar != null) {
-            mSnackbar.setText(mCurMsg).setAction(mCurActionText, mOnActionClickListener).setDuration(mDuration).show();
+            mSnackbar.setText(mCurMsg).setAction(mCurActionText, mOnActionClickListener)
+                     .setDuration(mDuration)
+                     .show();
         }
     }
 </code></pre>
