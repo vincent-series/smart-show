@@ -324,4 +324,4 @@ public class SnackbarActivity extends BaseActivity implements SnackbarCallback {
 否则调用public static SnackbarShow get(Activity activity)，内部会自动将 android.R.id.content作为容器。<br/>
 # 打赏
 您的肯定，是我不懈努力的动力！<br/><br/>
-Alipay ![图片加载失败](images/wechat.png) WeChat![图片加载失败](images/alipay.jpg)
+WeChat ![图片加载失败](images/wechat.png) Alipay ![图片加载失败](images/alipay.jpg)
