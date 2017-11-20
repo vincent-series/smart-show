@@ -244,7 +244,7 @@ Long Toast<br/>
 
         如果当前页面创建过Snackbar，则退出页面时，回收资源。如果没有，则不会回收资源，比如Activity A 显示过Snackbar，然后
 
-        启动了B，B没有显示过Snackbar，当B销毁时，不会回收资源，回到A再次显示Snackbar，可复用，不必再次创建Snackbar实例，提高效率
+        启动了B，B没有显示过Snackbar，当B销毁时，不会回收资源，回到A再次显示Snackbar，可复用，不必重建Snackbar实例，提高效率
 
         */
 
