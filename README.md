@@ -313,11 +313,11 @@ public class SnackbarActivity extends BaseActivity implements SnackbarCallback {
 
 }
 </code></pre>
-#### SmartSnackbar获取方式的说明
+### SmartSnackbar获取方式的说明：
 以上示例获取SmartSnackbar使用的是public static SnackbarShow get(Activity activity)，<br/>
 还可使用public static SnackbarShow get(CoordinatorLayout view)。<br/>
 根据谷歌源码，我们知道创建Snackbar时需传入一个当前页面的某个View。<br/>
-实际上，Snackar会以该View为基点，沿着整个View Tree上溯，直到找到CoordinatorLayout容器或android.R.id.content 容器，那个先找到，就将视图嵌入其中。<br/>
+实际上，Snackar会以该View为基点，沿着整个View Tree上溯，直到找到CoordinatorLayout容器或android.R.id.content 容器，哪个先找到，就将视图嵌入其中。<br/>
 为了提高效率，直接将android.R.id.content或者CoordinatorLayout传入会更好。<br/>
 以CoordinatorLayout为内嵌容器时，Snackbar会有一些特殊的行为，如可以用手指手动滑动移除，显示时会导致FloatActionButton升高等。<br/>
 所以建议，在使用SmartSnackbar时，如果你的页面想以某个具体CoordinatorLayout作为容器，则调用public static SnackbarShow get(CoordinatorLayout view)。<br/>
