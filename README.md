@@ -324,12 +324,18 @@ public class SnackbarActivity extends BaseActivity implements SnackbarCallback {
 否则调用public static SnackbarShow get(Activity activity)，内部会自动将 android.R.id.content作为容器。<br/>
 <pre><code>
     //SmartSnackbar自身实现延时显示发送的Runnable
+
     @Override
     public void run() {
+
         if (mSnackbar != null) {
+
             mSnackbar.setText(mCurMsg).setAction(mCurActionText, mOnActionClickListener)
+
                      .setDuration(mDuration)
+
                      .show();
+
         }
     }
 </code></pre>
