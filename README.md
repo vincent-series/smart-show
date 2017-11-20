@@ -21,7 +21,7 @@ allprojects {
 
     compile ( 'com.github.the-pig-of-jungle:SmartShow:v1.0.0' ){
 
-        //去除design包的依赖，其一，你不一定用到SmartSnackbar；其二，你项目使用的版本不一定和库中使用的相同
+        //去除design包的依赖，其一，你不一定用到SmartSnackbar；其二，你项目使用的版本不一定和库中所用相同
 
         exclude group: 'com.android.support'
 
