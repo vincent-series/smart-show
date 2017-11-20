@@ -1,5 +1,6 @@
 package com.coder.zzq.smartshow.toast;
 
+import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.LayoutRes;
 import android.view.View;
 
@@ -8,6 +9,7 @@ import android.view.View;
  */
 
 public interface CustomToastSetting {
+
     CustomToastSetting view(View view);
     CustomToastSetting view(@LayoutRes int layout);
     CustomToastSetting processCustomView(ProcessViewCallback callback);
