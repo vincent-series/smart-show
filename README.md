@@ -328,7 +328,7 @@ public class SnackbarActivity extends BaseActivity implements SnackbarCallback {
 ①同一页面，如果Snackbar正在显示，多次触发同一内容的Snackbar，不会重复弹出</br>
 ②同一页面，如果Snackbar正在显示，再次触发Snackbar，如果内容（msg或actionText）发生了变化（不会重建Snackbar实例）或内嵌的容器发生了变化（会重建Snackbar实例），会重新弹出，具有切换效果。<br/><br/>
 ![图片加载失败](images/g_4.gif)<br/><br/>
-4.可修改布局风格，如背景颜色，文字大小和颜色等</br></br>
+③可修改布局风格，如背景颜色，文字大小和颜色等</br></br>
 ![图片加载失败](images/g_5.gif)<br/>
 # 打赏
 您的肯定，是我不懈努力的动力！<br/><br/>
