@@ -190,7 +190,7 @@ Long Toast<br/>
 ### 特点：
 1.Snackbar的显示原理与Toast不同，Toast通过Window展示视图，全局可复用一个实例。Snackbar则是把视图内嵌到当前Activity的android.R.id.content容器或某个CoordinatorLayout中。在获取方式不变（容器不变）的情况下，同一页面可复用一个Snackbar实例，节省内存<br/>
 2.同一页面，如果Snackbar正在显示，多次触发同一内容的Snackbar，不会重复弹出</br>
-3.同一页面，如果Snackbar正在显示，再次触发Snackbar，如果内容发生了变化（不会重建Snackbar实例）或内嵌的容器发生了变化（会重建Snackbar实例），会重新弹出，具有切换效果。<br/>
+3.同一页面，如果Snackbar正在显示，再次触发Snackbar，如果内容（msg或actionText）发生了变化（不会重建Snackbar实例）或内嵌的容器发生了变化（会重建Snackbar实例），会重新弹出，具有切换效果。<br/>
 4.可修改布局风格，如背景颜色，文字大小和颜色等</br>
 ### 使用：
 第一步，初始化。这不是必须的，若想修改Snackbar布局的默认风格，则在Application的onCreate()方法中初始化<br/>
@@ -324,6 +324,12 @@ public class SnackbarActivity extends BaseActivity implements SnackbarCallback {
 以CoordinatorLayout为内嵌容器时，Snackbar会有一些特殊的行为，如可以用手指手动滑动移除，显示时会导致FloatActionButton升高等。<br/>
 所以建议，在使用SmartSnackbar时，如果你的页面想以某个具体CoordinatorLayout作为容器，则调用public static SnackbarShow get(CoordinatorLayout view)。<br/>
 否则调用public static SnackbarShow get(Activity activity)，内部会自动将 android.R.id.content作为容器。<br/>
+### 效果图
+①同一页面，如果Snackbar正在显示，多次触发同一内容的Snackbar，不会重复弹出</br>
+②同一页面，如果Snackbar正在显示，再次触发Snackbar，如果内容（msg或actionText）发生了变化（不会重建Snackbar实例）或内嵌的容器发生了变化（会重建Snackbar实例），会重新弹出，具有切换效果。<br/><br/>
+![图片加载失败](images/g_4.gif)<br/><br/>
+4.可修改布局风格，如背景颜色，文字大小和颜色等</br></br>
+![图片加载失败](images/g_5.gif)<br/>
 # 打赏
 您的肯定，是我不懈努力的动力！<br/><br/>
 ![图片加载失败](images/wechat.png) WeChat ![图片加载失败](images/alipay.jpg) Alipay

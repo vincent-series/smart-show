@@ -77,7 +77,7 @@ public class MyApplication extends Application {
         SmartSnackbar.init(this)
                 .backgroundColorRes(R.color.colorPrimary)
                 .actionColorRes(R.color.colorAccent)
-                .msgTextSizeSp(16)
-                .actionSizeSp(16);
+                .msgTextSizeSp(18)
+                .actionSizeSp(18);
     }
 }
