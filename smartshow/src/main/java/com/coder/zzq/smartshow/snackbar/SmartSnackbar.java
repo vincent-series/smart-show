@@ -71,16 +71,16 @@ public class SmartSnackbar extends Snackbar.Callback implements SnackbarSetting,
         getSmartSnackbar(activity).mPageContext = activity;
         //取出android.R.id.content
         View view = activity.findViewById(android.R.id.content);
-        return getFromView(view);
+        return get(view);
     }
 
     public static SnackbarShow get(CoordinatorLayout view){
         //保存当前页面的Context
         getSmartSnackbar(view.getContext()).mPageContext = view.getContext();
-        return getFromView(view);
+        return get(view);
     }
 
-    private static SnackbarShow getFromView(View view){
+    private static SnackbarShow get(View view){
         /*
 
         如果Snackbar尚未创建创建，则创建之
