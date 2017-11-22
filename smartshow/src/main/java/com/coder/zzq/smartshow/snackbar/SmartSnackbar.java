@@ -92,7 +92,7 @@ public class SmartSnackbar extends Snackbar.Callback implements SnackbarSetting,
         的容器改变 2.进入新的页面，两种情况都需要重建Snackbar
 
          */
-        if (sSmartSnackbar.mSnackbar == null || sSmartSnackbar.mBaseTraceView != view){
+        if (sSmartSnackbar.mSnackbar == null || sSmartSnackbar.mBaseTraceView != view || sSmartSnackbar.mSnackbar.getView().getVisibility() != View.VISIBLE){
             sSmartSnackbar.rebuildSnackbar(view);
         }
         return sSmartSnackbar;

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/root"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,25 +10,29 @@
     android:gravity="center"
     tools:context="com.coder.zzq.smartshowdemo.ToastActivity">
     <Button
+        android:layout_gravity="left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="苹果"
         android:onClick="onAppleClick"/>
     <Button
+        android:layout_gravity="right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="香蕉"
         android:textStyle="italic"
         android:onClick="onBananaClick"/>
     <Button
+
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="桔子"
         android:onClick="onOrangeClick"/>
     <Button
+        android:layout_gravity="center_vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="我是朱志强"
         android:onClick="onNameClick"/>
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
