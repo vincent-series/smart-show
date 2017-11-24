@@ -103,7 +103,7 @@ allprojects {
 
                         设置自定义布局，有重载方法，直接以View为参数。在你的自定义布局中，一定要设置显示文本提示的
 
-                        TextView的Id为android:id="@id/custom_toast_msg"。如果不调用该方法，那么上面的调用与
+                        TextView的Id为android:id="@id/custom_toast_msg"。如果不调用下面的方法，那么上面的调用与
 
                         SmartToast.plainToast(this)等效
 
