@@ -254,7 +254,7 @@ Long Toast<br/>
         SmartSnackbar.destroy(this);
     }
 </code></pre>
-第三步，获取当前页面的Snackbar， 调用show方法显示，三种duration体现在方法名上，而不是传参，尽可能简化调用<br/><br/>
+第三步，获取当前页面的Snackbar，调用show方法显示，三种duration体现在方法名上，而不是传参，尽可能简化调用<br/><br/>
 Short Snackbar<br/>
 <pre><code>
         //传入Activity，获取当前页面的Snackbar，显示消息
