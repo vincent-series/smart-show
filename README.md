@@ -43,6 +43,10 @@ allprojects {
 3.新的Toast(内容或位置发生了变化)来临时，会立即弹出，不会等到当前显示的Toast的duration耗尽再弹出，虽不会创建新的Toast实例，但具有切换效果（与你手机系统原生Toast的切换动画一致）<br/>
 4.可修改Toast默认布局的风格，如背景颜色，文字大小和颜色等</br>
 5.可为Toast设置自定义布局，并进行代码处理</br>
+### 注意
+关闭app的系统通知权限将导致SmartToast无法使用，原因如下：<br/>
+Toast的内部原理使用NotificationManagerService，关闭通知权限后，无法显示。这是Toast本身的特性，而不是SmartShow的bug。<br/>
+以淘宝app和优酷app的"再按一次退出程序"的Toast提示为例，关闭他们的通知权限，也会导致Toast不显示，感兴趣的话可以去试一试。
 ### 使用：
 第一步，必须初始化，在Application的onCreate()方法中初始化</br>
 方式 1：<br/>
