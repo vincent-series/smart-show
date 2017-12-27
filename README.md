@@ -246,7 +246,7 @@ Long Toast<br/>
                     }
                 });
 </code></pre>
-第二步，在你的BaseActivity的onDestroy()方法里调用SmartSnackbar.destroy(this)方法
+第二步，在你的BaseActivity的onDestroy()里调用SmartSnackbar.destroy(this)方法
 <pre><code>
     @Override
     protected void onDestroy() {
