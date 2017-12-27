@@ -1,11 +1,22 @@
 package com.coder.zzq.smartshowdemo;
 
 
+import android.support.design.widget.BaseTransientBottomBar;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
+import android.support.v7.widget.ContentFrameLayout;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.coder.zzq.smartshow.toast.SmartToast;
+
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
 
 
 public class ToastActivity extends BaseActivity {
@@ -18,14 +29,11 @@ public class ToastActivity extends BaseActivity {
     }
 
     public void onAppleClick(View view) {
-        //在默认位置显示
-        SmartToast.showLong("我是朱志强！");
-        //在屏幕顶部显示，距离顶部位置为Toast在Y方向默认的偏移距离
-        SmartToast.showLongAtTop("我是朱志强!");
-        //在屏幕中央显示
-        SmartToast.showLongInCenter("我是朱志强！");
-        //在指定位置显示，x,y方向偏移量单位为dp
-        SmartToast.showLongAtLocation("我是朱志强",Gravity.LEFT | Gravity.TOP,10,10);
+        Snackbar snackbar = Snackbar.make(view,"你好", BaseTransientBottomBar.LENGTH_SHORT);
+        snackbar.getView().clearAnimation();
+        snackbar.getView().setAnimation(AnimationUtils.loadAnimation(this,android.R.anim.slide_in_left));
+        ((ViewGroup.MarginLayoutParams) snackbar.getView().getLayoutParams()).bottomMargin = 500;
+
     }
 
     public void onBananaClick(View view) {
