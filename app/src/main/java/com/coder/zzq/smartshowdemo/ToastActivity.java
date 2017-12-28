@@ -47,8 +47,9 @@ public class ToastActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-            SmartToast.dismiss();
-            super.onBackPressed();
+        SmartToast.dismiss();
+
+        super.onBackPressed();
     }
 
 
