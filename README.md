@@ -182,7 +182,7 @@ Long Toast<br/>
 
         SmartToast.showLongAtLocation("我是朱志强",Gravity.LEFT | Gravity.TOP,10,10);
 </code></pre>
-
+其他方法
 <pre><code>
          //Toast是否显示
 
@@ -192,6 +192,7 @@ Long Toast<br/>
 
          SmartToast.dismiss();
 </code></pre>
+
 ### 效果图
 ①全局始终使用一个Toast实例，节省内存<br/>
 ②如果Toast正在显示，多次触发同一内容的Toast，不会重复弹出</br>
