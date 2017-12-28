@@ -244,6 +244,7 @@ public final class SmartToast implements PlainToastSetting, CustomToastSetting, 
                 e.printStackTrace();
             } catch (InvocationTargetException e) {
                 e.printStackTrace();
+
             }
         }
     }
