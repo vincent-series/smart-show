@@ -14,6 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.coder.zzq.smartshow.snackbar.SmartSnackbar;
 import com.coder.zzq.smartshow.toast.SmartToast;
 
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
@@ -48,7 +49,8 @@ public class ToastActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         SmartToast.dismiss();
-
+        SmartToast.isShowing();
+        SmartSnackbar.dismiss();
         super.onBackPressed();
     }
 

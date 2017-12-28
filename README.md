@@ -184,6 +184,10 @@ Long Toast<br/>
 </code></pre>
 
 <pre><code>
+         //Toast是否显示
+
+         SmartToast.isShowing();
+
          //隐藏Toast
 
          SmartToast.dismiss();
