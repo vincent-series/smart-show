@@ -24,15 +24,10 @@ public class ToastActivity extends BaseActivity {
 
     @Override
     protected int contentLayout() {
-        mToast = Toast.makeText(this, "你好", Toast.LENGTH_SHORT);
         return R.layout.activity_smart_show;
     }
 
     public void onAppleClick(View view) {
-        Snackbar snackbar = Snackbar.make(view,"你好", BaseTransientBottomBar.LENGTH_SHORT);
-        snackbar.getView().clearAnimation();
-        snackbar.getView().setAnimation(AnimationUtils.loadAnimation(this,android.R.anim.slide_in_left));
-        ((ViewGroup.MarginLayoutParams) snackbar.getView().getLayoutParams()).bottomMargin = 500;
 
     }
 
@@ -44,4 +39,19 @@ public class ToastActivity extends BaseActivity {
         SmartToast.show("你好！");
     }
 
+
+    public void onNameClick(View view) {
+
+    }
+
+
+    @Override
+    public void onBackPressed() {
+            SmartToast.dismiss();
+            super.onBackPressed();
+    }
+
+
+    public void onOrangeClick(View view) {
+    }
 }

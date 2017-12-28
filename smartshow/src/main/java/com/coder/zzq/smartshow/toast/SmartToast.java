@@ -222,6 +222,10 @@ public final class SmartToast implements PlainToastSetting, CustomToastSetting, 
         return mGravity != gravity || mXOffset != xOffset || mYOffset != yOffset;
     }
 
+    public static boolean isShowing(){
+        return sSmartToast != null && sSmartToast.mToast != null && ViewCompat.isAttachedToWindow(sSmartToast.mToast.getView());
+    }
+
 
     public static void dismiss() {
         if (sSmartToast != null && sSmartToast.mToast != null) {
