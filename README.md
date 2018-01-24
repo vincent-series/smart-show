@@ -346,6 +346,3 @@ public class SnackbarActivity extends BaseActivity implements SnackbarCallback {
 ![图片加载失败](images/g_4.gif)<br/><br/>
 ③可修改布局风格，如背景颜色，文字大小和颜色等</br></br>
 ![图片加载失败](images/g_5.gif)
-# 打赏
-您的肯定，是我不懈努力的动力！<br/><br/>
-![图片加载失败](images/wechat.png) WeChat ![图片加载失败](images/alipay.jpg) Alipay
