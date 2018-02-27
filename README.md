@@ -2,7 +2,7 @@
 Smart Toast & Snackbar : 简化调用，并处理常见问题，提高性能和用户体验！作者：朱志强<br/>
 如果你对实现感兴趣，请参考我的CSDN博客：http://blog.csdn.net/jungle_pig/article/details/78568493 <br/>
 该博文已授权Android大咖郭霖的微信公众号同步发表：http://mp.weixin.qq.com/s/l62PtbmrIOkVKfJ2r0JwEw <br/>
-该开源库刚开发出来不久，尚未经大量用户使用检验。为了让SmartShow库更加健壮，如果您在使用过程中发现任何问题，请联系我，我会立即跟进修复和维护。<br/>
+为了让SmartShow库更加健壮，如果您在使用过程中发现任何问题，请联系我，我会立即跟进修复和维护。<br/>
 感谢您的支持！<br/>
 微信：w361281607<br/>
 邮箱：coder_zzq@163.com<br/>
