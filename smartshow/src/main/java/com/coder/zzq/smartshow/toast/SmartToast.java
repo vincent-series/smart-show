@@ -2,8 +2,8 @@ package com.coder.zzq.smartshow.toast;
 
 import android.content.Context;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.NinePatchDrawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.LayoutRes;
@@ -115,9 +115,9 @@ public final class SmartToast implements PlainToastSetting, CustomToastSetting, 
         LinearLayout outParent = (LinearLayout) mToast.getView();
         TextView msgView = (TextView) outParent.findViewById(android.R.id.message);
         if (mBgColor != -1) {
-            NinePatchDrawable ninePatchDrawable = (NinePatchDrawable) ContextCompat.getDrawable(mAppContext, android.R.drawable.toast_frame);
+            Drawable drawable = ContextCompat.getDrawable(mAppContext, android.R.drawable.toast_frame);
             Rect rect = new Rect();
-            ninePatchDrawable.getPadding(rect);
+            drawable.getPadding(rect);
             msgView.setPadding(msgView.getPaddingLeft() + rect.left, msgView.getPaddingTop(), msgView.getPaddingRight() + rect.right, msgView.getPaddingBottom());
             GradientDrawable gradientDrawable = new GradientDrawable();
             gradientDrawable.setColor(mBgColor);
@@ -222,7 +222,7 @@ public final class SmartToast implements PlainToastSetting, CustomToastSetting, 
         return mGravity != gravity || mXOffset != xOffset || mYOffset != yOffset;
     }
 
-    public static boolean isShowing(){
+    public static boolean isShowing() {
         return sSmartToast != null && sSmartToast.mToast != null && ViewCompat.isAttachedToWindow(sSmartToast.mToast.getView());
     }
 
