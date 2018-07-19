@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.coder.zzq.smartshow.R;
+import com.coder.zzq.smartshow.toast.compat.ToastCompat;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -83,7 +84,7 @@ public final class SmartToast implements PlainToastSetting, CustomToastSetting, 
         }
         if (sSmartToast.mToast == null) {
             if (sSmartToast.mCustomView == null) {
-                sSmartToast.mToast = Toast.makeText(sSmartToast.mAppContext, "", Toast.LENGTH_SHORT);
+                sSmartToast.mToast = ToastCompat.makeText(sSmartToast.mAppContext, "", Toast.LENGTH_SHORT);
                 sSmartToast.setupPlainToast();
             } else {
                 sSmartToast.mToast = new Toast(sSmartToast.mAppContext);
