@@ -25,7 +25,7 @@ allprojects {
 2.在Module的grable文件中<br/>
 <pre></code>
 
-    compile ( 'com.github.the-pig-of-jungle:SmartShow:v1.0.4' ){
+    implementation ( 'com.github.the-pig-of-jungle:SmartShow:v1.0.6' ){
 
         //去除design包的依赖，其一，你不一定用到SmartSnackbar；其二，你项目使用的版本不一定和库中所用相同
 
