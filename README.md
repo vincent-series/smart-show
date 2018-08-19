@@ -54,38 +54,61 @@ allprojects {
 ### 使用SmartShow
 第1步，必须初始化
 <pre><code>
-
     //必须初始化
-    SmartShow.init(this);
 
+    SmartShow.init(this);
 </code></pre>
 #### 使用Toast
 可获取ToastSetting对SmartToast进行配置,这一步不是必须的<br/>
 <pre><code>
         //返回ToastSetting对象
+
         SmartShow.toastSetting()
+
                        //自定义布局，参数可以是布局资源，也可以View。
+
                        // 在自定义布局中，一定要设置显示文本提示的
+
                        //TextView的Id为android:id="@id/custom_toast_msg"。
+
                        .view(R.layout.custom_toast)
+
                        //设置背景颜色
+
                        .backgroundColorRes(R.color.colorPrimary)
+
                        //文本颜色
+
                        .textColorRes(R.color.colorAccent)
+
                        //设置文本字体大小
+
                        .textSizeSp(18)
+
                        //设置文本是否加粗
+
                        .textBold(true)
+
                        //设置离开当前页面时，该页面的Toast是否立即消失，默认false
+
                        .dismissOnLeave(true)
+
                        //对布局进一步处理
+
                        .processView(new ProcessViewCallback() {
+
                            @Override
+
                            //isCustom 是否是自定义布局；rootView 布局根view；outParent 默认布局时，msgView的父布局，也是根布局
+
                            //msgView 显示文本的TxtView
+
                            public void processView(boolean isCustom, View rootView, LinearLayout outParent, TextView msgView) {
+
                                //...
+
                            }
+
                        });
 </code></pre>
 
