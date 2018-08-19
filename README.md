@@ -62,57 +62,57 @@ allprojects {
 #### 使用Toast
 可获取ToastSetting对SmartToast进行配置,这一步不是必须的<br/>
 <pre><code>
-     //返回ToastSetting对象
+   //返回ToastSetting对象
 
-     SmartShow.toastSetting()
+   SmartShow.toastSetting()
 
-          //自定义布局，参数可以是布局资源，也可以View。
+      //自定义布局，参数可以是布局资源，也可以View。
 
-          // 在自定义布局中，一定要设置显示文本提示的
+      // 在自定义布局中，一定要设置显示文本提示的
 
-          //TextView的Id为android:id="@id/custom_toast_msg"。
+      //TextView的Id为android:id="@id/custom_toast_msg"。
 
-           .view(R.layout.custom_toast)
+       .view(R.layout.custom_toast)
 
-           //设置背景颜色
+       //设置背景颜色
 
-           .backgroundColorRes(R.color.colorPrimary)
+       .backgroundColorRes(R.color.colorPrimary)
 
-           //文本颜色
+       //文本颜色
 
-           .textColorRes(R.color.colorAccent)
+       .textColorRes(R.color.colorAccent)
 
-             //设置文本字体大小
+       //设置文本字体大小
 
-            .textSizeSp(18)
+       .textSizeSp(18)
 
-             //设置文本是否加粗
+       //设置文本是否加粗
 
-            .textBold(true)
+       .textBold(true)
 
-             //设置离开当前页面时，该页面的Toast是否立即消失，默认false
+       //设置离开当前页面时，该页面的Toast是否立即消失，默认false
 
-            .dismissOnLeave(true)
+       .dismissOnLeave(true)
 
-             //对布局进一步处理
+       //对布局进一步处理
 
-             .processView(new ProcessViewCallback() {
+       .processView(new ProcessViewCallback() {
 
-                 @Override
+            @Override
 
-                 //isCustom 是否是自定义布局；rootView 布局根view
+            //isCustom 是否是自定义布局；rootView 布局根view
 
-                 //outParent 默认布局时，msgView的父布局，也是根布局
+            //outParent 默认布局时，msgView的父布局，也是根布局
 
-                 //msgView 显示文本的TxtView
+            //msgView 显示文本的TxtView
 
-                 public void processView(boolean isCustom, View rootView, LinearLayout outParent, TextView msgView) {
+            public void processView(boolean isCustom, View rootView, LinearLayout outParent, TextView msgView) {
 
-                      //...
+                  //...
 
-                }
+            }
 
-        });
+      });
 </code></pre>
 
 调用show方法显示Toast，duration和常用的显示位置体现在方法名上，而不是传参，使得调用非常简易<br/><br/>
@@ -180,48 +180,48 @@ Long Toast<br/>
 #### 使用Snackbar
 可获取SnackbarSetting，修改Snackbar布局的默认风格，这一步不是必须的<br/>
 <pre><code>
-      //返回SnackbarSetting对象
+   //返回SnackbarSetting对象
 
-     SmartShow.snackbarSetting()
+   SmartShow.snackbarSetting()
 
-           //设置背景颜色
+       //设置背景颜色
 
-           .backgroundColorRes(R.color.colorPrimary)
+       .backgroundColorRes(R.color.colorPrimary)
 
-           //设置消息文本颜色
+       //设置消息文本颜色
 
-           .msgTextColor(Color.WHITE)
+       .msgTextColor(Color.WHITE)
 
-           //设置消息文本大小
+       //设置消息文本大小
 
-           .msgTextSizeSp(18)
+       .msgTextSizeSp(18)
 
-           //设置动作文本颜色
+       //设置动作文本颜色
 
-           .actionColorRes(R.color.colorAccent)
+       .actionColorRes(R.color.colorAccent)
 
-           //设置动作文本大小
+       //设置动作文本大小
 
-           .actionSizeSp(18)
+       .actionSizeSp(18)
 
-           //设置进入新的页面时，该页面的Snackbar是否消失（主要是Indefinite Snackbar而言）
+       //设置进入新的页面时，该页面的Snackbar是否消失（主要是Indefinite Snackbar而言）
 
-           .dismissOnLeave(true)
+       .dismissOnLeave(true)
 
-          //对布局进一步处理
+       //对布局进一步处理
 
-          .processView(new com.coder.zzq.smartshow.snackbar.ProcessViewCallback() {
-             @Override
+       .processView(new com.coder.zzq.smartshow.snackbar.ProcessViewCallback() {
+           @Override
 
-             //layout 父布局；msgView 消息文本View;actionView 动作文本View
+           //layout 父布局；msgView 消息文本View;actionView 动作文本View
 
-            public void processSnackbarView(Snackbar.SnackbarLayout layout, TextView msgView, TextView actionView) {
+           public void processSnackbarView(Snackbar.SnackbarLayout layout, TextView msgView, TextView actionView) {
 
-                  //...
+               //...
 
-          }
+       }
 
-      });
+   });
 
 </code></pre>
 
