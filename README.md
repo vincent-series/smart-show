@@ -98,21 +98,21 @@ allprojects {
 
              .processView(new ProcessViewCallback() {
 
-                    @Override
+                 @Override
 
-                    //isCustom 是否是自定义布局；rootView 布局根view
+                 //isCustom 是否是自定义布局；rootView 布局根view
 
-                    //outParent 默认布局时，msgView的父布局，也是根布局
+                 //outParent 默认布局时，msgView的父布局，也是根布局
 
-                    //msgView 显示文本的TxtView
+                 //msgView 显示文本的TxtView
 
-                    public void processView(boolean isCustom, View rootView, LinearLayout outParent, TextView msgView) {
+                 public void processView(boolean isCustom, View rootView, LinearLayout outParent, TextView msgView) {
 
-                         //...
+                      //...
 
-                   }
+                }
 
-           });
+        });
 </code></pre>
 
 调用show方法显示Toast，duration和常用的显示位置体现在方法名上，而不是传参，使得调用非常简易<br/><br/>
@@ -211,17 +211,17 @@ Long Toast<br/>
           //对布局进一步处理
 
           .processView(new com.coder.zzq.smartshow.snackbar.ProcessViewCallback() {
-               @Override
+             @Override
 
-               //layout 父布局；msgView 消息文本View;actionView 动作文本View
+             //layout 父布局；msgView 消息文本View;actionView 动作文本View
 
-               public void processSnackbarView(Snackbar.SnackbarLayout layout, TextView msgView, TextView actionView) {
+            public void processSnackbarView(Snackbar.SnackbarLayout layout, TextView msgView, TextView actionView) {
 
-                           //...
+                  //...
 
-                    }
+          }
 
-              });
+      });
 
 </code></pre>
 
