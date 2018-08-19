@@ -55,101 +55,41 @@ allprojects {
 ### 初始化
 <pre><code>
 
-    //初始化
+    //必须初始化
     SmartShow.init(this);
 
 </code></pre>
-
-若想修改默认布局的风格,可继续链式调用，不过这并不是必须的<br/>
+### 使用SmartToast
+可获取ToastSetting对SmartToast进行配置,这一步不是必须的<br/>
 <pre><code>
-        //返回PlainToastSetting对象，对布局进行风格设置
-
-        SmartToast.plainToast(this)
-
-                /*
-
-                设置背景颜色，有可选方法，直接以颜色值为参数。Toast的默认背景是一个圆角图片，当你设置了背景颜色时，
-
-                原有背景失效。SmartToast内部用GradientDrawable实现背景，可以保证大小与你手机系统的Toast一致，
-
-                但是不同品牌手机的Toast的圆角半径不尽相同，将统一使用2.5dp
-
-                */
-
-                .backgroundColorRes(R.color.colorPrimary)
-
-                //设置文本颜色，有可选方法，直接以颜色值为参数
-
-                .textColorRes(R.color.colorAccent)
-
-                //设置文本字体大小，单位为sp
-
-                .textSizeSp(18)
-
-                //设置是否加粗文本
-
-                .textBold(true)
-
-                //如果以上还不够，可调用此方法
-
-                .processPlainView(new ProcessViewCallback() {
-
-                    //outParent为显示文本的TextView的父布局，msgView为显示文本的TextView
-
-                    @Override
-                    public void processPlainView(LinearLayout outParent, TextView msgView) {
-
-                        //处理代码
-
-                        ...
-
-                    }
-                });
+        //返回ToastSetting对象
+        SmartShow.toastSetting()
+                       //自定义布局，参数可以是布局资源，也可以View。
+                       // 在自定义布局中，一定要设置显示文本提示的
+                       //TextView的Id为android:id="@id/custom_toast_msg"。
+                       .view(R.layout.custom_toast)
+                       //设置背景颜色
+                       .backgroundColorRes(R.color.colorPrimary)
+                       //文本颜色
+                       .textColorRes(R.color.colorAccent)
+                       //设置文本字体大小
+                       .textSizeSp(18)
+                       //设置文本是否加粗
+                       .textBold(true)
+                       //设置离开当前页面时，该页面的Toast是否立即消失
+                       .dismissOnLeave(true)
+                       //对布局进一步处理
+                       .processView(new ProcessViewCallback() {
+                           @Override
+                           //isCustom 是否是自定义布局；rootView 布局根view；outParent 默认布局时，msgView的父布局，也是根布局
+                           //msgView 显示文本的TxtView
+                           public void processView(boolean isCustom, View rootView, LinearLayout outParent, TextView msgView) {
+                               //...
+                           }
+                       });
 </code></pre>
-方式 2：<br/>
-<pre><code>
-        使用自定义布局的Toast
 
-        SmartToast.customToast(this)
-
-                        /*
-
-                        设置自定义布局，有重载方法，直接以View为参数。在你的自定义布局中，一定要设置显示文本提示的
-
-                        TextView的Id为android:id="@id/custom_toast_msg"。如果不调用下面的方法，那么上面的调用与
-
-                        SmartToast.plainToast(this)等效
-
-                        */
-
-                        .view(R.layout.custom_toast);
-</code></pre>
-若想对自定义的布局进行代码处理,可继续链式调用，不过这并不是必须的<br/>
-<pre><code>
-        返回CustomToastSetting对象
-
-        SmartToast.customToast(this)
-
-                //填充布局
-
-                .view(R.layout.custom_toast)
-
-                //对自定义布局进行代码处理
-
-                .processCustomView(new ProcessViewCallback() {
-
-                    @Override
-                    public void processCustomView(View view) {
-
-                        //处理代码
-
-                        ...
-
-                    }
-                });
-</code></pre>
-第二步，调用show方法显示Toast，duration和常用的显示位置体现在方法名上，而不是传参，使得调用非常简易<br/><br/>
-Short Toast<br/>
+###调用show方法显示Toast，duration和常用的显示位置体现在方法名上，而不是传参，使得调用非常简易<br/><br/>
 <pre><code>
         //在默认位置显示
 
