@@ -120,7 +120,7 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
         sSmartSnackbar.mSnackbar = Snackbar.make(mBaseTraceView,mCurMsg,Snackbar.LENGTH_SHORT);
 
         if (mPageContext instanceof SnackbarCallback){
-            sSmartSnackbar.mSnackbar.setCallback(this);
+            sSmartSnackbar.mSnackbar.addCallback(this);
         }
 
         if (mBgColor != -1){
