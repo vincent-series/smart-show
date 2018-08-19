@@ -8,28 +8,27 @@ Smart Toast & Snackbar : 简化调用，并处理常见问题，提高性能和�
 邮箱：coder_zzq@163.com<br/>
 技术交流QQ群：598117142，可及时反馈bug和功能诉求,接收新版本发布消息等。
 
-## SmartToast部分
-### 特点：
+### SmartToast部分
+#### 特点：
 1.尽可能地复用Toast实例，节约内存<br/>
 2.如果Toast正在显示，多次触发同一内容的Toast，不会重复弹出</br>
 3.新的Toast(内容或位置发生了变化)会立即弹出，不会等待旧的Toast的duration耗尽再弹出，并具有动画效果（与你手机系统原生Toast的切换动画一致）<br/>
 4.可修改Toast默认布局的风格，如背景颜色，文字大小和颜色等</br>
 5.可为Toast设置自定义布局，并进行代码处理</br>
-### 注意
+#### 注意
 关闭app的系统通知权限,将导致SmartToast无法显示，原因如下：<br/>
 Toast的内部原理使用NotificationManagerService，关闭通知权限后，无法显示。<br/>
 这是原生Toast本身的特性，而不是SmartShow的bug。<br/>
 以淘宝app和优酷app的"再按一次退出程序"的Toast提示为例，关闭他们的通知权限，<br/>
 也会导致Toast不显示，感兴趣的话可以去试一试。
 
-## SmartSnackbar部分
-### 特点：
+### SmartSnackbar部分
+#### 特点：
 1.Snackbar的显示原理与Toast不同，Toast通过Window展示视图，全局可复用一个实例。Snackbar则是把视图内嵌到当前Activity的android.R.id.content容器或某个CoordinatorLayout中。在获取方式不变（容器不变）的情况下，同一页面可复用一个Snackbar实例，节省内存<br/>
 2.同一页面，如果Snackbar正在显示，多次触发同一内容的Snackbar，不会重复弹出</br>
 3.同一页面，如果Snackbar正在显示，再次触发Snackbar，如果内容（msg或actionText）发生了变化（不会重建Snackbar实例）或内嵌的容器发生了变化（会重建Snackbar实例），会重新弹出，具有切换效果（与你手机系统原生Snackbar的切换动画一致）。<br/>
 4.可修改布局风格，如背景颜色，文字大小和颜色等</br>
 
-## 使用
 ### 添加依赖
 1.在Project的gradle文件中<br/>
 <pre><code>
@@ -52,15 +51,15 @@ allprojects {
 
 </code></pre>
 
-### 初始化
+### 使用
 <pre><code>
 
     //必须初始化
     SmartShow.init(this);
 
 </code></pre>
-### 使用SmartToast
-可获取ToastSetting对SmartToast进行配置,这一步不是必须的<br/>
+#### 使用SmartToast
+##### 可获取ToastSetting对SmartToast进行配置,这一步不是必须的<br/>
 <pre><code>
         //返回ToastSetting对象
         SmartShow.toastSetting()
@@ -89,7 +88,7 @@ allprojects {
                        });
 </code></pre>
 
-###调用show方法显示Toast，duration和常用的显示位置体现在方法名上，而不是传参，使得调用非常简易<br/><br/>
+##### 调用show方法显示Toast，duration和常用的显示位置体现在方法名上，而不是传参，使得调用非常简易<br/><br/>
 <pre><code>
         //在默认位置显示
 
