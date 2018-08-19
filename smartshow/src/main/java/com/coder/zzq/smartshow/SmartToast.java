@@ -219,8 +219,9 @@ public final class SmartToast implements ToastSetting {
 
 
     private static void ensureToastExists() {
+
         if (sSmartToast == null) {
-            throw new IllegalStateException("尚未初始化SmartToast:SmartToast.init(Context context)。");
+            init(SmartShow.getContext());
         }
         if (sSmartToast.mToast == null) {
             sSmartToast.mToast = Toast.makeText(sAppContext, "", Toast.LENGTH_SHORT);

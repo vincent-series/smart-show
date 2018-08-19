@@ -51,21 +51,23 @@ public final class SmartShow {
     }
 
     private static void ensureContextNotNull() {
-        if (sApplication == null) {
-            throw new NullPointerException("初始化SmartShow的context不可为null！");
-        }
+
     }
 
     public static ToastSetting toastSetting() {
-        ensureContextNotNull();
-        return SmartToast.init(sApplication);
+        return SmartToast.init(getContext());
     }
 
 
     public static SnackbarSetting snackbarSetting() {
-        ensureContextNotNull();
-        return SmartSnackbar.init(sApplication);
+        return SmartSnackbar.init(getContext());
     }
 
 
+    public static Application getContext() {
+        if (sApplication == null) {
+            throw new NullPointerException("初始化SmartShow的context不可为null！");
+        }
+        return sApplication;
+    }
 }
