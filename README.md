@@ -5,7 +5,7 @@ Smart Toast & Snackbar : 简化调用，并处理常见问题，提高性能和�
 为了让SmartShow库更加健壮，如果您在使用过程中发现任何问题，请联系我，我会立即跟进修复和维护。<br/>
 感谢您的支持！<br/>
 微信：w361281607<br/>
-![图片加载失败](images/wx.jpg)<br/><br/>
+![图片加载失败](images/wx_2d.jpg)<br/><br/>
 邮箱：coder_zzq@163.com<br/>
 
 ### SmartToast部分
