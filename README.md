@@ -51,15 +51,16 @@ allprojects {
 
 </code></pre>
 
-### 使用
+### 使用SmartShow
+第1步，必须初始化
 <pre><code>
 
     //必须初始化
     SmartShow.init(this);
 
 </code></pre>
-#### 使用SmartToast
-##### 可获取ToastSetting对SmartToast进行配置,这一步不是必须的<br/>
+#### 使用Toast
+可获取ToastSetting对SmartToast进行配置,这不是必须的<br/>
 <pre><code>
         //返回ToastSetting对象
         SmartShow.toastSetting()
@@ -75,7 +76,7 @@ allprojects {
                        .textSizeSp(18)
                        //设置文本是否加粗
                        .textBold(true)
-                       //设置离开当前页面时，该页面的Toast是否立即消失
+                       //设置离开当前页面时，该页面的Toast是否立即消失，默认false
                        .dismissOnLeave(true)
                        //对布局进一步处理
                        .processView(new ProcessViewCallback() {
@@ -88,7 +89,8 @@ allprojects {
                        });
 </code></pre>
 
-##### 调用show方法显示Toast，duration和常用的显示位置体现在方法名上，而不是传参，使得调用非常简易<br/><br/>
+调用show方法显示Toast，duration和常用的显示位置体现在方法名上，而不是传参，使得调用非常简易<br/><br/>
+
 <pre><code>
         //在默认位置显示
 
@@ -133,16 +135,21 @@ Long Toast<br/>
          //隐藏Toast
 
          SmartToast.dismiss();
+
+         //设置离开当前页面时，当前页面的Toast是否消失，默认false
+
+         SmartToast.setDismissOnLeave(boolean b);
+
 </code></pre>
 
 ### 效果图
-①全局始终使用一个Toast实例，节省内存<br/>
+①尽可能地复用Toast实例，节约内存<br/>
 ②如果Toast正在显示，多次触发同一内容的Toast，不会重复弹出</br>
-③新的Toast(内容或位置发生了变化)来临时，会立即弹出，不会等到当前显示的Toast的duration耗尽再弹出，虽不会创建新的Toast实例，但具有切换效果<br/><br/>
+③新的Toast(内容或位置发生了变化)会立即弹出，不会等待旧的Toast的duration耗尽再弹出，并具有动画效果（与你手机系统原生Toast的切换动画一致）<br/></br>
 ![图片加载失败](images/g_1.gif)<br/><br/>
-④修改默认布局的风格，背景颜色、字体大小、颜色、加粗等</br><br/>
+④修改布局的风格，背景颜色、字体大小、颜色、加粗等</br><br/>
 ![图片加载失败](images/g_2.gif)<br/><br/>
-⑤为Toast设置自定义布局<br/><br/>
+⑤设置自定义布局<br/><br/>
 ![图片加载失败](images/g_3.gif)<br/>
 
 ### 使用：

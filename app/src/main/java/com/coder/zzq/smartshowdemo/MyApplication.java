@@ -44,6 +44,7 @@ public class MyApplication extends Application {
                         //...
                     }
                 });
+
         SmartShow.snackbarSetting()
                 .backgroundColorRes(R.color.colorPrimary)
                 .actionColorRes(R.color.colorAccent)
