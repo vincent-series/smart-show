@@ -341,6 +341,9 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
     }
 
 
+    public static boolean isShowing(){
+        return sSmartSnackbar != null && sSmartSnackbar.mSnackbar != null && sSmartSnackbar.mSnackbar.isShown();
+    }
 
     public static boolean isDismissOnLeave() {
         return sDismissOnLeave;

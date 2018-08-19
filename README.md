@@ -212,11 +212,17 @@ Indefinite Snackbar<br/>
 
 显示Short和Long类型的Snackbar时，通常不会显示动作文本，而Indefinite Snackbar通常不会只显示消息文本，但实际上该库为三种Snackbar均提供了以上参数个数为1，2和3的方法。
 
+其他方法：
 <pre><code>
 
-        //隐藏当前Snackbar
+         //隐藏SmanrtSnackbar
 
-        SmartSnackbar.dismiss();
+         SmartSnackbar.dismiss();
+
+         //设置进入新的页面时，当前页面的Snackbar是否消失，默认false
+
+         SmartSnackbar.setDismissOnLeave(boolean b);
+
 </code></pre>
 一般情况下，我们不会监听Snackbar的显示和消失,但如有此需要，将当前页面的Activity实现SnackbarCallback接口，然后重写方法即可。在SmartSnackbar显示时，会检测当前页面是否实现该接口，是则进行回调。
 <pre><code>
