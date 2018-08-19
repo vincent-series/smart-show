@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.coder.zzq.smartshow.toast.SmartToast;
+import com.coder.zzq.smartshow.SmartToast;
 
 public class ToastDuplicateActivity extends AppCompatActivity {
 

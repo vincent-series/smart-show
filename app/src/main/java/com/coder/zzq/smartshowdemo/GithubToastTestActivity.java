@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 
-import com.coder.zzq.smartshow.toast.SmartToast;
+import com.coder.zzq.smartshow.SmartToast;
 
 /**
  * Created by Administrator on 2017/11/16.

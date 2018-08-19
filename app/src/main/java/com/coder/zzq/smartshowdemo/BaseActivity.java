@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
 
-import com.coder.zzq.smartshow.snackbar.SmartSnackbar;
+import com.coder.zzq.smartshow.SmartSnackbar;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
@@ -19,9 +19,4 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract int contentLayout();
 
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        SmartSnackbar.destroy(this);
-    }
 }

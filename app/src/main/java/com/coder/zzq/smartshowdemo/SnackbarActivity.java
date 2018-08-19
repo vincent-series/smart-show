@@ -1,14 +1,15 @@
 package com.coder.zzq.smartshowdemo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 
-import com.coder.zzq.smartshow.snackbar.SmartSnackbar;
+import com.coder.zzq.smartshow.SmartSnackbar;
 import com.coder.zzq.smartshow.snackbar.SnackbarCallback;
-import com.coder.zzq.smartshow.toast.SmartToast;
+import com.coder.zzq.smartshow.SmartToast;
 
 
 public class SnackbarActivity extends BaseActivity implements SnackbarCallback {
@@ -33,21 +34,26 @@ public class SnackbarActivity extends BaseActivity implements SnackbarCallback {
     }
 
     public void onBananaClick(View view) {
-        SmartSnackbar.get(mCoordinatorLayout).showLong("香蕉");
+        SmartSnackbar.get().showLong("香蕉");
     }
 
 
     public void onOrangeClick(View view) {
-        SmartSnackbar.get(mCoordinatorLayout).showIndefinite("桔子","好吃");
+//        SmartSnackbar.get(mCoordinatorLayout).showIndefinite("桔子","好吃");
+        startActivity(new Intent(this,SnackbarActivity.class));
     }
 
     public void onNameClick(View view) {
-        SmartSnackbar.get(mCoordinatorLayout).show("我是朱志强", "打赏", new View.OnClickListener() {
+        Snackbar s;
+
+        SmartSnackbar.get().showIndefinite("我是朱志强", "打赏", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SmartToast.showInCenter("Thank you ！");
             }
         });
+
+
     }
 
 

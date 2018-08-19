@@ -1,4 +1,4 @@
-package com.coder.zzq.smartshow.snackbar;
+package com.coder.zzq.smartshow;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,15 +11,24 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.TextView;
 
+import com.coder.zzq.smartshow.lifecycle.ActivityStack;
+import com.coder.zzq.smartshow.snackbar.ProcessViewCallback;
+import com.coder.zzq.smartshow.snackbar.SnackbarCallback;
+import com.coder.zzq.smartshow.snackbar.SnackbarSetting;
+import com.coder.zzq.smartshow.snackbar.SnackbarShow;
+
 /**
- * Created by Administrator on 2017/11/15.
+ * Created by 朱志强 on 2017/11/15.
  */
 
-public class SmartSnackbar extends Snackbar.Callback implements SnackbarSetting,SnackbarShow, View.OnClickListener, Runnable {
+public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSetting,SnackbarShow, View.OnClickListener, Runnable {
     private static SmartSnackbar sSmartSnackbar;
+
+    private static boolean sDismissOnLeave;
+
     private Context mAppContext;
-    private Snackbar mSnackbar;
     private Context mPageContext;
+    private Snackbar mSnackbar;
     private CharSequence mCurMsg;
     private CharSequence mCurActionText;
     private View.OnClickListener mOnActionClickListener;
@@ -61,16 +70,21 @@ public class SmartSnackbar extends Snackbar.Callback implements SnackbarSetting,
           return sSmartSnackbar;
     }
 
-    public static SnackbarSetting init(Context context) {
+    protected static SnackbarSetting init(Context context) {
         return getSmartSnackbar(context);
     }
 
 
-    public static SnackbarShow get(Activity activity){
+    public static SnackbarShow get(){
         //保存当前页面的Context
+        Activity activity = ActivityStack.getTop();
+
         getSmartSnackbar(activity).mPageContext = activity;
+
         //取出android.R.id.content
+
         View view = activity.findViewById(android.R.id.content);
+
         return getFromView(view);
     }
 
@@ -106,7 +120,7 @@ public class SmartSnackbar extends Snackbar.Callback implements SnackbarSetting,
         sSmartSnackbar.mSnackbar = Snackbar.make(mBaseTraceView,mCurMsg,Snackbar.LENGTH_SHORT);
 
         if (mPageContext instanceof SnackbarCallback){
-            sSmartSnackbar.mSnackbar.addCallback(this);
+            sSmartSnackbar.mSnackbar.setCallback(this);
         }
 
         if (mBgColor != -1){
@@ -134,7 +148,8 @@ public class SmartSnackbar extends Snackbar.Callback implements SnackbarSetting,
     }
 
 
-    public static void destroy(Activity activity){
+    protected static void destroy(Activity activity){
+
         if (sSmartSnackbar != null && sSmartSnackbar.mPageContext == activity){
 
             sSmartSnackbar.mCurMsg = "";
@@ -286,6 +301,12 @@ public class SmartSnackbar extends Snackbar.Callback implements SnackbarSetting,
     }
 
     @Override
+    public SnackbarSetting dismissOnLeave(boolean b) {
+        setDismissOnLeave(b);
+        return this;
+    }
+
+    @Override
     public SnackbarSetting processView(ProcessViewCallback callback) {
         mProcessViewCallback = callback;
         return this;
@@ -317,5 +338,15 @@ public class SmartSnackbar extends Snackbar.Callback implements SnackbarSetting,
         if (mPageContext != null && mPageContext instanceof SnackbarCallback){
             ((SnackbarCallback) mPageContext).onSnackbarDismissed(sb,event);
         }
+    }
+
+
+
+    public static boolean isDismissOnLeave() {
+        return sDismissOnLeave;
+    }
+
+    public static void setDismissOnLeave(boolean b){
+        sDismissOnLeave = b;
     }
 }

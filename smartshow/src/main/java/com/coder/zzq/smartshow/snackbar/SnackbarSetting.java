@@ -24,5 +24,7 @@ public interface SnackbarSetting {
 
     SnackbarSetting actionSizeSp(int textSizeSp);
 
+    SnackbarSetting dismissOnLeave(boolean b);
+
     SnackbarSetting processView(ProcessViewCallback callback);
 }
