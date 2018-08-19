@@ -90,7 +90,7 @@ allprojects {
 </code></pre>
 
 调用show方法显示Toast，duration和常用的显示位置体现在方法名上，而不是传参，使得调用非常简易<br/><br/>
-
+Short Toast</br>
 <pre><code>
         //在默认位置显示
 
