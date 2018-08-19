@@ -1,6 +1,8 @@
 package com.coder.zzq.smartshowdemo;
 
 import android.app.Application;
+import android.graphics.Color;
+import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -46,9 +48,25 @@ public class MyApplication extends Application {
                 });
 
         SmartShow.snackbarSetting()
+                //设置背景颜色
                 .backgroundColorRes(R.color.colorPrimary)
-                .actionColorRes(R.color.colorAccent)
+                //设置消息文本颜色
+                .msgTextColor(Color.WHITE)
+                //设置消息文本大小
                 .msgTextSizeSp(18)
-                .actionSizeSp(18);
+                //设置动作文本颜色
+                .actionColorRes(R.color.colorAccent)
+                //设置动作文本大小
+                .actionSizeSp(18)
+                // //设置进入新的页面时，该页面的Snackbar是否消失（主要是Indefinite Snackbar而言）
+                .dismissOnLeave(true)
+                //对布局进一步处理
+                .processView(new com.coder.zzq.smartshow.snackbar.ProcessViewCallback() {
+                    @Override
+                    //layout 父布局；msgView 消息文本View;actionView 动作文本View
+                    public void processSnackbarView(Snackbar.SnackbarLayout layout, TextView msgView, TextView actionView) {
+
+                    }
+                });
     }
 }
