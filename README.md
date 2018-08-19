@@ -143,9 +143,8 @@ Long Toast<br/>
 </code></pre>
 
 ### 效果图
-①尽可能地复用Toast实例，节约内存<br/>
-②如果Toast正在显示，多次触发同一内容的Toast，不会重复弹出</br>
-③新的Toast(内容或位置发生了变化)会立即弹出，不会等待旧的Toast的duration耗尽再弹出，并具有动画效果（与你手机系统原生Toast的切换动画一致）<br/></br>
+①如果Toast正在显示，多次触发同一内容的Toast，不会重复弹出</br>
+②新的Toast(内容或位置发生了变化)会立即弹出，不会等待旧的Toast的duration耗尽再弹出，并具有动画效果（与你手机系统原生Toast的切换动画一致）<br/></br>
 ![图片加载失败](images/g_1.gif)<br/><br/>
 ④修改布局的风格，背景颜色、字体大小、颜色、加粗等</br><br/>
 ![图片加载失败](images/g_2.gif)<br/><br/>
