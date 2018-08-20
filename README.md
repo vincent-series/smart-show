@@ -162,7 +162,7 @@ Long Toast<br/>
 
          SmartToast.dismiss();
 
-         //设置离开当前页面时，当前页面的Toast是否消失，默认false
+         //设置离开当前页面时，当前页面的Toast是否立即消失，默认false
 
          SmartToast.setDismissOnLeave(boolean b);
 
