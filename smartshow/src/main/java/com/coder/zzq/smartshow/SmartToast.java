@@ -20,7 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.coder.zzq.smartshow.lifecycle.ActivityStack;
-import com.coder.zzq.smartshow.toast.ProcessViewCallback;
+import com.coder.zzq.smartshow.toast.ProcessToastCallback;
 import com.coder.zzq.smartshow.toast.ToastSetting;
 import com.coder.zzq.smartshow.toast.dummy.DummyToast;
 
@@ -54,7 +54,7 @@ public final class SmartToast implements ToastSetting {
     private int mTextSizeSp;
     private boolean mTextBold;
 
-    private ProcessViewCallback mProcessViewCallback;
+    private ProcessToastCallback mProcessViewCallback;
     private boolean mHasRetrieveWindowAnimStyle;
 
 
@@ -130,7 +130,7 @@ public final class SmartToast implements ToastSetting {
     }
 
     @Override
-    public ToastSetting processView(ProcessViewCallback callback) {
+    public ToastSetting processView(ProcessToastCallback callback) {
         mProcessViewCallback = callback;
         return this;
     }

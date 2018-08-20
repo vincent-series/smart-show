@@ -26,5 +26,5 @@ public interface SnackbarSetting {
 
     SnackbarSetting dismissOnLeave(boolean b);
 
-    SnackbarSetting processView(ProcessViewCallback callback);
+    SnackbarSetting processView(ProcessSnackbarCallback callback);
 }

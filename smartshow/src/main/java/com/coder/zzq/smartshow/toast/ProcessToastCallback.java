@@ -10,6 +10,6 @@ import com.coder.zzq.smartshow.SmartToast;
  * Created by 朱志强 on 2017/11/13.
  */
 
-public interface ProcessViewCallback {
+public interface ProcessToastCallback {
     void processView(boolean isCustom,View rootView,LinearLayout outParent, TextView msgView);
 }

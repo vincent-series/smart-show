@@ -5,17 +5,18 @@ import android.content.Context;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
+
 import android.support.v4.content.ContextCompat;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.TextView;
 
 import com.coder.zzq.smartshow.lifecycle.ActivityStack;
-import com.coder.zzq.smartshow.snackbar.ProcessViewCallback;
+import com.coder.zzq.smartshow.snackbar.ProcessSnackbarCallback;
 import com.coder.zzq.smartshow.snackbar.SnackbarCallback;
 import com.coder.zzq.smartshow.snackbar.SnackbarSetting;
 import com.coder.zzq.smartshow.snackbar.SnackbarShow;
+import com.coder.zzq.smartshow.snackbar.custom.Snackbar;
 
 /**
  * Created by 朱志强 on 2017/11/15.
@@ -46,7 +47,7 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
     private int mActionColor;
     private int mActionSizeSp;
 
-    private ProcessViewCallback mProcessViewCallback;
+    private ProcessSnackbarCallback mProcessViewCallback;
 
     private SmartSnackbar(Context context) {
         if (context == null) {
@@ -168,11 +169,13 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
         }
     }
 
-    private void showHelper(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener,int duration){
+    private void showHelper(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener,int duration,int pos){
 
         msg = msg == null ? "" : msg;
         actionText = actionText == null ? "" : actionText;
         onActionClickListener = onActionClickListener == null ? this : onActionClickListener;
+
+        mSnackbar.setPos(pos);
 
         boolean appearanceChanged = appearanceChanged(msg,actionText);
         setting(msg, actionText, onActionClickListener, duration);
@@ -214,13 +217,28 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
     }
 
     @Override
+    public void showAtTop(CharSequence msg) {
+        showAtTop(msg,null,null);
+    }
+
+    @Override
     public void show(CharSequence msg, CharSequence actionText) {
         show(msg,actionText,null);
     }
 
     @Override
+    public void showAtTop(CharSequence msg, CharSequence actionText) {
+        showAtTop(msg,actionText,null);
+    }
+
+    @Override
     public void show(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener) {
-        showHelper(msg,actionText,onActionClickListener,Snackbar.LENGTH_SHORT);
+        showHelper(msg,actionText,onActionClickListener,Snackbar.LENGTH_SHORT,Snackbar.POS_BOTTOM);
+    }
+
+    @Override
+    public void showAtTop(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener) {
+        showHelper(msg,actionText,onActionClickListener,Snackbar.LENGTH_SHORT,Snackbar.POS_TOP);
     }
 
     @Override
@@ -229,13 +247,28 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
     }
 
     @Override
+    public void showLongAtTop(CharSequence msg) {
+        showLongAtTop(msg,null);
+    }
+
+    @Override
     public void showLong(CharSequence msg, CharSequence actionText) {
         showLong(msg,actionText,null);
     }
 
     @Override
+    public void showLongAtTop(CharSequence msg, CharSequence actionText) {
+        showLongAtTop(msg,actionText,null);
+    }
+
+    @Override
     public void showLong(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener) {
-        showHelper(msg,actionText,onActionClickListener,Snackbar.LENGTH_LONG);
+        showHelper(msg,actionText,onActionClickListener,Snackbar.LENGTH_LONG,Snackbar.POS_BOTTOM);
+    }
+
+    @Override
+    public void showLongAtTop(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener) {
+        showHelper(msg,actionText,onActionClickListener,Snackbar.LENGTH_LONG,Snackbar.POS_TOP);
     }
 
     @Override
@@ -244,15 +277,29 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
     }
 
     @Override
+    public void showIndefiniteAtTop(CharSequence msg) {
+        showIndefiniteAtTop(msg,null);
+    }
+
+    @Override
     public void showIndefinite(CharSequence msg, CharSequence actionText) {
         showIndefinite(msg,actionText,null);
     }
 
     @Override
-    public void showIndefinite(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener) {
-        showHelper(msg,actionText,onActionClickListener,Snackbar.LENGTH_INDEFINITE);
+    public void showIndefiniteAtTop(CharSequence msg, CharSequence actionText) {
+        showIndefiniteAtTop(msg,actionText,null);
     }
 
+    @Override
+    public void showIndefinite(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener) {
+        showHelper(msg,actionText,onActionClickListener,Snackbar.LENGTH_INDEFINITE,Snackbar.POS_BOTTOM);
+    }
+
+    @Override
+    public void showIndefiniteAtTop(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener) {
+        showHelper(msg,actionText,onActionClickListener,Snackbar.LENGTH_INDEFINITE,Snackbar.POS_TOP);
+    }
 
 
     @Override
@@ -307,7 +354,7 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
     }
 
     @Override
-    public SnackbarSetting processView(ProcessViewCallback callback) {
+    public SnackbarSetting processView(ProcessSnackbarCallback callback) {
         mProcessViewCallback = callback;
         return this;
     }

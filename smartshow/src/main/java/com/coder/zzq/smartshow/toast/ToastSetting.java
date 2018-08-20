@@ -20,7 +20,7 @@ public interface ToastSetting {
     ToastSetting textSizeSp(int sp);
     ToastSetting textBold(boolean bold);
     ToastSetting dismissOnLeave(boolean b);
-    ToastSetting processView(ProcessViewCallback callback);
+    ToastSetting processView(ProcessToastCallback callback);
 
 
 }

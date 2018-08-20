@@ -2,15 +2,13 @@ package com.coder.zzq.smartshowdemo;
 
 import android.app.Application;
 import android.graphics.Color;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.coder.zzq.smartshow.SmartShow;
-import com.coder.zzq.smartshow.SmartSnackbar;
-import com.coder.zzq.smartshow.SmartToast;
-import com.coder.zzq.smartshow.toast.ProcessViewCallback;
+import com.coder.zzq.smartshow.snackbar.ProcessSnackbarCallback;
+import com.coder.zzq.smartshow.toast.ProcessToastCallback;
 
 
 /**
@@ -38,7 +36,7 @@ public class MyApplication extends Application {
                 //设置离开当前页面时，该页面的Toast是否立即消失
                 .dismissOnLeave(true)
                 //对布局进一步处理
-                .processView(new ProcessViewCallback() {
+                .processView(new ProcessToastCallback() {
                     @Override
                     //isCustom 是否是自定义布局；rootView 布局根view；outParent 默认布局时，msgView的父布局，也是根布局
                     //msgView 显示文本的TxtView
@@ -61,10 +59,9 @@ public class MyApplication extends Application {
                 // //设置进入新的页面时，该页面的Snackbar是否消失（主要是Indefinite Snackbar而言）
                 .dismissOnLeave(true)
                 //对布局进一步处理
-                .processView(new com.coder.zzq.smartshow.snackbar.ProcessViewCallback() {
+                .processView(new ProcessSnackbarCallback() {
                     @Override
-                    //layout 父布局；msgView 消息文本View;actionView 动作文本View
-                    public void processSnackbarView(Snackbar.SnackbarLayout layout, TextView msgView, TextView actionView) {
+                    public void processSnackbarView(com.coder.zzq.smartshow.snackbar.custom.Snackbar.SnackbarLayout layout, TextView msgView, TextView actionView) {
 
                     }
                 });

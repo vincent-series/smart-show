@@ -96,7 +96,7 @@ allprojects {
 
        //对布局进一步处理
 
-       .processView(new ProcessViewCallback() {
+       .processView(new ProcessToastCallback() {
 
             @Override
 
@@ -210,7 +210,7 @@ Long Toast<br/>
 
        //对布局进一步处理
 
-       .processView(new com.coder.zzq.smartshow.snackbar.ProcessViewCallback() {
+       .processView(new ProcessSnackbarCallback() {
            @Override
 
            //layout 父布局；msgView 消息文本View;actionView 动作文本View
