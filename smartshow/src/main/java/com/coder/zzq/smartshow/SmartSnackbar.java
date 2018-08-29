@@ -89,7 +89,7 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
         //保存当前页面的Context
         Activity activity = ActivityStack.getTop();
 
-        getSmartSnackbar(activity).mPageContext = activity;
+        getSmartSnackbar(SmartShow.getContext()).mPageContext = activity;
 
         //取出android.R.id.content
 
@@ -100,7 +100,7 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
 
     public static SnackbarShow get(CoordinatorLayout view) {
         //保存当前页面的Context
-        getSmartSnackbar(view.getContext()).mPageContext = view.getContext();
+        getSmartSnackbar(SmartShow.getContext()).mPageContext = view.getContext();
         return getFromView(view);
     }
 
@@ -175,7 +175,6 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
     }
 
     private void showHelper(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener, int duration, int pos) {
-
         msg = msg == null ? "" : msg;
         actionText = actionText == null ? "" : actionText;
         onActionClickListener = onActionClickListener == null ? this : onActionClickListener;

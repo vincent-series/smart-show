@@ -49,25 +49,25 @@ public class MyApplication extends Application {
                     }
                 });
 
-        SmartShow.snackbarSetting()
-                //设置背景颜色
-//                .backgroundColorRes(R.color.colorPrimary)
-                //设置消息文本颜色
-                .msgTextColor(Color.WHITE)
-                //设置消息文本大小
-                .msgTextSizeSp(18)
-                //设置动作文本颜色
-                .actionColorRes(R.color.colorAccent)
-                //设置动作文本大小
-                .actionSizeSp(18)
-                // //设置进入新的页面时，该页面的Snackbar是否消失（主要是Indefinite Snackbar而言）
-                .dismissOnLeave(true)
-                //对布局进一步处理
-                .processView(new ProcessSnackbarCallback() {
-                    @Override
-                    public void processSnackbarView(com.coder.zzq.smartshow.snackbar.custom.Snackbar.SnackbarLayout layout, TextView msgView, TextView actionView) {
-
-                    }
-                });
+//        SmartShow.snackbarSetting()
+//                //设置背景颜色
+////                .backgroundColorRes(R.color.colorPrimary)
+//                //设置消息文本颜色
+//                .msgTextColor(Color.WHITE)
+//                //设置消息文本大小
+//                .msgTextSizeSp(18)
+//                //设置动作文本颜色
+//                .actionColorRes(R.color.colorAccent)
+//                //设置动作文本大小
+//                .actionSizeSp(18)
+//                // //设置进入新的页面时，该页面的Snackbar是否消失（主要是Indefinite Snackbar而言）
+//                .dismissOnLeave(true)
+//                //对布局进一步处理
+//                .processView(new ProcessSnackbarCallback() {
+//                    @Override
+//                    public void processSnackbarView(com.coder.zzq.smartshow.snackbar.custom.Snackbar.SnackbarLayout layout, TextView msgView, TextView actionView) {
+//
+//                    }
+//                });
     }
 }
