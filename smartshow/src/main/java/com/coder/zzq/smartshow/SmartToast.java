@@ -5,6 +5,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
+import android.os.Handler;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.LayoutRes;
@@ -14,26 +15,28 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.coder.zzq.smartshow.lifecycle.ActivityStack;
 import com.coder.zzq.smartshow.toast.ProcessToastCallback;
+import com.coder.zzq.smartshow.toast.SafeHandler;
 import com.coder.zzq.smartshow.toast.ToastSetting;
-import com.coder.zzq.smartshow.toast.dummy.DummyToast;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * Created by 朱志强 on 2017/11/14.
  */
 
-public final class SmartToast implements ToastSetting {
+public final class SmartToast implements ToastSetting, View.OnAttachStateChangeListener {
     private static SmartToast sSmartToast;
     private static Context sAppContext;
     private static boolean sDismissOnLeave;
+    private Object mTn;
+    private Field mViewField;
 
 
     private Toast mToast;
@@ -54,8 +57,10 @@ public final class SmartToast implements ToastSetting {
     private int mTextSizeSp;
     private boolean mTextBold;
 
+    private int mActionWhenToastDuplicate = ACTION_IGNORE;
+
     private ProcessToastCallback mProcessViewCallback;
-    private boolean mHasRetrieveWindowAnimStyle;
+    private Method mHideMethod;
 
 
     private SmartToast() {
@@ -126,6 +131,12 @@ public final class SmartToast implements ToastSetting {
     @Override
     public ToastSetting dismissOnLeave(boolean b) {
         setDismissOnLeave(b);
+        return this;
+    }
+
+    @Override
+    public ToastSetting actionWhenDuplicate(int action) {
+        mActionWhenToastDuplicate = action;
         return this;
     }
 
@@ -209,12 +220,34 @@ public final class SmartToast implements ToastSetting {
         sSmartToast.mYOffset = yOffset;
 
 
-        if (isShowing() && locationChanged || contentChanged) {
-            SmartToast.dismiss();
-            rebuildToast();
+        switch (sSmartToast.mActionWhenToastDuplicate) {
+            case ACTION_IGNORE:
+                showOnActionIgnore(locationChanged, contentChanged);
+                break;
+            case ACTION_REPEAT_SHOW_LIKE_SNACKBAR:
+                dismiss();
+                sSmartToast.mToast.setText(sSmartToast.mCurMsg);
+                break;
+            default:
+                showOnActionIgnore(locationChanged, contentChanged);
+                break;
         }
-        updateToast();
-        showToast();
+
+
+        sSmartToast.mToast.setGravity(sSmartToast.mGravity, sSmartToast.mXOffset, sSmartToast.mYOffset);
+        sSmartToast.mToast.setDuration(sSmartToast.mDuration);
+
+        sSmartToast.mToast.show();
+    }
+
+    private static void showOnActionIgnore(boolean locationChanged, boolean contentChanged) {
+        if (sSmartToast.mActionWhenToastDuplicate == ACTION_IGNORE) {
+            if (isShowing() && (locationChanged || contentChanged)) {
+                dismiss();
+            } else {
+                sSmartToast.mToast.setText(sSmartToast.mCurMsg);
+            }
+        }
     }
 
 
@@ -226,13 +259,13 @@ public final class SmartToast implements ToastSetting {
         if (sSmartToast.mToast == null) {
             sSmartToast.mToast = Toast.makeText(sAppContext, "", Toast.LENGTH_SHORT);
             sSmartToast.setInitialPosInfo();
-            setupDummyToast();
             setupToast();
         }
     }
 
     private static void setupToast() {
         View rootView = isCustom() ? sSmartToast.mCustomView : sSmartToast.mToast.getView();
+        rootView.addOnAttachStateChangeListener(sSmartToast);
         LinearLayout outParent = isCustom() ? null : (LinearLayout) sSmartToast.mToast.getView();
         if (isCustom()) {
             sSmartToast.mMsgView = rootView.findViewById(R.id.custom_toast_msg);
@@ -268,12 +301,26 @@ public final class SmartToast implements ToastSetting {
             sSmartToast.mProcessViewCallback.processView(isCustom(), rootView, outParent, sSmartToast.mMsgView);
         }
 
-    }
-
-
-    private static void setupDummyToast() {
-        if (isSdk25() && !sSmartToast.mHasRetrieveWindowAnimStyle) {
-            DummyToast.setWindowAnimationStyle(getToastWindowAnimStyleRes());
+        try {
+            Field tnField = Toast.class.getDeclaredField("mTN");
+            tnField.setAccessible(true);
+            sSmartToast.mTn = tnField.get(sSmartToast.mToast);
+            sSmartToast.mViewField = sSmartToast.mTn.getClass().getDeclaredField("mView");
+            sSmartToast.mViewField.setAccessible(true);
+            sSmartToast.mHideMethod = sSmartToast.mTn.getClass().getDeclaredMethod("handleHide");
+            sSmartToast.mHideMethod.setAccessible(true);
+            if (isSdk25()) {
+                Field handerField = sSmartToast.mTn.getClass().getDeclaredField("mHandler");
+                handerField.setAccessible(true);
+                Handler handler = (Handler) handerField.get(sSmartToast.mTn);
+                handerField.set(sSmartToast.mTn, new SafeHandler(handler));
+            }
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
         }
     }
 
@@ -285,91 +332,24 @@ public final class SmartToast implements ToastSetting {
     }
 
 
-    private static void rebuildToast() {
-
-        if (isSdk25()) {
-            return;
-        }
-
-        if (isCustom()) {
-            sSmartToast.mToast = new Toast(sAppContext);
-            sSmartToast.mToast.setView(sSmartToast.mCustomView);
-        } else {
-            sSmartToast.mToast = Toast.makeText(sAppContext, "", Toast.LENGTH_SHORT);
-        }
-        setupToast();
-    }
-
-
-    private static void showToast() {
-
-        if (!isSdk25()) {
-            sSmartToast.mToast.show();
-            return;
-        }
-
-        if (ActivityStack.getTop() != null) {
-            DummyToast.show(ActivityStack.getTop().findViewById(android.R.id.content),
-                    sSmartToast.mToast.getView(),
-                    sSmartToast.mGravity, sSmartToast.mXOffset, sSmartToast.mYOffset, sSmartToast.mDuration);
-            return;
-        }
-
-    }
-
-    private static void updateToast() {
-        sSmartToast.mToast.setText(sSmartToast.mCurMsg);
-        sSmartToast.mToast.setGravity(sSmartToast.mGravity, sSmartToast.mXOffset, sSmartToast.mYOffset);
-        sSmartToast.mToast.setDuration(sSmartToast.mDuration);
-    }
-
-
     private boolean locationChanged(int gravity, int xOffset, int yOffset) {
         return mGravity != gravity || mXOffset != xOffset || mYOffset != yOffset;
     }
 
     public static boolean isShowing() {
-        if (isSdk25()) {
-            return DummyToast.isShowing();
-        }
-
         return sSmartToast != null && sSmartToast.mToast != null
                 && ViewCompat.isAttachedToWindow(sSmartToast.mToast.getView());
-
     }
 
 
     public static void dismiss() {
-        if (isSdk25()) {
-            DummyToast.dismiss();
-            return;
-        }
-
-        if (sSmartToast != null && sSmartToast.mToast != null
-                && ViewCompat.isAttachedToWindow(sSmartToast.mToast.getView())) {
-            sSmartToast.mToast.cancel();
-            sSmartToast.mToast = null;
-        }
-    }
-
-
-    private static int getToastWindowAnimStyleRes() {
-        int windowAnimations = 0;
         try {
-            Field tnField = Toast.class.getDeclaredField("mTN");
-            tnField.setAccessible(true);
-            Object tn = tnField.get(sSmartToast.mToast);
-            Field windowLayoutParamsField = tn.getClass().getDeclaredField("mParams");
-            windowLayoutParamsField.setAccessible(true);
-            WindowManager.LayoutParams layoutParams = (WindowManager.LayoutParams) windowLayoutParamsField.get(tn);
-            windowAnimations = layoutParams.windowAnimations;
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
+            sSmartToast.mHideMethod.invoke(sSmartToast.mTn);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
         }
-        sSmartToast.mHasRetrieveWindowAnimStyle = true;
-        return windowAnimations;
     }
 
 
@@ -378,4 +358,13 @@ public final class SmartToast implements ToastSetting {
     }
 
 
+    @Override
+    public void onViewAttachedToWindow(View v) {
+
+    }
+
+    @Override
+    public void onViewDetachedFromWindow(View v) {
+        mMsgView.setText(mCurMsg);
+    }
 }

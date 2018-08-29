@@ -10,6 +10,9 @@ import android.view.View;
 public interface ToastSetting {
 
 
+    int ACTION_IGNORE = 0;
+    int ACTION_REPEAT_SHOW_LIKE_SNACKBAR = 1;
+
     ToastSetting view(View view);
     ToastSetting view(@LayoutRes int layout);
 
@@ -20,7 +23,9 @@ public interface ToastSetting {
     ToastSetting textSizeSp(int sp);
     ToastSetting textBold(boolean bold);
     ToastSetting dismissOnLeave(boolean b);
+    ToastSetting actionWhenDuplicate(int action);
     ToastSetting processView(ProcessToastCallback callback);
+
 
 
 }

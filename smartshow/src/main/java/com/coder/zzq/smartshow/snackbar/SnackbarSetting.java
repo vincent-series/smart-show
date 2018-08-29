@@ -12,6 +12,8 @@ public interface SnackbarSetting {
 
     SnackbarSetting backgroundColorRes(@ColorRes int colorRes);
 
+    SnackbarSetting sameBackgroundWhenTop(boolean same);
+
     SnackbarSetting msgTextColor(@ColorInt int color);
 
     SnackbarSetting msgTextColorRes(@ColorRes int colorRes);

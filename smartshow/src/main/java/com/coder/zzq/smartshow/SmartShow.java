@@ -17,8 +17,10 @@ public final class SmartShow {
     private static Application sApplication;
 
     public static void init(Application application) {
+        if (application == null){
+            throw new NullPointerException("初始化SmartShow的context不可为null！");
+        }
         sApplication = application;
-        ensureContextNotNull();
         sApplication.registerActivityLifecycleCallbacks(new ActivityLifecycleCallback() {
             @Override
             public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
@@ -50,9 +52,6 @@ public final class SmartShow {
         }
     }
 
-    private static void ensureContextNotNull() {
-
-    }
 
     public static ToastSetting toastSetting() {
         return SmartToast.init(getContext());
@@ -66,7 +65,7 @@ public final class SmartShow {
 
     public static Application getContext() {
         if (sApplication == null) {
-            throw new NullPointerException("初始化SmartShow的context不可为null！");
+            throw new NullPointerException("尚未初始化SmartShow:SmartShow.init(applicationContext)");
         }
         return sApplication;
     }

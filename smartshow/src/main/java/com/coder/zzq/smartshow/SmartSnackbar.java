@@ -2,13 +2,17 @@ package com.coder.zzq.smartshow;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.design.widget.CoordinatorLayout;
 
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewCompat;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.coder.zzq.smartshow.lifecycle.ActivityStack;
@@ -16,13 +20,14 @@ import com.coder.zzq.smartshow.snackbar.ProcessSnackbarCallback;
 import com.coder.zzq.smartshow.snackbar.SnackbarCallback;
 import com.coder.zzq.smartshow.snackbar.SnackbarSetting;
 import com.coder.zzq.smartshow.snackbar.SnackbarShow;
+import com.coder.zzq.smartshow.snackbar.custom.BaseTransientBar;
 import com.coder.zzq.smartshow.snackbar.custom.Snackbar;
 
 /**
  * Created by 朱志强 on 2017/11/15.
  */
 
-public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSetting,SnackbarShow, View.OnClickListener, Runnable {
+public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSetting, SnackbarShow, View.OnClickListener, Runnable {
     private static SmartSnackbar sSmartSnackbar;
 
     private static boolean sDismissOnLeave;
@@ -40,6 +45,7 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
 
     @ColorInt
     private int mBgColor;
+    private boolean mSameBgWhenTop;
     @ColorInt
     private int mMsgColor;
     private int mMsgTextSizeSp;
@@ -48,6 +54,8 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
     private int mActionSizeSp;
 
     private ProcessSnackbarCallback mProcessViewCallback;
+
+
 
     private SmartSnackbar(Context context) {
         if (context == null) {
@@ -58,6 +66,7 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
         mCurActionText = "";
 
         mBgColor = -1;
+        mBgColor = -1;
         mMsgColor = -1;
         mMsgTextSizeSp = -1;
         mActionColor = -1;
@@ -65,10 +74,10 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
     }
 
     private static SmartSnackbar getSmartSnackbar(Context context) {
-          if (sSmartSnackbar == null){
-              sSmartSnackbar = new SmartSnackbar(context);
-          }
-          return sSmartSnackbar;
+        if (sSmartSnackbar == null) {
+            sSmartSnackbar = new SmartSnackbar(context);
+        }
+        return sSmartSnackbar;
     }
 
     protected static SnackbarSetting init(Context context) {
@@ -76,7 +85,7 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
     }
 
 
-    public static SnackbarShow get(){
+    public static SnackbarShow get() {
         //保存当前页面的Context
         Activity activity = ActivityStack.getTop();
 
@@ -89,13 +98,13 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
         return getFromView(view);
     }
 
-    public static SnackbarShow get(CoordinatorLayout view){
+    public static SnackbarShow get(CoordinatorLayout view) {
         //保存当前页面的Context
         getSmartSnackbar(view.getContext()).mPageContext = view.getContext();
         return getFromView(view);
     }
 
-    private static SnackbarShow getFromView(View view){
+    private static SnackbarShow getFromView(View view) {
         /*
 
         如果Snackbar尚未创建创建，则创建之
@@ -107,7 +116,7 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
         的容器改变 2.进入新的页面，两种情况都需要重建Snackbar
 
          */
-        if (sSmartSnackbar.mSnackbar == null || sSmartSnackbar.mBaseTraceView != view || sSmartSnackbar.mSnackbar.getView().getVisibility() != View.VISIBLE){
+        if (sSmartSnackbar.mSnackbar == null || sSmartSnackbar.mBaseTraceView != view || sSmartSnackbar.mSnackbar.getView().getVisibility() != View.VISIBLE) {
             sSmartSnackbar.rebuildSnackbar(view);
         }
         return sSmartSnackbar;
@@ -115,43 +124,39 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
 
 
     private void rebuildSnackbar(View view) {
-        mCurMsg = "";
-        mCurActionText = "";
         mBaseTraceView = view;
-        sSmartSnackbar.mSnackbar = Snackbar.make(mBaseTraceView,mCurMsg,Snackbar.LENGTH_SHORT);
+        sSmartSnackbar.mSnackbar = Snackbar.make(mBaseTraceView, "", BaseTransientBar.LENGTH_SHORT);
 
-        if (mPageContext instanceof SnackbarCallback){
+        if (mPageContext instanceof SnackbarCallback) {
             sSmartSnackbar.mSnackbar.addCallback(this);
         }
 
-        if (mBgColor != -1){
-            sSmartSnackbar.mSnackbar.getView().setBackgroundColor(mBgColor);
-        }
         TextView msgView = (TextView) sSmartSnackbar.mSnackbar.getView().findViewById(android.support.design.R.id.snackbar_text);
-        if (mMsgColor != -1){
+        if (mMsgColor != -1) {
             msgView.setTextColor(mMsgColor);
         }
-        if (mMsgTextSizeSp != -1){
-            msgView.setTextSize(TypedValue.COMPLEX_UNIT_SP,mMsgTextSizeSp);
+        if (mMsgTextSizeSp != -1) {
+            msgView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mMsgTextSizeSp);
         }
 
         TextView actionView = (TextView) sSmartSnackbar.mSnackbar.getView().findViewById(android.support.design.R.id.snackbar_action);
-        if (mActionColor != -1){
+        if (mActionColor != -1) {
             actionView.setTextColor(mActionColor);
         }
-        if (mActionSizeSp != -1){
-            actionView.setTextSize(TypedValue.COMPLEX_UNIT_SP,mActionSizeSp);
+        if (mActionSizeSp != -1) {
+            actionView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mActionSizeSp);
         }
 
-        if (mProcessViewCallback != null){
-            mProcessViewCallback.processSnackbarView((Snackbar.SnackbarLayout) mSnackbar.getView(),msgView,actionView);
+        if (mProcessViewCallback != null) {
+            mProcessViewCallback.processSnackbarView((Snackbar.SnackbarLayout) mSnackbar.getView(), msgView, actionView);
         }
+
     }
 
 
-    protected static void destroy(Activity activity){
+    protected static void destroy(Activity activity) {
 
-        if (sSmartSnackbar != null && sSmartSnackbar.mPageContext == activity){
+        if (sSmartSnackbar != null && sSmartSnackbar.mPageContext == activity) {
 
             sSmartSnackbar.mCurMsg = "";
             sSmartSnackbar.mCurActionText = "";
@@ -163,27 +168,65 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
         }
     }
 
-    public static void dismiss(){
-        if (sSmartSnackbar != null && sSmartSnackbar.mSnackbar != null){
+    public static void dismiss() {
+        if (sSmartSnackbar != null && sSmartSnackbar.mSnackbar != null) {
             sSmartSnackbar.mSnackbar.dismiss();
         }
     }
 
-    private void showHelper(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener,int duration,int pos){
+    private void showHelper(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener, int duration, int pos) {
 
         msg = msg == null ? "" : msg;
         actionText = actionText == null ? "" : actionText;
         onActionClickListener = onActionClickListener == null ? this : onActionClickListener;
 
-        mSnackbar.setPos(pos);
 
-        boolean appearanceChanged = appearanceChanged(msg,actionText);
+        boolean appearanceChanged = appearanceChanged(msg, actionText);
+        boolean positionChanged = (pos != mSnackbar.getPos());
         setting(msg, actionText, onActionClickListener, duration);
 
-        if (appearanceChanged && mSnackbar.isShown()){
+        if (positionChanged && isShowing()) {
+            dismiss();
+            if (mBaseTraceView != null) {
+                rebuildSnackbar(mBaseTraceView);
+            }
+        }
+
+        mSnackbar.setPos(pos);
+        switch (pos) {
+            case Snackbar.POS_TOP:
+                mSnackbar.getView().getLayoutParams().height =
+                        Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 57, mAppContext.getResources().getDisplayMetrics()));
+                if (mSameBgWhenTop) {
+                    if (mBgColor != -1) {
+                        sSmartSnackbar.mSnackbar.getView().setBackgroundColor(mBgColor);
+                    }else {
+                        sSmartSnackbar.mSnackbar.getView().setBackgroundResource(android.support.design.R.drawable.design_snackbar_background);
+                    }
+                }else {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                        sSmartSnackbar.mSnackbar.getView().setBackgroundColor(
+                                ActivityStack.getTop().getWindow().getStatusBarColor()
+                        );
+                    }else {
+                        sSmartSnackbar.mSnackbar.getView().setBackgroundResource(R.color.colorPrimaryDark);
+                    }
+                }
+                break;
+            case Snackbar.POS_BOTTOM:
+                mSnackbar.getView().getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                if (mBgColor != -1) {
+                    sSmartSnackbar.mSnackbar.getView().setBackgroundColor(mBgColor);
+                }else {
+                    sSmartSnackbar.mSnackbar.getView().setBackgroundResource(android.support.design.R.drawable.design_snackbar_background);
+                }
+                break;
+        }
+
+        if (appearanceChanged && mSnackbar.isShown()) {
             //如果Snackbar正在显示，且内容发生了变化，先隐藏掉再显示，具有切换效果
             dismissAndShowAgain();
-        }else {
+        } else {
             //如果Snackbar没有显示或者“样貌”没有发生改变，正常显示即可
             normalShow();
         }
@@ -213,92 +256,92 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
 
     @Override
     public void show(CharSequence msg) {
-        show(msg,null,null);
+        show(msg, null, null);
     }
 
     @Override
     public void showAtTop(CharSequence msg) {
-        showAtTop(msg,null,null);
+        showAtTop(msg, null, null);
     }
 
     @Override
     public void show(CharSequence msg, CharSequence actionText) {
-        show(msg,actionText,null);
+        show(msg, actionText, null);
     }
 
     @Override
     public void showAtTop(CharSequence msg, CharSequence actionText) {
-        showAtTop(msg,actionText,null);
+        showAtTop(msg, actionText, null);
     }
 
     @Override
     public void show(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener) {
-        showHelper(msg,actionText,onActionClickListener,Snackbar.LENGTH_SHORT,Snackbar.POS_BOTTOM);
+        showHelper(msg, actionText, onActionClickListener, Snackbar.LENGTH_SHORT, Snackbar.POS_BOTTOM);
     }
 
     @Override
     public void showAtTop(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener) {
-        showHelper(msg,actionText,onActionClickListener,Snackbar.LENGTH_SHORT,Snackbar.POS_TOP);
+        showHelper(msg, actionText, onActionClickListener, Snackbar.LENGTH_SHORT, Snackbar.POS_TOP);
     }
 
     @Override
     public void showLong(CharSequence msg) {
-        showLong(msg,null);
+        showLong(msg, null);
     }
 
     @Override
     public void showLongAtTop(CharSequence msg) {
-        showLongAtTop(msg,null);
+        showLongAtTop(msg, null);
     }
 
     @Override
     public void showLong(CharSequence msg, CharSequence actionText) {
-        showLong(msg,actionText,null);
+        showLong(msg, actionText, null);
     }
 
     @Override
     public void showLongAtTop(CharSequence msg, CharSequence actionText) {
-        showLongAtTop(msg,actionText,null);
+        showLongAtTop(msg, actionText, null);
     }
 
     @Override
     public void showLong(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener) {
-        showHelper(msg,actionText,onActionClickListener,Snackbar.LENGTH_LONG,Snackbar.POS_BOTTOM);
+        showHelper(msg, actionText, onActionClickListener, Snackbar.LENGTH_LONG, Snackbar.POS_BOTTOM);
     }
 
     @Override
     public void showLongAtTop(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener) {
-        showHelper(msg,actionText,onActionClickListener,Snackbar.LENGTH_LONG,Snackbar.POS_TOP);
+        showHelper(msg, actionText, onActionClickListener, Snackbar.LENGTH_LONG, Snackbar.POS_TOP);
     }
 
     @Override
     public void showIndefinite(CharSequence msg) {
-        showIndefinite(msg,null);
+        showIndefinite(msg, null);
     }
 
     @Override
     public void showIndefiniteAtTop(CharSequence msg) {
-        showIndefiniteAtTop(msg,null);
+        showIndefiniteAtTop(msg, null);
     }
 
     @Override
     public void showIndefinite(CharSequence msg, CharSequence actionText) {
-        showIndefinite(msg,actionText,null);
+        showIndefinite(msg, actionText, null);
     }
 
     @Override
     public void showIndefiniteAtTop(CharSequence msg, CharSequence actionText) {
-        showIndefiniteAtTop(msg,actionText,null);
+        showIndefiniteAtTop(msg, actionText, null);
     }
 
     @Override
     public void showIndefinite(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener) {
-        showHelper(msg,actionText,onActionClickListener,Snackbar.LENGTH_INDEFINITE,Snackbar.POS_BOTTOM);
+        showHelper(msg, actionText, onActionClickListener, Snackbar.LENGTH_INDEFINITE, Snackbar.POS_BOTTOM);
     }
 
     @Override
     public void showIndefiniteAtTop(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener) {
-        showHelper(msg,actionText,onActionClickListener,Snackbar.LENGTH_INDEFINITE,Snackbar.POS_TOP);
+        showHelper(msg, actionText, onActionClickListener, Snackbar.LENGTH_INDEFINITE, Snackbar.POS_TOP);
     }
 
 
@@ -314,6 +357,12 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
     }
 
     @Override
+    public SnackbarSetting sameBackgroundWhenTop(boolean same) {
+        mSameBgWhenTop = same;
+        return this;
+    }
+
+    @Override
     public SnackbarSetting msgTextColor(@ColorInt int color) {
         mMsgColor = color;
         return this;
@@ -321,7 +370,7 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
 
     @Override
     public SnackbarSetting msgTextColorRes(@ColorRes int colorRes) {
-        return msgTextColor(ContextCompat.getColor(mAppContext,colorRes));
+        return msgTextColor(ContextCompat.getColor(mAppContext, colorRes));
     }
 
     @Override
@@ -338,7 +387,7 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
 
     @Override
     public SnackbarSetting actionColorRes(@ColorRes int colorRes) {
-        return actionColor(ContextCompat.getColor(mAppContext,colorRes));
+        return actionColor(ContextCompat.getColor(mAppContext, colorRes));
     }
 
     @Override
@@ -375,20 +424,20 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
 
     @Override
     public void onShown(Snackbar sb) {
-        if (mPageContext != null && mPageContext instanceof SnackbarCallback){
+        if (mPageContext != null && mPageContext instanceof SnackbarCallback) {
             ((SnackbarCallback) mPageContext).onSnackbarShown(sb);
         }
     }
 
     @Override
     public void onDismissed(Snackbar sb, int event) {
-        if (mPageContext != null && mPageContext instanceof SnackbarCallback){
-            ((SnackbarCallback) mPageContext).onSnackbarDismissed(sb,event);
+        if (mPageContext != null && mPageContext instanceof SnackbarCallback) {
+            ((SnackbarCallback) mPageContext).onSnackbarDismissed(sb, event);
         }
     }
 
 
-    public static boolean isShowing(){
+    public static boolean isShowing() {
         return sSmartSnackbar != null && sSmartSnackbar.mSnackbar != null && sSmartSnackbar.mSnackbar.isShown();
     }
 
@@ -396,7 +445,7 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
         return sDismissOnLeave;
     }
 
-    public static void setDismissOnLeave(boolean b){
+    public static void setDismissOnLeave(boolean b) {
         sDismissOnLeave = b;
     }
 }
