@@ -19,7 +19,7 @@ public class SnackbarTestActivity extends AppCompatActivity {
 
 
     public void onShowClick(View view) {
-        SmartSnackbar.get().show("香蕉");
+        SmartSnackbar.get().showIndefinite("香蕉");
     }
 
     public void onShowAtTopClick(View view) {

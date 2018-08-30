@@ -344,7 +344,9 @@ public final class SmartToast implements ToastSetting, View.OnAttachStateChangeL
 
     public static void dismiss() {
         try {
-            sSmartToast.mHideMethod.invoke(sSmartToast.mTn);
+            if (sSmartToast != null && sSmartToast.mHideMethod != null){
+                sSmartToast.mHideMethod.invoke(sSmartToast.mTn);
+            }
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {

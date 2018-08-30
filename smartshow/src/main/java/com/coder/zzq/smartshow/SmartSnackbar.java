@@ -54,7 +54,7 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
     private int mActionSizeSp;
 
     private ProcessSnackbarCallback mProcessViewCallback;
-
+    private String mDefaultActionTextForIndefinite = "确定";
 
 
     private SmartSnackbar(Context context) {
@@ -192,35 +192,10 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
         }
 
         mSnackbar.setPos(pos);
-        switch (pos) {
-            case Snackbar.POS_TOP:
-                mSnackbar.getView().getLayoutParams().height =
-                        Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 57, mAppContext.getResources().getDisplayMetrics()));
-                if (mSameBgWhenTop) {
-                    if (mBgColor != -1) {
-                        sSmartSnackbar.mSnackbar.getView().setBackgroundColor(mBgColor);
-                    }else {
-                        sSmartSnackbar.mSnackbar.getView().setBackgroundResource(android.support.design.R.drawable.design_snackbar_background);
-                    }
-                }else {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-                        sSmartSnackbar.mSnackbar.getView().setBackgroundColor(
-                                ActivityStack.getTop().getWindow().getStatusBarColor()
-                        );
-                    }else {
-                        sSmartSnackbar.mSnackbar.getView().setBackgroundResource(R.color.colorPrimaryDark);
-                    }
-                }
-                break;
-            case Snackbar.POS_BOTTOM:
-                mSnackbar.getView().getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
-                if (mBgColor != -1) {
-                    sSmartSnackbar.mSnackbar.getView().setBackgroundColor(mBgColor);
-                }else {
-                    sSmartSnackbar.mSnackbar.getView().setBackgroundResource(android.support.design.R.drawable.design_snackbar_background);
-                }
-                break;
-        }
+
+        adjustHeight(pos);
+
+        adjustBg(pos);
 
         if (appearanceChanged && mSnackbar.isShown()) {
             //如果Snackbar正在显示，且内容发生了变化，先隐藏掉再显示，具有切换效果
@@ -229,6 +204,43 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
             //如果Snackbar没有显示或者“样貌”没有发生改变，正常显示即可
             normalShow();
         }
+    }
+
+    private void adjustBg(int pos) {
+        switch (pos){
+            case Snackbar.POS_TOP:
+                if (mSameBgWhenTop){
+                    setBgWhenBottom();
+                }else {
+                    mSnackbar.getView().setBackgroundColor(getStatusBarColor());
+                }
+                break;
+            case Snackbar.POS_BOTTOM:
+                setBgWhenBottom();
+                break;
+        }
+    }
+
+    private int getStatusBarColor() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            return ActivityStack.getTop().getWindow().getStatusBarColor();
+        }else {
+            return ContextCompat.getColor(mAppContext,R.color.colorPrimaryDark);
+        }
+    }
+
+    private void setBgWhenBottom() {
+        if (mBgColor != -1){
+            mSnackbar.getView().setBackgroundColor(mBgColor);
+        }else {
+            mSnackbar.getView().setBackgroundResource(android.support.design.R.drawable.design_snackbar_background);
+        }
+    }
+
+    private void adjustHeight(int pos) {
+        ViewGroup.LayoutParams lp = mSnackbar.getView().getLayoutParams();
+        lp.height = (pos == Snackbar.POS_TOP) ? dpToPx(60) : ViewGroup.LayoutParams.WRAP_CONTENT;
+        lp.toString();
     }
 
     private boolean appearanceChanged(CharSequence msg, CharSequence actionText) {
@@ -315,12 +327,12 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
 
     @Override
     public void showIndefinite(CharSequence msg) {
-        showIndefinite(msg, null);
+        showIndefinite(msg, mDefaultActionTextForIndefinite);
     }
 
     @Override
     public void showIndefiniteAtTop(CharSequence msg) {
-        showIndefiniteAtTop(msg, null);
+        showIndefiniteAtTop(msg, mDefaultActionTextForIndefinite);
     }
 
     @Override
@@ -396,6 +408,12 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
     }
 
     @Override
+    public SnackbarSetting defaultActionTextForIndefinite(String actionText) {
+        mDefaultActionTextForIndefinite = actionText;
+        return this;
+    }
+
+    @Override
     public SnackbarSetting dismissOnLeave(boolean b) {
         setDismissOnLeave(b);
         return this;
@@ -446,5 +464,10 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
 
     public static void setDismissOnLeave(boolean b) {
         sDismissOnLeave = b;
+    }
+
+
+    private int dpToPx(float dp){
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,dp,mAppContext.getResources().getDisplayMetrics()));
     }
 }
