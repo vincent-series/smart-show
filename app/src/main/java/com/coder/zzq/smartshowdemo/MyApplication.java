@@ -51,7 +51,7 @@ public class MyApplication extends Application {
 
         SmartShow.snackbarSetting()
                 //设置背景颜色
-                .backgroundColorRes(R.color.colorPrimary)
+                .backgroundColor(Color.parseColor("#99000000"))
                 //设置消息文本颜色
                 .msgTextColor(Color.WHITE)
                 //设置消息文本大小

@@ -54,7 +54,15 @@ allprojects {
 2.在Module的grable文件中<br/>
 <pre><code>
 
-    implementation 'com.github.the-pig-of-jungle:SmartShow:v2.1.1'
+        implementation('com.github.the-pig-of-jungle:SmartShow:v2.1.2') {
+        
+            exclude group: 'com.android.support'
+            
+        }
+        
+        //添加和你项目匹配的design依赖库
+        
+        implementation 'com.android.support:design:x.y.z'
 
 </code></pre>
 
