@@ -18,9 +18,9 @@ ACTION_REPEAT_SHOW_LIKE_SNACKBAR为立即隐藏前一个，再次显示一个，
 类似Snackbar(不同实例交替显示)<\br>
 默认策略为不重复弹出</br>
 3.新的Toast(内容或位置发生了变化)会立即弹出，不会等待旧的Toast的duration耗尽再弹出，并具有动画效果（与你手机系统原生Toast的切换动画一致）<br/>
-4.可修改Toast默认布局的风格，如背景颜色，文字大小和颜色等</br>
+4.可修改Toast默认布局的风格，如背景颜色，文字大小和颜色等<\br>
 5.可为Toast设置自定义布局，并进行代码处理</br>
-6.完美解决Android 7.1的系统bug——Toast BadTokenException
+6.完美解决Android 7.1的系统bug——Toast BadTokenException<\br>
 7.可配置离开当前页面，立即消失Toast
 #### 注意
 关闭app的系统通知权限,将导致SmartToast无法显示，原因如下：<br/>
