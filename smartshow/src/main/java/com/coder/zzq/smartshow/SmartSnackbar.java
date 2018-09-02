@@ -7,9 +7,7 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.design.widget.CoordinatorLayout;
 
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewCompat;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -225,7 +223,7 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             return ActivityStack.getTop().getWindow().getStatusBarColor();
         }else {
-            return ContextCompat.getColor(mAppContext,R.color.colorPrimaryDark);
+            return ContextCompat.getColor(mAppContext, R.color.colorPrimaryDark);
         }
     }
 

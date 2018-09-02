@@ -4,8 +4,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.coder.zzq.smartshow.SmartToast;
-
 /**
  * Created by 朱志强 on 2017/11/13.
  */

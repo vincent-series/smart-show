@@ -446,6 +446,7 @@ public final class SmartToast implements ToastSetting, View.OnAttachStateChangeL
         }
         if (sSmartToast.mTypeInfoView == null) {
             sSmartToast.mTypeInfoView = LayoutInflater.from(sAppContext).inflate(R.layout.layout_type_info, null);
+            sSmartToast.mTypeInfoView.addOnAttachStateChangeListener(sSmartToast);
             sSmartToast.mTypeInfoMsgView = sSmartToast.mTypeInfoView.findViewById(R.id.type_info_message);
             sSmartToast.mTypeInfoIconView = sSmartToast.mTypeInfoView.findViewById(R.id.type_info_icon);
         }
@@ -464,7 +465,7 @@ public final class SmartToast implements ToastSetting, View.OnAttachStateChangeL
 
         sSmartToast.mCurMsg = msg;
         sSmartToast.mDuration = duration;
-
+        sSmartToast.mCurTypeInfo = typeInfo;
         switch (typeInfo){
             case TYPE_INFO_SUCCESS:
                 sSmartToast.mTypeIconRes = R.drawable.type_info_success;

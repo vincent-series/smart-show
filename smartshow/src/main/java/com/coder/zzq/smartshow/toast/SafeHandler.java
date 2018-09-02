@@ -1,15 +1,9 @@
 package com.coder.zzq.smartshow.toast;
 
 
-import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.WindowManager;
-
-import com.coder.zzq.smartshow.BuildConfig;
-import com.coder.zzq.smartshow.SmartShow;
-import com.coder.zzq.smartshow.SmartToast;
 
 public class SafeHandler extends Handler {
     private Handler mNestedHandler;
