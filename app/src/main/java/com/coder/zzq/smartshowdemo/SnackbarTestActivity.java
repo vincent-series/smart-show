@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.coder.zzq.smartshow.SmartSnackbar;
+import com.coder.zzq.smartshow.snackbar.SmartSnackbar;
 
 public class SnackbarTestActivity extends AppCompatActivity {
     @Override

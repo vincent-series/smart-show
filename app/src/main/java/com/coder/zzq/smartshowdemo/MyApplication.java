@@ -3,13 +3,12 @@ package com.coder.zzq.smartshowdemo;
 import android.app.Application;
 import android.graphics.Color;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.coder.zzq.smartshow.SmartShow;
 import com.coder.zzq.smartshow.snackbar.ProcessSnackbarCallback;
-import com.coder.zzq.smartshow.toast.ProcessToastCallback;
-import com.coder.zzq.smartshow.toast.ToastSetting;
+import com.coder.zzq.smartshow.toast.IProcessToastCallback;
+import com.coder.zzq.smartshow.toast.IToastSetting;
 
 
 /**
@@ -39,24 +38,25 @@ public class MyApplication extends Application {
 //                //当Toast内容重复时的处理策略：ACTION_IGNORE为传统模式，即不重复弹出；
 //                //ACTION_REPEAT_SHOW_LIKE_SNACKBAR为立即隐藏前一个，再次显示一个，类似Snackbar
 //                //默认策略为不重复弹出
-                .actionWhenDuplicate(ToastSetting.ACTION_IGNORE)
+                .actionWhenDuplicate(IToastSetting.ACTION_REPEAT)
+//                .typeInfoToastThemeColorRes(R.color.colorPrimary)
 //                //对布局进一步处理
-                .processView(new ProcessToastCallback() {
+                .processView(new IProcessToastCallback() {
                     @Override
-                    public void processView(boolean isCustom, View rootView, LinearLayout outParent, TextView msgView) {
+                    public void processView(boolean isCustom, View rootView, TextView msgView) {
 
                     }
                 });
 
         SmartShow.snackbarSetting()
                 //设置背景颜色
-                .backgroundColor(Color.parseColor("#99000000"))
+//                .backgroundColor()
                 //设置消息文本颜色
                 .msgTextColor(Color.WHITE)
                 //设置消息文本大小
                 .msgTextSizeSp(18)
                 //设置动作文本颜色
-                .actionColorRes(R.color.colorAccent)
+//                .actionColorRes(R.color.colorAccent)
                 //设置动作文本大小
                 .actionSizeSp(18)
                 .defaultActionTextForIndefinite("ok")

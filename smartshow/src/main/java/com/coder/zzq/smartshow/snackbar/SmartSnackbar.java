@@ -1,4 +1,4 @@
-package com.coder.zzq.smartshow;
+package com.coder.zzq.smartshow.snackbar;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,11 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.coder.zzq.smartshow.R;
+import com.coder.zzq.smartshow.SmartShow;
 import com.coder.zzq.smartshow.lifecycle.ActivityStack;
-import com.coder.zzq.smartshow.snackbar.ProcessSnackbarCallback;
-import com.coder.zzq.smartshow.snackbar.SnackbarCallback;
-import com.coder.zzq.smartshow.snackbar.SnackbarSetting;
-import com.coder.zzq.smartshow.snackbar.SnackbarShow;
 import com.coder.zzq.smartshow.snackbar.custom.BaseTransientBar;
 import com.coder.zzq.smartshow.snackbar.custom.Snackbar;
 
@@ -78,7 +76,7 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
         return sSmartSnackbar;
     }
 
-    protected static SnackbarSetting init(Context context) {
+    public static SnackbarSetting init(Context context) {
         return getSmartSnackbar(context);
     }
 
@@ -152,7 +150,7 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
     }
 
 
-    protected static void destroy(Activity activity) {
+    public static void destroy(Activity activity) {
 
         if (sSmartSnackbar != null && sSmartSnackbar.mPageContext == activity) {
 

@@ -6,8 +6,10 @@ import android.os.Bundle;
 
 import com.coder.zzq.smartshow.lifecycle.ActivityLifecycleCallback;
 import com.coder.zzq.smartshow.lifecycle.ActivityStack;
+import com.coder.zzq.smartshow.snackbar.SmartSnackbar;
 import com.coder.zzq.smartshow.snackbar.SnackbarSetting;
-import com.coder.zzq.smartshow.toast.ToastSetting;
+import com.coder.zzq.smartshow.toast.IToastSetting;
+import com.coder.zzq.smartshow.toast.SmartToast;
 
 /**
  * Created by 朱志强 on 2018/08/19.
@@ -53,7 +55,7 @@ public final class SmartShow {
     }
 
 
-    public static ToastSetting toastSetting() {
+    public static IToastSetting toastSetting() {
         return SmartToast.init(getContext());
     }
 

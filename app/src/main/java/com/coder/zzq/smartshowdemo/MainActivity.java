@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
-import com.coder.zzq.smartshow.SmartToast;
+import com.coder.zzq.smartshow.toast.SmartToast;
 
 import java.lang.reflect.Field;
 

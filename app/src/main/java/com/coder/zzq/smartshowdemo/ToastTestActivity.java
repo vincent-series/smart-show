@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.coder.zzq.smartshow.SmartToast;
+import com.coder.zzq.smartshow.toast.SmartToast;
 
 public class ToastTestActivity extends AppCompatActivity {
     @Override
@@ -31,6 +31,6 @@ public class ToastTestActivity extends AppCompatActivity {
     }
 
     public void onNextPageClick(View view) {
-        SmartToast.error("密码错误");
+        SmartToast.show("苹果");
     }
 }

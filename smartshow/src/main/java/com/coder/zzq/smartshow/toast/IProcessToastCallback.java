@@ -8,6 +8,6 @@ import android.widget.TextView;
  * Created by 朱志强 on 2017/11/13.
  */
 
-public interface ProcessToastCallback {
-    void processView(boolean isCustom,View rootView,LinearLayout outParent, TextView msgView);
+public interface IProcessToastCallback {
+    void processView(boolean isCustom,View rootView,TextView msgView);
 }
