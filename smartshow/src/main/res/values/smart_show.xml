@@ -17,4 +17,9 @@
 
     <item name="custom_toast_msg" type="id"/>
 
+    <style name="type_info_toast_anim">
+        <item name="android:windowEnterAnimation">@anim/type_info_toast_enter</item>
+        <item name="android:windowExitAnimation">@anim/type_info_toast_exit</item>
+    </style>
+
 </resources>

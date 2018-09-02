@@ -22,30 +22,29 @@ public class MyApplication extends Application {
         super.onCreate();
         SmartShow.init(this);
         SmartShow.toastSetting()
-//                自定义布局，参数可以是布局资源，也可以View。
-//                 在自定义布局中，一定要设置显示文本提示的
-//                TextView的Id为android:id="@id/custom_toast_msg"。
-//                设置背景颜色
-                .backgroundColorRes(R.color.colorPrimary)
-//                文本颜色
-                .textColorRes(R.color.colorAccent)
-                //设置文本字体大小
-                .textSizeSp(18)
-                //设置文本是否加粗
-                .textBold(true)
-                //设置离开当前页面时，该页面的Toast是否立即消失
+////                .view(R.layout.custom_toast)
+////                自定义布局，参数可以是布局资源，也可以View。
+////                 在自定义布局中，一定要设置显示文本提示的
+////                TextView的Id为android:id="@id/custom_toast_msg"。
+////                设置背景颜色
+//                .backgroundColorRes(R.color.colorPrimary)
+////                文本颜色
+//                .textColorRes(R.color.colorAccent)
+//                //设置文本字体大小
+//                .textSizeSp(18)
+//                //设置文本是否加粗
+//                .textBold(true)
+//                //设置离开当前页面时，该页面的Toast是否立即消失
                 .dismissOnLeave(true)
-                //当Toast内容重复时的处理策略：ACTION_IGNORE为传统模式，即不重复弹出；
-                //ACTION_REPEAT_SHOW_LIKE_SNACKBAR为立即隐藏前一个，再次显示一个，类似Snackbar
-                //默认策略为不重复弹出
-                .actionWhenDuplicate(ToastSetting.ACTION_REPEAT_SHOW_LIKE_SNACKBAR)
-                //对布局进一步处理
+//                //当Toast内容重复时的处理策略：ACTION_IGNORE为传统模式，即不重复弹出；
+//                //ACTION_REPEAT_SHOW_LIKE_SNACKBAR为立即隐藏前一个，再次显示一个，类似Snackbar
+//                //默认策略为不重复弹出
+                .actionWhenDuplicate(ToastSetting.ACTION_IGNORE)
+//                //对布局进一步处理
                 .processView(new ProcessToastCallback() {
                     @Override
-                    //isCustom 是否是自定义布局；rootView 布局根view；outParent 默认布局时，msgView的父布局，也是根布局
-                    //msgView 显示文本的TxtView
                     public void processView(boolean isCustom, View rootView, LinearLayout outParent, TextView msgView) {
-                        //...
+
                     }
                 });
 

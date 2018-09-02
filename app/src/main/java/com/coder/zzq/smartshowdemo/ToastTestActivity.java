@@ -17,22 +17,22 @@ public class ToastTestActivity extends AppCompatActivity {
     }
 
     public void onShowClick(View view) {
-        SmartToast.show("香蕉");
+        SmartToast.success("重置成功");
     }
 
     public void onShowAtTopClick(View view) {
-        SmartToast.showAtTop("苹果");
+        SmartToast.fail("下载失败");
     }
 
     public void onShowInCenterClick(View view) {
-        SmartToast.showInCenter("荔枝");
+        SmartToast.warning("电量过低，请充电");
     }
 
     public void onShowAtLocationClick(View view) {
-        SmartToast.showAtLocation("芒果", Gravity.TOP|Gravity.LEFT,30,60);
+        SmartToast.normal("已在后台下载");
     }
 
     public void onNextPageClick(View view) {
-        startActivity(new Intent(this,ToastTestActivity.class));
+        SmartToast.error("密码错误");
     }
 }
