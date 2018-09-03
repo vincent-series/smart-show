@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
+import android.support.annotation.RestrictTo;
 import android.support.design.widget.CoordinatorLayout;
 
 import android.support.v4.content.ContextCompat;
@@ -76,6 +77,7 @@ public final class SmartSnackbar extends Snackbar.Callback implements SnackbarSe
         return sSmartSnackbar;
     }
 
+    @RestrictTo(RestrictTo.Scope.LIBRARY)
     public static SnackbarSetting init(Context context) {
         return getSmartSnackbar(context);
     }

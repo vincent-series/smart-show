@@ -9,6 +9,7 @@ import com.coder.zzq.smartshow.SmartShow;
 import com.coder.zzq.smartshow.snackbar.ProcessSnackbarCallback;
 import com.coder.zzq.smartshow.toast.IProcessToastCallback;
 import com.coder.zzq.smartshow.toast.IToastSetting;
+import com.coder.zzq.smartshow.toast.SmartToast;
 
 
 /**

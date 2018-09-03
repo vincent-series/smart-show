@@ -1,6 +1,7 @@
 package com.coder.zzq.smartshow.toast;
 
 import android.content.Context;
+import android.support.annotation.RestrictTo;
 
 /**
  * Created by 朱志强 on 2017/11/14.
@@ -16,6 +17,7 @@ public final class SmartToast{
 
     }
 
+    @RestrictTo(RestrictTo.Scope.LIBRARY)
     public static IToastSetting init(Context context) {
         if (context == null) {
             throw new NullPointerException("初始化SmartToast的context不可谓null！");
