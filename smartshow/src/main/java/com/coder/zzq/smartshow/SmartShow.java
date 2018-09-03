@@ -43,6 +43,8 @@ public final class SmartShow {
                 SmartSnackbar.destroy(activity);
             }
         });
+        SmartToast.init(getContext());
+        SmartSnackbar.init(getContext());
     }
 
     private static void setupDismissOnLeave() {
