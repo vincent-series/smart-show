@@ -1,15 +1,9 @@
 package com.coder.zzq.smartshowdemo;
 
 import android.app.Application;
-import android.graphics.Color;
-import android.view.View;
-import android.widget.TextView;
 
 import com.coder.zzq.smartshow.SmartShow;
-import com.coder.zzq.smartshow.snackbar.ProcessSnackbarCallback;
-import com.coder.zzq.smartshow.toast.IProcessToastCallback;
-import com.coder.zzq.smartshow.toast.IToastSetting;
-import com.coder.zzq.smartshow.toast.SmartToast;
+import com.coder.zzq.smartshow.bar.topbar.SmartTopBar;
 
 
 /**
@@ -49,6 +43,8 @@ public class MyApplication extends Application {
 //                    }
 //                });
 
+        SmartTopBar.topbarSetting()
+                .msgTextSizeSp(14);
 //        SmartShow.snackbarSetting()
 //                //设置背景颜色
 ////                .backgroundColor()

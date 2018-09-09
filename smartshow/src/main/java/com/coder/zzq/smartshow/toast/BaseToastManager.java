@@ -9,12 +9,13 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.coder.zzq.smartshow.SmartShow;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public abstract class ToastManager implements View.OnAttachStateChangeListener {
-    protected ToastSettingImpl mToastSetting;
+public abstract class BaseToastManager implements View.OnAttachStateChangeListener {
 
     protected Toast mToast;
     protected CharSequence mCurMsg;
@@ -27,9 +28,7 @@ public abstract class ToastManager implements View.OnAttachStateChangeListener {
     protected WindowManager.LayoutParams mWindowParams;
 
 
-    public ToastManager(ToastSettingImpl toastSetting) {
-        mToastSetting = toastSetting;
-
+    public BaseToastManager() {
         mToast = createToast();
         setupReflectInfo();
         setupToast();
@@ -37,7 +36,12 @@ public abstract class ToastManager implements View.OnAttachStateChangeListener {
 
 
     protected abstract Toast createToast();
-    protected abstract void rebuildToast();
+
+    protected void rebuildToast(){
+        mToast = createToast();
+        setupReflectInfo();
+        setupToast();
+    }
     protected void updateToast(){
         mMsgView.setText(mCurMsg);
     }
@@ -98,16 +102,15 @@ public abstract class ToastManager implements View.OnAttachStateChangeListener {
 
     }
 
+
     @Override
     public void onViewDetachedFromWindow(View v) {
         updateToast();
     }
 
+
     protected boolean isSdk25() {
         return Build.VERSION.SDK_INT == Build.VERSION_CODES.N_MR1;
     }
 
-    protected int dpToPx(float dp){
-        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,dp, SmartToast.getContext().getResources().getDisplayMetrics()));
-    }
 }

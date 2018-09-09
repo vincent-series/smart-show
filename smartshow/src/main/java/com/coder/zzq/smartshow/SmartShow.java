@@ -4,12 +4,11 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
 
+import com.coder.zzq.smartshow.bar.topbar.SmartTopbarDelegate;
 import com.coder.zzq.smartshow.lifecycle.ActivityLifecycleCallback;
 import com.coder.zzq.smartshow.lifecycle.ActivityStack;
-import com.coder.zzq.smartshow.snackbar.SmartSnackbar;
-import com.coder.zzq.smartshow.snackbar.SnackbarSetting;
-import com.coder.zzq.smartshow.toast.IToastSetting;
-import com.coder.zzq.smartshow.toast.SmartToast;
+import com.coder.zzq.smartshow.bar.snackbar.SmartSnackbarDeligate;
+import com.coder.zzq.smartshow.toast.SmartToastDelegate;
 
 /**
  * Created by 朱志强 on 2018/08/19.
@@ -20,7 +19,7 @@ public final class SmartShow {
 
     public static void init(Application application) {
         if (application == null){
-            throw new NullPointerException("初始化SmartShow的context不可为null！");
+            throw new NullPointerException("初始化SmartShow的application不可为null！");
         }
         sApplication = application;
         sApplication.registerActivityLifecycleCallbacks(new ActivityLifecycleCallback() {
@@ -33,39 +32,34 @@ public final class SmartShow {
             @Override
             public void onActivityPaused(Activity activity) {
                 super.onActivityPaused(activity);
-                setupDismissOnLeave();
+
+                if (SmartToastDelegate.hasCreated() && SmartToastDelegate.get().isDismissOnLeave()) {
+                    SmartToastDelegate.get().dismiss();
+                }
+                if (SmartSnackbarDeligate.hasCreated() && SmartSnackbarDeligate.get().isDismissOnLeave()) {
+                    SmartSnackbarDeligate.get().dismiss();
+                }
+
+                if (SmartTopbarDelegate.hasCreated() && SmartTopbarDelegate.get().isDismissOnLeave()){
+                    SmartTopbarDelegate.get().dismiss();
+                }
+
             }
 
             @Override
             public void onActivityDestroyed(Activity activity) {
                 super.onActivityDestroyed(activity);
                 ActivityStack.pop(activity);
-                SmartSnackbar.destroy(activity);
+                if (SmartSnackbarDeligate.hasCreated()){
+                    SmartSnackbarDeligate.get().destroy(activity);
+                }
+                if (SmartTopbarDelegate.hasCreated()){
+                    SmartTopbarDelegate.get().destroy(activity);
+                }
             }
         });
-        SmartToast.init(getContext());
-        SmartSnackbar.init(getContext());
+
     }
-
-    private static void setupDismissOnLeave() {
-        if (SmartToast.isDismissOnLeave()) {
-            SmartToast.dismiss();
-        }
-        if (SmartSnackbar.isDismissOnLeave()) {
-            SmartSnackbar.dismiss();
-        }
-    }
-
-
-    public static IToastSetting toastSetting() {
-        return SmartToast.init(getContext());
-    }
-
-
-    public static SnackbarSetting snackbarSetting() {
-        return SmartSnackbar.init(getContext());
-    }
-
 
     public static Application getContext() {
         if (sApplication == null) {

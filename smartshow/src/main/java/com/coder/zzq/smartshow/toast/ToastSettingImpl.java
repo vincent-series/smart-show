@@ -7,6 +7,8 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.coder.zzq.smartshow.SmartShow;
+
 public class ToastSettingImpl implements IToastSetting {
     private View mCustomView;
     @ColorInt
@@ -15,7 +17,6 @@ public class ToastSettingImpl implements IToastSetting {
     private int mTextColor;
     private float mTextSizeSp;
     private boolean mTextBold;
-    private int mActionWhenToastDuplicate;
     private IProcessToastCallback mIProcessToastCallback;
     private boolean mDismissOnleave;
     @ColorInt
@@ -27,7 +28,6 @@ public class ToastSettingImpl implements IToastSetting {
         mTextColor = -1;
         mTextSizeSp = -1;
         mTypeInfoToastThemeColor = -1;
-        mActionWhenToastDuplicate = IToastSetting.ACTION_IGNORE;
     }
 
     @Override
@@ -38,7 +38,7 @@ public class ToastSettingImpl implements IToastSetting {
 
     @Override
     public IToastSetting view(@LayoutRes int layout) {
-        return view(LayoutInflater.from(SmartToast.getContext()).inflate(layout, null));
+        return view(LayoutInflater.from(SmartShow.getContext()).inflate(layout, null));
     }
 
     @Override
@@ -49,7 +49,7 @@ public class ToastSettingImpl implements IToastSetting {
 
     @Override
     public IToastSetting backgroundColorRes(@ColorRes int colorRes) {
-        return backgroundColor(ContextCompat.getColor(SmartToast.getContext(), colorRes));
+        return backgroundColor(ContextCompat.getColor(SmartShow.getContext(), colorRes));
     }
 
     @Override
@@ -60,7 +60,7 @@ public class ToastSettingImpl implements IToastSetting {
 
     @Override
     public IToastSetting textColorRes(@ColorRes int colorRes) {
-        return textColor(ContextCompat.getColor(SmartToast.getContext(), colorRes));
+        return textColor(ContextCompat.getColor(SmartShow.getContext(), colorRes));
     }
 
     @Override
@@ -85,14 +85,6 @@ public class ToastSettingImpl implements IToastSetting {
         return mDismissOnleave;
     }
 
-
-
-    @Override
-    public IToastSetting actionWhenDuplicate(int action) {
-        mActionWhenToastDuplicate = action;
-        return this;
-    }
-
     @Override
     public IToastSetting processView(IProcessToastCallback callback) {
         mIProcessToastCallback = callback;
@@ -107,7 +99,7 @@ public class ToastSettingImpl implements IToastSetting {
 
     @Override
     public IToastSetting typeInfoToastThemeColorRes(int colorRes) {
-        return typeInfoToastThemeColor(ContextCompat.getColor(SmartToast.getContext(),colorRes));
+        return typeInfoToastThemeColor(ContextCompat.getColor(SmartShow.getContext(),colorRes));
     }
 
 
@@ -141,10 +133,6 @@ public class ToastSettingImpl implements IToastSetting {
 
     public boolean isTextBold() {
         return mTextBold;
-    }
-
-    public int getActionWhenToastDuplicate() {
-        return mActionWhenToastDuplicate;
     }
 
     public IProcessToastCallback getIProcessToastCallback() {

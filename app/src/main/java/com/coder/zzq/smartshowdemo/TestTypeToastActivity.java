@@ -7,11 +7,11 @@ import android.view.View;
 
 import com.coder.zzq.smartshow.toast.SmartToast;
 
-public class ToastTestActivity extends AppCompatActivity {
+public class TestTypeToastActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.toast_test_activity);
+        setContentView(R.layout.activity_test_type_toast);
     }
 
     public void onShowClick(View view) {

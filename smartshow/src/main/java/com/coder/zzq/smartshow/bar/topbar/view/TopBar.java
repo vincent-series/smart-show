@@ -1,20 +1,5 @@
-/*
- * Copyright (C) 2015 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 
-package com.coder.zzq.smartshow.snackbar.custom;
+package com.coder.zzq.smartshow.bar.topbar.view;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -33,50 +18,48 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.coder.zzq.smartshow.R;
+import com.coder.zzq.smartshow.Utils;
+import com.coder.zzq.smartshow.lifecycle.ActivityStack;
 
 
-public final class Snackbar extends BaseTransientBar<Snackbar> {
+public final class TopBar extends BaseTopBar<TopBar> {
 
-    public static final int LENGTH_INDEFINITE = BaseTransientBar.LENGTH_INDEFINITE;
+    public static final int LENGTH_INDEFINITE = BaseTopBar.LENGTH_INDEFINITE;
 
-    public static final int LENGTH_SHORT = BaseTransientBar.LENGTH_SHORT;
+    public static final int LENGTH_SHORT = BaseTopBar.LENGTH_SHORT;
 
-    public static final int LENGTH_LONG = BaseTransientBar.LENGTH_LONG;
+    public static final int LENGTH_LONG = BaseTopBar.LENGTH_LONG;
 
 
-    public static class Callback extends BaseCallback<Snackbar> {
-        /** Indicates that the Snackbar was dismissed via a swipe.*/
+    public static class Callback extends BaseCallback<TopBar> {
+
         public static final int DISMISS_EVENT_SWIPE = BaseCallback.DISMISS_EVENT_SWIPE;
-        /** Indicates that the Snackbar was dismissed via an action click.*/
         public static final int DISMISS_EVENT_ACTION = BaseCallback.DISMISS_EVENT_ACTION;
-        /** Indicates that the Snackbar was dismissed via a timeout.*/
         public static final int DISMISS_EVENT_TIMEOUT = BaseCallback.DISMISS_EVENT_TIMEOUT;
-        /** Indicates that the Snackbar was dismissed via a call to {@link #dismiss()}.*/
         public static final int DISMISS_EVENT_MANUAL = BaseCallback.DISMISS_EVENT_MANUAL;
-        /** Indicates that the Snackbar was dismissed from a new Snackbar being shown.*/
         public static final int DISMISS_EVENT_CONSECUTIVE = BaseCallback.DISMISS_EVENT_CONSECUTIVE;
 
         @Override
-        public void onShown(Snackbar sb) {
-            // Stub implementation to make API check happy.
+        public void onShown(TopBar topBar) {
+
         }
 
         @Override
-        public void onDismissed(Snackbar transientBottomBar, @DismissEvent int event) {
-            // Stub implementation to make API check happy.
+        public void onDismissed(TopBar topBar, @DismissEvent int event) {
+
         }
     }
 
-    @Nullable private BaseCallback<Snackbar> mCallback;
+    @Nullable private BaseCallback<TopBar> mCallback;
 
-    private Snackbar(ViewGroup parent, View content, ContentViewCallback contentViewCallback) {
+    private TopBar(ViewGroup parent, View content, ContentViewCallback contentViewCallback) {
         super(parent, content, contentViewCallback);
     }
 
 
     @NonNull
-    public static Snackbar make(@NonNull View view, @NonNull CharSequence text,
-            @Duration int duration) {
+    public static TopBar make(@NonNull View view, @NonNull CharSequence text,
+                              @Duration int duration) {
         final ViewGroup parent = findSuitableParent(view);
         if (parent == null) {
             throw new IllegalArgumentException("No suitable parent found from the given view. "
@@ -84,18 +67,20 @@ public final class Snackbar extends BaseTransientBar<Snackbar> {
         }
 
         final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        final SnackbarContentLayout content =
-                (SnackbarContentLayout) inflater.inflate(
-                        R.layout.custom_snackbar_include,
+        final ContentLayout content =
+                (ContentLayout) inflater.inflate(
+                        Utils.hasActionbar(ActivityStack.getTop()) ?
+                        R.layout.topbar_include_small : R.layout.topbar_include,
                         parent, false);
-        final Snackbar snackbar = new Snackbar(parent, content, content);
+
+        final TopBar snackbar = new TopBar(parent, content, content);
         snackbar.setText(text);
         snackbar.setDuration(duration);
         return snackbar;
     }
 
     @NonNull
-    public static Snackbar make(@NonNull View view, @StringRes int resId, @Duration int duration) {
+    public static TopBar make(@NonNull View view, @StringRes int resId, @Duration int duration) {
         return make(view, view.getResources().getText(resId), duration);
     }
 
@@ -129,8 +114,8 @@ public final class Snackbar extends BaseTransientBar<Snackbar> {
 
 
     @NonNull
-    public Snackbar setText(@NonNull CharSequence message) {
-        final SnackbarContentLayout contentLayout = (SnackbarContentLayout) mView.getChildAt(0);
+    public TopBar setText(@NonNull CharSequence message) {
+        final ContentLayout contentLayout = (ContentLayout) mView.getChildAt(0);
         final TextView tv = contentLayout.getMessageView();
         tv.setText(message);
         return this;
@@ -138,18 +123,18 @@ public final class Snackbar extends BaseTransientBar<Snackbar> {
 
 
     @NonNull
-    public Snackbar setText(@StringRes int resId) {
+    public TopBar setText(@StringRes int resId) {
         return setText(getContext().getText(resId));
     }
 
     @NonNull
-    public Snackbar setAction(@StringRes int resId, View.OnClickListener listener) {
+    public TopBar setAction(@StringRes int resId, View.OnClickListener listener) {
         return setAction(getContext().getText(resId), listener);
     }
 
     @NonNull
-    public Snackbar setAction(CharSequence text, final View.OnClickListener listener) {
-        final SnackbarContentLayout contentLayout = (SnackbarContentLayout) mView.getChildAt(0);
+    public TopBar setAction(CharSequence text, final View.OnClickListener listener) {
+        final ContentLayout contentLayout = (ContentLayout) mView.getChildAt(0);
         final TextView tv = contentLayout.getActionView();
 
         if (TextUtils.isEmpty(text) || listener == null) {
@@ -172,16 +157,16 @@ public final class Snackbar extends BaseTransientBar<Snackbar> {
 
 
     @NonNull
-    public Snackbar setActionTextColor(ColorStateList colors) {
-        final SnackbarContentLayout contentLayout = (SnackbarContentLayout) mView.getChildAt(0);
+    public TopBar setActionTextColor(ColorStateList colors) {
+        final ContentLayout contentLayout = (ContentLayout) mView.getChildAt(0);
         final TextView tv = contentLayout.getActionView();
         tv.setTextColor(colors);
         return this;
     }
 
     @NonNull
-    public Snackbar setActionTextColor(@ColorInt int color) {
-        final SnackbarContentLayout contentLayout = (SnackbarContentLayout) mView.getChildAt(0);
+    public TopBar setActionTextColor(@ColorInt int color) {
+        final ContentLayout contentLayout = (ContentLayout) mView.getChildAt(0);
         final TextView tv = contentLayout.getActionView();
         tv.setTextColor(color);
         return this;
@@ -190,7 +175,7 @@ public final class Snackbar extends BaseTransientBar<Snackbar> {
 
     @Deprecated
     @NonNull
-    public Snackbar setCallback(Callback callback) {
+    public TopBar setCallback(Callback callback) {
         // The logic in this method emulates what we had before support for multiple
         // registered callbacks.
         if (mCallback != null) {
@@ -206,12 +191,12 @@ public final class Snackbar extends BaseTransientBar<Snackbar> {
     }
 
 
-    public static final class SnackbarLayout extends BaseTransientBar.SnackbarBaseLayout {
-        public SnackbarLayout(Context context) {
+    public static final class TopbarLayout extends BaseTopBar.TopbarBaseLayout {
+        public TopbarLayout(Context context) {
             super(context);
         }
 
-        public SnackbarLayout(Context context, AttributeSet attrs) {
+        public TopbarLayout(Context context, AttributeSet attrs) {
             super(context, attrs);
         }
 
@@ -227,9 +212,9 @@ public final class Snackbar extends BaseTransientBar<Snackbar> {
             for (int i = 0; i < childCount; i++) {
                 View child = getChildAt(i);
                 if (child.getLayoutParams().width == ViewGroup.LayoutParams.MATCH_PARENT) {
-                    child.measure(View.MeasureSpec.makeMeasureSpec(availableWidth, View.MeasureSpec.EXACTLY),
-                            View.MeasureSpec.makeMeasureSpec(child.getMeasuredHeight(),
-                                    View.MeasureSpec.EXACTLY));
+                    child.measure(MeasureSpec.makeMeasureSpec(availableWidth, MeasureSpec.EXACTLY),
+                            MeasureSpec.makeMeasureSpec(child.getMeasuredHeight(),
+                                    MeasureSpec.EXACTLY));
                 }
             }
         }

@@ -6,27 +6,29 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.coder.zzq.smartshow.snackbar.SmartSnackbar;
+import com.coder.zzq.smartshow.bar.snackbar.SmartSnackbar;
+import com.coder.zzq.smartshow.bar.topbar.SmartTopBar;
 
-public class SnackbarTestActivity extends AppCompatActivity {
+public class TestSnackbarActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.snackbar_test_activity);
+        setContentView(R.layout.activity_test_snackbar);
+        SmartTopBar.get().show("爱你");
     }
 
 
     public void onShowClick(View view) {
-        SmartSnackbar.get().showIndefinite("香蕉");
+        SmartTopBar.get().show("香蕉");
     }
 
     public void onShowAtTopClick(View view) {
-        SmartSnackbar.get().showAtTop("苹果");
+        SmartSnackbar.get().show("苹果");
     }
 
 
 
     public void onNextPageClick(View view) {
-        startActivity(new Intent(this,SnackbarTestActivity.class));
+        startActivity(new Intent(this,TestSnackbarActivity.class));
     }
 }

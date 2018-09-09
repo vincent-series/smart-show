@@ -3,6 +3,7 @@ package com.coder.zzq.smartshow.toast;
 import android.widget.Toast;
 
 public interface ITypeShow {
+
     void normal(String msg);
 
     void normalLong(String msg);

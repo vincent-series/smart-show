@@ -7,11 +7,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.coder.zzq.smartshow.R;
+import com.coder.zzq.smartshow.SmartShow;
+import com.coder.zzq.smartshow.Utils;
 
-import static com.coder.zzq.smartshow.toast.IToastSetting.ACTION_IGNORE;
-import static com.coder.zzq.smartshow.toast.IToastSetting.ACTION_REPEAT;
-
-public class TypeToastManager extends ToastManager implements ITypeShow {
+public class TypeToastManager extends BaseToastManager implements ITypeShow {
 
     public static final int TYPE_INFO_NORMAL = 0;
     public static final int TYPE_INFO_WARNING = 1;
@@ -23,26 +22,20 @@ public class TypeToastManager extends ToastManager implements ITypeShow {
     private ImageView mIconView;
     private int mCurIcon;
 
-    public TypeToastManager(ToastSettingImpl toastSetting) {
-        super(toastSetting);
+    public TypeToastManager() {
+        super();
     }
 
     @Override
     protected Toast createToast() {
-        mToast = new Toast(SmartToast.getContext());
-        mView = LayoutInflater.from(SmartToast.getContext()).inflate(R.layout.layout_type_info, null);
+        mToast = new Toast(SmartShow.getContext());
+        mView = LayoutInflater.from(SmartShow.getContext()).inflate(R.layout.layout_type_info, null);
         mMsgView = mView.findViewById(R.id.type_info_message);
         mIconView = mView.findViewById(R.id.type_info_icon);
         mToast.setView(mView);
         return mToast;
     }
 
-    @Override
-    protected void rebuildToast() {
-        mToast = createToast();
-        setupReflectInfo();
-        setupToast();
-    }
 
     @Override
     protected void updateToast() {
@@ -56,17 +49,17 @@ public class TypeToastManager extends ToastManager implements ITypeShow {
         mCurInfoType = TYPE_INFO_NORMAL;
         mCurIcon = R.drawable.type_info_normal;
         mWindowParams.windowAnimations = R.style.type_info_toast_anim;
-        mWindowParams.height = dpToPx(85);
-        if (mToastSetting.isTypeInfoThemeColorSetup()){
+        mWindowParams.height = Utils.dpToPx(85);
+        if (SmartToastDelegate.get().hasToastSetting()
+                && SmartToastDelegate.get().getToastSetting().isTypeInfoThemeColorSetup()) {
             GradientDrawable drawable = (GradientDrawable) mView.getBackground();
             drawable.setAlpha(238);
-            drawable.setColor(mToastSetting.getTypeInfoThemeColor());
+            drawable.setColor(SmartToastDelegate.get().toastSetting().getTypeInfoThemeColor());
         }
-
     }
 
-    public void showHelper(String msg, int infoType, int duration) {
-        SmartToast.dismissPlainShowIfNeed();
+    private final void showHelper(String msg, int infoType, int duration) {
+        SmartToastDelegate.get().dismissPlainShowIfNeed();
         msg = (msg == null) ? "" : msg;
         //文本是否改变
         boolean contentChanged = !mCurMsg.equals(msg.trim());
@@ -79,27 +72,18 @@ public class TypeToastManager extends ToastManager implements ITypeShow {
         mCurInfoType = infoType;
         mCurIcon = getIcon(mCurInfoType);
 
-        switch (mToastSetting.getActionWhenToastDuplicate()) {
-            case ACTION_IGNORE:
-                if (isShowing() && (contentChanged || typeChanged)) {
-                    dismiss();
-                } else {
-                    updateToast();
-                }
-                break;
-            case ACTION_REPEAT:
-                dismiss();
-                updateToast();
-                break;
+        if (isShowing() && (contentChanged || typeChanged)) {
+            dismiss();
+        } else {
+            updateToast();
         }
-
 
         mToast.setGravity(Gravity.CENTER, 0, 0);
         mToast.setDuration(mDuration);
         mToast.show();
     }
 
-    private int getIcon(int infoType) {
+    private final int getIcon(int infoType) {
         switch (infoType) {
             case TYPE_INFO_NORMAL:
                 return R.drawable.type_info_normal;
@@ -118,44 +102,52 @@ public class TypeToastManager extends ToastManager implements ITypeShow {
 
     @Override
     public void normal(String msg) {
-        showHelper(msg,TYPE_INFO_NORMAL,Toast.LENGTH_SHORT);
+        showHelper(msg, TYPE_INFO_NORMAL, Toast.LENGTH_SHORT);
     }
+
     @Override
     public void normalLong(String msg) {
-        showHelper(msg,TYPE_INFO_NORMAL,Toast.LENGTH_LONG);
+        showHelper(msg, TYPE_INFO_NORMAL, Toast.LENGTH_LONG);
     }
+
     @Override
     public void warning(String msg) {
-        showHelper(msg,TYPE_INFO_WARNING,Toast.LENGTH_SHORT);
+        showHelper(msg, TYPE_INFO_WARNING, Toast.LENGTH_SHORT);
     }
+
     @Override
     public void warningLong(String msg) {
-        showHelper(msg,TYPE_INFO_WARNING,Toast.LENGTH_LONG);
+        showHelper(msg, TYPE_INFO_WARNING, Toast.LENGTH_LONG);
     }
+
     @Override
     public void fail(String msg) {
-        showHelper(msg,TYPE_INFO_FAIL,Toast.LENGTH_SHORT);
+        showHelper(msg, TYPE_INFO_FAIL, Toast.LENGTH_SHORT);
     }
+
     @Override
     public void failLong(String msg) {
-        showHelper(msg,TYPE_INFO_FAIL,Toast.LENGTH_LONG);
+        showHelper(msg, TYPE_INFO_FAIL, Toast.LENGTH_LONG);
     }
+
     @Override
     public void success(String msg) {
-        showHelper(msg,TYPE_INFO_SUCCESS,Toast.LENGTH_SHORT);
+        showHelper(msg, TYPE_INFO_SUCCESS, Toast.LENGTH_SHORT);
     }
+
     @Override
     public void successLong(String msg) {
-        showHelper(msg,TYPE_INFO_SUCCESS,Toast.LENGTH_LONG);
+        showHelper(msg, TYPE_INFO_SUCCESS, Toast.LENGTH_LONG);
     }
+
     @Override
     public void error(String msg) {
-        showHelper(msg,TYPE_INFO_ERROR,Toast.LENGTH_SHORT);
+        showHelper(msg, TYPE_INFO_ERROR, Toast.LENGTH_SHORT);
     }
 
     @Override
     public void errorLong(String msg) {
-        showHelper(msg,TYPE_INFO_ERROR,Toast.LENGTH_LONG);
+        showHelper(msg, TYPE_INFO_ERROR, Toast.LENGTH_LONG);
     }
 
     public void cancel() {

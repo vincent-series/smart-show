@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.coder.zzq.smartshow.snackbar.custom;
+package com.coder.zzq.smartshow.bar.topbar.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -24,21 +24,23 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.coder.zzq.smartshow.snackbar.custom.BaseTransientBar;
+import com.coder.zzq.smartshow.R;
+import com.coder.zzq.smartshow.Utils;
+import com.coder.zzq.smartshow.lifecycle.ActivityStack;
 
-public class SnackbarContentLayout extends LinearLayout implements
-        BaseTransientBar.ContentViewCallback {
+public class ContentLayout extends LinearLayout implements
+        BaseTopBar.ContentViewCallback {
     private TextView mMessageView;
     private Button mActionView;
 
     private int mMaxWidth;
     private int mMaxInlineActionWidth;
 
-    public SnackbarContentLayout(Context context) {
+    public ContentLayout(Context context) {
         this(context, null);
     }
 
-    public SnackbarContentLayout(Context context, AttributeSet attrs) {
+    public ContentLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         TypedArray a = context.obtainStyledAttributes(attrs, android.support.design.R.styleable.SnackbarLayout);
         mMaxWidth = a.getDimensionPixelSize(android.support.design.R.styleable.SnackbarLayout_android_maxWidth, -1);
@@ -50,8 +52,8 @@ public class SnackbarContentLayout extends LinearLayout implements
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        mMessageView = findViewById(android.support.design.R.id.snackbar_text);
-        mActionView = findViewById(android.support.design.R.id.snackbar_action);
+        mMessageView = findViewById(R.id.topbar_text);
+        mActionView = findViewById(R.id.topbar_action);
     }
 
     public TextView getMessageView() {
@@ -73,7 +75,8 @@ public class SnackbarContentLayout extends LinearLayout implements
 
         final int multiLineVPadding = getResources().getDimensionPixelSize(
                 android.support.design.R.dimen.design_snackbar_padding_vertical_2lines);
-        final int singleLineVPadding = getResources().getDimensionPixelSize(
+        final int singleLineVPadding = Utils.hasActionbar(ActivityStack.getTop()) ?
+                0 : getResources().getDimensionPixelSize(
                 android.support.design.R.dimen.design_snackbar_padding_vertical);
         final boolean isMultiLine = mMessageView.getLayout().getLineCount() > 1;
 
