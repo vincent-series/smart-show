@@ -1,4 +1,4 @@
-package com.coder.zzq.smartshow.bar.base;
+package com.coder.zzq.smartshow.snackbar.base;
 
 import android.support.annotation.ColorInt;
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.coder.zzq.smartshow.bar.topbar.utils;
+package com.coder.zzq.smartshow.snackbar.top.utils;
 
 import android.content.Context;
 import android.content.res.TypedArray;

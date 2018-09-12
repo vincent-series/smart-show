@@ -4,10 +4,10 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
 
-import com.coder.zzq.smartshow.bar.topbar.SmartTopbarDelegate;
+import com.coder.zzq.smartshow.snackbar.top.SmartTopbarDelegate;
 import com.coder.zzq.smartshow.lifecycle.ActivityLifecycleCallback;
 import com.coder.zzq.smartshow.lifecycle.ActivityStack;
-import com.coder.zzq.smartshow.bar.snackbar.SmartSnackbarDeligate;
+import com.coder.zzq.smartshow.snackbar.bottom.SmartSnackbarDeligate;
 import com.coder.zzq.smartshow.toast.SmartToastDelegate;
 
 /**

@@ -1,4 +1,4 @@
-package com.coder.zzq.smartshow.bar.base;
+package com.coder.zzq.smartshow.snackbar.base;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.RestrictTo;
 import android.support.design.widget.CoordinatorLayout;
 import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;

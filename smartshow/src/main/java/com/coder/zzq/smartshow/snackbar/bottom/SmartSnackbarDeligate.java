@@ -1,4 +1,4 @@
-package com.coder.zzq.smartshow.bar.snackbar;
+package com.coder.zzq.smartshow.snackbar.bottom;
 
 import android.support.annotation.RestrictTo;
 import android.support.design.widget.Snackbar;
@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.coder.zzq.smartshow.bar.base.IBarShowCallback;
-import com.coder.zzq.smartshow.bar.base.SmartBarDelegate;
+import com.coder.zzq.smartshow.snackbar.base.IBarShowCallback;
+import com.coder.zzq.smartshow.snackbar.base.SmartBarDelegate;
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public class SmartSnackbarDeligate extends SmartBarDelegate<Snackbar, Snackbar.SnackbarLayout, SnackbarSettingImpl> {

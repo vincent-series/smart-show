@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.coder.zzq.smartshow.bar.topbar.view;
+package com.coder.zzq.smartshow.snackbar.top.view;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -44,7 +44,7 @@ import android.widget.FrameLayout;
 
 import com.coder.zzq.smartshow.R;
 import com.coder.zzq.smartshow.Utils;
-import com.coder.zzq.smartshow.bar.topbar.utils.ThemeUtils;
+import com.coder.zzq.smartshow.snackbar.top.utils.ThemeUtils;
 import com.coder.zzq.smartshow.lifecycle.ActivityStack;
 
 import java.lang.annotation.Retention;
@@ -52,7 +52,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.coder.zzq.smartshow.bar.topbar.utils.AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR;
+import static com.coder.zzq.smartshow.snackbar.top.utils.AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR;
 
 
 public abstract class BaseTopBar<B extends BaseTopBar<B>> {

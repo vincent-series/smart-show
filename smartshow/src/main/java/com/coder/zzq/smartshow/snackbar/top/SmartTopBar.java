@@ -1,8 +1,8 @@
-package com.coder.zzq.smartshow.bar.topbar;
+package com.coder.zzq.smartshow.snackbar.top;
 
 import android.support.design.widget.CoordinatorLayout;
 
-import com.coder.zzq.smartshow.bar.base.IBarShow;
+import com.coder.zzq.smartshow.snackbar.base.IBarShow;
 
 public final class SmartTopBar {
 

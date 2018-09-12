@@ -3,7 +3,8 @@ package com.coder.zzq.smartshowdemo;
 import android.app.Application;
 
 import com.coder.zzq.smartshow.SmartShow;
-import com.coder.zzq.smartshow.bar.topbar.SmartTopBar;
+import com.coder.zzq.smartshow.snackbar.top.ITopbarSetting;
+import com.coder.zzq.smartshow.snackbar.top.SmartTopBar;
 
 
 /**
@@ -44,7 +45,8 @@ public class MyApplication extends Application {
 //                });
 
         SmartTopBar.topbarSetting()
-                .msgTextSizeSp(14);
+                .msgTextSizeSp(14)
+                .backgroundColorWhenBelowStatusBar(ITopbarSetting.SNACK_BAR_COLOR);
 //        SmartShow.snackbarSetting()
 //                //设置背景颜色
 ////                .backgroundColor()

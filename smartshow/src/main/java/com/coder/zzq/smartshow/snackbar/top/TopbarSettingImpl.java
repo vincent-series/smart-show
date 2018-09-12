@@ -1,10 +1,9 @@
-package com.coder.zzq.smartshow.bar.topbar;
+package com.coder.zzq.smartshow.snackbar.top;
 
 import android.support.annotation.ColorInt;
 
-import com.coder.zzq.smartshow.Utils;
-import com.coder.zzq.smartshow.bar.base.BarSettingImpl;
-import com.coder.zzq.smartshow.bar.topbar.view.TopBar;
+import com.coder.zzq.smartshow.snackbar.base.BarSettingImpl;
+import com.coder.zzq.smartshow.snackbar.top.view.TopBar;
 
 public class TopbarSettingImpl extends BarSettingImpl<TopBar.TopbarLayout, ITopbarSetting>
         implements ITopbarSetting {

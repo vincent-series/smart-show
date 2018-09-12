@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <view
     xmlns:android="http://schemas.android.com/apk/res/android"
-    class="com.coder.zzq.smartshow.bar.topbar.view.ContentLayout"
+    class="com.coder.zzq.smartshow.snackbar.top.view.ContentLayout"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

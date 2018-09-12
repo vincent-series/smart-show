@@ -1,17 +1,15 @@
-package com.coder.zzq.smartshow.bar.topbar;
+package com.coder.zzq.smartshow.snackbar.top;
 
-import android.graphics.Color;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.coder.zzq.smartshow.R;
 import com.coder.zzq.smartshow.Utils;
-import com.coder.zzq.smartshow.bar.base.IBarShowCallback;
-import com.coder.zzq.smartshow.bar.base.SmartBarDelegate;
-import com.coder.zzq.smartshow.bar.topbar.view.BaseTopBar;
-import com.coder.zzq.smartshow.bar.topbar.view.TopBar;
+import com.coder.zzq.smartshow.snackbar.base.IBarShowCallback;
+import com.coder.zzq.smartshow.snackbar.base.SmartBarDelegate;
+import com.coder.zzq.smartshow.snackbar.top.view.BaseTopBar;
+import com.coder.zzq.smartshow.snackbar.top.view.TopBar;
 import com.coder.zzq.smartshow.lifecycle.ActivityStack;
 
 public final class SmartTopbarDelegate extends SmartBarDelegate<TopBar, TopBar.TopbarLayout, TopbarSettingImpl> {

@@ -1,4 +1,4 @@
-package com.coder.zzq.smartshow.bar.base;
+package com.coder.zzq.smartshow.snackbar.base;
 
 public interface IBarShowCallback<Bar> {
     void onShown(Bar sb);

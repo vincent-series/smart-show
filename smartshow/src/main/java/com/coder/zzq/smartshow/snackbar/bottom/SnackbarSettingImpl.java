@@ -1,10 +1,10 @@
-package com.coder.zzq.smartshow.bar.snackbar;
+package com.coder.zzq.smartshow.snackbar.bottom;
 
 import android.support.annotation.ColorInt;
 import android.support.design.widget.Snackbar;
 
 import com.coder.zzq.smartshow.Utils;
-import com.coder.zzq.smartshow.bar.base.BarSettingImpl;
+import com.coder.zzq.smartshow.snackbar.base.BarSettingImpl;
 
 public final class SnackbarSettingImpl extends BarSettingImpl<Snackbar.SnackbarLayout, ISnackbarSetting>
         implements ISnackbarSetting {

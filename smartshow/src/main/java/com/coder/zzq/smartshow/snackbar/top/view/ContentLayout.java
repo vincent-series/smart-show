@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.coder.zzq.smartshow.bar.topbar.view;
+package com.coder.zzq.smartshow.snackbar.top.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
