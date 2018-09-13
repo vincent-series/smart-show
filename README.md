@@ -1,6 +1,14 @@
 # SmartShow
-Smart Toast & Snackbar : 简化调用，并处理常见问题，提高性能和用户体验！作者：朱志强<br/>
-如果你对实现感兴趣，请参考我的CSDN博客：http://blog.csdn.net/jungle_pig/article/details/78568493 <br/>
+本库针对Toast，Snackbar，TopBar:<br/>
+1.优雅封装，简化调用<br/>
+2.处理系统bug等，如Android 7.1.1上Toast BadTokenException<br/>
+3.解决已知的性能缺陷，提高用户体验<br/>
+4.合理的复用策略，节约内存<br/>
+5.根据实际开发中的常见需求，进行功能扩展<br/>
+作者：朱志强<br/>
+如果你对实现感兴趣，请参考我的CSDN博客：<br/>
+2.x 版本
+1.x 版本 http://blog.csdn.net/jungle_pig/article/details/78568493 <br/>
 该博文已授权《第一行代码》作者郭霖的微信公众号同步发表：http://mp.weixin.qq.com/s/l62PtbmrIOkVKfJ2r0JwEw <br/>
 为了让SmartShow库更加健壮，如果您在使用过程中发现任何问题，请联系我，我会立即跟进修复和维护。<br/>
 感谢您的支持！<br/>
@@ -10,7 +18,7 @@ Smart Toast & Snackbar : 简化调用，并处理常见问题，提高性能和�
 
 ### SmartToast部分
 #### 特点：
-1.全局使用Toast实例，节约内存<br/>
+
 2.解决了再不复用Toast实例的情况下，Toast重复弹出，且每个都会待duration耗尽才显示下一个的体验问题<br/>
 如果Toast正在显示，再次触发（内容和位置完全一致）,提供两种处理策略：<br/>
 ACTION_IGNORE为传统解决策略，即不重复弹出,直接忽略<br/>
