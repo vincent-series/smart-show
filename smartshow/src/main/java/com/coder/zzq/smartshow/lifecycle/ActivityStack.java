@@ -42,4 +42,8 @@ public final class ActivityStack {
         }
         return sActivitySet;
     }
+
+    public static boolean isEmpty() {
+        return sActivitySet == null || sActivitySet.isEmpty();
+    }
 }

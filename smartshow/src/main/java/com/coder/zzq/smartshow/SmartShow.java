@@ -3,10 +3,20 @@ package com.coder.zzq.smartshow;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+
+import com.coder.zzq.smartshow.basebar.IBarSetting;
 import com.coder.zzq.smartshow.lifecycle.ActivityLifecycleCallback;
 import com.coder.zzq.smartshow.lifecycle.ActivityStack;
+import com.coder.zzq.smartshow.snackbar.ISnackbarSetting;
+import com.coder.zzq.smartshow.snackbar.SmartSnackbar;
 import com.coder.zzq.smartshow.snackbar.SmartSnackbarDeligate;
+import com.coder.zzq.smartshow.snackbar.SnackbarSettingImpl;
+import com.coder.zzq.smartshow.toast.IToastSetting;
 import com.coder.zzq.smartshow.toast.SmartToastDelegate;
+import com.coder.zzq.smartshow.toast.ToastSettingImpl;
+import com.coder.zzq.smartshow.topbar.ITopbarSetting;
+import com.coder.zzq.smartshow.topbar.SmartTopBar;
 import com.coder.zzq.smartshow.topbar.SmartTopbarDelegate;
 
 /**
@@ -17,7 +27,7 @@ public final class SmartShow {
     private static Application sApplication;
 
     public static void init(Application application) {
-        if (application == null){
+        if (application == null) {
             throw new NullPointerException("初始化SmartShow的application不可为null！");
         }
         sApplication = application;
@@ -31,15 +41,13 @@ public final class SmartShow {
             @Override
             public void onActivityPaused(Activity activity) {
                 super.onActivityPaused(activity);
-
                 if (SmartToastDelegate.hasCreated() && SmartToastDelegate.get().isDismissOnLeave()) {
                     SmartToastDelegate.get().dismiss();
                 }
                 if (SmartSnackbarDeligate.hasCreated() && SmartSnackbarDeligate.get().isDismissOnLeave()) {
                     SmartSnackbarDeligate.get().dismiss();
                 }
-
-                if (SmartTopbarDelegate.hasCreated() && SmartTopbarDelegate.get().isDismissOnLeave()){
+                if (SmartTopbarDelegate.hasCreated() && SmartTopbarDelegate.get().isDismissOnLeave()) {
                     SmartTopbarDelegate.get().dismiss();
                 }
 
@@ -49,11 +57,19 @@ public final class SmartShow {
             public void onActivityDestroyed(Activity activity) {
                 super.onActivityDestroyed(activity);
                 ActivityStack.pop(activity);
-                if (SmartSnackbarDeligate.hasCreated()){
+
+
+                if (SmartSnackbarDeligate.hasCreated()) {
                     SmartSnackbarDeligate.get().destroy(activity);
                 }
-                if (SmartTopbarDelegate.hasCreated()){
+                if (SmartTopbarDelegate.hasCreated()) {
                     SmartTopbarDelegate.get().destroy(activity);
+                }
+
+                if (ActivityStack.isEmpty()) {
+                    SmartToastDelegate.destroyDelegate();
+                    SmartSnackbarDeligate.destroyDelegate();
+                    SmartTopbarDelegate.destroyDelegate();
                 }
             }
         });
@@ -66,4 +82,5 @@ public final class SmartShow {
         }
         return sApplication;
     }
+
 }

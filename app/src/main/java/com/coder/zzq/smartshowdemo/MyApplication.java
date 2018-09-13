@@ -24,7 +24,8 @@ public class MyApplication extends Application {
         SmartToast.setting()
                 .dismissOnLeave(true);
 
-        SmartTopBar.topbarSetting()
+
+        SmartTopBar.setting()
                 .dismissOnLeave(false)
                 .backgroundColor(Color.WHITE)
                 .msgTextColor(Color.DKGRAY)

@@ -50,7 +50,7 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
         mWindowParams.windowAnimations = R.style.type_info_toast_anim;
         mWindowParams.height = Utils.dpToPx(85);
         if (SmartToastDelegate.get().hasToastSetting()
-                && SmartToastDelegate.get().getToastSetting().isTypeInfoThemeColorSetup()) {
+                && SmartToastDelegate.get().getsToastSetting().isTypeInfoThemeColorSetup()) {
             GradientDrawable drawable = (GradientDrawable) mView.getBackground();
             drawable.setAlpha(238);
             drawable.setColor(SmartToastDelegate.get().toastSetting().getTypeInfoThemeColor());
@@ -140,5 +140,11 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
     public void cancel() {
         mToast.cancel();
         rebuildToast();
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        mIconView = null;
     }
 }

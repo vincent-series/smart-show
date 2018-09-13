@@ -38,7 +38,7 @@ public final class SmartTopbarDelegate extends SmartBarDelegate<TopBar, TopBar.T
         Activity activity = ActivityStack.getTop();
         mPageContext = activity;
         //取出DecorView
-        View view =  activity == null ? null : activity.getWindow().getDecorView();
+        View view = activity == null ? null : activity.getWindow().getDecorView();
 
         return getFromView(view);
     }
@@ -55,7 +55,7 @@ public final class SmartTopbarDelegate extends SmartBarDelegate<TopBar, TopBar.T
 
     @Override
     protected boolean isDismissByGesture() {
-        return mBar.getView().getVisibility() != View.VISIBLE;
+        return false;
     }
 
     @Override
@@ -147,4 +147,7 @@ public final class SmartTopbarDelegate extends SmartBarDelegate<TopBar, TopBar.T
     }
 
 
+    public static void destroyDelegate() {
+        sDelegate = null;
+    }
 }

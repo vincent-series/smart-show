@@ -24,9 +24,9 @@ public class PlainToastManager extends BaseToastManager implements IPlainShow {
     @Override
     protected Toast createToast() {
         if (SmartToastDelegate.get().hasToastSetting()
-                && SmartToastDelegate.get().getToastSetting().isCustom()) {
+                && SmartToastDelegate.get().getsToastSetting().isCustom()) {
 
-            mView = SmartToastDelegate.get().getToastSetting().getCustomView();
+            mView = SmartToastDelegate.get().getsToastSetting().getCustomView();
             mMsgView = mView.findViewById(R.id.custom_toast_msg);
             mToast = new Toast(SmartShow.getContext());
             mToast.setView(mView);
@@ -58,25 +58,25 @@ public class PlainToastManager extends BaseToastManager implements IPlainShow {
         super.setupToast();
         if (SmartToastDelegate.get().hasToastSetting()) {
 
-            if (SmartToastDelegate.get().getToastSetting().isBgColorSetup()) {
-                if (SmartToastDelegate.get().getToastSetting().isCustom()) {
-                    mView.setBackgroundColor(SmartToastDelegate.get().getToastSetting().getBgColor());
+            if (SmartToastDelegate.get().getsToastSetting().isBgColorSetup()) {
+                if (SmartToastDelegate.get().getsToastSetting().isCustom()) {
+                    mView.setBackgroundColor(SmartToastDelegate.get().getsToastSetting().getBgColor());
                 } else {
-                    DrawableCompat.setTint(mView.getBackground(), SmartToastDelegate.get().getToastSetting().getBgColor());
+                    DrawableCompat.setTint(mView.getBackground(), SmartToastDelegate.get().getsToastSetting().getBgColor());
                 }
             }
 
-            if (SmartToastDelegate.get().getToastSetting().isTextColorSetup()) {
-                mMsgView.setTextColor(SmartToastDelegate.get().getToastSetting().getTextColor());
+            if (SmartToastDelegate.get().getsToastSetting().isTextColorSetup()) {
+                mMsgView.setTextColor(SmartToastDelegate.get().getsToastSetting().getTextColor());
             }
-            if (SmartToastDelegate.get().getToastSetting().isTextSizeSetup()) {
-                mMsgView.setTextSize(TypedValue.COMPLEX_UNIT_SP, SmartToastDelegate.get().getToastSetting().getTextSizeSp());
+            if (SmartToastDelegate.get().getsToastSetting().isTextSizeSetup()) {
+                mMsgView.setTextSize(TypedValue.COMPLEX_UNIT_SP, SmartToastDelegate.get().getsToastSetting().getTextSizeSp());
             }
 
             mMsgView.setGravity(Gravity.CENTER);
-            mMsgView.getPaint().setFakeBoldText(SmartToastDelegate.get().getToastSetting().isTextBold());
-            if (SmartToastDelegate.get().getToastSetting().isViewCallbackSetup()) {
-                SmartToastDelegate.get().getToastSetting().getIProcessToastCallback().processView(SmartToastDelegate.get().getToastSetting().isCustom(), mView, mMsgView);
+            mMsgView.getPaint().setFakeBoldText(SmartToastDelegate.get().getsToastSetting().isTextBold());
+            if (SmartToastDelegate.get().getsToastSetting().isViewCallbackSetup()) {
+                SmartToastDelegate.get().getsToastSetting().getIProcessToastCallback().processView(SmartToastDelegate.get().getsToastSetting().isCustom(), mView, mMsgView);
             }
 
         }

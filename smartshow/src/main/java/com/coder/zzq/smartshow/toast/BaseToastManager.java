@@ -113,4 +113,15 @@ public abstract class BaseToastManager implements View.OnAttachStateChangeListen
         return Build.VERSION.SDK_INT == Build.VERSION_CODES.N_MR1;
     }
 
+    public void destroy() {
+        mToast = null;
+        mCurMsg = "";
+        mDuration = Toast.LENGTH_SHORT;
+        View mView = null;
+        TextView mMsgView = null;
+        Object mTn = null;
+        Field mViewField = null;
+        Method mHideMethod = null;
+        WindowManager.LayoutParams mWindowParams = null;
+    }
 }

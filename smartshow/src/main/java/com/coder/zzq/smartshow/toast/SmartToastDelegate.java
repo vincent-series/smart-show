@@ -10,10 +10,9 @@ import com.coder.zzq.smartshow.SmartShow;
  */
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public final class SmartToastDelegate {
-    private ToastSettingImpl mToastSetting;
+    private static ToastSettingImpl sToastSetting;
     private PlainToastManager mPlainToastManager;
     private TypeToastManager mTypeToastManager;
-
 
 
     private SmartToastDelegate(Application context) {
@@ -21,20 +20,20 @@ public final class SmartToastDelegate {
     }
 
     public ToastSettingImpl toastSetting() {
-        if (mToastSetting == null) {
-            mToastSetting = new ToastSettingImpl();
+        if (sToastSetting == null) {
+            sToastSetting = new ToastSettingImpl();
         }
-        return mToastSetting;
+        return sToastSetting;
     }
 
 
-    protected boolean hasToastSetting(){
-        return mToastSetting != null;
+    protected boolean hasToastSetting() {
+        return sToastSetting != null;
     }
 
 
     public boolean isDismissOnLeave() {
-        return mToastSetting != null && mToastSetting.isDismissOnleave();
+        return sToastSetting != null && sToastSetting.isDismissOnleave();
     }
 
     public boolean isShowing() {
@@ -151,7 +150,6 @@ public final class SmartToastDelegate {
     }
 
 
-
     public void success(String msg) {
         getTypeShowManager().success(msg);
     }
@@ -182,18 +180,36 @@ public final class SmartToastDelegate {
     @RestrictTo(RestrictTo.Scope.LIBRARY)
     public static SmartToastDelegate get() {
 
-        if (sSmartToastDelegate == null){
+        if (sSmartToastDelegate == null) {
             sSmartToastDelegate = new SmartToastDelegate(SmartShow.getContext());
         }
 
         return sSmartToastDelegate;
     }
 
-    public ToastSettingImpl getToastSetting() {
-        return mToastSetting;
+    public ToastSettingImpl getsToastSetting() {
+        return sToastSetting;
     }
 
     public static boolean hasCreated() {
         return sSmartToastDelegate != null;
+    }
+
+
+    public static void destroyDelegate() {
+
+        if (hasCreated()) {
+            if (sSmartToastDelegate.mPlainToastManager != null) {
+                sSmartToastDelegate.mPlainToastManager.destroy();
+                sSmartToastDelegate.mPlainToastManager = null;
+            }
+
+            if (sSmartToastDelegate.mTypeToastManager != null) {
+                sSmartToastDelegate.mTypeToastManager.destroy();
+                sSmartToastDelegate.mTypeToastManager = null;
+            }
+
+            sSmartToastDelegate = null;
+        }
     }
 }

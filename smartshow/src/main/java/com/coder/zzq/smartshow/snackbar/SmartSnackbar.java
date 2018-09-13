@@ -11,7 +11,7 @@ import com.coder.zzq.smartshow.basebar.IBarShow;
  * Created by 朱志强 on 2017/11/15.
  */
 
-public final class SmartSnackbar{
+public final class SmartSnackbar {
 
     private SmartSnackbar() {
 
@@ -36,7 +36,7 @@ public final class SmartSnackbar{
         SmartSnackbarDeligate.get().dismiss();
     }
 
-    public static IBarSetting<Snackbar.SnackbarLayout,IBarSetting> setting(){
+    public static ISnackbarSetting setting() {
         return SmartSnackbarDeligate.get().barSetting();
     }
 

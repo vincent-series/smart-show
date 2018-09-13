@@ -17,7 +17,7 @@ import com.coder.zzq.smartshow.lifecycle.ActivityStack;
 
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
-public class SmartSnackbarDeligate extends SmartBarDelegate<Snackbar, Snackbar.SnackbarLayout, BarSettingImpl> {
+public class SmartSnackbarDeligate extends SmartBarDelegate<Snackbar, Snackbar.SnackbarLayout, SnackbarSettingImpl> {
 
     private SmartSnackbarDeligate() {
         super();
@@ -128,7 +128,7 @@ public class SmartSnackbarDeligate extends SmartBarDelegate<Snackbar, Snackbar.S
 
     @Override
     protected void createBarSetting() {
-        mBarSetting = new BarSettingImpl();
+        mBarSetting = new SnackbarSettingImpl();
     }
 
 
@@ -153,5 +153,9 @@ public class SmartSnackbarDeligate extends SmartBarDelegate<Snackbar, Snackbar.S
         }
 
         mBar.addCallback(mCallback);
+    }
+
+    public static void destroyDelegate() {
+        sDeligate = null;
     }
 }
