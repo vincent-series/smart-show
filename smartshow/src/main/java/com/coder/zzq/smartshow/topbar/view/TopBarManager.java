@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.coder.zzq.smartshow.snackbar.top.view;
+package com.coder.zzq.smartshow.topbar.view;
 
 import android.os.Handler;
 import android.os.Looper;

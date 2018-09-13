@@ -12,27 +12,27 @@
             android:textAllCaps="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="show"
+            android:text="成功"
             android:onClick="onShowClick"/>
 
         <Button
             android:textAllCaps="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="show at top"
+            android:text="错误"
             android:onClick="onShowAtTopClick"/>
         <Button
             android:textAllCaps="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="show in center"
+            android:text="警告"
             android:onClick="onShowInCenterClick"/>
         <Button
             android:lineSpacingExtra="4dp"
             android:textAllCaps="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="show at location\n(gravity:left|top,x:30dp,y:60dp)"
+            android:text="普通"
             android:onClick="onShowAtLocationClick"
             />
 
@@ -40,7 +40,7 @@
             android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="下一页"
+            android:text="失败"
             android:onClick="onNextPageClick"/>
     </LinearLayout>
 

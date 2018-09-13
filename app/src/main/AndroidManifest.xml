@@ -17,10 +17,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".TestTopbarWithActionBarActivity"
-            android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar" />
-        <activity android:name=".TestTopbarWithoutActionBarActivity"></activity>
+
     </application>
 
 </manifest>

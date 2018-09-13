@@ -1,4 +1,4 @@
-package com.coder.zzq.smartshow.snackbar.base;
+package com.coder.zzq.smartshow.basebar;
 
 import android.view.ViewGroup;
 import android.widget.TextView;

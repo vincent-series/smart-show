@@ -1,8 +1,7 @@
-package com.coder.zzq.smartshow.snackbar.top;
+package com.coder.zzq.smartshow.topbar;
 
-import android.support.design.widget.CoordinatorLayout;
 
-import com.coder.zzq.smartshow.snackbar.base.IBarShow;
+import com.coder.zzq.smartshow.basebar.IBarShow;
 
 public final class SmartTopBar {
 
@@ -12,13 +11,8 @@ public final class SmartTopBar {
 
 
     public static IBarShow get() {
-        return SmartTopbarDelegate.get().getPlain();
+        return SmartTopbarDelegate.get().nestedDecorView();
     }
-
-    public static IBarShow get(CoordinatorLayout view) {
-        return SmartTopbarDelegate.get().getWithCoordinatorLayout(view);
-    }
-
 
     public static boolean isShowing() {
         return SmartTopbarDelegate.get().isShowing();

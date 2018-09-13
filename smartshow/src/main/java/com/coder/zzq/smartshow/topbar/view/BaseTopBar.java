@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.coder.zzq.smartshow.snackbar.top.view;
+package com.coder.zzq.smartshow.topbar.view;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -44,15 +44,15 @@ import android.widget.FrameLayout;
 
 import com.coder.zzq.smartshow.R;
 import com.coder.zzq.smartshow.Utils;
-import com.coder.zzq.smartshow.snackbar.top.utils.ThemeUtils;
 import com.coder.zzq.smartshow.lifecycle.ActivityStack;
+import com.coder.zzq.smartshow.topbar.utils.ThemeUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.coder.zzq.smartshow.snackbar.top.utils.AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR;
+import static com.coder.zzq.smartshow.topbar.utils.AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR;
 
 
 public abstract class BaseTopBar<B extends BaseTopBar<B>> {
@@ -181,8 +181,7 @@ public abstract class BaseTopBar<B extends BaseTopBar<B>> {
         // in the extending Snackbar class. This is to prevent breakage of apps that have custom
         // coordinator layout behaviors that depend on that layout.
         mView = (TopbarBaseLayout) inflater.inflate(
-                Utils.hasActionbar(ActivityStack.getTop()) ?
-                        R.layout.topbar_small : R.layout.topbar, mTargetParent, false);
+                R.layout.topbar, mTargetParent, false);
         mView.addView(content);
 
         ViewCompat.setAccessibilityLiveRegion(mView,

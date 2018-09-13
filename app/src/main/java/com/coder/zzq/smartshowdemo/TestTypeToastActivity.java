@@ -19,7 +19,7 @@ public class TestTypeToastActivity extends AppCompatActivity {
     }
 
     public void onShowAtTopClick(View view) {
-        SmartToast.fail("下载失败");
+        SmartToast.error("数据解析错误");
     }
 
     public void onShowInCenterClick(View view) {
@@ -31,6 +31,6 @@ public class TestTypeToastActivity extends AppCompatActivity {
     }
 
     public void onNextPageClick(View view) {
-        SmartToast.show("苹果");
+        SmartToast.fail("下载失败");
     }
 }

@@ -1,5 +1,5 @@
 
-package com.coder.zzq.smartshow.snackbar.top.view;
+package com.coder.zzq.smartshow.topbar.view;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -7,14 +7,11 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
-import android.support.design.widget.CoordinatorLayout;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.coder.zzq.smartshow.R;
@@ -50,7 +47,8 @@ public final class TopBar extends BaseTopBar<TopBar> {
         }
     }
 
-    @Nullable private BaseCallback<TopBar> mCallback;
+    @Nullable
+    private BaseCallback<TopBar> mCallback;
 
     private TopBar(ViewGroup parent, View content, ContentViewCallback contentViewCallback) {
         super(parent, content, contentViewCallback);
@@ -69,8 +67,7 @@ public final class TopBar extends BaseTopBar<TopBar> {
         final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         final ContentLayout content =
                 (ContentLayout) inflater.inflate(
-                        Utils.hasActionbar(ActivityStack.getTop()) ?
-                        R.layout.topbar_include_small : R.layout.topbar_include,
+                        R.layout.topbar_include,
                         parent, false);
 
         final TopBar snackbar = new TopBar(parent, content, content);
@@ -85,31 +82,7 @@ public final class TopBar extends BaseTopBar<TopBar> {
     }
 
     private static ViewGroup findSuitableParent(View view) {
-        ViewGroup fallback = null;
-        do {
-            if (view instanceof CoordinatorLayout) {
-                // We've found a CoordinatorLayout, use it
-                return (ViewGroup) view;
-            } else if (view instanceof FrameLayout) {
-                if (view.getId() == android.R.id.content) {
-                    // If we've hit the decor content view, then we didn't find a CoL in the
-                    // hierarchy, so use it.
-                    return (ViewGroup) view;
-                } else {
-                    // It's not the content view but we'll use it as our fallback
-                    fallback = (ViewGroup) view;
-                }
-            }
-
-            if (view != null) {
-                // Else, we will loop and crawl up the view hierarchy and try to find a parent
-                final ViewParent parent = view.getParent();
-                view = parent instanceof View ? (View) parent : null;
-            }
-        } while (view != null);
-
-        // If we reach here then we didn't find a CoL or a suitable content view so we'll fallback
-        return fallback;
+        return (ViewGroup) view;
     }
 
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.coder.zzq.smartshow.snackbar.top.utils;
+package com.coder.zzq.smartshow.topbar.utils;
 
 import android.support.v4.view.animation.FastOutLinearInInterpolator;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;

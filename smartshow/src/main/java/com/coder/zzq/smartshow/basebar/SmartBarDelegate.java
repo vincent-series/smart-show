@@ -1,17 +1,14 @@
-package com.coder.zzq.smartshow.snackbar.base;
+package com.coder.zzq.smartshow.basebar;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.annotation.RestrictTo;
-import android.support.design.widget.CoordinatorLayout;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.coder.zzq.smartshow.Utils;
 import com.coder.zzq.smartshow.lifecycle.ActivityStack;
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
@@ -32,25 +29,8 @@ public abstract class SmartBarDelegate<Bar, ViewParam, BarSetting extends BarSet
         mCurActionText = "";
     }
 
-
-    public IBarShow getPlain() {
-        //保存当前页面的Context
-        Activity activity = ActivityStack.getTop();
-        mPageContext = activity;
-        //取出android.R.id.content
-        View view = activity.findViewById(android.R.id.content);
-
-        return getFromView(view);
-    }
-
-    public IBarShow getWithCoordinatorLayout(@NonNull CoordinatorLayout view) {
-        //保存当前页面的Context
-        mPageContext = Utils.requireNonNull(view, "传入的CoordinatorLayout不可为null！").getContext();
-        return getFromView(view);
-    }
-
-    private IBarShow getFromView(View view) {
-        if (mBar == null || mBaseTraceView != view || isDismissByGesture()){
+    protected IBarShow getFromView(View view) {
+        if (mBar == null || mBaseTraceView != view || isDismissByGesture()) {
             mBaseTraceView = view;
             rebuildBar(view);
         }
@@ -61,6 +41,11 @@ public abstract class SmartBarDelegate<Bar, ViewParam, BarSetting extends BarSet
 
 
     private void rebuildBar(View view) {
+
+        if (view == null) {
+            return;
+        }
+
         mBar = createBar(view);
         if (mPageContext instanceof IBarShowCallback) {
             setShowCallback();
@@ -68,36 +53,22 @@ public abstract class SmartBarDelegate<Bar, ViewParam, BarSetting extends BarSet
 
 
         if (hasBarSetting()) {
-            setupBackgroundWhenHasBarSetting();
             TextView msgView = getMsgView();
-            if (mBarSetting.msgColorHasSetup()) {
-                msgView.setTextColor(mBarSetting.getMsgColor());
-            }
-            if (mBarSetting.msgTextSizeHasSetup()) {
-                msgView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mBarSetting.getMsgTextSizeSp());
-            }
-
+            msgView.setTextColor(mBarSetting.getMsgColor());
+            msgView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mBarSetting.getMsgTextSizeSp());
             Button actionView = getActionView();
-            if (mBarSetting.actionColorHasSetup()) {
-                actionView.setTextColor(mBarSetting.getActionColor());
-            }
-            if (mBarSetting.actionSizeHasSetup()) {
-                actionView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mBarSetting.getActionSizeSp());
-            }
-
-            if (mBarSetting.processBarCallbackHasSetup()) {
+            actionView.setTextColor(mBarSetting.getActionColor());
+            actionView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mBarSetting.getActionSizeSp());
+            if (mBarSetting.getProcessBarCallback() != null) {
                 mBarSetting.getProcessBarCallback().processBarView((ViewGroup) getBarView(), msgView, actionView);
             }
-
-        }else {
-            setupBackgroundWhenNoBarSetting();
+            setup();
         }
 
     }
 
-    protected abstract void setupBackgroundWhenNoBarSetting();
 
-    protected abstract void setupBackgroundWhenHasBarSetting();
+    public abstract void setup();
 
     protected abstract ViewParam getBarView();
 
@@ -124,6 +95,10 @@ public abstract class SmartBarDelegate<Bar, ViewParam, BarSetting extends BarSet
 
 
     private void showHelper(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener, int duration) {
+
+        if (mBaseTraceView == null) {
+            return;
+        }
 
         msg = msg == null ? "" : msg;
         actionText = actionText == null ? "" : actionText;
@@ -248,7 +223,7 @@ public abstract class SmartBarDelegate<Bar, ViewParam, BarSetting extends BarSet
     }
 
     public BarSetting barSetting() {
-        if (mBarSetting == null){
+        if (mBarSetting == null) {
             createBarSetting();
         }
         return mBarSetting;

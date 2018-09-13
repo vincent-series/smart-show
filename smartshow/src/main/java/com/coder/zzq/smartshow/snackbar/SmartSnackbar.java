@@ -1,8 +1,10 @@
-package com.coder.zzq.smartshow.snackbar.bottom;
+package com.coder.zzq.smartshow.snackbar;
+
 
 import android.support.design.widget.CoordinatorLayout;
 
-import com.coder.zzq.smartshow.snackbar.base.IBarShow;
+import com.coder.zzq.smartshow.basebar.IBarSetting;
+import com.coder.zzq.smartshow.basebar.IBarShow;
 
 /**
  * Created by 朱志强 on 2017/11/15.
@@ -16,11 +18,12 @@ public final class SmartSnackbar{
 
 
     public static IBarShow get() {
-        return SmartSnackbarDeligate.get().getPlain();
+
+        return SmartSnackbarDeligate.get().nestedContentView();
     }
 
     public static IBarShow get(CoordinatorLayout view) {
-        return SmartSnackbarDeligate.get().getWithCoordinatorLayout(view);
+        return SmartSnackbarDeligate.get().nestedCoordinatorLayout(view);
     }
 
 
@@ -32,7 +35,7 @@ public final class SmartSnackbar{
         SmartSnackbarDeligate.get().dismiss();
     }
 
-    public static ISnackbarSetting setting(){
+    public static IBarSetting setting(){
         return SmartSnackbarDeligate.get().barSetting();
     }
 

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.coder.zzq.smartshow.snackbar.top.view;
+package com.coder.zzq.smartshow.topbar.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -75,8 +75,7 @@ public class ContentLayout extends LinearLayout implements
 
         final int multiLineVPadding = getResources().getDimensionPixelSize(
                 android.support.design.R.dimen.design_snackbar_padding_vertical_2lines);
-        final int singleLineVPadding = Utils.hasActionbar(ActivityStack.getTop()) ?
-                0 : getResources().getDimensionPixelSize(
+        final int singleLineVPadding = getResources().getDimensionPixelSize(
                 android.support.design.R.dimen.design_snackbar_padding_vertical);
         final boolean isMultiLine = mMessageView.getLayout().getLineCount() > 1;
 
@@ -100,7 +99,7 @@ public class ContentLayout extends LinearLayout implements
     }
 
     private boolean updateViewsWithinLayout(final int orientation,
-            final int messagePadTop, final int messagePadBottom) {
+                                            final int messagePadTop, final int messagePadBottom) {
         boolean changed = false;
         if (orientation != getOrientation()) {
             setOrientation(orientation);

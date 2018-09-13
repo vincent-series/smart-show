@@ -1,11 +1,16 @@
-package com.coder.zzq.smartshow.snackbar.base;
+package com.coder.zzq.smartshow.basebar;
 
+import android.graphics.Color;
 import android.support.annotation.ColorInt;
 
+import com.coder.zzq.smartshow.R;
 import com.coder.zzq.smartshow.Utils;
+import com.coder.zzq.smartshow.topbar.ITopbarSetting;
+
 
 public class BarSettingImpl<View,BarSetting> implements IBarSetting<View,BarSetting> {
-
+    @ColorInt
+    private int mBgColor;
     @ColorInt
     private int mMsgColor;
     private float mMsgTextSizeSp;
@@ -21,11 +26,30 @@ public class BarSettingImpl<View,BarSetting> implements IBarSetting<View,BarSett
     private IProcessBarCallback mProcessBarCallback;
 
     public BarSettingImpl() {
-        mMsgColor = -1;
-        mMsgTextSizeSp = -1f;
-        mActionColor = -1;
-        mActionSizeSp = -1f;
+        mBgColor = IBarSetting.SNACK_BAR_COLOR;
+        mMsgColor = Color.WHITE;
+        mMsgTextSizeSp = 14;
+        mActionColor = Utils.getColorFromRes(R.color.colorAccent);
+        mActionSizeSp = 14;
         mDefaultActionTextForIndefinite = "确定";
+    }
+
+    @Override
+    public BarSetting backgroundColor(int color) {
+        mBgColor = color;
+        return (BarSetting) this;
+    }
+
+    @Override
+    public BarSetting backgroundColorRes(int colorRes) {
+        return backgroundColor(Utils.getColorFromRes(colorRes));
+    }
+
+
+
+    @ColorInt
+    public int getBackgroundColor() {
+        return mBgColor;
     }
 
     @Override
@@ -39,9 +63,7 @@ public class BarSettingImpl<View,BarSetting> implements IBarSetting<View,BarSett
         return msgTextColor(Utils.getColorFromRes(colorRes));
     }
 
-    public boolean msgColorHasSetup() {
-        return mMsgColor != -1;
-    }
+
 
     @ColorInt
     public int getMsgColor() {
@@ -55,9 +77,7 @@ public class BarSettingImpl<View,BarSetting> implements IBarSetting<View,BarSett
         return (BarSetting) this;
     }
 
-    public boolean msgTextSizeHasSetup() {
-        return mMsgTextSizeSp != -1f;
-    }
+
 
     public float getMsgTextSizeSp(){
         return mMsgTextSizeSp;
@@ -75,9 +95,6 @@ public class BarSettingImpl<View,BarSetting> implements IBarSetting<View,BarSett
         return actionColor(Utils.getColorFromRes(colorRes));
     }
 
-    public boolean actionColorHasSetup(){
-        return mActionColor != -1;
-    }
 
     @ColorInt
     public int getActionColor(){
@@ -90,9 +107,6 @@ public class BarSettingImpl<View,BarSetting> implements IBarSetting<View,BarSett
         return (BarSetting) this;
     }
 
-    public boolean actionSizeHasSetup(){
-        return mActionSizeSp != -1f;
-    }
 
     public float getActionSizeSp(){
         return mActionSizeSp;
@@ -125,9 +139,6 @@ public class BarSettingImpl<View,BarSetting> implements IBarSetting<View,BarSett
         return (BarSetting) this;
     }
 
-    public boolean processBarCallbackHasSetup(){
-        return mProcessBarCallback != null;
-    }
 
     public IProcessBarCallback getProcessBarCallback() {
         return mProcessBarCallback;

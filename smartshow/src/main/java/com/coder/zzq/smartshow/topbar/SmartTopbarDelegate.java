@@ -1,16 +1,21 @@
-package com.coder.zzq.smartshow.snackbar.top;
+package com.coder.zzq.smartshow.topbar;
 
+import android.app.Activity;
+import android.graphics.Color;
+import android.os.Build;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.coder.zzq.smartshow.R;
+import com.coder.zzq.smartshow.SmartShow;
 import com.coder.zzq.smartshow.Utils;
-import com.coder.zzq.smartshow.snackbar.base.IBarShowCallback;
-import com.coder.zzq.smartshow.snackbar.base.SmartBarDelegate;
-import com.coder.zzq.smartshow.snackbar.top.view.BaseTopBar;
-import com.coder.zzq.smartshow.snackbar.top.view.TopBar;
+import com.coder.zzq.smartshow.basebar.IBarShow;
+import com.coder.zzq.smartshow.basebar.IBarShowCallback;
+import com.coder.zzq.smartshow.basebar.SmartBarDelegate;
 import com.coder.zzq.smartshow.lifecycle.ActivityStack;
+import com.coder.zzq.smartshow.topbar.view.BaseTopBar;
+import com.coder.zzq.smartshow.topbar.view.TopBar;
 
 public final class SmartTopbarDelegate extends SmartBarDelegate<TopBar, TopBar.TopbarLayout, TopbarSettingImpl> {
 
@@ -28,14 +33,23 @@ public final class SmartTopbarDelegate extends SmartBarDelegate<TopBar, TopBar.T
         return sDelegate;
     }
 
+    public IBarShow nestedDecorView() {
+        //保存当前页面的Context
+        Activity activity = ActivityStack.getTop();
+        mPageContext = activity;
+        //取出DecorView
+        View view =  activity == null ? null : activity.getWindow().getDecorView();
+
+        return getFromView(view);
+    }
+
 
     @Override
     protected TopBar createBar(View view) {
         TopBar topBar = TopBar.make(view, "", BaseTopBar.LENGTH_SHORT);
-        int height = Utils.hasActionbar(ActivityStack.getTop()) ?
-                Utils.dpToPx(30) : Utils.dpToPx(57);
+        int height = Utils.dpToPx(80);
         topBar.getView().getLayoutParams().height = height;
-
+        topBar.getView().setBackgroundColor(Utils.getColorFromRes(R.color.colorPrimary));
         return topBar;
     }
 
@@ -45,22 +59,12 @@ public final class SmartTopbarDelegate extends SmartBarDelegate<TopBar, TopBar.T
     }
 
     @Override
-    protected void setupBackgroundWhenNoBarSetting() {
-        if (!Utils.hasActionbar(ActivityStack.getTop())){
-            mBar.getView().setBackgroundColor(Utils.getStatusBarColor());
+    public void setup() {
+        mBar.getView().setBackgroundColor(mBarSetting.getBackgroundColor());
+        if (mBarSetting.isLightBackground() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            mBar.getView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
-    }
 
-    @Override
-    protected void setupBackgroundWhenHasBarSetting() {
-        int color = Utils.hasActionbar(ActivityStack.getTop()) ?
-                mBarSetting.getBgColorWhenBelowActionBar() :
-                mBarSetting.getBgColorWhenBelowStatusBar();
-        if (color == -1){
-            setupBackgroundWhenNoBarSetting();
-        }else {
-            mBar.getView().setBackgroundColor(color);
-        }
     }
 
     @Override
