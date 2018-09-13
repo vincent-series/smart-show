@@ -14,21 +14,21 @@ public class TestSnackbarActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_snackbar);
-        SmartTopBar.get().show("爱你");
-
     }
-
-
-    public void onShowClick(View view) {
-        SmartTopBar.get().showIndefinite("香蕉");
-    }
-
-    public void onShowAtTopClick(View view) {
-        SmartSnackbar.get().showIndefinite("苹果");
-    }
-
 
     public void onNextPageClick(View view) {
         startActivity(new Intent(this, TestSnackbarActivity.class));
+    }
+
+    public void onIndefiniteClick(View view) {
+        SmartSnackbar.get().showIndefinite("橘子");
+    }
+
+    public void onLongClick(View view) {
+        SmartSnackbar.get().showLong("香蕉");
+    }
+
+    public void onShortClick(View view) {
+        SmartSnackbar.get().show("苹果");
     }
 }

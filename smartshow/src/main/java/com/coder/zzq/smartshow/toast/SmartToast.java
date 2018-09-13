@@ -58,14 +58,14 @@ public final class SmartToast{
     }
 
 
-    public static void normal(String msg) {
+    public static void info(String msg) {
 
-        SmartToastDelegate.get().getTypeShowManager().normal(msg);
+        SmartToastDelegate.get().getTypeShowManager().info(msg);
     }
 
 
-    public static void normalLong(String msg) {
-        SmartToastDelegate.get().getTypeShowManager().normalLong(msg);
+    public static void infoLong(String msg) {
+        SmartToastDelegate.get().getTypeShowManager().infoLong(msg);
     }
 
 
@@ -76,16 +76,6 @@ public final class SmartToast{
 
     public static void warningLong(String msg) {
         SmartToastDelegate.get().getTypeShowManager().warningLong(msg);
-    }
-
-
-    public static void fail(String msg) {
-        SmartToastDelegate.get().getTypeShowManager().fail(msg);
-    }
-
-
-    public static void failLong(String msg) {
-        SmartToastDelegate.get().getTypeShowManager().failLong(msg);
     }
 
 

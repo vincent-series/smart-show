@@ -16,30 +16,23 @@
         android:orientation="vertical">
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/normal_btn"
             android:onClick="onShortClick"
-            android:text="苹果 (shor)"
-            android:textAllCaps="false" />
+            android:text="short" />
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/normal_btn"
             android:onClick="onLongClick"
-            android:text="香蕉 (long)"
-            android:textAllCaps="false" />
+            android:text="long"
+            />
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/normal_btn"
             android:onClick="onIndefinite"
-            android:text="橘子 (indefinite)"
-            android:textAllCaps="false" />
+            android:text="indefinite" />
 
         <Button
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/normal_btn"
             android:text="下一页"
             android:onClick="onNextPageClick"/>
     </LinearLayout>

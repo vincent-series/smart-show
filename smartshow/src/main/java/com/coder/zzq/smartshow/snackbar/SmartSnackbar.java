@@ -2,6 +2,7 @@ package com.coder.zzq.smartshow.snackbar;
 
 
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 
 import com.coder.zzq.smartshow.basebar.IBarSetting;
 import com.coder.zzq.smartshow.basebar.IBarShow;
@@ -35,7 +36,7 @@ public final class SmartSnackbar{
         SmartSnackbarDeligate.get().dismiss();
     }
 
-    public static IBarSetting setting(){
+    public static IBarSetting<Snackbar.SnackbarLayout,IBarSetting> setting(){
         return SmartSnackbarDeligate.get().barSetting();
     }
 

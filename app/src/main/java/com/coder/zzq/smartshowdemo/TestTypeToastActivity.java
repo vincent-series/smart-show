@@ -27,10 +27,10 @@ public class TestTypeToastActivity extends AppCompatActivity {
     }
 
     public void onShowAtLocationClick(View view) {
-        SmartToast.normal("已在后台下载");
+
     }
 
     public void onNextPageClick(View view) {
-        SmartToast.fail("下载失败");
+
     }
 }

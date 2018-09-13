@@ -8,4 +8,31 @@
 
     <include layout="@layout/copyright_toolbar" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            style="@style/normal_btn"
+            android:text="Toast"
+            android:onClick="onToastClick"/>
+
+
+        <Button
+            style="@style/normal_btn"
+            android:text="TypeToast"
+            android:onClick="onTypeToastClick"/>
+
+        <Button
+            style="@style/normal_btn"
+            android:text="Snackbar"
+            android:onClick="onSnackbarClick"/>
+
+        <Button
+            style="@style/normal_btn"
+            android:text="TopBar"
+            android:onClick="onTopBarClick"/>
+    </LinearLayout>
 </LinearLayout>

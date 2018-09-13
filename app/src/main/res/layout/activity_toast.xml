@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.coder.zzq.smartshowdemo.ToastActivity">
+
+    <include layout="@layout/copyright_toolbar" />
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <Button style="@style/normal_btn"
+            android:onClick="onShowClick"
+            android:text="show（苹果）"/>
+        <Button style="@style/normal_btn"
+            android:onClick="onShowAtTopClick"
+            android:text="showAtTop（香蕉）"/>
+        <Button style="@style/normal_btn"
+            android:onClick="onShowInCenterClick"
+            android:text="showInCenter（橘子）"/>
+        <Button style="@style/normal_btn"
+            android:onClick="onShowAtLocationClick"
+            android:text="showAtLocation（荔枝，Top|Left，xOffset 10dp,yOffset 10dp）"/>
+
+        <Button style="@style/normal_btn"
+            android:text="下一页"
+            android:onClick="onNextPageClick"/>
+    </LinearLayout>
+</LinearLayout>

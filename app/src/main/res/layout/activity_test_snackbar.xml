@@ -9,18 +9,18 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <Button
-            android:textAllCaps="false"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="show"
-            android:onClick="onShowClick"/>
+            style="@style/normal_btn"
+            android:text="short"
+            android:onClick="onShortClick"/>
 
         <Button
-            android:textAllCaps="false"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="show at top"
-            android:onClick="onShowAtTopClick"/>
+            style="@style/normal_btn"
+            android:text="long"
+            android:onClick="onLongClick"/>
+        <Button
+            style="@style/normal_btn"
+            android:text="indefinite"
+            android:onClick="onIndefiniteClick"/>
 
         <Button
             android:layout_marginTop="20dp"

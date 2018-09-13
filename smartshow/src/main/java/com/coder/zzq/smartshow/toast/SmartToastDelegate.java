@@ -130,14 +130,14 @@ public final class SmartToastDelegate {
     }
 
 
-    public void normal(String msg) {
+    public void info(String msg) {
 
-        getTypeShowManager().normal(msg);
+        getTypeShowManager().info(msg);
     }
 
 
-    public void normalLong(String msg) {
-        getTypeShowManager().normalLong(msg);
+    public void infoLong(String msg) {
+        getTypeShowManager().infoLong(msg);
     }
 
 
@@ -150,15 +150,6 @@ public final class SmartToastDelegate {
         getTypeShowManager().warningLong(msg);
     }
 
-
-    public void fail(String msg) {
-        getTypeShowManager().fail(msg);
-    }
-
-
-    public void failLong(String msg) {
-        getTypeShowManager().failLong(msg);
-    }
 
 
     public void success(String msg) {

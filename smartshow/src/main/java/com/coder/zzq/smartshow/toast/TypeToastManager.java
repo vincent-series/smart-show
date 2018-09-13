@@ -15,8 +15,7 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
     public static final int TYPE_INFO_NORMAL = 0;
     public static final int TYPE_INFO_WARNING = 1;
     public static final int TYPE_INFO_SUCCESS = 2;
-    public static final int TYPE_INFO_FAIL = 3;
-    public static final int TYPE_INFO_ERROR = 4;
+    public static final int TYPE_INFO_ERROR = 3;
 
     private int mCurInfoType;
     private ImageView mIconView;
@@ -93,20 +92,18 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
                 return R.drawable.type_info_success;
             case TYPE_INFO_ERROR:
                 return R.drawable.type_info_error;
-            case TYPE_INFO_FAIL:
-                return R.drawable.type_info_fail;
             default:
                 return R.drawable.type_info_normal;
         }
     }
 
     @Override
-    public void normal(String msg) {
+    public void info(String msg) {
         showHelper(msg, TYPE_INFO_NORMAL, Toast.LENGTH_SHORT);
     }
 
     @Override
-    public void normalLong(String msg) {
+    public void infoLong(String msg) {
         showHelper(msg, TYPE_INFO_NORMAL, Toast.LENGTH_LONG);
     }
 
@@ -118,16 +115,6 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
     @Override
     public void warningLong(String msg) {
         showHelper(msg, TYPE_INFO_WARNING, Toast.LENGTH_LONG);
-    }
-
-    @Override
-    public void fail(String msg) {
-        showHelper(msg, TYPE_INFO_FAIL, Toast.LENGTH_SHORT);
-    }
-
-    @Override
-    public void failLong(String msg) {
-        showHelper(msg, TYPE_INFO_FAIL, Toast.LENGTH_LONG);
     }
 
     @Override
