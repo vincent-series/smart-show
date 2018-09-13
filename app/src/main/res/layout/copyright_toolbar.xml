@@ -2,7 +2,6 @@
 <android.support.v7.widget.Toolbar
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:visibility="gone"
     android:background="@color/colorPrimary">
     <TextView
         android:layout_width="match_parent"
@@ -10,5 +9,5 @@
         android:gravity="center"
         android:textColor="#ffffff"
         android:textSize="20sp"
-        android:text="版权所有--朱志强"/>
+        android:text="作者--朱志强"/>
 </android.support.v7.widget.Toolbar>

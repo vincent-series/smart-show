@@ -4,6 +4,7 @@ import android.app.Application;
 import android.graphics.Color;
 
 import com.coder.zzq.smartshow.SmartShow;
+import com.coder.zzq.smartshow.basebar.IBarSetting;
 import com.coder.zzq.smartshow.topbar.SmartTopBar;
 
 
@@ -45,7 +46,15 @@ public class MyApplication extends Application {
 //                });
 
 
-        SmartTopBar.topbarSetting();
+        SmartTopBar.topbarSetting()
+                .dismissOnLeave(true)
+                .backgroundColor(Color.parseColor("#ff5000"))
+                .msgTextSizeSp(20)
+                .msgTextColor(Color.GREEN)
+                .actionColor(Color.BLUE)
+                .actionSizeSp(20)
+                .defaultActionTextForIndefinite("ok")
+                .darkStatusBarTextAndIcon();
 //        SmartShow.snackbarSetting()
 //                //设置背景颜色
 ////                .backgroundColor()

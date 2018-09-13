@@ -5,4 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.coder.zzq.smartshowdemo.MainActivity">
+
+    <include layout="@layout/copyright_toolbar" />
+
 </LinearLayout>

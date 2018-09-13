@@ -14,7 +14,6 @@ public class TopbarSettingImpl extends BarSettingImpl<TopBar.TopbarLayout, ITopb
 
     public TopbarSettingImpl(){
         super();
-        backgroundColor(Utils.getColorFromRes(R.color.colorPrimary));
     }
 
     @Override
