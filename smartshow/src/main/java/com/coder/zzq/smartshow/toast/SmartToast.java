@@ -115,6 +115,6 @@ public final class SmartToast{
 
 
     public static IToastSetting setting() {
-        return SmartToastDelegate.get().toastSetting();
+        return SmartToastDelegate.get().createToastSetting();
     }
 }

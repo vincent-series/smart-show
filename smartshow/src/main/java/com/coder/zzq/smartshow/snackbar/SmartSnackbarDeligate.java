@@ -8,6 +8,8 @@ import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.coder.zzq.smartshow.Config;
 import com.coder.zzq.smartshow.Utils;
 import com.coder.zzq.smartshow.basebar.BarSettingImpl;
 import com.coder.zzq.smartshow.basebar.IBarShow;
@@ -45,8 +47,6 @@ public class SmartSnackbarDeligate extends SmartBarDelegate<Snackbar, Snackbar.S
     }
 
 
-
-
     private static SmartSnackbarDeligate sDeligate;
 
     public static boolean hasCreated() {
@@ -72,8 +72,8 @@ public class SmartSnackbarDeligate extends SmartBarDelegate<Snackbar, Snackbar.S
 
     @Override
     public void setup() {
-        if (mBarSetting.getBackgroundColor() != -1){
-            mBar.getView().setBackgroundColor(mBarSetting.getBackgroundColor());
+        if (getBarSetting().getBackgroundColor() != -1) {
+            mBar.getView().setBackgroundColor(getBarSetting().getBackgroundColor());
         }
     }
 
@@ -127,8 +127,18 @@ public class SmartSnackbarDeligate extends SmartBarDelegate<Snackbar, Snackbar.S
     }
 
     @Override
-    protected void createBarSetting() {
-        mBarSetting = new SnackbarSettingImpl();
+    public boolean hasBarSetting() {
+        return Config.hasSnackbarSetting();
+    }
+
+    @Override
+    protected SnackbarSettingImpl createBarSetting() {
+        return Config.buildSmartSnackbarSetting();
+    }
+
+    @Override
+    public SnackbarSettingImpl getBarSetting() {
+        return Config.getSnackbarSetting();
     }
 
 

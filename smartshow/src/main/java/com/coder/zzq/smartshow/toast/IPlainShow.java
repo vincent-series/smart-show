@@ -1,10 +1,7 @@
 package com.coder.zzq.smartshow.toast;
 
-import android.util.TypedValue;
-import android.view.Gravity;
-import android.widget.Toast;
-
 public interface IPlainShow {
+
     void show(CharSequence msg);
 
     void showAtTop(CharSequence msg);

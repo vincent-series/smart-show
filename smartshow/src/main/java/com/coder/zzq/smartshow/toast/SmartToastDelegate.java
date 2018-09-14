@@ -1,8 +1,8 @@
 package com.coder.zzq.smartshow.toast;
 
-import android.app.Application;
 import android.support.annotation.RestrictTo;
 
+import com.coder.zzq.smartshow.Config;
 import com.coder.zzq.smartshow.SmartShow;
 
 /**
@@ -10,30 +10,26 @@ import com.coder.zzq.smartshow.SmartShow;
  */
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public final class SmartToastDelegate {
-    private static ToastSettingImpl sToastSetting;
     private PlainToastManager mPlainToastManager;
     private TypeToastManager mTypeToastManager;
 
 
-    private SmartToastDelegate(Application context) {
+    private SmartToastDelegate() {
 
     }
 
-    public ToastSettingImpl toastSetting() {
-        if (sToastSetting == null) {
-            sToastSetting = new ToastSettingImpl();
-        }
-        return sToastSetting;
+    public ToastSettingImpl createToastSetting() {
+        return Config.createToastSetting();
     }
 
 
     protected boolean hasToastSetting() {
-        return sToastSetting != null;
+        return Config.hasToastSetting();
     }
 
 
     public boolean isDismissOnLeave() {
-        return sToastSetting != null && sToastSetting.isDismissOnleave();
+        return hasToastSetting() && getToastSetting().isDismissOnleave();
     }
 
     public boolean isShowing() {
@@ -179,17 +175,18 @@ public final class SmartToastDelegate {
 
     @RestrictTo(RestrictTo.Scope.LIBRARY)
     public static SmartToastDelegate get() {
-
+        SmartShow.getContext();
         if (sSmartToastDelegate == null) {
-            sSmartToastDelegate = new SmartToastDelegate(SmartShow.getContext());
+            sSmartToastDelegate = new SmartToastDelegate();
         }
 
         return sSmartToastDelegate;
     }
 
-    public ToastSettingImpl getsToastSetting() {
-        return sToastSetting;
+    public ToastSettingImpl getToastSetting() {
+        return Config.getToastSetting();
     }
+
 
     public static boolean hasCreated() {
         return sSmartToastDelegate != null;

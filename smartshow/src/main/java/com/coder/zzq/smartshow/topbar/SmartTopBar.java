@@ -24,7 +24,7 @@ public final class SmartTopBar {
 
 
     public static ITopbarSetting setting() {
-        return SmartTopbarDelegate.get().barSetting();
+        return SmartTopbarDelegate.get().createBarSetting();
     }
 
 }

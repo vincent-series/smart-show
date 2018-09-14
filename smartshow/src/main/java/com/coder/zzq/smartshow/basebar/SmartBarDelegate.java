@@ -21,8 +21,6 @@ public abstract class SmartBarDelegate<Bar, ViewParam, BarSetting extends BarSet
     protected int mDuration;
     protected View mBaseTraceView;
     protected Bar mBar;
-    protected BarSetting mBarSetting;
-
 
     protected SmartBarDelegate() {
         mCurMsg = "";
@@ -54,13 +52,13 @@ public abstract class SmartBarDelegate<Bar, ViewParam, BarSetting extends BarSet
 
         if (hasBarSetting()) {
             TextView msgView = getMsgView();
-            msgView.setTextColor(mBarSetting.getMsgColor());
-            msgView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mBarSetting.getMsgTextSizeSp());
+            msgView.setTextColor(getBarSetting().getMsgColor());
+            msgView.setTextSize(TypedValue.COMPLEX_UNIT_SP, getBarSetting().getMsgTextSizeSp());
             Button actionView = getActionView();
-            actionView.setTextColor(mBarSetting.getActionColor());
-            actionView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mBarSetting.getActionSizeSp());
-            if (mBarSetting.getProcessBarCallback() != null) {
-                mBarSetting.getProcessBarCallback().processBarView((ViewGroup) getBarView(), msgView, actionView);
+            actionView.setTextColor(getBarSetting().getActionColor());
+            actionView.setTextSize(TypedValue.COMPLEX_UNIT_SP, getBarSetting().getActionSizeSp());
+            if (getBarSetting().getProcessBarCallback() != null) {
+                getBarSetting().getProcessBarCallback().processBarView((ViewGroup) getBarView(), msgView, actionView);
             }
             setup();
         }
@@ -180,7 +178,7 @@ public abstract class SmartBarDelegate<Bar, ViewParam, BarSetting extends BarSet
 
     @Override
     public void showIndefinite(CharSequence msg) {
-        showIndefinite(msg, hasBarSetting() ? ((BarSettingImpl) mBarSetting).getDefaultActionTextForIndefinite() : "确定");
+        showIndefinite(msg, hasBarSetting() ? getBarSetting().getDefaultActionTextForIndefinite() : "确定");
     }
 
 
@@ -214,20 +212,14 @@ public abstract class SmartBarDelegate<Bar, ViewParam, BarSetting extends BarSet
 
 
     public boolean isDismissOnLeave() {
-        return mBarSetting != null && ((BarSettingImpl) mBarSetting).isDismissOnLeave();
+        return hasBarSetting() && getBarSetting().isDismissOnLeave();
     }
 
 
-    public boolean hasBarSetting() {
-        return mBarSetting != null;
-    }
+    public abstract boolean hasBarSetting();
 
-    public BarSetting barSetting() {
-        if (mBarSetting == null) {
-            createBarSetting();
-        }
-        return mBarSetting;
-    }
 
-    protected abstract void createBarSetting();
+    protected abstract BarSetting createBarSetting();
+
+    public abstract BarSetting getBarSetting();
 }

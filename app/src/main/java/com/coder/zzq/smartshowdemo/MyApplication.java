@@ -22,11 +22,12 @@ public class MyApplication extends Application {
         SmartShow.init(this);
 
         SmartToast.setting()
+                .typeInfoToastThemeColorRes(R.color.colorPrimary)
                 .dismissOnLeave(true);
 
 
         SmartTopBar.setting()
-                .dismissOnLeave(false)
+                .dismissOnLeave(true)
                 .backgroundColor(Color.WHITE)
                 .msgTextColor(Color.DKGRAY)
                 .actionColor(Color.RED)

@@ -3,10 +3,12 @@ package com.coder.zzq.smartshow.topbar;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Build;
+import android.support.annotation.RestrictTo;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.coder.zzq.smartshow.Config;
 import com.coder.zzq.smartshow.R;
 import com.coder.zzq.smartshow.SmartShow;
 import com.coder.zzq.smartshow.Utils;
@@ -16,7 +18,7 @@ import com.coder.zzq.smartshow.basebar.SmartBarDelegate;
 import com.coder.zzq.smartshow.lifecycle.ActivityStack;
 import com.coder.zzq.smartshow.topbar.view.BaseTopBar;
 import com.coder.zzq.smartshow.topbar.view.TopBar;
-
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 public final class SmartTopbarDelegate extends SmartBarDelegate<TopBar, TopBar.TopbarLayout, TopbarSettingImpl> {
 
 
@@ -60,8 +62,8 @@ public final class SmartTopbarDelegate extends SmartBarDelegate<TopBar, TopBar.T
 
     @Override
     public void setup() {
-        mBar.getView().setBackgroundColor(mBarSetting.getBackgroundColor());
-        if (mBarSetting.isLightBackground() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        mBar.getView().setBackgroundColor(getBarSetting().getBackgroundColor());
+        if (getBarSetting().isLightBackground() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             mBar.getView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
 
@@ -142,10 +144,19 @@ public final class SmartTopbarDelegate extends SmartBarDelegate<TopBar, TopBar.T
     }
 
     @Override
-    protected void createBarSetting() {
-        mBarSetting = new TopbarSettingImpl();
+    public boolean hasBarSetting() {
+        return Config.hasToastSetting();
     }
 
+    @Override
+    protected TopbarSettingImpl createBarSetting() {
+        return Config.buildSmartTopBarSetting();
+    }
+
+    @Override
+    public TopbarSettingImpl getBarSetting() {
+        return Config.getTopbarSetting();
+    }
 
     public static void destroyDelegate() {
         sDelegate = null;

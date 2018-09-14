@@ -1,6 +1,7 @@
 package com.coder.zzq.smartshow.toast;
 
 import android.graphics.drawable.GradientDrawable;
+import android.support.annotation.RestrictTo;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
@@ -9,7 +10,7 @@ import android.widget.Toast;
 import com.coder.zzq.smartshow.R;
 import com.coder.zzq.smartshow.SmartShow;
 import com.coder.zzq.smartshow.Utils;
-
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 public class TypeToastManager extends BaseToastManager implements ITypeShow {
 
     public static final int TYPE_INFO_NORMAL = 0;
@@ -50,10 +51,9 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
         mWindowParams.windowAnimations = R.style.type_info_toast_anim;
         mWindowParams.height = Utils.dpToPx(85);
         if (SmartToastDelegate.get().hasToastSetting()
-                && SmartToastDelegate.get().getsToastSetting().isTypeInfoThemeColorSetup()) {
+                && SmartToastDelegate.get().getToastSetting().isTypeInfoThemeColorSetup()) {
             GradientDrawable drawable = (GradientDrawable) mView.getBackground();
-            drawable.setAlpha(238);
-            drawable.setColor(SmartToastDelegate.get().toastSetting().getTypeInfoThemeColor());
+            drawable.setColor(SmartToastDelegate.get().getToastSetting().getTypeInfoThemeColor());
         }
     }
 

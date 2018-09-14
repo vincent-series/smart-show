@@ -37,7 +37,7 @@ public final class SmartSnackbar {
     }
 
     public static ISnackbarSetting setting() {
-        return SmartSnackbarDeligate.get().barSetting();
+        return SmartSnackbarDeligate.get().createBarSetting();
     }
 
 }
