@@ -1,17 +1,18 @@
 # SmartShow
-本库针对Toast，Snackbar，TopBar:<br/>
+本库针对Toast，Snackbar，TopBar:<br/><br/>
 1.优雅封装，简化调用<br/><br/>
 2.处理系统bug等，如Android 7.1系统关于Toast的BadTokenException<br/><br/>
 3.解决已知的性能缺陷，提高用户体验<br/><br/>
 4.合理的复用策略，节约内存开销的同时及时解除引用以回收对象<br/></br>
 5.根据实际开发中的常见需求，进行功能扩展<br/><br/>
-作者：朱志强<br/><br/>
-如果你对实现感兴趣，请参考我的CSDN博客：<br/>
-2.x 版本
-1.x 版本 http://blog.csdn.net/jungle_pig/article/details/78568493 <br/>
-该博文已授权《第一行代码》作者郭霖的微信公众号同步发表：http://mp.weixin.qq.com/s/l62PtbmrIOkVKfJ2r0JwEw <br/>
+如果你对实现感兴趣，请参考我的CSDN博客：<br/><br/>
+2.x 版本 <br/><br/>
+1.x 版本 http://blog.csdn.net/jungle_pig/article/details/78568493 <br/><br/>
+该博文已授权《第一行代码》作者郭霖的微信公众号同步发表：http://mp.weixin.qq.com/s/l62PtbmrIOkVKfJ2r0JwEw <br/><br/>
+# 关于作者
 为了让SmartShow库更加健壮，如果您在使用过程中发现任何问题，请联系我，我会立即跟进修复和维护。<br/>
 感谢您的支持！<br/>
+朱志强<br/><br/>
 微信：w361281607
 ![图片加载失败](images/wx_2d.jpg)<br/><br/>
 邮箱：coder_zzq@163.com<br/>
