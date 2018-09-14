@@ -15,35 +15,6 @@
 微信：w361281607<br/><br/>
 ![图片加载失败](images/wx_2d.jpg)<br/><br/>
 邮箱：coder_zzq@163.com<br/>
-
-### SmartToast部分
-#### 特点：
-
-2.解决了再不复用Toast实例的情况下，Toast重复弹出，且每个都会待duration耗尽才显示下一个的体验问题<br/>
-如果Toast正在显示，再次触发（内容和位置完全一致）,提供两种处理策略：<br/>
-ACTION_IGNORE为传统解决策略，即不重复弹出,直接忽略<br/>
-ACTION_REPEAT_SHOW_LIKE_SNACKBAR为立即隐藏前一个，再次显示一个，<br/>
-类似Snackbar(不同实例交替显示)<br/>
-默认策略为不重复弹出</br>
-3.新的Toast(内容或位置发生了变化)会立即弹出，不会等待旧的Toast的duration耗尽再弹出，并具有动画效果（与你手机系统原生Toast的切换动画一致）<br/>
-4.可修改Toast默认布局的风格，如背景颜色，文字大小和颜色等<br/>
-5.可为Toast设置自定义布局，并进行代码处理</br>
-6.完美解决Android 7.1的系统bug——Toast BadTokenException<br/>
-7.可配置离开当前页面，立即消失Toast
-#### 注意
-关闭app的系统通知权限,将导致SmartToast无法显示，原因如下：<br/>
-Toast的内部原理使用NotificationManagerService，关闭通知权限后，无法显示。<br/>
-这是原生Toast本身的特性，而不是SmartShow的bug。<br/>
-以淘宝app和优酷app的"再按一次退出程序"的Toast提示为例，关闭他们的通知权限，<br/>
-也会导致Toast不显示，感兴趣的话可以去试一试。
-
-### SmartSnackbar部分
-#### 特点：
-1.Snackbar的显示原理与Toast不同，Toast通过Window展示视图，全局可复用一个实例。Snackbar则是把视图内嵌到当前Activity的android.R.id.content容器或某个CoordinatorLayout中。在获取方式不变（容器不变）的情况下，同一页面可复用一个Snackbar实例，节省内存<br/>
-2.同一页面，如果Snackbar正在显示，多次触发同一内容的Snackbar，不会重复弹出</br>
-3.同一页面，如果Snackbar正在显示，再次触发Snackbar，如果内容（msg或actionText）发生了变化（不会重建Snackbar实例）或内嵌的容器发生了变化（会重建Snackbar实例），会重新弹出，具有切换效果（与你手机系统原生Snackbar的切换动画一致）。<br/>
-4.可修改布局风格，如背景颜色，文字大小和颜色等</br>
-5.7.可配置离开当前页面，立即消失Snackbar
 ### 添加依赖
 1.在Project的gradle文件中<br/>
 <pre><code>
@@ -73,6 +44,36 @@ allprojects {
         implementation 'com.android.support:design:x.y.z'
 
 </code></pre>
+
+##SmartToast部分
+#### 特点：
+
+2.解决了再不复用Toast实例的情况下，Toast重复弹出，且每个都会待duration耗尽才显示下一个的体验问题<br/>
+如果Toast正在显示，再次触发（内容和位置完全一致）,提供两种处理策略：<br/>
+ACTION_IGNORE为传统解决策略，即不重复弹出,直接忽略<br/>
+ACTION_REPEAT_SHOW_LIKE_SNACKBAR为立即隐藏前一个，再次显示一个，<br/>
+类似Snackbar(不同实例交替显示)<br/>
+默认策略为不重复弹出</br>
+3.新的Toast(内容或位置发生了变化)会立即弹出，不会等待旧的Toast的duration耗尽再弹出，并具有动画效果（与你手机系统原生Toast的切换动画一致）<br/>
+4.可修改Toast默认布局的风格，如背景颜色，文字大小和颜色等<br/>
+5.可为Toast设置自定义布局，并进行代码处理</br>
+6.完美解决Android 7.1的系统bug——Toast BadTokenException<br/>
+7.可配置离开当前页面，立即消失Toast
+#### 注意
+关闭app的系统通知权限,将导致SmartToast无法显示，原因如下：<br/>
+Toast的内部原理使用NotificationManagerService，关闭通知权限后，无法显示。<br/>
+这是原生Toast本身的特性，而不是SmartShow的bug。<br/>
+以淘宝app和优酷app的"再按一次退出程序"的Toast提示为例，关闭他们的通知权限，<br/>
+也会导致Toast不显示，感兴趣的话可以去试一试。
+
+### SmartSnackbar部分
+#### 特点：
+1.Snackbar的显示原理与Toast不同，Toast通过Window展示视图，全局可复用一个实例。Snackbar则是把视图内嵌到当前Activity的android.R.id.content容器或某个CoordinatorLayout中。在获取方式不变（容器不变）的情况下，同一页面可复用一个Snackbar实例，节省内存<br/>
+2.同一页面，如果Snackbar正在显示，多次触发同一内容的Snackbar，不会重复弹出</br>
+3.同一页面，如果Snackbar正在显示，再次触发Snackbar，如果内容（msg或actionText）发生了变化（不会重建Snackbar实例）或内嵌的容器发生了变化（会重建Snackbar实例），会重新弹出，具有切换效果（与你手机系统原生Snackbar的切换动画一致）。<br/>
+4.可修改布局风格，如背景颜色，文字大小和颜色等</br>
+5.7.可配置离开当前页面，立即消失Snackbar
+
 
 ### 使用SmartShow
 第1步，必须初始化
