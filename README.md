@@ -344,9 +344,11 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
         
         ISnackbarSetting defaultActionTextForIndefinite(String actionText);
         
-        //设置离开当前activity时，是否立即消失掉正在显示的Snackbar，默认false，如在Activity A上显示了一个Indefinite Snackbar，
+        //设置离开当前activity时，是否立即消失掉正在显示的Snackbar，默认false，如在Activity A上显示了一个
         
-        //启动Activity B，然后按返回键回到A，原先的Snackbar依然存在，设置为true后，在进入B之前就会消失
+        //Indefinite Snackbar，启动Activity B，然后按返回键回到A，原先的Snackbar依然存在，设置为true后，
+        
+        //在进入B之前就会消失
         
         ISnackbarSetting dismissOnLeave(boolean b); 
 </code></pre>
