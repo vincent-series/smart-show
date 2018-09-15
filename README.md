@@ -50,8 +50,8 @@ allprojects {
 </code></pre>
 
 ### SmartToast部分
-1.复用Toast实例，内容和位置均未改变时，多次触发不会重复弹出；下一个Toast不会等到上一个Toast的Duration耗尽才弹出<br/><br/>
-2.解决传统复用模式的性能缺陷，如正在显示一个内容为"A"的Toast，此时再弹出内容为"B"的Toast时，文本虽改变，<br/><br/>
+1.复用Toast实例，当Toast正在显示时，多次触发内容和位置均未改变的Toast，不会重复弹出；下一个Toast不会等到上一个Toast的Duration耗尽才弹出<br/><br/>
+2.解决传统复用模式的功能缺陷，如正在显示一个内容为"A"的Toast，此时再弹出内容为"B"的Toast时，文本虽改变，<br/><br/>
   但没有弹出效果；如果复用的Toast正在显示，改变其Gravity以改变显示位置会无效，直到消失后再次显示才生效<br/><br/>
 3.可修改Toast默认布局的风格，如背景颜色，文字大小和颜色等<br/><br/>
 4.可为Toast设置自定义布局</br><br/>
@@ -233,18 +233,11 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
 ![图片加载失败](images/g_2.gif)<br/><br/>
 ⑤设置自定义布局<br/><br/>
 ![图片加载失败](images/g_3.gif)<br/>
-
 ### SmartSnackbar部分
-#### 特点：
-1.Snackbar的显示原理与Toast不同，Toast通过Window展示视图，全局可复用一个实例。Snackbar则是把视图内嵌到当前Activity的android.R.id.content容器或某个CoordinatorLayout中。在获取方式不变（容器不变）的情况下，同一页面可复用一个Snackbar实例，节省内存<br/>
-2.同一页面，如果Snackbar正在显示，多次触发同一内容的Snackbar，不会重复弹出</br>
-3.同一页面，如果Snackbar正在显示，再次触发Snackbar，如果内容（msg或actionText）发生了变化（不会重建Snackbar实例）或内嵌的容器发生了变化（会重建Snackbar实例），会重新弹出，具有切换效果（与你手机系统原生Snackbar的切换动画一致）。<br/>
-4.可修改布局风格，如背景颜色，文字大小和颜色等</br>
-5.
-7.可配置离开当前页面，立即消失Snackbar
-
-
-
+1.复用Snackbar实例，当Snackbar正在显示时，多次触发msg和actionTex均未改变的Snackbar，不会重复弹出，
+  若改变，则有弹出效果
+2.可修改布局风格，如背景颜色，文字大小和颜色等</br>
+3.可配置离开当前Activity时，立即消失正在显示的Snackbar
 #### 使用Snackbar
 可获取SnackbarSetting，修改Snackbar布局的默认风格，这一步不是必须的<br/>
 <pre><code>
