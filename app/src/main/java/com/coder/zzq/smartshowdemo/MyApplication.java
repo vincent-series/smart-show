@@ -28,6 +28,7 @@ public class MyApplication extends Application {
             TextView，且id为android:id="@id/custom_toast_msg"
          */
         SmartToast.setting()
+                .dismissOnLeave(true)
                 .backgroundColorRes(R.color.colorPrimary)
 
                 .textSizeSp(18)

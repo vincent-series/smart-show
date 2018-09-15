@@ -167,7 +167,7 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
          
          //对布局进一步处理，callback中会传入布局的根View和显示消息的TextView，
          
-         callback中的处理和以上配置方法的处理有冲突时，将覆盖掉以上的配置
+         //callback中的处理和以上配置方法的处理有冲突时，将覆盖掉以上的配置
          
          IToastSetting processView(IProcessToastCallback callback);  
          
@@ -193,7 +193,7 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
                              }
                          });         
 </code></pre>
-配置类型Toast的主题色
+配置类型Toast（info，success,error,warning）的主题色
 <pre><code>
         IToastSetting typeInfoToastThemeColor(@ColorInt int color);
         
@@ -205,8 +205,17 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
         
                   .typeInfoToastThemeColorRes(R.color.colorPrimary);
 </code></pre>
-
-判断显示和隐藏
+配置离开当前activity时，是否立即隐藏正在显示的Toast（包括普通Toast和类型Toast）,默认false
+<pre><code>
+        IToastSetting dismissOnLeave(boolean b);
+        
+        例如：
+        
+        SmartToast.setting()
+        
+                  .dismissOnLeave(true);
+</code></pre>
+#### 判断显示和隐藏
 <pre><code>
          //是否有Toast在显示
          
