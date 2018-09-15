@@ -69,6 +69,7 @@ public class MyApplication extends Application {
                 .actionColorRes(R.color.colorAccent)
 
                 .dismissOnLeave(true);
+        SmartSnackbar.isShowing();
 
 
     }

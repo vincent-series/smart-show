@@ -372,28 +372,19 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
                         
         .dismissOnLeave(true);
 </code></pre>
-### SmartSnackbar获取方式的说明：
-以上示例获取SmartSnackbar使用的是public static SnackbarShow get()，<br/>
-还可使用public static SnackbarShow get(CoordinatorLayout view)。<br/>
-根据谷歌源码，我们知道创建Snackbar时需传入一个当前页面的某个View。<br/>
-实际上，Snackar会以该View为基点，沿着整个View Tree上溯，直到找到CoordinatorLayout容器或android.R.id.content 容器，哪个先找到，就将视图嵌入其中。<br/>
-为了提高效率，直接将android.R.id.content或者CoordinatorLayout传入会更好。<br/>
-以CoordinatorLayout为内嵌容器时，Snackbar会有一些特殊的行为，如可以用手指手动滑动移除，显示时会导致FloatingActionButton升高等。<br/>
-所以建议，在使用SmartSnackbar时，如果你的页面想以某个具体CoordinatorLayout作为容器，则调用public static SnackbarShow get(CoordinatorLayout view)。<br/>
-否则调用public static SnackbarShow get()，内部会自动将当前Activity的 android.R.id.content作为容器。<br/>
-其他方法：
+#### 判断显示和隐藏
 <pre><code>
 
          //隐藏SmanrtSnackbar
 
          SmartSnackbar.dismiss();
-
-         //设置进入新的页面时，当前页面的Snackbar是否消失，默认false
-
-         SmartSnackbar.setDismissOnLeave(boolean b);
-
+         
+         //是否有Snackbar在显示
+         
+         SmartSnackbar.isShowing();
 </code></pre>
-一般情况下，我们不会监听Snackbar的显示和消失,但如有此需要，将当前页面的Activity实现SnackbarCallback接口，然后重写方法即可。在SmartSnackbar显示时，会检测当前页面是否实现该接口，是则进行回调。
+#### 监听显示和隐藏
+将当前页面的Activity实现SnackbarCallback接口，然后重写方法即可。在SmartSnackbar显示时，会检测当前页面是否实现该接口，是则进行回调。
 <pre><code>
 public class SnackbarActivity extends BaseActivity implements SnackbarCallback {
 
