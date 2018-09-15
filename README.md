@@ -259,15 +259,15 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
 <pre><code>
        //short snackbar
        
-       SmartSnackbar.get().show("为SmartShow Star一下可以么","好的");
+       SmartSnackbar.get().show("为SmartShow Star 一下可以么","好的");
        
        //long snackbar
        
-       SmartSnackbar.get().showLong("为SmartShow Star一下可以么","好的");
+       SmartSnackbar.get().showLong("为SmartShow Star 一下可以么","好的");
        
        //indefinite snackbar
        
-       SmartSnackbar.get().showIndefinite("为SmartShow Star一下可以么","好的");
+       SmartSnackbar.get().showIndefinite("为SmartShow Star 一下可以么","好的");
 </code></pre>
 #### 传入消息文本和动作文本以及动作监听器
 <pre><code>
@@ -300,6 +300,14 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
                 
            });              
 </code></pre>
+以上示例获取SmartSnackbar使用的是SmartSnackbar.get()，<br/>
+还可使用SmartSnackbar.get(CoordinatorLayout view)。<br/>
+根据谷歌源码，我们知道创建Snackbar时需传入一个当前页面的某个View。<br/>
+实际上，Snackar会以该View为基点，沿着整个View Tree上溯，直到找到CoordinatorLayout容器或android.R.id.content 容器，哪个先找到，就将视图嵌入其中。<br/>
+为了提高效率，直接将android.R.id.content或者CoordinatorLayout传入会更好。<br/>
+以CoordinatorLayout为内嵌容器时，Snackbar会有一些特殊的行为，如可以用手指手动滑动移除，显示时会导致FloatingActionButton升高等。<br/>
+所以SmartSnackbar对入口做了限制，如果你的页面想以某个具体CoordinatorLayout作为容器，则调用get(CoordinatorLayout view)。<br/>
+否则调用get()，内部会自动将当前Activity的 android.R.id.content作为容器。<br/>
 #### 定制化
 如果想定制化SmartSnackbar，可调用setting方法获取ISnackbarSetting对象进行全局配置
 <pre><code>
@@ -365,7 +373,15 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
                         
         .dismissOnLeave(true);
 </code></pre>
-
+### SmartSnackbar获取方式的说明：
+以上示例获取SmartSnackbar使用的是public static SnackbarShow get()，<br/>
+还可使用public static SnackbarShow get(CoordinatorLayout view)。<br/>
+根据谷歌源码，我们知道创建Snackbar时需传入一个当前页面的某个View。<br/>
+实际上，Snackar会以该View为基点，沿着整个View Tree上溯，直到找到CoordinatorLayout容器或android.R.id.content 容器，哪个先找到，就将视图嵌入其中。<br/>
+为了提高效率，直接将android.R.id.content或者CoordinatorLayout传入会更好。<br/>
+以CoordinatorLayout为内嵌容器时，Snackbar会有一些特殊的行为，如可以用手指手动滑动移除，显示时会导致FloatingActionButton升高等。<br/>
+所以建议，在使用SmartSnackbar时，如果你的页面想以某个具体CoordinatorLayout作为容器，则调用public static SnackbarShow get(CoordinatorLayout view)。<br/>
+否则调用public static SnackbarShow get()，内部会自动将当前Activity的 android.R.id.content作为容器。<br/>
 其他方法：
 <pre><code>
 
