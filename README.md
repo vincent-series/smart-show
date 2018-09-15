@@ -49,7 +49,7 @@ allprojects {
         SmartShow.init(this);
 </code></pre>
 
-## SmartToast部分
+### SmartToast部分
 1.复用Toast实例，内容和位置均未改变时，多次触发不会重复弹出；下一个Toast不会等到上一个Toast的Duration耗尽才弹出<br/><br/>
 2.解决传统复用模式的性能缺陷，如正在显示一个内容为"A"的Toast，此时再弹出内容为"B"的Toast时，文本虽改变，<br/><br/>
   但没有弹出效果；如果复用的Toast正在显示，改变其Gravity以改变显示位置会无效，直到消失后再次显示才生效<br/><br/>
