@@ -15,8 +15,8 @@
 微信：w361281607<br/><br/>
 ![图片加载失败](images/wx_2d.jpg)<br/><br/>
 邮箱：coder_zzq@163.com<br/>
-### 添加依赖
-1.在Project的gradle文件中<br/>
+## 引入SmartShow
+1.在Project的gradle文件中<br/><br/>
 <pre><code>
 allprojects {
 
@@ -33,7 +33,7 @@ allprojects {
 2.在Module的grable文件中<br/>
 <pre><code>
 
-        implementation('com.github.the-pig-of-jungle:SmartShow:v2.2.4') {
+        implementation('com.github.the-pig-of-jungle:SmartShow:v2.3.1') {
         
             exclude group: 'com.android.support'
             
@@ -42,10 +42,14 @@ allprojects {
         //添加和你项目匹配的design依赖库
         
         implementation 'com.android.support:design:x.y.z'
-
+        
+</code></pre>
+3.在Application的onCreate方法中初始化<br/>
+<pre><code>
+        SmartShow.init(this);
 </code></pre>
 
-##SmartToast部分
+## 使用
 #### 特点：
 
 2.解决了再不复用Toast实例的情况下，Toast重复弹出，且每个都会待duration耗尽才显示下一个的体验问题<br/>

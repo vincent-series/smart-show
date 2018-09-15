@@ -22,7 +22,6 @@ public class MyApplication extends Application {
         SmartShow.init(this);
 
         SmartToast.setting()
-                .typeInfoToastThemeColorRes(R.color.colorPrimary)
                 .dismissOnLeave(true);
 
 
