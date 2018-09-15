@@ -119,7 +119,7 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
         SmartToast.warning("电量过低，请充电");
         
 </pre></code>
-其他API
+判断显示和隐藏
 <pre><code>
          //是否有Toast在显示
          
