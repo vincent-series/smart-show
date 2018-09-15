@@ -137,7 +137,7 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
     
     IToastSetting view(@LayoutRes int layout);
     
-    例如：
+    例子：
     
     SmartToast.setting()
     
@@ -171,7 +171,7 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
          
          IToastSetting processView(IProcessToastCallback callback);  
          
-         例如：
+         例子：
          
           SmartToast.setting()
                          
@@ -199,7 +199,7 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
         
         IToastSetting typeInfoToastThemeColorRes(@ColorRes int colorRes);
         
-        例如：
+        例子：
         
         SmartToast.setting()
         
@@ -209,7 +209,7 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
 <pre><code>
         IToastSetting dismissOnLeave(boolean b);
         
-        例如：
+        例子：
         
         SmartToast.setting()
         
