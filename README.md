@@ -239,53 +239,7 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
 2.可修改布局风格，如背景颜色，文字大小和颜色等</br><br/>
 3.可配置离开当前Activity时，立即消失正在显示的Snackbar,一般Indefinite Snackbar有此需求
 ### API
-显示Snackbar
-<pre><code>
-   //返回SnackbarSetting对象
-
-   SmartShow.snackbarSetting()
-
-       //设置背景颜色
-
-       .backgroundColorRes(R.color.colorPrimary)
-
-       //设置消息文本颜色
-
-       .msgTextColor(Color.WHITE)
-
-       //设置消息文本大小
-
-       .msgTextSizeSp(18)
-
-       //设置动作文本颜色
-
-       .actionColorRes(R.color.colorAccent)
-
-       //设置动作文本大小
-
-       .actionSizeSp(18)
-
-       //设置进入新的页面时，该页面的Snackbar是否消失（主要是Indefinite Snackbar而言）
-
-       .dismissOnLeave(true)
-
-       //对布局进一步处理
-
-       .processView(new ProcessSnackbarCallback() {
-           @Override
-
-           //layout 父布局；msgView 消息文本View;actionView 动作文本View
-
-           public void processSnackbarView(Snackbar.SnackbarLayout layout, TextView msgView, TextView actionView) {
-
-               //...
-
-       }
-
-   });
-
-</code></pre>
-获取当前页面的Snackbar，调用show方法显示，三种duration体现在方法名上，而不是传参，尽可能简化调用<br/><br/>
+调用show方法显示Snackbar，三种duration体现在方法名上，而不是传参，尽可能简化调用<br/><br/>
 只传入消息文本
 <pre><code>
         //short snackbar
