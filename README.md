@@ -205,7 +205,7 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
         
                   .typeInfoToastThemeColorRes(R.color.colorPrimary);
 </code></pre>
-配置离开当前activity时，是否立即隐藏正在显示的Toast（包括普通Toast和类型Toast）,默认false
+配置离开当前activity时，是否立即隐藏正在显示的Toast（不管是普通Toast还是类型Toast）,默认false
 <pre><code>
         IToastSetting dismissOnLeave(boolean b);
         
@@ -225,83 +225,6 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
 
          SmartToast.dismiss();
 </code></pre>
-### SmartSnackbar部分
-#### 特点：
-1.Snackbar的显示原理与Toast不同，Toast通过Window展示视图，全局可复用一个实例。Snackbar则是把视图内嵌到当前Activity的android.R.id.content容器或某个CoordinatorLayout中。在获取方式不变（容器不变）的情况下，同一页面可复用一个Snackbar实例，节省内存<br/>
-2.同一页面，如果Snackbar正在显示，多次触发同一内容的Snackbar，不会重复弹出</br>
-3.同一页面，如果Snackbar正在显示，再次触发Snackbar，如果内容（msg或actionText）发生了变化（不会重建Snackbar实例）或内嵌的容器发生了变化（会重建Snackbar实例），会重新弹出，具有切换效果（与你手机系统原生Snackbar的切换动画一致）。<br/>
-4.可修改布局风格，如背景颜色，文字大小和颜色等</br>
-5.7.可配置离开当前页面，立即消失Snackbar
-
-
-### 使用SmartShow
-第1步，必须初始化
-<pre><code>
-    //必须初始化
-
-    SmartShow.init(this);
-</code></pre>
-#### 使用Toast
-可获取ToastSetting对SmartToast进行配置,这一步不是必须的<br/>
-<pre><code>
-   //返回ToastSetting对象
-
-   SmartShow.toastSetting()
-
-      //自定义布局，参数可以是布局资源，也可以View。
-
-      // 在自定义布局中，一定要设置显示文本提示的
-
-      //TextView的Id为android:id="@id/custom_toast_msg"。
-
-       .view(R.layout.custom_toast)
-
-       //设置背景颜色
-
-       .backgroundColorRes(R.color.colorPrimary)
-
-       //文本颜色
-
-       .textColorRes(R.color.colorAccent)
-
-       //设置文本字体大小
-
-       .textSizeSp(18)
-
-       //设置文本是否加粗
-
-       .textBold(true)
-
-       //设置离开当前页面时，该页面的Toast是否立即消失，默认false
-
-       .dismissOnLeave(true)
-       
-       //当Toast重复（内容和位置完全一致，且当前正在显示该Toast）时的处理策略：ACTION_IGNORE为传统模式，即不重复弹出；
-       //ACTION_REPEAT_SHOW_LIKE_SNACKBAR为立即隐藏前一个，再次显示一个，类似Snackbar
-       //默认策略为不重复弹出，这里显示指定为重复弹出
-       .actionWhenDuplicate(ToastSetting.ACTION_REPEAT_SHOW_LIKE_SNACKBAR)
-
-       //对布局进一步处理
-
-       .processView(new ProcessToastCallback() {
-
-            @Override
-
-            //isCustom 是否是自定义布局；rootView 布局根view
-
-            //outParent 默认布局时，msgView的父布局，也是根布局
-
-            //msgView 显示文本的TxtView
-
-            public void processView(boolean isCustom, View rootView, LinearLayout outParent, TextView msgView) {
-
-                  //...
-
-            }
-
-      });
-</code></pre>
-
 #### 效果图
 ①多次触发同一内容的Toast，不会重复弹出</br>
 ②新的Toast(内容或位置发生了变化)会立即弹出，不会等待旧的Toast的duration耗尽再弹出，并具有动画效果（与你手机系统原生Toast的切换动画一致）<br/></br>
@@ -310,6 +233,17 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
 ![图片加载失败](images/g_2.gif)<br/><br/>
 ⑤设置自定义布局<br/><br/>
 ![图片加载失败](images/g_3.gif)<br/>
+
+### SmartSnackbar部分
+#### 特点：
+1.Snackbar的显示原理与Toast不同，Toast通过Window展示视图，全局可复用一个实例。Snackbar则是把视图内嵌到当前Activity的android.R.id.content容器或某个CoordinatorLayout中。在获取方式不变（容器不变）的情况下，同一页面可复用一个Snackbar实例，节省内存<br/>
+2.同一页面，如果Snackbar正在显示，多次触发同一内容的Snackbar，不会重复弹出</br>
+3.同一页面，如果Snackbar正在显示，再次触发Snackbar，如果内容（msg或actionText）发生了变化（不会重建Snackbar实例）或内嵌的容器发生了变化（会重建Snackbar实例），会重新弹出，具有切换效果（与你手机系统原生Snackbar的切换动画一致）。<br/>
+4.可修改布局风格，如背景颜色，文字大小和颜色等</br>
+5.
+7.可配置离开当前页面，立即消失Snackbar
+
+
 
 #### 使用Snackbar
 可获取SnackbarSetting，修改Snackbar布局的默认风格，这一步不是必须的<br/>
