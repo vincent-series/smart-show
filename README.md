@@ -384,26 +384,27 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
          SmartSnackbar.isShowing();
 </code></pre>
 #### 监听显示和隐藏
-将当前页面的Activity实现SnackbarCallback接口，然后重写方法即可。在SmartSnackbar显示时，会检测当前页面是否实现该接口，是则进行回调。
+将当前页面的Activity实现ISnackbarShowCallback接口，然后重写方法即可。在SmartSnackbar显示时，会检测当前页面是否实现该接口，是则进行回调。
 <pre><code>
-public class SnackbarActivity extends BaseActivity implements SnackbarCallback {
+public class SnackbarActivity extends BaseActivity implements ISnackbarShowCallback {
 
-
-    @Override
-    protected int contentLayout() {
-        return R.layout.activity_smart_show;
-    }
-
-    @Override
-    public void onSnackbarShown(Snackbar sb) {
-        Log.d("Main", "shown");
-    }
-
-    @Override
-    public void onSnackbarDismissed(Snackbar sb, int event) {
-        Log.d("Main", "dismiss");
-    }
-
+        @Override
+        protected int contentLayout() {
+    
+           return R.layout.activity_smart_show;
+        
+        }
+    
+        @Override
+        public void onShown(Snackbar sb) {
+            
+        }
+    
+        @Override
+        public void onDismissed(Snackbar sb, int event) {
+    
+        }
+        
 }
 </code></pre>
 ### SmartSnackbar获取方式的说明：
