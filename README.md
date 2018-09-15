@@ -234,9 +234,9 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
 ⑤设置自定义布局<br/><br/>
 ![图片加载失败](images/g_3.gif)<br/>
 ### SmartSnackbar部分
-1.复用Snackbar实例，当Snackbar正在显示时，多次触发msg和actionTex均未改变的Snackbar，不会重复弹出，
-  若改变，则有弹出效果
-2.可修改布局风格，如背景颜色，文字大小和颜色等</br>
+1.复用Snackbar实例，当Snackbar正在显示时，多次触发msg和actionTex均未改变的Snackbar，不会重复弹出，<br/>
+  若改变，则有弹出效果<br/><br/>
+2.可修改布局风格，如背景颜色，文字大小和颜色等</br><br/>
 3.可配置离开当前Activity时，立即消失正在显示的Snackbar
 #### 使用Snackbar
 可获取SnackbarSetting，修改Snackbar布局的默认风格，这一步不是必须的<br/>
