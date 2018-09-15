@@ -276,7 +276,7 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
            @Override
            public void onClick(View v) {
        
-              Log.d("SmartShow","Thank you !");
+                //...
        
               }
            });
@@ -286,7 +286,7 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
            @Override
            public void onClick(View v) {
        
-              Log.d("SmartShow","Thank you !");
+                //...
        
               }
            });
@@ -295,14 +295,60 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
        
            @Override
            public void onClick(View v) {
-       
-              Log.d("SmartShow","Thank you !");
-       
-              }
+           
+                //...
+                
            });              
 </code></pre>
 #### 定制化
-
+如果想定制化SmartSnackbar，可调用setting方法获取ISnackbarSetting对象进行全局配置
+<pre><code>
+        //获取ISnackbarSetting对象
+        SmartSnackbar.setting()
+</code></pre>
+配置布局风格
+<pre><code>
+        //设置背景颜色
+        
+        ISnackbarSetting backgroundColor(int color);
+        
+        ISnackbarSetting backgroundColorRes(int colorRes);
+        
+        //设置消息文本颜色
+        
+        ISnackbarSetting msgTextColor(@ColorInt int color);
+        
+        ISnackbarSetting msgTextColorRes(@ColorRes int colorRes);
+        
+        //设置消息文本大小
+        
+        ISnackbarSetting msgTextSizeSp(float textSizeSp);
+        
+        //设置动作文本颜色
+        
+        ISnackbarSetting actionColor(@ColorInt int color);
+        
+        ISnackbarSetting actionColorRes(@ColorRes int colorRes);
+        
+        //设置动作文本大小
+        
+        ISnackbarSetting actionSizeSp(float textSizeSp);
+        
+        //对布局进一步处理，callback中会传入布局的根View和显示消息文本的TextView以及动作文本的Button，
+                 
+        //callback中的处理和以上配置方法的处理有冲突时，将覆盖掉以上的配置
+        
+        ISnackbarSetting processView(IProcessBarCallback callback);
+        
+        //设置调用Indefinite Snackbar时，如果只传入消息文本，默认显示的动作文本字符串，如果不设置，即显示为"确定"
+        ISnackbarSetting defaultActionTextForIndefinite(String actionText);
+        
+        //设置离开当前activity时，是否立即消失掉正在显示的Snackbar，默认false，如在Activity A上显示了一个Indefinite Snackbar，
+        
+        //启动Activity B，然后按返回键回到A，原先的Snackbar依然存在，设置为true后，在进入B之前就会消失
+        
+        ISnackbarSetting dismissOnLeave(boolean b); 
+</code></pre>
 其他方法：
 <pre><code>
 
