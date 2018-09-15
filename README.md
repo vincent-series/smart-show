@@ -9,7 +9,7 @@
 2.x 版本 <br/><br/>
 1.x 版本 http://blog.csdn.net/jungle_pig/article/details/78568493 <br/><br/>
 该博文已授权《第一行代码》作者郭霖的微信公众号同步发表：http://mp.weixin.qq.com/s/l62PtbmrIOkVKfJ2r0JwEw <br/><br/>
-##关于作者
+## 关于作者
 为了让SmartShow库更加健壮，如果您在使用过程中发现任何问题，请联系我，我会立即跟进修复和维护。感谢您的支持！<br/><br/>
 作者：朱志强<br/><br/>
 微信：w361281607<br/><br/>
