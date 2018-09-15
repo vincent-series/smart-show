@@ -116,7 +116,7 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
         
         SmartToast.warning("电量过低，请充电");
                 
-        SmartToast.warning("电量过低，请充电");
+        SmartToast.warningLong("电量过低，请充电");
         
 </pre></code>
 #### 定制化
@@ -126,7 +126,7 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
         
         SmartToast.setting()                   
 </code></pre>
-替换Toast的默认布局，但是在自定义布局中必须含有显示消息的TextView，<br/>
+替换普通Toast的默认布局，但是在自定义布局中必须含有显示消息的TextView，<br/>
 并且指定它的id为android:id="@id/custom_toast_msg"
 <pre><code>
     //直接传入View
@@ -143,7 +143,7 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
     
               .view(R.layout.custom_toast);
 </code></pre>
-配置布局风格，不管是否自定义布局，均起作用
+配置普通Toast布局风格，不管是否自定义布局，均起作用
 <pre><code>           
          //设置布局背景颜色
          
@@ -193,7 +193,18 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
                              }
                          });         
 </code></pre>
-
+配置类型Toast的主题色
+<pre><code>
+        IToastSetting typeInfoToastThemeColor(@ColorInt int color);
+        
+        IToastSetting typeInfoToastThemeColorRes(@ColorRes int colorRes);
+        
+        例如：
+        
+        SmartToast.setting()
+        
+                  .typeInfoToastThemeColorRes(R.color.colorPrimary);
+</code></pre>
 
 判断显示和隐藏
 <pre><code>
