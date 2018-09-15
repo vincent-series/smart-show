@@ -98,7 +98,6 @@ LongToast
         SmartToast.showLongInCenter("我是朱志强！");
 
         //在左上角，x，y偏移量为10dp的位置显示
-        
         SmartToast.showLongAtLocation("我是朱志强",Gravity.LEFT | Gravity.TOP,10,10);
 </pre></code>
 其他API
