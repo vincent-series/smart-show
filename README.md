@@ -341,6 +341,7 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
         ISnackbarSetting processView(IProcessBarCallback callback);
         
         //设置调用Indefinite Snackbar时，如果只传入消息文本，默认显示的动作文本字符串，如果不设置，即显示为"确定"
+        
         ISnackbarSetting defaultActionTextForIndefinite(String actionText);
         
         //设置离开当前activity时，是否立即消失掉正在显示的Snackbar，默认false，如在Activity A上显示了一个Indefinite Snackbar，
