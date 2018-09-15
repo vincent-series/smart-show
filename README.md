@@ -15,7 +15,7 @@
 微信：w361281607<br/><br/>
 ![图片加载失败](images/wx_2d.jpg)<br/><br/>
 邮箱：coder_zzq@163.com<br/>
-## 引入SmartShow
+# 引入SmartShow
 1.在Project的gradle文件中<br/><br/>
 <pre><code>
 allprojects {
@@ -49,7 +49,7 @@ allprojects {
         SmartShow.init(this);
 </code></pre>
 
-### SmartToast部分
+## SmartToast部分
 1.复用Toast实例，内容和位置均未改变时，多次触发不会重复弹出；下一个Toast不会等到上一个Toast的Duration耗尽才弹出<br/><br/>
 2.解决传统复用模式的性能缺陷，如正在显示一个内容为"A"的Toast，此时再弹出内容为"B"的Toast时，文本虽改变，<br/><br/>
   但没有弹出效果；如果复用的Toast正在显示，改变其Gravity以改变显示位置会无效，直到消失后再次显示才生效<br/><br/>
@@ -58,14 +58,14 @@ allprojects {
 5.完美解决Android 7.1的系统bug——Toast BadTokenException<br/><br/>
 6.可配置离开当前页面，立即消失正在当前页面之上显示的Toast<br/><br/>
 7.结合主流app类型Toast的展示效果，提供info、success、error、warnign 4种类型Toast
-#### 注意
+### 注意
 关闭app的系统通知权限,将导致SmartToast无法显示<br/>
 Toast的内部原理使用NotificationManagerService，关闭通知权限后，将无法显示。<br/>
 这是原生Toast本身的特性，以淘宝app和优酷app的"再按一次退出程序"的Toast提示为例，关闭他们的通知权限，<br/>
 将会导致Toast不显示。
-#### API
+### API
 调用show方法显示Toast，duration和常用的显示位置体现在方法名上，而不是传参，调用非常简易
-普通Toast
+#### 普通 Toast
 <pre><code>
         //在默认位置显示
 
@@ -91,7 +91,7 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
         
         SmartToast.showLongAtLocation("我是朱志强",Gravity.LEFT | Gravity.TOP,10,10);
 </pre></code>
-类型Toast
+#### 类型 Toast
 <pre><code>
         //普通信息
         
