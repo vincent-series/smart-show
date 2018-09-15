@@ -137,12 +137,12 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
     
     IToastSetting view(@LayoutRes int layout);
     
-    //例如：
+    例如：
     
     SmartToast.setting()
     
               .view(R.layout.custom_toast);
-</code><pre>
+</code></pre>
 配置布局风格，不管是否自定义布局，均起作用
 <pre><code>           
          //设置布局背景颜色
