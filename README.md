@@ -89,6 +89,31 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
         SmartToast.showAtLocation("我是朱志强",Gravity.LEFT | Gravity.TOP,10,10);
         
         SmartToast.showLongAtLocation("我是朱志强",Gravity.LEFT | Gravity.TOP,10,10);
+        
+        //普通信息
+        
+        SmartToast.info("已在后台下载");
+        
+        SmartToast.infoLong("已在后台下载");
+        
+        //成功/完成
+        
+        SmartToast.success("重置成功");
+        
+        SmartToast.successLong("重置成功");
+        
+        //错误/失败
+        
+        SmartToast.error("保存失败");
+        
+        SmartToast.errorLong("保存失败");
+        
+        //警告
+        
+        SmartToast.warning("电量过低，请充电");
+                
+        SmartToast.warning("电量过低，请充电");
+        
 </pre></code>
 
 其他API
