@@ -305,8 +305,8 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
 沿着整个View Tree上溯，直到找到CoordinatorLayout容器或android.R.id.content 容器，哪个先找到，就将视图嵌入其中。<br/><br/>
 为了提高效率，直接将android.R.id.content或者CoordinatorLayout传入会更好。<br/><br/>
 以CoordinatorLayout为内嵌容器时，Snackbar会有一些特殊的行为，如可以用手指手动滑动移除，显示时会导致FloatingActionButton升高等。<br/><br/>
-所以SmartSnackbar对入口做了限制，如果你的页面想以某个具体CoordinatorLayout作为容器，则调用get(CoordinatorLayout view)。<br/>
-否则调用get()，内部会自动将当前Activity的 android.R.id.content作为容器。<br/>
+所以SmartSnackbar对入口做了限制，如果你的页面想以某个具体CoordinatorLayout作为容器，<br/>
+则调用get(CoordinatorLayout view)。否则调用get()，内部会自动将当前Activity的 android.R.id.content作为容器。<br/>
 #### 定制化
 如果想定制化SmartSnackbar，可调用setting方法获取ISnackbarSetting对象进行全局配置
 <pre><code>
