@@ -62,34 +62,13 @@ public class MyApplication extends Application {
 
         SmartSnackbar.setting()
 
-                //设置背景颜色，有可选方法，直接以颜色值为参数
-
                 .backgroundColorRes(R.color.colorPrimary)
-
-                //设置消息文本颜色，有可选方法，直接以颜色值为参数
 
                 .msgTextColorRes(R.color.white)
 
-                //设置动作文本颜色，有可选方法，直接以颜色值为参数
-
                 .actionColorRes(R.color.colorAccent)
 
-                //设置消息文本字体大小，单位为sp
-
-                .msgTextSizeSp(18)
-
-                //设置动作文本字体大小，单位为sp
-
-                .actionSizeSp(18)
-
-                //如果以上还不够，可调用该方法
-
-                .processView(new IProcessBarCallback() {
-                    @Override
-                    public void processBarView(ViewGroup layout, TextView msgView, Button actionView) {
-
-                    }
-                });
+                .dismissOnLeave(true);
 
 
     }

@@ -304,6 +304,7 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
 如果想定制化SmartSnackbar，可调用setting方法获取ISnackbarSetting对象进行全局配置
 <pre><code>
         //获取ISnackbarSetting对象
+        
         SmartSnackbar.setting()
 </code></pre>
 配置布局风格
@@ -351,7 +352,20 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
         //在进入B之前就会消失
         
         ISnackbarSetting dismissOnLeave(boolean b); 
+        
+        例子：
+        
+        SmartSnackbar.setting()
+                        
+        .backgroundColorRes(R.color.colorPrimary)
+        
+        .msgTextColorRes(R.color.white)
+        
+        .actionColorRes(R.color.colorAccent)
+                        
+        .dismissOnLeave(true);
 </code></pre>
+
 其他方法：
 <pre><code>
 
