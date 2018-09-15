@@ -237,9 +237,9 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
 1.复用Snackbar实例，当Snackbar正在显示时，多次触发msg和actionTex均未改变的Snackbar，不会重复弹出，<br/>
   若改变，则有弹出效果<br/><br/>
 2.可修改布局风格，如背景颜色，文字大小和颜色等</br><br/>
-3.可配置离开当前Activity时，立即消失正在显示的Snackbar
-#### 使用Snackbar
-可获取SnackbarSetting，修改Snackbar布局的默认风格，这一步不是必须的<br/>
+3.可配置离开当前Activity时，立即消失正在显示的Snackbar,一般Indefinite Snackbar有此需求
+### API
+显示Snackbar
 <pre><code>
    //返回SnackbarSetting对象
 
@@ -285,20 +285,22 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
    });
 
 </code></pre>
-
 获取当前页面的Snackbar，调用show方法显示，三种duration体现在方法名上，而不是传参，尽可能简化调用<br/><br/>
-Short Snackbar<br/>
+只传入消息文本
 <pre><code>
-        //获取当前页面的Snackbar，显示消息
-
+        //short snackbar
+        
         SmartSnackbar.get().show("我是朱志强");
-</code></pre>
-Long Snackbar<br/>
-<pre><code>
-        //获取当前页面的Snackbar，显示消息
-
+        
+        //long snackbar
+        
         SmartSnackbar.get().showLong("我是朱志强");
+        
+       //indefinite snackbar,只传入消息文本时，会显示默认的动作文本"确定"，点击动作文本，执行默认行为--Snackbar消失
+        
+       SmartSnackbar.get().showIndefinite("我是朱志强");     
 </code></pre>
+
 Indefinite Snackbar<br/>
 <pre><code>
         获取当前页面的Snackbar，显示消息和动作文本，传入点击动作文本的回调代码

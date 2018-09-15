@@ -30,8 +30,7 @@ public class SmartSnackbarDeligate extends SmartBarDelegate<Snackbar, Snackbar.S
         Activity activity = ActivityStack.getTop();
         mPageContext = activity;
         //取出android.R.id.content
-        View view = activity.findViewById(android.R.id.content);
-
+        View view = activity == null ? null : activity.findViewById(android.R.id.content);
         return getFromView(view);
     }
 

@@ -77,7 +77,7 @@ public class PlainToastManager extends BaseToastManager implements IPlainShow {
             mMsgView.setGravity(Gravity.CENTER);
             mMsgView.getPaint().setFakeBoldText(SmartToastDelegate.get().getToastSetting().isTextBold());
             if (SmartToastDelegate.get().getToastSetting().isViewCallbackSetup()) {
-                SmartToastDelegate.get().getToastSetting().getIProcessToastCallback().processView(SmartToastDelegate.get().getToastSetting().isCustom(), mView, mMsgView);
+                SmartToastDelegate.get().getToastSetting().getIProcessToastCallback().processView( mView, mMsgView);
             }
 
         }

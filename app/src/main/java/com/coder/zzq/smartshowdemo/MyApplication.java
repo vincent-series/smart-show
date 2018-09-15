@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.coder.zzq.smartshow.SmartShow;
 import com.coder.zzq.smartshow.basebar.IBarSetting;
 import com.coder.zzq.smartshow.snackbar.SmartSnackbar;
+import com.coder.zzq.smartshow.snackbar.SmartSnackbarDeligate;
 import com.coder.zzq.smartshow.toast.IProcessToastCallback;
 import com.coder.zzq.smartshow.toast.SmartToast;
 import com.coder.zzq.smartshow.topbar.SmartTopBar;
@@ -23,6 +24,10 @@ public class MyApplication extends Application {
         super.onCreate();
 
         SmartShow.init(this);
+        SmartSnackbar.get().show("你好");
+        SmartTopBar.get().show("你好");
+        SmartSnackbar.get().showIndefinite("我是朱志强");
+
         /*
             如果不想使用Toast的默认布局，可以自定义布局，但是在你的布局中必须含有显示消息的
             TextView，且id为android:id="@id/custom_toast_msg"
