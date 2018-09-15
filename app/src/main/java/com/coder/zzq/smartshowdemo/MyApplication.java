@@ -21,10 +21,7 @@ public class MyApplication extends Application {
 
         SmartShow.init(this);
 
-        SmartToast.setting()
-                .backgroundColorRes(R.color.colorPrimary)
-                ...
-                .dismissOnLeave(true);
+
 
 
         SmartTopBar.setting()

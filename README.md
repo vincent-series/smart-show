@@ -56,7 +56,7 @@ allprojects {
 3.可修改Toast默认布局的风格，如背景颜色，文字大小和颜色等<br/><br/>
 4.可为Toast设置自定义布局</br><br/>
 5.完美解决Android 7.1的系统bug——Toast BadTokenException<br/><br/>
-6.可配置离开当前页面，立即消失正在当前页面之上显示的Toast<br/><br/>
+6.可配置离开当前页面，立即消失正在显示的Toast<br/><br/>
 7.结合主流app类型Toast的展示效果，提供info、success、error、warnign 4种类型Toast
 ### 注意
 关闭app的系统通知权限,将导致SmartToast无法显示<br/>
