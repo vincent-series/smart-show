@@ -64,44 +64,33 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
 这是原生Toast本身的特性，以淘宝app和优酷app的"再按一次退出程序"的Toast提示为例，关闭他们的通知权限，<br/>
 将会导致Toast不显示。
 #### API
-duration和常用的显示位置体现在方法名上，而不是传参，调用非常简易<br/><br/>
-##### Short Toast
+显示Toast的api,duration和常用的显示位置体现在方法名上，而不是传参，调用非常简易<br/><br/>
 <pre><code>
         //在默认位置显示
 
         SmartToast.show("我是朱志强！");
+        
+        SmartToast.showLong("我是朱志强！");
 
         //在屏幕顶部显示，水平居中，距离顶部距离与在默认位置显示时，距离底部的距离一致
 
         SmartToast.showAtTop("我是朱志强!");
-
-        //在屏幕中央显示
-
-        SmartToast.showInCenter("我是朱志强！");
-
-        //在左上角，x，y偏移量为10dp的位置显示
-
-        SmartToast.showAtLocation("我是朱志强",Gravity.LEFT | Gravity.TOP,10,10);
-</pre></code>
-Long Toast<br/>
-<pre><code>
-        //在默认位置显示
-
-        SmartToast.showLong("我是朱志强！");
-
-        //在屏幕顶部显示，距离顶部位置为Toast在Y方向默认的偏移距离
-
+        
         SmartToast.showLongAtTop("我是朱志强!");
 
         //在屏幕中央显示
 
+        SmartToast.showInCenter("我是朱志强！");
+        
         SmartToast.showLongInCenter("我是朱志强！");
 
-        //在指定位置显示，x,y方向偏移量单位为dp
+        //在左上角，x，y偏移量为10dp的位置显示
 
+        SmartToast.showAtLocation("我是朱志强",Gravity.LEFT | Gravity.TOP,10,10);
+        
         SmartToast.showLongAtLocation("我是朱志强",Gravity.LEFT | Gravity.TOP,10,10);
-</code></pre>
-其他方法
+</pre></code>
+其他api
 <pre><code>
          //Toast是否显示
 
