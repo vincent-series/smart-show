@@ -413,3 +413,4 @@ public class SnackbarActivity extends BaseActivity implements ISnackbarShowCallb
 ![图片加载失败](images/g_4.gif)<br/><br/>
 ③可修改布局风格，如背景颜色，文字大小和颜色等</br></br>
 ![图片加载失败](images/g_5.gif)
+### SmartTopbar部分
