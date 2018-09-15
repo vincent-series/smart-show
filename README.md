@@ -64,12 +64,13 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
 这是原生Toast本身的特性，以淘宝app和优酷app的"再按一次退出程序"的Toast提示为例，关闭他们的通知权限，<br/>
 将会导致Toast不显示。
 #### API
-显示Toast的API,duration和常用的显示位置体现在方法名上，而不是传参，调用非常简易<br/><br/>
+调用show方法显示Toast，duration和常用的显示位置体现在方法名上，而不是传参，调用非常简易<br/><br/>
 ShortToast
 <pre><code>
         //在默认位置显示
 
-        SmartToast.show("我是朱志强！"); / SmartToast.showLong("我是朱志强！");
+        SmartToast.show("我是朱志强！");
+        SmartToast.showLong("我是朱志强！");
 
         //在屏幕顶部显示，水平居中，距离顶部距离与在默认位置显示时，距离底部的距离一致
 
@@ -83,6 +84,7 @@ ShortToast
 
         SmartToast.showAtLocation("我是朱志强",Gravity.LEFT | Gravity.TOP,10,10);
 </pre></code>
+
 Long Toast
 <pre><code>
         //在默认位置显示
