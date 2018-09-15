@@ -100,13 +100,13 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
         
         SmartToast.infoLong("已在后台下载");
         
-        //成功/完成
+        //成功or完成
         
         SmartToast.success("重置成功");
         
         SmartToast.successLong("重置成功");
         
-        //错误/失败
+        //错误or失败
         
         SmartToast.error("保存失败");
         
@@ -126,7 +126,7 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
         
         SmartToast.setting()                   
 </code></pre>
-替换Toast的默认布局，但是在自定义布局中必须含有显示消息的TextView，<br/><br/>
+替换Toast的默认布局，但是在自定义布局中必须含有显示消息的TextView，<br/>
 并且指定它的id为android:id="@id/custom_toast_msg"
 <pre><code>
     //直接传入View
@@ -137,7 +137,7 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
     
     IToastSetting view(@LayoutRes int layout);
     
-    例如：
+    //例如：
     
     SmartToast.setting()
     
