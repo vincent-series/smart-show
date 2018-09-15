@@ -119,6 +119,82 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
         SmartToast.warning("电量过低，请充电");
         
 </pre></code>
+#### 定制化
+如果想定制化SmartToast，可调用setting方法获取IToastSetting对象进行全局配置
+<pre><code>  
+        //获取IToastSetting对象
+        
+        SmartToast.setting()                   
+</code></pre>
+替换Toast的默认布局，但是在自定义布局中必须含有显示消息的TextView，<br/><br/>
+并且指定它的id为android:id="@id/custom_toast_msg"
+<pre><code>
+    //直接传入View
+    
+    IToastSetting view(View view);
+    
+    //传入布局资源
+    
+    IToastSetting view(@LayoutRes int layout);
+    
+    例如：
+    
+    SmartToast.setting()
+    
+              .view(R.layout.custom_toast);
+</code><pre>
+配置布局风格，不管是否自定义布局，均起作用
+<pre><code>           
+         //设置布局背景颜色
+         
+         IToastSetting backgroundColor(@ColorInt int color);
+         
+         IToastSetting backgroundColorRes(@ColorRes int colorRes);
+         
+         // 设置消息文本颜色
+         
+         IToastSetting textColor(@ColorInt int color);
+         
+         IToastSetting textColorRes(@ColorRes int color);
+         
+         //设置消息文本大小
+         
+         IToastSetting textSizeSp(float sp);
+         
+         //消息文本是否为粗体
+         
+         IToastSetting textBold(boolean bold);
+         
+         //对布局进一步处理，callback中会传入布局的根View和显示消息的TextView，
+         
+         callback中的处理和以上配置方法的处理有冲突时，将覆盖掉以上的配置
+         
+         IToastSetting processView(IProcessToastCallback callback);  
+         
+         例如：
+         
+          SmartToast.setting()
+                         
+                    .backgroundColorRes(R.color.colorPrimary)
+                         
+                    .textSizeSp(18)
+                    
+                    .textBold(true)
+                         
+                    .processView(new IProcessToastCallback() {
+                    
+                             //root 为布局根View，msgView为显示消息的TextView
+                             
+                             @Override                           
+                             public void processView(View rootView, TextView msgView) {
+                             
+                                //... 
+                                
+                             }
+                         });         
+</code></pre>
+
+
 判断显示和隐藏
 <pre><code>
          //是否有Toast在显示
@@ -128,57 +204,6 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
          //隐藏当前显示的Toast
 
          SmartToast.dismiss();
-</code></pre>
-如果需要对SmartToast进行定制化，可调用setting方法获取IToastSetting对象进行全局配置
-<pre><code>
-        
-        //获取IToastSetting对象
-        
-        SmartToast.setting()
-        
-                  .backgroundColorRes(R.color.colorPrimary)
-                  
-                  ...
-                  
-                  .dismissOnLeave(true);
-</code></pre>
-IToastSetting 可供调用的方法中，
-<pre><code>
-         //设置背景颜色
-         
-         IToastSetting backgroundColor(@ColorInt int color);
-         
-         IToastSetting backgroundColorRes(@ColorRes int colorRes);
-         
-         // 设置文本颜色
-         
-         IToastSetting textColor(@ColorInt int color);
-         
-         IToastSetting textColorRes(@ColorRes int color);
-         
-         //设置文本大小
-         
-         IToastSetting textSizeSp(float sp);
-         
-         //文本是否为粗体
-         
-         IToastSetting textBold(boolean bold);
-         
-         //离开当前activity时，是否立即隐藏掉正在显示的Toast
-         
-         IToastSetting dismissOnLeave(boolean b);
-         
-          //设定自定义布局,不过用来展示消息内容的TextView的id需要设置为android:id="@id/custom_toast_msg"
-          
-          IToastSetting view(View view);
-          
-          IToastSetting view(@LayoutRes int layout);
-          
-    IToastSetting processView(IProcessToastCallback callback);
-    
-
-    IToastSetting typeInfoToastThemeColor(@ColorInt int color);
-    IToastSetting typeInfoToastThemeColorRes(@ColorRes int colorRes);
 </code></pre>
 ### SmartSnackbar部分
 #### 特点：
