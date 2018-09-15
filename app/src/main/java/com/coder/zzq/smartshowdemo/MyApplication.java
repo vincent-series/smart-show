@@ -28,10 +28,7 @@ public class MyApplication extends Application {
         SmartTopBar.get().show("你好");
         SmartSnackbar.get().showIndefinite("我是朱志强");
 
-        /*
-            如果不想使用Toast的默认布局，可以自定义布局，但是在你的布局中必须含有显示消息的
-            TextView，且id为android:id="@id/custom_toast_msg"
-         */
+        SmartSnackbar.get().show("为SmartShow Star一下可以么","好的");
         SmartToast.setting()
                 .dismissOnLeave(true)
                 .backgroundColorRes(R.color.colorPrimary)

@@ -239,7 +239,7 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
 2.可修改布局风格，如背景颜色，文字大小和颜色等</br><br/>
 3.可配置离开当前Activity时，立即消失正在显示的Snackbar,一般Indefinite Snackbar有此需求
 ### API
-显示Snackbar，三种duration体现在方法名上，而不是传参，尽可能简化调用<br/><br/>
+显示Snackbar，三种duration体现在方法名上，而不是传参，尽可能简化调用
 #### 只传入消息文本
 <pre><code>
         //short snackbar
@@ -254,26 +254,51 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
         
        SmartSnackbar.get().showIndefinite("我是朱志强");     
 </code></pre>
-
-Indefinite Snackbar<br/>
+#### 传入消息文本和动作文本
+不显示设置动作文本的监听器，点击动作文本，执行默认逻辑--Snackbar消失
 <pre><code>
-        获取当前页面的Snackbar，显示消息和动作文本，传入点击动作文本的回调代码
-        SmartSnackbar.get().showIndefinite("我是朱志强", "打赏", new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                Log.d("SmartShow","Thank you !");
-
-            }
-        });
-
-        //获取当前页面的Snackbar，显示消息和动作文本，不传第三个参数，默认行为为Snackbar消失
-
-        SmartSnackbar.get().showIndefinite("我是朱志强","打赏");
+       //short snackbar
+       
+       SmartSnackbar.get().show("为SmartShow Star一下可以么","好的");
+       
+       //long snackbar
+       
+       SmartSnackbar.get().showLong("为SmartShow Star一下可以么","好的");
+       
+       //indefinite snackbar
+       
+       SmartSnackbar.get().showIndefinite("为SmartShow Star一下可以么","好的");
 </code></pre>
-
-显示Short和Long类型的Snackbar时，通常不会显示动作文本，而Indefinite Snackbar通常不会只显示消息文本，但实际上该库为三种Snackbar均提供了以上参数个数为1，2和3的方法。
+#### 传入消息文本和动作文本以及动作监听器
+<pre><code>
+       SmartSnackbar.get().show("我是朱志强", "打赏", new View.OnClickListener() {
+       
+           @Override
+           public void onClick(View v) {
+       
+              Log.d("SmartShow","Thank you !");
+       
+              }
+           });
+       SmartSnackbar.get().showLong("我是朱志强", "打赏", new View.OnClickListener() {
+       
+           @Override
+           public void onClick(View v) {
+       
+              Log.d("SmartShow","Thank you !");
+       
+              }
+           });
+       SmartSnackbar.get().showIndefinite("我是朱志强", "打赏", new View.OnClickListener() {
+       
+           @Override
+           public void onClick(View v) {
+       
+              Log.d("SmartShow","Thank you !");
+       
+              }
+           });              
+</code></pre>
 
 其他方法：
 <pre><code>
