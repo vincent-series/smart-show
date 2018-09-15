@@ -65,7 +65,7 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
 将会导致Toast不显示。
 #### API
 显示Toast的API,duration和常用的显示位置体现在方法名上，而不是传参，调用非常简易<br/><br/>
-##### ShortToast
+ShortToast
 <pre><code>
         //在默认位置显示
 
@@ -91,7 +91,7 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
         
         SmartToast.showLongAtLocation("我是朱志强",Gravity.LEFT | Gravity.TOP,10,10);
 </pre></code>
-##### LongToast
+LongToast
 <pre><code>
         //在默认位置显示
         
