@@ -3,20 +3,11 @@ package com.coder.zzq.smartshow;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 
-import com.coder.zzq.smartshow.basebar.IBarSetting;
 import com.coder.zzq.smartshow.lifecycle.ActivityLifecycleCallback;
 import com.coder.zzq.smartshow.lifecycle.ActivityStack;
-import com.coder.zzq.smartshow.snackbar.ISnackbarSetting;
-import com.coder.zzq.smartshow.snackbar.SmartSnackbar;
 import com.coder.zzq.smartshow.snackbar.SmartSnackbarDeligate;
-import com.coder.zzq.smartshow.snackbar.SnackbarSettingImpl;
-import com.coder.zzq.smartshow.toast.IToastSetting;
 import com.coder.zzq.smartshow.toast.SmartToastDelegate;
-import com.coder.zzq.smartshow.toast.ToastSettingImpl;
-import com.coder.zzq.smartshow.topbar.ITopbarSetting;
-import com.coder.zzq.smartshow.topbar.SmartTopBar;
 import com.coder.zzq.smartshow.topbar.SmartTopbarDelegate;
 
 /**

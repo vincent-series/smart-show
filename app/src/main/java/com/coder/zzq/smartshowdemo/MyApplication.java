@@ -3,19 +3,13 @@ package com.coder.zzq.smartshowdemo;
 import android.app.Application;
 import android.graphics.Color;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.coder.zzq.smartshow.SmartShow;
-import com.coder.zzq.smartshow.basebar.IBarSetting;
-import com.coder.zzq.smartshow.basebar.IProcessBarCallback;
 import com.coder.zzq.smartshow.snackbar.SmartSnackbar;
-import com.coder.zzq.smartshow.snackbar.SmartSnackbarDeligate;
 import com.coder.zzq.smartshow.toast.IProcessToastCallback;
 import com.coder.zzq.smartshow.toast.SmartToast;
-import com.coder.zzq.smartshow.topbar.SmartTopBar;
-import com.coder.zzq.smartshow.topbar.SmartTopbarDelegate;
+import com.coder.zzq.smartshow.topbar.SmartTopbar;
 
 
 /**
@@ -29,7 +23,7 @@ public class MyApplication extends Application {
 
         SmartShow.init(this);
         SmartSnackbar.get().show("你好");
-        SmartTopBar.get().show("你好");
+        SmartTopbar.get().show("你好");
         SmartSnackbar.get().showIndefinite("我是朱志强");
 
         SmartSnackbar.get().show("为SmartShow Star一下可以么", "好的");
@@ -48,7 +42,7 @@ public class MyApplication extends Application {
                 });
 
 
-        SmartTopBar.setting()
+        SmartTopbar.setting()
                 .dismissOnLeave(true)
                 .backgroundColor(Color.WHITE)
                 .msgTextColor(Color.DKGRAY)
@@ -71,7 +65,24 @@ public class MyApplication extends Application {
 
                 .dismissOnLeave(true);
         SmartSnackbar.isShowing();
+        SmartTopbar.setting()
 
+                .backgroundColorRes(R.color.colorPrimary)
+
+                .msgTextColorRes(R.color.white)
+                .darkStatusBarTextAndIcon()
+                .actionColorRes(R.color.colorAccent)
+
+                .dismissOnLeave(true);
+        SmartTopbar.setting()
+
+                .backgroundColorRes(R.color.colorPrimary)
+
+                .msgTextColorRes(R.color.white)
+
+                .actionColorRes(R.color.colorAccent)
+
+                .dismissOnLeave(true);
 
     }
 }

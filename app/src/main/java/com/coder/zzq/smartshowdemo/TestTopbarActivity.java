@@ -6,8 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.coder.zzq.smartshow.toast.SmartToast;
-import com.coder.zzq.smartshow.topbar.SmartTopBar;
-import com.coder.zzq.smartshow.topbar.SmartTopbarDelegate;
+import com.coder.zzq.smartshow.topbar.SmartTopbar;
 
 public class TestTopbarActivity extends AppCompatActivity {
 
@@ -18,15 +17,15 @@ public class TestTopbarActivity extends AppCompatActivity {
     }
 
     public void onShortClick(View view) {
-        SmartTopBar.get().show("苹果");
+        SmartTopbar.get().show("苹果");
     }
 
     public void onLongClick(View view) {
-        SmartTopBar.get().showLong("香蕉");
+        SmartTopbar.get().showLong("香蕉");
     }
 
     public void onIndefinite(View view) {
-        SmartTopBar.get().showIndefinite("橘子", "好吃", new View.OnClickListener() {
+        SmartTopbar.get().showIndefinite("橘子", "好吃", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SmartToast.showAtTop("好吃你就多吃点");

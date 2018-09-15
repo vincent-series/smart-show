@@ -375,7 +375,7 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
 #### 判断显示和隐藏
 <pre><code>
 
-         //隐藏SmanrtSnackbar
+         //隐藏SmartSnackbar
 
          SmartSnackbar.dismiss();
          
@@ -414,3 +414,170 @@ public class SnackbarActivity extends BaseActivity implements ISnackbarShowCallb
 ③可修改布局风格，如背景颜色，文字大小和颜色等</br></br>
 ![图片加载失败](images/g_5.gif)
 ### SmartTopbar部分
+1.SmartTopbar在功能以及使用上很像一个顶部的Snackbar
+2.复用Topbar实例，当Topbar正在显示时，多次触发msg和actionTex均未改变的Topbar，不会重复弹出，<br/>
+  若改变，则有弹出效果<br/><br/>
+3.可修改布局风格，如背景颜色，文字大小和颜色等</br><br/>
+4.可配置离开当前Activity时，立即消失正在显示的Topbar,一般Indefinite Topbar有此需求
+### API
+显示Topbar，三种duration体现在方法名上，而不是传参，尽可能简化调用
+#### 只传入消息文本
+<pre><code>
+        //short topbar
+        
+        SmartTopbar.get().show("我是朱志强");
+        
+        //long topbar
+        
+        SmartTopbar.get().showLong("我是朱志强");
+        
+       //indefinite topbar,只传入消息文本时，会显示默认的动作文本"确定"，点击动作文本，执行默认行为--Topbar消失
+        
+       SmartTopbar.get().showIndefinite("我是朱志强");     
+</code></pre>
+#### 传入消息文本和动作文本
+点击动作文本，执行默认逻辑--Topbar消失
+<pre><code>
+       //short topbar
+       
+       SmartTopbar.get().show("为SmartShow Star 一下可以么","好的");
+       
+       //long topbar
+       
+       SmartTopbar.get().showLong("为SmartShow Star 一下可以么","好的");
+       
+       //indefinite topbar
+       
+       SmartTopbar.get().showIndefinite("为SmartShow Star 一下可以么","好的");
+</code></pre>
+#### 传入消息文本和动作文本以及动作监听器
+<pre><code>
+       SmartTopbar.get().show("我是朱志强", "打赏", new View.OnClickListener() {
+       
+           @Override
+           public void onClick(View v) {
+       
+                //...
+       
+              }
+           });
+           
+       SmartTopbar.get().showLong("我是朱志强", "打赏", new View.OnClickListener() {
+       
+           @Override
+           public void onClick(View v) {
+       
+                //...
+       
+              }
+           });
+           
+       SmartTopbar.get().showIndefinite("我是朱志强", "打赏", new View.OnClickListener() {
+       
+           @Override
+           public void onClick(View v) {
+           
+                //...
+                
+           });              
+</code></pre>
+#### 定制化
+如果想定制化SmartTopbar，可调用setting方法获取ITopbarSetting对象进行全局配置
+<pre><code>
+        //获取ITopbarSetting对象
+        
+        SmartTopbar.setting()
+</code></pre>
+配置布局风格
+<pre><code>
+        //设置背景颜色
+        
+        ITopbarSetting backgroundColor(int color);
+        
+        ITopbarSetting backgroundColorRes(int colorRes);
+        
+        //设置消息文本颜色
+        
+        ITopbarSetting msgTextColor(@ColorInt int color);
+        
+        ITopbarSetting msgTextColorRes(@ColorRes int colorRes);
+        
+        //设置消息文本大小
+        
+        ITopbarSetting msgTextSizeSp(float textSizeSp);
+        
+        //设置动作文本颜色
+        
+        ITopbarSetting actionColor(@ColorInt int color);
+        
+        ITopbarSetting actionColorRes(@ColorRes int colorRes);
+        
+        //设置动作文本大小
+        
+        ITopbarSetting actionSizeSp(float textSizeSp);
+        
+        //对布局进一步处理，callback中会传入布局的根View和显示消息文本的TextView以及动作文本的Button，
+                 
+        //callback中的处理和以上配置方法的处理有冲突时，将覆盖掉以上的配置
+        
+        ITopbarSetting processView(IProcessBarCallback callback);
+        
+        //设置调用Indefinite Topbar时，如果只传入消息文本，默认显示的动作文本字符串，如果不设置，即显示为"确定"
+        
+        ITopbarSetting defaultActionTextForIndefinite(String actionText);
+        
+        //设置离开当前activity时，是否立即消失掉正在显示的Topbar，默认false，如在Activity A上显示了一个
+        
+        //Indefinite Topbar，启动Activity B，然后按返回键回到A，原先的Topkbar依然存在，设置为true后，
+        
+        //在进入B之前就会消失
+        
+        ITopbarSetting dismissOnLeave(boolean b); 
+        
+        例子：
+        
+        SmartTopbar.setting()
+                        
+        .backgroundColorRes(R.color.colorPrimary)
+        
+        .msgTextColorRes(R.color.white)
+        
+        .actionColorRes(R.color.colorAccent)
+                        
+        .dismissOnLeave(true);
+</code></pre>
+#### 判断显示和隐藏
+<pre><code>
+
+         //隐藏SmartTopbar
+
+         SmartTopbar.dismiss();
+         
+         //是否有Topbar在显示
+         
+         SmartTopbar.isShowing();
+</code></pre>
+#### 监听显示和隐藏
+将当前页面的Activity实现ITopbarShowCallback接口，然后重写方法即可。在SmartTopbar显示时，会检测当前页面是否实现该接口，是则进行回调。
+<pre><code>
+public class SnackbarActivity extends BaseActivity implements ITopbarShowCallback {
+
+        @Override
+        protected int contentLayout() {
+    
+           return R.layout.activity_smart_show;
+        
+        }
+    
+        @Override
+        public void onShown(Topbar tb) {
+            
+        }
+    
+        @Override
+        public void onDismissed(Topbar tb, int event) {
+    
+        }
+        
+}
+</code></pre>

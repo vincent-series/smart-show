@@ -3,9 +3,9 @@ package com.coder.zzq.smartshow.topbar;
 
 import com.coder.zzq.smartshow.basebar.IBarShow;
 
-public final class SmartTopBar {
+public final class SmartTopbar {
 
-    private SmartTopBar() {
+    private SmartTopbar() {
 
     }
 

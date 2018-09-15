@@ -9,7 +9,6 @@ import android.view.View;
 
 import com.coder.zzq.smartshow.snackbar.ISnackbarShowCallback;
 import com.coder.zzq.smartshow.snackbar.SmartSnackbar;
-import com.coder.zzq.smartshow.topbar.SmartTopBar;
 
 
 public class TestSnackbarActivity extends AppCompatActivity  implements ISnackbarShowCallback{
