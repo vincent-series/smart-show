@@ -129,7 +129,57 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
 
          SmartToast.dismiss();
 </code></pre>
+如果需要对SmartToast进行定制化，可调用setting方法获取IToastSetting对象进行全局配置
+<pre><code>
+        
+        //获取IToastSetting对象
+        
+        SmartToast.setting()
+        
+                  .backgroundColorRes(R.color.colorPrimary)
+                  
+                  ...
+                  
+                  .dismissOnLeave(true);
+</code></pre>
+IToastSetting 可供调用的方法中，
+<pre><code>
+         //设置背景颜色
+         
+         IToastSetting backgroundColor(@ColorInt int color);
+         
+         IToastSetting backgroundColorRes(@ColorRes int colorRes);
+         
+         // 设置文本颜色
+         
+         IToastSetting textColor(@ColorInt int color);
+         
+         IToastSetting textColorRes(@ColorRes int color);
+         
+         //设置文本大小
+         
+         IToastSetting textSizeSp(float sp);
+         
+         //文本是否为粗体
+         
+         IToastSetting textBold(boolean bold);
+         
+         //离开当前activity时，是否立即隐藏掉正在显示的Toast
+         
+         IToastSetting dismissOnLeave(boolean b);
+         
+          //设定自定义布局,不过用来展示消息内容的TextView的id需要设置为android:id="@id/custom_toast_msg"
+          
+          IToastSetting view(View view);
+          
+          IToastSetting view(@LayoutRes int layout);
+          
+    IToastSetting processView(IProcessToastCallback callback);
+    
 
+    IToastSetting typeInfoToastThemeColor(@ColorInt int color);
+    IToastSetting typeInfoToastThemeColorRes(@ColorRes int colorRes);
+</code></pre>
 ### SmartSnackbar部分
 #### 特点：
 1.Snackbar的显示原理与Toast不同，Toast通过Window展示视图，全局可复用一个实例。Snackbar则是把视图内嵌到当前Activity的android.R.id.content容器或某个CoordinatorLayout中。在获取方式不变（容器不变）的情况下，同一页面可复用一个Snackbar实例，节省内存<br/>
@@ -205,59 +255,6 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
             }
 
       });
-</code></pre>
-
-调用show方法显示Toast，duration和常用的显示位置体现在方法名上，而不是传参，使得调用非常简易<br/><br/>
-Short Toast</br>
-<pre><code>
-        //在默认位置显示
-
-        SmartToast.show("我是朱志强！");
-
-        //在屏幕顶部显示，距离顶部位置为Toast在Y方向默认的偏移距离
-
-        SmartToast.showAtTop("我是朱志强!");
-
-        //在屏幕中央显示
-
-        SmartToast.showInCenter("我是朱志强！");
-
-        //在指定位置显示，x,y方向偏移量单位为dp
-
-        SmartToast.showAtLocation("我是朱志强",Gravity.LEFT | Gravity.TOP,10,10);
-</pre></code>
-Long Toast<br/>
-<pre><code>
-        //在默认位置显示
-
-        SmartToast.showLong("我是朱志强！");
-
-        //在屏幕顶部显示，距离顶部位置为Toast在Y方向默认的偏移距离
-
-        SmartToast.showLongAtTop("我是朱志强!");
-
-        //在屏幕中央显示
-
-        SmartToast.showLongInCenter("我是朱志强！");
-
-        //在指定位置显示，x,y方向偏移量单位为dp
-
-        SmartToast.showLongAtLocation("我是朱志强",Gravity.LEFT | Gravity.TOP,10,10);
-</code></pre>
-其他方法
-<pre><code>
-         //Toast是否显示
-
-         SmartToast.isShowing();
-
-         //隐藏Toast
-
-         SmartToast.dismiss();
-
-         //设置离开当前页面时，当前页面的Toast是否立即消失，默认false
-
-         SmartToast.setDismissOnLeave(boolean b);
-
 </code></pre>
 
 #### 效果图
