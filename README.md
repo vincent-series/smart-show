@@ -193,7 +193,7 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
                              }
                          });         
 </code></pre>
-配置类型Toast（info，success,error,warning）的主题色
+配置类型Toast（info，success，error，warning）的主题色
 <pre><code>
         IToastSetting typeInfoToastThemeColor(@ColorInt int color);
         
