@@ -50,13 +50,13 @@ allprojects {
 </code></pre>
 
 ### SmartToast部分
-1.复用Toast实例，内容和位置均未改变时，多次触发不会重复弹出；下一个Toast不会等到上一个Toast的Duration耗尽才弹出
-2.解决传统复用模式的性能缺陷，如正在显示一个内容为"A"的Toast，此时再弹出内容为"B"
-  的Toast时，文本虽改变，但没有弹出效果；如果复用的Toast正在显示，改变其Gravity以改变显示位置会无效，直到消失后再次显示才生效
+1.复用Toast实例，内容和位置均未改变时，多次触发不会重复弹出；下一个Toast不会等到上一个Toast的Duration耗尽才弹出<br/>
+2.解决传统复用模式的性能缺陷，如正在显示一个内容为"A"的Toast，此时再弹出内容为"B"的Toast时，文本虽改变，<br/>
+  但没有弹出效果；如果复用的Toast正在显示，改变其Gravity以改变显示位置会无效，直到消失后再次显示才生效<br/>
 3.可修改Toast默认布局的风格，如背景颜色，文字大小和颜色等<br/>
 4.可为Toast设置自定义布局</br>
 5.完美解决Android 7.1的系统bug——Toast BadTokenException<br/>
-6.可配置离开当前页面，立即消失正在当前页面之上显示的Toast
+6.可配置离开当前页面，立即消失正在当前页面之上显示的Toast<br/>
 7.结合主流app，提供info、success、error、warnign 4种类型Toast
 #### 注意
 关闭app的系统通知权限,将导致SmartToast无法显示<br/>
