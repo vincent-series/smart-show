@@ -70,6 +70,7 @@ ShortToast
         //在默认位置显示
 
         SmartToast.show("我是朱志强！");
+        
         SmartToast.showLong("我是朱志强！");
 
         //在屏幕顶部显示，水平居中，距离顶部距离与在默认位置显示时，距离底部的距离一致
