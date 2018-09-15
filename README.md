@@ -301,8 +301,8 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
            });              
 </code></pre>
 以上示例获取SmartSnackbar使用的是SmartSnackbar.get()，还可使用SmartSnackbar.get(CoordinatorLayout view)。<br/><br/>
-根据谷歌源码，我们知道创建Snackbar时需传入一个当前页面的某个View。实际上，Snackar会以该View为基点，沿着整个View Tree上溯，<br/>
-直到找到CoordinatorLayout容器或android.R.id.content 容器，哪个先找到，就将视图嵌入其中。<br/><br/>
+根据谷歌源码，我们知道创建Snackbar时需传入一个当前页面的某个View。实际上，Snackar会以该View为基点，<br/>
+沿着整个View Tree上溯，直到找到CoordinatorLayout容器或android.R.id.content 容器，哪个先找到，就将视图嵌入其中。<br/><br/>
 为了提高效率，直接将android.R.id.content或者CoordinatorLayout传入会更好。<br/><br/>
 以CoordinatorLayout为内嵌容器时，Snackbar会有一些特殊的行为，如可以用手指手动滑动移除，显示时会导致FloatingActionButton升高等。<br/><br/>
 所以SmartSnackbar对入口做了限制，如果你的页面想以某个具体CoordinatorLayout作为容器，则调用get(CoordinatorLayout view)。<br/>
