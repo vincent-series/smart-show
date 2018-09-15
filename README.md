@@ -49,26 +49,20 @@ allprojects {
         SmartShow.init(this);
 </code></pre>
 
-## 使用
-#### 特点：
-
-2.解决了再不复用Toast实例的情况下，Toast重复弹出，且每个都会待duration耗尽才显示下一个的体验问题<br/>
-如果Toast正在显示，再次触发（内容和位置完全一致）,提供两种处理策略：<br/>
-ACTION_IGNORE为传统解决策略，即不重复弹出,直接忽略<br/>
-ACTION_REPEAT_SHOW_LIKE_SNACKBAR为立即隐藏前一个，再次显示一个，<br/>
-类似Snackbar(不同实例交替显示)<br/>
-默认策略为不重复弹出</br>
-3.新的Toast(内容或位置发生了变化)会立即弹出，不会等待旧的Toast的duration耗尽再弹出，并具有动画效果（与你手机系统原生Toast的切换动画一致）<br/>
-4.可修改Toast默认布局的风格，如背景颜色，文字大小和颜色等<br/>
-5.可为Toast设置自定义布局，并进行代码处理</br>
-6.完美解决Android 7.1的系统bug——Toast BadTokenException<br/>
-7.可配置离开当前页面，立即消失Toast
+### SmartToast部分
+1.复用Toast实例，内容和位置均未改变时，多次触发不会重复弹出；下一个Toast不会等到上一个Toast的Duration耗尽才弹出
+2.解决传统复用模式的性能缺陷，如正在显示一个内容为"A"的Toast，此时再弹出内容为"B"
+  的Toast时，文本虽改变，但没有弹出效果；如果复用的Toast正在显示，改变其Gravity以改变显示位置会无效，直到消失后再次显示才生效
+3.可修改Toast默认布局的风格，如背景颜色，文字大小和颜色等<br/>
+4.可为Toast设置自定义布局</br>
+5.完美解决Android 7.1的系统bug——Toast BadTokenException<br/>
+6.可配置离开当前页面，立即消失正在当前页面之上显示的Toast
+7.结合主流app，提供info、success、error、warnign 4种类型Toast
 #### 注意
-关闭app的系统通知权限,将导致SmartToast无法显示，原因如下：<br/>
-Toast的内部原理使用NotificationManagerService，关闭通知权限后，无法显示。<br/>
-这是原生Toast本身的特性，而不是SmartShow的bug。<br/>
-以淘宝app和优酷app的"再按一次退出程序"的Toast提示为例，关闭他们的通知权限，<br/>
-也会导致Toast不显示，感兴趣的话可以去试一试。
+关闭app的系统通知权限,将导致SmartToast无法显示<br/>
+Toast的内部原理使用NotificationManagerService，关闭通知权限后，将无法显示。<br/>
+这是原生Toast本身的特性，以淘宝app和优酷app的"再按一次退出程序"的Toast提示为例，关闭他们的通知权限，<br/>
+将会导致Toast不显示。
 
 ### SmartSnackbar部分
 #### 特点：
