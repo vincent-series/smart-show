@@ -239,8 +239,8 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
 2.可修改布局风格，如背景颜色，文字大小和颜色等</br><br/>
 3.可配置离开当前Activity时，立即消失正在显示的Snackbar,一般Indefinite Snackbar有此需求
 ### API
-调用show方法显示Snackbar，三种duration体现在方法名上，而不是传参，尽可能简化调用<br/><br/>
-只传入消息文本
+显示Snackbar，三种duration体现在方法名上，而不是传参，尽可能简化调用<br/><br/>
+#### 只传入消息文本
 <pre><code>
         //short snackbar
         
