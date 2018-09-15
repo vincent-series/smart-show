@@ -76,34 +76,22 @@ ShortToast
         //在屏幕顶部显示，水平居中，距离顶部距离与在默认位置显示时，距离底部的距离一致
 
         SmartToast.showAtTop("我是朱志强!");
-
-        //在屏幕中央显示
-
-        SmartToast.showInCenter("我是朱志强！");
-
-        //在左上角，x，y偏移量为10dp的位置显示
-
-        SmartToast.showAtLocation("我是朱志强",Gravity.LEFT | Gravity.TOP,10,10);
-</pre></code>
-
-Long Toast
-<pre><code>
-        //在默认位置显示
-        
-        SmartToast.showLong("我是朱志强！");
-
-        //在屏幕顶部显示，水平居中，距离顶部距离与在默认位置显示时，距离底部的距离一致
         
         SmartToast.showLongAtTop("我是朱志强!");
 
         //在屏幕中央显示
+
+        SmartToast.showInCenter("我是朱志强！");
         
         SmartToast.showLongInCenter("我是朱志强！");
 
         //在左上角，x，y偏移量为10dp的位置显示
+
+        SmartToast.showAtLocation("我是朱志强",Gravity.LEFT | Gravity.TOP,10,10);
         
         SmartToast.showLongAtLocation("我是朱志强",Gravity.LEFT | Gravity.TOP,10,10);
 </pre></code>
+
 其他API
 <pre><code>
          //是否有Toast在显示
@@ -113,11 +101,6 @@ Long Toast
          //隐藏当前显示的Toast
 
          SmartToast.dismiss();
-
-         //设置离开当前页面时，当前页面的Toast是否立即消失，默认false
-
-         SmartToast.setDismissOnLeave(boolean b);
-
 </code></pre>
 
 ### SmartSnackbar部分
