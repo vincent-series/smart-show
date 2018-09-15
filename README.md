@@ -255,7 +255,7 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
        SmartSnackbar.get().showIndefinite("我是朱志强");     
 </code></pre>
 #### 传入消息文本和动作文本
-不显示设置动作文本的监听器，点击动作文本，执行默认逻辑--Snackbar消失
+点击动作文本，执行默认逻辑--Snackbar消失
 <pre><code>
        //short snackbar
        
@@ -280,6 +280,7 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
        
               }
            });
+           
        SmartSnackbar.get().showLong("我是朱志强", "打赏", new View.OnClickListener() {
        
            @Override
@@ -289,6 +290,7 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
        
               }
            });
+           
        SmartSnackbar.get().showIndefinite("我是朱志强", "打赏", new View.OnClickListener() {
        
            @Override
