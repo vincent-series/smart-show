@@ -33,7 +33,7 @@ allprojects {
 2.在Module的grable文件中<br/>
 <pre><code>
 
-        implementation('com.github.the-pig-of-jungle:SmartShow:v2.3.1') {
+        implementation('com.github.the-pig-of-jungle:SmartShow:v2.3.2') {
         
             exclude group: 'com.android.support'
             
