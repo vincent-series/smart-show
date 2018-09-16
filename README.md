@@ -225,14 +225,6 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
 
          SmartToast.dismiss();
 </code></pre>
-#### 效果图
-①多次触发同一内容的Toast，不会重复弹出</br>
-②新的Toast(内容或位置发生了变化)会立即弹出，不会等待旧的Toast的duration耗尽再弹出，并具有动画效果（与你手机系统原生Toast的切换动画一致）<br/></br>
-![图片加载失败](images/g_1.gif)<br/><br/>
-④修改布局的风格，背景颜色、字体大小、颜色、加粗等</br><br/>
-![图片加载失败](images/g_2.gif)<br/><br/>
-⑤设置自定义布局<br/><br/>
-![图片加载失败](images/g_3.gif)<br/>
 ### SmartSnackbar部分
 1.复用Snackbar实例，当Snackbar正在显示时，多次触发msg和actionTex均未改变的Snackbar，不会重复弹出，<br/>
   若改变，则有弹出效果<br/><br/>
@@ -407,12 +399,6 @@ public class SnackbarActivity extends BaseActivity implements ISnackbarShowCallb
         
 }
 </code></pre>
-### 效果图
-①多次触发同一内容的Snackbar，不会重复弹出</br>
-②同一页面，如果Snackbar正在显示，再次触发Snackbar，如果内容（msg或actionText）发生了变化（不会重建Snackbar实例）或内嵌的容器发生了变化（会重建Snackbar实例），会重新弹出，具有切换效果。<br/><br/>
-![图片加载失败](images/g_4.gif)<br/><br/>
-③可修改布局风格，如背景颜色，文字大小和颜色等</br></br>
-![图片加载失败](images/g_5.gif)
 ### SmartTopbar部分
 1.SmartTopbar在功能以及使用上很像一个顶部的Snackbar<br/><br/>
 2.当Topbar正在显示时，多次触发msg和actionTex均未改变的Topbar，不会重复弹出，若改变，则有弹出效果<br/><br/>
