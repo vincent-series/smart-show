@@ -375,7 +375,7 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
 #### 判断显示和隐藏
 <pre><code>
 
-         //隐藏SmartSnackbar
+         //隐藏当前显示的Snackbar
 
          SmartSnackbar.dismiss();
          
@@ -548,7 +548,7 @@ public class SnackbarActivity extends BaseActivity implements ISnackbarShowCallb
 #### 判断显示和隐藏
 <pre><code>
 
-         //隐藏SmartTopbar
+         //隐藏当前显示的Topbar
 
          SmartTopbar.dismiss();
          
