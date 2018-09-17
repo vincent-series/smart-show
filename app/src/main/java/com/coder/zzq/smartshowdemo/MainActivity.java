@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.coder.zzq.smartshow.dialog.SmartDialog;
 import com.coder.zzq.smartshow.toast.SmartToast;
 
 import java.lang.reflect.Field;
@@ -18,6 +19,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        SmartDialog.loading();
     }
 
     public void onToastClick(View view) {
