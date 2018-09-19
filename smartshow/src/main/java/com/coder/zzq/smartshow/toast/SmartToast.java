@@ -58,43 +58,47 @@ public final class SmartToast{
     }
 
 
-    public static void info(String msg) {
+    public static void info(CharSequence msg) {
 
         SmartToastDelegate.get().getTypeShowManager().info(msg);
     }
 
 
-    public static void infoLong(String msg) {
+    public static void infoLong(CharSequence msg) {
         SmartToastDelegate.get().getTypeShowManager().infoLong(msg);
     }
 
 
-    public static void warning(String msg) {
+    public static void warning(CharSequence msg) {
         SmartToastDelegate.get().getTypeShowManager().warning(msg);
     }
 
 
-    public static void warningLong(String msg) {
+    public static void warningLong(CharSequence msg) {
         SmartToastDelegate.get().getTypeShowManager().warningLong(msg);
     }
 
 
-    public static void success(String msg) {
+    public static void success(CharSequence msg) {
         SmartToastDelegate.get().getTypeShowManager().success(msg);
     }
 
 
-    public static void successLong(String msg) {
+    public static void successLong(CharSequence msg) {
         SmartToastDelegate.get().getTypeShowManager().successLong(msg);
     }
 
-    public static void error(String msg) {
+    public static void error(CharSequence msg) {
         SmartToastDelegate.get().getTypeShowManager().error(msg);
     }
 
 
-    public static void errorLong(String msg) {
+    public static void errorLong(CharSequence msg) {
         SmartToastDelegate.get().getTypeShowManager().errorLong(msg);
+    }
+
+    public static void fail(CharSequence msg){
+        SmartToastDelegate.get().getTypeShowManager().fail(msg);
     }
 
 

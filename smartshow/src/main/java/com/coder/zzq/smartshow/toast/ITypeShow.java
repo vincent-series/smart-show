@@ -4,19 +4,22 @@ package com.coder.zzq.smartshow.toast;
 
 public interface ITypeShow {
 
-    void info(String msg);
+    void info(CharSequence msg);
 
-    void infoLong(String msg);
+    void infoLong(CharSequence msg);
 
-    void warning(String msg);
+    void warning(CharSequence msg);
 
-    void warningLong(String msg);
+    void warningLong(CharSequence msg);
 
-    void success(String msg);
+    void success(CharSequence msg);
 
-    void successLong(String msg);
+    void successLong(CharSequence msg);
 
-    void error(String msg);
+    void error(CharSequence msg);
 
-    void errorLong(String msg);
+    void errorLong(CharSequence msg);
+    
+    void fail(CharSequence msg);
+    void failLong(CharSequence msg);
 }

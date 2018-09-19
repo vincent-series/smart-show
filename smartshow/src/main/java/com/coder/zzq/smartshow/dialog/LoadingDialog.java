@@ -37,8 +37,8 @@ public class LoadingDialog extends Dialog {
             if (activity != null) {
                 View contentView = LayoutInflater.from(SmartShow.getContext()).inflate(R.layout.loading, null);
                 LoadingDialog loadingDialog = new LoadingDialog(activity,R.style.loading_dialog);
-//                ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(100,100);
-                loadingDialog.setContentView(contentView);
+                ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                loadingDialog.setContentView(contentView,lp);
                 loadingDialog.setCancelable(true);
                 loadingDialog.setCanceledOnTouchOutside(false);
 

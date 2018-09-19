@@ -1,35 +1,35 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="100dp"
-    android:layout_height="100dp"
-    android:paddingBottom="10dp"
-    android:background="@color/colorAccent"
-    android:paddingTop="16dp">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/smart_show_type_info_toast_bg">
 
-    <ProgressBar
-        android:layout_centerInParent="true"
-        android:id="@+id/progress_bar"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_gravity="center_horizontal"
-        android:indeterminateBehavior="repeat"
-        android:indeterminateDrawable="@drawable/loading_anim"
-        android:indeterminateOnly="true" />
+        <ProgressBar
+            android:layout_marginTop="22dp"
+            android:layout_marginBottom="16dp"
+            android:id="@+id/progress_bar"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_centerInParent="true"
+            android:indeterminateBehavior="repeat"
+            android:indeterminateDrawable="@drawable/smart_show_loading_anim"
+            android:indeterminateOnly="true" />
 
     <TextView
+        android:paddingBottom="14dp"
         android:id="@+id/type_info_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
         android:ellipsize="end"
         android:gravity="center_horizontal"
         android:maxLines="1"
-        android:minWidth="100dp"
+        android:minWidth="80dp"
+        android:maxWidth="120dp"
         android:singleLine="true"
-        android:text="I'm a Toast"
         android:textColor="#ffffff"
-        android:textSize="14sp" />
-
-</RelativeLayout>
+        android:text="加载中..."
+        android:textSize="15sp" />
+</LinearLayout>

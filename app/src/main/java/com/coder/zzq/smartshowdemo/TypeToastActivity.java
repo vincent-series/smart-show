@@ -24,7 +24,7 @@ public class TypeToastActivity extends AppCompatActivity {
     }
 
     public void onErrorClick(View view) {
-        SmartToast.error("数据解析错误");
+        SmartToast.fail("模式转换失败");
     }
 
     public void onWarningClick(View view) {

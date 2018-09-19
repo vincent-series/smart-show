@@ -17,6 +17,7 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
     public static final int TYPE_INFO_WARNING = 1;
     public static final int TYPE_INFO_SUCCESS = 2;
     public static final int TYPE_INFO_ERROR = 3;
+    public static final int TYPE_INFO_FAIL = 4;
 
     private int mCurInfoType;
     private ImageView mIconView;
@@ -57,11 +58,11 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
         }
     }
 
-    private final void showHelper(String msg, int infoType, int duration) {
+    private final void showHelper(CharSequence msg, int infoType, int duration) {
         SmartToastDelegate.get().dismissPlainShowIfNeed();
         msg = (msg == null) ? "" : msg;
         //文本是否改变
-        boolean contentChanged = !mCurMsg.equals(msg.trim());
+        boolean contentChanged = !mCurMsg.equals(msg.toString().trim());
 
         //类型是否改变
         boolean typeChanged = mCurInfoType != infoType;
@@ -92,49 +93,61 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
                 return R.drawable.type_info_success;
             case TYPE_INFO_ERROR:
                 return R.drawable.type_info_error;
+            case TYPE_INFO_FAIL:
+                return R.drawable.fail;
             default:
                 return R.drawable.type_info_normal;
         }
     }
 
     @Override
-    public void info(String msg) {
+    public void info(CharSequence msg) {
         showHelper(msg, TYPE_INFO_NORMAL, Toast.LENGTH_SHORT);
     }
 
     @Override
-    public void infoLong(String msg) {
+    public void infoLong(CharSequence msg) {
         showHelper(msg, TYPE_INFO_NORMAL, Toast.LENGTH_LONG);
     }
 
     @Override
-    public void warning(String msg) {
+    public void warning(CharSequence msg) {
         showHelper(msg, TYPE_INFO_WARNING, Toast.LENGTH_SHORT);
     }
 
     @Override
-    public void warningLong(String msg) {
+    public void warningLong(CharSequence msg) {
         showHelper(msg, TYPE_INFO_WARNING, Toast.LENGTH_LONG);
     }
 
     @Override
-    public void success(String msg) {
+    public void success(CharSequence msg) {
         showHelper(msg, TYPE_INFO_SUCCESS, Toast.LENGTH_SHORT);
     }
 
     @Override
-    public void successLong(String msg) {
+    public void successLong(CharSequence msg) {
         showHelper(msg, TYPE_INFO_SUCCESS, Toast.LENGTH_LONG);
     }
 
     @Override
-    public void error(String msg) {
+    public void error(CharSequence msg) {
         showHelper(msg, TYPE_INFO_ERROR, Toast.LENGTH_SHORT);
     }
 
     @Override
-    public void errorLong(String msg) {
+    public void errorLong(CharSequence msg) {
         showHelper(msg, TYPE_INFO_ERROR, Toast.LENGTH_LONG);
+    }
+
+    @Override
+    public void fail(CharSequence msg) {
+        showHelper(msg,TYPE_INFO_FAIL,Toast.LENGTH_SHORT);
+    }
+
+    @Override
+    public void failLong(CharSequence msg) {
+        showHelper(msg,TYPE_INFO_FAIL,Toast.LENGTH_LONG);
     }
 
     public void cancel() {
