@@ -10,16 +10,6 @@ import com.coder.zzq.smartshow.lifecycle.ActivityStack;
 
 public class SmartDialog {
     public static void loading() {
-        Activity activity = ActivityStack.getTop();
-        if (activity != null) {
-            AlertDialog dialog = new AlertDialog.Builder(activity)
-                    .setView(R.layout.loading)
-                    .create();
-            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
-
-            dialog.getWindow().setBackgroundDrawableResource(R.drawable.ss_type_info_toast_bg);
-            dialog.show();
-        }
-
+        new LoadingDialog.Builder().create().show();
     }
 }
