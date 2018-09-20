@@ -1,6 +1,7 @@
 package com.coder.zzq.smartshow.toast;
 
 
+import android.support.annotation.DrawableRes;
 
 public interface ITypeShow {
 
@@ -19,7 +20,21 @@ public interface ITypeShow {
     void error(CharSequence msg);
 
     void errorLong(CharSequence msg);
-    
+
     void fail(CharSequence msg);
+
     void failLong(CharSequence msg);
+
+    void complete(CharSequence msg);
+
+    void completeLong(CharSequence msg);
+
+    void forbid(CharSequence msg);
+
+    void forbidLong(CharSequence msg);
+
+    void waiting(CharSequence msg);
+
+    void waitingLong(CharSequence msg);
+
 }

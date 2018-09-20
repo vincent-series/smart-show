@@ -9,39 +9,83 @@
     <include layout="@layout/copyright_toolbar" />
 
     <LinearLayout
-        android:gravity="center_horizontal|top"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center_horizontal|top"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <Button style="@style/normal_btn"
+
+            <Button
+                style="@style/normal_btn"
+                android:layout_width="150dp"
                 android:onClick="onInfoClick"
+                android:text="info" />
+
+            <Button
+                style="@style/normal_btn"
                 android:layout_width="150dp"
-                android:text="info"
-                />
-            <Button style="@style/normal_btn"
-                android:onClick="onSuccessClick"
-                android:layout_width="150dp"
-                android:text="success/complete"/>
+                android:onClick="onWarningClick"
+                android:text="warning" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <Button style="@style/normal_btn"
+
+            <Button
+                style="@style/normal_btn"
+                android:layout_width="150dp"
+                android:onClick="onSuccessClick"
+                android:text="success" />
+
+            <Button
+                style="@style/normal_btn"
+                android:layout_width="150dp"
                 android:onClick="onErrorClick"
-                android:text="error/fail"
-                android:layout_width="150dp"/>
-            <Button style="@style/normal_btn"
-                android:onClick="onWarningClick"
-                android:text="warning"
-                android:layout_width="150dp"/>
+                android:text="error" />
         </LinearLayout>
 
-        <Button style="@style/normal_btn"
-            android:text="下一页"
-            android:onClick="onNextPageClick"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                style="@style/normal_btn"
+                android:layout_width="150dp"
+                android:onClick="onFailClick"
+                android:text="fail" />
+
+            <Button
+                style="@style/normal_btn"
+                android:layout_width="150dp"
+                android:onClick="onCompleteClick"
+                android:text="complete" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                style="@style/normal_btn"
+                android:layout_width="150dp"
+                android:onClick="onForbidClick"
+                android:text="forbid" />
+
+            <Button
+                style="@style/normal_btn"
+                android:layout_width="150dp"
+                android:onClick="onWaitingClick"
+                android:text="waiting" />
+        </LinearLayout>
+
+        <Button
+            style="@style/normal_btn"
+            android:onClick="onNextPageClick"
+            android:text="下一页" />
     </LinearLayout>
 </LinearLayout>

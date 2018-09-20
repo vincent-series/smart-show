@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.coder.zzq.smartshow.R;
 import com.coder.zzq.smartshow.SmartShow;
 import com.coder.zzq.smartshow.Utils;
+
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public class TypeToastManager extends BaseToastManager implements ITypeShow {
 
@@ -18,6 +19,9 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
     public static final int TYPE_INFO_SUCCESS = 2;
     public static final int TYPE_INFO_ERROR = 3;
     public static final int TYPE_INFO_FAIL = 4;
+    public static final int TYPE_INFO_COMPLETE = 5;
+    public static final int TYPE_INFO_FORBID = 6;
+    public static final int TYPE_INFO_WAITING = 7;
 
     private int mCurInfoType;
     private ImageView mIconView;
@@ -94,7 +98,13 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
             case TYPE_INFO_ERROR:
                 return R.drawable.type_info_error;
             case TYPE_INFO_FAIL:
-                return R.drawable.fail;
+                return R.drawable.type_info_fail;
+            case TYPE_INFO_COMPLETE:
+                return R.drawable.type_info_complete;
+            case TYPE_INFO_WAITING:
+                return R.drawable.type_info_waiting;
+            case TYPE_INFO_FORBID:
+                return R.drawable.type_info_forbid;
             default:
                 return R.drawable.type_info_normal;
         }
@@ -142,12 +152,42 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
 
     @Override
     public void fail(CharSequence msg) {
-        showHelper(msg,TYPE_INFO_FAIL,Toast.LENGTH_SHORT);
+        showHelper(msg, TYPE_INFO_FAIL, Toast.LENGTH_SHORT);
     }
 
     @Override
     public void failLong(CharSequence msg) {
-        showHelper(msg,TYPE_INFO_FAIL,Toast.LENGTH_LONG);
+        showHelper(msg, TYPE_INFO_FAIL, Toast.LENGTH_LONG);
+    }
+
+    @Override
+    public void complete(CharSequence msg) {
+        showHelper(msg,TYPE_INFO_COMPLETE,Toast.LENGTH_SHORT);
+    }
+
+    @Override
+    public void completeLong(CharSequence msg) {
+        showHelper(msg,TYPE_INFO_COMPLETE,Toast.LENGTH_LONG);
+    }
+
+    @Override
+    public void forbid(CharSequence msg) {
+        showHelper(msg,TYPE_INFO_FORBID,Toast.LENGTH_SHORT);
+    }
+
+    @Override
+    public void forbidLong(CharSequence msg) {
+        showHelper(msg,TYPE_INFO_FORBID,Toast.LENGTH_LONG);
+    }
+
+    @Override
+    public void waiting(CharSequence msg) {
+        showHelper(msg,TYPE_INFO_WAITING,Toast.LENGTH_SHORT);
+    }
+
+    @Override
+    public void waitingLong(CharSequence msg) {
+        showHelper(msg,TYPE_INFO_WAITING,Toast.LENGTH_LONG);
     }
 
     public void cancel() {

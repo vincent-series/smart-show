@@ -30,7 +30,6 @@ public class MyApplication extends Application {
         SmartToast.setting()
                 .dismissOnLeave(true)
                 .backgroundColorRes(R.color.colorPrimary)
-
                 .textSizeSp(18)
                 .textBold(true)
                 .processView(new IProcessToastCallback() {
@@ -42,13 +41,6 @@ public class MyApplication extends Application {
                 });
 
 
-        SmartTopbar.setting()
-                .dismissOnLeave(true)
-                .backgroundColor(Color.WHITE)
-                .msgTextColor(Color.DKGRAY)
-                .actionColor(Color.RED)
-                .darkStatusBarTextAndIcon()
-                .defaultActionTextForIndefinite("ok");
 
         SmartSnackbar.setting()
                 .dismissOnLeave(true)
@@ -66,21 +58,10 @@ public class MyApplication extends Application {
                 .dismissOnLeave(true);
         SmartSnackbar.isShowing();
         SmartTopbar.setting()
-
-                .backgroundColorRes(R.color.colorPrimary)
-
                 .msgTextColorRes(R.color.white)
-                .darkStatusBarTextAndIcon()
                 .actionColorRes(R.color.colorAccent)
-
                 .dismissOnLeave(true);
         SmartTopbar.setting()
-
-                .backgroundColorRes(R.color.colorPrimary)
-
-                .msgTextColorRes(R.color.white)
-
-                .actionColorRes(R.color.colorAccent)
 
                 .dismissOnLeave(true);
 

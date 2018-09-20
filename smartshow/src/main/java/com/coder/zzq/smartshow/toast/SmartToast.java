@@ -4,7 +4,7 @@ package com.coder.zzq.smartshow.toast;
  * Created by 朱志强 on 2017/11/14.
  */
 
-public final class SmartToast{
+public final class SmartToast {
 
     private SmartToast() {
 
@@ -97,22 +97,50 @@ public final class SmartToast{
         SmartToastDelegate.get().getTypeShowManager().errorLong(msg);
     }
 
-    public static void fail(CharSequence msg){
+    public static void fail(CharSequence msg) {
         SmartToastDelegate.get().getTypeShowManager().fail(msg);
     }
 
+    public static void failLong(CharSequence msg) {
+        SmartToastDelegate.get().getTypeShowManager().failLong(msg);
+    }
+
+    public static void complete(CharSequence msg) {
+        SmartToastDelegate.get().getTypeShowManager().complete(msg);
+    }
+
+    public static void completeLong(CharSequence msg) {
+        SmartToastDelegate.get().getTypeShowManager().completeLong(msg);
+    }
 
 
-    public static boolean isShowing(){
+    public static void forbid(CharSequence msg) {
+        SmartToastDelegate.get().getTypeShowManager().forbid(msg);
+    }
+
+    public static void forbidLong(CharSequence msg) {
+        SmartToastDelegate.get().getTypeShowManager().forbidLong(msg);
+    }
+
+
+    public static void waiting(CharSequence msg) {
+        SmartToastDelegate.get().getTypeShowManager().waiting(msg);
+    }
+
+    public static void waitingLong(CharSequence msg) {
+        SmartToastDelegate.get().getTypeShowManager().waitingLong(msg);
+    }
+
+    public static boolean isShowing() {
         return SmartToastDelegate.get().isPlainShowing() || SmartToastDelegate.get().isTypeShowing();
     }
 
-    public static void dismiss(){
-        if (SmartToastDelegate.get().isPlainShowing()){
+    public static void dismiss() {
+        if (SmartToastDelegate.get().isPlainShowing()) {
             SmartToastDelegate.get().getPlainShowManager().dismiss();
         }
 
-        if (SmartToastDelegate.get().isTypeShowing()){
+        if (SmartToastDelegate.get().isTypeShowing()) {
             SmartToastDelegate.get().getTypeShowManager().dismiss();
         }
     }
