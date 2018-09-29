@@ -1,15 +1,31 @@
 package com.coder.zzq.smartshow.dialog;
 
-import android.app.Activity;
-import android.support.v7.app.AlertDialog;
-import android.view.WindowManager;
+import android.support.annotation.StringRes;
 
 import com.coder.zzq.smartshow.R;
-import com.coder.zzq.smartshow.Utils;
-import com.coder.zzq.smartshow.lifecycle.ActivityStack;
+import com.coder.zzq.smartshow.SmartShow;
+import com.coder.zzq.smartshow.dialog.type.DialogBuilder;
+import com.coder.zzq.smartshow.dialog.type.IMessageDialog;
 
 public class SmartDialog {
-    public static void loading() {
-        new LoadingDialog.Builder().create().show();
+    public static void loading(String msg) {
+        DialogDelegate.get().loading(msg);
     }
+
+    public static void loading() {
+        DialogDelegate.get().loading("加载中...");
+    }
+
+
+
+
+    public static IMessageDialog message(String msg) {
+        return DialogDelegate.get().message(msg);
+    }
+
+    public static IMessageDialog message(@StringRes int msgRes) {
+        return message(SmartShow.getContext().getString(msgRes));
+    }
+
+
 }

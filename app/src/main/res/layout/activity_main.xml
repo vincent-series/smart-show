@@ -34,5 +34,10 @@
             style="@style/normal_btn"
             android:text="TopBar"
             android:onClick="onTopBarClick"/>
+
+        <Button
+            style="@style/normal_btn"
+            android:text="Dialog"
+            android:onClick="onDialogClick"/>
     </LinearLayout>
 </LinearLayout>

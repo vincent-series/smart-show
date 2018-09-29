@@ -11,17 +11,16 @@ import android.widget.TextView;
 
 import com.coder.zzq.smartshow.Config;
 import com.coder.zzq.smartshow.Utils;
-import com.coder.zzq.smartshow.basebar.BarSettingImpl;
 import com.coder.zzq.smartshow.basebar.IBarShow;
 import com.coder.zzq.smartshow.basebar.IBarShowCallback;
-import com.coder.zzq.smartshow.basebar.SmartBarDelegate;
+import com.coder.zzq.smartshow.basebar.BarDelegate;
 import com.coder.zzq.smartshow.lifecycle.ActivityStack;
 
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
-public class SmartSnackbarDeligate extends SmartBarDelegate<Snackbar, Snackbar.SnackbarLayout, SnackbarSettingImpl> {
+public class SnackbarDeligate extends BarDelegate<Snackbar, Snackbar.SnackbarLayout, SnackbarSettingImpl> {
 
-    private SmartSnackbarDeligate() {
+    private SnackbarDeligate() {
         super();
     }
 
@@ -46,16 +45,16 @@ public class SmartSnackbarDeligate extends SmartBarDelegate<Snackbar, Snackbar.S
     }
 
 
-    private static SmartSnackbarDeligate sDeligate;
+    private static SnackbarDeligate sDeligate;
 
     public static boolean hasCreated() {
         return sDeligate != null;
     }
 
-    public static SmartSnackbarDeligate get() {
+    public static SnackbarDeligate get() {
 
         if (sDeligate == null) {
-            sDeligate = new SmartSnackbarDeligate();
+            sDeligate = new SnackbarDeligate();
         }
 
         return sDeligate;

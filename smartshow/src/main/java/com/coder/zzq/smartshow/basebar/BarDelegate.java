@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.coder.zzq.smartshow.lifecycle.ActivityStack;
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
-public abstract class SmartBarDelegate<Bar, ViewParam, BarSetting extends BarSettingImpl> implements IBarShow, View.OnClickListener, Runnable {
+public abstract class BarDelegate<Bar, ViewParam, BarSetting extends BarSettingImpl> implements IBarShow, View.OnClickListener, Runnable {
 
     protected Context mPageContext;
     protected CharSequence mCurMsg;
@@ -22,7 +22,7 @@ public abstract class SmartBarDelegate<Bar, ViewParam, BarSetting extends BarSet
     protected View mBaseTraceView;
     protected Bar mBar;
 
-    protected SmartBarDelegate() {
+    protected BarDelegate() {
         mCurMsg = "";
         mCurActionText = "";
     }

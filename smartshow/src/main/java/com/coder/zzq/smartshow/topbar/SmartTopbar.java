@@ -11,20 +11,20 @@ public final class SmartTopbar {
 
 
     public static IBarShow get() {
-        return SmartTopbarDelegate.get().nestedDecorView();
+        return TopbarDelegate.get().nestedDecorView();
     }
 
     public static boolean isShowing() {
-        return SmartTopbarDelegate.get().isShowing();
+        return TopbarDelegate.get().isShowing();
     }
 
     public static void dismiss() {
-        SmartTopbarDelegate.get().dismiss();
+        TopbarDelegate.get().dismiss();
     }
 
 
     public static ITopbarSetting setting() {
-        return SmartTopbarDelegate.get().createBarSetting();
+        return TopbarDelegate.get().createBarSetting();
     }
 
 }

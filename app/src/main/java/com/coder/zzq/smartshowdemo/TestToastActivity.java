@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.coder.zzq.smartshow.toast.SmartToast;
 
-public class ToastActivity extends AppCompatActivity {
+public class TestToastActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +17,7 @@ public class ToastActivity extends AppCompatActivity {
     }
 
     public void onNextPageClick(View view) {
-        startActivity(new Intent(this,ToastActivity.class));
+        startActivity(new Intent(this,TestToastActivity.class));
     }
 
 

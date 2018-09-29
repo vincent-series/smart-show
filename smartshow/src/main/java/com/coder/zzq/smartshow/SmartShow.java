@@ -4,11 +4,12 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
 
+import com.coder.zzq.smartshow.dialog.DialogDelegate;
 import com.coder.zzq.smartshow.lifecycle.ActivityLifecycleCallback;
 import com.coder.zzq.smartshow.lifecycle.ActivityStack;
-import com.coder.zzq.smartshow.snackbar.SmartSnackbarDeligate;
-import com.coder.zzq.smartshow.toast.SmartToastDelegate;
-import com.coder.zzq.smartshow.topbar.SmartTopbarDelegate;
+import com.coder.zzq.smartshow.snackbar.SnackbarDeligate;
+import com.coder.zzq.smartshow.toast.ToastDelegate;
+import com.coder.zzq.smartshow.topbar.TopbarDelegate;
 
 /**
  * Created by 朱志强 on 2018/08/19.
@@ -32,14 +33,14 @@ public final class SmartShow {
             @Override
             public void onActivityPaused(Activity activity) {
                 super.onActivityPaused(activity);
-                if (SmartToastDelegate.hasCreated() && SmartToastDelegate.get().isDismissOnLeave()) {
-                    SmartToastDelegate.get().dismiss();
+                if (ToastDelegate.hasCreated() && ToastDelegate.get().isDismissOnLeave()) {
+                    ToastDelegate.get().dismiss();
                 }
-                if (SmartSnackbarDeligate.hasCreated() && SmartSnackbarDeligate.get().isDismissOnLeave()) {
-                    SmartSnackbarDeligate.get().dismiss();
+                if (SnackbarDeligate.hasCreated() && SnackbarDeligate.get().isDismissOnLeave()) {
+                    SnackbarDeligate.get().dismiss();
                 }
-                if (SmartTopbarDelegate.hasCreated() && SmartTopbarDelegate.get().isDismissOnLeave()) {
-                    SmartTopbarDelegate.get().dismiss();
+                if (TopbarDelegate.hasCreated() && TopbarDelegate.get().isDismissOnLeave()) {
+                    TopbarDelegate.get().dismiss();
                 }
 
             }
@@ -47,20 +48,22 @@ public final class SmartShow {
             @Override
             public void onActivityDestroyed(Activity activity) {
                 super.onActivityDestroyed(activity);
-                ActivityStack.pop(activity);
-
-
-                if (SmartSnackbarDeligate.hasCreated()) {
-                    SmartSnackbarDeligate.get().destroy(activity);
+                if (activity == ActivityStack.getTop()) {
+                    ActivityStack.pop();
                 }
-                if (SmartTopbarDelegate.hasCreated()) {
-                    SmartTopbarDelegate.get().destroy(activity);
+
+                if (SnackbarDeligate.hasCreated()) {
+                    SnackbarDeligate.get().destroy(activity);
+                }
+                if (TopbarDelegate.hasCreated()) {
+                    TopbarDelegate.get().destroy(activity);
                 }
 
                 if (ActivityStack.isEmpty()) {
-                    SmartToastDelegate.destroyDelegate();
-                    SmartSnackbarDeligate.destroyDelegate();
-                    SmartTopbarDelegate.destroyDelegate();
+                    ToastDelegate.destroyDelegate();
+                    SnackbarDeligate.destroyDelegate();
+                    TopbarDelegate.destroyDelegate();
+                    DialogDelegate.destroyDelegate();
                 }
             }
         });

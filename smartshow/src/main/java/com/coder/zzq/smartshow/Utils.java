@@ -27,5 +27,11 @@ public class Utils {
     }
 
 
+    public static boolean isEmpty(CharSequence c) {
+        return c == null || c.toString().trim().isEmpty();
+    }
 
+    public static int screenWidth() {
+        return SmartShow.getContext().getResources().getDisplayMetrics().widthPixels;
+    }
 }

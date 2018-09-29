@@ -9,12 +9,12 @@ import com.coder.zzq.smartshow.SmartShow;
  * Created by 朱志强 on 2018/9/8.
  */
 @RestrictTo(RestrictTo.Scope.LIBRARY)
-public final class SmartToastDelegate {
+public final class ToastDelegate {
     private PlainToastManager mPlainToastManager;
     private TypeToastManager mTypeToastManager;
 
 
-    private SmartToastDelegate() {
+    private ToastDelegate() {
 
     }
 
@@ -171,13 +171,13 @@ public final class SmartToastDelegate {
     }
 
 
-    private static SmartToastDelegate sSmartToastDelegate;
+    private static ToastDelegate sSmartToastDelegate;
 
     @RestrictTo(RestrictTo.Scope.LIBRARY)
-    public static SmartToastDelegate get() {
+    public static ToastDelegate get() {
         SmartShow.getContext();
         if (sSmartToastDelegate == null) {
-            sSmartToastDelegate = new SmartToastDelegate();
+            sSmartToastDelegate = new ToastDelegate();
         }
 
         return sSmartToastDelegate;

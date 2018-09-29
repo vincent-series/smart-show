@@ -1,17 +1,11 @@
 package com.coder.zzq.smartshowdemo;
 
 import android.content.Intent;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.NinePatchDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
 
 import com.coder.zzq.smartshow.dialog.SmartDialog;
-import com.coder.zzq.smartshow.toast.SmartToast;
-
-import java.lang.reflect.Field;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,14 +15,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    @Override
-    public void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        SmartDialog.loading();
-    }
-
     public void onToastClick(View view) {
-        startActivity(new Intent(this, ToastActivity.class));
+        startActivity(new Intent(this, TestToastActivity.class));
     }
 
     public void onSnackbarClick(View view) {
@@ -40,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onTypeToastClick(View view) {
-        startActivity(new Intent(this, TypeToastActivity.class));
+        startActivity(new Intent(this, TestTypeToastActivity.class));
+    }
+
+    public void onDialogClick(View view) {
+        startActivity(new Intent(this,TestDialogActivity.class));
     }
 }

@@ -5,7 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.WindowManager;
 
-public class SafeHandler extends Handler {
+class SafeHandler extends Handler {
     private Handler mNestedHandler;
 
     public SafeHandler(Handler nestedHandler) {
@@ -16,7 +16,8 @@ public class SafeHandler extends Handler {
     public void dispatchMessage(Message msg) {
         try {
             super.dispatchMessage(msg);
-        }catch (WindowManager.BadTokenException e){}
+        } catch (WindowManager.BadTokenException e) {
+        }
     }
 
     @Override

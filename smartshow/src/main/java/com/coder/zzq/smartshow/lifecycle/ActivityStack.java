@@ -23,7 +23,7 @@ public final class ActivityStack {
     }
 
 
-    public static Activity pop(Activity activity){
+    public static Activity pop(){
         if (getActivitySet().isEmpty()){
             return null;
         }

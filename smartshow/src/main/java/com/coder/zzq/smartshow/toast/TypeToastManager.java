@@ -55,15 +55,15 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
         mCurIcon = R.drawable.type_info_normal;
         mWindowParams.windowAnimations = R.style.type_info_toast_anim;
         mWindowParams.height = Utils.dpToPx(85);
-        if (SmartToastDelegate.get().hasToastSetting()
-                && SmartToastDelegate.get().getToastSetting().isTypeInfoThemeColorSetup()) {
+        if (ToastDelegate.get().hasToastSetting()
+                && ToastDelegate.get().getToastSetting().isTypeInfoThemeColorSetup()) {
             GradientDrawable drawable = (GradientDrawable) mView.getBackground();
-            drawable.setColor(SmartToastDelegate.get().getToastSetting().getTypeInfoThemeColor());
+            drawable.setColor(ToastDelegate.get().getToastSetting().getTypeInfoThemeColor());
         }
     }
 
     private final void showHelper(CharSequence msg, int infoType, int duration) {
-        SmartToastDelegate.get().dismissPlainShowIfNeed();
+        ToastDelegate.get().dismissPlainShowIfNeed();
         msg = (msg == null) ? "" : msg;
         //文本是否改变
         boolean contentChanged = !mCurMsg.equals(msg.toString().trim());

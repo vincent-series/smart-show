@@ -2,6 +2,7 @@ package com.coder.zzq.smartshowdemo;
 
 import android.app.Application;
 import android.graphics.Color;
+import android.graphics.drawable.NinePatchDrawable;
 import android.view.View;
 import android.widget.TextView;
 
@@ -25,13 +26,13 @@ public class MyApplication extends Application {
         SmartSnackbar.get().show("你好");
         SmartTopbar.get().show("你好");
         SmartSnackbar.get().showIndefinite("我是朱志强");
-
         SmartSnackbar.get().show("为SmartShow Star一下可以么", "好的");
         SmartToast.setting()
                 .dismissOnLeave(true)
                 .backgroundColorRes(R.color.colorPrimary)
                 .textSizeSp(18)
                 .textBold(true)
+                .typeInfoToastThemeColorRes(R.color.colorPrimary)
                 .processView(new IProcessToastCallback() {
                     @Override
                     //root 为布局根View，msgView为显示消息的TextView

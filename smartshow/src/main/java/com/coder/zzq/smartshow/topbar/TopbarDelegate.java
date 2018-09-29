@@ -1,7 +1,6 @@
 package com.coder.zzq.smartshow.topbar;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RestrictTo;
 import android.view.View;
@@ -10,27 +9,26 @@ import android.widget.TextView;
 
 import com.coder.zzq.smartshow.Config;
 import com.coder.zzq.smartshow.R;
-import com.coder.zzq.smartshow.SmartShow;
 import com.coder.zzq.smartshow.Utils;
 import com.coder.zzq.smartshow.basebar.IBarShow;
 import com.coder.zzq.smartshow.basebar.IBarShowCallback;
-import com.coder.zzq.smartshow.basebar.SmartBarDelegate;
+import com.coder.zzq.smartshow.basebar.BarDelegate;
 import com.coder.zzq.smartshow.lifecycle.ActivityStack;
 import com.coder.zzq.smartshow.topbar.view.BaseTopBar;
 import com.coder.zzq.smartshow.topbar.view.TopBar;
 @RestrictTo(RestrictTo.Scope.LIBRARY)
-public final class SmartTopbarDelegate extends SmartBarDelegate<TopBar, TopBar.TopbarLayout, TopbarSettingImpl> {
+public final class TopbarDelegate extends BarDelegate<TopBar, TopBar.TopbarLayout, TopbarSettingImpl> {
 
 
-    private static SmartTopbarDelegate sDelegate;
+    private static TopbarDelegate sDelegate;
 
     public static boolean hasCreated() {
         return sDelegate != null;
     }
 
-    public static SmartTopbarDelegate get() {
+    public static TopbarDelegate get() {
         if (sDelegate == null) {
-            sDelegate = new SmartTopbarDelegate();
+            sDelegate = new TopbarDelegate();
         }
         return sDelegate;
     }

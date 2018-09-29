@@ -24,10 +24,10 @@ public class PlainToastManager extends BaseToastManager implements IPlainShow {
 
     @Override
     protected Toast createToast() {
-        if (SmartToastDelegate.get().hasToastSetting()
-                && SmartToastDelegate.get().getToastSetting().isCustom()) {
+        if (ToastDelegate.get().hasToastSetting()
+                && ToastDelegate.get().getToastSetting().isCustom()) {
 
-            mView = SmartToastDelegate.get().getToastSetting().getCustomView();
+            mView = ToastDelegate.get().getToastSetting().getCustomView();
             mMsgView = mView.findViewById(R.id.custom_toast_msg);
             mToast = new Toast(SmartShow.getContext());
             mToast.setView(mView);
@@ -57,27 +57,27 @@ public class PlainToastManager extends BaseToastManager implements IPlainShow {
     @Override
     protected void setupToast() {
         super.setupToast();
-        if (SmartToastDelegate.get().hasToastSetting()) {
+        if (ToastDelegate.get().hasToastSetting()) {
 
-            if (SmartToastDelegate.get().getToastSetting().isBgColorSetup()) {
-                if (SmartToastDelegate.get().getToastSetting().isCustom()) {
-                    mView.setBackgroundColor(SmartToastDelegate.get().getToastSetting().getBgColor());
+            if (ToastDelegate.get().getToastSetting().isBgColorSetup()) {
+                if (ToastDelegate.get().getToastSetting().isCustom()) {
+                    mView.setBackgroundColor(ToastDelegate.get().getToastSetting().getBgColor());
                 } else {
-                    DrawableCompat.setTint(mView.getBackground(), SmartToastDelegate.get().getToastSetting().getBgColor());
+                    DrawableCompat.setTint(mView.getBackground(), ToastDelegate.get().getToastSetting().getBgColor());
                 }
             }
 
-            if (SmartToastDelegate.get().getToastSetting().isTextColorSetup()) {
-                mMsgView.setTextColor(SmartToastDelegate.get().getToastSetting().getTextColor());
+            if (ToastDelegate.get().getToastSetting().isTextColorSetup()) {
+                mMsgView.setTextColor(ToastDelegate.get().getToastSetting().getTextColor());
             }
-            if (SmartToastDelegate.get().getToastSetting().isTextSizeSetup()) {
-                mMsgView.setTextSize(TypedValue.COMPLEX_UNIT_SP, SmartToastDelegate.get().getToastSetting().getTextSizeSp());
+            if (ToastDelegate.get().getToastSetting().isTextSizeSetup()) {
+                mMsgView.setTextSize(TypedValue.COMPLEX_UNIT_SP, ToastDelegate.get().getToastSetting().getTextSizeSp());
             }
 
             mMsgView.setGravity(Gravity.CENTER);
-            mMsgView.getPaint().setFakeBoldText(SmartToastDelegate.get().getToastSetting().isTextBold());
-            if (SmartToastDelegate.get().getToastSetting().isViewCallbackSetup()) {
-                SmartToastDelegate.get().getToastSetting().getIProcessToastCallback().processView( mView, mMsgView);
+            mMsgView.getPaint().setFakeBoldText(ToastDelegate.get().getToastSetting().isTextBold());
+            if (ToastDelegate.get().getToastSetting().isViewCallbackSetup()) {
+                ToastDelegate.get().getToastSetting().getIProcessToastCallback().processView( mView, mMsgView);
             }
 
         }
@@ -129,7 +129,7 @@ public class PlainToastManager extends BaseToastManager implements IPlainShow {
     }
 
     private void showHelper(CharSequence msg, int gravity, int xOffset, int yOffset, int duration) {
-        SmartToastDelegate.get().dismissTypeShowIfNeed();
+        ToastDelegate.get().dismissTypeShowIfNeed();
         msg = (msg == null) ? "" : msg;
         //位置是否改变
         boolean locationChanged = locationChanged(gravity, xOffset, yOffset);

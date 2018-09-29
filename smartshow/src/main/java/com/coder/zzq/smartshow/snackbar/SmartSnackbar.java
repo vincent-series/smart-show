@@ -2,9 +2,7 @@ package com.coder.zzq.smartshow.snackbar;
 
 
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
 
-import com.coder.zzq.smartshow.basebar.IBarSetting;
 import com.coder.zzq.smartshow.basebar.IBarShow;
 
 /**
@@ -20,24 +18,24 @@ public final class SmartSnackbar {
 
     public static IBarShow get() {
 
-        return SmartSnackbarDeligate.get().nestedContentView();
+        return SnackbarDeligate.get().nestedContentView();
     }
 
     public static IBarShow get(CoordinatorLayout view) {
-        return SmartSnackbarDeligate.get().nestedCoordinatorLayout(view);
+        return SnackbarDeligate.get().nestedCoordinatorLayout(view);
     }
 
 
     public static boolean isShowing() {
-        return SmartSnackbarDeligate.get().isShowing();
+        return SnackbarDeligate.get().isShowing();
     }
 
     public static void dismiss() {
-        SmartSnackbarDeligate.get().dismiss();
+        SnackbarDeligate.get().dismiss();
     }
 
     public static ISnackbarSetting setting() {
-        return SmartSnackbarDeligate.get().createBarSetting();
+        return SnackbarDeligate.get().createBarSetting();
     }
 
 }

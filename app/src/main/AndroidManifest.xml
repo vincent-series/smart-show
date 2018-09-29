@@ -17,10 +17,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ToastActivity" />
-        <activity android:name=".TypeToastActivity" />
+        <activity android:name=".TestToastActivity" />
+        <activity android:name=".TestTypeToastActivity" />
         <activity android:name=".TestTopbarActivity" />
         <activity android:name=".TestSnackbarActivity" />
+        <activity android:name=".TestDialogActivity"></activity>
     </application>
 
 </manifest>

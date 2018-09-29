@@ -6,9 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.coder.zzq.smartshow.toast.SmartToast;
-import com.coder.zzq.smartshow.toast.SmartToastDelegate;
 
-public class TypeToastActivity extends AppCompatActivity {
+public class TestTypeToastActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +50,7 @@ public class TypeToastActivity extends AppCompatActivity {
 
 
     public void onNextPageClick(View view) {
-        startActivity(new Intent(this, TypeToastActivity.class));
+        startActivity(new Intent(this, TestTypeToastActivity.class));
     }
 
 
