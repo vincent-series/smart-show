@@ -42,6 +42,6 @@ public class TestDialogActivity extends AppCompatActivity {
 
 
     public void onNextPageClick(View view) {
-        startActivity(new Intent(this, TestDialogActivity.class));
+        SmartDialog.loading();
     }
 }

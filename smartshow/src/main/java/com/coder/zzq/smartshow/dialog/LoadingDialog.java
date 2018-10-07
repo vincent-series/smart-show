@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.coder.zzq.smartshow.R;
 import com.coder.zzq.smartshow.SmartShow;
 import com.coder.zzq.smartshow.Utils;
+import com.coder.zzq.smartshow.dialog.type.ILoadingDialog;
 import com.coder.zzq.smartshow.lifecycle.ActivityStack;
 
 class LoadingDialog extends Dialog {
@@ -50,7 +51,7 @@ class LoadingDialog extends Dialog {
         return mActivity != ActivityStack.getTop();
     }
 
-    public static class Builder {
+    public static class Builder implements ILoadingDialog {
 
         public LoadingDialog create(String msg) {
             Activity activity = ActivityStack.getTop();
@@ -72,5 +73,30 @@ class LoadingDialog extends Dialog {
             return null;
         }
 
+        @Override
+        public ILoadingDialog msg(String msg) {
+            return null;
+        }
+
+        @Override
+        public ILoadingDialog large() {
+
+            return this;
+        }
+
+        @Override
+        public ILoadingDialog middle() {
+            return null;
+        }
+
+        @Override
+        public ILoadingDialog small() {
+            return null;
+        }
+
+        @Override
+        public void show() {
+
+        }
     }
 }

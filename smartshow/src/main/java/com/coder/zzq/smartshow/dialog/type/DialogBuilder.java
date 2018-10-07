@@ -97,7 +97,7 @@ public class DialogBuilder<V extends View, Type> implements IDialogShow<Type>, V
     @Override
     public Type cancelClick(View.OnClickListener listener) {
         mCancelListener = listener;
-        return null;
+        return (Type) this;
     }
 
     @Override

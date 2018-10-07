@@ -8,9 +8,6 @@ import com.coder.zzq.smartshow.dialog.type.DialogBuilder;
 import com.coder.zzq.smartshow.dialog.type.IMessageDialog;
 
 public class SmartDialog {
-    public static void loading(String msg) {
-        DialogDelegate.get().loading(msg);
-    }
 
     public static void loading() {
         DialogDelegate.get().loading("加载中...");
