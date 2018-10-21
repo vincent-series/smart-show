@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
 
-import com.coder.zzq.smartshow.dialog.DialogDelegate;
 import com.coder.zzq.smartshow.lifecycle.ActivityLifecycleCallback;
 import com.coder.zzq.smartshow.lifecycle.ActivityStack;
 import com.coder.zzq.smartshow.snackbar.SnackbarDeligate;
@@ -63,7 +62,6 @@ public final class SmartShow {
                     ToastDelegate.destroyDelegate();
                     SnackbarDeligate.destroyDelegate();
                     TopbarDelegate.destroyDelegate();
-                    DialogDelegate.destroyDelegate();
                 }
             }
         });

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -14,11 +13,11 @@
         android:paddingTop="20dp"
         android:text="提示"
         android:textColor="#323232"
-        android:textSize="18sp"
+        android:textSize="19sp"
         android:visibility="gone" />
 
     <FrameLayout
-        android:id="@+id/dialog_content"
+        android:id="@+id/dialog_content_wrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="80dp"
@@ -38,7 +37,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/dialog_cancel_btn"
+            android:id="@+id/dialog_negative_btn"
             style="@style/smart_show_dialog_button"
             android:text="取消" />
 
@@ -49,10 +48,9 @@
             android:background="#cccccc" />
 
         <TextView
-            android:id="@+id/dialog_ensure_btn"
+            android:id="@+id/dialog_positive_btn"
             style="@style/smart_show_dialog_button"
             android:text="确定"
             android:textColor="@color/colorPrimary" />
-
     </LinearLayout>
 </LinearLayout>
