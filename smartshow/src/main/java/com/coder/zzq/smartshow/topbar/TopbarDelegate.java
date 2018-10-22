@@ -3,8 +3,12 @@ package com.coder.zzq.smartshow.topbar;
 import android.app.Activity;
 import android.os.Build;
 import android.support.annotation.RestrictTo;
+import android.support.design.widget.CoordinatorLayout;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.coder.zzq.smartshow.Config;
@@ -16,6 +20,7 @@ import com.coder.zzq.smartshow.basebar.BarDelegate;
 import com.coder.zzq.smartshow.lifecycle.ActivityStack;
 import com.coder.zzq.smartshow.topbar.view.BaseTopBar;
 import com.coder.zzq.smartshow.topbar.view.TopBar;
+
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public final class TopbarDelegate extends BarDelegate<TopBar, TopBar.TopbarLayout, TopbarSettingImpl> {
 
@@ -38,18 +43,30 @@ public final class TopbarDelegate extends BarDelegate<TopBar, TopBar.TopbarLayou
         Activity activity = ActivityStack.getTop();
         mPageContext = activity;
         //取出DecorView
-        View view = activity == null ? null : activity.getWindow().getDecorView();
+        ViewGroup decorView = activity == null ? null : (ViewGroup) activity.getWindow().getDecorView();
+        CoordinatorLayout topbarContainer = null;
+        if (decorView != null) {
+            topbarContainer = decorView.findViewById(R.id.smart_show_top_bar_container);
+            if (topbarContainer == null){
+                topbarContainer = new CoordinatorLayout(activity);
+                ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT
+                );
+                decorView.addView(topbarContainer, lp);
+            }
 
-        return getFromView(view);
+        }
+        return getFromView(topbarContainer);
     }
 
 
     @Override
     protected TopBar createBar(View view) {
         TopBar topBar = TopBar.make(view, "", BaseTopBar.LENGTH_SHORT);
-        int height = Utils.dpToPx(80);
-        topBar.getView().getLayoutParams().height = height;
-        topBar.getView().setBackgroundColor(Utils.getColorFromRes(R.color.colorPrimary));
+        View v = ((ViewGroup) topBar.getView()).getChildAt(0);
+        FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) v.getLayoutParams();
+        lp.gravity = Gravity.BOTTOM;
         return topBar;
     }
 
