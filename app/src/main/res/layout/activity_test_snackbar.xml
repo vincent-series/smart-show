@@ -3,6 +3,10 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <include layout="@layout/copyright_toolbar"/>
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <LinearLayout
         android:gravity="center"
         android:layout_width="match_parent"
@@ -29,5 +33,5 @@
             android:text="下一页"
             android:onClick="onNextPageClick"/>
     </LinearLayout>
-
+    </android.support.design.widget.CoordinatorLayout>
 </LinearLayout>

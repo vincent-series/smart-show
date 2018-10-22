@@ -47,8 +47,9 @@ public final class TopbarDelegate extends BarDelegate<TopBar, TopBar.TopbarLayou
         CoordinatorLayout topbarContainer = null;
         if (decorView != null) {
             topbarContainer = decorView.findViewById(R.id.smart_show_top_bar_container);
-            if (topbarContainer == null){
+            if (topbarContainer == null) {
                 topbarContainer = new CoordinatorLayout(activity);
+                topbarContainer.setId(R.id.smart_show_top_bar_container);
                 ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT
@@ -72,7 +73,7 @@ public final class TopbarDelegate extends BarDelegate<TopBar, TopBar.TopbarLayou
 
     @Override
     protected boolean isDismissByGesture() {
-        return false;
+        return mBar.getView().getVisibility() != View.VISIBLE;
     }
 
     @Override

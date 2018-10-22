@@ -3,6 +3,7 @@ package com.coder.zzq.smartshowdemo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -23,7 +24,7 @@ public class TestSnackbarActivity extends AppCompatActivity  implements ISnackba
     }
 
     public void onIndefiniteClick(View view) {
-        SmartSnackbar.get().showIndefinite("橘子");
+        SmartSnackbar.get((CoordinatorLayout) findViewById(R.id.coordinator)).showIndefinite("橘子");
     }
 
     public void onLongClick(View view) {
