@@ -57,7 +57,7 @@ allprojects {
 4.可为Toast设置自定义布局</br><br/>
 5.完美解决Android 7.1的系统bug——Toast BadTokenException<br/><br/>
 6.可配置离开当前页面，立即消失正在显示的Toast<br/><br/>
-7.结合主流app类型Toast的展示效果，提供info、success、error、warnign 4种类型Toast
+7.结合主流app类型Toast的展示效果，提供info、success、error、warnign、complete、forbid、wait、fail 8种类型Toast
 ### 注意
 关闭app的系统通知权限,将导致SmartToast无法显示<br/>
 Toast的内部原理使用NotificationManagerService，关闭通知权限后，将无法显示。<br/>
@@ -625,3 +625,4 @@ INotificationDialogBuilder的全部方法
     
     Dialog create(Activity activity);
 </code></pre>
+#### 确认框
