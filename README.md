@@ -33,7 +33,7 @@ allprojects {
 2.在Module的grable文件中<br/>
 <pre><code>
 
-        implementation('com.github.the-pig-of-jungle:SmartShow:v2.4.0') {
+        implementation('com.github.the-pig-of-jungle:SmartShow:v2.4.1') {
         
             exclude group: 'com.android.support'
             
@@ -626,3 +626,47 @@ INotificationDialogBuilder的全部方法
     Dialog create(Activity activity);
 </code></pre>
 #### 确认框
+确认框与通知框类似，只是多了一个取消按钮
+<pre><code>
+    SmartDialog.ensure("确定不再关注此人？").create(this).show();
+</code></pre>
+除了具有INotificationDialogBuilder的全部方法外，IEnsureDialogBuilder如外的方法
+<pre><code>
+    //设置取消按钮的文本及点击事件
+    
+    IEnsureDialogBuilder negativeBtn(CharSequence label, DialogBtnClickListener clickListener);
+</code></pre>
+#### 延迟框
+延迟框与确认框类似，只是确定按钮在延迟一定时间后方可点击
+<pre><code>
+    SmartDialog.ensureDelay("确定启用开发者模式？").create(this).show();
+</code></pre>
+除了具有IEnsureDialogBuilder的全部方法外，IEnsureDelayDialogBuilder如外的方法
+<pre><code>
+    //设置确定按钮延迟多少秒方可点击
+    
+    IEnsureDelayDialogBuilder delay(int seconds);
+</code></pre>
+#### 输入框
+输入框具有确认框除msg(CharSequence msg)的全部方法
+<pre<<code>
+        SmartDialog.inputText().hint("请输入建议")
+                .inputAtMost(70)
+                .positiveBtn("提交", new DialogBtnClickListener() {
+                    @Override
+                    public void onBtnClick(TextView btn, Object data) {
+                        SmartToast.showInCenter("已提交——>" + data.toString());
+                    }
+                })
+                .create(this)
+                .show();
+</code></pre>
+IInputDialogBuilder如外的方法
+<pre><code>
+    //设置EditText的hint文本
+    
+    IInputTextDialogBuilder hint(CharSequence hintMsg);
+
+    //设置最多输入多少字
+    IInputTextDialogBuilder inputAtMost(int num);
+</code></pre>

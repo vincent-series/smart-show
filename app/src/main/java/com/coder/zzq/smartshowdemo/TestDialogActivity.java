@@ -33,15 +33,11 @@ public class TestDialogActivity extends AppCompatActivity {
     }
 
     public void onEnsureClick(View view) {
-        SmartDialog.ensure("确定不再关注此人？")
-                .create(this)
-                .show();
+        SmartDialog.ensure("确定不再关注此人？").create(this).show();
     }
 
     public void onEnsureDelayClick(View view) {
-        SmartDialog.ensureDelay("确定启用开发者模式？")
-                .create(this)
-                .show();
+        SmartDialog.ensureDelay("确定启用开发者模式？").create(this).show();
     }
 
 
