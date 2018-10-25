@@ -1,5 +1,6 @@
 package com.coder.zzq.smartshowdemo;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -24,15 +25,15 @@ public class TestSnackbarActivity extends AppCompatActivity  implements ISnackba
     }
 
     public void onIndefiniteClick(View view) {
-        SmartSnackbar.get((CoordinatorLayout) findViewById(R.id.coordinator)).showIndefinite("橘子");
+        SmartSnackbar.get(this).showIndefinite("橘子");
     }
 
     public void onLongClick(View view) {
-        SmartSnackbar.get().showLong("香蕉");
+        SmartSnackbar.get(this).showLong("香蕉");
     }
 
     public void onShortClick(View view) {
-        SmartSnackbar.get().show("苹果");
+        SmartSnackbar.get(this).show("苹果");
     }
 
     @Override

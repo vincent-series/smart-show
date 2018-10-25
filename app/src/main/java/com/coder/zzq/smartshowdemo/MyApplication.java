@@ -23,10 +23,7 @@ public class MyApplication extends Application {
         super.onCreate();
 
         SmartShow.init(this);
-        SmartSnackbar.get().show("你好");
-        SmartTopbar.get().show("你好");
-        SmartSnackbar.get().showIndefinite("我是朱志强");
-        SmartSnackbar.get().show("为SmartShow Star一下可以么", "好的");
+
         SmartToast.setting()
                 .dismissOnLeave(true)
                 .backgroundColorRes(R.color.colorPrimary)

@@ -17,15 +17,15 @@ public class TestTopbarActivity extends AppCompatActivity {
     }
 
     public void onShortClick(View view) {
-        SmartTopbar.get().show("苹果");
+        SmartTopbar.get(this).show("苹果");
     }
 
     public void onLongClick(View view) {
-        SmartTopbar.get().showLong("香蕉");
+        SmartTopbar.get(this).showLong("香蕉");
     }
 
     public void onIndefinite(View view) {
-        SmartTopbar.get().showIndefinite("橘子", "好吃", new View.OnClickListener() {
+        SmartTopbar.get(this).showIndefinite("火龙果", "好吃", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SmartToast.showAtTop("好吃你就多吃点");

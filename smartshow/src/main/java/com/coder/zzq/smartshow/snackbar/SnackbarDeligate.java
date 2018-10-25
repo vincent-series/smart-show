@@ -24,9 +24,8 @@ public class SnackbarDeligate extends BarDelegate<Snackbar, Snackbar.SnackbarLay
         super();
     }
 
-    public IBarShow nestedContentView() {
+    public IBarShow nestedContentView(Activity activity) {
         //保存当前页面的Context
-        Activity activity = ActivityStack.getTop();
         mPageContext = activity;
         //取出android.R.id.content
         View view = activity == null ? null : activity.findViewById(android.R.id.content);

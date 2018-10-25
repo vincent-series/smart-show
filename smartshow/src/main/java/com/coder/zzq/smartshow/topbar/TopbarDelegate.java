@@ -38,9 +38,8 @@ public final class TopbarDelegate extends BarDelegate<TopBar, TopBar.TopbarLayou
         return sDelegate;
     }
 
-    public IBarShow nestedDecorView() {
+    public IBarShow nestedDecorView(Activity activity) {
         //保存当前页面的Context
-        Activity activity = ActivityStack.getTop();
         mPageContext = activity;
         //取出DecorView
         ViewGroup decorView = activity == null ? null : (ViewGroup) activity.getWindow().getDecorView();

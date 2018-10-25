@@ -1,6 +1,7 @@
 package com.coder.zzq.smartshow.snackbar;
 
 
+import android.app.Activity;
 import android.support.design.widget.CoordinatorLayout;
 
 import com.coder.zzq.smartshow.basebar.IBarShow;
@@ -16,9 +17,9 @@ public final class SmartSnackbar {
     }
 
 
-    public static IBarShow get() {
+    public static IBarShow get(Activity activity) {
 
-        return SnackbarDeligate.get().nestedContentView();
+        return SnackbarDeligate.get().nestedContentView(activity);
     }
 
     public static IBarShow get(CoordinatorLayout view) {
