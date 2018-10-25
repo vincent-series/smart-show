@@ -231,39 +231,39 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
 2.可修改布局风格，如背景颜色，文字大小和颜色等</br><br/>
 3.可配置离开当前Activity时，立即消失正在显示的Snackbar,一般Indefinite Snackbar有此需求
 ### API
-显示Snackbar，三种duration体现在方法名上，而不是传参，尽可能简化调用
+传入当前界面的Activity,获取Snackbar，三种duration体现在方法名上，而不是传参，尽可能简化调用
 #### 只传入消息文本
 <pre><code>
         //short snackbar
         
-        SmartSnackbar.get().show("我是朱志强");
+        SmartSnackbar.get(this).show("我是朱志强");
         
         //long snackbar
         
-        SmartSnackbar.get().showLong("我是朱志强");
+        SmartSnackbar.get(this).showLong("我是朱志强");
         
        //indefinite snackbar,只传入消息文本时，会显示默认的动作文本"确定"，点击动作文本，执行默认行为--Snackbar消失
         
-       SmartSnackbar.get().showIndefinite("我是朱志强");     
+       SmartSnackbar.get(this).showIndefinite("我是朱志强");     
 </code></pre>
 #### 传入消息文本和动作文本
 点击动作文本，执行默认逻辑--Snackbar消失
 <pre><code>
        //short snackbar
        
-       SmartSnackbar.get().show("为SmartShow Star 一下可以么","好的");
+       SmartSnackbar.get(this).show("为SmartShow Star 一下可以么","好的");
        
        //long snackbar
        
-       SmartSnackbar.get().showLong("为SmartShow Star 一下可以么","好的");
+       SmartSnackbar.get(this).showLong("为SmartShow Star 一下可以么","好的");
        
        //indefinite snackbar
        
-       SmartSnackbar.get().showIndefinite("为SmartShow Star 一下可以么","好的");
+       SmartSnackbar.get(this).showIndefinite("为SmartShow Star 一下可以么","好的");
 </code></pre>
 #### 传入消息文本和动作文本以及动作监听器
 <pre><code>
-       SmartSnackbar.get().show("我是朱志强", "打赏", new View.OnClickListener() {
+       SmartSnackbar.get(this).show("我是朱志强", "打赏", new View.OnClickListener() {
        
            @Override
            public void onClick(View v) {
@@ -273,7 +273,7 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
               }
            });
            
-       SmartSnackbar.get().showLong("我是朱志强", "打赏", new View.OnClickListener() {
+       SmartSnackbar.get(this).showLong("我是朱志强", "打赏", new View.OnClickListener() {
        
            @Override
            public void onClick(View v) {
@@ -283,7 +283,7 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
               }
            });
            
-       SmartSnackbar.get().showIndefinite("我是朱志强", "打赏", new View.OnClickListener() {
+       SmartSnackbar.get(this).showIndefinite("我是朱志强", "打赏", new View.OnClickListener() {
        
            @Override
            public void onClick(View v) {
@@ -292,13 +292,13 @@ Toast的内部原理使用NotificationManagerService，关闭通知权限后，�
                 
            });              
 </code></pre>
-以上示例获取SmartSnackbar使用的是SmartSnackbar.get()，还可使用SmartSnackbar.get(CoordinatorLayout view)。<br/><br/>
+以上示例获取SmartSnackbar使用的是SmartSnackbar.get(this)，this为当前界面activity，还可使用SmartSnackbar.get(CoordinatorLayout view)。<br/><br/>
 根据谷歌源码，我们知道创建Snackbar时需传入一个当前页面的某个View。实际上，Snackar会以该View为基点，<br/>
 沿着整个View Tree上溯，直到找到CoordinatorLayout容器或android.R.id.content 容器，哪个先找到，就将视图嵌入其中。<br/><br/>
 为了提高效率，直接将android.R.id.content或者CoordinatorLayout传入会更好。<br/><br/>
 以CoordinatorLayout为内嵌容器时，Snackbar会有一些特殊的行为，如可以用手指手动滑动移除，显示时会导致FloatingActionButton升高等。<br/><br/>
 所以SmartSnackbar对入口做了限制，如果你的页面想以某个具体CoordinatorLayout作为容器，<br/>
-则调用get(CoordinatorLayout view)。否则调用get()，内部会自动将当前Activity的 android.R.id.content作为容器。<br/>
+则调用get(CoordinatorLayout view)。否则调用get(Activity activity)，内部会自动将该Activity的 android.R.id.content作为容器。<br/>
 #### 定制化
 如果想定制化SmartSnackbar，可调用setting方法获取ISnackbarSetting对象进行全局配置
 <pre><code>
@@ -405,39 +405,39 @@ public class SnackbarActivity extends BaseActivity implements ISnackbarShowCallb
 3.可修改布局风格，如背景颜色，文字大小和颜色等</br><br/>
 4.可配置离开当前Activity时，立即消失正在显示的Topbar,一般Indefinite Topbar有此需求
 ### API
-显示Topbar，三种duration体现在方法名上，而不是传参，尽可能简化调用
+传入当前界面的Activity,获取Topbar，三种duration体现在方法名上，而不是传参，尽可能简化调用
 #### 只传入消息文本
 <pre><code>
         //short topbar
         
-        SmartTopbar.get().show("我是朱志强");
+        SmartTopbar.get(this).show("我是朱志强");
         
         //long topbar
         
-        SmartTopbar.get().showLong("我是朱志强");
+        SmartTopbar.get(this).showLong("我是朱志强");
         
        //indefinite topbar,只传入消息文本时，会显示默认的动作文本"确定"，点击动作文本，执行默认行为--Topbar消失
         
-       SmartTopbar.get().showIndefinite("我是朱志强");     
+       SmartTopbar.get(this).showIndefinite("我是朱志强");     
 </code></pre>
 #### 传入消息文本和动作文本
 点击动作文本，执行默认逻辑--Topbar消失
 <pre><code>
        //short topbar
        
-       SmartTopbar.get().show("为SmartShow Star 一下可以么","好的");
+       SmartTopbar.get(this).show("为SmartShow Star 一下可以么","好的");
        
        //long topbar
        
-       SmartTopbar.get().showLong("为SmartShow Star 一下可以么","好的");
+       SmartTopbar.get(this).showLong("为SmartShow Star 一下可以么","好的");
        
        //indefinite topbar
        
-       SmartTopbar.get().showIndefinite("为SmartShow Star 一下可以么","好的");
+       SmartTopbar.get(this).showIndefinite("为SmartShow Star 一下可以么","好的");
 </code></pre>
 #### 传入消息文本和动作文本以及动作监听器
 <pre><code>
-       SmartTopbar.get().show("我是朱志强", "打赏", new View.OnClickListener() {
+       SmartTopbar.get(this).show("我是朱志强", "打赏", new View.OnClickListener() {
        
            @Override
            public void onClick(View v) {
@@ -447,7 +447,7 @@ public class SnackbarActivity extends BaseActivity implements ISnackbarShowCallb
               }
            });
            
-       SmartTopbar.get().showLong("我是朱志强", "打赏", new View.OnClickListener() {
+       SmartTopbar.get(this).showLong("我是朱志强", "打赏", new View.OnClickListener() {
        
            @Override
            public void onClick(View v) {
@@ -457,7 +457,7 @@ public class SnackbarActivity extends BaseActivity implements ISnackbarShowCallb
               }
            });
            
-       SmartTopbar.get().showIndefinite("我是朱志强", "打赏", new View.OnClickListener() {
+       SmartTopbar.get(this).showIndefinite("我是朱志强", "打赏", new View.OnClickListener() {
        
            @Override
            public void onClick(View v) {
@@ -567,3 +567,61 @@ public class SnackbarActivity extends BaseActivity implements ITopbarShowCallbac
 }
 </code></pre>
 ### SmartDialog部分
+ios风格的loading框、对话框在主流App中很盛行，SmartDialog提供了几种类ios风格的对话框。
+#### API
+#### Loading框
+loading方法获取ILoadingDialogBuilder对象，可传入loading框上的提示文本
+<pre><code>
+
+    SmartDialog.loading("加载中...").large().create(this).show();    
+    
+</code></pre>
+ILoadingDialogBuilder的全部方法
+<pre><code>
+    //设置提示文本，会覆盖掉loading方法传入的值
+    
+    ILoadingDialogBuilder msg(CharSequence msg);
+
+    //设置Loading框的大小为large
+    
+    ILoadingDialogBuilder large();
+
+    //设置Loading框的大小为middle
+    
+    ILoadingDialogBuilder middle();
+
+    //设置Loading框的大小为small,此时提示文本隐藏了，只显示loading动画
+    
+    ILoadingDialogBuilder small();
+
+    //设置完毕，创建对话框
+    
+    Dialog create(Activity activity);
+</code></pre>
+#### 通知框
+调用notification方法获取INotificationDialogBuilder对象，可传入通知信息
+<pre><code>
+        SmartDialog.notification("充值成功").create(this).show();
+</code></pre>
+INotificationDialogBuilder的全部方法
+<pre><code>
+    //设置标题
+    
+    INotificationDialogBuilder title(CharSequence title);
+
+    //设置确定按钮的文本及点击事件
+    
+    INotificationDialogBuilder positiveBtn(CharSequence label, DialogBtnClickListener clickListener);
+
+    //对话框是否可点击back键消失
+    
+    INotificationDialogBuilder cancelable(boolean b);
+    
+    //触碰对话框以外区域可否消失对话框
+    
+    INotificationDialogBuilder cancelableOnTouchOutside(boolean b);
+
+    //设置完毕，创建对话框
+    
+    Dialog create(Activity activity);
+</code></pre>

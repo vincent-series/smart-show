@@ -24,11 +24,12 @@ public class TestDialogActivity extends AppCompatActivity {
 
     public void onNextPageClick(View view) {
         SmartDialog.loading("加载中...").small().create(this).show();
+
     }
 
     public void onNotificationClick(View view) {
-        SmartDialog.notification("充值成功")
-                .create(this).show();
+
+        SmartDialog.notification("充值成功").create(this).show();
     }
 
     public void onEnsureClick(View view) {
