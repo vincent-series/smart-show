@@ -648,8 +648,8 @@ INotificationDialogBuilder的全部方法
     IEnsureDelayDialogBuilder delay(int seconds);
 </code></pre>
 #### 输入框
-输入框具有确认框除msg(CharSequence msg)的全部方法
-<pre<<code>
+输入框具有确认框除msg(CharSequence msg)外的全部方法
+<pre><code>
         SmartDialog.inputText().hint("请输入建议")
                 .inputAtMost(70)
                 .positiveBtn("提交", new DialogBtnClickListener() {
