@@ -60,8 +60,7 @@ allprojects {
 7.结合主流app消息提示的效果，提供info、success、error、warnign、complete、forbid、wait、fail 8 种类型的Toast
 ### 注意
 关闭app的系统通知权限,Toast将无法显示。Toast的内部原理使用NotificationManagerService，关闭通知权限后，将无法显示。<br/>
-这是原生Toast本身的特性，以淘宝app和优酷app的"再按一次退出程序"的Toast提示为例，关闭他们的通知权限，<br/>
-Toast将不再显示。
+这是原生Toast本身的特性，以淘宝app和优酷app的"再按一次退出程序"的Toast提示为例，关闭通知权限，Toast将不再显示。
 ### API
 调用show方法显示Toast，duration和常用的显示位置体现在方法名上，而不是传参，调用非常简易
 #### 普通 Toast
