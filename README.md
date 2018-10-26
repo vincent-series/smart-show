@@ -67,25 +67,25 @@ allprojects {
 <pre><code>
         //在默认位置显示
 
-        SmartToast.show("我是朱志强！");
+        SmartToast.show("我是朱志强");
         
-        SmartToast.showLong("我是朱志强！");
+        SmartToast.showLong("我是朱志强");
 
 
 
         //在屏幕顶部显示，水平居中，距离顶部距离与在默认位置显示时，距离底部的距离一致
 
-        SmartToast.showAtTop("我是朱志强!");
+        SmartToast.showAtTop("我是朱志强");
         
-        SmartToast.showLongAtTop("我是朱志强!");
+        SmartToast.showLongAtTop("我是朱志强");
 
 
 
         //在屏幕中央显示
 
-        SmartToast.showInCenter("我是朱志强！");
+        SmartToast.showInCenter("我是朱志强");
         
-        SmartToast.showLongInCenter("我是朱志强！");
+        SmartToast.showLongInCenter("我是朱志强");
 
 
 
@@ -95,8 +95,8 @@ allprojects {
         
         SmartToast.showLongAtLocation("我是朱志强",Gravity.LEFT | Gravity.TOP,10,10);
 </pre></code>
-#### 类型 Toast
-类型Toast均居中显示
+#### Type Toast
+Type Toast均居中显示
 <pre><code>
         //普通信息
         
