@@ -163,8 +163,7 @@ Type Toast均居中显示
         
         SmartToast.setting()                   
 </code></pre>
-替换普通Toast的默认布局，但是在自定义布局中必须含有显示消息的TextView，<br/>
-并且指定它的id为android:id="@id/custom_toast_msg"
+若自定义布局，在布局中必须定义id为android:id="@id/custom_toast_msg"的TextView显示消息文本<br/>
 <pre><code>
           //自定义布局，直接传入View
     
@@ -234,7 +233,7 @@ Type Toast均居中显示
                              }
                          });         
 </code></pre>
-配置Type Toast 的主题色
+配置 Type Toast 的主题色
 <pre><code>
         IToastSetting typeInfoToastThemeColor(@ColorInt int color);
         
@@ -246,7 +245,7 @@ Type Toast均居中显示
         
                   .typeInfoToastThemeColorRes(R.color.colorPrimary);
 </code></pre>
-配置离开当前activity时，是否立即隐藏正在显示的Toast（不管是普通Toast还是类型Toast）,默认false
+配置离开当前activity时，是否立即隐藏正在显示的Toast（不管是普通Toast还是 Type Toast）,默认false
 <pre><code>
         IToastSetting dismissOnLeave(boolean b);
         
