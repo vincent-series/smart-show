@@ -157,7 +157,7 @@ Type Toast均居中显示
         SmartToast.waitingLong("已在后台下载，请耐心等待");
 </pre></code>
 #### 定制化
-如果想定制化SmartToast，可调用setting方法获取IToastSetting对象进行全局配置
+定制化SmartToast，调用setting方法获取IToastSetting对象进行全局配置
 <pre><code>  
         //获取IToastSetting对象
         
@@ -166,27 +166,23 @@ Type Toast均居中显示
 替换普通Toast的默认布局，但是在自定义布局中必须含有显示消息的TextView，<br/>
 并且指定它的id为android:id="@id/custom_toast_msg"
 <pre><code>
-    //直接传入View
+          //自定义布局，直接传入View
     
-    IToastSetting view(View view);
+          IToastSetting view(View view);
     
-    //传入布局资源
+         //自定义布局，传入布局资源
     
-    IToastSetting view(@LayoutRes int layout);
-    
-    例子：
-    
-    SmartToast.setting()
-    
-              .view(R.layout.custom_toast);
-</code></pre>
-配置普通Toast布局风格，不管是否自定义布局，均起作用
-<pre><code>           
+         IToastSetting view(@LayoutRes int layout);
+</code></pre>      
+<pre><code>
+            
          //设置布局背景颜色
          
          IToastSetting backgroundColor(@ColorInt int color);
          
          IToastSetting backgroundColorRes(@ColorRes int colorRes);
+         
+         
          
          // 设置消息文本颜色
          
@@ -194,19 +190,27 @@ Type Toast均居中显示
          
          IToastSetting textColorRes(@ColorRes int color);
          
+         
+         
          //设置消息文本大小
          
          IToastSetting textSizeSp(float sp);
          
+         
+         
          //消息文本是否为粗体
          
          IToastSetting textBold(boolean bold);
+         
+         
          
          //对布局进一步处理，callback中会传入布局的根View和显示消息的TextView，
          
          //callback中的处理和以上配置方法的处理有冲突时，将覆盖掉以上的配置
          
          IToastSetting processView(IProcessToastCallback callback);  
+         
+         
          
          例子：
          
@@ -230,7 +234,7 @@ Type Toast均居中显示
                              }
                          });         
 </code></pre>
-配置类型Toast（info，success，error，warning）的主题色
+配置Type Toast 的主题色
 <pre><code>
         IToastSetting typeInfoToastThemeColor(@ColorInt int color);
         

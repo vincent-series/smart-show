@@ -46,7 +46,6 @@ public class TestTypeToastActivity extends AppCompatActivity {
 
     public void onWaitingClick(View view) {
         SmartToast.waiting("已在后台下载，请耐心等待");
-        SmartToast.waitingLong("已在后台下载，请耐心等待");
     }
 
 
