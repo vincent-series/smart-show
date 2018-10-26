@@ -98,7 +98,7 @@ allprojects {
 #### Type Toast
 Type Toast均居中显示
 <pre><code>
-        //普通信息
+        //普通
         
         SmartToast.info("已在后台下载");
         
@@ -128,6 +128,33 @@ Type Toast均居中显示
                 
         SmartToast.warningLong("电量过低，请充电");
         
+        
+        //完成
+        
+        SmartToast.complete("下载完成");
+        
+        SmartToast.completeLong("下载完成");
+        
+        
+        //失败
+        
+        SmartToast.fail("保存失败");
+        
+        SmartToast.failLong("保存失败");
+        
+        
+        //禁止
+        
+        SmartToast.forbid("当前账户不允许汇款操作");
+        
+        SmartToast.forbidLong("当前账户不允许汇款操作");
+        
+        
+        //等候
+        
+        SmartToast.waiting("已在后台下载，请耐心等待");
+        
+        SmartToast.waitingLong("已在后台下载，请耐心等待");
 </pre></code>
 #### 定制化
 如果想定制化SmartToast，可调用setting方法获取IToastSetting对象进行全局配置
