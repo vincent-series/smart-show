@@ -2,15 +2,15 @@
 本库针对Toast，Snackbar，TopBar，Dialog：<br/><br/>
 1.优雅封装，简化调用<br/><br/>
 2.处理系统bug等，如Android 7.1系统关于Toast的BadTokenException<br/><br/>
-3.解决已知的性能缺陷，提高用户体验<br/><br/>
-4.合理的复用策略，节约内存开销的同时及时解除引用以回收对象<br/></br>
+3.解决控件已知的性能缺陷，提高用户体验<br/><br/>
+4.合理的复用策略，节约内存开销的同时及时解除引用以便被垃圾回收器回收<br/></br>
 5.根据实际开发中的常见需求，进行功能扩展<br/><br/>
 如果你对实现感兴趣，请参考我的CSDN博客：<br/><br/>
 2.x 版本 <br/><br/>
 1.x 版本 http://blog.csdn.net/jungle_pig/article/details/78568493 <br/><br/>
-该博文已授权《第一行代码》作者郭霖的微信公众号同步发表：http://mp.weixin.qq.com/s/l62PtbmrIOkVKfJ2r0JwEw <br/><br/>
+已授权《第一行代码》作者郭霖的微信公众号同步发表：http://mp.weixin.qq.com/s/l62PtbmrIOkVKfJ2r0JwEw <br/><br/>
 ## 关于作者
-为了让SmartShow库更加健壮，如果您在使用过程中发现任何问题，请联系我，我会立即跟进修复和维护。感谢您的支持！<br/><br/>
+为使SmartShow库更加健壮，如果您在使用过程中发现任何问题，请联系我，我会立即跟进修复和维护。感谢您的支持！<br/><br/>
 作者：朱志强<br/><br/>
 微信：w361281607<br/><br/>
 ![图片加载失败](images/wx_2d.jpg)<br/><br/>
@@ -39,7 +39,7 @@ allprojects {
             
         }
         
-        //添加和你项目匹配的design依赖库
+        //添加与你项目匹配的design依赖库的相应版本
         
         implementation 'com.android.support:design:x.y.z'
         
@@ -56,13 +56,12 @@ allprojects {
 3.可修改Toast默认布局的风格，如背景颜色，文字大小和颜色等<br/><br/>
 4.可为Toast设置自定义布局</br><br/>
 5.完美解决Android 7.1的系统bug——Toast BadTokenException<br/><br/>
-6.可配置离开当前页面，立即消失正在显示的Toast<br/><br/>
-7.结合主流app类型Toast的展示效果，提供info、success、error、warnign、complete、forbid、wait、fail 8种类型Toast
+6.可配置离开当前页面（退出当前activity或进入新的activity），立即消失正在显示的Toast<br/><br/>
+7.结合主流app消息提示的效果，提供info、success、error、warnign、complete、forbid、wait、fail 8 种类型的Toast
 ### 注意
-关闭app的系统通知权限,将导致SmartToast无法显示<br/>
-Toast的内部原理使用NotificationManagerService，关闭通知权限后，将无法显示。<br/>
+关闭app的系统通知权限,Toast将无法显示。Toast的内部原理使用NotificationManagerService，关闭通知权限后，将无法显示。<br/>
 这是原生Toast本身的特性，以淘宝app和优酷app的"再按一次退出程序"的Toast提示为例，关闭他们的通知权限，<br/>
-将会导致Toast不显示。
+Toast将不再显示。
 ### API
 调用show方法显示Toast，duration和常用的显示位置体现在方法名上，而不是传参，调用非常简易
 #### 普通 Toast
@@ -655,18 +654,20 @@ INotificationDialogBuilder的全部方法
                 .positiveBtn("提交", new DialogBtnClickListener() {
                     @Override
                     public void onBtnClick(TextView btn, Object data) {
+                        //输入的内容会在确定按钮的回调方法里以参数data传入
                         SmartToast.showInCenter("已提交——>" + data.toString());
                     }
                 })
                 .create(this)
                 .show();
 </code></pre>
-IInputDialogBuilder如外的方法
+IInputTextDialogBuilder如外的方法
 <pre><code>
     //设置EditText的hint文本
     
     IInputTextDialogBuilder hint(CharSequence hintMsg);
 
     //设置最多输入多少字
+
     IInputTextDialogBuilder inputAtMost(int num);
 </code></pre>
