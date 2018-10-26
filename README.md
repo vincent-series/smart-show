@@ -71,17 +71,23 @@ allprojects {
         
         SmartToast.showLong("我是朱志强！");
 
+
+
         //在屏幕顶部显示，水平居中，距离顶部距离与在默认位置显示时，距离底部的距离一致
 
         SmartToast.showAtTop("我是朱志强!");
         
         SmartToast.showLongAtTop("我是朱志强!");
 
+
+
         //在屏幕中央显示
 
         SmartToast.showInCenter("我是朱志强！");
         
         SmartToast.showLongInCenter("我是朱志强！");
+
+
 
         //在左上角，x，y偏移量为10dp的位置显示
 
