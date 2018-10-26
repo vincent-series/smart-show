@@ -104,17 +104,23 @@ Type Toast均居中显示
         
         SmartToast.infoLong("已在后台下载");
         
-        //成功or完成
+        
+        
+        //成功
         
         SmartToast.success("重置成功");
         
         SmartToast.successLong("重置成功");
         
-        //错误or失败
+        
+        
+        //错误
         
         SmartToast.error("保存失败");
         
         SmartToast.errorLong("保存失败");
+        
+        
         
         //警告
         
