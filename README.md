@@ -266,10 +266,9 @@ Type Toast均居中显示
          SmartToast.dismiss();
 </code></pre>
 ### SmartSnackbar部分
-1.复用Snackbar实例，当Snackbar正在显示时，多次触发msg和actionTex均未改变的Snackbar，不会重复弹出，<br/>
-  若改变，则有弹出效果<br/><br/>
+1.复用Snackbar实例，当Snackbar正在显示，多次触发时，若msg和actionTex均未改变，则不会重复弹出，否则会有弹出效果<br/><br/>
 2.可修改布局风格，如背景颜色，文字大小和颜色等</br><br/>
-3.可配置离开当前Activity时，立即消失正在显示的Snackbar,一般Indefinite Snackbar有此需求
+3.可配置启动新的Activity时，立即消失正在当前activity显示的Snackbar
 ### API
 传入当前界面的Activity,获取Snackbar，三种duration体现在方法名上，而不是传参，尽可能简化调用
 #### 只传入消息文本
@@ -286,8 +285,7 @@ Type Toast均居中显示
         
        SmartSnackbar.get(this).showIndefinite("我是朱志强");     
 </code></pre>
-#### 传入消息文本和动作文本
-点击动作文本，执行默认逻辑--Snackbar消失
+#### 只传入消息文本和动作文本，则点击动作文本执行默认逻辑--Snackbar消失
 <pre><code>
        //short snackbar
        
@@ -333,14 +331,14 @@ Type Toast均居中显示
            });              
 </code></pre>
 以上示例获取SmartSnackbar使用的是SmartSnackbar.get(this)，this为当前界面activity，还可使用SmartSnackbar.get(CoordinatorLayout view)。<br/><br/>
-根据谷歌源码，我们知道创建Snackbar时需传入一个当前页面的某个View。实际上，Snackar会以该View为基点，<br/>
+根据谷歌源码，我们知道创建Snackbar时需传入一个当前activity的某个View。实际上，Snackar会以该View为基点，<br/>
 沿着整个View Tree上溯，直到找到CoordinatorLayout容器或android.R.id.content 容器，哪个先找到，就将视图嵌入其中。<br/><br/>
-为了提高效率，直接将android.R.id.content或者CoordinatorLayout传入会更好。<br/><br/>
 以CoordinatorLayout为内嵌容器时，Snackbar会有一些特殊的行为，如可以用手指手动滑动移除，显示时会导致FloatingActionButton升高等。<br/><br/>
+为了提高效率，直接将android.R.id.content或者CoordinatorLayout传入会更好。<br/><br/>
 所以SmartSnackbar对入口做了限制，如果你的页面想以某个具体CoordinatorLayout作为容器，<br/>
 则调用get(CoordinatorLayout view)。否则调用get(Activity activity)，内部会自动将该Activity的 android.R.id.content作为容器。<br/>
 #### 定制化
-如果想定制化SmartSnackbar，可调用setting方法获取ISnackbarSetting对象进行全局配置
+定制化SmartSnackbar，可调用setting方法获取ISnackbarSetting对象进行全局配置
 <pre><code>
         //获取ISnackbarSetting对象
         
