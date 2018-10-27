@@ -268,7 +268,7 @@ Type Toast均居中显示
 ### SmartSnackbar部分
 1.复用Snackbar实例，当Snackbar正在显示，多次触发时，若msg和actionTex均未改变，则不会重复弹出，否则会有弹出效果<br/><br/>
 2.可修改布局风格，如背景颜色，文字大小和颜色等</br><br/>
-3.可配置离开当前Activity时，立即消失正在显示的Snackbar，如在Activity A 上显示了一个Indefinite Snackbar，并且用户没有<br/>
+3.可配置离开当前Activity时，立即消失正在显示的Snackbar。如，在Activity A 上显示了一个Indefinite Snackbar，并且用户没有<br/>
 点击响应，启动activity B，然后再返回A，原来的Snackbar已自动消失
 ### API
 传入当前界面的Activity,获取Snackbar，三种duration体现在方法名上，而不是传参，尽可能简化调用
@@ -409,7 +409,7 @@ Type Toast均居中显示
 
 
         
-        //设置离开当前activity时，是否立即消失掉正在显示的Snackbar，默认false，如在Activity A上显示了一个
+        //设置离开当前activity时，是否立即消失掉正在显示的Snackbar，默认false。如，在Activity A上显示了一个
         
         //Indefinite Snackbar，启动Activity B，然后按返回键回到A，原先的Snackbar依然存在，设置为true后，
         
@@ -472,7 +472,7 @@ public class SnackbarActivity extends BaseActivity implements ISnackbarShowCallb
 1.SmartTopbar在功能以及使用上很像一个顶部的Snackbar<br/><br/>
 2.当Topbar正在显示，多次触发时，若msg和actionTex均未改变，则不会重复弹出，否则有弹出效果<br/><br/>
 3.可修改布局风格，如背景颜色，文字大小和颜色等</br><br/>
-4.可配置离开当前Activity时，立即消失正在显示的Topbar,如在Activity A 上显示了一个Indefinite Topbar，并且用户没有<br/>
+4.可配置离开当前Activity时，立即消失正在显示的Topbar。如，在Activity A 上显示了一个Indefinite Topbar，并且用户没有<br/>
 点击响应，启动activity B，然后再返回A，原来的Topbar已自动消失
 ### API
 传入当前界面的Activity,获取Topbar，三种duration体现在方法名上，而不是传参，尽可能简化调用
@@ -605,7 +605,7 @@ public class SnackbarActivity extends BaseActivity implements ISnackbarShowCallb
 
 
         
-        //设置离开当前activity时，是否立即消失掉正在显示的Topbar，默认false，如在Activity A上显示了一个
+        //设置离开当前activity时，是否立即消失掉正在显示的Topbar，默认false。如，在Activity A上显示了一个
         
         //Indefinite Topbar，启动Activity B，然后按返回键回到A，原先的Topkbar依然存在，设置为true后，
         
@@ -680,17 +680,25 @@ ILoadingDialogBuilder的全部方法
     
     ILoadingDialogBuilder msg(CharSequence msg);
 
+
+
     //设置Loading框的大小为large
     
     ILoadingDialogBuilder large();
+
+
 
     //设置Loading框的大小为middle
     
     ILoadingDialogBuilder middle();
 
+
+
     //设置Loading框的大小为small,此时提示文本隐藏了，只显示loading动画
     
     ILoadingDialogBuilder small();
+
+
 
     //设置完毕，创建对话框
     
@@ -707,17 +715,25 @@ INotificationDialogBuilder的全部方法
     
     INotificationDialogBuilder title(CharSequence title);
 
+
+
     //设置确定按钮的文本及点击事件
     
     INotificationDialogBuilder positiveBtn(CharSequence label, DialogBtnClickListener clickListener);
 
+
+
     //对话框是否可点击back键消失
     
     INotificationDialogBuilder cancelable(boolean b);
+
+
     
     //触碰对话框以外区域可否消失对话框
     
     INotificationDialogBuilder cancelableOnTouchOutside(boolean b);
+
+
 
     //设置完毕，创建对话框
     
@@ -765,6 +781,8 @@ IInputTextDialogBuilder如外的方法
     //设置EditText的hint文本
     
     IInputTextDialogBuilder hint(CharSequence hintMsg);
+
+
 
     //设置最多输入多少字
 
