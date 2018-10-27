@@ -1,6 +1,5 @@
 ## SmartShow
 本库针对Toast，Snackbar，TopBar，Dialog：<br/><br/>
-[TOC]
 1.优雅封装，简化调用<br/><br/>
 2.处理系统bug等，如Android 7.1系统关于Toast的BadTokenException<br/><br/>
 3.解决控件已知的性能缺陷，提高用户体验<br/><br/>
