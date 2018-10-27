@@ -277,10 +277,14 @@ activity B，然后再返回A，原来的Snackbar已自动消失
         //short snackbar
         
         SmartSnackbar.get(this).show("我是朱志强");
+
+
         
         //long snackbar
         
         SmartSnackbar.get(this).showLong("我是朱志强");
+
+
         
        //indefinite snackbar,只传入消息文本时，会显示默认的动作文本"确定"，点击动作文本，执行默认行为--Snackbar消失
         
@@ -291,10 +295,14 @@ activity B，然后再返回A，原来的Snackbar已自动消失
        //short snackbar
        
        SmartSnackbar.get(this).show("为SmartShow Star 一下可以么","好的");
+
+
        
        //long snackbar
        
        SmartSnackbar.get(this).showLong("为SmartShow Star 一下可以么","好的");
+
+
        
        //indefinite snackbar
        
@@ -311,6 +319,8 @@ activity B，然后再返回A，原来的Snackbar已自动消失
        
               }
            });
+
+
            
        SmartSnackbar.get(this).showLong("我是朱志强", "打赏", new View.OnClickListener() {
        
@@ -321,6 +331,8 @@ activity B，然后再返回A，原来的Snackbar已自动消失
        
               }
            });
+
+
            
        SmartSnackbar.get(this).showIndefinite("我是朱志强", "打赏", new View.OnClickListener() {
        
