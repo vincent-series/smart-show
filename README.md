@@ -1,5 +1,5 @@
 ## SmartShow
-本库包含[SmartToast](https://github.com/the-pig-of-jungle/SmartShow#smarttoast%E9%83%A8%E5%88%86)，SmartSnackbar，SmartTopBar，SmartDialog：<br/><br/>
+本库包含[SmartToast](https://github.com/the-pig-of-jungle/SmartShow#smarttoast%E9%83%A8%E5%88%86)，[SmartSnackbar](https://github.com/the-pig-of-jungle/SmartShow#smartsnackbar%E9%83%A8%E5%88%86)，[SmartTopBar](https://github.com/the-pig-of-jungle/SmartShow#smarttopbar%E9%83%A8%E5%88%86)，[SmartDialog](https://github.com/the-pig-of-jungle/SmartShow#smarttopbar%E9%83%A8%E5%88%86)：<br/><br/>
 1.优雅封装，简化调用<br/><br/>
 2.处理系统bug等，如Android 7.1系统关于Toast的BadTokenException<br/><br/>
 3.解决控件已知的性能缺陷，提高用户体验<br/><br/>
