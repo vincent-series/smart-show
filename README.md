@@ -268,8 +268,8 @@ Type Toast均居中显示
 ### SmartSnackbar部分
 1.复用Snackbar实例，当Snackbar正在显示，多次触发时，若msg和actionTex均未改变，则不会重复弹出，否则会有弹出效果<br/><br/>
 2.可修改布局风格，如背景颜色，文字大小和颜色等</br><br/>
-3.可配置离开当前Activity时，立即消失正在显示的Snackbar，如在Activity A 上显示了一个Indefinite Snackbar，并且用户没有点击响应，启动</br>
-activity B，然后再返回A，原来的Snackbar已自动消失
+3.可配置离开当前Activity时，立即消失正在显示的Snackbar，如在Activity A 上显示了一个Indefinite Snackbar，并且用户没有<br/>
+点击响应，启动activity B，然后再返回A，原来的Snackbar已自动消失
 ### API
 传入当前界面的Activity,获取Snackbar，三种duration体现在方法名上，而不是传参，尽可能简化调用
 #### 只传入消息文本
@@ -470,9 +470,10 @@ public class SnackbarActivity extends BaseActivity implements ISnackbarShowCallb
 </code></pre>
 ### SmartTopbar部分
 1.SmartTopbar在功能以及使用上很像一个顶部的Snackbar<br/><br/>
-2.当Topbar正在显示时，多次触发msg和actionTex均未改变的Topbar，不会重复弹出，若改变，则有弹出效果<br/><br/>
+2.当Topbar正在显示，多次触发时，若msg和actionTex均未改变，则不会重复弹出，否则有弹出效果<br/><br/>
 3.可修改布局风格，如背景颜色，文字大小和颜色等</br><br/>
-4.可配置离开当前Activity时，立即消失正在显示的Topbar,一般Indefinite Topbar有此需求
+4.可配置离开当前Activity时，立即消失正在显示的Topbar,如在Activity A 上显示了一个Indefinite Topbar，并且用户没有<br/>
+点击响应，启动activity B，然后再返回A，原来的Topbar已自动消失
 ### API
 传入当前界面的Activity,获取Topbar，三种duration体现在方法名上，而不是传参，尽可能简化调用
 #### 只传入消息文本
