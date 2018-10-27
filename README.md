@@ -286,7 +286,7 @@ Type Toast均居中显示
 
 
         
-       //indefinite snackbar,只传入消息文本时，会显示默认的动作文本"确定"，点击动作文本，执行默认行为--Snackbar消失
+       //indefinite snackbar,只传入消息文本时，会显示默认的动作文本"确定"，点击动作文本，执行默认行为——Snackbar消失
         
        SmartSnackbar.get(this).showIndefinite("我是朱志强");     
 </code></pre>
@@ -481,25 +481,32 @@ public class SnackbarActivity extends BaseActivity implements ISnackbarShowCallb
         //short topbar
         
         SmartTopbar.get(this).show("我是朱志强");
+
+
         
         //long topbar
         
         SmartTopbar.get(this).showLong("我是朱志强");
+
+
         
-       //indefinite topbar,只传入消息文本时，会显示默认的动作文本"确定"，点击动作文本，执行默认行为--Topbar消失
+       //indefinite topbar,只传入消息文本时，会显示默认的动作文本"确定"，点击动作文本，执行默认行为——Topbar消失
         
        SmartTopbar.get(this).showIndefinite("我是朱志强");     
 </code></pre>
-#### 传入消息文本和动作文本
-点击动作文本，执行默认逻辑--Topbar消失
+#### 只传入消息文本和动作文本，则点击动作文本，执行默认逻辑--Topbar消失
 <pre><code>
        //short topbar
        
        SmartTopbar.get(this).show("为SmartShow Star 一下可以么","好的");
+
+
        
        //long topbar
        
        SmartTopbar.get(this).showLong("为SmartShow Star 一下可以么","好的");
+
+
        
        //indefinite topbar
        
@@ -516,6 +523,8 @@ public class SnackbarActivity extends BaseActivity implements ISnackbarShowCallb
        
               }
            });
+
+
            
        SmartTopbar.get(this).showLong("我是朱志强", "打赏", new View.OnClickListener() {
        
@@ -526,6 +535,8 @@ public class SnackbarActivity extends BaseActivity implements ISnackbarShowCallb
        
               }
            });
+
+
            
        SmartTopbar.get(this).showIndefinite("我是朱志强", "打赏", new View.OnClickListener() {
        
@@ -537,7 +548,7 @@ public class SnackbarActivity extends BaseActivity implements ISnackbarShowCallb
            });              
 </code></pre>
 #### 定制化
-如果想定制化SmartTopbar，可调用setting方法获取ITopbarSetting对象进行全局配置
+定制化SmartTopbar，可调用setting方法获取ITopbarSetting对象进行全局配置
 <pre><code>
         //获取ITopbarSetting对象
         
@@ -550,36 +561,49 @@ public class SnackbarActivity extends BaseActivity implements ISnackbarShowCallb
         ITopbarSetting backgroundColor(int color);
         
         ITopbarSetting backgroundColorRes(int colorRes);
+
+
         
         //设置消息文本颜色
         
         ITopbarSetting msgTextColor(@ColorInt int color);
         
         ITopbarSetting msgTextColorRes(@ColorRes int colorRes);
+
+
         
         //设置消息文本大小
         
         ITopbarSetting msgTextSizeSp(float textSizeSp);
+
+
         
         //设置动作文本颜色
         
         ITopbarSetting actionColor(@ColorInt int color);
         
         ITopbarSetting actionColorRes(@ColorRes int colorRes);
+
+
         
         //设置动作文本大小
         
         ITopbarSetting actionSizeSp(float textSizeSp);
+
+
         
         //对布局进一步处理，callback中会传入布局的根View和显示消息文本的TextView以及动作文本的Button，
                  
         //callback中的处理和以上配置方法的处理有冲突时，将覆盖掉以上的配置
         
         ITopbarSetting processView(IProcessBarCallback callback);
+
         
         //设置调用Indefinite Topbar时，如果只传入消息文本，默认显示的动作文本字符串，如果不设置，即显示为"确定"
         
         ITopbarSetting defaultActionTextForIndefinite(String actionText);
+
+
         
         //设置离开当前activity时，是否立即消失掉正在显示的Topbar，默认false，如在Activity A上显示了一个
         
@@ -587,7 +611,9 @@ public class SnackbarActivity extends BaseActivity implements ISnackbarShowCallb
         
         //在进入B之前就会消失
         
-        ITopbarSetting dismissOnLeave(boolean b); 
+        ITopbarSetting dismissOnLeave(boolean b);
+
+
         
         例子：
         
@@ -607,13 +633,15 @@ public class SnackbarActivity extends BaseActivity implements ISnackbarShowCallb
          //隐藏当前显示的Topbar
 
          SmartTopbar.dismiss();
+
+
          
          //是否有Topbar在显示
          
          SmartTopbar.isShowing();
 </code></pre>
 #### 监听显示和隐藏
-将当前页面的Activity实现ITopbarShowCallback接口，然后重写方法即可。在SmartTopbar显示时，会检测当前页面是否实现该接口，是则进行回调。
+将Activity实现ITopbarShowCallback接口，然后重写方法即可。在SmartTopbar显示时，会检测当activity是否实现该接口，是则进行回调。
 <pre><code>
 public class SnackbarActivity extends BaseActivity implements ITopbarShowCallback {
 
