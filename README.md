@@ -268,7 +268,8 @@ Type Toast均居中显示
 ### SmartSnackbar部分
 1.复用Snackbar实例，当Snackbar正在显示，多次触发时，若msg和actionTex均未改变，则不会重复弹出，否则会有弹出效果<br/><br/>
 2.可修改布局风格，如背景颜色，文字大小和颜色等</br><br/>
-3.可配置启动新的Activity时，立即消失正在当前activity显示的Snackbar
+3.可配置离开当前Activity时，立即消失正在显示的Snackbar，如在Activity A 上显示了一个Indefinite Snackbar，并且用户没有点击响应，启动</br>
+activity B，然后再返回A，原来的Snackbar已自动消失
 ### API
 传入当前界面的Activity,获取Snackbar，三种duration体现在方法名上，而不是传参，尽可能简化调用
 #### 只传入消息文本
@@ -351,36 +352,50 @@ Type Toast均居中显示
         ISnackbarSetting backgroundColor(int color);
         
         ISnackbarSetting backgroundColorRes(int colorRes);
+
+
         
         //设置消息文本颜色
         
         ISnackbarSetting msgTextColor(@ColorInt int color);
         
         ISnackbarSetting msgTextColorRes(@ColorRes int colorRes);
+
+
         
         //设置消息文本大小
         
         ISnackbarSetting msgTextSizeSp(float textSizeSp);
+
+
         
         //设置动作文本颜色
         
         ISnackbarSetting actionColor(@ColorInt int color);
         
         ISnackbarSetting actionColorRes(@ColorRes int colorRes);
+
+
         
         //设置动作文本大小
         
         ISnackbarSetting actionSizeSp(float textSizeSp);
+
+
         
         //对布局进一步处理，callback中会传入布局的根View和显示消息文本的TextView以及动作文本的Button，
                  
         //callback中的处理和以上配置方法的处理有冲突时，将覆盖掉以上的配置
         
         ISnackbarSetting processView(IProcessBarCallback callback);
+
+
         
         //设置调用Indefinite Snackbar时，如果只传入消息文本，默认显示的动作文本字符串，如果不设置，即显示为"确定"
         
         ISnackbarSetting defaultActionTextForIndefinite(String actionText);
+
+
         
         //设置离开当前activity时，是否立即消失掉正在显示的Snackbar，默认false，如在Activity A上显示了一个
         
@@ -388,7 +403,9 @@ Type Toast均居中显示
         
         //在进入B之前就会消失
         
-        ISnackbarSetting dismissOnLeave(boolean b); 
+        ISnackbarSetting dismissOnLeave(boolean b);
+
+
         
         例子：
         
@@ -408,13 +425,15 @@ Type Toast均居中显示
          //隐藏当前显示的Snackbar
 
          SmartSnackbar.dismiss();
+
+
          
          //是否有Snackbar在显示
          
          SmartSnackbar.isShowing();
 </code></pre>
 #### 监听显示和隐藏
-将当前页面的Activity实现ISnackbarShowCallback接口，然后重写方法即可。在SmartSnackbar显示时，会检测当前页面是否实现该接口，是则进行回调。
+将Activity实现ISnackbarShowCallback接口，然后重写方法即可。在SmartSnackbar显示时，会检测当前activity是否实现该接口，是则进行回调。
 <pre><code>
 public class SnackbarActivity extends BaseActivity implements ISnackbarShowCallback {
 
