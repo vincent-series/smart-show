@@ -765,15 +765,24 @@ INotificationDialogBuilder的全部方法
 输入框具有确认框除msg(CharSequence msg)外的全部方法
 <pre><code>
         SmartDialog.inputText().hint("请输入建议")
+
                 .inputAtMost(70)
+
                 .positiveBtn("提交", new DialogBtnClickListener() {
+
+
                     @Override
                     public void onBtnClick(TextView btn, Object data) {
+
                         //输入的内容会在确定按钮的回调方法里以参数data传入
                         SmartToast.showInCenter("已提交——>" + data.toString());
+
                     }
+
                 })
+
                 .create(this)
+
                 .show();
 </code></pre>
 IInputTextDialogBuilder如外的方法
