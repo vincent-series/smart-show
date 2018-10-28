@@ -10,7 +10,8 @@
 3. 解决控件已知的性能缺陷，提高用户体验
 4. 合理的复用策略，节约内存开销的同时及时解除引用以便被垃圾回收器回收
 5. 根据实际开发中的常见需求，进行功能扩展
-如果你对实现感兴趣，请参考我的CSDN博客：<br/><br/>
+
+如果你对实现感兴趣，请参考我的CSDN博客：<br/><br/
 2.x 版本 <br/><br/>
 1.x 版本 http://blog.csdn.net/jungle_pig/article/details/78568493 <br/><br/>
 已授权《第一行代码》作者郭霖的微信公众号同步发表：http://mp.weixin.qq.com/s/l62PtbmrIOkVKfJ2r0JwEw <br/><br/>
@@ -56,13 +57,12 @@ allprojects {
 
 ### SmartToast部分
 1. 复用Toast实例，当Toast正在显示时，多次触发内容和位置均未改变的Toast，不会重复弹出；下一个Toast不会等到上一个Toast的Duration耗尽才弹出
-2. 解决传统复用模式的功能缺陷，如正在显示一个内容为"A"的Toast，此时再弹出内容为"B"的Toast时，文本虽改变，
-  但没有弹出效果；如果复用的Toast正在显示，改变其Gravity以改变显示位置会无效，直到消失后再次显示才生效<br/><br/>
-3.可修改Toast默认布局的风格，如背景颜色，文字大小和颜色等<br/><br/>
-4.可为Toast设置自定义布局</br><br/>
-5.完美解决Android 7.1的系统bug——Toast BadTokenException<br/><br/>
-6.可配置离开当前页面（退出当前activity或进入新的activity），立即消失正在显示的Toast<br/><br/>
-7.结合主流app消息提示的效果，提供info、success、error、warnign、complete、forbid、wait、fail 8 种类型的Toast
+2. 解决传统复用模式的功能缺陷，如正在显示一个内容为"A"的Toast，此时再弹出内容为"B"的Toast时，文本虽改变，但没有弹出效果；如果复用的Toast正在显示，改变其Gravity以改变显示位置会无效，直到消失后再次显示才生效
+3. 可修改Toast默认布局的风格，如背景颜色，文字大小和颜色等
+4. 可为Toast设置自定义布局
+5. 完美解决Android 7.1的系统bug——Toast BadTokenException
+6. 可配置离开当前页面（退出当前activity或进入新的activity），立即消失正在显示的Toast
+7. 结合主流app消息提示的效果，提供info、success、error、warnign、complete、forbid、wait、fail 8 种类型的Toast
 ### 注意
 关闭app的系统通知权限,Toast将无法显示。Toast的内部原理使用NotificationManagerService，关闭通知权限后，将无法显示。<br/>
 这是原生Toast本身的特性，以淘宝app和优酷app的"再按一次退出程序"的Toast提示为例，关闭通知权限，Toast将不再显示。
@@ -271,10 +271,9 @@ Type Toast均居中显示
          SmartToast.dismiss();
 </code></pre>
 ### SmartSnackbar部分
-1.复用Snackbar实例，当Snackbar正在显示，多次触发时，若msg和actionTex均未改变，则不会重复弹出，否则会有弹出效果<br/><br/>
-2.可修改布局风格，如背景颜色，文字大小和颜色等</br><br/>
-3.可配置离开当前Activity时，立即消失正在显示的Snackbar。如，在Activity A 上显示了一个Indefinite Snackbar，并且用户没有<br/>
-点击响应，启动activity B，然后再返回A，原来的Snackbar已自动消失
+1. 复用Snackbar实例，当Snackbar正在显示，多次触发时，若msg和actionTex均未改变，则不会重复弹出，否则会有弹出效果
+2. 可修改布局风格，如背景颜色，文字大小和颜色等
+3. 可配置离开当前Activity时，立即消失正在显示的Snackbar。如，在Activity A 上显示了一个Indefinite Snackbar，并且用户没有点击响应，启动activity B，然后再返回A，原来的Snackbar已自动消失
 ### API
 传入当前界面的Activity,获取Snackbar，三种duration体现在方法名上，而不是传参，尽可能简化调用
 #### 只传入消息文本
@@ -348,13 +347,10 @@ Type Toast均居中显示
                 
            });              
 </code></pre>
-以上示例获取SmartSnackbar使用的是SmartSnackbar.get(this)，this为当前界面activity，还可使用SmartSnackbar.get(CoordinatorLayout view)。<br/><br/>
-根据谷歌源码，我们知道创建Snackbar时需传入一个当前activity的某个View。实际上，Snackar会以该View为基点，<br/>
-沿着整个View Tree上溯，直到找到CoordinatorLayout容器或android.R.id.content 容器，哪个先找到，就将视图嵌入其中。<br/><br/>
-以CoordinatorLayout为内嵌容器时，Snackbar会有一些特殊的行为，如可以用手指手动滑动移除，显示时会导致FloatingActionButton升高等。<br/><br/>
-为了提高效率，直接将android.R.id.content或者CoordinatorLayout传入会更好。<br/><br/>
-所以SmartSnackbar对入口做了限制，如果你的页面想以某个具体CoordinatorLayout作为容器，<br/>
-则调用get(CoordinatorLayout view)。否则调用get(Activity activity)，内部会自动将该Activity的 android.R.id.content作为容器。<br/>
+* 以上示例获取SmartSnackbar使用的是SmartSnackbar.get(this)，this为当前界面activity，还可使用SmartSnackbar.get(CoordinatorLayout view)。
+* 根据谷歌源码，我们知道创建Snackbar时需传入一个当前activity的某个View。实际上，Snackar会以该View为基点，沿着整个View Tree上溯，直到找到CoordinatorLayout容器或android.R.id.content 容器，哪个先找到，就将视图嵌入其中。以CoordinatorLayout为内嵌容器时，Snackbar会有一些特殊的行为，如可以用手指手动滑动移除，显示时会导致FloatingActionButton升高等。
+为了提高效率，直接将android.R.id.content或者CoordinatorLayout传入会更好。
+* SmartSnackbar对入口做了限制，如果你的页面想以某个具体CoordinatorLayout作为容器，则调用get(CoordinatorLayout view)。否则调用get(Activity activity)，内部会自动将该Activity的 android.R.id.content作为容器。
 #### 定制化
 定制化SmartSnackbar，可调用setting方法获取ISnackbarSetting对象进行全局配置
 <pre><code>
@@ -474,10 +470,10 @@ public class SnackbarActivity extends BaseActivity implements ISnackbarShowCallb
 }
 </code></pre>
 ### SmartTopbar部分
-1.SmartTopbar在功能以及使用上很像一个顶部的Snackbar<br/><br/>
-2.当Topbar正在显示，多次触发时，若msg和actionTex均未改变，则不会重复弹出，否则有弹出效果<br/><br/>
-3.可修改布局风格，如背景颜色，文字大小和颜色等</br><br/>
-4.可配置离开当前Activity时，立即消失正在显示的Topbar。如，在Activity A 上显示了一个Indefinite Topbar，并且用户没有<br/>
+1. SmartTopbar在功能以及使用上很像一个顶部的Snackbar<br/>
+2. 当Topbar正在显示，多次触发时，若msg和actionTex均未改变，则不会重复弹出，否则有弹出效果
+3. 可修改布局风格，如背景颜色，文字大小和颜色等
+4. 可配置离开当前Activity时，立即消失正在显示的Topbar。如，在Activity A 上显示了一个Indefinite Topbar，并且用户没有
 点击响应，启动activity B，然后再返回A，原来的Topbar已自动消失
 ### API
 传入当前界面的Activity,获取Topbar，三种duration体现在方法名上，而不是传参，尽可能简化调用
