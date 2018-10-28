@@ -69,6 +69,7 @@ allprojects {
 ### API
 调用show方法显示Toast，duration和常用的显示位置体现在方法名上，而不是传参，调用非常简易
 #### 普通 Toast
+默认样式：![图片加载失败](images/toast_normal.gif)设置背景色：![图片加载失败](images/toast_color.gif)
 <pre><code>
         //在默认位置显示
 
@@ -101,9 +102,8 @@ allprojects {
         SmartToast.showLongAtLocation("我是朱志强",Gravity.LEFT | Gravity.TOP,10,10);
 </pre></code>
 #### Type Toast
-
 Type Toast均居中显示<br/>
-模式样式：![图片加载失败](images/type_toast_normal.gif)设置主题色：![图片加载失败](images/type_toast_color.gif)
+默认样式：![图片加载失败](images/type_toast_normal.gif)设置主题色：![图片加载失败](images/type_toast_color.gif)
 <pre><code>
         //普通
         
