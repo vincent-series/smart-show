@@ -4,6 +4,9 @@
 * [SmartSnackbar](https://github.com/the-pig-of-jungle/SmartShow#smartsnackbar%E9%83%A8%E5%88%86)
 * [SmartTopBar](https://github.com/the-pig-of-jungle/SmartShow#smarttopbar%E9%83%A8%E5%88%86)
 * [SmartDialog](https://github.com/the-pig-of-jungle/SmartShow#smarttopbar%E9%83%A8%E5%88%86)
+* [关于实现](https://github.com/the-pig-of-jungle/SmartShow#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0)
+* [关于作者](https://github.com/the-pig-of-jungle/SmartShow#%E5%85%B3%E4%BA%8E%E4%BD%9C%E8%80%85)
+* [引入该库](https://github.com/the-pig-of-jungle/SmartShow#%E5%BC%95%E5%85%A5smartshow)
 ### 功能总览：
 1. 优雅封装，简化调用
 2. 处理系统bug等，如Android 7.1系统关于Toast的BadTokenException
@@ -59,7 +62,8 @@ allprojects {
         SmartShow.init(this);
 </code></pre>
 
-### SmartToast部分
+### SmartToast部分 
+* [回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)
 1. 复用Toast实例，当Toast正在显示时，多次触发内容和位置均未改变的Toast，不会重复弹出；下一个Toast不会等到上一个Toast的Duration耗尽才弹出
 2. 解决传统复用模式的功能缺陷，如正在显示一个内容为"A"的Toast，此时再弹出内容为"B"的Toast时，文本虽改变，但没有弹出效果；如果复用的Toast正在显示，改变其Gravity以改变显示位置会无效，直到消失后再次显示才生效
 3. 可修改Toast默认布局的风格，如背景颜色，文字大小和颜色等
