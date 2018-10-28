@@ -102,7 +102,7 @@ allprojects {
 </pre></code>
 #### Type Toast
 Type Toast均居中显示<br/>
-![图片加载失败](images/type_toast_normal.gif)![图片加载失败](images/type_toast_normal.gif)
+默认模式：![图片加载失败](images/type_toast_normal.gif)设置主题色：![图片加载失败](images/type_toast_color.gif)
 <pre><code>
         //普通
         
