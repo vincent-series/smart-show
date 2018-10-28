@@ -13,11 +13,9 @@ import android.widget.TextView;
 
 import com.coder.zzq.smartshow.Config;
 import com.coder.zzq.smartshow.R;
-import com.coder.zzq.smartshow.Utils;
+import com.coder.zzq.smartshow.basebar.BarDelegate;
 import com.coder.zzq.smartshow.basebar.IBarShow;
 import com.coder.zzq.smartshow.basebar.IBarShowCallback;
-import com.coder.zzq.smartshow.basebar.BarDelegate;
-import com.coder.zzq.smartshow.lifecycle.ActivityStack;
 import com.coder.zzq.smartshow.topbar.view.BaseTopBar;
 import com.coder.zzq.smartshow.topbar.view.TopBar;
 

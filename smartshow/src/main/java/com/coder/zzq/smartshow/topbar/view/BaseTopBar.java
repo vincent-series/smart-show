@@ -43,8 +43,6 @@ import android.view.accessibility.AccessibilityManager;
 import android.widget.FrameLayout;
 
 import com.coder.zzq.smartshow.R;
-import com.coder.zzq.smartshow.Utils;
-import com.coder.zzq.smartshow.lifecycle.ActivityStack;
 import com.coder.zzq.smartshow.topbar.utils.ThemeUtils;
 
 import java.lang.annotation.Retention;

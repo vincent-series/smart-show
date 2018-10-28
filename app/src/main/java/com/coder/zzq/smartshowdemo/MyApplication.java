@@ -24,43 +24,15 @@ public class MyApplication extends Application {
 
         SmartShow.init(this);
 
-        SmartToast.setting()
-                .dismissOnLeave(true)
-                .backgroundColorRes(R.color.colorPrimary)
-                .textSizeSp(18)
-                .textBold(true)
-                .typeInfoToastThemeColorRes(R.color.colorPrimary)
-                .processView(new IProcessToastCallback() {
-                    @Override
-                    //root 为布局根View，msgView为显示消息的TextView
-                    public void processView(View rootView, TextView msgView) {
-
-                    }
-                });
-
-
-
         SmartSnackbar.setting()
-                .dismissOnLeave(true)
-                .backgroundColorRes(R.color.colorPrimary);
-
-
-        SmartSnackbar.setting()
-
                 .backgroundColorRes(R.color.colorPrimary)
-
-                .msgTextColorRes(R.color.white)
-
-                .actionColorRes(R.color.colorAccent)
-
-                .dismissOnLeave(true);
-        SmartSnackbar.isShowing();
-        SmartTopbar.setting()
                 .msgTextColorRes(R.color.white)
                 .actionColorRes(R.color.colorAccent)
                 .dismissOnLeave(true);
-        SmartTopbar.setting()
 
+        SmartTopbar.setting()
+                .msgTextColorRes(R.color.white)
+                .actionColorRes(R.color.colorAccent)
                 .dismissOnLeave(true);
 
     }

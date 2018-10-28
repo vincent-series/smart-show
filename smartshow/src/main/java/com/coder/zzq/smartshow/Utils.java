@@ -1,6 +1,5 @@
 package com.coder.zzq.smartshow;
 
-import android.content.res.Resources;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.v4.content.ContextCompat;

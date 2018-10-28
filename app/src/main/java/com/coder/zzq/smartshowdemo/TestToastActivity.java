@@ -18,6 +18,7 @@ public class TestToastActivity extends AppCompatActivity {
 
     public void onNextPageClick(View view) {
         startActivity(new Intent(this,TestToastActivity.class));
+        finish();
     }
 
 

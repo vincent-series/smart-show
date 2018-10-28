@@ -5,7 +5,6 @@ import android.support.annotation.ColorInt;
 
 import com.coder.zzq.smartshow.R;
 import com.coder.zzq.smartshow.Utils;
-import com.coder.zzq.smartshow.topbar.ITopbarSetting;
 
 
 public class BarSettingImpl<View,BarSetting> implements IBarSetting<View,BarSetting> {

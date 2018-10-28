@@ -11,10 +11,9 @@ import android.widget.TextView;
 
 import com.coder.zzq.smartshow.Config;
 import com.coder.zzq.smartshow.Utils;
+import com.coder.zzq.smartshow.basebar.BarDelegate;
 import com.coder.zzq.smartshow.basebar.IBarShow;
 import com.coder.zzq.smartshow.basebar.IBarShowCallback;
-import com.coder.zzq.smartshow.basebar.BarDelegate;
-import com.coder.zzq.smartshow.lifecycle.ActivityStack;
 
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)

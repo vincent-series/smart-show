@@ -1,8 +1,6 @@
 package com.coder.zzq.smartshow.toast;
 
 
-import android.support.annotation.DrawableRes;
-
 public interface ITypeShow {
 
     void info(CharSequence msg);

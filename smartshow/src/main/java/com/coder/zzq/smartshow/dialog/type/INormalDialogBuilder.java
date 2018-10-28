@@ -2,8 +2,6 @@ package com.coder.zzq.smartshow.dialog.type;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.view.View;
-import android.widget.FrameLayout;
 
 import com.coder.zzq.smartshow.dialog.DialogBtnClickListener;
 import com.coder.zzq.smartshow.dialog.DialogContentCallback;

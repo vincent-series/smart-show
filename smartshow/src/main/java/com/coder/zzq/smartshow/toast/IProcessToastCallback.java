@@ -1,7 +1,6 @@
 package com.coder.zzq.smartshow.toast;
 
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**

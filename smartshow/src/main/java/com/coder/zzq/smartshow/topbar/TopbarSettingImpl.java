@@ -1,9 +1,5 @@
 package com.coder.zzq.smartshow.topbar;
 
-import android.support.annotation.ColorInt;
-
-import com.coder.zzq.smartshow.R;
-import com.coder.zzq.smartshow.Utils;
 import com.coder.zzq.smartshow.basebar.BarSettingImpl;
 import com.coder.zzq.smartshow.topbar.view.TopBar;
 

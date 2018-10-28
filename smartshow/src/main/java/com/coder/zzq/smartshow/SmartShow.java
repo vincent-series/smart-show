@@ -3,6 +3,7 @@ package com.coder.zzq.smartshow;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.coder.zzq.smartshow.lifecycle.ActivityLifecycleCallback;
 import com.coder.zzq.smartshow.lifecycle.ActivityStack;
@@ -35,35 +36,45 @@ public final class SmartShow {
                 if (ToastDelegate.hasCreated() && ToastDelegate.get().isDismissOnLeave()) {
                     ToastDelegate.get().dismiss();
                 }
+            }
+
+
+            @Override
+            public void onActivityStopped(Activity activity) {
+                super.onActivityStopped(activity);
                 if (SnackbarDeligate.hasCreated() && SnackbarDeligate.get().isDismissOnLeave()) {
-                    SnackbarDeligate.get().dismiss();
+                    SnackbarDeligate.get().onLeave(activity);
                 }
                 if (TopbarDelegate.hasCreated() && TopbarDelegate.get().isDismissOnLeave()) {
-                    TopbarDelegate.get().dismiss();
+                    TopbarDelegate.get().onLeave(activity);
                 }
-
             }
 
             @Override
             public void onActivityDestroyed(Activity activity) {
                 super.onActivityDestroyed(activity);
-                if (activity == ActivityStack.getTop()) {
-                    ActivityStack.pop();
-                }
+
+                ActivityStack.pop(activity);
 
                 if (SnackbarDeligate.hasCreated()) {
                     SnackbarDeligate.get().destroy(activity);
                 }
+
                 if (TopbarDelegate.hasCreated()) {
                     TopbarDelegate.get().destroy(activity);
                 }
+
+                Log.d("zzq","activity 数量：" + ActivityStack.count());
 
                 if (ActivityStack.isEmpty()) {
                     ToastDelegate.destroyDelegate();
                     SnackbarDeligate.destroyDelegate();
                     TopbarDelegate.destroyDelegate();
                 }
+
+
             }
+
         });
 
     }

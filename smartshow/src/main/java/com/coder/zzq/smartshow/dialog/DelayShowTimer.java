@@ -1,9 +1,9 @@
 package com.coder.zzq.smartshow.dialog;
 
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.widget.TextView;
+
 import com.coder.zzq.smartshow.R;
 import com.coder.zzq.smartshow.Utils;
 

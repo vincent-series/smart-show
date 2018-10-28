@@ -25,8 +25,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.coder.zzq.smartshow.R;
-import com.coder.zzq.smartshow.Utils;
-import com.coder.zzq.smartshow.lifecycle.ActivityStack;
 
 public class ContentLayout extends LinearLayout implements
         BaseTopBar.ContentViewCallback {
