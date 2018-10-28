@@ -672,7 +672,7 @@ public class SnackbarActivity extends BaseActivity implements ITopbarShowCallbac
 }
 </code></pre>
 ### SmartDialog部分
-ios风格的loading框、对话框在主流App中很盛行，SmartDialog提供了几种类ios风格的对话框。
+ios风格的loading框、对话框在主流App中很盛行，SmartDialog提供了几种类ios风格的对话框。<br/><br/>
 ![图片加载失败](images/dialog.gif)
 #### API
 #### Loading框
