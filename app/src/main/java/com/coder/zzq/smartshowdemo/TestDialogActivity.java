@@ -1,5 +1,6 @@
 package com.coder.zzq.smartshowdemo;
 
+import android.content.Intent;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -23,8 +24,7 @@ public class TestDialogActivity extends AppCompatActivity {
 
 
     public void onNextPageClick(View view) {
-        SmartDialog.loading("加载中...").small().create(this).show();
-
+        startActivity(new Intent(this, TestDialogActivity.class));
     }
 
     public void onNotificationClick(View view) {
