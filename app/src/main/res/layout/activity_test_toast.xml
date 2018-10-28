@@ -16,16 +16,17 @@
         android:orientation="vertical">
         <Button style="@style/normal_btn"
             android:onClick="onShowClick"
-            android:text="show（苹果）"/>
+            android:text="show"/>
         <Button style="@style/normal_btn"
             android:onClick="onShowAtTopClick"
-            android:text="showAtTop（香蕉）"/>
+            android:text="showAtTop"/>
         <Button style="@style/normal_btn"
             android:onClick="onShowInCenterClick"
-            android:text="showInCenter（橘子）"/>
+            android:text="showInCenter"/>
         <Button style="@style/normal_btn"
+            android:lineSpacingExtra="4dp"
             android:onClick="onShowAtLocationClick"
-            android:text="showAtLocation（荔枝，Top|Left，xOffset 10dp,yOffset 90dp）"/>
+            android:text="showAtLocation\n（Top|Left，xOffset 10dp,yOffset 90dp）"/>
 
     </LinearLayout>
 </LinearLayout>
