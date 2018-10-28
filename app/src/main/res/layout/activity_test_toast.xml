@@ -25,10 +25,7 @@
             android:text="showInCenter（橘子）"/>
         <Button style="@style/normal_btn"
             android:onClick="onShowAtLocationClick"
-            android:text="showAtLocation（荔枝，Top|Left，xOffset 10dp,yOffset 10dp）"/>
+            android:text="showAtLocation（荔枝，Top|Left，xOffset 10dp,yOffset 90dp）"/>
 
-        <Button style="@style/normal_btn"
-            android:text="下一页"
-            android:onClick="onNextPageClick"/>
     </LinearLayout>
 </LinearLayout>
