@@ -50,10 +50,6 @@
             android:onClick="onLoadingSmallClick"
             android:text="loading small" />
 
-        <Button
-            style="@style/normal_btn"
-            android:onClick="onNextPageClick"
-            android:text="下一页" />
 
     </LinearLayout>
 </LinearLayout>

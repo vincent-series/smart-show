@@ -4,12 +4,14 @@
 * [SmartSnackbar](https://github.com/the-pig-of-jungle/SmartShow#smartsnackbar%E9%83%A8%E5%88%86)
 * [SmartTopBar](https://github.com/the-pig-of-jungle/SmartShow#smarttopbar%E9%83%A8%E5%88%86)
 * [SmartDialog](https://github.com/the-pig-of-jungle/SmartShow#smarttopbar%E9%83%A8%E5%88%86)
-### 该库功能：
+### 功能总览：
 1. 优雅封装，简化调用
 2. 处理系统bug等，如Android 7.1系统关于Toast的BadTokenException
 3. 解决控件已知的性能缺陷，提高用户体验
 4. 合理的复用策略，节约内存开销的同时及时解除引用以便被垃圾回收器回收
 5. 根据实际开发中的常见需求，进行功能扩展
+
+四大模块的详细功能可查看下面的模块介绍
 ### 效果展示
 ### 代码实现
 如果你对实现感兴趣，请参考我的CSDN博客：

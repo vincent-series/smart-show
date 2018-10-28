@@ -31,10 +31,6 @@
             android:onClick="onIndefinite"
             android:text="indefinite" />
 
-        <Button
-            style="@style/normal_btn"
-            android:text="下一页"
-            android:onClick="onNextPageClick"/>
     </LinearLayout>
 
 </LinearLayout>

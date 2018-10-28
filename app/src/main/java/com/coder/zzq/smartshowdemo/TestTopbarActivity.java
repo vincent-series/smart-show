@@ -25,10 +25,10 @@ public class TestTopbarActivity extends AppCompatActivity {
     }
 
     public void onIndefinite(View view) {
-        SmartTopbar.get(this).showIndefinite("火龙果", "好吃", new View.OnClickListener() {
+        SmartTopbar.get(this).showIndefinite("为该库Start一下好么", "好的", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SmartToast.showAtTop("好吃你就多吃点");
+                SmartToast.showInCenter("Thank you");
             }
         });
     }

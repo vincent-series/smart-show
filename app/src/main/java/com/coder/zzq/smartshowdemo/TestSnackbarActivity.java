@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.coder.zzq.smartshow.snackbar.ISnackbarShowCallback;
 import com.coder.zzq.smartshow.snackbar.SmartSnackbar;
+import com.coder.zzq.smartshow.toast.SmartToast;
 
 
 public class TestSnackbarActivity extends AppCompatActivity  implements ISnackbarShowCallback{
@@ -25,7 +26,13 @@ public class TestSnackbarActivity extends AppCompatActivity  implements ISnackba
     }
 
     public void onIndefiniteClick(View view) {
-        SmartSnackbar.get(this).showIndefinite("橘子");
+        SmartSnackbar.get(this).showIndefinite("为该库Start一下好么", "好的",
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        SmartToast.showInCenter("Thank you");
+                    }
+                });
     }
 
     public void onLongClick(View view) {

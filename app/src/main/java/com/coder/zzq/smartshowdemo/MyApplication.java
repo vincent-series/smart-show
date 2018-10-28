@@ -24,7 +24,8 @@ public class MyApplication extends Application {
 
         SmartShow.init(this);
 
-        SmartToast.setting().dismissOnLeave(true);
+        SmartToast.setting().dismissOnLeave(true)
+                .backgroundColorRes(R.color.colorPrimary);
 
         SmartSnackbar.setting()
                 .backgroundColorRes(R.color.colorPrimary)
@@ -33,6 +34,7 @@ public class MyApplication extends Application {
                 .dismissOnLeave(true);
 
         SmartTopbar.setting()
+                .backgroundColorRes(R.color.colorPrimary)
                 .msgTextColorRes(R.color.white)
                 .actionColorRes(R.color.colorAccent)
                 .dismissOnLeave(true);
