@@ -16,20 +16,23 @@
         android:orientation="vertical">
 
         <Button
+            android:layout_width="150dp"
             style="@style/normal_btn"
             android:onClick="onShortClick"
-            android:text="short" />
+            android:text="short topbar" />
 
         <Button
+            android:layout_width="150dp"
             style="@style/normal_btn"
             android:onClick="onLongClick"
-            android:text="long"
+            android:text="long topbar"
             />
 
         <Button
+            android:layout_width="150dp"
             style="@style/normal_btn"
             android:onClick="onIndefinite"
-            android:text="indefinite" />
+            android:text="indefinite topbar" />
 
     </LinearLayout>
 

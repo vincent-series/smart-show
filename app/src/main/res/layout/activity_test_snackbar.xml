@@ -13,17 +13,20 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <Button
+            android:layout_width="150dp"
             style="@style/normal_btn"
-            android:text="short"
+            android:text="short snackbar"
             android:onClick="onShortClick"/>
 
         <Button
+            android:layout_width="150dp"
             style="@style/normal_btn"
-            android:text="long"
+            android:text="long snackbar"
             android:onClick="onLongClick"/>
         <Button
+            android:layout_width="150dp"
             style="@style/normal_btn"
-            android:text="indefinite"
+            android:text="indefinite snackbar"
             android:onClick="onIndefiniteClick"/>
 
     </LinearLayout>
