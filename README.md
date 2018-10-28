@@ -19,19 +19,19 @@
 ![图片加载失败](images/toast_all.gif)    ![图片加载失败](images/topbar_all.gif)<br/>
 ![图片加载失败](images/dialog.gif)    ![图片加载失败](images/snackbar_color.gif)
 ### 代码实现
-[回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)
+[回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)<br/>
 如果你对实现感兴趣，请参考我的CSDN博客：
 * 2.x 版本 
 * 1.x 版本 http://blog.csdn.net/jungle_pig/article/details/78568493<br/>已授权《第一行代码》作者郭霖的微信公众号同步发表：http://mp.weixin.qq.com/s/l62PtbmrIOkVKfJ2r0JwEw
 ## 关于作者
-[回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)
+[回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)<br/>
 为使SmartShow库更加健壮，如果您在使用过程中发现任何问题，请联系我，我会立即跟进修复和维护。感谢您的支持！<br/><br/>
 作者：朱志强<br/><br/>
 微信：w361281607<br/><br/>
 ![图片加载失败](images/wx_2d.jpg)<br/><br/>
 邮箱：coder_zzq@163.com<br/>
 ## 引入SmartShow
-[回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)
+[回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)<br/>
 1.在Project的gradle文件中<br/><br/>
 <pre><code>
 allprojects {
@@ -285,7 +285,7 @@ type toast 均居中显示<br/><br/>
          SmartToast.dismiss();
 </code></pre>
 ### SmartSnackbar部分
-[回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)
+[回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)<br/>
 ![图片加载失败](images/snackbar_color.gif)
 1. 复用Snackbar实例，当Snackbar正在显示，多次触发时，若msg和actionTex均未改变，则不会重复弹出，否则会有弹出效果
 2. 可修改布局风格，如背景颜色，文字大小和颜色等
@@ -486,7 +486,7 @@ public class SnackbarActivity extends BaseActivity implements ISnackbarShowCallb
 }
 </code></pre>
 ### SmartTopbar部分
-[回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)
+[回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)<br/>
 默认样式：![图片加载失败](images/topbar_normal.gif)设置背景色：![图片加载失败](images/topbar_color.gif)
 1. SmartTopbar在功能以及使用上很像一个顶部的Snackbar<br/>
 2. 当Topbar正在显示，多次触发时，若msg和actionTex均未改变，则不会重复弹出，否则有弹出效果
@@ -684,7 +684,7 @@ public class SnackbarActivity extends BaseActivity implements ITopbarShowCallbac
 }
 </code></pre>
 ### SmartDialog部分
-[回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)
+[回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)<br/>
 ios风格的loading框、对话框在主流App中很盛行，SmartDialog提供了几种类ios风格的对话框。<br/><br/>
 ![图片加载失败](images/dialog.gif)
 #### API
