@@ -684,7 +684,7 @@ public class SnackbarActivity extends BaseActivity implements ITopbarShowCallbac
 }
 </code></pre>
 ### SmartDialog部分
-[回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)<br/>
+[回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)<br/><br/>
 ios风格的loading框、对话框在主流App中很盛行，SmartDialog提供了几种类ios风格的对话框。<br/><br/>
 ![图片加载失败](images/dialog.gif)
 #### API
