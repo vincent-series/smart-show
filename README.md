@@ -476,7 +476,7 @@ public class SnackbarActivity extends BaseActivity implements ISnackbarShowCallb
 }
 </code></pre>
 ### SmartTopbar部分
-默认样式：![图片加载失败](images/topbar_normal.gif)设置背景色：![图片加载失败](images/topbar_color.gif)
+默认样式：![图片加载失败](images/topbar_normal.gif)设置背景色：![图片加载失败](images/topbar_color_new.gif)
 1. SmartTopbar在功能以及使用上很像一个顶部的Snackbar<br/>
 2. 当Topbar正在显示，多次触发时，若msg和actionTex均未改变，则不会重复弹出，否则有弹出效果
 3. 可修改布局风格，如背景颜色，文字大小和颜色等
