@@ -19,16 +19,19 @@
 ![图片加载失败](images/toast_all.gif)    ![图片加载失败](images/topbar_all.gif)<br/>
 ![图片加载失败](images/dialog.gif)    ![图片加载失败](images/snackbar_color.gif)
 ### 代码实现
+[回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)
 如果你对实现感兴趣，请参考我的CSDN博客：
 * 2.x 版本 
 * 1.x 版本 http://blog.csdn.net/jungle_pig/article/details/78568493<br/>已授权《第一行代码》作者郭霖的微信公众号同步发表：http://mp.weixin.qq.com/s/l62PtbmrIOkVKfJ2r0JwEw
 ## 关于作者
+[回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)
 为使SmartShow库更加健壮，如果您在使用过程中发现任何问题，请联系我，我会立即跟进修复和维护。感谢您的支持！<br/><br/>
 作者：朱志强<br/><br/>
 微信：w361281607<br/><br/>
 ![图片加载失败](images/wx_2d.jpg)<br/><br/>
 邮箱：coder_zzq@163.com<br/>
 ## 引入SmartShow
+[回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)
 1.在Project的gradle文件中<br/><br/>
 <pre><code>
 allprojects {
