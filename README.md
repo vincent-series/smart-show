@@ -63,7 +63,7 @@ allprojects {
 </code></pre>
 
 ### SmartToast部分 
-* [回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)
+[回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)
 1. 复用Toast实例，当Toast正在显示时，多次触发内容和位置均未改变的Toast，不会重复弹出；下一个Toast不会等到上一个Toast的Duration耗尽才弹出
 2. 解决传统复用模式的功能缺陷，如正在显示一个内容为"A"的Toast，此时再弹出内容为"B"的Toast时，文本虽改变，但没有弹出效果；如果复用的Toast正在显示，改变其Gravity以改变显示位置会无效，直到消失后再次显示才生效
 3. 可修改Toast默认布局的风格，如背景颜色，文字大小和颜色等
