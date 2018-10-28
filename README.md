@@ -10,11 +10,11 @@
 3. 解决控件已知的性能缺陷，提高用户体验
 4. 合理的复用策略，节约内存开销的同时及时解除引用以便被垃圾回收器回收
 5. 根据实际开发中的常见需求，进行功能扩展
-
+### 效果展示
+### 代码实现
 如果你对实现感兴趣，请参考我的CSDN博客：<br/><br/
-2.x 版本 <br/><br/>
-1.x 版本 http://blog.csdn.net/jungle_pig/article/details/78568493 <br/><br/>
-已授权《第一行代码》作者郭霖的微信公众号同步发表：http://mp.weixin.qq.com/s/l62PtbmrIOkVKfJ2r0JwEw <br/><br/>
+* 2.x 版本 <br/><br/>
+* 1.x 版本 http://blog.csdn.net/jungle_pig/article/details/78568493 <br/><br/>已授权《第一行代码》作者郭霖的微信公众号同步发表：http://mp.weixin.qq.com/s/l62PtbmrIOkVKfJ2r0JwEw <br/><br/>
 ## 关于作者
 为使SmartShow库更加健壮，如果您在使用过程中发现任何问题，请联系我，我会立即跟进修复和维护。感谢您的支持！<br/><br/>
 作者：朱志强<br/><br/>
