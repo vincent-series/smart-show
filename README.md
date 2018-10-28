@@ -3,13 +3,13 @@
 * [SmartToast](https://github.com/the-pig-of-jungle/SmartShow#smarttoast%E9%83%A8%E5%88%86)
 * [SmartSnackbar](https://github.com/the-pig-of-jungle/SmartShow#smartsnackbar%E9%83%A8%E5%88%86)
 * [SmartTopBar](https://github.com/the-pig-of-jungle/SmartShow#smarttopbar%E9%83%A8%E5%88%86)
-* [SmartDialog](https://github.com/the-pig-of-jungle/SmartShow#smarttopbar%E9%83%A8%E5%88%86)：<br/><br/>
-### 该库功能
-1.优雅封装，简化调用<br/><br/>
-2.处理系统bug等，如Android 7.1系统关于Toast的BadTokenException<br/><br/>
-3.解决控件已知的性能缺陷，提高用户体验<br/><br/>
-4.合理的复用策略，节约内存开销的同时及时解除引用以便被垃圾回收器回收<br/></br>
-5.根据实际开发中的常见需求，进行功能扩展<br/><br/>
+* [SmartDialog](https://github.com/the-pig-of-jungle/SmartShow#smarttopbar%E9%83%A8%E5%88%86)
+### 该库功能：
+1. 优雅封装，简化调用
+2. 处理系统bug等，如Android 7.1系统关于Toast的BadTokenException
+3. 解决控件已知的性能缺陷，提高用户体验
+4. 合理的复用策略，节约内存开销的同时及时解除引用以便被垃圾回收器回收
+5. 根据实际开发中的常见需求，进行功能扩展
 如果你对实现感兴趣，请参考我的CSDN博客：<br/><br/>
 2.x 版本 <br/><br/>
 1.x 版本 http://blog.csdn.net/jungle_pig/article/details/78568493 <br/><br/>
@@ -55,8 +55,8 @@ allprojects {
 </code></pre>
 
 ### SmartToast部分
-1.复用Toast实例，当Toast正在显示时，多次触发内容和位置均未改变的Toast，不会重复弹出；下一个Toast不会等到上一个Toast的Duration耗尽才弹出<br/><br/>
-2.解决传统复用模式的功能缺陷，如正在显示一个内容为"A"的Toast，此时再弹出内容为"B"的Toast时，文本虽改变，<br/><br/>
+1. 复用Toast实例，当Toast正在显示时，多次触发内容和位置均未改变的Toast，不会重复弹出；下一个Toast不会等到上一个Toast的Duration耗尽才弹出
+2. 解决传统复用模式的功能缺陷，如正在显示一个内容为"A"的Toast，此时再弹出内容为"B"的Toast时，文本虽改变，
   但没有弹出效果；如果复用的Toast正在显示，改变其Gravity以改变显示位置会无效，直到消失后再次显示才生效<br/><br/>
 3.可修改Toast默认布局的风格，如背景颜色，文字大小和颜色等<br/><br/>
 4.可为Toast设置自定义布局</br><br/>
