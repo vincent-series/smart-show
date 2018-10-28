@@ -13,7 +13,7 @@
 
 四大模块的详细功能可查看下面各模块的介绍
 ### 效果展示
-![图片加载失败](images/toast_all.gif)<br/><br/>![图片加载失败](images/topbar_all.gif)<br/>
+![图片加载失败](images/toast_all.gif)    ![图片加载失败](images/topbar_all.gif)<br/>
 ![图片加载失败](images/dialog.gif)<br/><br/>![图片加载失败](images/snackbar_color.gif)
 ### 代码实现
 如果你对实现感兴趣，请参考我的CSDN博客：
