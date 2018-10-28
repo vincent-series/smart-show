@@ -13,12 +13,11 @@ public class TestToastActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_toast);
+        setContentView(R.layout.activity_test_toast);
     }
 
     public void onNextPageClick(View view) {
         startActivity(new Intent(this,TestToastActivity.class));
-        finish();
     }
 
 

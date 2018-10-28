@@ -1,47 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <include layout="@layout/copyright_toolbar"/>
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/copyright_toolbar" />
+
     <LinearLayout
-        android:gravity="center"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center_horizontal|top"
         android:orientation="vertical">
-        <Button
-            android:textAllCaps="false"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="成功"
-            android:onClick="onShowClick"/>
 
-        <Button
-            android:textAllCaps="false"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="错误"
-            android:onClick="onShowAtTopClick"/>
-        <Button
-            android:textAllCaps="false"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="警告"
-            android:onClick="onShowInCenterClick"/>
-        <Button
-            android:lineSpacingExtra="4dp"
-            android:textAllCaps="false"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="普通"
-            android:onClick="onShowAtLocationClick"
-            />
+            android:layout_height="wrap_content">
+            <Button
+                style="@style/grid_btn"
+                android:onClick="onInfoClick"
+                android:text="info" />
+            <Button
+                style="@style/grid_btn"
+                android:onClick="onWarningClick"
+                android:text="warning" />
 
-        <Button
-            android:layout_marginTop="20dp"
+            <Button
+                style="@style/grid_btn"
+                android:onClick="onSuccessClick"
+                android:text="success" />
+
+            <Button
+                style="@style/grid_btn"
+                android:onClick="onErrorClick"
+                android:text="error" />
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="失败"
-            android:onClick="onNextPageClick"/>
+            android:layout_height="wrap_content">
+
+            <Button
+                style="@style/grid_btn"
+                android:onClick="onFailClick"
+                android:text="fail" />
+
+            <Button
+                style="@style/grid_btn"
+                android:onClick="onCompleteClick"
+                android:text="complete" />
+            <Button
+                style="@style/grid_btn"
+                android:onClick="onForbidClick"
+                android:text="forbid" />
+
+            <Button
+                style="@style/grid_btn"
+                android:onClick="onWaitingClick"
+                android:text="waiting" />
+        </LinearLayout>
+
     </LinearLayout>
-
 </LinearLayout>

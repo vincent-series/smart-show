@@ -12,7 +12,7 @@ public class TestTypeToastActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_type_toast);
+        setContentView(R.layout.activity_test_type_toast);
     }
 
     public void onInfoClick(View view) {

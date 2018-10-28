@@ -15,4 +15,9 @@
         <item name="android:textAllCaps">false</item>
     </style>
 
+    <style name="grid_btn" parent="normal_btn">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
 </resources>

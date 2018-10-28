@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.coder.zzq.smartshowdemo.TestToastActivity">
+    tools:context="com.coder.zzq.smartshowdemo.show.ToastActivity">
 
     <include layout="@layout/copyright_toolbar" />
 
@@ -14,21 +14,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <Button style="@style/normal_btn"
-            android:onClick="onShowClick"
-            android:text="show（苹果）"/>
-        <Button style="@style/normal_btn"
-            android:onClick="onShowAtTopClick"
-            android:text="showAtTop（香蕉）"/>
-        <Button style="@style/normal_btn"
-            android:onClick="onShowInCenterClick"
-            android:text="showInCenter（橘子）"/>
-        <Button style="@style/normal_btn"
-            android:onClick="onShowAtLocationClick"
-            android:text="showAtLocation（荔枝，Top|Left，xOffset 10dp,yOffset 10dp）"/>
 
-        <Button style="@style/normal_btn"
-            android:text="下一页"
-            android:onClick="onNextPageClick"/>
+        <Button
+            style="@style/normal_btn"
+            android:layout_width="200dp"
+            android:text="type toast(默认)"
+            android:onClick="onTypeToastClick"/>
+        <Button
+            style="@style/normal_btn"
+            android:layout_width="200dp"
+            android:text="type toast(设置主题色)"
+            android:onClick="onColorTypeToastClick"/>
+
+        <Button
+            style="@style/normal_btn"
+            android:layout_width="200dp"
+            android:text="普通 toast"
+            android:onClick="onToastClick"/>
+
+        <Button
+            style="@style/normal_btn"
+            android:layout_width="200dp"
+            android:text="普通 toast(设置背景色)"
+            android:onClick="onColorToastClick"/>
     </LinearLayout>
 </LinearLayout>

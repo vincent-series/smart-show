@@ -9,5 +9,5 @@
         android:gravity="center"
         android:textColor="#ffffff"
         android:textSize="20sp"
-        android:text="作者--朱志强"/>
+        android:text="作者：朱志强"/>
 </android.support.v7.widget.Toolbar>
