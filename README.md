@@ -493,6 +493,7 @@ public class SnackbarActivity extends BaseActivity implements ISnackbarShowCallb
 3. 可修改布局风格，如背景颜色，文字大小和颜色等
 4. 可配置离开当前Activity时，立即消失正在显示的Topbar。如，在Activity A 上显示了一个Indefinite Topbar，并且用户没有
 点击响应，启动activity B，然后再返回A，原来的Topbar已自动消失
+5. 可通过手势右滑隐藏Topbar
 ### API
 传入当前界面的Activity,获取Topbar，三种duration体现在方法名上，而不是传参，尽可能简化调用
 #### 只传入消息文本
