@@ -18,7 +18,7 @@
 ### 效果展示
 ![图片加载失败](images/toast_all.gif)    ![图片加载失败](images/topbar_all.gif)<br/>
 ![图片加载失败](images/dialog.gif)    ![图片加载失败](images/snackbar_color.gif)
-### 代码实现
+## 代码实现
 [回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)<br/><br/>
 如果你对实现感兴趣，请参考我的CSDN博客：
 * 2.x 版本 
@@ -65,7 +65,7 @@ allprojects {
         SmartShow.init(this);
 </code></pre>
 
-### SmartToast部分 
+## SmartToast部分 
 [回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)
 1. 复用Toast实例，当Toast正在显示时，多次触发内容和位置均未改变的Toast，不会重复弹出；下一个Toast不会等到上一个Toast的Duration耗尽才弹出
 2. 解决传统复用模式的功能缺陷，如正在显示一个内容为"A"的Toast，此时再弹出内容为"B"的Toast时，文本虽改变，但没有弹出效果；如果复用的Toast正在显示，改变其Gravity以改变显示位置会无效，直到消失后再次显示才生效
@@ -284,7 +284,7 @@ type toast 均居中显示<br/><br/>
 
          SmartToast.dismiss();
 </code></pre>
-### SmartSnackbar部分
+## SmartSnackbar部分
 [回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)<br/><br/>
 ![图片加载失败](images/snackbar_color.gif)
 1. 复用Snackbar实例，当Snackbar正在显示，多次触发时，若msg和actionTex均未改变，则不会重复弹出，否则会有弹出效果
@@ -485,7 +485,7 @@ public class SnackbarActivity extends BaseActivity implements ISnackbarShowCallb
         
 }
 </code></pre>
-### SmartTopbar部分
+## SmartTopbar部分
 [回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)<br/><br/>
 默认样式：![图片加载失败](images/topbar_normal.gif)设置背景色：![图片加载失败](images/topbar_color.gif)
 1. SmartTopbar在功能以及使用上很像一个顶部的Snackbar<br/>
@@ -683,7 +683,7 @@ public class SnackbarActivity extends BaseActivity implements ITopbarShowCallbac
         
 }
 </code></pre>
-### SmartDialog部分
+## SmartDialog部分
 [回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)<br/><br/>
 ios风格的loading框、对话框在主流App中很盛行，SmartDialog提供了几种类ios风格的对话框。<br/><br/>
 ![图片加载失败](images/dialog.gif)
