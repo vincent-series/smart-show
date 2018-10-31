@@ -20,7 +20,6 @@ public abstract class BaseToastManager implements View.OnAttachStateChangeListen
     protected View mView;
     protected TextView mMsgView;
     protected Object mTn;
-    protected Field mViewField;
     protected Method mHideMethod;
     protected WindowManager.LayoutParams mWindowParams;
 
@@ -48,18 +47,16 @@ public abstract class BaseToastManager implements View.OnAttachStateChangeListen
             Field tnField = Toast.class.getDeclaredField("mTN");
             tnField.setAccessible(true);
             mTn = tnField.get(mToast);
-            mViewField = mTn.getClass().getDeclaredField("mView");
-            mViewField.setAccessible(true);
             mHideMethod = mTn.getClass().getDeclaredMethod("handleHide");
             mHideMethod.setAccessible(true);
             Field windowParamsField = mTn.getClass().getDeclaredField("mParams");
             windowParamsField.setAccessible(true);
             mWindowParams = (WindowManager.LayoutParams) windowParamsField.get(mTn);
             if (isSdk25()) {
-                Field handerField = mTn.getClass().getDeclaredField("mHandler");
-                handerField.setAccessible(true);
-                Handler handler = (Handler) handerField.get(mTn);
-                handerField.set(mTn, new SafeHandler(handler));
+                Field handlerField = mTn.getClass().getDeclaredField("mHandler");
+                handlerField.setAccessible(true);
+                Handler handler = (Handler) handlerField.get(mTn);
+                handlerField.set(mTn, new SafeHandler(handler));
             }
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
@@ -114,11 +111,10 @@ public abstract class BaseToastManager implements View.OnAttachStateChangeListen
         mToast = null;
         mCurMsg = "";
         mDuration = Toast.LENGTH_SHORT;
-        View mView = null;
-        TextView mMsgView = null;
-        Object mTn = null;
-        Field mViewField = null;
-        Method mHideMethod = null;
-        WindowManager.LayoutParams mWindowParams = null;
+        mView = null;
+        mMsgView = null;
+        mTn = null;
+        mHideMethod = null;
+        mWindowParams = null;
     }
 }
