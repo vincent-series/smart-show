@@ -22,6 +22,7 @@ public abstract class BaseToastManager implements View.OnAttachStateChangeListen
     protected Object mTn;
     protected Method mHideMethod;
     protected WindowManager.LayoutParams mWindowParams;
+    protected Field mNextViewFieldOfTn;
 
 
     public BaseToastManager() {
@@ -47,6 +48,8 @@ public abstract class BaseToastManager implements View.OnAttachStateChangeListen
             Field tnField = Toast.class.getDeclaredField("mTN");
             tnField.setAccessible(true);
             mTn = tnField.get(mToast);
+            mNextViewFieldOfTn = mTn.getClass().getDeclaredField("mNextView");
+            mNextViewFieldOfTn.setAccessible(true);
             mHideMethod = mTn.getClass().getDeclaredMethod("handleHide");
             mHideMethod.setAccessible(true);
             Field windowParamsField = mTn.getClass().getDeclaredField("mParams");
@@ -82,7 +85,10 @@ public abstract class BaseToastManager implements View.OnAttachStateChangeListen
 
     public void dismiss() {
         try {
-            mHideMethod.invoke(mTn);
+            if (mTn != null){
+                mHideMethod.invoke(mTn);
+                mNextViewFieldOfTn.set(mTn,null);
+            }
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
@@ -116,5 +122,6 @@ public abstract class BaseToastManager implements View.OnAttachStateChangeListen
         mTn = null;
         mHideMethod = null;
         mWindowParams = null;
+        mNextViewFieldOfTn = null;
     }
 }
