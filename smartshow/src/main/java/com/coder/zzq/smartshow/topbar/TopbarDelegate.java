@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.coder.zzq.smartshow.Config;
 import com.coder.zzq.smartshow.R;
 import com.coder.zzq.smartshow.basebar.BarDelegate;
 import com.coder.zzq.smartshow.basebar.IBarShow;
@@ -22,6 +21,7 @@ import com.coder.zzq.smartshow.topbar.view.TopBar;
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public final class TopbarDelegate extends BarDelegate<TopBar, TopBar.TopbarLayout, TopbarSettingImpl> {
 
+    private TopbarSettingImpl mTopbarSetting;
 
     private static TopbarDelegate sDelegate;
 
@@ -158,17 +158,21 @@ public final class TopbarDelegate extends BarDelegate<TopBar, TopBar.TopbarLayou
 
     @Override
     public boolean hasBarSetting() {
-        return Config.hasToastSetting();
+        return mTopbarSetting != null;
     }
 
     @Override
     protected TopbarSettingImpl createBarSetting() {
-        return Config.buildSmartTopBarSetting();
+
+        if (mTopbarSetting == null) {
+            mTopbarSetting = new TopbarSettingImpl();
+        }
+        return mTopbarSetting;
     }
 
     @Override
     public TopbarSettingImpl getBarSetting() {
-        return Config.getTopbarSetting();
+        return mTopbarSetting;
     }
 
 }

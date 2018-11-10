@@ -2,7 +2,6 @@ package com.coder.zzq.smartshow.toast;
 
 import android.support.annotation.RestrictTo;
 
-import com.coder.zzq.smartshow.Config;
 import com.coder.zzq.smartshow.SmartShow;
 
 /**
@@ -10,6 +9,7 @@ import com.coder.zzq.smartshow.SmartShow;
  */
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public final class ToastDelegate {
+    private ToastSettingImpl mToastSetting;
     private PlainToastManager mPlainToastManager;
     private TypeToastManager mTypeToastManager;
 
@@ -19,12 +19,15 @@ public final class ToastDelegate {
     }
 
     public ToastSettingImpl createToastSetting() {
-        return Config.createToastSetting();
+        if (mToastSetting == null){
+            mToastSetting = new ToastSettingImpl();
+        }
+        return mToastSetting;
     }
 
 
     protected boolean hasToastSetting() {
-        return Config.hasToastSetting();
+        return mToastSetting != null;
     }
 
 
@@ -184,7 +187,7 @@ public final class ToastDelegate {
     }
 
     public ToastSettingImpl getToastSetting() {
-        return Config.getToastSetting();
+        return mToastSetting;
     }
 
 

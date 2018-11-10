@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.coder.zzq.smartshow.Config;
 import com.coder.zzq.smartshow.Utils;
 import com.coder.zzq.smartshow.basebar.BarDelegate;
 import com.coder.zzq.smartshow.basebar.IBarShow;
@@ -18,7 +17,7 @@ import com.coder.zzq.smartshow.basebar.IBarShowCallback;
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public class SnackbarDeligate extends BarDelegate<Snackbar, Snackbar.SnackbarLayout, SnackbarSettingImpl> {
-
+    private SnackbarSettingImpl mSnackbarSetting;
     private SnackbarDeligate() {
         super();
     }
@@ -124,17 +123,20 @@ public class SnackbarDeligate extends BarDelegate<Snackbar, Snackbar.SnackbarLay
 
     @Override
     public boolean hasBarSetting() {
-        return Config.hasSnackbarSetting();
+        return mSnackbarSetting != null;
     }
 
     @Override
     protected SnackbarSettingImpl createBarSetting() {
-        return Config.buildSmartSnackbarSetting();
+        if (mSnackbarSetting == null) {
+            mSnackbarSetting = new SnackbarSettingImpl();
+        }
+        return mSnackbarSetting;
     }
 
     @Override
     public SnackbarSettingImpl getBarSetting() {
-        return Config.getSnackbarSetting();
+        return mSnackbarSetting;
     }
 
 
