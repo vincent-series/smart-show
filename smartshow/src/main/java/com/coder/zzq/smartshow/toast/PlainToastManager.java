@@ -2,9 +2,7 @@ package com.coder.zzq.smartshow.toast;
 
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.NinePatchDrawable;
 import android.support.annotation.RestrictTo;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -13,7 +11,6 @@ import android.widget.Toast;
 import com.coder.zzq.smartshow.R;
 import com.coder.zzq.smartshow.SmartShow;
 import com.coder.zzq.smartshow.Utils;
-import com.coder.zzq.smartshow.topbar.SmartTopbar;
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public class PlainToastManager extends BaseToastManager implements IPlainShow {
@@ -70,11 +67,10 @@ public class PlainToastManager extends BaseToastManager implements IPlainShow {
                     mView.setBackgroundColor(ToastDelegate.get().getToastSetting().getBgColor());
                 } else {
                     Drawable bg = mView.getBackground();
-                    Toast.makeText(SmartShow.getContext(),bg.getClass().toString(),Toast.LENGTH_LONG).show();
-                    if (bg instanceof GradientDrawable){
+                    if (bg instanceof GradientDrawable) {
                         ((GradientDrawable) bg).setColor(ToastDelegate.get().getToastSetting().getBgColor());
-                    }else{
-                        DrawableCompat.setTint(bg,ToastDelegate.get().getToastSetting().getBgColor());
+                    } else {
+                        DrawableCompat.setTint(bg, ToastDelegate.get().getToastSetting().getBgColor());
                     }
 
                     mView.setBackgroundDrawable(bg);
@@ -166,7 +162,7 @@ public class PlainToastManager extends BaseToastManager implements IPlainShow {
         updateToast();
         mToast.setGravity(mGravity, mXOffset, mYOffset);
         mToast.setDuration(mDuration);
-        if (needInvodeShow){
+        if (needInvodeShow) {
             mToast.show();
         }
     }
