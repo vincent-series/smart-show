@@ -27,7 +27,7 @@ public class MyApplication extends Application {
 
         SmartToast.setting()
                 .backgroundColorRes(R.color.colorPrimary)
-                .dismissOnLeave(true);
+                .dismissOnLeave(false);
 
         SmartSnackbar.setting()
                 .backgroundColorRes(R.color.colorPrimary)

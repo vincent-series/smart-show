@@ -9,10 +9,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
-public abstract class BaseToastManager implements View.OnAttachStateChangeListener {
+public abstract class BaseToastManager {
 
     protected Toast mToast;
     protected CharSequence mCurMsg;
@@ -20,9 +18,7 @@ public abstract class BaseToastManager implements View.OnAttachStateChangeListen
     protected View mView;
     protected TextView mMsgView;
     protected Object mTn;
-    protected Method mHideMethod;
     protected WindowManager.LayoutParams mWindowParams;
-    protected Field mNextViewFieldOfTn;
 
 
     public BaseToastManager() {
@@ -34,12 +30,13 @@ public abstract class BaseToastManager implements View.OnAttachStateChangeListen
 
     protected abstract Toast createToast();
 
-    protected void rebuildToast(){
+    protected void rebuildToast() {
         mToast = createToast();
         setupReflectInfo();
         setupToast();
     }
-    protected void updateToast(){
+
+    protected void updateToast() {
         mMsgView.setText(mCurMsg);
     }
 
@@ -48,80 +45,41 @@ public abstract class BaseToastManager implements View.OnAttachStateChangeListen
             Field tnField = Toast.class.getDeclaredField("mTN");
             tnField.setAccessible(true);
             mTn = tnField.get(mToast);
-            mNextViewFieldOfTn = mTn.getClass().getDeclaredField("mNextView");
-            mNextViewFieldOfTn.setAccessible(true);
-            mHideMethod = mTn.getClass().getDeclaredMethod("handleHide");
-            mHideMethod.setAccessible(true);
+
             Field windowParamsField = mTn.getClass().getDeclaredField("mParams");
             windowParamsField.setAccessible(true);
             mWindowParams = (WindowManager.LayoutParams) windowParamsField.get(mTn);
+
             if (isSdk25()) {
                 Field handlerField = mTn.getClass().getDeclaredField("mHandler");
                 handlerField.setAccessible(true);
-                Handler handler = (Handler) handlerField.get(mTn);
-                handlerField.set(mTn, new SafeHandler(handler));
+                Handler handlerOfTn = (Handler) handlerField.get(mTn);
+                handlerField.set(mTn, new SafeHandler(handlerOfTn));
             }
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
         }
     }
 
-    protected void setupToast(){
+    protected void setupToast() {
         mCurMsg = "";
         mDuration = Toast.LENGTH_SHORT;
-        mView.addOnAttachStateChangeListener(this);
     }
 
-    protected boolean isShowing(){
+    protected boolean isShowing() {
         return ViewCompat.isAttachedToWindow(mView);
     }
 
 
-
-
     public void dismiss() {
-        try {
-            if (mTn != null){
-                mHideMethod.invoke(mTn);
-                mNextViewFieldOfTn.set(mTn,null);
-            }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
+        mToast.cancel();
+        rebuildToast();
     }
-
-
-    @Override
-    public void onViewAttachedToWindow(View v) {
-
-    }
-
-
-    @Override
-    public void onViewDetachedFromWindow(View v) {
-        updateToast();
-    }
-
 
     protected boolean isSdk25() {
         return Build.VERSION.SDK_INT == Build.VERSION_CODES.N_MR1;
     }
 
-    public void destroy() {
-        mToast = null;
-        mCurMsg = "";
-        mDuration = Toast.LENGTH_SHORT;
-        mView = null;
-        mMsgView = null;
-        mTn = null;
-        mHideMethod = null;
-        mWindowParams = null;
-        mNextViewFieldOfTn = null;
-    }
 }

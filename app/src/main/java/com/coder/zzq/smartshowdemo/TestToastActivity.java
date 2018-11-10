@@ -39,4 +39,8 @@ public class TestToastActivity extends AppCompatActivity {
     public void onShowAtLocationClick(View view) {
         SmartToast.showAtLocation("荔枝", Gravity.LEFT|Gravity.TOP,10,90);
     }
+
+    public void onShowAnotherClick(View view) {
+        SmartToast.show("");
+    }
 }

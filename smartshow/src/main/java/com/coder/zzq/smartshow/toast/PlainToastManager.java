@@ -1,6 +1,10 @@
 package com.coder.zzq.smartshow.toast;
 
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.NinePatchDrawable;
 import android.support.annotation.RestrictTo;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -9,6 +13,8 @@ import android.widget.Toast;
 import com.coder.zzq.smartshow.R;
 import com.coder.zzq.smartshow.SmartShow;
 import com.coder.zzq.smartshow.Utils;
+import com.coder.zzq.smartshow.topbar.SmartTopbar;
+
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public class PlainToastManager extends BaseToastManager implements IPlainShow {
 
@@ -63,7 +69,15 @@ public class PlainToastManager extends BaseToastManager implements IPlainShow {
                 if (ToastDelegate.get().getToastSetting().isCustom()) {
                     mView.setBackgroundColor(ToastDelegate.get().getToastSetting().getBgColor());
                 } else {
-                    DrawableCompat.setTint(mView.getBackground(), ToastDelegate.get().getToastSetting().getBgColor());
+                    Drawable bg = mView.getBackground();
+                    Toast.makeText(SmartShow.getContext(),bg.getClass().toString(),Toast.LENGTH_LONG).show();
+                    if (bg instanceof GradientDrawable){
+                        ((GradientDrawable) bg).setColor(ToastDelegate.get().getToastSetting().getBgColor());
+                    }else{
+                        DrawableCompat.setTint(bg,ToastDelegate.get().getToastSetting().getBgColor());
+                    }
+
+                    mView.setBackgroundDrawable(bg);
                 }
             }
 
@@ -77,12 +91,13 @@ public class PlainToastManager extends BaseToastManager implements IPlainShow {
             mMsgView.setGravity(Gravity.CENTER);
             mMsgView.getPaint().setFakeBoldText(ToastDelegate.get().getToastSetting().isTextBold());
             if (ToastDelegate.get().getToastSetting().isViewCallbackSetup()) {
-                ToastDelegate.get().getToastSetting().getIProcessToastCallback().processView( mView, mMsgView);
+                ToastDelegate.get().getToastSetting().getIProcessToastCallback().processView(mView, mMsgView);
             }
 
         }
 
     }
+
 
     @Override
     public void show(CharSequence msg) {
@@ -136,29 +151,28 @@ public class PlainToastManager extends BaseToastManager implements IPlainShow {
         //文本是否改变
         boolean contentChanged = !mCurMsg.equals(msg);
 
+        boolean needInvodeShow = !isShowing();
+
+        if (isShowing() && (locationChanged || contentChanged)) {
+            dismiss();
+            needInvodeShow = true;
+        }
+
         mCurMsg = msg;
         mDuration = duration;
         mGravity = gravity;
         mXOffset = xOffset;
         mYOffset = yOffset;
-
-        if (isShowing() && (locationChanged || contentChanged)) {
-            dismiss();
-        } else {
-            updateToast();
-        }
-
+        updateToast();
         mToast.setGravity(mGravity, mXOffset, mYOffset);
         mToast.setDuration(mDuration);
-        mToast.show();
+        if (needInvodeShow){
+            mToast.show();
+        }
     }
 
     private boolean locationChanged(int gravity, int xOffset, int yOffset) {
         return mGravity != gravity || mXOffset != xOffset || mYOffset != yOffset;
     }
 
-    public void cancel() {
-        mToast.cancel();
-        rebuildToast();
-    }
 }

@@ -18,6 +18,9 @@
             android:onClick="onShowClick"
             android:text="show"/>
         <Button style="@style/normal_btn"
+            android:onClick="onShowAnotherClick"
+            android:text="showAnother"/>
+        <Button style="@style/normal_btn"
             android:onClick="onShowAtTopClick"
             android:text="showAtTop"/>
         <Button style="@style/normal_btn"

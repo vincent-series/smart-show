@@ -2,11 +2,8 @@ package com.coder.zzq.smartshow;
 
 import android.app.Activity;
 import android.app.Application;
-import android.os.Bundle;
-import android.util.Log;
 
 import com.coder.zzq.smartshow.lifecycle.ActivityLifecycleCallback;
-import com.coder.zzq.smartshow.lifecycle.ActivityStack;
 import com.coder.zzq.smartshow.snackbar.SnackbarDeligate;
 import com.coder.zzq.smartshow.toast.ToastDelegate;
 import com.coder.zzq.smartshow.topbar.TopbarDelegate;
@@ -24,11 +21,6 @@ public final class SmartShow {
         }
         sApplication = application;
         sApplication.registerActivityLifecycleCallbacks(new ActivityLifecycleCallback() {
-            @Override
-            public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-                super.onActivityCreated(activity, savedInstanceState);
-                ActivityStack.push(activity);
-            }
 
             @Override
             public void onActivityPaused(Activity activity) {
@@ -53,9 +45,6 @@ public final class SmartShow {
             @Override
             public void onActivityDestroyed(Activity activity) {
                 super.onActivityDestroyed(activity);
-
-                ActivityStack.pop(activity);
-
                 if (SnackbarDeligate.hasCreated()) {
                     SnackbarDeligate.get().destroy(activity);
                 }
@@ -63,16 +52,6 @@ public final class SmartShow {
                 if (TopbarDelegate.hasCreated()) {
                     TopbarDelegate.get().destroy(activity);
                 }
-
-                Log.d("zzq","activity 数量：" + ActivityStack.count());
-
-                if (ActivityStack.isEmpty()) {
-                    ToastDelegate.destroyDelegate();
-                    SnackbarDeligate.destroyDelegate();
-                    TopbarDelegate.destroyDelegate();
-                }
-
-
             }
 
         });

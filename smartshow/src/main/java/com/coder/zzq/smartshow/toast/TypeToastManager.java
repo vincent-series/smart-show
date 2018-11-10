@@ -71,20 +71,25 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
         //类型是否改变
         boolean typeChanged = mCurInfoType != infoType;
 
+
+        boolean needInvodeShow = !isShowing();
+        if (isShowing() && (contentChanged || typeChanged)) {
+            dismiss();
+            needInvodeShow = true;
+        }
+
         mCurMsg = msg;
         mDuration = duration;
         mCurInfoType = infoType;
         mCurIcon = getIcon(mCurInfoType);
 
-        if (isShowing() && (contentChanged || typeChanged)) {
-            dismiss();
-        } else {
-            updateToast();
-        }
+        updateToast();
 
         mToast.setGravity(Gravity.CENTER, 0, 0);
         mToast.setDuration(mDuration);
-        mToast.show();
+        if (needInvodeShow){
+            mToast.show();
+        }
     }
 
     private final int getIcon(int infoType) {
@@ -190,14 +195,4 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
         showHelper(msg,TYPE_INFO_WAITING,Toast.LENGTH_LONG);
     }
 
-    public void cancel() {
-        mToast.cancel();
-        rebuildToast();
-    }
-
-    @Override
-    public void destroy() {
-        super.destroy();
-        mIconView = null;
-    }
 }

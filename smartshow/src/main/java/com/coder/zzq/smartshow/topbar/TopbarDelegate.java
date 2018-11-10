@@ -171,7 +171,4 @@ public final class TopbarDelegate extends BarDelegate<TopBar, TopBar.TopbarLayou
         return Config.getTopbarSetting();
     }
 
-    public static void destroyDelegate() {
-        sDelegate = null;
-    }
 }

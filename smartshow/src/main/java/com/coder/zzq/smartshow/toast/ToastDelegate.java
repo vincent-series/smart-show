@@ -120,7 +120,7 @@ public final class ToastDelegate {
 
     protected void dismissTypeShowIfNeed() {
         if (mTypeToastManager != null) {
-            mTypeToastManager.cancel();
+            mTypeToastManager.dismiss();
         }
     }
 
@@ -166,7 +166,7 @@ public final class ToastDelegate {
 
     public void dismissPlainShowIfNeed() {
         if (mPlainToastManager != null) {
-            mPlainToastManager.cancel();
+            mPlainToastManager.dismiss();
         }
     }
 
@@ -190,23 +190,5 @@ public final class ToastDelegate {
 
     public static boolean hasCreated() {
         return sSmartToastDelegate != null;
-    }
-
-
-    public static void destroyDelegate() {
-
-        if (hasCreated()) {
-            if (sSmartToastDelegate.mPlainToastManager != null) {
-                sSmartToastDelegate.mPlainToastManager.destroy();
-                sSmartToastDelegate.mPlainToastManager = null;
-            }
-
-            if (sSmartToastDelegate.mTypeToastManager != null) {
-                sSmartToastDelegate.mTypeToastManager.destroy();
-                sSmartToastDelegate.mTypeToastManager = null;
-            }
-
-            sSmartToastDelegate = null;
-        }
     }
 }

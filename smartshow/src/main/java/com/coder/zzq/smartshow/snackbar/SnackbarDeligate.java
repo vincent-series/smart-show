@@ -160,8 +160,4 @@ public class SnackbarDeligate extends BarDelegate<Snackbar, Snackbar.SnackbarLay
 
         mBar.addCallback(mCallback);
     }
-
-    public static void destroyDelegate() {
-        sDeligate = null;
-    }
 }
