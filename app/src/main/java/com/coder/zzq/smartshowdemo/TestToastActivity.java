@@ -41,6 +41,6 @@ public class TestToastActivity extends AppCompatActivity {
     }
 
     public void onShowAnotherClick(View view) {
-        SmartToast.show("");
+        SmartToast.show("芒果");
     }
 }
