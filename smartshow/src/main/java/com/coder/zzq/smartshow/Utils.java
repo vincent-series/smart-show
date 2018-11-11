@@ -1,9 +1,14 @@
 package com.coder.zzq.smartshow;
 
+import android.content.res.Resources;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.util.TypedValue;
+import android.widget.Toast;
+
+import com.coder.zzq.smartshow.toast.SmartToast;
 
 public class Utils {
 
@@ -33,4 +38,30 @@ public class Utils {
     public static int screenWidth() {
         return SmartShow.getContext().getResources().getDisplayMetrics().widthPixels;
     }
+
+
+    public static int getStatusBarHeight() {
+        int resourceId = SmartShow.getContext().getResources().getIdentifier("status_bar_height", "dimen", "android");
+        int height = 0;
+        try {
+            height = SmartShow.getContext().getResources().getDimensionPixelSize(resourceId);
+        } catch (Resources.NotFoundException e) {
+            height = Utils.dpToPx(24);
+        }
+
+        return height;
+    }
+
+    public static int getToolbarHeight(){
+        int resourceId = SmartShow.getContext().getResources().getIdentifier("abc_action_bar_default_height_material", "dimen", "android");
+        int height = 0;
+        try {
+            height = SmartShow.getContext().getResources().getDimensionPixelSize(resourceId);
+        } catch (Resources.NotFoundException e) {
+            height = Utils.dpToPx(56);
+        }
+
+        return height;
+    }
+
 }

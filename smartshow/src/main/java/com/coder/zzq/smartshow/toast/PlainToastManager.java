@@ -3,6 +3,7 @@ package com.coder.zzq.smartshow.toast;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.RestrictTo;
+import android.support.annotation.UiThread;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -17,7 +18,8 @@ public class PlainToastManager extends BaseToastManager implements IPlainShow {
 
     private int mXOffset;
     private int mYOffset;
-    private int mVerticalAxisOffset;
+    private int mVerticalAxisOffsetWhenBottom;
+    private int mVerticalAxisOffsetWhenTop;
     private int mGravity;
 
     public PlainToastManager() {
@@ -54,7 +56,8 @@ public class PlainToastManager extends BaseToastManager implements IPlainShow {
     private void setupInitialPosInfo() {
         mGravity = mToast.getGravity();
         mXOffset = mToast.getXOffset();
-        mVerticalAxisOffset = mYOffset = mToast.getYOffset();
+        mVerticalAxisOffsetWhenBottom = mYOffset = mToast.getYOffset();
+        mVerticalAxisOffsetWhenTop = Utils.getToolbarHeight() + Utils.dpToPx(40);
     }
 
     @Override
@@ -97,12 +100,12 @@ public class PlainToastManager extends BaseToastManager implements IPlainShow {
 
     @Override
     public void show(CharSequence msg) {
-        showHelper(msg, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, mVerticalAxisOffset, Toast.LENGTH_SHORT);
+        showHelper(msg, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, mVerticalAxisOffsetWhenBottom, Toast.LENGTH_SHORT);
     }
 
     @Override
     public void showAtTop(CharSequence msg) {
-        showHelper(msg, Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, mVerticalAxisOffset, Toast.LENGTH_SHORT);
+        showHelper(msg, Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, mVerticalAxisOffsetWhenTop, Toast.LENGTH_SHORT);
     }
 
     @Override
@@ -119,12 +122,12 @@ public class PlainToastManager extends BaseToastManager implements IPlainShow {
 
     @Override
     public void showLong(CharSequence msg) {
-        showHelper(msg, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, mVerticalAxisOffset, Toast.LENGTH_LONG);
+        showHelper(msg, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, mVerticalAxisOffsetWhenBottom, Toast.LENGTH_LONG);
     }
 
     @Override
     public void showLongAtTop(CharSequence msg) {
-        showHelper(msg, Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, mVerticalAxisOffset, Toast.LENGTH_LONG);
+        showHelper(msg, Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, mVerticalAxisOffsetWhenTop, Toast.LENGTH_LONG);
     }
 
     @Override

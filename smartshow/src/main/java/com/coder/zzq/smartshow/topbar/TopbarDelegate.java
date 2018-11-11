@@ -12,6 +12,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.coder.zzq.smartshow.R;
+import com.coder.zzq.smartshow.Utils;
 import com.coder.zzq.smartshow.basebar.BarDelegate;
 import com.coder.zzq.smartshow.basebar.IBarShow;
 import com.coder.zzq.smartshow.basebar.IBarShowCallback;
@@ -62,9 +63,14 @@ public final class TopbarDelegate extends BarDelegate<TopBar, TopBar.TopbarLayou
     @Override
     protected TopBar createBar(View view) {
         TopBar topBar = TopBar.make(view, "", BaseTopBar.LENGTH_SHORT);
+        ViewGroup.LayoutParams barViewLp = topBar.getView().getLayoutParams();
+        barViewLp.height = Utils.getStatusBarHeight() + Utils.getToolbarHeight();
+        topBar.getView().setLayoutParams(barViewLp);
+        
         View v = ((ViewGroup) topBar.getView()).getChildAt(0);
         FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) v.getLayoutParams();
         lp.gravity = Gravity.BOTTOM;
+        v.setLayoutParams(lp);
         return topBar;
     }
 

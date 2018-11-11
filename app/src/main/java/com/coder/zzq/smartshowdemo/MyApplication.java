@@ -36,7 +36,7 @@ public class MyApplication extends Application {
                 .dismissOnLeave(true);
 
         SmartTopbar.setting()
-                .backgroundColorRes(R.color.colorPrimary)
+//                .backgroundColorRes(R.color.colorPrimary)
                 .msgTextColorRes(R.color.white)
                 .actionColorRes(R.color.colorAccent)
                 .dismissOnLeave(true);
