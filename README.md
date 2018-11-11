@@ -21,8 +21,9 @@
 ## 代码实现
 [回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)<br/><br/>
 如果你对实现感兴趣，请参考我的CSDN博客：
-* 2.x 版本 
-* 1.x 版本 http://blog.csdn.net/jungle_pig/article/details/78568493<br/>已授权《第一行代码》作者郭霖的微信公众号同步发表：http://mp.weixin.qq.com/s/l62PtbmrIOkVKfJ2r0JwEw
+* 2.x 版本 https://blog.csdn.net/jungle_pig/article/details/83959662
+* 1.x 版本 http://blog.csdn.net/jungle_pig/article/details/78568493<br/>
+已授权郭霖微信公众号同步发表：http://mp.weixin.qq.com/s/l62PtbmrIOkVKfJ2r0JwEw
 ## 关于作者
 [回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)<br/><br/>
 为使SmartShow库更加健壮，如果您在使用过程中发现任何问题，请联系我，我会立即跟进修复和维护。感谢您的支持！<br/><br/>
