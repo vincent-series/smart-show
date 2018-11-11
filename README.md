@@ -16,9 +16,8 @@
 
 四大模块的详细功能可查看下面各模块的介绍
 ### 效果展示
-![图片加载失败](images/type_toast_all.gif)&nbsp;&nbsp;&nbsp;&nbsp;![图片加载失败](images/topbar_normal.gif)<br/>
-![图片加载失败](images/toast_all.gif)![图片加载失败](images/dialog.gif)<br/> 
-![图片加载失败](images/snackbar_color.gif)
+![图片加载失败](images/type_toast_all.gif)&nbsp;&nbsp;&nbsp;&nbsp;![图片加载失败](images/bar_all.gif)<br/>
+![图片加载失败](images/toast_all.gif)&nbsp;&nbsp;&nbsp;&nbsp;![图片加载失败](images/dialog.gif)<br/> 
 ## 代码实现
 [回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)<br/><br/>
 如果你对实现感兴趣，请参考我的CSDN博客：
