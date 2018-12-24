@@ -58,7 +58,7 @@ public class LoadingDialogBuilder implements ILoadingDialogBuilder {
         mContentView = LayoutInflater.from(SmartShow.getContext()).inflate(mLayoutRes, null);
         TextView msgView = mContentView.findViewById(R.id.loading_message);
         mMsgView = msgView;
-        if (mMsgView != null){
+        if (mMsgView != null) {
             mMsgView.setText(mMsg);
         }
         mProgressBar = mContentView.findViewById(R.id.progress_bar);

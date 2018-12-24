@@ -3,7 +3,6 @@ package com.coder.zzq.smartshow.toast;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.RestrictTo;
-import android.support.annotation.UiThread;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.TypedValue;
 import android.view.Gravity;

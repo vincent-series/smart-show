@@ -3,6 +3,7 @@ package com.coder.zzq.smartshow.lifecycle;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
+
 /**
  * Created by 朱志强 on 2018/08/19.
  */
@@ -10,7 +11,7 @@ public class ActivityLifecycleCallback implements Application.ActivityLifecycleC
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-        
+
     }
 
     @Override

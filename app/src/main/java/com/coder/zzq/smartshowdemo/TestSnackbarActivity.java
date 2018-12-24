@@ -34,6 +34,7 @@ public class TestSnackbarActivity extends AppCompatActivity  implements ISnackba
                         Toast.makeText(TestSnackbarActivity.this, "Thank you", Toast.LENGTH_SHORT).show();
                     }
                 });
+
     }
 
     public void onLongClick(View view) {

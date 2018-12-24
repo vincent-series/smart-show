@@ -9,9 +9,8 @@ import android.widget.TextView;
 
 public interface IProcessToastCallback {
     /**
-     *
      * @param rootView 根View
      * @param msgView  文本View
      */
-    void processView(View rootView,TextView msgView);
+    void processView(View rootView, TextView msgView);
 }

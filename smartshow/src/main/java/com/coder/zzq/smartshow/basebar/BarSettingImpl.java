@@ -7,7 +7,7 @@ import com.coder.zzq.smartshow.R;
 import com.coder.zzq.smartshow.Utils;
 
 
-public class BarSettingImpl<View,BarSetting> implements IBarSetting<View,BarSetting> {
+public class BarSettingImpl<View, BarSetting> implements IBarSetting<View, BarSetting> {
     @ColorInt
     private int mBgColor;
     @ColorInt
@@ -45,7 +45,6 @@ public class BarSettingImpl<View,BarSetting> implements IBarSetting<View,BarSett
     }
 
 
-
     @ColorInt
     public int getBackgroundColor() {
         return mBgColor;
@@ -63,7 +62,6 @@ public class BarSettingImpl<View,BarSetting> implements IBarSetting<View,BarSett
     }
 
 
-
     @ColorInt
     public int getMsgColor() {
         return mMsgColor;
@@ -77,8 +75,7 @@ public class BarSettingImpl<View,BarSetting> implements IBarSetting<View,BarSett
     }
 
 
-
-    public float getMsgTextSizeSp(){
+    public float getMsgTextSizeSp() {
         return mMsgTextSizeSp;
     }
 
@@ -96,8 +93,8 @@ public class BarSettingImpl<View,BarSetting> implements IBarSetting<View,BarSett
 
 
     @ColorInt
-    public int getActionColor(){
-       return mActionColor;
+    public int getActionColor() {
+        return mActionColor;
     }
 
     @Override
@@ -107,7 +104,7 @@ public class BarSettingImpl<View,BarSetting> implements IBarSetting<View,BarSett
     }
 
 
-    public float getActionSizeSp(){
+    public float getActionSizeSp() {
         return mActionSizeSp;
     }
 
@@ -118,8 +115,8 @@ public class BarSettingImpl<View,BarSetting> implements IBarSetting<View,BarSett
         return (BarSetting) this;
     }
 
-    public CharSequence getDefaultActionTextForIndefinite(){
-       return mDefaultActionTextForIndefinite;
+    public CharSequence getDefaultActionTextForIndefinite() {
+        return mDefaultActionTextForIndefinite;
     }
 
     @Override
@@ -128,7 +125,7 @@ public class BarSettingImpl<View,BarSetting> implements IBarSetting<View,BarSett
         return (BarSetting) this;
     }
 
-    public boolean isDismissOnLeave(){
+    public boolean isDismissOnLeave() {
         return mDismissOnLeave;
     }
 

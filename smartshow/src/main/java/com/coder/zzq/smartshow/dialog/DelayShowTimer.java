@@ -45,7 +45,7 @@ public class DelayShowTimer extends CountDownTimer {
     }
 
 
-    public void cancelTask(){
+    public void cancelTask() {
         super.cancel();
         mBtn = null;
     }

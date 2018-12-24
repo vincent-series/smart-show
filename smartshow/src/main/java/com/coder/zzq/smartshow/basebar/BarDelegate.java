@@ -222,7 +222,7 @@ public abstract class BarDelegate<Bar, ViewParam, BarSetting extends BarSettingI
     public abstract BarSetting getBarSetting();
 
     public void onLeave(Activity activity) {
-        if (mPageContext == activity){
+        if (mPageContext == activity) {
             dismiss();
         }
     }

@@ -63,6 +63,7 @@ public class TopBarManager {
 
     interface Callback {
         void show();
+
         void dismiss(int event);
     }
 

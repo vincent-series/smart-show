@@ -4,11 +4,7 @@ import android.content.res.Resources;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.util.TypedValue;
-import android.widget.Toast;
-
-import com.coder.zzq.smartshow.toast.SmartToast;
 
 public class Utils {
 
@@ -52,7 +48,7 @@ public class Utils {
         return height;
     }
 
-    public static int getToolbarHeight(){
+    public static int getToolbarHeight() {
         int resourceId = SmartShow.getContext().getResources().getIdentifier("abc_action_bar_default_height_material", "dimen", "android");
         int height = 0;
         try {

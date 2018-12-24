@@ -87,7 +87,7 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
 
         mToast.setGravity(Gravity.CENTER, 0, 0);
         mToast.setDuration(mDuration);
-        if (needInvodeShow){
+        if (needInvodeShow) {
             mToast.show();
         }
     }
@@ -167,32 +167,32 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
 
     @Override
     public void complete(CharSequence msg) {
-        showHelper(msg,TYPE_INFO_COMPLETE,Toast.LENGTH_SHORT);
+        showHelper(msg, TYPE_INFO_COMPLETE, Toast.LENGTH_SHORT);
     }
 
     @Override
     public void completeLong(CharSequence msg) {
-        showHelper(msg,TYPE_INFO_COMPLETE,Toast.LENGTH_LONG);
+        showHelper(msg, TYPE_INFO_COMPLETE, Toast.LENGTH_LONG);
     }
 
     @Override
     public void forbid(CharSequence msg) {
-        showHelper(msg,TYPE_INFO_FORBID,Toast.LENGTH_SHORT);
+        showHelper(msg, TYPE_INFO_FORBID, Toast.LENGTH_SHORT);
     }
 
     @Override
     public void forbidLong(CharSequence msg) {
-        showHelper(msg,TYPE_INFO_FORBID,Toast.LENGTH_LONG);
+        showHelper(msg, TYPE_INFO_FORBID, Toast.LENGTH_LONG);
     }
 
     @Override
     public void waiting(CharSequence msg) {
-        showHelper(msg,TYPE_INFO_WAITING,Toast.LENGTH_SHORT);
+        showHelper(msg, TYPE_INFO_WAITING, Toast.LENGTH_SHORT);
     }
 
     @Override
     public void waitingLong(CharSequence msg) {
-        showHelper(msg,TYPE_INFO_WAITING,Toast.LENGTH_LONG);
+        showHelper(msg, TYPE_INFO_WAITING, Toast.LENGTH_LONG);
     }
 
 }

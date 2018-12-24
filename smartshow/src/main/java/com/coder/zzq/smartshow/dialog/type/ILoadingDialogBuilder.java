@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 
 public interface ILoadingDialogBuilder {
-    
+
     ILoadingDialogBuilder msg(CharSequence msg);
 
     ILoadingDialogBuilder large();

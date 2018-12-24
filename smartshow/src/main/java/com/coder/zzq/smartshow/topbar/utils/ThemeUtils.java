@@ -25,7 +25,7 @@ public class ThemeUtils {
             android.support.v7.appcompat.R.attr.colorPrimary
     };
 
-   public static void checkAppCompatTheme(Context context) {
+    public static void checkAppCompatTheme(Context context) {
         TypedArray a = context.obtainStyledAttributes(APPCOMPAT_CHECK_ATTRS);
         final boolean failed = !a.hasValue(0);
         a.recycle();

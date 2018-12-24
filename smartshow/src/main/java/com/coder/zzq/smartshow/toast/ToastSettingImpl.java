@@ -81,7 +81,7 @@ public class ToastSettingImpl implements IToastSetting {
         return this;
     }
 
-    public boolean isDismissOnleave(){
+    public boolean isDismissOnleave() {
         return mDismissOnleave;
     }
 
@@ -99,7 +99,7 @@ public class ToastSettingImpl implements IToastSetting {
 
     @Override
     public IToastSetting typeInfoToastThemeColorRes(int colorRes) {
-        return typeInfoToastThemeColor(ContextCompat.getColor(SmartShow.getContext(),colorRes));
+        return typeInfoToastThemeColor(ContextCompat.getColor(SmartShow.getContext(), colorRes));
     }
 
 
@@ -111,7 +111,7 @@ public class ToastSettingImpl implements IToastSetting {
         return mBgColor;
     }
 
-    public boolean isBgColorSetup(){
+    public boolean isBgColorSetup() {
         return mBgColor != -1;
     }
 
@@ -139,7 +139,7 @@ public class ToastSettingImpl implements IToastSetting {
         return mIProcessToastCallback;
     }
 
-    public boolean isCustom(){
+    public boolean isCustom() {
         return mCustomView != null;
     }
 

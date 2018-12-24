@@ -44,7 +44,7 @@ public class EnsureDelayDialogBuilder extends MessageDialogBuilder<IEnsureDelayD
                 if (mCountDownTimer != null) {
                     mCountDownTimer.cancelTask();
                 }
-                mCountDownTimer = new DelayShowTimer(mDelaySeconds * 1000,1000);
+                mCountDownTimer = new DelayShowTimer(mDelaySeconds * 1000, 1000);
                 mCountDownTimer.setBtn(mPositiveBtn);
 
 

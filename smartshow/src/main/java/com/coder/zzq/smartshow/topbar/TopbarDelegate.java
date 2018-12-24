@@ -12,6 +12,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.coder.zzq.smartshow.R;
+import com.coder.zzq.smartshow.SmartShow;
 import com.coder.zzq.smartshow.Utils;
 import com.coder.zzq.smartshow.basebar.BarDelegate;
 import com.coder.zzq.smartshow.basebar.IBarShow;
@@ -33,6 +34,7 @@ public final class TopbarDelegate extends BarDelegate<TopBar, TopBar.TopbarLayou
     public static TopbarDelegate get() {
         if (sDelegate == null) {
             sDelegate = new TopbarDelegate();
+            SmartShow.setTopbarCallback(new TopbarCallback());
         }
         return sDelegate;
     }
@@ -66,7 +68,7 @@ public final class TopbarDelegate extends BarDelegate<TopBar, TopBar.TopbarLayou
         ViewGroup.LayoutParams barViewLp = topBar.getView().getLayoutParams();
         barViewLp.height = Utils.getStatusBarHeight() + Utils.getToolbarHeight();
         topBar.getView().setLayoutParams(barViewLp);
-        
+
         View v = ((ViewGroup) topBar.getView()).getChildAt(0);
         FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) v.getLayoutParams();
         lp.gravity = Gravity.BOTTOM;

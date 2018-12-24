@@ -8,7 +8,7 @@ public class TopbarSettingImpl extends BarSettingImpl<TopBar.TopbarLayout, ITopb
 
     private boolean mLightBackground;
 
-    public TopbarSettingImpl(){
+    public TopbarSettingImpl() {
         super();
     }
 
@@ -18,7 +18,7 @@ public class TopbarSettingImpl extends BarSettingImpl<TopBar.TopbarLayout, ITopb
         return this;
     }
 
-    public boolean isLightBackground(){
+    public boolean isLightBackground() {
         return mLightBackground;
     }
 }

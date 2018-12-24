@@ -4,6 +4,6 @@ import android.support.design.widget.Snackbar;
 
 import com.coder.zzq.smartshow.basebar.IBarSetting;
 
-public interface ISnackbarSetting extends IBarSetting<Snackbar.SnackbarLayout, ISnackbarSetting>{
+public interface ISnackbarSetting extends IBarSetting<Snackbar.SnackbarLayout, ISnackbarSetting> {
 
 }

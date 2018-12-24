@@ -19,7 +19,7 @@ public final class ToastDelegate {
     }
 
     public ToastSettingImpl createToastSetting() {
-        if (mToastSetting == null){
+        if (mToastSetting == null) {
             mToastSetting = new ToastSettingImpl();
         }
         return mToastSetting;
@@ -181,6 +181,7 @@ public final class ToastDelegate {
         SmartShow.getContext();
         if (sSmartToastDelegate == null) {
             sSmartToastDelegate = new ToastDelegate();
+            SmartShow.setToastCallback(new ToastCallback());
         }
 
         return sSmartToastDelegate;

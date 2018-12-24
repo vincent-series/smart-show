@@ -1,4 +1,3 @@
-
 package com.coder.zzq.smartshow.topbar.view;
 
 import android.content.Context;

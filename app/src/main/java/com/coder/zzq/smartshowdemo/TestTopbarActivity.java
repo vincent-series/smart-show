@@ -31,6 +31,7 @@ public class TestTopbarActivity extends AppCompatActivity {
                 SmartToast.showInCenter("Thank you");
             }
         });
+
     }
 
     public void onNextPageClick(View view) {
