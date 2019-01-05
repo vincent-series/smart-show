@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.coder.zzq.smartshow.dialog.SmartDialog;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override

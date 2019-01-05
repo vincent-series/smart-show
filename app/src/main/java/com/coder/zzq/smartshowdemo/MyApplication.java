@@ -1,14 +1,9 @@
 package com.coder.zzq.smartshowdemo;
 
 import android.app.Application;
-import android.graphics.Color;
-import android.graphics.drawable.NinePatchDrawable;
-import android.view.View;
-import android.widget.TextView;
 
-import com.coder.zzq.smartshow.SmartShow;
+import com.coder.zzq.smartshow.core.SmartShow;
 import com.coder.zzq.smartshow.snackbar.SmartSnackbar;
-import com.coder.zzq.smartshow.toast.IProcessToastCallback;
 import com.coder.zzq.smartshow.toast.SmartToast;
 import com.coder.zzq.smartshow.topbar.SmartTopbar;
 
@@ -29,17 +24,18 @@ public class MyApplication extends Application {
                 .backgroundColorRes(R.color.colorPrimary)
                 .dismissOnLeave(false);
 
-        SmartSnackbar.setting()
-                .backgroundColorRes(R.color.colorPrimary)
-                .msgTextColorRes(R.color.white)
-                .actionColorRes(R.color.colorAccent)
-                .dismissOnLeave(true);
-
-        SmartTopbar.setting()
-                .backgroundColorRes(R.color.colorPrimary)
-                .msgTextColorRes(R.color.white)
-                .actionColorRes(R.color.colorAccent)
-                .dismissOnLeave(true);
+//        SmartSnackbar.setting()
+//
+//                .backgroundColorRes(R.color.colorPrimary)
+//                .msgTextColorRes(R.color.white)
+//                .actionColorRes(R.color.colorAccent)
+//                .dismissOnLeave(true);
+//
+//        SmartTopbar.setting()
+//                .backgroundColorRes(R.color.colorPrimary)
+//                .msgTextColorRes(R.color.white)
+//                .actionColorRes(R.color.colorAccent)
+//                .dismissOnLeave(true);
 
     }
 }

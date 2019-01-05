@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.coder.zzq.smartshow.toast.SmartToast;
 
+
 public class TestToastActivity extends AppCompatActivity {
 
     @Override

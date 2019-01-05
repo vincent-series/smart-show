@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">smart-topbar</string>
+    <item name="smart_show_top_bar_container" type="id"/>
+</resources>
