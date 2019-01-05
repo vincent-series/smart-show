@@ -82,8 +82,7 @@ public class SnackbarDeligate extends BarDelegate<Snackbar, Snackbar.SnackbarLay
 
     @Override
     protected Button getActionView() {
-        int id = SmartShow.getContext().getResources().getIdentifier("snackbar_action", "id", "android.support.design");
-        return mBar.getView().findViewById(id);
+        return mBar.getView().findViewById(android.support.design.R.id.snackbar_action);
     }
 
     @Override

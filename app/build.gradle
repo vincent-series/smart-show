@@ -24,9 +24,9 @@ dependencies {
     implementation 'com.android.support:design:28.0.0'
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation project(':core')
-    implementation project(':smart-toast')
+    implementation project(':bar-core')
     implementation project(':smart-dialog')
     implementation project(':smart-snackbar')
+    implementation project(':smart-toast')
     implementation project(':smart-topbar')
-    implementation project(':bar-core')
 }
