@@ -1,8 +1,14 @@
 package com.coder.zzq.smartshow.dialog;
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.os.Build;
 import android.support.annotation.StringRes;
+import android.view.WindowManager;
 
+import com.coder.zzq.smartshow.core.EasyLogger;
 import com.coder.zzq.smartshow.core.SmartShow;
+import com.coder.zzq.smartshow.core.lifecycle.ActivityStack;
 import com.coder.zzq.smartshow.dialog.type.IEnsureDelayDialogBuilder;
 import com.coder.zzq.smartshow.dialog.type.IEnsureDialogBuilder;
 import com.coder.zzq.smartshow.dialog.type.IInputTextDialogBuilder;
@@ -51,6 +57,29 @@ public class SmartDialog {
     public static ILoadingDialogBuilder loading(CharSequence msg) {
         return new LoadingDialogBuilder()
                 .msg(msg);
+    }
+
+
+    public static void show(Activity activity, DialogCreator dialogCreator, int bizTag) {
+        if (activity == null || dialogCreator == null
+                || activity.isFinishing() || isActivityDestroyed(activity)) {
+            return;
+        }
+        Dialog dialog = dialogCreator.createDialog(bizTag);
+
+        if (dialog != null) {
+            try {
+                dialog.show();
+            } catch (WindowManager.BadTokenException e) {
+                EasyLogger.e("BadTokenException has happened !" + e.toString());
+            }
+        }
+
+    }
+
+    private static boolean isActivityDestroyed(Activity activity) {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 ?
+                activity.isDestroyed() : !ActivityStack.isInStack(activity);
     }
 
 }

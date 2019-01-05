@@ -2,8 +2,10 @@ package com.coder.zzq.smartshow.core;
 
 import android.app.Activity;
 import android.app.Application;
+import android.os.Bundle;
 
 import com.coder.zzq.smartshow.core.lifecycle.ActivityLifecycleCallback;
+import com.coder.zzq.smartshow.core.lifecycle.ActivityStack;
 import com.coder.zzq.smartshow.core.lifecycle.IBarCallback;
 import com.coder.zzq.smartshow.core.lifecycle.IToastCallback;
 
@@ -23,6 +25,11 @@ public final class SmartShow {
         }
         sApplication = application;
         sApplication.registerActivityLifecycleCallbacks(new ActivityLifecycleCallback() {
+            @Override
+            public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+                super.onActivityCreated(activity, savedInstanceState);
+                ActivityStack.push(activity);
+            }
 
             @Override
             public void onActivityPaused(Activity activity) {
@@ -36,6 +43,7 @@ public final class SmartShow {
             @Override
             public void onActivityStopped(Activity activity) {
                 super.onActivityStopped(activity);
+                ActivityStack.pop(activity);
                 if (sSnackbarCallback != null) {
                     sSnackbarCallback.dismissOnLeave(activity);
                 }
