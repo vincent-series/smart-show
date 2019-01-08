@@ -5,6 +5,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+
     <style name="smart_show_loading_dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowFrame">@null</item>
@@ -19,7 +20,6 @@
 
     <style name="smart_show_normal_dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
-        <!--<item name="android:windowFrame">@null</item>-->
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowIsTranslucent">true</item>

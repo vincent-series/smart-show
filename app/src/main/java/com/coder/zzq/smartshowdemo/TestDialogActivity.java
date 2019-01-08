@@ -1,5 +1,6 @@
 package com.coder.zzq.smartshowdemo;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -10,10 +11,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.coder.zzq.smartshow.dialog.DialogBtnClickListener;
+import com.coder.zzq.smartshow.dialog.DialogCallback;
+import com.coder.zzq.smartshow.dialog.DialogCreator;
 import com.coder.zzq.smartshow.dialog.SmartDialog;
 import com.coder.zzq.smartshow.toast.SmartToast;
 
-public class TestDialogActivity extends AppCompatActivity {
+public class TestDialogActivity extends AppCompatActivity implements DialogCreator {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,5 +68,20 @@ public class TestDialogActivity extends AppCompatActivity {
 
     public void onLoadingSmallClick(View view) {
         SmartDialog.loading("加载中").small().create(this).show();
+    }
+
+    public static final int LOADING = 0;
+    @Override
+    public Dialog createDialog(int bizTag) {
+        switch (bizTag){
+            case LOADING:
+                return SmartDialog.loading("加载中").small().create(this);
+        }
+        return null;
+    }
+
+    @Override
+    public Dialog resetDialog(int bizTag) {
+        return null;
     }
 }

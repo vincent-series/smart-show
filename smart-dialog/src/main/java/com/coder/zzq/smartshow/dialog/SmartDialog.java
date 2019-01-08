@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import com.coder.zzq.smartshow.core.EasyLogger;
 import com.coder.zzq.smartshow.core.SmartShow;
 import com.coder.zzq.smartshow.core.lifecycle.ActivityStack;
+import com.coder.zzq.smartshow.dialog.cache.DialogReuseContainer;
 import com.coder.zzq.smartshow.dialog.type.IEnsureDelayDialogBuilder;
 import com.coder.zzq.smartshow.dialog.type.IEnsureDialogBuilder;
 import com.coder.zzq.smartshow.dialog.type.IInputTextDialogBuilder;
@@ -21,6 +22,9 @@ import com.coder.zzq.smartshow.dialog.type.impl.LoadingDialogBuilder;
 import com.coder.zzq.smartshow.dialog.type.impl.NotificationDialogBuilder;
 
 public class SmartDialog {
+    static {
+        SmartShow.setDialogCallback(new DialogCallback());
+    }
 
     public static INotificationDialogBuilder notification(CharSequence msg) {
         return new NotificationDialogBuilder()
@@ -65,7 +69,9 @@ public class SmartDialog {
                 || activity.isFinishing() || isActivityDestroyed(activity)) {
             return;
         }
-        Dialog dialog = dialogCreator.createDialog(bizTag);
+
+        Dialog dialog = DialogReuseContainer.retrieveCachedDialog(activity, bizTag);
+        dialog = dialog != null ? dialog : dialogCreator.createDialog(bizTag);
 
         if (dialog != null) {
             try {

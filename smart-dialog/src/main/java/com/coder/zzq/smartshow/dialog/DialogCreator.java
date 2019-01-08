@@ -2,6 +2,7 @@ package com.coder.zzq.smartshow.dialog;
 
 import android.app.Dialog;
 
-interface DialogCreator {
+public interface DialogCreator {
     Dialog createDialog(int bizTag);
+    Dialog resetDialog(int bizTag);
 }

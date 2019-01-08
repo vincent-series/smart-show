@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.coder.zzq.smartshow.core.lifecycle.ActivityLifecycleCallback;
 import com.coder.zzq.smartshow.core.lifecycle.ActivityStack;
 import com.coder.zzq.smartshow.core.lifecycle.IBarCallback;
+import com.coder.zzq.smartshow.core.lifecycle.IDialogCallback;
 import com.coder.zzq.smartshow.core.lifecycle.IToastCallback;
 
 /**
@@ -18,6 +19,7 @@ public final class SmartShow {
     private static IToastCallback sToastCallback;
     private static IBarCallback sSnackbarCallback;
     private static IBarCallback sTopbarCallback;
+    private static IDialogCallback sDialogCallback;
 
     public static void init(Application application) {
         if (application == null) {
@@ -43,7 +45,6 @@ public final class SmartShow {
             @Override
             public void onActivityStopped(Activity activity) {
                 super.onActivityStopped(activity);
-                ActivityStack.pop(activity);
                 if (sSnackbarCallback != null) {
                     sSnackbarCallback.dismissOnLeave(activity);
                 }
@@ -55,11 +56,15 @@ public final class SmartShow {
             @Override
             public void onActivityDestroyed(Activity activity) {
                 super.onActivityDestroyed(activity);
+                ActivityStack.pop(activity);
                 if (sSnackbarCallback != null) {
                     sSnackbarCallback.recycleOnDestroy(activity);
                 }
                 if (sTopbarCallback != null) {
                     sTopbarCallback.recycleOnDestroy(activity);
+                }
+                if (sDialogCallback != null){
+                    sDialogCallback.recycleOnDestroy(activity);
                 }
             }
 
@@ -84,6 +89,10 @@ public final class SmartShow {
 
     public static void setTopbarCallback(IBarCallback topbarCallback) {
         sTopbarCallback = topbarCallback;
+    }
+
+    public static void setDialogCallback(IDialogCallback dialogCallback){
+        sDialogCallback = dialogCallback;
     }
 
 }
