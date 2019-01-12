@@ -144,9 +144,13 @@ public abstract class NormalDialogBuilder<B> extends DialogCreator implements IN
         return SmartDialog.show(activity, this, tag);
     }
 
+    protected void initPartView(View contentPartView) {
+
+    }
 
     @Override
     public Dialog createDialog(Activity activity) {
+        initPartView(mContentPartView);
         if (mDialogContentCallback != null) {
             mDialogContentCallback.processContentView(mContentWrapperView
                     , mContentPartView);

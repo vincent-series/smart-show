@@ -1,12 +1,18 @@
 package com.coder.zzq.smartshow.core;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.res.Resources;
 import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.v4.content.ContextCompat;
 import android.util.TypedValue;
+import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.LinearLayout;
 
 import com.coder.zzq.smartshow.core.lifecycle.ActivityStack;
 
@@ -70,8 +76,18 @@ public class Utils {
                 activity.isDestroyed() : !ActivityStack.isInStack(activity);
     }
 
-    public static void popKeyboard() {
-
+    public static void popKeyboardWhenDialogShow(Dialog dialog) {
+        if (dialog != null) {
+            dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
     }
 
+    public static void hideKeyboard(View view) {
+        if (view != null){
+            InputMethodManager imm = (InputMethodManager) SmartShow.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+        }
+    }
 }

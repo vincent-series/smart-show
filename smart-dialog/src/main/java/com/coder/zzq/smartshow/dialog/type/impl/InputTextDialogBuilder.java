@@ -1,6 +1,7 @@
 package com.coder.zzq.smartshow.dialog.type.impl;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.graphics.Color;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.coder.zzq.smartshow.core.Utils;
 import com.coder.zzq.smartshow.dialog.InputCheckListener;
 import com.coder.zzq.smartshow.dialog.R;
 import com.coder.zzq.smartshow.dialog.type.IInputTextDialogBuilder;
@@ -76,7 +78,11 @@ public class InputTextDialogBuilder extends NormalDialogBuilder<IInputTextDialog
     @Override
     public boolean createAndShow(Activity activity, int tag) {
         boolean showSucc = super.createAndShow(activity, tag);
+        if (showSucc) {
+            Utils.popKeyboardWhenDialogShow(mDialog);
+        }
 
+        return showSucc;
     }
 
     @Override
@@ -85,6 +91,7 @@ public class InputTextDialogBuilder extends NormalDialogBuilder<IInputTextDialog
                 && !mInputCheckListener.check(mInputEdt.getText().toString())) {
             return;
         }
+        Utils.hideKeyboard(mDialogRootView);
         mDialog.dismiss();
         if (mOnConfirmBtnClickListener != null && v.getId() == R.id.dialog_positive_btn) {
             mOnConfirmBtnClickListener.onBtnClick((TextView) v, mInputEdt.getText().toString());
@@ -97,4 +104,10 @@ public class InputTextDialogBuilder extends NormalDialogBuilder<IInputTextDialog
 
     }
 
+
+    @Override
+    public void resetDialog(Dialog dialog) {
+        EditText editText = dialog.getWindow().getDecorView().findViewById(R.id.input_edt);
+        editText.setText("");
+    }
 }

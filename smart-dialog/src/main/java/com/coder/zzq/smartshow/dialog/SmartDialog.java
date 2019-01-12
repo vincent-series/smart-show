@@ -46,8 +46,10 @@ public class SmartDialog {
         if (dialog == null) {
             dialog = dialogCreator.createDialog(activity);
             DialogCacheContainer.cache(dialog, activity, tag);
+            EasyLogger.d("create and cache dialog ->" + dialog.hashCode());
         } else {
             dialogCreator.resetDialog(dialog);
+            EasyLogger.d("reset dialog ->" + dialog.hashCode());
         }
 
         if (dialog != null) {

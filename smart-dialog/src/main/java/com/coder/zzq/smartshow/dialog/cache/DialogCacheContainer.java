@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.util.SparseArray;
 
+import com.coder.zzq.smartshow.core.EasyLogger;
+
 public final class DialogCacheContainer {
     private static SparseArray<SparseArray<Dialog>> sCacheContainer;
 
@@ -29,6 +31,8 @@ public final class DialogCacheContainer {
                 getCacheContainer().get(activity.hashCode()).clear();
                 getCacheContainer().remove(activity.hashCode());
             }
+            EasyLogger.d("cache container size ->" + getCacheContainer().size()
+            + "     activity cache group " + getCacheContainer().get(activity.hashCode()));
         }
     }
 
