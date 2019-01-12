@@ -2,17 +2,22 @@ package com.coder.zzq.smartshow.dialog;
 
 import android.graphics.Color;
 import android.os.CountDownTimer;
+import android.support.annotation.ColorInt;
 import android.widget.TextView;
 
 import com.coder.zzq.smartshow.core.Utils;
 
 public class DelayShowTimer extends CountDownTimer {
     private TextView mBtn;
-    private StringBuilder mPositiveLabel;
+    private CharSequence mFinalLable;
+    @ColorInt 
+    private int mFinalColor;
+    private StringBuilder mDelayLabel;
 
     public DelayShowTimer(long millisInFuture, long countDownInterval) {
         super(millisInFuture, countDownInterval);
-        mPositiveLabel = new StringBuilder();
+        mDelayLabel = new StringBuilder();
+
     }
 
     public void setBtn(TextView btn) {
@@ -21,15 +26,23 @@ public class DelayShowTimer extends CountDownTimer {
         mBtn.setEnabled(false);
     }
 
+    public void setFinalColor(int finalColor) {
+        mFinalColor = finalColor;
+    }
+
+    public void setFinalLable(CharSequence finalLable) {
+        mFinalLable = finalLable;
+    }
+
     @Override
     public void onTick(long millisUntilFinished) {
         if (mBtn != null) {
-            mPositiveLabel.delete(0, mPositiveLabel.length());
-            mPositiveLabel.append("确定")
+            mDelayLabel.delete(0, mDelayLabel.length());
+            mDelayLabel.append(mFinalLable)
                     .append("(")
                     .append(millisUntilFinished / 1000)
                     .append("s)");
-            mBtn.setText(mPositiveLabel);
+            mBtn.setText(mDelayLabel);
         }
 
     }
@@ -38,8 +51,8 @@ public class DelayShowTimer extends CountDownTimer {
     public void onFinish() {
         if (mBtn != null) {
             mBtn.setEnabled(true);
-            mBtn.setTextColor(Utils.getColorFromRes(R.color.colorPrimary));
-            mBtn.setText("确定");
+            mBtn.setTextColor(mFinalColor);
+            mBtn.setText(mFinalLable);
         }
     }
 

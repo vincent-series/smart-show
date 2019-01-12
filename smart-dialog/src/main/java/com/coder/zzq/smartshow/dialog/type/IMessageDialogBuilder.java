@@ -1,5 +1,5 @@
 package com.coder.zzq.smartshow.dialog.type;
 
-public interface IMessageDialogBuilder<B> extends INormalDialogBuilder<B> {
-    B message(CharSequence msg);
+public interface IMessageDialogBuilder extends INormalDialogBuilder<IMessageDialogBuilder> {
+    IMessageDialogBuilder message(CharSequence msg);
 }

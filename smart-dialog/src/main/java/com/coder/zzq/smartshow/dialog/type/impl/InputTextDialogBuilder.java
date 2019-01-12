@@ -1,5 +1,6 @@
 package com.coder.zzq.smartshow.dialog.type.impl;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -7,8 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.coder.zzq.smartshow.core.Utils;
-import com.coder.zzq.smartshow.dialog.DialogBtnClickListener;
+import com.coder.zzq.smartshow.dialog.InputCheckListener;
 import com.coder.zzq.smartshow.dialog.R;
 import com.coder.zzq.smartshow.dialog.type.IInputTextDialogBuilder;
 
@@ -21,6 +21,7 @@ public class InputTextDialogBuilder extends NormalDialogBuilder<IInputTextDialog
     private EditText mInputEdt;
     private TextView mInputNumView;
     private int mAtMostInputNum = 70;
+    private InputCheckListener mInputCheckListener;
 
     public InputTextDialogBuilder() {
         super();
@@ -44,9 +45,11 @@ public class InputTextDialogBuilder extends NormalDialogBuilder<IInputTextDialog
     }
 
     @Override
-    public IInputTextDialogBuilder negativeBtn(CharSequence label, DialogBtnClickListener clickListener) {
-        return null;
+    public IInputTextDialogBuilder inputCheck(InputCheckListener listener) {
+        mInputCheckListener = listener;
+        return this;
     }
+
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -62,29 +65,34 @@ public class InputTextDialogBuilder extends NormalDialogBuilder<IInputTextDialog
     public void afterTextChanged(Editable s) {
         if (s.length() > mAtMostInputNum) {
             mInputNumView.setTextColor(Color.RED);
-            mInputNumView.setText(String.valueOf(s.length() - mAtMostInputNum));
+            mInputNumView.setText("-" + String.valueOf(s.length() - mAtMostInputNum));
         } else {
-            mInputNumView.setTextColor(Utils.getColorFromRes(R.color.colorPrimary));
+            mInputNumView.setTextColor(mConfirmBtn.getTextColors());
             mInputNumView.setText(String.valueOf(mAtMostInputNum - s.length()));
         }
 
     }
 
+    @Override
+    public boolean createAndShow(Activity activity, int tag) {
+        boolean showSucc = super.createAndShow(activity, tag);
+
+    }
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.dialog_positive_btn && mInputEdt.getText().length() > mAtMostInputNum) {
-//            SmartToast.showAtTop("输入超出上限（" + mAtMostInputNum + ")");
+        if (v.getId() == R.id.dialog_positive_btn && mInputCheckListener != null
+                && !mInputCheckListener.check(mInputEdt.getText().toString())) {
             return;
         }
         mDialog.dismiss();
-        if (mOnPositiveBtnClickListener != null && v.getId() == R.id.dialog_positive_btn) {
-            mOnPositiveBtnClickListener.onBtnClick((TextView) v, mInputEdt.getText().toString());
+        if (mOnConfirmBtnClickListener != null && v.getId() == R.id.dialog_positive_btn) {
+            mOnConfirmBtnClickListener.onBtnClick((TextView) v, mInputEdt.getText().toString());
             return;
         }
 
-        if (mOnNegativeBtnClickListener != null && v.getId() == R.id.dialog_negative_btn) {
-            mOnNegativeBtnClickListener.onBtnClick((TextView) v, mInputEdt.getText().toString());
+        if (mOnCancelBtnClickListener != null && v.getId() == R.id.dialog_negative_btn) {
+            mOnCancelBtnClickListener.onBtnClick((TextView) v, mInputEdt.getText().toString());
         }
 
     }

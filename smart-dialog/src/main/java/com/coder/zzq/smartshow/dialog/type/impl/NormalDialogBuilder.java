@@ -2,7 +2,9 @@ package com.coder.zzq.smartshow.dialog.type.impl;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.support.annotation.ColorInt;
 import android.support.annotation.LayoutRes;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,23 +15,32 @@ import android.widget.TextView;
 
 import com.coder.zzq.smartshow.core.SmartShow;
 import com.coder.zzq.smartshow.core.Utils;
+import com.coder.zzq.smartshow.dialog.DelayShowTimer;
 import com.coder.zzq.smartshow.dialog.DialogBtnClickListener;
 import com.coder.zzq.smartshow.dialog.DialogContentCallback;
+import com.coder.zzq.smartshow.dialog.DialogCreator;
 import com.coder.zzq.smartshow.dialog.R;
+import com.coder.zzq.smartshow.dialog.SmartDialog;
 import com.coder.zzq.smartshow.dialog.type.INormalDialogBuilder;
 
-public abstract class NormalDialogBuilder<B> implements INormalDialogBuilder<B>, View.OnClickListener {
+public abstract class NormalDialogBuilder<B> extends DialogCreator implements INormalDialogBuilder<B>, View.OnClickListener {
     protected Dialog mDialog;
     protected LinearLayout mDialogRootView;
     protected TextView mTitleView;
-    protected TextView mPositiveBtn;
-    protected TextView mNegativeBtn;
+    @BUTTON_MODE
+    protected int mButtonMode = MODE_BOTN_CONFIRM_AND_CANCEL;
+    protected TextView mConfirmBtn;
+    private int mDelaySeconds;
+    private CharSequence mConfirmLabel = "确定";
+    @ColorInt
+    private int mConfirmColor = Utils.getColorFromRes(R.color.colorPrimary);
+    protected TextView mCancelBtn;
     protected FrameLayout mContentWrapperView;
     protected View mSeparatorBetweenBtn;
     protected View mSeparatorBetweenBtnAndContent;
     protected View mContentPartView;
-    protected DialogBtnClickListener mOnPositiveBtnClickListener;
-    protected DialogBtnClickListener mOnNegativeBtnClickListener;
+    protected DialogBtnClickListener mOnConfirmBtnClickListener;
+    protected DialogBtnClickListener mOnCancelBtnClickListener;
     protected DialogContentCallback mDialogContentCallback;
 
     protected boolean mCancelabel = true;
@@ -39,10 +50,10 @@ public abstract class NormalDialogBuilder<B> implements INormalDialogBuilder<B>,
         mDialogRootView = (LinearLayout) LayoutInflater.from(SmartShow.getContext())
                 .inflate(R.layout.smart_show_normal_dialog, null);
         mTitleView = mDialogRootView.findViewById(R.id.dialog_title);
-        mPositiveBtn = mDialogRootView.findViewById(R.id.dialog_positive_btn);
-        mPositiveBtn.setOnClickListener(this);
-        mNegativeBtn = mDialogRootView.findViewById(R.id.dialog_negative_btn);
-        mNegativeBtn.setOnClickListener(this);
+        mConfirmBtn = mDialogRootView.findViewById(R.id.dialog_positive_btn);
+        mConfirmBtn.setOnClickListener(this);
+        mCancelBtn = mDialogRootView.findViewById(R.id.dialog_negative_btn);
+        mCancelBtn.setOnClickListener(this);
         mSeparatorBetweenBtn = mDialogRootView.findViewById(R.id.separator_between_btn);
         mSeparatorBetweenBtnAndContent = mDialogRootView.findViewById(R.id.separator_between_btn_and_content);
 
@@ -69,12 +80,46 @@ public abstract class NormalDialogBuilder<B> implements INormalDialogBuilder<B>,
     }
 
     @Override
-    public B positiveBtn(CharSequence label, DialogBtnClickListener clickListener) {
-        mPositiveBtn.setText(label);
-        mOnPositiveBtnClickListener = clickListener;
+    public B buttonMode(int buttonMode) {
+        mButtonMode = buttonMode;
         return (B) this;
     }
 
+    @Override
+    public B confirmBtn(CharSequence label, DialogBtnClickListener clickListener) {
+        mConfirmLabel = label;
+        mConfirmBtn.setText(label);
+        mOnConfirmBtnClickListener = clickListener;
+        return (B) this;
+    }
+
+    @Override
+    public B confirmBtnTextStyle(@ColorInt int textColor, float textSizeSp) {
+        mConfirmColor = textColor;
+        mConfirmBtn.setTextColor(textColor);
+        mConfirmBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSizeSp);
+        return (B) this;
+    }
+
+    @Override
+    public B delaySecondsConfirm(int delaySeconds) {
+        mDelaySeconds = delaySeconds;
+        return (B) this;
+    }
+
+    @Override
+    public B cancelBtn(CharSequence label, DialogBtnClickListener clickListener) {
+        mCancelBtn.setText(label);
+        mOnCancelBtnClickListener = clickListener;
+        return (B) this;
+    }
+
+    @Override
+    public B cancelBtnTextStyle(int textColor, float textSizeSp) {
+        mCancelBtn.setTextColor(textColor);
+        mCancelBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSizeSp);
+        return (B) this;
+    }
 
     @Override
     public B processContent(DialogContentCallback callback) {
@@ -95,7 +140,13 @@ public abstract class NormalDialogBuilder<B> implements INormalDialogBuilder<B>,
     }
 
     @Override
-    public Dialog create(Activity activity) {
+    public boolean createAndShow(Activity activity, int tag) {
+        return SmartDialog.show(activity, this, tag);
+    }
+
+
+    @Override
+    public Dialog createDialog(Activity activity) {
         if (mDialogContentCallback != null) {
             mDialogContentCallback.processContentView(mContentWrapperView
                     , mContentPartView);
@@ -107,6 +158,43 @@ public abstract class NormalDialogBuilder<B> implements INormalDialogBuilder<B>,
                     mContentWrapperView.getPaddingRight(),
                     mContentWrapperView.getPaddingBottom());
         }
+
+        switch (mButtonMode) {
+            case MODE_ONLY_CONFIRM:
+                mConfirmBtn.setVisibility(View.VISIBLE);
+                mCancelBtn.setVisibility(View.GONE);
+                mSeparatorBetweenBtn.setVisibility(View.GONE);
+                break;
+            case MODE_BOTN_CONFIRM_AND_CANCEL:
+                mConfirmBtn.setVisibility(View.VISIBLE);
+                mCancelBtn.setVisibility(View.VISIBLE);
+                mSeparatorBetweenBtn.setVisibility(View.VISIBLE);
+                break;
+        }
+        if (mDelaySeconds > 0) {
+            mConfirmBtn.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+                private DelayShowTimer mCountDownTimer;
+
+                @Override
+                public void onViewAttachedToWindow(View v) {
+                    if (mCountDownTimer != null) {
+                        mCountDownTimer.cancelTask();
+                    }
+                    mCountDownTimer = new DelayShowTimer(mDelaySeconds * 1000, 1000);
+                    mCountDownTimer.setBtn(mConfirmBtn);
+                    mCountDownTimer.setFinalColor(mConfirmColor);
+                    mCountDownTimer.setFinalLable(mConfirmLabel);
+                    mCountDownTimer.start();
+                }
+
+                @Override
+                public void onViewDetachedFromWindow(View v) {
+
+                }
+            });
+        }
+
+
         mDialog = new Dialog(activity, R.style.smart_show_normal_dialog);
         mDialog.setCancelable(mCancelabel);
         mDialog.setCanceledOnTouchOutside(mCanceledOnTouchOutside);
@@ -117,16 +205,17 @@ public abstract class NormalDialogBuilder<B> implements INormalDialogBuilder<B>,
         return mDialog;
     }
 
+
     @Override
     public void onClick(View v) {
         mDialog.dismiss();
-        if (mOnPositiveBtnClickListener != null && v.getId() == R.id.dialog_positive_btn) {
-            mOnPositiveBtnClickListener.onBtnClick((TextView) v, null);
+        if (mOnConfirmBtnClickListener != null && v.getId() == R.id.dialog_positive_btn) {
+            mOnConfirmBtnClickListener.onBtnClick((TextView) v, null);
             return;
         }
 
-        if (mOnNegativeBtnClickListener != null && v.getId() == R.id.dialog_negative_btn) {
-            mOnNegativeBtnClickListener.onBtnClick((TextView) v, null);
+        if (mOnCancelBtnClickListener != null && v.getId() == R.id.dialog_negative_btn) {
+            mOnCancelBtnClickListener.onBtnClick((TextView) v, null);
         }
     }
 }

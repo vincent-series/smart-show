@@ -1,10 +1,14 @@
 package com.coder.zzq.smartshow.core;
 
+import android.app.Activity;
 import android.content.res.Resources;
+import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.v4.content.ContextCompat;
 import android.util.TypedValue;
+
+import com.coder.zzq.smartshow.core.lifecycle.ActivityStack;
 
 public class Utils {
 
@@ -58,6 +62,16 @@ public class Utils {
         }
 
         return height;
+    }
+
+
+    public static boolean isActivityDestroyed(Activity activity) {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 ?
+                activity.isDestroyed() : !ActivityStack.isInStack(activity);
+    }
+
+    public static void popKeyboard() {
+
     }
 
 }

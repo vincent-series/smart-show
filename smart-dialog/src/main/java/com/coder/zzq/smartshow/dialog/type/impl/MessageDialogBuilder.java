@@ -5,7 +5,7 @@ import android.widget.TextView;
 import com.coder.zzq.smartshow.dialog.R;
 import com.coder.zzq.smartshow.dialog.type.IMessageDialogBuilder;
 
-public class MessageDialogBuilder<B> extends NormalDialogBuilder<B> implements IMessageDialogBuilder<B> {
+public class MessageDialogBuilder extends NormalDialogBuilder<IMessageDialogBuilder> implements IMessageDialogBuilder {
 
     @Override
     protected int getContentPartLayoutRes() {
@@ -13,8 +13,9 @@ public class MessageDialogBuilder<B> extends NormalDialogBuilder<B> implements I
     }
 
     @Override
-    public B message(CharSequence msg) {
+    public IMessageDialogBuilder message(CharSequence msg) {
         ((TextView) mContentPartView).setText(msg);
-        return (B) this;
+        return this;
     }
+
 }
