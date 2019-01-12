@@ -13,6 +13,6 @@ public interface ILoadingDialogBuilder {
 
     ILoadingDialogBuilder small();
 
-    Dialog create(Activity activity);
+    boolean createAndShow(Activity activity,int tag);
 
 }

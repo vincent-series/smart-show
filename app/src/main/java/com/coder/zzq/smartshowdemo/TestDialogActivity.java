@@ -74,15 +74,15 @@ public class TestDialogActivity extends AppCompatActivity {
     }
 
     public void onLoadingLargeClick(View view) {
-        SmartDialog.loading("加载中").large().create(this).show();
+        SmartDialog.loading("加载中").large().createAndShow(this,4);
     }
 
     public void onLoadingMiddleClick(View view) {
-        SmartDialog.loading("加载中").middle().create(this).show();
+        SmartDialog.loading("加载中").middle().createAndShow(this,5);
     }
 
     public void onLoadingSmallClick(View view) {
-        SmartDialog.loading("加载中").small().create(this).show();
+        SmartDialog.loading("加载中").small().createAndShow(this,6);
     }
 
 }

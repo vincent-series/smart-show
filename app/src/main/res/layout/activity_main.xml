@@ -39,11 +39,5 @@
             style="@style/normal_btn"
             android:text="Dialog"
             android:onClick="onDialogClick"/>
-        <CheckedTextView
-            android:checked="false"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="你好"
-            android:checkMark="@drawable/check_mark"/>
     </LinearLayout>
 </LinearLayout>
