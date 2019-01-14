@@ -14,7 +14,7 @@ import com.coder.zzq.smartshow.dialog.InputCheckListener;
 import com.coder.zzq.smartshow.dialog.R;
 import com.coder.zzq.smartshow.dialog.type.IInputTextDialogBuilder;
 
-public class InputTextDialogBuilder extends NormalDialogBuilder<IInputTextDialogBuilder> implements IInputTextDialogBuilder, TextWatcher {
+public class InputTextDialogBuilder extends NormalDiaBuilder<IInputTextDialogBuilder> implements IInputTextDialogBuilder, TextWatcher {
     @Override
     protected int getContentPartLayoutRes() {
         return R.layout.smart_show_input_content;

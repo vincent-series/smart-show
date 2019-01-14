@@ -23,7 +23,7 @@ import com.coder.zzq.smartshow.dialog.R;
 import com.coder.zzq.smartshow.dialog.SmartDialog;
 import com.coder.zzq.smartshow.dialog.type.INormalDialogBuilder;
 
-public abstract class NormalDialogBuilder<B> extends DialogCreator implements INormalDialogBuilder<B>, View.OnClickListener {
+public abstract class NormalDiaBuilder<B> extends DialogCreator implements INormalDialogBuilder<B>, View.OnClickListener {
     protected Dialog mDialog;
     protected LinearLayout mDialogRootView;
     protected TextView mTitleView;
@@ -46,7 +46,7 @@ public abstract class NormalDialogBuilder<B> extends DialogCreator implements IN
     protected boolean mCancelabel = true;
     protected boolean mCanceledOnTouchOutside = true;
 
-    public NormalDialogBuilder() {
+    public NormalDiaBuilder() {
         mDialogRootView = (LinearLayout) LayoutInflater.from(SmartShow.getContext())
                 .inflate(R.layout.smart_show_normal_dialog, null);
         mTitleView = mDialogRootView.findViewById(R.id.dialog_title);

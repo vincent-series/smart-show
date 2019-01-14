@@ -10,7 +10,7 @@ import com.coder.zzq.smartshow.core.Utils;
 import com.coder.zzq.smartshow.dialog.cache.DialogCacheContainer;
 import com.coder.zzq.smartshow.dialog.type.IInputTextDialogBuilder;
 import com.coder.zzq.smartshow.dialog.type.ILoadingDialogBuilder;
-import com.coder.zzq.smartshow.dialog.type.IMessageDialogBuilder;
+import com.coder.zzq.smartshow.dialog.type.INotificationDialogBuilder;
 import com.coder.zzq.smartshow.dialog.type.impl.InputTextDialogBuilder;
 import com.coder.zzq.smartshow.dialog.type.impl.LoadingDialogBuilder;
 import com.coder.zzq.smartshow.dialog.type.impl.MessageDialogBuilder;
@@ -20,7 +20,7 @@ public class SmartDialog {
         SmartShow.setDialogCallback(new DialogCallback());
     }
 
-    public static IMessageDialogBuilder messageDialog() {
+    public static INotificationDialogBuilder messageDialog() {
         return new MessageDialogBuilder();
     }
 
