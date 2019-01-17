@@ -2,22 +2,18 @@ package com.coder.zzq.smartshow.dialog;
 
 import android.graphics.Color;
 import android.os.CountDownTimer;
-import android.support.annotation.ColorInt;
 import android.widget.TextView;
 
-import com.coder.zzq.smartshow.core.Utils;
+import com.coder.zzq.smartshow.R;
+import com.coder.zzq.smartshow.Utils;
 
 public class DelayShowTimer extends CountDownTimer {
     private TextView mBtn;
-    private CharSequence mFinalLable;
-    @ColorInt 
-    private int mFinalColor;
-    private StringBuilder mDelayLabel;
+    private StringBuilder mPositiveLabel;
 
     public DelayShowTimer(long millisInFuture, long countDownInterval) {
         super(millisInFuture, countDownInterval);
-        mDelayLabel = new StringBuilder();
-
+        mPositiveLabel = new StringBuilder();
     }
 
     public void setBtn(TextView btn) {
@@ -26,23 +22,15 @@ public class DelayShowTimer extends CountDownTimer {
         mBtn.setEnabled(false);
     }
 
-    public void setFinalColor(int finalColor) {
-        mFinalColor = finalColor;
-    }
-
-    public void setFinalLable(CharSequence finalLable) {
-        mFinalLable = finalLable;
-    }
-
     @Override
     public void onTick(long millisUntilFinished) {
         if (mBtn != null) {
-            mDelayLabel.delete(0, mDelayLabel.length());
-            mDelayLabel.append(mFinalLable)
+            mPositiveLabel.delete(0, mPositiveLabel.length());
+            mPositiveLabel.append("确定")
                     .append("(")
                     .append(millisUntilFinished / 1000)
                     .append("s)");
-            mBtn.setText(mDelayLabel);
+            mBtn.setText(mPositiveLabel);
         }
 
     }
@@ -51,13 +39,13 @@ public class DelayShowTimer extends CountDownTimer {
     public void onFinish() {
         if (mBtn != null) {
             mBtn.setEnabled(true);
-            mBtn.setTextColor(mFinalColor);
-            mBtn.setText(mFinalLable);
+            mBtn.setTextColor(Utils.getColorFromRes(R.color.colorPrimary));
+            mBtn.setText("确定");
         }
     }
 
 
-    public void cancelTask() {
+    public void cancelTask(){
         super.cancel();
         mBtn = null;
     }

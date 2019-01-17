@@ -4,21 +4,19 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+
 import com.coder.zzq.smartshow.core.SmartShow;
 import com.coder.zzq.smartshow.core.Utils;
-import com.coder.zzq.smartshow.dialog.DialogCreator;
 import com.coder.zzq.smartshow.dialog.R;
-import com.coder.zzq.smartshow.dialog.SmartDialog;
 import com.coder.zzq.smartshow.dialog.type.ILoadingDialogBuilder;
 
-public class LoadingDialogBuilder extends DialogCreator implements ILoadingDialogBuilder {
+public class LoadingDialogBuilder implements ILoadingDialogBuilder {
     private View mContentView;
     private ProgressBar mProgressBar;
     private TextView mMsgView;
@@ -57,16 +55,11 @@ public class LoadingDialogBuilder extends DialogCreator implements ILoadingDialo
     }
 
     @Override
-    public boolean createAndShow(Activity activity,int tag) {
-        return SmartDialog.show(activity,this,tag);
-    }
-
-    @Override
-    public Dialog createDialog(@NonNull Activity activity) {
+    public Dialog create(Activity activity) {
         mContentView = LayoutInflater.from(SmartShow.getContext()).inflate(mLayoutRes, null);
         TextView msgView = mContentView.findViewById(R.id.loading_message);
         mMsgView = msgView;
-        if (mMsgView != null) {
+        if (mMsgView != null){
             mMsgView.setText(mMsg);
         }
         mProgressBar = mContentView.findViewById(R.id.progress_bar);

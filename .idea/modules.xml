@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/all/all.iml" filepath="$PROJECT_DIR$/all/all.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bar-core/bar-core.iml" filepath="$PROJECT_DIR$/bar-core/bar-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/smart-dialog/smart-dialog.iml" filepath="$PROJECT_DIR$/smart-dialog/smart-dialog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/smart-show.iml" filepath="$PROJECT_DIR$/smart-show.iml" />
+      <module fileurl="file://$PROJECT_DIR$/smart-snackbar/smart-snackbar.iml" filepath="$PROJECT_DIR$/smart-snackbar/smart-snackbar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/smart-toast/smart-toast.iml" filepath="$PROJECT_DIR$/smart-toast/smart-toast.iml" />
+      <module fileurl="file://$PROJECT_DIR$/smart-topbar/smart-topbar.iml" filepath="$PROJECT_DIR$/smart-topbar/smart-topbar.iml" />
+    </modules>
+  </component>
+</project>

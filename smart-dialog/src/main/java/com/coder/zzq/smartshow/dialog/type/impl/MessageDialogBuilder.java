@@ -2,10 +2,10 @@ package com.coder.zzq.smartshow.dialog.type.impl;
 
 import android.widget.TextView;
 
-import com.coder.zzq.smartshow.dialog.R;
-import com.coder.zzq.smartshow.dialog.type.INotificationDialogBuilder;
+import com.coder.zzq.smartshow.R;
+import com.coder.zzq.smartshow.dialog.type.IMessageDialogBuilder;
 
-public class MessageDialogBuilder extends NormalDiaBuilder<INotificationDialogBuilder> implements INotificationDialogBuilder {
+public class MessageDialogBuilder<B> extends NormalDialogBuilder<B> implements IMessageDialogBuilder<B> {
 
     @Override
     protected int getContentPartLayoutRes() {
@@ -13,9 +13,8 @@ public class MessageDialogBuilder extends NormalDiaBuilder<INotificationDialogBu
     }
 
     @Override
-    public INotificationDialogBuilder message(CharSequence msg) {
+    public B message(CharSequence msg) {
         ((TextView) mContentPartView).setText(msg);
-        return this;
+        return (B) this;
     }
-
 }

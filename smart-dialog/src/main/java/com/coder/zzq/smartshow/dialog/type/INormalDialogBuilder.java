@@ -1,19 +1,22 @@
 package com.coder.zzq.smartshow.dialog.type;
 
-import android.support.annotation.ColorInt;
+import android.app.Activity;
+import android.app.Dialog;
 
 import com.coder.zzq.smartshow.dialog.DialogBtnClickListener;
+import com.coder.zzq.smartshow.dialog.DialogContentCallback;
 
-public interface INormalDialogBuilder<B> extends IDialogBuilder<B> {
+public interface INormalDialogBuilder<B> {
     B title(CharSequence title);
 
-    B confirmBtn(CharSequence label, DialogBtnClickListener clickListener);
+    B positiveBtn(CharSequence label, DialogBtnClickListener clickListener);
 
-    B confirmBtnTextStyle(@ColorInt int textColor, float textSizeSp);
+    B cancelable(boolean b);
 
-    B cancelBtn(CharSequence label, DialogBtnClickListener clickListener);
+    B cancelableOnTouchOutside(boolean b);
 
-    B cancelBtnTextStyle(@ColorInt int textColor, float textSizeSp);
+    B processContent(DialogContentCallback callback);
 
+    Dialog create(Activity activity);
 
 }

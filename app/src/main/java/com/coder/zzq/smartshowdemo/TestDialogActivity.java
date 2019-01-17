@@ -1,15 +1,16 @@
 package com.coder.zzq.smartshowdemo;
 
 import android.content.Intent;
-import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.coder.zzq.smartshow.dialog.DialogBtnClickListener;
-import com.coder.zzq.smartshow.dialog.InputCheckListener;
 import com.coder.zzq.smartshow.dialog.SmartDialog;
-import com.coder.zzq.smartshow.dialog.type.INormalDialogBuilder;
 import com.coder.zzq.smartshow.toast.SmartToast;
 
 public class TestDialogActivity extends AppCompatActivity {
@@ -28,61 +29,41 @@ public class TestDialogActivity extends AppCompatActivity {
 
     public void onNotificationClick(View view) {
 
-        SmartDialog.messageDialog()
-                .message("充值成功")
-                .buttonMode(INormalDialogBuilder.MODE_ONLY_CONFIRM)
-                .createAndShow(this, 0);
+        SmartDialog.notification("充值成功").create(this).show();
     }
 
     public void onEnsureClick(View view) {
-        SmartDialog.messageDialog()
-                .message("确定不再关注此人？")
-                .buttonMode(INormalDialogBuilder.MODE_BOTN_CONFIRM_AND_CANCEL)
-                .createAndShow(this, 1);
+        SmartDialog.ensure("确定不再关注此人？").create(this).show();
     }
 
     public void onEnsureDelayClick(View view) {
-        SmartDialog.messageDialog()
-                .buttonMode(INormalDialogBuilder.MODE_BOTN_CONFIRM_AND_CANCEL)
-                .delaySecondsConfirm(10)
-                .createAndShow(this, 2);
-
+        SmartDialog.ensureDelay("确定启用开发者模式？").create(this).show();
     }
 
 
     public void onInputClick(View view) {
         SmartDialog.inputText().hint("请输入建议")
                 .inputAtMost(70)
-                .confirmBtn("提交", new DialogBtnClickListener() {
+                .positiveBtn("提交", new DialogBtnClickListener() {
                     @Override
                     public void onBtnClick(TextView btn, Object data) {
                         SmartToast.showInCenter("已提交——>" + data.toString());
                     }
                 })
-                .inputCheck(new InputCheckListener() {
-                    @Override
-                    public boolean check(String input) {
-                        if (input.trim().length() > 70) {
-                            SmartToast.showInCenter("最多输入70个字！");
-                            return false;
-                        }
-                        return true;
-                    }
-                })
-                .createAndShow(this, 3);
+                .create(this)
+                .show();
 
     }
 
     public void onLoadingLargeClick(View view) {
-        SmartDialog.loading("加载中").large().createAndShow(this,4);
+        SmartDialog.loading("加载中").large().create(this).show();
     }
 
     public void onLoadingMiddleClick(View view) {
-        SmartDialog.loading("加载中").middle().createAndShow(this,5);
+        SmartDialog.loading("加载中").middle().create(this).show();
     }
 
     public void onLoadingSmallClick(View view) {
-        SmartDialog.loading("加载中").small().createAndShow(this,6);
+        SmartDialog.loading("加载中").small().create(this).show();
     }
-
 }
