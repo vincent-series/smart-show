@@ -6,10 +6,9 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import com.coder.zzq.smartshow.R;
-import com.coder.zzq.smartshow.Utils;
+import com.coder.zzq.smartshow.core.Utils;
 import com.coder.zzq.smartshow.dialog.DialogBtnClickListener;
+import com.coder.zzq.smartshow.dialog.R;
 import com.coder.zzq.smartshow.dialog.type.IInputTextDialogBuilder;
 import com.coder.zzq.smartshow.toast.SmartToast;
 

@@ -2,7 +2,7 @@ package com.coder.zzq.smartshow.dialog;
 
 import android.support.annotation.StringRes;
 
-import com.coder.zzq.smartshow.SmartShow;
+import com.coder.zzq.smartshow.core.SmartShow;
 import com.coder.zzq.smartshow.dialog.type.IEnsureDelayDialogBuilder;
 import com.coder.zzq.smartshow.dialog.type.IEnsureDialogBuilder;
 import com.coder.zzq.smartshow.dialog.type.IInputTextDialogBuilder;
@@ -52,5 +52,8 @@ public class SmartDialog {
         return new LoadingDialogBuilder()
                 .msg(msg);
     }
+
+
+
 
 }

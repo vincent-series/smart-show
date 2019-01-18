@@ -4,8 +4,8 @@ import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.widget.TextView;
 
-import com.coder.zzq.smartshow.R;
-import com.coder.zzq.smartshow.Utils;
+import com.coder.zzq.smartshow.core.Utils;
+
 
 public class DelayShowTimer extends CountDownTimer {
     private TextView mBtn;

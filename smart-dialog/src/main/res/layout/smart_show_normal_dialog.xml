@@ -5,16 +5,16 @@
     android:background="@drawable/smart_show_round_dialog_bg"
     android:orientation="vertical">
 
-    <FrameLayout
-        android:id="@+id/dialog_title_container"
+    <TextView
+        android:id="@+id/dialog_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <View
-        android:id="@+id/separator_between_title_and_content"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#cccccc" />
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="20dp"
+        android:text="提示"
+        android:textColor="#323232"
+        android:textSize="19sp"
+        android:visibility="gone" />
 
     <FrameLayout
         android:id="@+id/dialog_content_wrapper"
@@ -31,8 +31,26 @@
         android:layout_height="0.5dp"
         android:background="#cccccc" />
 
-    <FrameLayout
-        android:id="@+id/dialog_btn_container"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="44dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/dialog_negative_btn"
+            style="@style/smart_show_dialog_button"
+            android:text="取消" />
+
+        <View
+            android:id="@+id/separator_between_btn"
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:background="#cccccc" />
+
+        <TextView
+            android:id="@+id/dialog_positive_btn"
+            style="@style/smart_show_dialog_button"
+            android:text="确定"
+            android:textColor="@color/colorPrimary" />
+    </LinearLayout>
 </LinearLayout>
