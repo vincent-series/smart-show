@@ -1,12 +1,12 @@
 ## SmartShow
 ### 模块导航：
 * [SmartToast](#SmartToast部分)
-* [SmartSnackbar](https://github.com/the-pig-of-jungle/SmartShow#smartsnackbar%E9%83%A8%E5%88%86)
-* [SmartTopBar](https://github.com/the-pig-of-jungle/SmartShow#smarttopbar%E9%83%A8%E5%88%86)
-* [SmartDialog](https://github.com/the-pig-of-jungle/SmartShow#smarttopbar%E9%83%A8%E5%88%86)
-* [关于实现](https://github.com/the-pig-of-jungle/SmartShow#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0)
-* [关于作者](https://github.com/the-pig-of-jungle/SmartShow#%E5%85%B3%E4%BA%8E%E4%BD%9C%E8%80%85)
-* [引入该库](https://github.com/the-pig-of-jungle/SmartShow#%E5%BC%95%E5%85%A5smartshow)
+* [SmartSnackbar](#SmartSnackbar部分)
+* [SmartTopBar](#SmartTopbar部分)
+* [SmartDialog](#SmartDialog部分)
+* [关于实现](#代码实现)
+* [关于作者](#关于作者)
+* [引入该库](#引入SmartShow)
 ### 功能总览：
 1. 优雅封装，简化调用
 2. 处理系统bug等，如Android 7.1系统关于Toast的BadTokenException
@@ -20,20 +20,20 @@
 ![图片加载失败](images/type_toast_all.gif)&nbsp;&nbsp;&nbsp;&nbsp;![图片加载失败](images/topbar_normal.gif)<br/>
 ![图片加载失败](images/toast_all.gif)&nbsp;&nbsp;&nbsp;&nbsp;![图片加载失败](images/dialog.gif)<br/> 
 ## 代码实现
-[回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)<br/><br/>
+[回到模块导航](#模块导航)<br/><br/>
 如果你对实现感兴趣，请参考我的CSDN博客：
 * 2.x 版本 https://blog.csdn.net/jungle_pig/article/details/83959662
 * 1.x 版本 http://blog.csdn.net/jungle_pig/article/details/78568493<br/>
 已授权郭霖微信公众号同步发表：http://mp.weixin.qq.com/s/l62PtbmrIOkVKfJ2r0JwEw
 ## 关于作者
-[回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)<br/><br/>
+[回到模块导航](#模块导航)<br/><br/>
 为使SmartShow库更加健壮，如果您在使用过程中发现任何问题，请联系我，我会立即跟进修复和维护。感谢您的支持！<br/><br/>
 作者：朱志强<br/><br/>
 微信：w361281607<br/><br/>
 ![图片加载失败](images/wx_2d.jpg)<br/><br/>
 邮箱：coder_zzq@163.com<br/>
 ## 引入SmartShow
-[回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)<br/><br/>
+[回到模块导航](#模块导航)<br/><br/>
 1.在Project的gradle文件中<br/><br/>
 <pre><code>
 allprojects {
@@ -68,7 +68,7 @@ allprojects {
 </code></pre>
 
 ## SmartToast部分 
-[回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)
+[回到模块导航](#模块导航)
 1. 复用Toast实例，当Toast正在显示时，多次触发内容和位置均未改变的Toast，不会重复弹出；下一个Toast不会等到上一个Toast的Duration耗尽才弹出
 2. 解决传统复用模式的功能缺陷，如正在显示一个内容为"A"的Toast，此时再弹出内容为"B"的Toast时，文本虽改变，但没有弹出效果；如果复用的Toast正在显示，改变其Gravity以改变显示位置会无效，直到消失后再次显示才生效
 3. 可修改Toast默认布局的风格，如背景颜色，文字大小和颜色等
@@ -287,7 +287,7 @@ type toast 均居中显示<br/><br/>
          SmartToast.dismiss();
 </code></pre>
 ## SmartSnackbar部分
-[回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)<br/><br/>
+[回到模块导航](#模块导航)<br/><br/>
 ![图片加载失败](images/snackbar_color.gif)
 1. 复用Snackbar实例，当Snackbar正在显示，多次触发时，若msg和actionTex均未改变，则不会重复弹出，否则会有弹出效果
 2. 可修改布局风格，如背景颜色，文字大小和颜色等
@@ -488,7 +488,7 @@ public class SnackbarActivity extends BaseActivity implements ISnackbarShowCallb
 }
 </code></pre>
 ## SmartTopbar部分
-[回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)<br/><br/>
+[回到模块导航](#模块导航)<br/><br/>
 默认样式：![图片加载失败](images/topbar_normal.gif)设置背景色：![图片加载失败](images/topbar_color.gif)
 1. SmartTopbar在功能以及使用上很像一个顶部的Snackbar<br/>
 2. 当Topbar正在显示，多次触发时，若msg和actionTex均未改变，则不会重复弹出，否则有弹出效果
@@ -687,7 +687,7 @@ public class SnackbarActivity extends BaseActivity implements ITopbarShowCallbac
 }
 </code></pre>
 ## SmartDialog部分
-[回到模块导航](https://github.com/the-pig-of-jungle/SmartShow#smartshow)<br/><br/>
+[回到模块导航](#模块导航)<br/><br/>
 ios风格的loading框、对话框在主流App中很盛行，SmartDialog提供了几种类ios风格的对话框。<br/><br/>
 ![图片加载失败](images/dialog.gif)
 #### API
