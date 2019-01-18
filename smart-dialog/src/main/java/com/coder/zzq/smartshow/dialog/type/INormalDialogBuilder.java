@@ -1,10 +1,9 @@
 package com.coder.zzq.smartshow.dialog.type;
 
 import android.app.Activity;
-import android.app.Dialog;
 
 import com.coder.zzq.smartshow.dialog.DialogBtnClickListener;
-import com.coder.zzq.smartshow.dialog.DialogContentCallback;
+import com.coder.zzq.smartshow.dialog.DialogWrapper;
 
 public interface INormalDialogBuilder<B> {
     B title(CharSequence title);
@@ -15,8 +14,5 @@ public interface INormalDialogBuilder<B> {
 
     B cancelableOnTouchOutside(boolean b);
 
-    B processContent(DialogContentCallback callback);
-
-    Dialog create(Activity activity);
-
+    boolean createAndShow(Activity activity, DialogWrapper dialogWrapper);
 }

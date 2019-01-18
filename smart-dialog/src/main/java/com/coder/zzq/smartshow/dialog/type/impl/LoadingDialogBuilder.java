@@ -10,13 +10,15 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-
 import com.coder.zzq.smartshow.core.SmartShow;
 import com.coder.zzq.smartshow.core.Utils;
+import com.coder.zzq.smartshow.dialog.DialogCreator;
+import com.coder.zzq.smartshow.dialog.DialogWrapper;
 import com.coder.zzq.smartshow.dialog.R;
+import com.coder.zzq.smartshow.dialog.SmartDialog;
 import com.coder.zzq.smartshow.dialog.type.ILoadingDialogBuilder;
 
-public class LoadingDialogBuilder implements ILoadingDialogBuilder {
+public class LoadingDialogBuilder extends DialogCreator implements ILoadingDialogBuilder {
     private View mContentView;
     private ProgressBar mProgressBar;
     private TextView mMsgView;
@@ -55,11 +57,11 @@ public class LoadingDialogBuilder implements ILoadingDialogBuilder {
     }
 
     @Override
-    public Dialog create(Activity activity) {
+    public Dialog createDialog(Activity activity) {
         mContentView = LayoutInflater.from(SmartShow.getContext()).inflate(mLayoutRes, null);
         TextView msgView = mContentView.findViewById(R.id.loading_message);
         mMsgView = msgView;
-        if (mMsgView != null){
+        if (mMsgView != null) {
             mMsgView.setText(mMsg);
         }
         mProgressBar = mContentView.findViewById(R.id.progress_bar);
@@ -69,5 +71,10 @@ public class LoadingDialogBuilder implements ILoadingDialogBuilder {
         dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(false);
         return dialog;
+    }
+
+    @Override
+    public boolean createAndShow(Activity activity, DialogWrapper dialogWrapper) {
+        return SmartDialog.show(activity, this, dialogWrapper);
     }
 }

@@ -14,7 +14,6 @@ public class EnsureDelayDialogBuilder extends MessageDialogBuilder<IEnsureDelayD
 
     @Override
     public IEnsureDelayDialogBuilder negativeBtn(String label, DialogBtnClickListener clickListener) {
-        mNegativeBtn.setText(label);
         mOnNegativeBtnClickListener = clickListener;
         return this;
     }
@@ -27,12 +26,13 @@ public class EnsureDelayDialogBuilder extends MessageDialogBuilder<IEnsureDelayD
 
     @Override
     public IEnsureDelayDialogBuilder positiveBtn(CharSequence label, DialogBtnClickListener clickListener) {
-        return null;
+        mOnPositiveBtnClickListener = clickListener;
+        return this;
     }
 
     @Override
-    public Dialog create(Activity activity) {
-        Dialog dialog = super.create(activity);
+    public Dialog createDialog(Activity activity) {
+        Dialog dialog = super.createDialog(activity);
         mPositiveBtn.setEnabled(false);
         mPositiveLabel = new StringBuilder();
 
@@ -44,7 +44,7 @@ public class EnsureDelayDialogBuilder extends MessageDialogBuilder<IEnsureDelayD
                 if (mCountDownTimer != null) {
                     mCountDownTimer.cancelTask();
                 }
-                mCountDownTimer = new DelayShowTimer(mDelaySeconds * 1000,1000);
+                mCountDownTimer = new DelayShowTimer(mDelaySeconds * 1000, 1000);
                 mCountDownTimer.setBtn(mPositiveBtn);
 
 

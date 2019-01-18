@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSnackbarClick(View view) {
-        startActivity(new Intent(this,TestSnackbarActivity.class));
+        startActivity(new Intent(this, TestSnackbarActivity.class));
     }
 
     public void onTopBarClick(View view) {
@@ -30,6 +30,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onDialogClick(View view) {
-        startActivity(new Intent(this,TestDialogActivity.class));
+        startActivity(new Intent(this, TestDialogActivity.class));
     }
 }

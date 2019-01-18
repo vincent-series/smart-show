@@ -1,10 +1,11 @@
 package com.coder.zzq.smartshow.dialog.type;
 
 import android.app.Activity;
-import android.app.Dialog;
+
+import com.coder.zzq.smartshow.dialog.DialogWrapper;
 
 public interface ILoadingDialogBuilder {
-    
+
     ILoadingDialogBuilder msg(CharSequence msg);
 
     ILoadingDialogBuilder large();
@@ -13,6 +14,5 @@ public interface ILoadingDialogBuilder {
 
     ILoadingDialogBuilder small();
 
-    Dialog create(Activity activity);
-
+    boolean createAndShow(Activity activity, DialogWrapper dialogWrapper);
 }

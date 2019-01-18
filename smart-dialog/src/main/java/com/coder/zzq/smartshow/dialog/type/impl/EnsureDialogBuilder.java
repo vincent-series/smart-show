@@ -4,10 +4,19 @@ import com.coder.zzq.smartshow.dialog.DialogBtnClickListener;
 import com.coder.zzq.smartshow.dialog.type.IEnsureDialogBuilder;
 
 public class EnsureDialogBuilder extends MessageDialogBuilder<IEnsureDialogBuilder> implements IEnsureDialogBuilder {
+    private static EnsureDialogBuilder sEnsureDialogBuilder;
+
     @Override
     public IEnsureDialogBuilder negativeBtn(CharSequence label, DialogBtnClickListener clickListener) {
-        mNegativeBtn.setText(label);
         mOnNegativeBtnClickListener = clickListener;
         return this;
+    }
+
+    public static IEnsureDialogBuilder getInstance() {
+        if (sEnsureDialogBuilder == null) {
+            sEnsureDialogBuilder = new EnsureDialogBuilder();
+        }
+        sEnsureDialogBuilder.reset();
+        return sEnsureDialogBuilder;
     }
 }

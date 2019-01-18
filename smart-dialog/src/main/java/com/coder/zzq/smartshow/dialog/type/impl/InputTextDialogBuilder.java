@@ -71,22 +71,22 @@ public class InputTextDialogBuilder extends NormalDialogBuilder<IInputTextDialog
     }
 
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.dialog_positive_btn && mInputEdt.getText().length() > mAtMostInputNum) {
-            SmartToast.showAtTop("输入超出上限（" + mAtMostInputNum + ")");
-            return;
-        }
-        mDialog.dismiss();
-        if (mOnPositiveBtnClickListener != null && v.getId() == R.id.dialog_positive_btn) {
-            mOnPositiveBtnClickListener.onBtnClick((TextView) v, mInputEdt.getText().toString());
-            return;
-        }
-
-        if (mOnNegativeBtnClickListener != null && v.getId() == R.id.dialog_negative_btn) {
-            mOnNegativeBtnClickListener.onBtnClick((TextView) v, mInputEdt.getText().toString());
-        }
-
-    }
+//    @Override
+//    public void onClick(View v) {
+//        if (v.getId() == R.id.dialog_positive_btn && mInputEdt.getText().length() > mAtMostInputNum) {
+//            SmartToast.showAtTop("输入超出上限（" + mAtMostInputNum + ")");
+//            return;
+//        }
+//        mDialog.dismiss();
+//        if (mOnPositiveBtnClickListener != null && v.getId() == R.id.dialog_positive_btn) {
+//            mOnPositiveBtnClickListener.onBtnClick((TextView) v, mInputEdt.getText().toString());
+//            return;
+//        }
+//
+//        if (mOnNegativeBtnClickListener != null && v.getId() == R.id.dialog_negative_btn) {
+//            mOnNegativeBtnClickListener.onBtnClick((TextView) v, mInputEdt.getText().toString());
+//        }
+//
+//    }
 
 }
