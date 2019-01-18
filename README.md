@@ -1,6 +1,6 @@
 ## SmartShow
 ### 模块导航：
-* [SmartToast](https://github.com/the-pig-of-jungle/SmartShow#smarttoast%E9%83%A8%E5%88%86)
+* [SmartToast](#user-content-SmartToast部分)
 * [SmartSnackbar](https://github.com/the-pig-of-jungle/SmartShow#smartsnackbar%E9%83%A8%E5%88%86)
 * [SmartTopBar](https://github.com/the-pig-of-jungle/SmartShow#smarttopbar%E9%83%A8%E5%88%86)
 * [SmartDialog](https://github.com/the-pig-of-jungle/SmartShow#smarttopbar%E9%83%A8%E5%88%86)
