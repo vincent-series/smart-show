@@ -1,5 +1,6 @@
 package com.coder.zzq.smartshowdemo;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import android.view.View;
 
 import com.coder.zzq.smartshow.dialog.DialogWrapper;
 import com.coder.zzq.smartshow.dialog.SmartDialog;
+import com.coder.zzq.smartshow.dialog.widget.DialogBtn;
 
 public class TestDialogActivity extends AppCompatActivity {
     private DialogWrapper mDialogWrapper = new DialogWrapper();
@@ -26,29 +28,28 @@ public class TestDialogActivity extends AppCompatActivity {
     private DialogWrapper mNotification = new DialogWrapper();
 
     public void onNotificationClick(View view) {
-//        SmartDialog.notification("充值成功").createAndShow(this, null);
+        SmartDialog.notification("充值成功").createAndShow(this, null);
     }
 
     public void onEnsureClick(View view) {
-        SmartDialog.ensure("确定不再关注此人？").createAndShow(this, mNotification);
+        SmartDialog.ensure("确定不再关注此人？").createAndShow(this, null);
     }
 
     public void onEnsureDelayClick(View view) {
-//        SmartDialog.ensureDelay("确定启用开发者模式？").sh(this).show();
+        SmartDialog.ensureDelay("确定启用开发者模式？").delaySeconds(10).createAndShow(this, mNotification);
     }
 
 
     public void onInputClick(View view) {
-//        SmartDialog.inputText().hint("请输入建议")
-//                .inputAtMost(70)
-//                .positiveBtn("提交", new DialogBtnClickListener() {
-//                    @Override
-//                    public void onBtnClick(TextView btn, Object data) {
-//                        SmartToast.showInCenter("已提交——>" + data.toString());
-//                    }
-//                })
-//                .create(this)
-//                .show();
+        SmartDialog.inputText().hint("请输入建议")
+                .inputAtMost(70)
+                .positiveBtn("提交", new DialogBtn.onDialogBtnClickListener() {
+                    @Override
+                    public void onDialogBtnClick(Dialog dialog, DialogBtn btn, Object data) {
+
+                    }
+                })
+                .createAndShow(this, mNotification);
 
     }
 

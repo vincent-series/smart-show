@@ -2,6 +2,7 @@ package com.coder.zzq.smartshow.dialog.type.impl;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.support.annotation.ColorInt;
 import android.support.annotation.LayoutRes;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -15,7 +16,7 @@ import android.widget.TextView;
 import com.coder.zzq.smartshow.core.EasyLogger;
 import com.coder.zzq.smartshow.core.SmartShow;
 import com.coder.zzq.smartshow.core.Utils;
-import com.coder.zzq.smartshow.dialog.DialogBtnClickListener;
+import com.coder.zzq.smartshow.dialog.widget.DialogBtn;
 import com.coder.zzq.smartshow.dialog.DialogCreator;
 import com.coder.zzq.smartshow.dialog.DialogWrapper;
 import com.coder.zzq.smartshow.dialog.R;
@@ -26,16 +27,27 @@ public abstract class NormalDialogBuilder<B> extends DialogCreator implements IN
     protected LinearLayout mDialogRootView;
     protected TextView mTitleView;
     protected CharSequence mTitle;
-    protected TextView mPositiveBtn;
+    protected DialogBtn mPositiveBtn;
     protected CharSequence mPositiveLabel;
-    protected TextView mNegativeBtn;
+    @ColorInt
+    protected int mPositiveLabelColor;
+    protected float mPositiveTextSizeSp;
+    protected boolean mPositiveTextBold;
+    protected int mDelaySeconds;
+
+    protected DialogBtn mNegativeBtn;
     protected CharSequence mNegativeLabel;
+    @ColorInt
+    protected int mNegativeLabelColor;
+    protected float mNegativeTextSizeSp;
+    protected boolean mNegativeTextBold;
+
     protected FrameLayout mContentWrapperView;
     protected View mSeparatorBetweenBtn;
     protected View mSeparatorBetweenBtnAndContent;
     protected View mContentPartView;
-    protected DialogBtnClickListener mOnPositiveBtnClickListener;
-    protected DialogBtnClickListener mOnNegativeBtnClickListener;
+    protected DialogBtn.onDialogBtnClickListener mOnPositiveBtnClickListener;
+    protected DialogBtn.onDialogBtnClickListener mOnNegativeBtnClickListener;
     protected boolean mCancelabel;
     protected boolean mCanceledOnTouchOutside;
 
@@ -51,8 +63,15 @@ public abstract class NormalDialogBuilder<B> extends DialogCreator implements IN
         mTitle = null;
         mPositiveBtn = null;
         mPositiveLabel = "确定";
+        mPositiveLabelColor = -1;
+        mPositiveTextSizeSp = 0;
+        mPositiveTextBold = false;
+        mDelaySeconds = 0;
         mNegativeBtn = null;
         mNegativeLabel = "取消";
+        mNegativeLabelColor = -1;
+        mNegativeTextSizeSp = 0;
+        mNegativeTextBold = false;
         mContentWrapperView = null;
         mSeparatorBetweenBtn = null;
         mSeparatorBetweenBtnAndContent = null;
@@ -73,9 +92,17 @@ public abstract class NormalDialogBuilder<B> extends DialogCreator implements IN
     }
 
     @Override
-    public B positiveBtn(CharSequence label, DialogBtnClickListener clickListener) {
+    public B positiveBtn(CharSequence label, DialogBtn.onDialogBtnClickListener clickListener) {
         mPositiveLabel = label;
         mOnPositiveBtnClickListener = clickListener;
+        return (B) this;
+    }
+
+    @Override
+    public B positiveBtnTextStyle(int color, float textSizeSp, boolean bold) {
+        mPositiveLabelColor = color;
+        mPositiveTextSizeSp = textSizeSp;
+        mPositiveTextBold = bold;
         return (B) this;
     }
 
@@ -101,7 +128,8 @@ public abstract class NormalDialogBuilder<B> extends DialogCreator implements IN
         mDialogRootView = (LinearLayout) LayoutInflater.from(SmartShow.getContext())
                 .inflate(R.layout.smart_show_normal_dialog, null);
         initViews(dialog);
-
+        setBtnListener(mPositiveBtn, dialog);
+        setBtnListener(mNegativeBtn, dialog);
         mContentPartView = LayoutInflater.from(SmartShow.getContext()).inflate(getContentPartLayoutRes(),
                 mContentWrapperView, false);
         mContentPartView.setTranslationY(mTitleView.getVisibility() == View.VISIBLE ? 0 : Utils.dpToPx(7));
@@ -117,6 +145,20 @@ public abstract class NormalDialogBuilder<B> extends DialogCreator implements IN
         return dialog;
     }
 
+    private void setBtnListener(DialogBtn dialogBtn, final Dialog dialog) {
+        dialogBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogBtn dialogBtn = (DialogBtn) v;
+                if (dialogBtn.getOnDialogBtnClickListener() == null) {
+                    dialog.dismiss();
+                } else {
+                    dialogBtn.getOnDialogBtnClickListener().onDialogBtnClick(dialog, dialogBtn, dialogBtn.getDataProvider() == null ? null : dialogBtn.getDataProvider().getDataWhenClick());
+                }
+            }
+        });
+    }
+
     @Override
     public void resetDialog(Dialog dialog) {
         ViewGroup parent = dialog.findViewById(android.R.id.content);
@@ -126,39 +168,24 @@ public abstract class NormalDialogBuilder<B> extends DialogCreator implements IN
         mContentPartView.setTranslationY(mTitleView.getVisibility() == View.VISIBLE ? 0 : Utils.dpToPx(7));
     }
 
-    private void initViews(final Dialog dialog) {
+    protected void initViews(final Dialog dialog) {
+
         mContentWrapperView = mDialogRootView.findViewById(R.id.dialog_content_wrapper);
+        mSeparatorBetweenBtn = mDialogRootView.findViewById(R.id.separator_between_btn);
+        mSeparatorBetweenBtnAndContent = mDialogRootView.findViewById(R.id.separator_between_btn_and_content);
+
         mTitleView = mDialogRootView.findViewById(R.id.dialog_title);
         mTitleView.setText(mTitle);
         mTitleView.setVisibility(TextUtils.isEmpty(mTitle) ? View.GONE : View.VISIBLE);
 
         mPositiveBtn = mDialogRootView.findViewById(R.id.dialog_positive_btn);
-        mPositiveBtn.setText(mPositiveLabel);
+        mPositiveBtn.setLabelAndClickListener(mPositiveLabel, mOnPositiveBtnClickListener);
+        mPositiveBtn.setTextStyle(mPositiveLabelColor, mPositiveTextSizeSp, mPositiveTextBold);
+        mPositiveBtn.delayEnable(mDelaySeconds);
 
-        mSeparatorBetweenBtn = mDialogRootView.findViewById(R.id.separator_between_btn);
-        mSeparatorBetweenBtnAndContent = mDialogRootView.findViewById(R.id.separator_between_btn_and_content);
-
-        mPositiveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                if (mOnPositiveBtnClickListener != null) {
-                    mOnPositiveBtnClickListener.onBtnClick((TextView) v, null);
-                    return;
-                }
-            }
-        });
         mNegativeBtn = mDialogRootView.findViewById(R.id.dialog_negative_btn);
-        mNegativeBtn.setText(mNegativeLabel);
-        mNegativeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                if (mOnNegativeBtnClickListener != null) {
-                    mOnNegativeBtnClickListener.onBtnClick((TextView) v, null);
-                }
-            }
-        });
+        mNegativeBtn.setLabelAndClickListener(mNegativeLabel, mOnNegativeBtnClickListener);
+        mNegativeBtn.setTextStyle(mNegativeLabelColor, mNegativeTextSizeSp, mNegativeTextBold);
     }
 
 

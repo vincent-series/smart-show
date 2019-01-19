@@ -8,12 +8,10 @@ import android.view.WindowManager;
 import com.coder.zzq.smartshow.core.EasyLogger;
 import com.coder.zzq.smartshow.core.SmartShow;
 import com.coder.zzq.smartshow.core.Utils;
-import com.coder.zzq.smartshow.dialog.type.IEnsureDelayDialogBuilder;
 import com.coder.zzq.smartshow.dialog.type.IEnsureDialogBuilder;
 import com.coder.zzq.smartshow.dialog.type.IInputTextDialogBuilder;
 import com.coder.zzq.smartshow.dialog.type.ILoadingDialogBuilder;
 import com.coder.zzq.smartshow.dialog.type.INotificationDialogBuilder;
-import com.coder.zzq.smartshow.dialog.type.impl.EnsureDelayDialogBuilder;
 import com.coder.zzq.smartshow.dialog.type.impl.EnsureDialogBuilder;
 import com.coder.zzq.smartshow.dialog.type.impl.InputTextDialogBuilder;
 import com.coder.zzq.smartshow.dialog.type.impl.LoadingDialogBuilder;
@@ -39,14 +37,15 @@ public class SmartDialog {
     }
 
 
-    public static IEnsureDelayDialogBuilder ensureDelay(CharSequence msg) {
-        return new EnsureDelayDialogBuilder()
+    public static IEnsureDialogBuilder ensureDelay(CharSequence msg) {
+        return EnsureDialogBuilder.getInstance()
+                .delaySeconds(10)
                 .message(msg).cancelableOnTouchOutside(false);
     }
 
 
     public static IInputTextDialogBuilder inputText() {
-        return new InputTextDialogBuilder().title("输入框").cancelableOnTouchOutside(false);
+        return InputTextDialogBuilder.getInstance().title("输入框").cancelableOnTouchOutside(false);
     }
 
 
