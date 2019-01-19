@@ -8,51 +8,46 @@ import android.view.WindowManager;
 import com.coder.zzq.smartshow.core.EasyLogger;
 import com.coder.zzq.smartshow.core.SmartShow;
 import com.coder.zzq.smartshow.core.Utils;
-import com.coder.zzq.smartshow.dialog.type.IEnsureDialogBuilder;
-import com.coder.zzq.smartshow.dialog.type.IInputTextDialogBuilder;
-import com.coder.zzq.smartshow.dialog.type.ILoadingDialogBuilder;
-import com.coder.zzq.smartshow.dialog.type.INotificationDialogBuilder;
-import com.coder.zzq.smartshow.dialog.type.impl.EnsureDialogBuilder;
-import com.coder.zzq.smartshow.dialog.type.impl.InputTextDialogBuilder;
-import com.coder.zzq.smartshow.dialog.type.impl.LoadingDialogBuilder;
-import com.coder.zzq.smartshow.dialog.type.impl.NotificationDialogBuilder;
+import com.coder.zzq.smartshow.dialog.dialog.DialogCreator;
+import com.coder.zzq.smartshow.dialog.dialog.DialogWrapper;
+
 
 public class SmartDialog {
 
-    public static INotificationDialogBuilder notification(CharSequence msg) {
-        return NotificationDialogBuilder.getInstance().message(msg);
-    }
-
-    public static INotificationDialogBuilder notification(@StringRes int msgRes) {
-        return notification(SmartShow.getContext().getString(msgRes));
-    }
-
-
-    public static IEnsureDialogBuilder ensure(CharSequence msg) {
-        return EnsureDialogBuilder.getInstance().message(msg);
-    }
-
-    public static IEnsureDialogBuilder ensure(@StringRes int msgRes) {
-        return ensure(SmartShow.getContext().getString(msgRes));
-    }
-
-
-    public static IEnsureDialogBuilder ensureDelay(CharSequence msg) {
-        return EnsureDialogBuilder.getInstance()
-                .delaySeconds(10)
-                .message(msg).cancelableOnTouchOutside(false);
-    }
-
-
-    public static IInputTextDialogBuilder inputText() {
-        return InputTextDialogBuilder.getInstance().title("输入框").cancelableOnTouchOutside(false);
-    }
-
-
-    public static ILoadingDialogBuilder loading(CharSequence msg) {
-        return new LoadingDialogBuilder()
-                .msg(msg);
-    }
+//    public static INotificationDialogBuilder notification(CharSequence msg) {
+//        return NotificationDialogBuilder.getInstance().message(msg);
+//    }
+//
+//    public static INotificationDialogBuilder notification(@StringRes int msgRes) {
+//        return notification(SmartShow.getContext().getString(msgRes));
+//    }
+//
+//
+//    public static IEnsureDialogBuilder ensure(CharSequence msg) {
+//        return EnsureDialogBuilder.getInstance().message(msg);
+//    }
+//
+//    public static IEnsureDialogBuilder ensure(@StringRes int msgRes) {
+//        return ensure(SmartShow.getContext().getString(msgRes));
+//    }
+//
+//
+//    public static IEnsureDialogBuilder ensureDelay(CharSequence msg) {
+//        return EnsureDialogBuilder.getInstance()
+//                .delaySeconds(10)
+//                .message(msg).cancelableOnTouchOutside(false);
+//    }
+//
+//
+//    public static IInputTextDialogBuilder inputText() {
+//        return InputTextDialogBuilder.getInstance().title("输入框").cancelableOnTouchOutside(false);
+//    }
+//
+//
+//    public static ILoadingDialogBuilder loading(CharSequence msg) {
+//        return new LoadingDialogBuilder()
+//                .msg(msg);
+//    }
 
 
     public static boolean show(Activity activity, DialogCreator dialogCreator, DialogWrapper dialogWrapper) {

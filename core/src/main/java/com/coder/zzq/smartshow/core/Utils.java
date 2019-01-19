@@ -4,15 +4,19 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
+import android.support.annotation.LayoutRes;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.LinearLayout;
 
 import com.coder.zzq.smartshow.core.lifecycle.ActivityStack;
 
@@ -38,7 +42,7 @@ public class Utils {
 
 
     public static boolean isEmpty(CharSequence c) {
-        return c == null || c.toString().trim().isEmpty();
+        return TextUtils.isEmpty(c) || c.toString().trim().isEmpty();
     }
 
     public static int screenWidth() {
@@ -83,11 +87,35 @@ public class Utils {
     }
 
     public static void hideKeyboard(View view) {
-        if (view != null){
+        if (view != null) {
             InputMethodManager imm = (InputMethodManager) SmartShow.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
             if (imm != null) {
                 imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
             }
+        }
+    }
+
+    public static View inflate(@LayoutRes int layoutRes, ViewGroup viewGroup, boolean attach) {
+        return LayoutInflater.from(SmartShow.getContext()).inflate(layoutRes, viewGroup, attach);
+    }
+
+    public static View inflate(@LayoutRes int layoutRes, ViewGroup viewGroup) {
+        return inflate(layoutRes, viewGroup, viewGroup != null);
+    }
+
+    public static Drawable getDrawableFromRes(int drawableRes) {
+        return ContextCompat.getDrawable(SmartShow.getContext(), drawableRes);
+    }
+
+    public static void setBackgroundDrawable(View view, Drawable drawable) {
+        if (view == null) {
+            return;
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            view.setBackground(drawable);
+        } else {
+            view.setBackgroundDrawable(drawable);
         }
     }
 }

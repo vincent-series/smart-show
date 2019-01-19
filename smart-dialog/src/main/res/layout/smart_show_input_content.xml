@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.coder.zzq.smartshow.dialog.widget.DialogInput
+    <widget.DialogInput
         android:id="@+id/input_edt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

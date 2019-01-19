@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">smart-snackbar</string>
+    <string name="app_name">all</string>
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>

@@ -1,8 +1,8 @@
-package com.coder.zzq.smartshow.dialog.type;
+package com.coder.zzq.smartshow.dialog.dialog.type;
 
 import android.app.Activity;
 
-import com.coder.zzq.smartshow.dialog.DialogWrapper;
+import com.coder.zzq.smartshow.dialog.dialog.DialogWrapper;
 
 public interface ILoadingDialogBuilder {
 
