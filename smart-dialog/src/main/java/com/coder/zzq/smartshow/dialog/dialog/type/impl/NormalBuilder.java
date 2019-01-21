@@ -2,10 +2,10 @@ package com.coder.zzq.smartshow.dialog.dialog.type.impl;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 
 import com.coder.zzq.smartshow.core.Utils;
@@ -56,7 +56,7 @@ public class NormalBuilder<B> extends DialogCreator implements INormalBuilder<B>
 
     @Override
     public AlertDialog createDialog(Activity activity) {
-        AlertDialog dialog = create();
+        final AlertDialog dialog = create();
         dialog.setCanceledOnTouchOutside(mCancelableOnTouchOutside);
         if (mDarkAroundWhenShow) {
             dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
@@ -64,18 +64,21 @@ public class NormalBuilder<B> extends DialogCreator implements INormalBuilder<B>
             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         }
         dialog.getWindow().setBackgroundDrawableResource(mWindowBackground);
-        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-            @Override
-            public void onShow(DialogInterface dialog) {
-                AlertDialog alertDialog = (AlertDialog) dialog;
-                alertDialog.getWindow().getDecorView().findViewById(android.R.id.content).getLayoutParams().width = Utils.screenWidth() - Utils.dpToPx(70);
-                onShowCallback(alertDialog);
-            }
-        });
+        dialog.getWindow().getDecorView().getViewTreeObserver()
+                .addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+                    @Override
+                    public boolean onPreDraw() {
+                        dialog.getWindow().getDecorView().findViewById(android.R.id.content).getLayoutParams().width = Utils.screenWidth() - Utils.dpToPx(70);
+                        adjustDialogLayout(dialog);
+                        dialog.getWindow().getDecorView().getViewTreeObserver().removeOnPreDrawListener(this);
+                        return false;
+                    }
+                });
+
         return dialog;
     }
 
-    protected void onShowCallback(AlertDialog dialog) {
+    protected void adjustDialogLayout(AlertDialog dialog) {
 
     }
 

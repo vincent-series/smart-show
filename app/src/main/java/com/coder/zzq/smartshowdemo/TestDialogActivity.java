@@ -6,9 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.coder.zzq.smartshow.dialog.dialog.DialogWrapper;
+import com.coder.zzq.smartshow.dialog.dialog.IMessage;
 import com.coder.zzq.smartshow.dialog.dialog.type.IEnsureBuilder;
 import com.coder.zzq.smartshow.dialog.dialog.type.INotificationBuilder;
 import com.coder.zzq.smartshow.dialog.dialog.type.impl.EnsureBuilder;
+import com.coder.zzq.smartshow.dialog.dialog.type.impl.MessageBuilder;
 import com.coder.zzq.smartshow.dialog.dialog.type.impl.NotificationBuilder;
 
 public class TestDialogActivity extends AppCompatActivity {
@@ -29,18 +31,19 @@ public class TestDialogActivity extends AppCompatActivity {
     private DialogWrapper mNotification = new DialogWrapper();
 
     public void onNotificationClick(View view) {
-        IEnsureBuilder ensureBuilder = new EnsureBuilder(this,R.style.smart_show_normal_dialog);
-        ensureBuilder.confirmBtn("确定",null)
-                .cancelBtn("取消",null)
-                .message("确定不再关注此人？")
+
+        INotificationBuilder notificationBuilder = new NotificationBuilder(this,R.style.smart_show_normal_dialog);
+        notificationBuilder.message("充值成功")
+                .confirmBtn("确定",null)
                 .createAndShow(this,null);
-
-
-//        SmartDialog.notification("充值成功").createAndShow(this, null);
     }
 
     public void onEnsureClick(View view) {
-//        SmartDialog.ensure("确定不再关注此人？").createAndShow(this, null);
+        IEnsureBuilder ensureBuilder = new EnsureBuilder(this, R.style.smart_show_normal_dialog);
+        ensureBuilder.confirmBtn("确定", null)
+                .cancelBtn("取消", null)
+                .message("确定不再关注此人？")
+                .createAndShow(this, null);
     }
 
     public void onEnsureDelayClick(View view) {

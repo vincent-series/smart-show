@@ -8,5 +8,5 @@ public interface IConfirmBtnBuilder<B> {
 
     B confirmBtnTextStyle(@ColorInt int color, float textSizeSp, boolean bold);
 
-    B delayConfirmSeconds(int seconds);
+    B secondsDelayConfirm(int seconds);
 }

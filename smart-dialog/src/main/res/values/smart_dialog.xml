@@ -1,14 +1,20 @@
 <resources>
     <string name="app_name">smart-dialog</string>
+
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="smart_show_light_gray">#eeeeee</color>
+
+    <item name="smart_show_dialog_confirm_btn" type="id" />
+    <item name="smart_show_dialog_cancel_btn" type="id" />
 
 
     <style name="smart_show_loading_dialog">
@@ -31,14 +37,26 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
         <item name="android:backgroundDimEnabled">true</item>
+        <item name="buttonStyle">@style/smart_show_dialog_horizontal_btn</item>
     </style>
 
 
     <style name="smart_show_dialog_button">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">center</item>
         <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:background">@drawable/smart_show_dialog_btn_bg</item>
+        <item name="android:textAppearance">@android:style/TextAppearance.Widget.Button</item>
+    </style>
+
+    <style name="smart_show_dialog_horizontal_btn" parent="smart_show_dialog_button">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="smart_show_dialog_vertical_btn" parent="smart_show_dialog_button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
     </style>
 </resources>
