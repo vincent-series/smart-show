@@ -3,7 +3,7 @@ package com.coder.zzq.smartshow.dialog.dialog.type;
 import android.app.Activity;
 import android.support.annotation.DrawableRes;
 
-import com.coder.zzq.smartshow.dialog.dialog.DialogWrapper;
+import com.coder.zzq.smartshow.dialog.dialog.DialogCreator;
 
 public interface INormalBuilder<B> {
     B darkAroundWhenShow(boolean dim);
@@ -14,5 +14,5 @@ public interface INormalBuilder<B> {
 
     B cancelableOnTouchOutside(boolean b);
 
-    boolean createAndShow(Activity activity, DialogWrapper dialogWrapper);
+    boolean createAndShow(Activity activity, DialogCreator dialogCreator);
 }

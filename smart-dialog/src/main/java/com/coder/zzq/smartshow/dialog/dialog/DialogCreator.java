@@ -1,18 +1,31 @@
 package com.coder.zzq.smartshow.dialog.dialog;
 
 import android.app.Activity;
-import android.content.Context;
+import android.app.Dialog;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 
-public abstract class DialogCreator extends AlertDialog.Builder {
-    public DialogCreator(@NonNull Context context, int themeResId) {
-        super(context, themeResId);
+import com.coder.zzq.smartshow.core.Utils;
+
+public abstract class DialogCreator {
+    protected Dialog mDialog;
+
+    public abstract Dialog createDialog(Activity activity);
+
+    public void resetDialog(Dialog dialog) {
+        if (dialog.isShowing()) {
+            dialog.dismiss();
+        }
     }
 
-    public abstract AlertDialog createDialog(Activity activity);
-
-    public void resetDialog(AlertDialog dialog) {
-
+    public Dialog getDialog(@NonNull Activity activity) {
+        if (activity == null || activity.isFinishing() || Utils.isActivityDestroyed(activity)) {
+            return null;
+        }
+        if (mDialog == null) {
+            createDialog(activity);
+        } else {
+            resetDialog(mDialog);
+        }
+        return mDialog;
     }
 }

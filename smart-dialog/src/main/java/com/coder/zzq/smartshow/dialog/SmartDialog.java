@@ -1,19 +1,16 @@
 package com.coder.zzq.smartshow.dialog;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
-import android.support.annotation.StringRes;
 import android.view.WindowManager;
 
 import com.coder.zzq.smartshow.core.EasyLogger;
-import com.coder.zzq.smartshow.core.SmartShow;
-import com.coder.zzq.smartshow.core.Utils;
 import com.coder.zzq.smartshow.dialog.dialog.DialogCreator;
-import com.coder.zzq.smartshow.dialog.dialog.DialogWrapper;
 
 
 public class SmartDialog {
-
+    AlertDialog.Builder
 //    public static INotificationDialogBuilder notification(CharSequence msg) {
 //        return NotificationDialogBuilder.getInstance().message(msg);
 //    }
@@ -50,12 +47,12 @@ public class SmartDialog {
 //    }
 
 
-    public static boolean show(Activity activity, DialogCreator dialogCreator, DialogWrapper dialogWrapper) {
-        if (activity == null || dialogCreator == null || activity.isFinishing() || Utils.isActivityDestroyed(activity)) {
+    public static boolean show(Activity activity, DialogCreator dialogCreator) {
+        if (dialogCreator == null) {
             return false;
         }
 
-        Dialog dialog = getDialog(activity, dialogCreator, dialogWrapper);
+        Dialog dialog = dialogCreator.getDialog(activity);
 
         if (dialog != null) {
             try {
@@ -67,21 +64,6 @@ public class SmartDialog {
         }
 
         return false;
-    }
-
-    private static Dialog getDialog(Activity activity, DialogCreator dialogCreator, DialogWrapper dialogWrapper) {
-        if (dialogWrapper == null) {
-            EasyLogger.d("dialog wrapper == null and create dialog from dialogCreator");
-            return dialogCreator.createDialog(activity);
-        } else if (dialogWrapper.getDialog() == null) {
-            EasyLogger.d("dialog wrapper != null but not contain dialog,so create dialog from dialogCreator");
-            dialogWrapper.setDialog(dialogCreator.createDialog(activity));
-            return dialogWrapper.getDialog();
-        } else {
-            EasyLogger.d("get dialog form wrapper: dialog -> " + (dialogWrapper.getDialog() == null ? "null" : dialogWrapper.getDialog().toString()));
-            dialogCreator.resetDialog(dialogWrapper.getDialog());
-            return dialogWrapper.getDialog();
-        }
     }
 
 }
