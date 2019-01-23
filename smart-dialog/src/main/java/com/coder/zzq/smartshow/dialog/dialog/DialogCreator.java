@@ -12,9 +12,7 @@ public abstract class DialogCreator {
     public abstract Dialog createDialog(Activity activity);
 
     public void resetDialog(Dialog dialog) {
-        if (dialog.isShowing()) {
-            dialog.dismiss();
-        }
+
     }
 
     public Dialog getDialog(@NonNull Activity activity) {

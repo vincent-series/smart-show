@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import com.coder.zzq.smartshow.dialog.R;
 import com.coder.zzq.smartshow.dialog.dialog.type.IEnsureBuilder;
 
-public class EnsureBuilder extends MessageBuilder<IEnsureBuilder> implements IEnsureBuilder {
+public class EnsureBuilder extends MessageDialogCreator<IEnsureBuilder> implements IEnsureBuilder {
 
     public EnsureBuilder(@NonNull Context context, int themeResId) {
         super(context, themeResId);

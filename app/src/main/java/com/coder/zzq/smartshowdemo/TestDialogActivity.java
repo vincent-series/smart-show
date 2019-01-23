@@ -6,11 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.coder.zzq.smartshow.dialog.dialog.DialogWrapper;
-import com.coder.zzq.smartshow.dialog.dialog.IMessage;
 import com.coder.zzq.smartshow.dialog.dialog.type.IEnsureBuilder;
 import com.coder.zzq.smartshow.dialog.dialog.type.INotificationBuilder;
 import com.coder.zzq.smartshow.dialog.dialog.type.impl.EnsureBuilder;
-import com.coder.zzq.smartshow.dialog.dialog.type.impl.MessageBuilder;
 import com.coder.zzq.smartshow.dialog.dialog.type.impl.NotificationBuilder;
 
 public class TestDialogActivity extends AppCompatActivity {

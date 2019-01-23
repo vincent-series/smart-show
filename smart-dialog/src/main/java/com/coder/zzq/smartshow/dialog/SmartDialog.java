@@ -10,7 +10,6 @@ import com.coder.zzq.smartshow.dialog.dialog.DialogCreator;
 
 
 public class SmartDialog {
-    AlertDialog.Builder
 //    public static INotificationDialogBuilder notification(CharSequence msg) {
 //        return NotificationDialogBuilder.getInstance().message(msg);
 //    }
