@@ -1,13 +1,7 @@
 package com.coder.zzq.smartshow.dialog.dialog.type.impl;
 
-import android.content.DialogInterface;
 import android.support.annotation.ColorInt;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.ButtonBarLayout;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.FrameLayout;
 
 import com.coder.zzq.smartshow.core.Utils;
 import com.coder.zzq.smartshow.dialog.R;
@@ -15,7 +9,7 @@ import com.coder.zzq.smartshow.dialog.dialog.DialogBtnClickListener;
 import com.coder.zzq.smartshow.dialog.dialog.IMessage;
 
 
-public class MessageDialogCreator<B> extends NormalDialogCreator<B> implements IMessage<B> {
+public abstract class MessageDialogCreator<B> extends NormalDialogCreator<B> implements IMessage<B> {
     protected CharSequence mTitle;
     protected CharSequence mConfirmLabel;
     protected DialogBtnClickListener mOnConfirmClickListener;
@@ -25,12 +19,14 @@ public class MessageDialogCreator<B> extends NormalDialogCreator<B> implements I
     protected boolean mConfirmLabelBold;
     protected int mSecondsDelayConfirm;
 
+    protected CharSequence mMessage;
+
     @Override
     public B message(CharSequence msg) {
         if (Utils.isEmpty(msg)) {
             return (B) this;
         }
-        mTitle = msg;
+        mMessage = msg;
         return (B) this;
     }
 
@@ -44,6 +40,8 @@ public class MessageDialogCreator<B> extends NormalDialogCreator<B> implements I
     @Override
     public B confirmBtnTextStyle(int color, float textSizeSp, boolean bold) {
         mConfirmLabelColor = color;
+        mConfirmLabelTextSizeSp = textSizeSp;
+        mConfirmLabelBold = bold;
         return (B) this;
     }
 
@@ -66,9 +64,33 @@ public class MessageDialogCreator<B> extends NormalDialogCreator<B> implements I
 
     protected StringBuilder mConfirmLabelWhenDelay;
 
+    @Override
+    protected void initView() {
+        initTitle((FrameLayout) mDialogRootView.findViewById(R.id.smart_show_dialog_title_wrapper));
+        initBody((FrameLayout) mDialogRootView.findViewById(R.id.smart_show_dialog_body_wrapper));
+        initBtn((FrameLayout) mDialogRootView.findViewById(R.id.smart_show_dialog_btn_wrapper));
+    }
+
+    protected void initTitle(FrameLayout wrapper) {
+        Utils.inflate(provideTitleView(), wrapper, true);
+    }
+
+    protected abstract int provideTitleView();
+
+    protected void initBody(FrameLayout wrapper) {
+        Utils.inflate(provideBodyView(), wrapper, true);
+    }
+
+    protected abstract int provideBodyView();
+
+    protected void initBtn(FrameLayout wrapper) {
+        Utils.inflate(provideBtnView(), wrapper, true);
+    }
+
+    protected abstract int provideBtnView();
 
     @Override
     protected int provideDialogRootView() {
-        return R.layout.smart_show_normal_dialog;
+        return R.layout.smart_show_message_dialog;
     }
 }

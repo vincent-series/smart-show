@@ -75,7 +75,7 @@ public abstract class NormalDialogCreator<B> extends DialogCreator implements IN
         return R.style.smart_show_normal_dialog;
     }
 
-    private void initView() {
+    protected void initView() {
 
     }
 

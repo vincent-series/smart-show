@@ -9,8 +9,9 @@
         android:layout_height="0.5dp"
         android:background="#cccccc" />
 
-    <FrameLayout
-        android:id="@id/smart_show_dialog_confirm_btn"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <TextView
+        android:id="@+id/smart_show_dialog_confirm_btn"
+        style="@style/smart_show_dialog_button"
+        android:text="确定"
+        android:textColor="@color/colorPrimary" />
 </LinearLayout>

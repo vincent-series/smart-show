@@ -9,7 +9,7 @@ import com.coder.zzq.smartshow.dialog.dialog.DialogWrapper;
 import com.coder.zzq.smartshow.dialog.dialog.type.IEnsureBuilder;
 import com.coder.zzq.smartshow.dialog.dialog.type.INotificationBuilder;
 import com.coder.zzq.smartshow.dialog.dialog.type.impl.EnsureBuilder;
-import com.coder.zzq.smartshow.dialog.dialog.type.impl.NotificationBuilder;
+import com.coder.zzq.smartshow.dialog.dialog.type.impl.NotificationDialogCreator;
 
 public class TestDialogActivity extends AppCompatActivity {
     private DialogWrapper mDialogWrapper = new DialogWrapper();
@@ -30,7 +30,7 @@ public class TestDialogActivity extends AppCompatActivity {
 
     public void onNotificationClick(View view) {
 
-        INotificationBuilder notificationBuilder = new NotificationBuilder(this,R.style.smart_show_normal_dialog);
+        INotificationBuilder notificationBuilder = new NotificationDialogCreator(this,R.style.smart_show_normal_dialog);
         notificationBuilder.message("充值成功")
                 .confirmBtn("确定",null)
                 .createAndShow(this,null);
