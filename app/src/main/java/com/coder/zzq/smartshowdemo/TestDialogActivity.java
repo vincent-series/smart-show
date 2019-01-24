@@ -1,6 +1,7 @@
 package com.coder.zzq.smartshowdemo;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -50,7 +51,11 @@ public class TestDialogActivity extends AppCompatActivity {
 
 
     public void onInputClick(View view) {
-
+        DialogCreatorFactory.input()
+                .inputAtMost(10)
+                .hint("输入姓名")
+                .inputCountMarkColor(Color.GREEN)
+                .createAndShow(this);
     }
 
     ILoadingDialogCreator mLoadingDialogCreator = DialogCreatorFactory.loading();

@@ -15,5 +15,5 @@ public interface DialogBtnClickListener {
     @interface DialogBtn {
     }
 
-    void onBtnClick(Dialog dialog, @DialogBtn int which);
+    void onBtnClick(Dialog dialog, @DialogBtn int which, Object data);
 }

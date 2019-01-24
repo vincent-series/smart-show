@@ -4,6 +4,7 @@ import android.support.annotation.LayoutRes;
 import android.widget.FrameLayout;
 
 import com.coder.zzq.smartshow.core.Utils;
+import com.coder.zzq.smartshow.dialog.DialogBtnClickListener;
 import com.coder.zzq.smartshow.dialog.R;
 
 abstract class BranchDialogCreator<B> extends NormalDialogCreator<B> {
@@ -46,4 +47,12 @@ abstract class BranchDialogCreator<B> extends NormalDialogCreator<B> {
 
     @LayoutRes
     protected abstract int provideFooterView();
+
+    protected void onBtnClick(DialogBtnClickListener clickListener, @DialogBtnClickListener.DialogBtn int which, Object data) {
+        if (clickListener == null) {
+            mDialog.dismiss();
+        } else {
+            clickListener.onBtnClick(mDialog, which, data);
+        }
+    }
 }

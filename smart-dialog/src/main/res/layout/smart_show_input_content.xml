@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <widget.DialogInput
-        android:id="@+id/input_edt"
+    <EditText
+        android:id="@+id/smart_show_input_edt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/smart_show_round_edt_bg"
@@ -18,7 +18,7 @@
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/inpu_num"
+        android:id="@+id/smart_show_input_count_mark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"

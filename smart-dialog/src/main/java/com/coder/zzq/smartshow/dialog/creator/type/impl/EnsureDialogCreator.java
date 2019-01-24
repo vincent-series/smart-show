@@ -66,11 +66,7 @@ class EnsureDialogCreator extends MessageDialogCreator<IEnsureDialogCreator> imp
     public void onClick(View v) {
         super.onClick(v);
         if (v.getId() == R.id.smart_show_dialog_cancel_btn) {
-            if (mOnCancelClickListener == null) {
-                mDialog.dismiss();
-            } else {
-                mOnCancelClickListener.onBtnClick(mDialog, DialogBtnClickListener.BTN_CANCEL);
-            }
+            onBtnClick(mOnCancelClickListener, DialogBtnClickListener.BTN_CANCEL, null);
         }
     }
 }

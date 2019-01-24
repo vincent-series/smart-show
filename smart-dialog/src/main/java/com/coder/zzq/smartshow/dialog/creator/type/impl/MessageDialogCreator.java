@@ -144,11 +144,7 @@ public abstract class MessageDialogCreator<B> extends BranchDialogCreator<B> imp
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.smart_show_dialog_confirm_btn) {
-            if (mOnConfirmClickListener == null) {
-                mDialog.dismiss();
-            } else {
-                mOnConfirmClickListener.onBtnClick(mDialog, DialogBtnClickListener.BTN_CANCEL);
-            }
+            onBtnClick(mOnConfirmClickListener, DialogBtnClickListener.BTN_CONFIRM, null);
         }
     }
 
