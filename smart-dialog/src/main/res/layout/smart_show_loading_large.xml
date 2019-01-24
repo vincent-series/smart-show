@@ -6,30 +6,30 @@
     android:orientation="vertical">
 
     <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:id="@+id/smart_show_progress_bar"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="6dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="22dp"
         android:indeterminateBehavior="repeat"
         android:indeterminateDrawable="@drawable/smart_show_loading_anim"
         android:indeterminateOnly="true" />
 
     <TextView
-        android:id="@+id/loading_message"
+        android:id="@+id/smart_show_loading_message_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="18dp"
-        android:layout_marginRight="18dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
         android:ellipsize="end"
         android:gravity="center_horizontal"
         android:maxLines="1"
         android:maxWidth="120dp"
-        android:minWidth="40dp"
-        android:paddingBottom="10dp"
+        android:minWidth="80dp"
+        android:paddingBottom="14dp"
         android:singleLine="true"
         android:text="加载中..."
         android:textColor="#ffffff"
-        android:textSize="12sp" />
+        android:textSize="15sp" />
 </LinearLayout>

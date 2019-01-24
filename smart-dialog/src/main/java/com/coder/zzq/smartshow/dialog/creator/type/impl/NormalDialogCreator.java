@@ -1,4 +1,4 @@
-package com.coder.zzq.smartshow.dialog.dialog.type.impl;
+package com.coder.zzq.smartshow.dialog.creator.type.impl;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -12,10 +12,9 @@ import android.view.WindowManager;
 import com.coder.zzq.smartshow.core.Utils;
 import com.coder.zzq.smartshow.dialog.R;
 import com.coder.zzq.smartshow.dialog.SmartDialog;
-import com.coder.zzq.smartshow.dialog.dialog.DialogCreator;
-import com.coder.zzq.smartshow.dialog.dialog.type.INormalDialogCreator;
+import com.coder.zzq.smartshow.dialog.creator.type.INormalDialogCreator;
 
-public abstract class NormalDialogCreator<B> extends DialogCreator implements INormalDialogCreator<B> {
+abstract class NormalDialogCreator<B> extends DialogCreator implements INormalDialogCreator<B> {
     protected boolean mDarkAroundWhenShow;
     protected boolean mCancelableOnTouchOutside;
     protected boolean mCancelable;
@@ -23,6 +22,12 @@ public abstract class NormalDialogCreator<B> extends DialogCreator implements IN
     @DrawableRes
     protected int mWindowBackground;
 
+    public NormalDialogCreator() {
+        mWindowBackground = R.drawable.smart_show_round_dialog_bg;
+        mCancelable = true;
+        mCancelableOnTouchOutside = true;
+        mDarkAroundWhenShow = true;
+    }
 
     @Override
     public B darkAroundWhenShow(boolean dim) {
@@ -55,20 +60,19 @@ public abstract class NormalDialogCreator<B> extends DialogCreator implements IN
 
     @Override
     public Dialog createDialog(Activity activity) {
-        AppCompatDialog dialog = new AppCompatDialog(activity, provideDialogStyle());
+        mDialog = new AppCompatDialog(activity, provideDialogStyle());
         if (mDarkAroundWhenShow) {
-            dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            mDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         } else {
-            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            mDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         }
-        dialog.getWindow().setBackgroundDrawableResource(mWindowBackground);
-        dialog.setCancelable(mCancelable);
-        dialog.setCanceledOnTouchOutside(mCancelableOnTouchOutside);
-        mDialogRootView = Utils.inflate(provideDialogRootView(), null);
+        mDialog.getWindow().setBackgroundDrawableResource(mWindowBackground);
+        mDialog.setCancelable(mCancelable);
+        mDialog.setCanceledOnTouchOutside(mCancelableOnTouchOutside);
         initView();
         ViewGroup.MarginLayoutParams rootLp = new ViewGroup.MarginLayoutParams(provideDialogWidth(), ViewGroup.LayoutParams.WRAP_CONTENT);
-        dialog.setContentView(mDialogRootView, rootLp);
-        return null;
+        mDialog.setContentView(mDialogRootView, rootLp);
+        return mDialog;
     }
 
     protected int provideDialogStyle() {
@@ -76,7 +80,7 @@ public abstract class NormalDialogCreator<B> extends DialogCreator implements IN
     }
 
     protected void initView() {
-
+        mDialogRootView = Utils.inflate(provideDialogRootView(), null);
     }
 
     protected int provideDialogWidth() {

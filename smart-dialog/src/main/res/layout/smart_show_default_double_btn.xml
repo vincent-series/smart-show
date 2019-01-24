@@ -14,8 +14,9 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <FrameLayout
+        <TextView
             android:id="@id/smart_show_dialog_cancel_btn"
+            style="@style/smart_show_dialog_button"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" />
@@ -26,11 +27,12 @@
             android:layout_height="match_parent"
             android:background="#cccccc" />
 
-        <FrameLayout
+        <TextView
+            android:textColor="@color/colorPrimary"
             android:id="@id/smart_show_dialog_confirm_btn"
+            style="@style/smart_show_dialog_button"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" />
-
     </LinearLayout>
 </LinearLayout>

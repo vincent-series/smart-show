@@ -7,11 +7,11 @@
 
     <ProgressBar
         android:id="@+id/progress_bar"
-        android:layout_width="34dp"
-        android:layout_height="34dp"
+        android:layout_width="27dp"
+        android:layout_height="27dp"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="12dp"
         android:indeterminateBehavior="repeat"
         android:indeterminateDrawable="@drawable/smart_show_loading_anim"
         android:indeterminateOnly="true" />
@@ -20,16 +20,16 @@
         android:id="@+id/loading_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:ellipsize="end"
         android:gravity="center_horizontal"
         android:maxLines="1"
         android:maxWidth="120dp"
-        android:minWidth="80dp"
-        android:paddingBottom="14dp"
+        android:minWidth="38dp"
+        android:paddingBottom="10dp"
         android:singleLine="true"
         android:text="加载中..."
         android:textColor="#ffffff"
-        android:textSize="15sp" />
+        android:textSize="12sp" />
 </LinearLayout>

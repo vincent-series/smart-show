@@ -1,9 +1,12 @@
-package com.coder.zzq.smartshow.dialog.dialog;
+package com.coder.zzq.smartshow.dialog.creator.type;
 
 import android.content.DialogInterface;
 import android.support.annotation.ColorInt;
 
-public interface IConfirmBtnBuilder<B> {
+import com.coder.zzq.smartshow.dialog.DialogBtnClickListener;
+
+
+public interface IConfirmBtnCreator<B> {
     B confirmBtn(CharSequence label, DialogBtnClickListener clickListener);
 
     B confirmBtnTextStyle(@ColorInt int color, float textSizeSp, boolean bold);

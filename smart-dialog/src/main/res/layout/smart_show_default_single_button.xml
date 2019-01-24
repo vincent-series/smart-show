@@ -10,8 +10,10 @@
         android:background="#cccccc" />
 
     <TextView
-        android:id="@+id/smart_show_dialog_confirm_btn"
+        android:id="@id/smart_show_dialog_confirm_btn"
         style="@style/smart_show_dialog_button"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:text="确定"
         android:textColor="@color/colorPrimary" />
 </LinearLayout>

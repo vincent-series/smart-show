@@ -5,14 +5,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.coder.zzq.smartshow.dialog.dialog.DialogWrapper;
-import com.coder.zzq.smartshow.dialog.dialog.type.IEnsureBuilder;
-import com.coder.zzq.smartshow.dialog.dialog.type.INotificationBuilder;
-import com.coder.zzq.smartshow.dialog.dialog.type.impl.EnsureBuilder;
-import com.coder.zzq.smartshow.dialog.dialog.type.impl.NotificationDialogCreator;
+import com.coder.zzq.smartshow.dialog.creator.type.IEnsureDialogCreator;
+import com.coder.zzq.smartshow.dialog.creator.type.ILoadingDialogCreator;
+import com.coder.zzq.smartshow.dialog.creator.type.INotificationCreator;
+import com.coder.zzq.smartshow.dialog.creator.type.impl.DialogCreatorFactory;
 
 public class TestDialogActivity extends AppCompatActivity {
-    private DialogWrapper mDialogWrapper = new DialogWrapper();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,51 +24,46 @@ public class TestDialogActivity extends AppCompatActivity {
         startActivity(new Intent(this, TestDialogActivity.class));
     }
 
-    private DialogWrapper mNotification = new DialogWrapper();
+    INotificationCreator mNotificationCreator = DialogCreatorFactory.notification();
 
     public void onNotificationClick(View view) {
-
-        INotificationBuilder notificationBuilder = new NotificationDialogCreator(this,R.style.smart_show_normal_dialog);
-        notificationBuilder.message("充值成功")
-                .confirmBtn("确定",null)
-                .createAndShow(this,null);
+        mNotificationCreator.message("充值成功")
+                .title("提示")
+                .secondsDelayConfirm(5)
+                .createAndShow(this);
     }
 
+    IEnsureDialogCreator mEnsureDialogCreator = DialogCreatorFactory.ensure();
+
     public void onEnsureClick(View view) {
-        IEnsureBuilder ensureBuilder = new EnsureBuilder(this, R.style.smart_show_normal_dialog);
-        ensureBuilder.confirmBtn("确定", null)
+        mEnsureDialogCreator.confirmBtn("确定", null)
+                .secondsDelayConfirm(5)
                 .cancelBtn("取消", null)
                 .message("确定不再关注此人？")
-                .createAndShow(this, null);
+                .createAndShow(this);
     }
 
     public void onEnsureDelayClick(View view) {
-//        SmartDialog.ensureDelay("确定启用开发者模式？").delaySeconds(10).createAndShow(this, mNotification);
+
     }
 
 
     public void onInputClick(View view) {
-//        SmartDialog.inputText().hint("请输入建议")
-//                .inputAtMost(70)
-//                .positiveBtn("提交", new DialogBtn.onDialogBtnClickListener() {
-//                    @Override
-//                    public void onDialogBtnClick(Dialog dialog, DialogBtn btn, Object data) {
-//
-//                    }
-//                })
-//                .createAndShow(this, mNotification);
 
     }
 
+    ILoadingDialogCreator mLoadingDialogCreator = DialogCreatorFactory.loading();
+
     public void onLoadingLargeClick(View view) {
-//        SmartDialog.loading("加载中").large().create(this).show();
+
+        mLoadingDialogCreator.message("加载中...").large().createAndShow(this);
+
     }
 
     public void onLoadingMiddleClick(View view) {
-//        SmartDialog.loading("加载中").middle().create(this).show();
+
     }
 
     public void onLoadingSmallClick(View view) {
-//        SmartDialog.loading("加载中").small().create(this).show();
     }
 }

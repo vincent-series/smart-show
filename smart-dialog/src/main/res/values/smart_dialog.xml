@@ -15,6 +15,8 @@
 
     <item name="smart_show_dialog_confirm_btn" type="id" />
     <item name="smart_show_dialog_cancel_btn" type="id" />
+    <item name="smart_show_dialog_title_view" type="id" />
+    <item name="smart_show_dialog_message_view" type="id" />
 
 
     <style name="smart_show_loading_dialog">
@@ -37,7 +39,6 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
         <item name="android:backgroundDimEnabled">true</item>
-        <item name="buttonStyle">@style/smart_show_dialog_horizontal_btn</item>
     </style>
 
 
@@ -45,18 +46,6 @@
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">center</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:background">@drawable/smart_show_dialog_btn_bg</item>
-        <item name="android:textAppearance">@android:style/TextAppearance.Widget.Button</item>
-    </style>
-
-    <style name="smart_show_dialog_horizontal_btn" parent="smart_show_dialog_button">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">match_parent</item>
-    </style>
-
-    <style name="smart_show_dialog_vertical_btn" parent="smart_show_dialog_button">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">0dp</item>
     </style>
 </resources>
