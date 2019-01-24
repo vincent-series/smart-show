@@ -76,7 +76,7 @@ abstract class NormalDialogCreator<B> extends DialogCreator implements INormalDi
     }
 
     protected int provideDialogStyle() {
-        return R.style.smart_show_normal_dialog;
+        return R.style.smart_show_dialog;
     }
 
     protected void initView() {

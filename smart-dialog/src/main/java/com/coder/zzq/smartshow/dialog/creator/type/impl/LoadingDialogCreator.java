@@ -65,7 +65,7 @@ public class LoadingDialogCreator extends NormalDialogCreator<ILoadingDialogCrea
 
     @Override
     protected int provideDialogStyle() {
-        return R.style.smart_show_loading_dialog;
+        return R.style.smart_show_dialog;
     }
 
     @Override

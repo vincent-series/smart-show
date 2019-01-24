@@ -38,6 +38,7 @@ public class TestDialogActivity extends AppCompatActivity {
     public void onEnsureClick(View view) {
         mEnsureDialogCreator.confirmBtn("确定", null)
                 .secondsDelayConfirm(5)
+                .darkAroundWhenShow(false)
                 .cancelBtn("取消", null)
                 .message("确定不再关注此人？")
                 .createAndShow(this);
@@ -56,7 +57,8 @@ public class TestDialogActivity extends AppCompatActivity {
 
     public void onLoadingLargeClick(View view) {
 
-        mLoadingDialogCreator.message("加载中...").large().createAndShow(this);
+        mLoadingDialogCreator.message("加载中...").large()
+                .createAndShow(this);
 
     }
 
