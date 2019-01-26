@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.coder.zzq.smartshow.core.Utils;
 import com.coder.zzq.smartshow.dialog.DialogBtnClickListener;
 import com.coder.zzq.smartshow.dialog.creator.type.IEnsureDialogCreator;
 import com.coder.zzq.smartshow.dialog.creator.type.IInputTextDialogCreator;
 import com.coder.zzq.smartshow.dialog.creator.type.ILoadingDialogCreator;
 import com.coder.zzq.smartshow.dialog.creator.type.INotificationCreator;
 import com.coder.zzq.smartshow.dialog.creator.type.impl.DialogCreatorFactory;
+import com.coder.zzq.smartshow.toast.SmartToast;
 
 public class TestDialogActivity extends AppCompatActivity {
 
@@ -53,7 +55,7 @@ public class TestDialogActivity extends AppCompatActivity {
                 .createAndShow(this);
     }
 
-    IInputTextDialogCreator mInputTextDialogCreator = DialogCreatorFactory.input();
+    private IInputTextDialogCreator mInputTextDialogCreator = DialogCreatorFactory.input();
 
     public void onInputClick(View view) {
         mInputTextDialogCreator
@@ -62,10 +64,16 @@ public class TestDialogActivity extends AppCompatActivity {
                 .confirmBtn("确定", new DialogBtnClickListener() {
                     @Override
                     public void onBtnClick(Dialog dialog, int which, Object data) {
-                        data.toString();
+                        if (data.toString().length() > 70) {
+                            SmartToast.showInCenter("最多只能输入70个字符");
+                            return;
+                        } else {
+                            dialog.dismiss();
+                            //do something
+                        }
                     }
                 })
-                .inputCountMarkColor(Color.GREEN)
+                .inputCountMarkColor(Utils.getColorFromRes(R.color.colorPrimary))
                 .createAndShow(this);
     }
 

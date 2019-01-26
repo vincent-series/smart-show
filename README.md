@@ -722,10 +722,11 @@ public class SnackbarActivity extends BaseActivity implements ITopbarShowCallbac
     }
 </code></pre>
 #### 预定义的DialogCreator
-可设置创建的Dialog的各种属性，在第一次创建Dialog时应用，之后复用Dialog。</br>
+可设置Dialog的各种属性，在第一次创建Dialog时应用，之后复用Dialog。</br>
 一旦已创建了Dialog，修改DialogCreator各种配置值，并不会应用到复用的对话框上。</br>
 下面是一些公共方法
 <pre><code>
+public interface INormalDialogCreator<B> {
     //Dialog显示时窗口以外区域是否变暗
     B darkAroundWhenShow(boolean dim);
     //设置窗口背景
@@ -735,15 +736,16 @@ public class SnackbarActivity extends BaseActivity implements ITopbarShowCallbac
     //触碰Dialog窗口外的区域是否取消掉Dialog
     B cancelableOnTouchOutside(boolean b);
     //创建并显示Dialog，如果已创建则复用之，直接显示
+    //返回值为是否真正显示了Dialog，当activity为null或者已destroyed或finishing时，返回false
     boolean createAndShow(Activity activity);
+    }
 </code></pre>
 #### LoadingDialogCreator
-loading方法获取ILoadingDialogBuilder对象，可传入loading框上的提示文本
 <pre><code>
 
     private ILoadingDialogCreator mLoadingDialogCreator = DialogCreatorFactory.loading();
 
-    public void onBtnClick(View view) {
+    public void onLoadingClick(View view) {
         mLoadingDialogCreator.message("加载中").large().createAndShow(this);
     } 
     
@@ -755,11 +757,9 @@ ILoadingDialogCreator的全部方法
     ILoadingDialogCreator message(CharSequence msg);
 
 
-
     //设置Loading框的大小为large
     
     ILoadingDialogCreator large();
-
 
 
     //设置Loading框的大小为middle
@@ -767,25 +767,19 @@ ILoadingDialogCreator的全部方法
     ILoadingDialogCreator middle();
 
 
-
     //设置Loading框的大小为small,此时提示文本隐藏了，只显示loading动画
     
     ILoadingDialogCreator small();
 
-
-
-    //设置完毕，创建并显示对话框,返回值为是否显示了对话框，
-    
-    //当activity为null值或者已销毁或者调用了finish而未显示Dialog时，
-    
-    //此返回值为false
-    
-    boolean createAndShow(Activity activity);
 </code></pre>
-#### 通知框
-调用notification方法获取INotificationDialogBuilder对象，可传入通知信息
+#### NotificationCreator
 <pre><code>
-        SmartDialog.notification("充值成功").create(this).show();
+    INotificationCreator mNotificationCreator = DialogCreatorFactory.notification();
+
+    public void onNotificationClick(View view) {
+        mNotificationCreator.message("充值成功")
+                .createAndShow(this);
+    }
 </code></pre>
 INotificationDialogBuilder的全部方法
 <pre><code>
@@ -794,28 +788,10 @@ INotificationDialogBuilder的全部方法
     INotificationDialogBuilder title(CharSequence title);
 
 
-
     //设置确定按钮的文本及点击事件
     
     INotificationDialogBuilder positiveBtn(CharSequence label, DialogBtnClickListener clickListener);
 
-
-
-    //对话框是否可点击back键消失
-    
-    INotificationDialogBuilder cancelable(boolean b);
-
-
-    
-    //触碰对话框以外区域可否消失对话框
-    
-    INotificationDialogBuilder cancelableOnTouchOutside(boolean b);
-
-
-
-    //设置完毕，创建对话框
-    
-    Dialog create(Activity activity);
 </code></pre>
 #### 确认框
 确认框与通知框类似，只是多了一个取消按钮
@@ -828,50 +804,28 @@ INotificationDialogBuilder的全部方法
     
     IEnsureDialogBuilder negativeBtn(CharSequence label, DialogBtnClickListener clickListener);
 </code></pre>
-#### 延迟框
-延迟框与确认框类似，只是确定按钮在延迟一定时间后方可点击
+#### InputTextDialogCreator
 <pre><code>
-    SmartDialog.ensureDelay("确定启用开发者模式？").create(this).show();
-</code></pre>
-除了具有IEnsureDialogBuilder的全部方法外，IEnsureDelayDialogBuilder如外的方法
-<pre><code>
-    //设置确定按钮延迟多少秒方可点击
-    
-    IEnsureDelayDialogBuilder delay(int seconds);
-</code></pre>
-#### 输入框
-输入框具有确认框除msg(CharSequence msg)外的全部方法
-<pre><code>
-        SmartDialog.inputText().hint("请输入建议")
+    private IInputTextDialogCreator mInputTextDialogCreator = DialogCreatorFactory.input();
 
+    public void onInputClick(View view) {
+        mInputTextDialogCreator
                 .inputAtMost(70)
-
-                .positiveBtn("提交", new DialogBtnClickListener() {
-
-
+                .hint("输入建议")
+                .confirmBtn("确定", new DialogBtnClickListener() {
                     @Override
-                    public void onBtnClick(TextView btn, Object data) {
-
-                        //输入的内容会在确定按钮的回调方法里以参数data传入
-                        SmartToast.showInCenter("已提交——>" + data.toString());
-
+                    public void onBtnClick(Dialog dialog, int which, Object data) {
+                        if (data.toString().length() > 70) {
+                            SmartToast.showInCenter("最多只能输入70个字符");
+                            return;
+                        } else {
+                            dialog.dismiss();
+                            //do something
+                        }
                     }
-
                 })
-
-                .create(this)
-
-                .show();
-</code></pre>
-IInputTextDialogBuilder如外的方法
-<pre><code>
-    //设置EditText的hint文本
-    
-    IInputTextDialogBuilder hint(CharSequence hintMsg);
-
-
-
-    //设置最多输入多少字
-
-    IInputTextDialogBuilder inputAtMost(int num);
+                //设置标记已输入字符数量的数字的颜色，默认为colorPrimary
+                .inputCountMarkColor(Utils.getColorFromRes(R.color.colorPrimary))
+                .createAndShow(this);
+    }
 </code></pre>
