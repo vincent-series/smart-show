@@ -688,7 +688,9 @@ public class SnackbarActivity extends BaseActivity implements ITopbarShowCallbac
 </code></pre>
 ## SmartDialog部分
 [回到模块导航](#模块导航)<br/><br/>
-ios风格的loading框、对话框在主流App中很盛行，SmartDialog提供了几种类ios风格的对话框。<br/><br/>
+1. 当宿主activity已经销毁或调用了finish()时，取消Dialog显示，避免BadTokenException问题<br/>
+2. 当宿主activity为null(如在Fragment中使用getActivity获取宿主activity)，取消创建Dialog，避免NullPointException问题
+3. 提供了主流APP中使用的message、loading等对话框
 ![图片加载失败](images/dialog.gif)
 #### API
 #### Loading框

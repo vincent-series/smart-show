@@ -1,8 +1,8 @@
 package com.coder.zzq.smartshowdemo;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.coder.zzq.smartshow.toast.SmartToast;
@@ -35,6 +35,6 @@ public class TestTopbarActivity extends AppCompatActivity {
     }
 
     public void onNextPageClick(View view) {
-        startActivity(new Intent(this,TestTopbarActivity.class));
+        startActivity(new Intent(this, TestTopbarActivity.class));
     }
 }

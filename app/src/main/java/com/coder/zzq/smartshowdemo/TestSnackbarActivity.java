@@ -7,11 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
-import com.coder.zzq.smartshow.snackbar.ISnackbarShowCallback;
 import com.coder.zzq.smartshow.snackbar.SmartSnackbar;
 
 
-public class TestSnackbarActivity extends AppCompatActivity{
+public class TestSnackbarActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
