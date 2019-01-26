@@ -25,6 +25,9 @@ public final class SmartShow {
         if (application == null) {
             throw new NullPointerException("初始化SmartShow的application不可为null！");
         }
+        if (sApplication != null) {
+            return;
+        }
         sApplication = application;
         sApplication.registerActivityLifecycleCallbacks(new ActivityLifecycleCallback() {
             @Override
