@@ -49,7 +49,7 @@ allprojects {
 }
 </code></pre>
 2.在Module的grable文件中<br/><br/><br/>
-引入所有模块
+第一种方式，引入所有模块
 <pre><code>
 
     implementation ('com.github.the-pig-of-jungle.smart-show:all:2.5.1'){
@@ -63,20 +63,17 @@ allprojects {
         implementation 'com.android.support:design:x.y.z'
         
 </code></pre>
-根据需要，自由引入各个模块
+第二种方式，自由引入各个模块<br/><br/><br/>
+引入SmartToast
 <pre><code>
-    //引入SmartToast
-    
     implementation 'com.github.the-pig-of-jungle.smart-show:toast:2.5.1'
 </code></pre>
+引入SmartDialog
 <pre><code>
-    //引入SmartDialog
-    
     implementation 'com.github.the-pig-of-jungle.smart-show:dialog:2.5.1'
 </code></pre>
-<pre><code>
-    //引入SmartTopbar
-    
+引入SmartTopbar
+<pre><code>  
     implementation('com.github.the-pig-of-jungle.smart-show:topbar:2.5.1') {
     
         exclude group: 'com.android.support'
@@ -87,9 +84,8 @@ allprojects {
             
     implementation 'com.android.support:design:x.y.z'
 </code></pre>
+引入SmartSnackbar
 <pre><code>
-    //引入SmartSnackbar
-
     implementation('com.github.the-pig-of-jungle.smart-show:snackbar:2.5.1') {
     
         exclude group: 'com.android.support'
