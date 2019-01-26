@@ -48,7 +48,7 @@ allprojects {
 
 }
 </code></pre>
-2. 在Module的gradle文件中<br/>
+2. 在Module的gradle文件中<br/><br/>
 第一种方式，引入所有模块
 <pre><code>
 
