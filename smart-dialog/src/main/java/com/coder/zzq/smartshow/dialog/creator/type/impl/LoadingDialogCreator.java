@@ -9,7 +9,7 @@ import com.coder.zzq.smartshow.core.Utils;
 import com.coder.zzq.smartshow.dialog.R;
 import com.coder.zzq.smartshow.dialog.creator.type.ILoadingDialogCreator;
 
-public class LoadingDialogCreator extends NormalDialogCreator<ILoadingDialogCreator> implements ILoadingDialogCreator {
+class LoadingDialogCreator extends NormalDialogCreator<ILoadingDialogCreator> implements ILoadingDialogCreator {
     private CharSequence mMsg = "加载中...";
     @DrawableRes
     private int mDrawablRes = R.drawable.smart_show_loading_img;

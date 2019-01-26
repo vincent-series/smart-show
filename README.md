@@ -711,6 +711,7 @@ Dialog对象
     private DialogCreator mDialogCreator;
 
     public void onBtnClick(View view) {
+    
         if (mDialogCreator == null) {
             mDialogCreator = new DialogCreator() {
                 @Override
@@ -730,42 +731,51 @@ Dialog对象
         SmartDialog.show(this, mDialogCreator);
     }
 </code></pre>
-#### Loading框
+#### 预定义的DialogCreator,可直接调用createAndShow显示，内部实现时上面的安全方法
+#### LoadingDialogCreator
 loading方法获取ILoadingDialogBuilder对象，可传入loading框上的提示文本
 <pre><code>
 
-    SmartDialog.loading("加载中...").large().create(this).show();    
+    private ILoadingDialogCreator mLoadingDialogCreator = DialogCreatorFactory.loading();
+
+    public void onBtnClick(View view) {
+        mLoadingDialogCreator.message("加载中").large().createAndShow(this);
+    } 
     
 </code></pre>
-ILoadingDialogBuilder的全部方法
+ILoadingDialogCreator的全部方法
 <pre><code>
-    //设置提示文本，会覆盖掉loading方法传入的值
+    //设置提示文本
     
-    ILoadingDialogBuilder msg(CharSequence msg);
+    ILoadingDialogCreator message(CharSequence msg);
 
 
 
     //设置Loading框的大小为large
     
-    ILoadingDialogBuilder large();
+    ILoadingDialogCreator large();
 
 
 
     //设置Loading框的大小为middle
     
-    ILoadingDialogBuilder middle();
+    ILoadingDialogCreator middle();
 
 
 
     //设置Loading框的大小为small,此时提示文本隐藏了，只显示loading动画
     
-    ILoadingDialogBuilder small();
+    ILoadingDialogCreator small();
 
 
 
-    //设置完毕，创建对话框
+    //设置完毕，创建并显示对话框,返回值为是否显示了对话框，
     
-    Dialog create(Activity activity);
+    //当activity为null值或者已销毁或者调用了finish而未显示Dialog时，
+    
+    //此返回值为false
+    
+    boolean createAndShow(Activity activity);
 </code></pre>
 #### 通知框
 调用notification方法获取INotificationDialogBuilder对象，可传入通知信息
