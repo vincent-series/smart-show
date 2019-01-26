@@ -16,6 +16,10 @@ import com.coder.zzq.smartshow.dialog.creator.type.ITitleCreator;
 public abstract class SimpleBranchCreator<B> extends BranchDialogCreator<B> implements ITitleCreator<B>, IConfirmBtnCreator<B>,
         ICancelBtnCreator<B>, View.OnClickListener {
     protected CharSequence mTitle;
+    protected float mTitleTextSizeSp;
+    @ColorInt
+    protected int mTitleColor;
+    protected boolean mTitleBold;
 
     protected CharSequence mConfirmLabel;
     protected DialogBtnClickListener mOnConfirmClickListener;
@@ -42,10 +46,23 @@ public abstract class SimpleBranchCreator<B> extends BranchDialogCreator<B> impl
     }
 
     @Override
+    public B titleStyle(int color, float textSizeSp, boolean bold) {
+        mTitleColor = color;
+        mTitleTextSizeSp = textSizeSp;
+        mTitleBold = bold;
+        return (B) this;
+    }
+
+    @Override
     public B confirmBtn(CharSequence label, DialogBtnClickListener clickListener) {
         mConfirmLabel = label;
         mOnConfirmClickListener = clickListener;
         return (B) this;
+    }
+
+    @Override
+    public B confirmBtn(CharSequence label) {
+        return confirmBtn(label, null);
     }
 
     @Override
@@ -62,6 +79,11 @@ public abstract class SimpleBranchCreator<B> extends BranchDialogCreator<B> impl
         mCancelLabel = label;
         mOnCancelClickListener = clickListener;
         return (B) this;
+    }
+
+    @Override
+    public B cancelBtn(CharSequence label) {
+        return cancelBtn(label, null);
     }
 
     @Override
@@ -98,32 +120,23 @@ public abstract class SimpleBranchCreator<B> extends BranchDialogCreator<B> impl
     @Override
     protected void initFooter(FrameLayout footerViewWrapper) {
         super.initFooter(footerViewWrapper);
-        TextView confirmBtn = footerViewWrapper.findViewById(R.id.smart_show_dialog_confirm_btn);
-        if (!Utils.isEmpty(mConfirmLabel)) {
-            confirmBtn.setText(mConfirmLabel);
-        }
-        if (mConfirmLabelColor > 0) {
-            confirmBtn.setTextColor(mConfirmLabelColor);
-        }
-        if (mConfirmLabelTextSizeSp > 0) {
-            confirmBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, mConfirmLabelTextSizeSp);
-        }
-        confirmBtn.getPaint().setFakeBoldText(mConfirmLabelBold);
-        confirmBtn.setOnClickListener(this);
+        setBtn(footerViewWrapper, R.id.smart_show_dialog_confirm_btn, mConfirmLabel, mConfirmLabelColor, mConfirmLabelTextSizeSp, mConfirmLabelBold);
+        setBtn(footerViewWrapper, R.id.smart_show_dialog_cancel_btn, mCancelLabel, mConfirmLabelColor, mCancelLabelTextSizeSp, mCancelLabelBold);
+    }
 
-        TextView cancelBtn = footerViewWrapper.findViewById(R.id.smart_show_dialog_cancel_btn);
-        if (!Utils.isEmpty(mCancelLabel)) {
-            cancelBtn.setText(mCancelLabel);
+    protected void setBtn(FrameLayout footerViewWrapper, int btnId, CharSequence label, int labelColor, float labelSize, boolean labelBold) {
+        TextView btn = footerViewWrapper.findViewById(btnId);
+        if (!Utils.isEmpty(label)) {
+            btn.setText(label);
         }
-        if (mCancelLabelColor > 0) {
-            cancelBtn.setTextColor(mCancelLabelColor);
+        if (labelColor > 0) {
+            btn.setTextColor(labelColor);
         }
-        if (mCancelLabelTextSizeSp > 0) {
-            cancelBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, mCancelLabelTextSizeSp);
+        if (labelSize > 0) {
+            btn.setTextSize(TypedValue.COMPLEX_UNIT_SP, labelSize);
         }
-
-        cancelBtn.getPaint().setFakeBoldText(mCancelLabelBold);
-        cancelBtn.setOnClickListener(this);
+        btn.getPaint().setFakeBoldText(labelBold);
+        btn.setOnClickListener(this);
     }
 
     @Override

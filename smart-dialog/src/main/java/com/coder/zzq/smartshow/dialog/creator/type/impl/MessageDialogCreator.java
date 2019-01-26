@@ -18,6 +18,10 @@ import com.coder.zzq.smartshow.dialog.creator.type.IMessageTipCreator;
 public abstract class MessageDialogCreator<B> extends BranchDialogCreator<B> implements IMessageTipCreator<B>, View.OnClickListener, View.OnAttachStateChangeListener, Runnable {
     public static final int DISABLE_COLOR = Color.parseColor("#bbbbbb");
     protected CharSequence mTitle;
+    protected float mTitleTextSizeSp;
+    @ColorInt
+    protected int mTitleColor;
+    protected boolean mTitleBold;
 
     protected CharSequence mConfirmLabel;
     protected DialogBtnClickListener mOnConfirmClickListener;
@@ -30,9 +34,13 @@ public abstract class MessageDialogCreator<B> extends BranchDialogCreator<B> imp
 
     protected CharSequence mMessage;
 
+    protected float mMessageTextSizeSp;
+    @ColorInt
+    protected int mMessageColor;
+    protected boolean mMessageBold;
+
     public MessageDialogCreator() {
-        mConfirmLabelTextSizeSp = -1;
-        mConfirmLabelColor = -1;
+
     }
 
     @Override
@@ -45,10 +53,23 @@ public abstract class MessageDialogCreator<B> extends BranchDialogCreator<B> imp
     }
 
     @Override
+    public B messageStyle(int color, float textSizeSp, boolean bold) {
+        mMessageColor = color;
+        mMessageTextSizeSp = textSizeSp;
+        mMessageBold = bold;
+        return (B) this;
+    }
+
+    @Override
     public B confirmBtn(CharSequence label, DialogBtnClickListener clickListener) {
         mConfirmLabel = label;
         mOnConfirmClickListener = clickListener;
         return (B) this;
+    }
+
+    @Override
+    public B confirmBtn(CharSequence label) {
+        return confirmBtn(label, null);
     }
 
     @Override
@@ -77,6 +98,14 @@ public abstract class MessageDialogCreator<B> extends BranchDialogCreator<B> imp
     }
 
     @Override
+    public B titleStyle(int color, float textSizeSp, boolean bold) {
+        mTitleColor = color;
+        mTitleTextSizeSp = textSizeSp;
+        mTitleBold = bold;
+        return (B) this;
+    }
+
+    @Override
     protected void initHeader(FrameLayout headerViewWrapper) {
         super.initHeader(headerViewWrapper);
         headerViewWrapper.setVisibility(Utils.isEmpty(mTitle) ? View.GONE : View.VISIBLE);
@@ -84,6 +113,13 @@ public abstract class MessageDialogCreator<B> extends BranchDialogCreator<B> imp
             headerViewWrapper.setVisibility(View.VISIBLE);
             TextView titleView = headerViewWrapper.findViewById(R.id.smart_show_dialog_title_view);
             titleView.setText(mTitle);
+            if (mTitleColor > 0) {
+                titleView.setTextColor(mTitleColor);
+            }
+            if (mTitleTextSizeSp > 0) {
+                titleView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTitleTextSizeSp);
+            }
+            titleView.getPaint().setFakeBoldText(mTitleBold);
         } else {
             headerViewWrapper.setVisibility(View.GONE);
         }
@@ -97,33 +133,46 @@ public abstract class MessageDialogCreator<B> extends BranchDialogCreator<B> imp
         ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) messageView.getLayoutParams();
         lp.topMargin = Utils.isEmpty(mTitle) ? Utils.dpToPx(7) : 0;
         messageView.addOnAttachStateChangeListener(this);
+        if (mMessageColor > 0) {
+            messageView.setTextColor(mMessageColor);
+        }
+        if (mMessageTextSizeSp > 0) {
+            messageView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mMessageTextSizeSp);
+        }
+        messageView.getPaint().setFakeBoldText(mMessageBold);
     }
 
 
     @Override
     protected void initFooter(FrameLayout footerViewWrapper) {
         super.initFooter(footerViewWrapper);
-        TextView confirmBtn = footerViewWrapper.findViewById(R.id.smart_show_dialog_confirm_btn);
-        if (!Utils.isEmpty(mConfirmLabel)) {
-            confirmBtn.setText(mConfirmLabel);
-        }
-        if (mConfirmLabelColor >= 0) {
-            confirmBtn.setTextColor(mConfirmLabelColor);
-        }
-        if (mConfirmLabelTextSizeSp > 0) {
-            confirmBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, mConfirmLabelTextSizeSp);
-        }
-        confirmBtn.getPaint().setFakeBoldText(mConfirmLabelBold);
-        confirmBtn.setOnClickListener(this);
+        TextView confirmBtn = setBtn(footerViewWrapper, R.id.smart_show_dialog_confirm_btn, mConfirmLabel, mConfirmLabelColor, mConfirmLabelTextSizeSp, mConfirmLabelBold);
         if (mSecondsDelayConfirm > 0) {
             mConfirmBtn = confirmBtn;
             mConfirmLabel = confirmBtn.getText();
-            if (mConfirmLabelColor < 0) {
+            if (mConfirmLabelColor <= 0) {
                 mConfirmLabelColor = confirmBtn.getCurrentTextColor();
             }
             mConfirmLabelWhenDelay = new StringBuilder();
             confirmBtn.addOnAttachStateChangeListener(this);
         }
+    }
+
+    protected TextView setBtn(FrameLayout footerViewWrapper, int btnId, CharSequence label, int labelColor, float labelSize, boolean labelBold) {
+        TextView btn = footerViewWrapper.findViewById(btnId);
+        if (!Utils.isEmpty(label)) {
+            btn.setText(label);
+        }
+        if (labelColor > 0) {
+            btn.setTextColor(labelColor);
+        }
+        if (labelSize > 0) {
+            btn.setTextSize(TypedValue.COMPLEX_UNIT_SP, labelSize);
+        }
+        btn.getPaint().setFakeBoldText(labelBold);
+        btn.setOnClickListener(this);
+
+        return btn;
     }
 
     @Override

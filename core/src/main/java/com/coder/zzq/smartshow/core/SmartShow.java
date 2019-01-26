@@ -63,7 +63,7 @@ public final class SmartShow {
                 if (sTopbarCallback != null) {
                     sTopbarCallback.recycleOnDestroy(activity);
                 }
-                if (sDialogCallback != null){
+                if (sDialogCallback != null) {
                     EasyLogger.d("recycle dialog");
                     sDialogCallback.recycleOnDestroy(activity);
                 }
@@ -92,7 +92,7 @@ public final class SmartShow {
         sTopbarCallback = topbarCallback;
     }
 
-    public static void setDialogCallback(IDialogCallback dialogCallback){
+    public static void setDialogCallback(IDialogCallback dialogCallback) {
         sDialogCallback = dialogCallback;
     }
 

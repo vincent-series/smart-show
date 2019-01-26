@@ -1,7 +1,6 @@
 package com.coder.zzq.smartshow.core.lifecycle;
 
 import android.app.Activity;
-import android.util.Log;
 
 import com.coder.zzq.smartshow.core.EasyLogger;
 
@@ -65,7 +64,7 @@ public final class ActivityStack {
         return sActivitySet == null ? 0 : sActivitySet.size();
     }
 
-    public static boolean isInStack(Activity activity){
+    public static boolean isInStack(Activity activity) {
         return !isEmpty() && getActivitySet().contains(activity);
     }
 }

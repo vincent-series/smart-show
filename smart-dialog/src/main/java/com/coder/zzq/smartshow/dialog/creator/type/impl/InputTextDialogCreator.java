@@ -1,5 +1,7 @@
 package com.coder.zzq.smartshow.dialog.creator.type.impl;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.graphics.Color;
 import android.support.annotation.ColorInt;
 import android.text.Editable;
@@ -47,6 +49,13 @@ class InputTextDialogCreator extends SimpleBranchCreator<IInputTextDialogCreator
             mInputNumMarkColor = color;
         }
         return this;
+    }
+
+    @Override
+    public Dialog createDialog(Activity activity) {
+        Dialog dialog = super.createDialog(activity);
+        Utils.popKeyboardWhenDialogShow(dialog);
+        return dialog;
     }
 
     @Override

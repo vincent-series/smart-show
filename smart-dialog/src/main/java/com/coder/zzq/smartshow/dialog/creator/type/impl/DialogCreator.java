@@ -12,7 +12,7 @@ public abstract class DialogCreator {
 
     public abstract Dialog createDialog(Activity activity);
 
-    public void resetDialog(Dialog dialog) {
+    public void resetDialogPerShow(Dialog dialog) {
 
     }
 
@@ -25,7 +25,7 @@ public abstract class DialogCreator {
             mDialog = createDialog(activity);
             EasyLogger.d("cache dialog is null,so create a dialog first");
         } else {
-            resetDialog(mDialog);
+            resetDialogPerShow(mDialog);
             EasyLogger.d("cache dialog is not null,so reuse and reset it");
         }
         return mDialog;

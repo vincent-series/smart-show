@@ -1,12 +1,9 @@
 package com.coder.zzq.smartshow.dialog.creator.type.impl;
 
 import android.support.annotation.ColorInt;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
-import com.coder.zzq.smartshow.core.Utils;
 import com.coder.zzq.smartshow.dialog.DialogBtnClickListener;
 import com.coder.zzq.smartshow.dialog.R;
 import com.coder.zzq.smartshow.dialog.creator.type.IEnsureDialogCreator;
@@ -20,8 +17,12 @@ class EnsureDialogCreator extends MessageDialogCreator<IEnsureDialogCreator> imp
     protected boolean mCancelLabelBold;
 
     public EnsureDialogCreator() {
-        mCancelLabelTextSizeSp = -1;
-        mCancelLabelColor = -1;
+
+    }
+
+    @Override
+    public IEnsureDialogCreator cancelBtn(CharSequence label) {
+        return cancelBtn(label, null);
     }
 
     @Override
@@ -42,19 +43,7 @@ class EnsureDialogCreator extends MessageDialogCreator<IEnsureDialogCreator> imp
     @Override
     protected void initFooter(FrameLayout footerViewWrapper) {
         super.initFooter(footerViewWrapper);
-        TextView cancelBtn = footerViewWrapper.findViewById(R.id.smart_show_dialog_cancel_btn);
-        if (!Utils.isEmpty(mCancelLabel)) {
-            cancelBtn.setText(mCancelLabel);
-        }
-        if (mCancelLabelColor >= 0) {
-            cancelBtn.setTextColor(mCancelLabelColor);
-        }
-        if (mCancelLabelTextSizeSp > 0) {
-            cancelBtn.setTextSize(TypedValue.COMPLEX_UNIT_SP, mCancelLabelTextSizeSp);
-        }
-
-        cancelBtn.getPaint().setFakeBoldText(mCancelLabelBold);
-        cancelBtn.setOnClickListener(this);
+        setBtn(footerViewWrapper, R.id.smart_show_dialog_cancel_btn, mCancelLabel, mConfirmLabelColor, mCancelLabelTextSizeSp, mCancelLabelBold);
     }
 
     @Override
