@@ -694,7 +694,7 @@ public class SnackbarActivity extends BaseActivity implements ITopbarShowCallbac
 ![图片加载失败](images/dialog.gif)
 #### API
 传入activity及DialogCreator对象显示Dialog，DialogCreator负责Dialog的创建,同一DialogCreator实例只会创建
-一次Dialog实例并复用
+一次Dialog并复用
 <pre><code>
     private DialogCreator mDialogCreator;
 
@@ -704,13 +704,17 @@ public class SnackbarActivity extends BaseActivity implements ITopbarShowCallbac
             mDialogCreator = new DialogCreator() {
                 @Override
                 public Dialog createDialog(Activity activity) {
+                    //抽象方法，必须实现
+                    
+                    //在这里创建Dialog并返回，这里可以确保activity不为null并且没有destroyed或finishing
                     return null;
                 }
 
                 @Override
                 public void resetDialogPerShow(Dialog dialog) {
-                    // 如果复用DialogCreator，也会Dialog实例也会复用，
-                    //如果想再每次显示前作重置工作，如输入框清零，可以在这里实现
+                    //非抽象方法，默认为空，可选择性覆写
+                    
+                    //复用Dialog时，如果想再每次显示前作重置工作，如输入框清零，可以在这里实现
                 }
             };
         }

@@ -26,7 +26,7 @@ public class TestDialogActivity extends AppCompatActivity {
     private ILoadingDialogCreator mLoadingDialogCreator = DialogCreatorFactory.loading();
 
     public void onBtnClick(View view) {
-        mLoadingDialogCreator.message("加载中").large().createAndShow(this);
+        mLoadingLarge.message("加载中").large().createAndShow(this);
     }
 
     INotificationCreator mNotificationCreator = DialogCreatorFactory.notification();
@@ -69,11 +69,10 @@ public class TestDialogActivity extends AppCompatActivity {
                 .createAndShow(this);
     }
 
-    ILoadingDialogCreator mLoadingDialogCreator = DialogCreatorFactory.loading();
+    ILoadingDialogCreator mLoadingLarge = DialogCreatorFactory.loading();
 
     public void onLoadingLargeClick(View view) {
-
-        mLoadingDialogCreator.message("加载中...").large()
+        mLoadingLarge.message("加载中...").large()
                 .createAndShow(this);
 
     }
