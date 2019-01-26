@@ -693,20 +693,8 @@ public class SnackbarActivity extends BaseActivity implements ITopbarShowCallbac
 3. 提供了主流APP中使用的message、loading等对话框<br/><br/>
 ![图片加载失败](images/dialog.gif)
 #### API
-传入activity及DialogCreator对象显示Dialog，DialogCreator负责Dialog的创建
-<pre><code>
-    public void onBtnClick(View view) {
-        SmartDialog.show(this, new DialogCreator() {
-            @Override
-            public Dialog createDialog(Activity activity) {
-                //创建dialog并返回该dialog，在这里可以保证activity不为null，且没有被销毁也没有调用finish()
-                return null;
-            }
-        });
-    }
-</code></pre>
-上面的方式每次都创建一个DialogCreator实例，因此每次也创建一个Dialog，可以复用该DialogCreator，则可以复用
-Dialog对象
+传入activity及DialogCreator对象显示Dialog，DialogCreator负责Dialog的创建,同一DialogCreator实例只会创建
+一次Dialog实例并复用
 <pre><code>
     private DialogCreator mDialogCreator;
 
