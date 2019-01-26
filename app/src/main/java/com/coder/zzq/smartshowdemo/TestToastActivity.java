@@ -1,8 +1,8 @@
 package com.coder.zzq.smartshowdemo;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 
@@ -18,11 +18,8 @@ public class TestToastActivity extends AppCompatActivity {
     }
 
     public void onNextPageClick(View view) {
-        startActivity(new Intent(this,TestToastActivity.class));
+        startActivity(new Intent(this, TestToastActivity.class));
     }
-
-
-
 
 
     public void onShowClick(View view) {
@@ -38,7 +35,7 @@ public class TestToastActivity extends AppCompatActivity {
     }
 
     public void onShowAtLocationClick(View view) {
-        SmartToast.showAtLocation("荔枝", Gravity.LEFT|Gravity.TOP,10,90);
+        SmartToast.showAtLocation("荔枝", Gravity.LEFT | Gravity.TOP, 10, 90);
     }
 
     public void onShowAnotherClick(View view) {
