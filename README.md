@@ -705,7 +705,6 @@ public class SnackbarActivity extends BaseActivity implements ITopbarShowCallbac
                 @Override
                 public Dialog createDialog(Activity activity) {
                     //抽象方法，必须实现
-                    
                     //在这里创建Dialog并返回，这里可以确保activity不为null并且没有destroyed或finishing
                     return null;
                 }
@@ -713,8 +712,7 @@ public class SnackbarActivity extends BaseActivity implements ITopbarShowCallbac
                 @Override
                 public void resetDialogPerShow(Dialog dialog) {
                     //非抽象方法，默认为空，可选择性覆写
-                    
-                    //复用Dialog时，如果想再每次显示前作重置工作，如输入框清零，可以在这里实现
+                    //复用Dialog时，如果想再每次显示前作重置工作，如输入框清空，可以在这里实现
                 }
             };
         }
@@ -723,7 +721,22 @@ public class SnackbarActivity extends BaseActivity implements ITopbarShowCallbac
         SmartDialog.show(this, mDialogCreator);
     }
 </code></pre>
-#### 预定义的DialogCreator,可直接调用createAndShow显示，内部实现时上面的安全方法
+#### 预定义的DialogCreator
+可设置创建的Dialog的各种属性，在第一次创建Dialog时应用，之后复用Dialog。</br>
+一旦已创建了Dialog，修改DialogCreator各种配置值，并不会应用到复用的对话框上。</br>
+下面是一些公共方法
+<pre><code>
+    //Dialog显示时窗口以外区域是否变暗
+    B darkAroundWhenShow(boolean dim);
+    //设置窗口背景
+    B windowBackground(@DrawableRes int bgRes);
+    //按back键是否可以取消
+    B cancelable(boolean b);
+    //触碰Dialog窗口外的区域是否取消掉Dialog
+    B cancelableOnTouchOutside(boolean b);
+    //创建并显示Dialog，如果已创建则复用之，直接显示
+    boolean createAndShow(Activity activity);
+</code></pre>
 #### LoadingDialogCreator
 loading方法获取ILoadingDialogBuilder对象，可传入loading框上的提示文本
 <pre><code>
