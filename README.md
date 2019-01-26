@@ -701,18 +701,25 @@ public class SnackbarActivity extends BaseActivity implements ITopbarShowCallbac
     public void onBtnClick(View view) {
     
         if (mDialogCreator == null) {
+        
             mDialogCreator = new DialogCreator() {
+            
                 @Override
                 public Dialog createDialog(Activity activity) {
+                
                     //抽象方法，必须实现
                     //在这里创建Dialog并返回，这里可以确保activity不为null并且没有destroyed或finishing
+                    
                     return null;
+                    
                 }
 
                 @Override
                 public void resetDialogPerShow(Dialog dialog) {
+                
                     //非抽象方法，默认为空，可选择性覆写
                     //复用Dialog时，如果想再每次显示前作重置工作，如输入框清空，可以在这里实现
+                    
                 }
             };
         }
