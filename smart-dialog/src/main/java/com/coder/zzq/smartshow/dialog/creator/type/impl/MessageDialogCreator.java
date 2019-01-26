@@ -113,7 +113,7 @@ public abstract class MessageDialogCreator<B> extends BranchDialogCreator<B> imp
             headerViewWrapper.setVisibility(View.VISIBLE);
             TextView titleView = headerViewWrapper.findViewById(R.id.smart_show_dialog_title_view);
             titleView.setText(mTitle);
-            if (mTitleColor > 0) {
+            if (mTitleColor != 0) {
                 titleView.setTextColor(mTitleColor);
             }
             if (mTitleTextSizeSp > 0) {
@@ -133,7 +133,7 @@ public abstract class MessageDialogCreator<B> extends BranchDialogCreator<B> imp
         ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) messageView.getLayoutParams();
         lp.topMargin = Utils.isEmpty(mTitle) ? Utils.dpToPx(7) : 0;
         messageView.addOnAttachStateChangeListener(this);
-        if (mMessageColor > 0) {
+        if (mMessageColor != 0) {
             messageView.setTextColor(mMessageColor);
         }
         if (mMessageTextSizeSp > 0) {
@@ -163,7 +163,7 @@ public abstract class MessageDialogCreator<B> extends BranchDialogCreator<B> imp
         if (!Utils.isEmpty(label)) {
             btn.setText(label);
         }
-        if (labelColor > 0) {
+        if (labelColor != 0) {
             btn.setTextColor(labelColor);
         }
         if (labelSize > 0) {

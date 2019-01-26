@@ -103,6 +103,15 @@ public abstract class SimpleBranchCreator<B> extends BranchDialogCreator<B> impl
             headerViewWrapper.setVisibility(View.VISIBLE);
             TextView titleView = headerViewWrapper.findViewById(R.id.smart_show_dialog_title_view);
             titleView.setText(mTitle);
+            if (mTitleColor != 0){
+                titleView.setTextColor(mTitleColor);
+            }
+            if (mTitleTextSizeSp > 0){
+                titleView.setTextSize(TypedValue.COMPLEX_UNIT_SP,mTitleTextSizeSp);
+            }
+            if (mTitleBold){
+                titleView.getPaint().setFakeBoldText(mTitleBold);
+            }
         } else {
             headerViewWrapper.setVisibility(View.GONE);
         }
@@ -129,7 +138,7 @@ public abstract class SimpleBranchCreator<B> extends BranchDialogCreator<B> impl
         if (!Utils.isEmpty(label)) {
             btn.setText(label);
         }
-        if (labelColor > 0) {
+        if (labelColor != 0) {
             btn.setTextColor(labelColor);
         }
         if (labelSize > 0) {

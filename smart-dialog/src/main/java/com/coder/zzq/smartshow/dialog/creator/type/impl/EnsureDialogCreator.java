@@ -43,7 +43,7 @@ class EnsureDialogCreator extends MessageDialogCreator<IEnsureDialogCreator> imp
     @Override
     protected void initFooter(FrameLayout footerViewWrapper) {
         super.initFooter(footerViewWrapper);
-        setBtn(footerViewWrapper, R.id.smart_show_dialog_cancel_btn, mCancelLabel, mConfirmLabelColor, mCancelLabelTextSizeSp, mCancelLabelBold);
+        setBtn(footerViewWrapper, R.id.smart_show_dialog_cancel_btn, mCancelLabel, mCancelLabelColor, mCancelLabelTextSizeSp, mCancelLabelBold);
     }
 
     @Override

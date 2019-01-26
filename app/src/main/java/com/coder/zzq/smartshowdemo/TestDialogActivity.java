@@ -11,7 +11,7 @@ import com.coder.zzq.smartshow.dialog.DialogBtnClickListener;
 import com.coder.zzq.smartshow.dialog.creator.type.IEnsureDialogCreator;
 import com.coder.zzq.smartshow.dialog.creator.type.IInputTextDialogCreator;
 import com.coder.zzq.smartshow.dialog.creator.type.ILoadingDialogCreator;
-import com.coder.zzq.smartshow.dialog.creator.type.INotificationCreator;
+import com.coder.zzq.smartshow.dialog.creator.type.INotificationDialogCreator;
 import com.coder.zzq.smartshow.dialog.creator.type.impl.DialogCreatorFactory;
 import com.coder.zzq.smartshow.toast.SmartToast;
 
@@ -31,18 +31,23 @@ public class TestDialogActivity extends AppCompatActivity {
         mLoadingLarge.message("加载中").large().createAndShow(this);
     }
 
-    INotificationCreator mNotificationCreator = DialogCreatorFactory.notification();
+    INotificationDialogCreator mNotificationCreator = DialogCreatorFactory.notification();
 
     public void onNotificationClick(View view) {
         mNotificationCreator.message("充值成功")
+                .title("提示")
+                .confirmBtnTextStyle(Color.GREEN,20,true)
+                .titleStyle(Color.GREEN,20,true)
                 .createAndShow(this);
     }
 
     IEnsureDialogCreator mEnsureDialogCreator = DialogCreatorFactory.ensure();
 
     public void onEnsureClick(View view) {
-        mEnsureDialogCreator.confirmBtn("确定", null)
-                .cancelBtn("取消", null)
+        mEnsureDialogCreator.confirmBtn("确定")
+                .cancelBtn("取消")
+                .cancelBtnTextStyle(Color.GREEN,20,true)
+                .messageStyle(Color.parseColor("#ff0000"),16,true)
                 .message("确定不再关注此人？")
                 .createAndShow(this);
     }
@@ -59,12 +64,16 @@ public class TestDialogActivity extends AppCompatActivity {
 
     public void onInputClick(View view) {
         mInputTextDialogCreator
-                .inputAtMost(70)
+                .inputAtMost(60)
                 .hint("输入建议")
+                .titleStyle(Color.RED,20,true)
+                .confirmBtnTextStyle(Color.GREEN,20,true)
+                .cancelBtnTextStyle(Color.RED,20,true)
                 .confirmBtn("确定", new DialogBtnClickListener() {
+
                     @Override
                     public void onBtnClick(Dialog dialog, int which, Object data) {
-                        if (data.toString().length() > 70) {
+                        if (data.toString().length() > 60) {
                             SmartToast.showInCenter("最多只能输入70个字符");
                             return;
                         } else {
