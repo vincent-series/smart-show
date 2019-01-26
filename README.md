@@ -727,17 +727,28 @@ public class SnackbarActivity extends BaseActivity implements ITopbarShowCallbac
 下面是一些公共方法
 <pre><code>
 public interface INormalDialogCreator&ltB&gt {
+
     //Dialog显示时窗口以外区域是否变暗
+    
     B darkAroundWhenShow(boolean dim);
+    
     //设置窗口背景
+    
     B windowBackground(@DrawableRes int bgRes);
+    
     //按back键是否可以取消
+    
     B cancelable(boolean b);
+    
     //触碰Dialog窗口外的区域是否取消掉Dialog
+    
     B cancelableOnTouchOutside(boolean b);
+    
     //创建并显示Dialog，如果已创建则复用之，直接显示
     //返回值为是否真正显示了Dialog，当activity为null或者已destroyed或finishing时，返回false
+    
     boolean createAndShow(Activity activity);
+    
     }
    
 </code></pre>
@@ -775,81 +786,118 @@ ILoadingDialogCreator的全部方法
 </code></pre>
 #### NotificationCreator
 <pre><code>
-    INotificationCreator mNotificationCreator = DialogCreatorFactory.notification();
+    INotificationDialogCreator mNotificationCreator = DialogCreatorFactory.notification();
 
     public void onNotificationClick(View view) {
+    
         mNotificationCreator.message("充值成功")
+        
                 .createAndShow(this);
     }
 </code></pre>
-INotificationCreator的全部方法
+INotificationDialogCreator的全部方法
 <pre><code>
     //设置标题
     
-    INotificationCreator title(CharSequence title);
+    INotificationDialogCreator title(CharSequence title);
 
     //设置标题风格
     
-    B titleStyle(@ColorInt int color, float textSizeSp, boolean bold);
+    INotificationDialogCreator titleStyle(@ColorInt int color, float textSizeSp, boolean bold);
     
     //设置确定按钮的文本
     
-    B confirmBtn(CharSequence label);
+    INotificationDialogCreator confirmBtn(CharSequence label);
    
     //设置确定按钮的文本以及设置监听器，不显示设置监听器或者设置为null则效果为Dialog消失
     
-    B confirmBtn(CharSequence label, DialogBtnClickListener clickListener);
+    INotificationDialogCreator confirmBtn(CharSequence label, DialogBtnClickListener clickListener);
    
     //设置确定按钮的风格
     
-    B confirmBtnTextStyle(@ColorInt int color, float textSizeSp, boolean bold)
+    INotificationDialogCreator confirmBtnTextStyle(@ColorInt int color, float textSizeSp, boolean bold)
     
     //设置消息文本
     
-    B message(CharSequence msg);
+    INotificationDialogCreator message(CharSequence msg);
     
     //设置消息文本风格
         
-    B messageStyle(@ColorInt int color, float textSizeSp, boolean bold)
+    INotificationDialogCreator messageStyle(@ColorInt int color, float textSizeSp, boolean bold)
     
     //禁用确定按钮，倒计时若干秒后启用
     
-    B secondsDelayConfirm(int seconds);
+    INotificationDialogCreator secondsDelayConfirm(int seconds);
    
 </code></pre>
-#### 确认框
-确认框与通知框类似，只是多了一个取消按钮
+#### IEnsureDialogCreator
 <pre><code>
-    SmartDialog.ensure("确定不再关注此人？").create(this).show();
-</code></pre>
-除了具有INotificationDialogBuilder的全部方法外，IEnsureDialogBuilder如外的方法
-<pre><code>
-    //设置取消按钮的文本及点击事件
+    IEnsureDialogCreator mEnsureDialogCreator = DialogCreatorFactory.ensure();
+
+    public void onEnsureClick(View view) {
     
-    IEnsureDialogBuilder negativeBtn(CharSequence label, DialogBtnClickListener clickListener);
+        mEnsureDialogCreator.confirmBtn("确定")
+        
+                .cancelBtn("取消")
+                
+                .message("确定不再关注此人？")
+                
+                .createAndShow(this);
+                
+    }
+</code></pre>
+除了具有INotificationDialogCreator的全部方法外，IEnsureDialogCreator如外的方法
+<pre><code>
+    //设置取消按钮的文本
+
+    IEnsureDialogCreator cancelBtn(CharSequence label);
+    
+    //设置取消按钮的文本及监听器，监听器为null或者不设置，效果为Dialog消失
+
+    IEnsureDialogCreator cancelBtn(CharSequence label, DialogBtnClickListener clickListener);
+
+    //设置取消按钮的文本风格
+
+    IEnsureDialogCreator cancelBtnTextStyle(@ColorInt int color, float textSizeSp, boolean bold);
 </code></pre>
 #### InputTextDialogCreator
 <pre><code>
     private IInputTextDialogCreator mInputTextDialogCreator = DialogCreatorFactory.input();
 
     public void onInputClick(View view) {
+    
         mInputTextDialogCreator
+        
                 .inputAtMost(70)
+                
                 .hint("输入建议")
+                
                 .confirmBtn("确定", new DialogBtnClickListener() {
+                
                     @Override
                     public void onBtnClick(Dialog dialog, int which, Object data) {
+                    
                         if (data.toString().length() > 70) {
+                        
                             SmartToast.showInCenter("最多只能输入70个字符");
+                            
                             return;
+                            
                         } else {
+                        
                             dialog.dismiss();
+                            
                             //do something
+                            
                         }
                     }
                 })
+                
                 //设置标记已输入字符数量的数字的颜色，默认为colorPrimary
+                
                 .inputCountMarkColor(Utils.getColorFromRes(R.color.colorPrimary))
+                
                 .createAndShow(this);
+                
     }
 </code></pre>
