@@ -34,7 +34,7 @@
 邮箱：coder_zzq@163.com<br/>
 ## 引入SmartShow
 [回到模块导航](#模块导航)<br/><br/>
-1.在Project的gradle文件中<br/><br/>
+1. 在Project的gradle文件中<br/><br/>
 <pre><code>
 allprojects {
 
@@ -48,7 +48,7 @@ allprojects {
 
 }
 </code></pre>
-2.在Module的gradle文件中<br/><br/>
+2. 在Module的gradle文件中<br/><br/>
 第一种方式，引入所有模块
 <pre><code>
 
