@@ -49,18 +49,56 @@ allprojects {
 }
 </code></pre>
 2.在Module的grable文件中<br/>
+引入所有模块
 <pre><code>
 
-        implementation('com.github.the-pig-of-jungle:SmartShow:v2.4.4') {
+    implementation ('com.github.the-pig-of-jungle.smart-show:all:2.5.1'){
+    
+        exclude group: 'com.android.support'
         
-            exclude group: 'com.android.support'
-            
-        }
+    }
         
         //添加与你项目匹配的design依赖库的相应版本
         
         implementation 'com.android.support:design:x.y.z'
         
+</code></pre>
+根据需要，自由引入各个模块
+<pre><code>
+    //引入SmartToast
+    
+    implementation 'com.github.the-pig-of-jungle.smart-show:toast:2.5.1'
+</code></pre>
+<pre><code>
+    //引入SmartDialog
+    
+    implementation 'com.github.the-pig-of-jungle.smart-show:dialog:2.5.1'
+</code></pre>
+<pre><code>
+    //引入SmartTopbar
+    
+    implementation('com.github.the-pig-of-jungle.smart-show:topbar:2.5.1') {
+    
+        exclude group: 'com.android.support'
+        
+    }
+    
+    //添加与你项目匹配的design依赖库的相应版本
+            
+    implementation 'com.android.support:design:x.y.z'
+</code></pre>
+<pre><code>
+    //引入SmartSnackbar
+
+    implementation('com.github.the-pig-of-jungle.smart-show:snackbar:2.5.1') {
+    
+        exclude group: 'com.android.support'
+        
+    }
+    
+    //添加与你项目匹配的design依赖库的相应版本
+                
+    implementation 'com.android.support:design:x.y.z'
 </code></pre>
 3.在Application的onCreate方法中初始化<br/>
 <pre><code>
