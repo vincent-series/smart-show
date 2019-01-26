@@ -782,17 +782,40 @@ ILoadingDialogCreator的全部方法
                 .createAndShow(this);
     }
 </code></pre>
-INotificationDialogBuilder的全部方法
+INotificationCreator的全部方法
 <pre><code>
     //设置标题
     
-    INotificationDialogBuilder title(CharSequence title);
+    INotificationCreator title(CharSequence title);
 
-
-    //设置确定按钮的文本及点击事件
+    //设置标题风格
     
-    INotificationDialogBuilder positiveBtn(CharSequence label, DialogBtnClickListener clickListener);
-
+    B titleStyle(@ColorInt int color, float textSizeSp, boolean bold);
+    
+    //设置确定按钮的文本
+    
+    B confirmBtn(CharSequence label);
+   
+    //设置确定按钮的文本以及设置监听器，不显示设置监听器或者设置为null则效果为Dialog消失
+    
+    B confirmBtn(CharSequence label, DialogBtnClickListener clickListener);
+   
+    //设置确定按钮的风格
+    
+    B confirmBtnTextStyle(@ColorInt int color, float textSizeSp, boolean bold)
+    
+    //设置消息文本
+    
+    B message(CharSequence msg);
+    
+    //设置消息文本风格
+        
+    B messageStyle(@ColorInt int color, float textSizeSp, boolean bold)
+    
+    //禁用确定按钮，倒计时若干秒后启用
+    
+    B secondsDelayConfirm(int seconds);
+   
 </code></pre>
 #### 确认框
 确认框与通知框类似，只是多了一个取消按钮
