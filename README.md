@@ -33,8 +33,8 @@
 ![图片加载失败](images/wx_2d.jpg)<br/><br/>
 邮箱：coder_zzq@163.com<br/>
 ## 引入SmartShow
-[回到模块导航](#模块导航)<br/><br/>
-1. 在Project的gradle文件中<br/><br/>
+[回到模块导航](#模块导航)<br/>
+1. 在Project的gradle文件中<br/>
 <pre><code>
 allprojects {
 
@@ -48,7 +48,7 @@ allprojects {
 
 }
 </code></pre>
-2. 在Module的gradle文件中<br/><br/>
+2. 在Module的gradle文件中<br/>
 第一种方式，引入所有模块
 <pre><code>
 
@@ -63,7 +63,7 @@ allprojects {
         implementation 'com.android.support:design:x.y.z'
         
 </code></pre>
-第二种方式，自由引入各个模块<br/><br/>
+第二种方式，自由引入各个模块<br/>
 
 <pre><code>
     implementation 'com.github.the-pig-of-jungle.smart-show:toast:2.5.1'
@@ -96,7 +96,7 @@ allprojects {
                 
     implementation 'com.android.support:design:x.y.z'
 </code></pre>
-3.在Application的onCreate方法中初始化<br/>
+3. 在Application的onCreate方法中初始化<br/>
 <pre><code>
         SmartShow.init(this);
 </code></pre>
