@@ -26,15 +26,24 @@ public class TestDialogActivity extends AppCompatActivity {
 
     }
 
+    private DialogCreator mDialogCreator;
 
     public void onBtnClick(View view) {
-        SmartDialog.show(this, new DialogCreator() {
-            @Override
-            public Dialog createDialog(Activity activity) {
-                //创建dialog并返回该dialog，在这里可以保证activity不为null，且没有被销毁也没有调用finish()
-                return null;
-            }
-        });
+        if (mDialogCreator == null) {
+            mDialogCreator = new DialogCreator() {
+                @Override
+                public Dialog createDialog(Activity activity) {
+                    return null;
+                }
+
+                @Override
+                public void resetDialogPerShow(Dialog dialog) {
+                    // 如果复用DialogCreator，也会Dialog实例也会复用，
+                    //如果想再每次显示前作重置工作，如输入框清零，可以再这里实现
+                }
+            };
+        }
+        SmartDialog.show(this, mDialogCreator);
     }
 
     INotificationCreator mNotificationCreator = DialogCreatorFactory.notification();
