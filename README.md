@@ -721,10 +721,12 @@ Dialog对象
                 @Override
                 public void resetDialogPerShow(Dialog dialog) {
                     // 如果复用DialogCreator，也会Dialog实例也会复用，
-                    //如果想再每次显示前作重置工作，如输入框清零，可以再这里实现
+                    //如果想再每次显示前作重置工作，如输入框清零，可以在这里实现
                 }
             };
         }
+        
+        
         SmartDialog.show(this, mDialogCreator);
     }
 </code></pre>
