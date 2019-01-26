@@ -688,13 +688,12 @@ public class SnackbarActivity extends BaseActivity implements ITopbarShowCallbac
 </code></pre>
 ## SmartDialog部分
 [回到模块导航](#模块导航)<br/><br/>
-1. 当宿主activity已经销毁或调用了finish()时，取消Dialog显示，避免BadTokenException问题<br/>
-2. 当宿主activity为null(如在Fragment中使用getActivity获取宿主activity)，取消创建Dialog，避免NullPointException问题
-3. 提供了主流APP中使用的message、loading等对话框<br/><br/>
+1. 当提供的activity为null或已销毁或调用了finish()，若未创建过Dialog，则取消创建；若已创建，取消本次显示，避免BadTokenException及NullPointException<br/>
+3. 提供主流APP中使用的message、loading等对话框<br/><br/>
 ![图片加载失败](images/dialog.gif)
 #### API
-传入activity及DialogCreator对象显示Dialog，DialogCreator负责Dialog的创建,同一DialogCreator实例只会创建
-一次Dialog并复用
+传入activity及DialogCreator，DialogCreator负责Dialog的创建,同一DialogCreator实例只会创建
+一次Dialog并复用之
 <pre><code>
     private DialogCreator mDialogCreator;
 
@@ -718,7 +717,7 @@ public class SnackbarActivity extends BaseActivity implements ITopbarShowCallbac
                 public void resetDialogPerShow(Dialog dialog) {
                 
                     //非抽象方法，默认为空，可选择性覆写
-                    //复用Dialog时，如果想再每次显示前作重置工作，如输入框清空，可以在这里实现
+                    //复用Dialog时，如果想在每次显示前作重置工作，如输入框清空，可以在这里实现
                     
                 }
             };
@@ -735,7 +734,7 @@ public class SnackbarActivity extends BaseActivity implements ITopbarShowCallbac
 <pre><code>
 public interface INormalDialogCreator&ltB&gt {
 
-    //Dialog显示时窗口以外区域是否变暗
+    //Dialog显示时，窗口以外区域是否变暗
     
     B darkAroundWhenShow(boolean dim);
     
@@ -747,7 +746,7 @@ public interface INormalDialogCreator&ltB&gt {
     
     B cancelable(boolean b);
     
-    //触碰Dialog窗口外的区域是否取消掉Dialog
+    //触碰Dialog窗口外的区域是否取消
     
     B cancelableOnTouchOutside(boolean b);
     
