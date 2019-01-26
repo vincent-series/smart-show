@@ -726,6 +726,7 @@ public class SnackbarActivity extends BaseActivity implements ITopbarShowCallbac
 一旦已创建了Dialog，修改DialogCreator各种配置值，并不会应用到复用的对话框上。</br>
 下面是一些公共方法
 <pre><code>
+
 public interface INormalDialogCreator<B> {
     //Dialog显示时窗口以外区域是否变暗
     B darkAroundWhenShow(boolean dim);
@@ -739,6 +740,7 @@ public interface INormalDialogCreator<B> {
     //返回值为是否真正显示了Dialog，当activity为null或者已destroyed或finishing时，返回false
     boolean createAndShow(Activity activity);
     }
+    
 </code></pre>
 #### LoadingDialogCreator
 <pre><code>
