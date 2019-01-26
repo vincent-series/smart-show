@@ -48,7 +48,7 @@ allprojects {
 
 }
 </code></pre>
-2.在Module的grable文件中<br/><br/><br/>
+2.在Module的grable文件中<br/><br/>
 第一种方式，引入所有模块
 <pre><code>
 
@@ -63,7 +63,7 @@ allprojects {
         implementation 'com.android.support:design:x.y.z'
         
 </code></pre>
-第二种方式，自由引入各个模块<br/><br/><br/>
+第二种方式，自由引入各个模块<br/><br/>
 
 <pre><code>
     implementation 'com.github.the-pig-of-jungle.smart-show:toast:2.5.1'
