@@ -690,9 +690,19 @@ public class SnackbarActivity extends BaseActivity implements ITopbarShowCallbac
 [回到模块导航](#模块导航)<br/><br/>
 1. 当宿主activity已经销毁或调用了finish()时，取消Dialog显示，避免BadTokenException问题<br/>
 2. 当宿主activity为null(如在Fragment中使用getActivity获取宿主activity)，取消创建Dialog，避免NullPointException问题
-3. 提供了主流APP中使用的message、loading等对话框
+3. 提供了主流APP中使用的message、loading等对话框<br/><br/>
 ![图片加载失败](images/dialog.gif)
 #### API
+
+<pre><code>
+        SmartDialog.show(this, new DialogCreator() {
+            @Override
+            public Dialog createDialog(Activity activity) {
+                //创建dialog并返回该dialog，在这里可以保证activity不为null，且没有被销毁也没有调用finish()
+                return null;
+            }
+        });
+</code></pre>
 #### Loading框
 loading方法获取ILoadingDialogBuilder对象，可传入loading框上的提示文本
 <pre><code>

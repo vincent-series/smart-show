@@ -1,17 +1,19 @@
 package com.coder.zzq.smartshowdemo;
 
+import android.app.Activity;
 import android.app.Dialog;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.coder.zzq.smartshow.dialog.DialogBtnClickListener;
+import com.coder.zzq.smartshow.dialog.SmartDialog;
 import com.coder.zzq.smartshow.dialog.creator.type.IEnsureDialogCreator;
 import com.coder.zzq.smartshow.dialog.creator.type.IInputTextDialogCreator;
 import com.coder.zzq.smartshow.dialog.creator.type.ILoadingDialogCreator;
 import com.coder.zzq.smartshow.dialog.creator.type.INotificationCreator;
+import com.coder.zzq.smartshow.dialog.creator.type.impl.DialogCreator;
 import com.coder.zzq.smartshow.dialog.creator.type.impl.DialogCreatorFactory;
 
 public class TestDialogActivity extends AppCompatActivity {
@@ -20,12 +22,19 @@ public class TestDialogActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_dialog);
+        onBtnClick(null);
 
     }
 
 
-    public void onNextPageClick(View view) {
-        startActivity(new Intent(this, TestDialogActivity.class));
+    public void onBtnClick(View view) {
+        SmartDialog.show(this, new DialogCreator() {
+            @Override
+            public Dialog createDialog(Activity activity) {
+                //创建dialog并返回该dialog，在这里可以保证activity不为null，且没有被销毁也没有调用finish()
+                return null;
+            }
+        });
     }
 
     INotificationCreator mNotificationCreator = DialogCreatorFactory.notification();
