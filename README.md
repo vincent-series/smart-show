@@ -112,13 +112,13 @@ allprojects {
 ## SmartToast部分 
 [回到模块导航](#模块导航)
 1. 使用application context，而不是activity，避免因activity生命周期问题引起的Toast显示问题
-1. 复用Toast实例，当Toast正在显示时，多次触发内容和位置均未改变的Toast，不会重复弹出；下一个Toast不会等到上一个Toast的Duration耗尽才弹出
-2. 解决传统复用模式的功能缺陷，如正在显示一个内容为"A"的Toast，此时再弹出内容为"B"的Toast时，文本虽改变，但没有弹出效果；如果复用的Toast正在显示，改变其Gravity以改变显示位置会无效，直到消失后再次显示才生效
-3. 可修改Toast默认布局的风格，如背景颜色，文字大小和颜色等
-4. 可为Toast设置自定义布局
-5. 完美解决Android 7.1的系统bug——Toast BadTokenException
-6. 可配置离开当前页面（退出当前activity或进入新的activity），立即消失正在显示的Toast
-7. 结合主流app消息提示的效果，提供info、success、error、warnign、complete、forbid、wait、fail 8 种类型的Toast
+2. 复用Toast实例，当Toast正在显示时，多次触发内容和位置均未改变的Toast，不会重复弹出；下一个Toast不会等到上一个Toast的Duration耗尽才弹出
+3. 解决传统复用模式的功能缺陷，如正在显示一个内容为"A"的Toast，此时再弹出内容为"B"的Toast时，文本虽改变，但没有弹出效果；如果复用的Toast正在显示，改变其Gravity以改变显示位置会无效，直到消失后再次显示才生效
+4. 可修改Toast默认布局的风格，如背景颜色，文字大小和颜色等
+5. 可为Toast设置自定义布局
+6. 完美解决Android 7.1的系统bug——Toast BadTokenException
+7. 可配置离开当前页面（退出当前activity或进入新的activity），立即消失正在显示的Toast
+8. 结合主流app消息提示的效果，提供info、success、error、warnign、complete、forbid、wait、fail 8 种类型的Toast
 ### 注意
 关闭app的系统通知权限,Toast将无法显示。Toast的内部原理使用NotificationManagerService，关闭通知权限后，将无法显示。<br/>
 这是原生Toast本身的特性，以淘宝app和优酷app的"再按一次退出程序"的Toast提示为例，关闭通知权限，Toast将不再显示。
@@ -731,7 +731,7 @@ public class SnackbarActivity extends BaseActivity implements ITopbarShowCallbac
 </code></pre>
 ## SmartDialog部分
 [回到模块导航](#模块导航)<br/><br/>
-1. 当提供的activity为null或已销毁或调用了finish()，若未创建过Dialog，则取消创建；若已创建，取消本次显示，避免BadTokenException及NullPointException<br/>
+1. 避免BadTokenException及NullPointException。当activity为null或已销毁或调用了finish()，若未创建过Dialog，则取消创建；若已创建，取消本次显示<br/>
 3. 提供主流APP中使用的message、loading等对话框<br/><br/>
 ![图片加载失败](images/dialog.gif)
 #### API
@@ -835,14 +835,29 @@ ILoadingDialogCreator的全部方法
 </code></pre>
 #### NotificationCreator
 <pre><code>
-    INotificationDialogCreator mNotificationCreator = DialogCreatorFactory.notification();
+    private SmartDialog mResetSuccTip;
 
     public void onNotificationClick(View view) {
     
-        mNotificationCreator.message("充值成功")
+        if (mResetSuccTip == null) {
         
-                .createAndShow(this);
+            mResetSuccTip = new SmartDialog()
+            
+                    .dialogCreator(
+                    
+                            DialogCreatorFactory
+                            
+                                    .notification()
+                                    
+                                    .message("重置成功")
+                                    
+                    )
+                    .reuse(true);
+        }
+
+        mResetSuccTip.show(this);
     }
+
 </code></pre>
 INotificationDialogCreator的全部方法
 <pre><code>
@@ -881,19 +896,34 @@ INotificationDialogCreator的全部方法
 </code></pre>
 #### IEnsureDialogCreator
 <pre><code>
-    IEnsureDialogCreator mEnsureDialogCreator = DialogCreatorFactory.ensure();
-
-    public void onEnsureClick(View view) {
-    
-        mEnsureDialogCreator.confirmBtn("确定")
-        
-                .cancelBtn("取消")
-                
-                .message("确定不再关注此人？")
-                
-                .createAndShow(this);
-                
-    }
+          pivate SmartDialog mCancelConcernDialog;
+      
+          public void onEnsureClick(View view) {
+          
+              if (mCancelConcernDialog == null) {
+              
+                  mCancelConcernDialog = new SmartDialog()
+                  
+                          .dialogCreator(
+                          
+                                  DialogCreatorFactory
+                                  
+                                          .ensure()
+                                          
+                                          .confirmBtn("确定")
+                                          
+                                          .cancelBtn("取消")
+                                          
+                                          .message("确定不再关注此人？")
+                                          
+                          )
+                          
+                          .reuse(true);
+                          
+              }
+              
+              mCancelConcernDialog.show(this);
+          }
 </code></pre>
 除了具有INotificationDialogCreator的全部方法外，IEnsureDialogCreator如外的方法
 <pre><code>
@@ -911,7 +941,7 @@ INotificationDialogCreator的全部方法
 </code></pre>
 #### InputTextDialogCreator
 <pre><code>
-    private SmartDialog mInputSuggestionDialog;
+        private SmartDialog mInputSuggestionDialog;
     
         public void onInputClick(View view) {
         
