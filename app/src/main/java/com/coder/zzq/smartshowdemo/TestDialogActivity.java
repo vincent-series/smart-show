@@ -20,7 +20,7 @@ public class TestDialogActivity extends AppCompatActivity {
 
     }
 
-    SmartDialog mResetSuccTip;
+    private SmartDialog mResetSuccTip;
 
     public void onNotificationClick(View view) {
         if (mResetSuccTip == null) {
@@ -36,7 +36,7 @@ public class TestDialogActivity extends AppCompatActivity {
         mResetSuccTip.show(this);
     }
 
-    SmartDialog mCancelConcernDialog;
+    private SmartDialog mCancelConcernDialog;
 
     public void onEnsureClick(View view) {
         if (mCancelConcernDialog == null) {
@@ -75,7 +75,8 @@ public class TestDialogActivity extends AppCompatActivity {
         if (mInputSuggestionDialog == null) {
             mInputSuggestionDialog = new SmartDialog()
                     .dialogCreator(
-                            DialogCreatorFactory.input()
+                            DialogCreatorFactory
+                                    .input()
                                     .inputAtMost(60)
                                     .hint("输入建议")
                                     .confirmBtn("提交", new DialogBtnClickListener() {
@@ -92,7 +93,8 @@ public class TestDialogActivity extends AppCompatActivity {
                                         }
                                     })
                                     .inputCountMarkColor(Utils.getColorFromRes(R.color.colorPrimary))
-                    ).reuse(true);
+                    )
+                    .reuse(true);
         }
 
         mInputSuggestionDialog.show(this);
