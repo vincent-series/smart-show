@@ -11,7 +11,7 @@ import com.coder.zzq.smartshow.dialog.creator.type.IDialogCreator;
 public class SmartDialog {
     private Dialog mNestedDialog;
     private IDialogCreator mDialogCreator;
-    private boolean mReuseDialog;
+    private boolean mReuseDialog = true;
 
     public boolean show(Activity activity) {
         if (!Utils.isUpdateActivityUIPermitted(activity) ||

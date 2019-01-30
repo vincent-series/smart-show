@@ -1,5 +1,6 @@
 package com.coder.zzq.smartshowdemo;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.view.View;
 import com.coder.zzq.smartshow.core.Utils;
 import com.coder.zzq.smartshow.dialog.DialogBtnClickListener;
 import com.coder.zzq.smartshow.dialog.SmartDialog;
+import com.coder.zzq.smartshow.dialog.creator.type.impl.DialogCreator;
 import com.coder.zzq.smartshow.dialog.creator.type.impl.DialogCreatorFactory;
 import com.coder.zzq.smartshow.toast.SmartToast;
 
@@ -18,6 +20,28 @@ public class TestDialogActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_dialog);
 
+    }
+
+    private SmartDialog mExampleDialog;
+
+    public void onShowDialogClick(View view) {
+        if (mExampleDialog == null) {
+            mExampleDialog = new SmartDialog()
+                    //传入DialogCreator，DialogCreator负责Dialog的创建
+                    .dialogCreator(new DialogCreator() {
+                        @Override
+                        public Dialog createDialog(Activity activity) {
+                            //创建Dialog并返回
+                            //在这里可以保证activity不为null,且没有销毁或者isFinishing
+                            Dialog dialog = null;
+                            //...
+                            return dialog;
+                        }
+                    })
+                    //是否复用，不复用的话，每次显示都创建一个Dialog实例
+                    .reuse(true);
+        }
+        mExampleDialog.show(this);
     }
 
     private SmartDialog mResetSuccTip;
@@ -100,7 +124,7 @@ public class TestDialogActivity extends AppCompatActivity {
         mInputSuggestionDialog.show(this);
     }
 
-    SmartDialog mLargeLoadingDialog;
+    private SmartDialog mLargeLoadingDialog;
 
     public void onLoadingLargeClick(View view) {
         if (mLargeLoadingDialog == null) {
