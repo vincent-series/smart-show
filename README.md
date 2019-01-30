@@ -797,24 +797,25 @@ public interface INormalDialogCreator&ltB&gt {
     //触碰Dialog窗口外的区域是否取消
     
     B cancelableOnTouchOutside(boolean b);
-    
-    //创建并显示Dialog，如果已创建则复用之，直接显示
-    //返回值为是否真正显示了Dialog，当activity为null或者已destroyed或finishing时，返回false
-    
-    boolean createAndShow(Activity activity);
-    
-    }
    
 </code></pre>
 #### LoadingDialogCreator
 <pre><code>
+    private SmartDialog mLargeLoadingDialog;
 
-    private ILoadingDialogCreator mLoadingDialogCreator = DialogCreatorFactory.loading();
-
-    public void onLoadingClick(View view) {
-        mLoadingDialogCreator.message("加载中").large().createAndShow(this);
-    } 
-    
+    public void onLoadingLargeClick(View view) {
+        if (mLargeLoadingDialog == null) {
+            mLargeLoadingDialog = new SmartDialog()
+                    .dialogCreator(
+                            DialogCreatorFactory
+                                    .loading()
+                                    .large()
+                                    .message("加载中")
+                    )
+                    .reuse(true);
+        }
+        mLargeLoadingDialog.show(this);
+    }  
 </code></pre>
 ILoadingDialogCreator的全部方法
 <pre><code>
