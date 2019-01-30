@@ -735,44 +735,49 @@ public class SnackbarActivity extends BaseActivity implements ITopbarShowCallbac
 3. 提供主流APP中使用的message、loading等对话框<br/><br/>
 ![图片加载失败](images/dialog.gif)
 #### API
-传入activity及DialogCreator，DialogCreator负责Dialog的创建,同一DialogCreator实例只会创建
-一次Dialog并复用之
 <pre><code>
-    private DialogCreator mDialogCreator;
+    private SmartDialog mExampleDialog;
 
-    public void onBtnClick(View view) {
+    public void onShowDialogClick(View view) {
     
-        if (mDialogCreator == null) {
+        if (mExampleDialog == null) {
         
-            mDialogCreator = new DialogCreator() {
+            mExampleDialog = new SmartDialog()
             
-                @Override
-                public Dialog createDialog(Activity activity) {
-                
-                    //抽象方法，必须实现
-                    //在这里创建Dialog并返回，这里可以确保activity不为null并且没有destroyed或finishing
+                    //传入DialogCreator，DialogCreator负责Dialog的创建
                     
-                    return null;
+                    .dialogCreator(new DialogCreator() {
                     
-                }
-
-                @Override
-                public void resetDialogPerShow(Dialog dialog) {
-                
-                    //非抽象方法，默认为空，可选择性覆写
-                    //复用Dialog时，如果想在每次显示前作重置工作，如输入框清空，可以在这里实现
+                        @Override
+                        public Dialog createDialog(Activity activity) {
+                        
+                            //创建Dialog并返回
+                            
+                            //在这里可以保证activity不为null,且没有销毁或者isFinishing
+                            
+                            Dialog dialog = null;
+                            
+                            //你的创建逻辑
+                            
+                            //...
+                            
+                            return dialog;
+                            
+                        }
+                        
+                    })
                     
-                }
-            };
+                    //是否复用，不复用的话，每次显示都创建一个Dialog实例
+                    
+                    .reuse(true);
+                    
         }
         
+        mExampleDialog.show(this);
         
-        SmartDialog.show(this, mDialogCreator);
     }
 </code></pre>
 #### 预定义的DialogCreator
-可设置Dialog的各种属性，在第一次创建Dialog时应用，之后复用Dialog。</br>
-一旦已创建了Dialog，修改DialogCreator各种配置值，并不会应用到复用的对话框上。</br>
 下面是一些公共方法
 <pre><code>
 public interface INormalDialogCreator&ltB&gt {
