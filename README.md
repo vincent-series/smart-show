@@ -66,14 +66,20 @@ allprojects {
 第二种方式，自由引入各个模块<br/>
 
 <pre><code>
+    //smart toast
+    
     implementation 'com.github.the-pig-of-jungle.smart-show:toast:2.5.1'
 </code></pre>
 
 <pre><code>
+    // smart dialog
+    
     implementation 'com.github.the-pig-of-jungle.smart-show:dialog:2.5.1'
 </code></pre>
 
 <pre><code>  
+    // smart topbar
+    
     implementation('com.github.the-pig-of-jungle.smart-show:topbar:2.5.1') {
     
         exclude group: 'com.android.support'
@@ -86,6 +92,8 @@ allprojects {
 </code></pre>
 
 <pre><code>
+    // smart snackbar
+    
     implementation('com.github.the-pig-of-jungle.smart-show:snackbar:2.5.1') {
     
         exclude group: 'com.android.support'
@@ -103,6 +111,7 @@ allprojects {
 
 ## SmartToast部分 
 [回到模块导航](#模块导航)
+1. 使用application context，而不是activity，避免因activity生命周期问题引起的Toast显示问题
 1. 复用Toast实例，当Toast正在显示时，多次触发内容和位置均未改变的Toast，不会重复弹出；下一个Toast不会等到上一个Toast的Duration耗尽才弹出
 2. 解决传统复用模式的功能缺陷，如正在显示一个内容为"A"的Toast，此时再弹出内容为"B"的Toast时，文本虽改变，但没有弹出效果；如果复用的Toast正在显示，改变其Gravity以改变显示位置会无效，直到消失后再次显示才生效
 3. 可修改Toast默认布局的风格，如背景颜色，文字大小和颜色等
@@ -902,42 +911,54 @@ INotificationDialogCreator的全部方法
 </code></pre>
 #### InputTextDialogCreator
 <pre><code>
-    private IInputTextDialogCreator mInputTextDialogCreator = DialogCreatorFactory.input();
-
-    public void onInputClick(View view) {
+    private SmartDialog mInputSuggestionDialog;
     
-        mInputTextDialogCreator
+        public void onInputClick(View view) {
         
-                .inputAtMost(70)
+            if (mInputSuggestionDialog == null) {
+            
+                mInputSuggestionDialog = new SmartDialog()
                 
-                .hint("输入建议")
-                
-                .confirmBtn("确定", new DialogBtnClickListener() {
-                
-                    @Override
-                    public void onBtnClick(Dialog dialog, int which, Object data) {
-                    
-                        if (data.toString().length() > 70) {
+                        .dialogCreator(
                         
-                            SmartToast.showInCenter("最多只能输入70个字符");
-                            
-                            return;
-                            
-                        } else {
-                        
-                            dialog.dismiss();
-                            
-                            //do something
-                            
-                        }
-                    }
-                })
-                
-                //设置标记已输入字符数量的数字的颜色，默认为colorPrimary
-                
-                .inputCountMarkColor(Utils.getColorFromRes(R.color.colorPrimary))
-                
-                .createAndShow(this);
-                
-    }
+                                DialogCreatorFactory
+                                
+                                        .input()
+                                        
+                                        .inputAtMost(60)
+                                        
+                                        .hint("输入建议")
+                                        
+                                        .confirmBtn("提交", new DialogBtnClickListener() {
+    
+                                            @Override
+                                            public void onBtnClick(Dialog dialog, int which, Object data) {
+                                            
+                                                if (data.toString().length() > 60) {
+                                                
+                                                    SmartToast.showInCenter("最多只能输入70个字符");
+                                                    
+                                                    return;
+                                                    
+                                                } else {
+                                                
+                                                    dialog.dismiss();
+                                                    
+                                                    SmartToast.showInCenter(data.toString());
+                                                    
+                                                }
+                                                
+                                            }
+                                            
+                                        })
+                                        
+                                        //设置标记已输入字符数量的数字的颜色，默认为colorPrimary
+                                        
+                                        .inputCountMarkColor(Utils.getColorFromRes(R.color.colorPrimary))
+                        )
+                        .reuse(true);
+            }
+    
+            mInputSuggestionDialog.show(this);
+        }
 </code></pre>
