@@ -1,17 +1,13 @@
 package com.coder.zzq.smartshowdemo;
 
 import android.app.Dialog;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.coder.zzq.smartshow.core.Utils;
 import com.coder.zzq.smartshow.dialog.DialogBtnClickListener;
-import com.coder.zzq.smartshow.dialog.creator.type.IEnsureDialogCreator;
-import com.coder.zzq.smartshow.dialog.creator.type.IInputTextDialogCreator;
-import com.coder.zzq.smartshow.dialog.creator.type.ILoadingDialogCreator;
-import com.coder.zzq.smartshow.dialog.creator.type.INotificationDialogCreator;
+import com.coder.zzq.smartshow.dialog.SmartDialog;
 import com.coder.zzq.smartshow.dialog.creator.type.impl.DialogCreatorFactory;
 import com.coder.zzq.smartshow.toast.SmartToast;
 
@@ -21,89 +17,122 @@ public class TestDialogActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_dialog);
-        onBtnClick(null);
 
     }
 
-    private ILoadingDialogCreator mLoadingDialogCreator = DialogCreatorFactory.loading();
-
-    public void onBtnClick(View view) {
-        mLoadingLarge.message("加载中").large().createAndShow(this);
-    }
-
-    INotificationDialogCreator mNotificationCreator = DialogCreatorFactory.notification();
+    SmartDialog mResetSuccTip;
 
     public void onNotificationClick(View view) {
-        mNotificationCreator.message("充值成功")
-                .title("提示")
-                .confirmBtnTextStyle(Color.GREEN,20,true)
-                .titleStyle(Color.GREEN,20,true)
-                .createAndShow(this);
+        if (mResetSuccTip == null) {
+            mResetSuccTip = new SmartDialog()
+                    .dialogCreator(
+                            DialogCreatorFactory
+                                    .notification()
+                                    .message("重置成功")
+                    )
+                    .reuse(true);
+        }
+
+        mResetSuccTip.show(this);
     }
 
-    IEnsureDialogCreator mEnsureDialogCreator = DialogCreatorFactory.ensure();
+    SmartDialog mCancelConcernDialog;
 
     public void onEnsureClick(View view) {
-        mEnsureDialogCreator.confirmBtn("确定")
-                .cancelBtn("取消")
-                .cancelBtnTextStyle(Color.GREEN,20,true)
-                .messageStyle(Color.parseColor("#ff0000"),16,true)
-                .message("确定不再关注此人？")
-                .createAndShow(this);
+        if (mCancelConcernDialog == null) {
+            mCancelConcernDialog = new SmartDialog()
+                    .dialogCreator(
+                            DialogCreatorFactory
+                                    .ensure()
+                                    .confirmBtn("确定")
+                                    .cancelBtn("取消")
+                                    .message("确定不再关注此人？")
+                    )
+                    .reuse(true);
+        }
+        mCancelConcernDialog.show(this);
     }
 
-    private IEnsureDialogCreator mEnsureDialogDelay = DialogCreatorFactory.ensure();
+    private SmartDialog mEnableDevelopModeDialog;
 
     public void onEnsureDelayClick(View view) {
-        mEnsureDialogDelay.message("确定开启开发者模式？")
-                .secondsDelayConfirm(10)
-                .createAndShow(this);
+        if (mEnableDevelopModeDialog == null) {
+            mEnableDevelopModeDialog = new SmartDialog()
+                    .dialogCreator(
+                            DialogCreatorFactory
+                                    .ensure()
+                                    .message("确定开启开发者模式？")
+                                    .secondsDelayConfirm(10)
+                    )
+                    .reuse(true);
+        }
+        mEnableDevelopModeDialog.show(this);
     }
 
-    private IInputTextDialogCreator mInputTextDialogCreator = DialogCreatorFactory.input();
+    private SmartDialog mInputSuggestionDialog;
 
     public void onInputClick(View view) {
-        mInputTextDialogCreator
-                .inputAtMost(60)
-                .hint("输入建议")
-                .titleStyle(Color.RED,20,true)
-                .confirmBtnTextStyle(Color.GREEN,20,true)
-                .cancelBtnTextStyle(Color.RED,20,true)
-                .confirmBtn("确定", new DialogBtnClickListener() {
+        if (mInputSuggestionDialog == null) {
+            mInputSuggestionDialog = new SmartDialog()
+                    .dialogCreator(
+                            DialogCreatorFactory.input()
+                                    .inputAtMost(60)
+                                    .hint("输入建议")
+                                    .confirmBtn("提交", new DialogBtnClickListener() {
 
-                    @Override
-                    public void onBtnClick(Dialog dialog, int which, Object data) {
-                        if (data.toString().length() > 60) {
-                            SmartToast.showInCenter("最多只能输入70个字符");
-                            return;
-                        } else {
-                            dialog.dismiss();
-                            //do something
-                        }
-                    }
-                })
-                .inputCountMarkColor(Utils.getColorFromRes(R.color.colorPrimary))
-                .createAndShow(this);
+                                        @Override
+                                        public void onBtnClick(Dialog dialog, int which, Object data) {
+                                            if (data.toString().length() > 60) {
+                                                SmartToast.showInCenter("最多只能输入70个字符");
+                                                return;
+                                            } else {
+                                                dialog.dismiss();
+                                                SmartToast.showInCenter(data.toString());
+                                            }
+                                        }
+                                    })
+                                    .inputCountMarkColor(Utils.getColorFromRes(R.color.colorPrimary))
+                    ).reuse(true);
+        }
+
+        mInputSuggestionDialog.show(this);
     }
 
-    ILoadingDialogCreator mLoadingLarge = DialogCreatorFactory.loading();
+    SmartDialog mLargeLoadingDialog;
 
     public void onLoadingLargeClick(View view) {
-        mLoadingLarge.message("加载中...").large()
-                .createAndShow(this);
-
+        if (mLargeLoadingDialog == null) {
+            mLargeLoadingDialog = new SmartDialog()
+                    .dialogCreator(
+                            DialogCreatorFactory
+                                    .loading()
+                                    .large()
+                                    .message("加载中")
+                    )
+                    .reuse(true);
+        }
+        mLargeLoadingDialog.show(this);
     }
 
-    ILoadingDialogCreator mMiddleLoading = DialogCreatorFactory.loading();
+    SmartDialog mMiddleLoadingDialog;
 
     public void onLoadingMiddleClick(View view) {
-        mMiddleLoading.middle().message("加载中...")
-                .createAndShow(this);
+        if (mMiddleLoadingDialog == null) {
+            mMiddleLoadingDialog = new SmartDialog();
+            mMiddleLoadingDialog.dialogCreator(DialogCreatorFactory.loading().middle().message("加载中"))
+                    .reuse(true);
+        }
+        mMiddleLoadingDialog.show(this);
     }
 
-    private ILoadingDialogCreator mSmallLoading = DialogCreatorFactory.loading();
+    private SmartDialog mSmallLoadingDialog;
 
     public void onLoadingSmallClick(View view) {
-        mSmallLoading.small().createAndShow(this);
+        if (mSmallLoadingDialog == null) {
+            mSmallLoadingDialog = new SmartDialog()
+                    .reuse(false)
+                    .dialogCreator(DialogCreatorFactory.loading().small());
+        }
+        mSmallLoadingDialog.show(this);
     }
 }
