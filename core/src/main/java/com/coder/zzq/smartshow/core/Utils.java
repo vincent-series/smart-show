@@ -118,4 +118,8 @@ public class Utils {
             view.setBackgroundDrawable(drawable);
         }
     }
+
+    public static boolean isUpdateActivityUIPermitted(Activity activity) {
+        return activity != null || !activity.isFinishing() || !Utils.isActivityDestroyed(activity);
+    }
 }
