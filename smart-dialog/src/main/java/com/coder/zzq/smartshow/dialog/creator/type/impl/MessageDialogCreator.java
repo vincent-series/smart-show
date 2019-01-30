@@ -1,5 +1,6 @@
 package com.coder.zzq.smartshow.dialog.creator.type.impl;
 
+import android.app.Dialog;
 import android.graphics.Color;
 import android.support.annotation.ColorInt;
 import android.util.TypedValue;
@@ -10,12 +11,13 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.coder.zzq.smartshow.core.Utils;
+import com.coder.zzq.smartshow.dialog.ConfirmDelayCallback;
 import com.coder.zzq.smartshow.dialog.DialogBtnClickListener;
 import com.coder.zzq.smartshow.dialog.R;
 import com.coder.zzq.smartshow.dialog.creator.type.IMessageTipCreator;
 
 
-public abstract class MessageDialogCreator<B> extends BranchDialogCreator<B> implements IMessageTipCreator<B>, View.OnClickListener, View.OnAttachStateChangeListener, Runnable {
+public abstract class MessageDialogCreator<B> extends BranchDialogCreator<B> implements IMessageTipCreator<B> {
     public static final int DISABLE_COLOR = Color.parseColor("#bbbbbb");
     protected CharSequence mTitle;
     protected float mTitleTextSizeSp;
@@ -29,7 +31,6 @@ public abstract class MessageDialogCreator<B> extends BranchDialogCreator<B> imp
     @ColorInt
     protected int mConfirmLabelColor;
     protected boolean mConfirmLabelBold;
-    protected TextView mConfirmBtn;
     protected int mSecondsDelayConfirm;
 
     protected CharSequence mMessage;
@@ -73,6 +74,20 @@ public abstract class MessageDialogCreator<B> extends BranchDialogCreator<B> imp
     }
 
     @Override
+    public B confirmBtn(CharSequence label, int color) {
+        mConfirmLabel = label;
+        mConfirmLabelColor = color;
+        return (B) this;
+    }
+
+    @Override
+    public B confirmBtn(CharSequence label, int color, DialogBtnClickListener clickListener) {
+        confirmBtn(label, color);
+        mOnConfirmClickListener = clickListener;
+        return (B) this;
+    }
+
+    @Override
     public B confirmBtnTextStyle(int color, float textSizeSp, boolean bold) {
         mConfirmLabelColor = color;
         mConfirmLabelTextSizeSp = textSizeSp;
@@ -106,8 +121,8 @@ public abstract class MessageDialogCreator<B> extends BranchDialogCreator<B> imp
     }
 
     @Override
-    protected void initHeader(FrameLayout headerViewWrapper) {
-        super.initHeader(headerViewWrapper);
+    protected void initHeader(Dialog dialog, FrameLayout headerViewWrapper) {
+        super.initHeader(dialog, headerViewWrapper);
         headerViewWrapper.setVisibility(Utils.isEmpty(mTitle) ? View.GONE : View.VISIBLE);
         if (!Utils.isEmpty(mTitle)) {
             headerViewWrapper.setVisibility(View.VISIBLE);
@@ -126,13 +141,28 @@ public abstract class MessageDialogCreator<B> extends BranchDialogCreator<B> imp
     }
 
     @Override
-    protected void initBody(FrameLayout bodyViewWrapper) {
-        super.initBody(bodyViewWrapper);
+    protected void initBody(Dialog dialog, FrameLayout bodyViewWrapper) {
+        super.initBody(dialog, bodyViewWrapper);
         TextView messageView = bodyViewWrapper.findViewById(R.id.smart_show_dialog_message_view);
         messageView.setText(mMessage);
         ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) messageView.getLayoutParams();
         lp.topMargin = Utils.isEmpty(mTitle) ? Utils.dpToPx(7) : 0;
-        messageView.addOnAttachStateChangeListener(this);
+        messageView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+            @Override
+            public void onViewAttachedToWindow(View v) {
+                TextView msgView = (TextView) v;
+                if (msgView.getLineCount() > 1) {
+                    msgView.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+                } else {
+                    msgView.setGravity(Gravity.CENTER);
+                }
+            }
+
+            @Override
+            public void onViewDetachedFromWindow(View v) {
+
+            }
+        });
         if (mMessageColor != 0) {
             messageView.setTextColor(mMessageColor);
         }
@@ -144,36 +174,88 @@ public abstract class MessageDialogCreator<B> extends BranchDialogCreator<B> imp
 
 
     @Override
-    protected void initFooter(FrameLayout footerViewWrapper) {
-        super.initFooter(footerViewWrapper);
-        TextView confirmBtn = setBtn(footerViewWrapper, R.id.smart_show_dialog_confirm_btn, mConfirmLabel, mConfirmLabelColor, mConfirmLabelTextSizeSp, mConfirmLabelBold);
-        if (mSecondsDelayConfirm > 0) {
-            mConfirmBtn = confirmBtn;
-            mConfirmLabel = confirmBtn.getText();
-            if (mConfirmLabelColor <= 0) {
-                mConfirmLabelColor = confirmBtn.getCurrentTextColor();
+    protected void initFooter(Dialog dialog, FrameLayout footerViewWrapper) {
+        super.initFooter(dialog, footerViewWrapper);
+        TextView confirmBtn = footerViewWrapper.findViewById(R.id.smart_show_dialog_confirm_btn);
+        setBtnStyle(confirmBtn, mConfirmLabel, mConfirmLabelTextSizeSp, mConfirmLabelColor, mConfirmLabelBold);
+        setBtnListener(dialog, confirmBtn, DialogBtnClickListener.BTN_CONFIRM, mOnConfirmClickListener);
+
+    }
+
+    protected void setBtnListener(final Dialog dialog, final TextView btn, @DialogBtnClickListener.DialogBtn final int which, final DialogBtnClickListener clickListener) {
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (clickListener == null) {
+                    dialog.dismiss();
+                } else {
+                    clickListener.onBtnClick(dialog, which, null);
+                }
             }
-            mConfirmLabelWhenDelay = new StringBuilder();
-            confirmBtn.addOnAttachStateChangeListener(this);
+        });
+        if (which == DialogBtnClickListener.BTN_CONFIRM && mSecondsDelayConfirm > 0) {
+            btn.addOnAttachStateChangeListener(new ConfirmDelayCallback() {
+                @ColorInt
+                private int mConfirmBtnSrcColor = btn.getCurrentTextColor();
+                private CharSequence mConfirmBtnSrcLabel = btn.getText();
+                private int mConfirmBtnSecondsDelay = mSecondsDelayConfirm;
+                private int mConfirmBtnSecondsDelayInitValue = mConfirmBtnSecondsDelay;
+                private StringBuilder mConfirmLabelWhenDelay = new StringBuilder();
+
+                @Override
+                public void onViewAttachedToWindow(View v) {
+                    TextView textView = (TextView) v;
+                    if (mConfirmBtnSecondsDelay > 0) {
+                        textView.setEnabled(false);
+                        textView.setTextColor(DISABLE_COLOR);
+                        textView.post(this);
+                    }
+                }
+
+                @Override
+                public void run() {
+                    if (mConfirmBtnSecondsDelay > 0) {
+                        mConfirmLabelWhenDelay.delete(0, mConfirmLabelWhenDelay.length());
+                        mConfirmLabelWhenDelay.append(mConfirmBtnSrcLabel)
+                                .append("(")
+                                .append(mConfirmBtnSecondsDelay)
+                                .append("s)");
+                        btn.setText(mConfirmLabelWhenDelay.toString());
+                        mConfirmBtnSecondsDelay--;
+                        btn.postDelayed(this, 1000);
+                    } else {
+                        btn.setEnabled(true);
+                        btn.setText(mConfirmBtnSrcLabel);
+                        btn.setTextColor(mConfirmBtnSrcColor);
+                        btn.removeCallbacks(this);
+                    }
+                }
+
+                @Override
+                public void onViewDetachedFromWindow(View v) {
+                    btn.setText(mConfirmBtnSrcLabel);
+                    btn.setTextColor(mConfirmBtnSrcColor);
+                    btn.removeCallbacks(this);
+                    btn.setEnabled(true);
+                    mConfirmBtnSecondsDelay = mConfirmBtnSecondsDelayInitValue;
+                }
+            });
         }
     }
 
-    protected TextView setBtn(FrameLayout footerViewWrapper, int btnId, CharSequence label, int labelColor, float labelSize, boolean labelBold) {
-        TextView btn = footerViewWrapper.findViewById(btnId);
-        if (!Utils.isEmpty(label)) {
-            btn.setText(label);
+    protected void setBtnStyle(TextView btn, CharSequence btnLabel, float labelSizeSp, @ColorInt int labelColor, boolean labelBold) {
+        if (!Utils.isEmpty(btnLabel)) {
+            btn.setText(btnLabel);
         }
         if (labelColor != 0) {
             btn.setTextColor(labelColor);
         }
-        if (labelSize > 0) {
-            btn.setTextSize(TypedValue.COMPLEX_UNIT_SP, labelSize);
+        if (labelSizeSp > 0) {
+            btn.setTextSize(TypedValue.COMPLEX_UNIT_SP, labelSizeSp);
         }
         btn.getPaint().setFakeBoldText(labelBold);
-        btn.setOnClickListener(this);
-
-        return btn;
     }
+
 
     @Override
     protected int provideHeaderView() {
@@ -190,60 +272,4 @@ public abstract class MessageDialogCreator<B> extends BranchDialogCreator<B> imp
         return R.layout.smart_show_default_single_button;
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.smart_show_dialog_confirm_btn) {
-            onBtnClick(mOnConfirmClickListener, DialogBtnClickListener.BTN_CONFIRM, null);
-        }
-    }
-
-    private StringBuilder mConfirmLabelWhenDelay;
-
-    @Override
-    public void onViewAttachedToWindow(View v) {
-        if (v.getId() == R.id.smart_show_dialog_message_view) {
-            TextView msgView = (TextView) v;
-            if (msgView.getLineCount() > 1) {
-                msgView.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-            } else {
-                msgView.setGravity(Gravity.CENTER);
-            }
-        } else if (v.getId() == R.id.smart_show_dialog_confirm_btn) {
-            if (mSecondsDelayConfirm > 0) {
-                mConfirmBtn.setEnabled(false);
-                mConfirmBtn.setTextColor(DISABLE_COLOR);
-                v.post(this);
-            }
-        }
-    }
-
-    @Override
-    public void onViewDetachedFromWindow(View v) {
-        if (v.getId() == R.id.smart_show_dialog_confirm_btn) {
-            mConfirmBtn.setText(mConfirmLabel);
-            mConfirmBtn.setTextColor(mConfirmLabelColor);
-            mConfirmBtn.removeCallbacks(this);
-            mConfirmBtn.setEnabled(true);
-        }
-    }
-
-    @Override
-    public void run() {
-
-        if (mSecondsDelayConfirm > 0) {
-            mConfirmLabelWhenDelay.delete(0, mConfirmLabelWhenDelay.length());
-            mConfirmLabelWhenDelay.append(mConfirmLabel)
-                    .append("(")
-                    .append(mSecondsDelayConfirm)
-                    .append("s)");
-            mConfirmBtn.setText(mConfirmLabelWhenDelay.toString());
-            mSecondsDelayConfirm--;
-            mConfirmBtn.postDelayed(this, 1000);
-        } else {
-            mConfirmBtn.setEnabled(true);
-            mConfirmBtn.setText(mConfirmLabel);
-            mConfirmBtn.setTextColor(mConfirmLabelColor);
-            mConfirmBtn.removeCallbacks(this);
-        }
-    }
 }

@@ -29,7 +29,7 @@
         android:minWidth="80dp"
         android:paddingBottom="14dp"
         android:singleLine="true"
-        android:text="加载中..."
+        android:text="加载中"
         android:textColor="#ffffff"
         android:textSize="15sp" />
 </LinearLayout>

@@ -1,5 +1,6 @@
 package com.coder.zzq.smartshow.dialog.creator.type.impl;
 
+import android.app.Dialog;
 import android.support.annotation.ColorInt;
 import android.util.TypedValue;
 import android.view.View;
@@ -14,7 +15,7 @@ import com.coder.zzq.smartshow.dialog.creator.type.IConfirmBtnCreator;
 import com.coder.zzq.smartshow.dialog.creator.type.ITitleCreator;
 
 public abstract class SimpleBranchCreator<B> extends BranchDialogCreator<B> implements ITitleCreator<B>, IConfirmBtnCreator<B>,
-        ICancelBtnCreator<B>, View.OnClickListener {
+        ICancelBtnCreator<B> {
     protected CharSequence mTitle;
     protected float mTitleTextSizeSp;
     @ColorInt
@@ -66,6 +67,20 @@ public abstract class SimpleBranchCreator<B> extends BranchDialogCreator<B> impl
     }
 
     @Override
+    public B confirmBtn(CharSequence label, int color) {
+        mConfirmLabel = label;
+        mConfirmLabelColor = color;
+        return (B) this;
+    }
+
+    @Override
+    public B confirmBtn(CharSequence label, int color, DialogBtnClickListener clickListener) {
+        confirmBtn(label, color);
+        mOnConfirmClickListener = clickListener;
+        return (B) this;
+    }
+
+    @Override
     public B confirmBtnTextStyle(int color, float textSizeSp, boolean bold) {
         mConfirmLabelColor = color;
         mConfirmLabelTextSizeSp = textSizeSp;
@@ -87,6 +102,20 @@ public abstract class SimpleBranchCreator<B> extends BranchDialogCreator<B> impl
     }
 
     @Override
+    public B cancelBtn(CharSequence label, int color) {
+        mCancelLabel = label;
+        mCancelLabelColor = color;
+        return (B) this;
+    }
+
+    @Override
+    public B cancelBtn(CharSequence label, int color, DialogBtnClickListener clickListener) {
+        cancelBtn(label, color);
+        mOnCancelClickListener = clickListener;
+        return (B) this;
+    }
+
+    @Override
     public B cancelBtnTextStyle(int color, float textSizeSp, boolean bold) {
         mCancelLabelColor = color;
         mCancelLabelTextSizeSp = textSizeSp;
@@ -96,20 +125,20 @@ public abstract class SimpleBranchCreator<B> extends BranchDialogCreator<B> impl
 
 
     @Override
-    protected void initHeader(FrameLayout headerViewWrapper) {
-        super.initHeader(headerViewWrapper);
+    protected void initHeader(Dialog dialog, FrameLayout headerViewWrapper) {
+        super.initHeader(dialog, headerViewWrapper);
         headerViewWrapper.setVisibility(Utils.isEmpty(mTitle) ? View.GONE : View.VISIBLE);
         if (!Utils.isEmpty(mTitle)) {
             headerViewWrapper.setVisibility(View.VISIBLE);
             TextView titleView = headerViewWrapper.findViewById(R.id.smart_show_dialog_title_view);
             titleView.setText(mTitle);
-            if (mTitleColor != 0){
+            if (mTitleColor != 0) {
                 titleView.setTextColor(mTitleColor);
             }
-            if (mTitleTextSizeSp > 0){
-                titleView.setTextSize(TypedValue.COMPLEX_UNIT_SP,mTitleTextSizeSp);
+            if (mTitleTextSizeSp > 0) {
+                titleView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTitleTextSizeSp);
             }
-            if (mTitleBold){
+            if (mTitleBold) {
                 titleView.getPaint().setFakeBoldText(mTitleBold);
             }
         } else {
@@ -127,14 +156,17 @@ public abstract class SimpleBranchCreator<B> extends BranchDialogCreator<B> impl
 
 
     @Override
-    protected void initFooter(FrameLayout footerViewWrapper) {
-        super.initFooter(footerViewWrapper);
-        setBtn(footerViewWrapper, R.id.smart_show_dialog_confirm_btn, mConfirmLabel, mConfirmLabelColor, mConfirmLabelTextSizeSp, mConfirmLabelBold);
-        setBtn(footerViewWrapper, R.id.smart_show_dialog_cancel_btn, mCancelLabel, mConfirmLabelColor, mCancelLabelTextSizeSp, mCancelLabelBold);
+    protected void initFooter(Dialog dialog, FrameLayout footerViewWrapper) {
+        super.initFooter(dialog, footerViewWrapper);
+        setBtn(dialog, footerViewWrapper, R.id.smart_show_dialog_confirm_btn, mConfirmLabel, mConfirmLabelColor, mConfirmLabelTextSizeSp, mConfirmLabelBold,
+                mOnConfirmClickListener);
+        setBtn(dialog, footerViewWrapper, R.id.smart_show_dialog_cancel_btn, mCancelLabel, mConfirmLabelColor, mCancelLabelTextSizeSp, mCancelLabelBold,
+                mOnCancelClickListener);
     }
 
-    protected void setBtn(FrameLayout footerViewWrapper, int btnId, CharSequence label, int labelColor, float labelSize, boolean labelBold) {
-        TextView btn = footerViewWrapper.findViewById(btnId);
+    protected void setBtn(final Dialog dialog, FrameLayout footerViewWrapper, int btnId, CharSequence label, int labelColor, float labelSize, boolean labelBold,
+                          final DialogBtnClickListener clickListener) {
+        final TextView btn = footerViewWrapper.findViewById(btnId);
         if (!Utils.isEmpty(label)) {
             btn.setText(label);
         }
@@ -145,31 +177,39 @@ public abstract class SimpleBranchCreator<B> extends BranchDialogCreator<B> impl
             btn.setTextSize(TypedValue.COMPLEX_UNIT_SP, labelSize);
         }
         btn.getPaint().setFakeBoldText(labelBold);
-        btn.setOnClickListener(this);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (clickListener == null) {
+                    dialog.dismiss();
+                } else if (btn.getId() == R.id.smart_show_dialog_confirm_btn) {
+                    onConfirmBtnClick(dialog, btn, clickListener);
+                } else if (btn.getId() == R.id.smart_show_dialog_cancel_btn) {
+                    onCancelBtnClick(dialog, btn, clickListener);
+                }
+            }
+        });
+    }
+
+    protected void onCancelBtnClick(Dialog dialog, TextView btn, DialogBtnClickListener clickListener) {
+        onBtnClick(dialog, btn, DialogBtnClickListener.BTN_CONFIRM, clickListener);
+    }
+
+    protected void onConfirmBtnClick(Dialog dialog, TextView btn, DialogBtnClickListener clickListener) {
+        onBtnClick(dialog, btn, DialogBtnClickListener.BTN_CANCEL, clickListener);
+    }
+
+    protected void onBtnClick(Dialog dialog, TextView btn, int which, DialogBtnClickListener clickListener) {
+        if (clickListener == null) {
+            dialog.dismiss();
+        } else {
+            clickListener.onBtnClick(dialog, which, clickListener);
+        }
     }
 
     @Override
     protected int provideFooterView() {
         return R.layout.smart_show_default_double_btn;
-    }
-
-
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.smart_show_dialog_confirm_btn) {
-            onConfirmBtnClick(v);
-        } else if (v.getId() == R.id.smart_show_dialog_cancel_btn) {
-            onCancelBtnClick(v);
-        }
-
-    }
-
-    protected void onCancelBtnClick(View v) {
-        onBtnClick(mOnCancelClickListener, DialogBtnClickListener.BTN_CANCEL, null);
-    }
-
-    protected void onConfirmBtnClick(View v) {
-        onBtnClick(mOnConfirmClickListener, DialogBtnClickListener.BTN_CONFIRM, null);
     }
 
 }

@@ -26,10 +26,10 @@
         android:gravity="center_horizontal"
         android:maxLines="1"
         android:maxWidth="120dp"
-        android:minWidth="38dp"
+        android:minWidth="42dp"
         android:paddingBottom="10dp"
         android:singleLine="true"
-        android:text="加载中..."
+        android:text="加载中"
         android:textColor="#ffffff"
         android:textSize="12sp" />
 </LinearLayout>

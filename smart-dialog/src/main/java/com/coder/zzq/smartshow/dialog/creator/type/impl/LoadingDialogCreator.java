@@ -1,7 +1,9 @@
 package com.coder.zzq.smartshow.dialog.creator.type.impl;
 
+import android.app.Dialog;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -53,10 +55,10 @@ class LoadingDialogCreator extends NormalDialogCreator<ILoadingDialogCreator> im
     }
 
     @Override
-    protected void initView() {
-        super.initView();
-        Utils.inflate(mLayoutRes, (ViewGroup) mDialogRootView, true);
-        TextView msgView = mDialogRootView.findViewById(R.id.smart_show_loading_message_view);
+    protected void initView(Dialog dialog, View dialogRootView) {
+        super.initView(dialog, dialogRootView);
+        Utils.inflate(mLayoutRes, (ViewGroup) dialogRootView, true);
+        TextView msgView = dialogRootView.findViewById(R.id.smart_show_loading_message_view);
         if (msgView != null) {
             msgView.setText(mMsg);
         }

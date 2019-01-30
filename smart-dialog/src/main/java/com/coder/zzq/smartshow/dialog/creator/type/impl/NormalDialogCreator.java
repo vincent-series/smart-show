@@ -11,14 +11,12 @@ import android.view.WindowManager;
 
 import com.coder.zzq.smartshow.core.Utils;
 import com.coder.zzq.smartshow.dialog.R;
-import com.coder.zzq.smartshow.dialog.SmartDialog;
 import com.coder.zzq.smartshow.dialog.creator.type.INormalDialogCreator;
 
 abstract class NormalDialogCreator<B> extends DialogCreator implements INormalDialogCreator<B> {
     protected boolean mDarkAroundWhenShow;
     protected boolean mCancelableOnTouchOutside;
     protected boolean mCancelable;
-    protected View mDialogRootView;
     @DrawableRes
     protected int mWindowBackground;
 
@@ -54,33 +52,29 @@ abstract class NormalDialogCreator<B> extends DialogCreator implements INormalDi
     }
 
     @Override
-    public boolean createAndShow(Activity activity) {
-        return SmartDialog.show(activity, this);
-    }
-
-    @Override
     public Dialog createDialog(Activity activity) {
-        mDialog = new AppCompatDialog(activity, provideDialogStyle());
+        Dialog dialog = new AppCompatDialog(activity, provideDialogStyle());
         if (mDarkAroundWhenShow) {
-            mDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         } else {
-            mDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         }
-        mDialog.getWindow().setBackgroundDrawableResource(mWindowBackground);
-        mDialog.setCancelable(mCancelable);
-        mDialog.setCanceledOnTouchOutside(mCancelableOnTouchOutside);
-        initView();
+        dialog.getWindow().setBackgroundDrawableResource(mWindowBackground);
+        dialog.setCancelable(mCancelable);
+        dialog.setCanceledOnTouchOutside(mCancelableOnTouchOutside);
+        View dialogRootView = Utils.inflate(provideDialogRootView(), null);
+        initView(dialog, dialogRootView);
         ViewGroup.MarginLayoutParams rootLp = new ViewGroup.MarginLayoutParams(provideDialogWidth(), ViewGroup.LayoutParams.WRAP_CONTENT);
-        mDialog.setContentView(mDialogRootView, rootLp);
-        return mDialog;
+        dialog.setContentView(dialogRootView, rootLp);
+        return dialog;
     }
 
     protected int provideDialogStyle() {
         return R.style.smart_show_dialog;
     }
 
-    protected void initView() {
-        mDialogRootView = Utils.inflate(provideDialogRootView(), null);
+    protected void initView(Dialog dialog, View dialogRootView) {
+
     }
 
     protected int provideDialogWidth() {

@@ -8,6 +8,10 @@ import com.coder.zzq.smartshow.dialog.DialogBtnClickListener;
 public interface IConfirmBtnCreator<B> {
     B confirmBtn(CharSequence label);
 
+    B confirmBtn(CharSequence label, @ColorInt int color);
+
+    B confirmBtn(CharSequence label, @ColorInt int color, DialogBtnClickListener clickListener);
+
     B confirmBtn(CharSequence label, DialogBtnClickListener clickListener);
 
     B confirmBtnTextStyle(@ColorInt int color, float textSizeSp, boolean bold);
