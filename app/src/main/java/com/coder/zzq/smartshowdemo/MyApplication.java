@@ -13,14 +13,15 @@ import com.coder.zzq.smartshow.topbar.SmartTopbar;
  */
 
 public class MyApplication extends Application {
+    public static MyApplication sContext;
     @Override
     public void onCreate() {
         super.onCreate();
-
+        sContext = this;
         SmartShow.init(this);
 
         SmartToast.setting()
-                .backgroundColorRes(R.color.colorPrimary)
+//                .backgroundColorRes(R.color.colorPrimary)
                 .dismissOnLeave(false);
 
         SmartSnackbar.setting()
