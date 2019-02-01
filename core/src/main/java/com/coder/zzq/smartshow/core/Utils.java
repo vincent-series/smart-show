@@ -119,6 +119,11 @@ public class Utils {
         }
     }
 
+    /**
+     * 判断 activity的状态是可以操作UI
+     * @param activity
+     * @return
+     */
     public static boolean isUpdateActivityUIPermitted(Activity activity) {
         return activity != null || !activity.isFinishing() || !Utils.isActivityDestroyed(activity);
     }
