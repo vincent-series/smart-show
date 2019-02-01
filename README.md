@@ -731,54 +731,54 @@ public class SnackbarActivity extends BaseActivity implements ITopbarShowCallbac
 </code></pre>
 ## SmartDialog部分
 [回到模块导航](#模块导航)<br/><br/>
-1. 避免BadTokenException及NullPointException。当activity为null或已销毁或调用了finish()，若未创建过Dialog，则取消创建；若已创建，取消本次显示<br/>
+1. 判断activity的生命周期，避免因activity生命周期引起的NullPointException、BadTokenException等<br/>
 3. 提供主流APP中使用的message、loading等对话框<br/><br/>
 ![图片加载失败](images/dialog.gif)
 #### API
+第一步，继承DialogCreator，实现你的Dialog创建逻辑。
+<pre><code>
+public class ExampleDialogCreator extends DialogCreator {
+    /**
+     * 抽象方法，必须实现
+     *
+     * @param activity
+     * @return
+     */
+    @Override
+    public Dialog createDialog(Activity activity) {
+        //创建Dialog，在这里可以保证activity不为null，并且没有destroyed或isFinishing
+        Dialog dialog = null;
+        ...
+        return dialog;
+    }
+
+    /**
+     * 非抽象方法，默认实现为空，可选择性覆写，用于Dialog每次显示前的一些重置工作，例如EditText清空等
+     *
+     * @param dialog
+     */
+    @Override
+    public void resetDialogPerShow(Dialog dialog) {
+        super.resetDialogPerShow(dialog);
+
+    }
+}
+</code></pre>
+第二步，创建SmartDialog，传入DialogCreator。实际上SmartDialog并没有继承Dialog，只是个Dialog的包装器，管理Dialog。reuse(boolean b)方法表示是否复用Dialog，如果不复用，每次显示都调用DialogCreator创建新的Dialog。
 <pre><code>
     private SmartDialog mExampleDialog;
 
     public void onShowDialogClick(View view) {
-    
         if (mExampleDialog == null) {
-        
             mExampleDialog = new SmartDialog()
-            
-                    //传入DialogCreator，DialogCreator负责Dialog的创建
-                    
-                    .dialogCreator(new DialogCreator() {
-                    
-                        @Override
-                        public Dialog createDialog(Activity activity) {
-                        
-                            //创建Dialog并返回
-                            
-                            //在这里可以保证activity不为null,且没有销毁或者isFinishing
-                            
-                            Dialog dialog = null;
-                            
-                            //你的创建逻辑
-                            
-                            ...
-                            
-                            return dialog;
-                            
-                        }
-                        
-                    })
-                    
-                    //是否复用，不复用的话，每次显示都创建一个Dialog实例
-                    
+                    .dialogCreator(new ExampleDialogCreator())
                     .reuse(true);
-                    
         }
-        
         mExampleDialog.show(this);
-        
     }
 </code></pre>
 #### 预定义的DialogCreator
-下面是一些公共方法
+预定义的DialogCreator可调用方法设置按钮文本和颜色、按钮点击事件、标题等等。下面是一些公共方法
 <pre><code>
 public interface INormalDialogCreator&ltB&gt {
 
