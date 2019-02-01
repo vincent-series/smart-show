@@ -746,10 +746,15 @@ public class ExampleDialogCreator extends DialogCreator {
      */
     @Override
     public Dialog createDialog(Activity activity) {
+    
         //创建Dialog，在这里可以保证activity不为null，并且没有destroyed或isFinishing
+        
         Dialog dialog = null;
+        
         ...
+        
         return dialog;
+        
     }
 
     /**
@@ -759,7 +764,6 @@ public class ExampleDialogCreator extends DialogCreator {
      */
     @Override
     public void resetDialogPerShow(Dialog dialog) {
-        super.resetDialogPerShow(dialog);
 
     }
 }
@@ -769,16 +773,23 @@ public class ExampleDialogCreator extends DialogCreator {
     private SmartDialog mExampleDialog;
 
     public void onShowDialogClick(View view) {
+    
         if (mExampleDialog == null) {
+        
             mExampleDialog = new SmartDialog()
+            
                     .dialogCreator(new ExampleDialogCreator())
+                    
                     .reuse(true);
+                    
         }
+        
         mExampleDialog.show(this);
     }
 </code></pre>
 #### 预定义的DialogCreator
-预定义的DialogCreator可调用方法设置按钮文本和颜色、按钮点击事件、标题等等。下面是一些公共方法
+预定义的DialogCreator可调用方法设置按钮文本和颜色、按钮点击事件、标题等等。通过DialogCreatorFactory获取相关实例。</br>
+下面是一些公共方法
 <pre><code>
 public interface INormalDialogCreator&ltB&gt {
 
