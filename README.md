@@ -815,16 +815,27 @@ public interface INormalDialogCreator&ltB&gt {
     private SmartDialog mLargeLoadingDialog;
 
     public void onLoadingLargeClick(View view) {
+    
         if (mLargeLoadingDialog == null) {
+        
             mLargeLoadingDialog = new SmartDialog()
+            
                     .dialogCreator(
+                    
                             DialogCreatorFactory
+                            
                                     .loading()
+                                    
                                     .large()
+                                    
                                     .message("加载中")
+                                    
                     )
+                    
                     .reuse(true);
+                    
         }
+        
         mLargeLoadingDialog.show(this);
     }  
 </code></pre>
