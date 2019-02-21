@@ -223,7 +223,8 @@ type toast 均居中显示<br/><br/>
 </pre></code>
 
 #### 定制化
-定制化SmartToast，调用setting方法获取IToastSetting对象进行全局配置
+定制化SmartToast，调用setting方法获取IToastSetting对象进行全局配置<br/><br/>
+,在application的onCreate方法里执行配置代码
 <pre><code>  
         //获取IToastSetting对象
         
@@ -415,7 +416,8 @@ type toast 均居中显示<br/><br/>
 为了提高效率，直接将android.R.id.content或者CoordinatorLayout传入会更好。
 * SmartSnackbar对入口做了限制，如果你的页面想以某个具体CoordinatorLayout作为容器，则调用get(CoordinatorLayout view)。否则调用get(Activity activity)，内部会自动将该Activity的 android.R.id.content作为容器。
 #### 定制化
-定制化SmartSnackbar，可调用setting方法获取ISnackbarSetting对象进行全局配置
+定制化SmartSnackbar，可调用setting方法获取ISnackbarSetting对象进行全局配置<br/><br/>
+在application的onCreate方法里执行配置代码
 <pre><code>
         //获取ISnackbarSetting对象
         
