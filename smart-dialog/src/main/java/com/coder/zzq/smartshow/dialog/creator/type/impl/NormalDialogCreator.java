@@ -59,7 +59,9 @@ abstract class NormalDialogCreator<B> extends DialogCreator implements INormalDi
         } else {
             dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         }
-        dialog.getWindow().setBackgroundDrawableResource(mWindowBackground);
+        if (mWindowBackground != 0) {
+            dialog.getWindow().setBackgroundDrawableResource(mWindowBackground);
+        }
         dialog.setCancelable(mCancelable);
         dialog.setCanceledOnTouchOutside(mCancelableOnTouchOutside);
         View dialogRootView = Utils.inflate(provideDialogRootView(), null);
@@ -78,7 +80,7 @@ abstract class NormalDialogCreator<B> extends DialogCreator implements INormalDi
     }
 
     protected int provideDialogWidth() {
-        return Utils.screenWidth() - Utils.dpToPx(70);
+        return Math.min(Utils.screenWidth() - Utils.dpToPx(70), Utils.dpToPx(290));
     }
 
     @LayoutRes

@@ -21,6 +21,7 @@ class LoadingDialogCreator extends NormalDialogCreator<ILoadingDialogCreator> im
     public LoadingDialogCreator() {
         mCancelableOnTouchOutside = false;
         mDarkAroundWhenShow = false;
+        mWindowBackground = 0;
     }
 
     @Override
