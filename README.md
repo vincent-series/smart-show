@@ -5,7 +5,7 @@
 * [SmartTopBar](#SmartTopbar部分)
 * [SmartDialog](#SmartDialog部分)
 * [关于实现](#代码实现)
-* [关于作者](#关于作者)
+* [关于作者及微信交流群](#关于作者)
 * [引入该库](#引入SmartShow)
 ### 功能总览：
 1. 优雅封装，简化调用
@@ -31,7 +31,9 @@
 作者：朱志强<br/><br/>
 微信：w361281607<br/><br/>
 ![图片加载失败](images/wx_2d.jpg)<br/><br/>
-邮箱：coder_zzq@163.com<br/>
+邮箱：coder_zzq@163.com<br/><br/>
+微信交流群：<br/><br/>
+![图片加载失败](images/communications.png)
 ## 引入SmartShow
 [回到模块导航](#模块导航)<br/>
 1. 在Project的gradle文件中<br/>
@@ -52,7 +54,7 @@ allprojects {
 第一种方式，引入所有模块
 <pre><code>
 
-    implementation ('com.github.the-pig-of-jungle.smart-show:all:2.5.3'){
+    implementation ('com.github.the-pig-of-jungle.smart-show:all:2.5.4'){
     
         exclude group: 'com.android.support'
         
@@ -68,19 +70,19 @@ allprojects {
 <pre><code>
     //smart toast
     
-    implementation 'com.github.the-pig-of-jungle.smart-show:toast:2.5.3'
+    implementation 'com.github.the-pig-of-jungle.smart-show:toast:2.5.4'
 </code></pre>
 
 <pre><code>
     // smart dialog
     
-    implementation 'com.github.the-pig-of-jungle.smart-show:dialog:2.5.3'
+    implementation 'com.github.the-pig-of-jungle.smart-show:dialog:2.5.4'
 </code></pre>
 
 <pre><code>  
     // smart topbar
     
-    implementation('com.github.the-pig-of-jungle.smart-show:topbar:2.5.3') {
+    implementation('com.github.the-pig-of-jungle.smart-show:topbar:2.5.4') {
     
         exclude group: 'com.android.support'
         
@@ -94,7 +96,7 @@ allprojects {
 <pre><code>
     // smart snackbar
     
-    implementation('com.github.the-pig-of-jungle.smart-show:snackbar:2.5.3') {
+    implementation('com.github.the-pig-of-jungle.smart-show:snackbar:2.5.4') {
     
         exclude group: 'com.android.support'
         
