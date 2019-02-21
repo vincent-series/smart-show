@@ -33,7 +33,7 @@
 ![图片加载失败](images/wx_2d.jpg)<br/><br/>
 邮箱：coder_zzq@163.com<br/><br/>
 微信交流群：<br/><br/>
-![图片加载失败](images/communications.png)
+![图片加载失败](images/communications.jpg)
 ## 引入SmartShow
 [回到模块导航](#模块导航)<br/>
 1. 在Project的gradle文件中<br/>
