@@ -37,10 +37,7 @@ public class TestDialogActivity extends AppCompatActivity {
                     .dialogCreator(DialogCreatorFactory.notification().message("重置成功"))
                     .reuse(true);
         }
-        finish();
         mResetSuccTip.show(this);
-
-
     }
 
     private SmartDialog mCancelConcernDialog;
