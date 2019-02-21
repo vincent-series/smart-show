@@ -16,6 +16,7 @@ public class SmartDialog {
     public boolean show(Activity activity) {
         if (!Utils.isUpdateActivityUIPermitted(activity) ||
                 (mNestedDialog == null && mDialogCreator == null)) {
+            EasyLogger.d("do nothing when conditions not available!");
             return false;
         }
 

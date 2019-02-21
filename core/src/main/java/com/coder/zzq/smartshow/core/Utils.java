@@ -125,6 +125,6 @@ public class Utils {
      * @return
      */
     public static boolean isUpdateActivityUIPermitted(Activity activity) {
-        return activity != null || !activity.isFinishing() || !Utils.isActivityDestroyed(activity);
+        return activity != null && !activity.isFinishing() && !Utils.isActivityDestroyed(activity);
     }
 }

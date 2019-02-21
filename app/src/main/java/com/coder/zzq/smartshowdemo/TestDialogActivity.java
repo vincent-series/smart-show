@@ -1,9 +1,7 @@
 package com.coder.zzq.smartshowdemo;
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -31,7 +29,7 @@ public class TestDialogActivity extends AppCompatActivity {
         mExampleDialog.show(this);
     }
 
-    private SmartDialog mResetSuccTip;
+    public static SmartDialog mResetSuccTip;
 
     public void onNotificationClick(View view) {
         if (mResetSuccTip == null) {
@@ -39,8 +37,10 @@ public class TestDialogActivity extends AppCompatActivity {
                     .dialogCreator(DialogCreatorFactory.notification().message("重置成功"))
                     .reuse(true);
         }
-
+        finish();
         mResetSuccTip.show(this);
+
+
     }
 
     private SmartDialog mCancelConcernDialog;
