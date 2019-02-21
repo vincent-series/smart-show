@@ -224,7 +224,7 @@ type toast 均居中显示<br/><br/>
 
 #### 定制化
 定制化SmartToast，调用setting方法获取IToastSetting对象进行全局配置<br/><br/>
-,在application的onCreate方法里执行配置代码
+在application的onCreate方法里执行配置代码
 <pre><code>  
         //获取IToastSetting对象
         
@@ -617,7 +617,8 @@ public class SnackbarActivity extends BaseActivity implements ISnackbarShowCallb
            });              
 </code></pre>
 #### 定制化
-定制化SmartTopbar，可调用setting方法获取ITopbarSetting对象进行全局配置
+定制化SmartTopbar，可调用setting方法获取ITopbarSetting对象进行全局配置<br/><br/>
+在application的onCreate方法里执行配置代码
 <pre><code>
         //获取ITopbarSetting对象
         
