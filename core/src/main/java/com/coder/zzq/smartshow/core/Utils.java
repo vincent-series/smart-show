@@ -9,6 +9,7 @@ import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.TypedValue;
@@ -121,10 +122,15 @@ public class Utils {
 
     /**
      * 判断 activity的状态是可以操作UI
+     *
      * @param activity
      * @return
      */
     public static boolean isUpdateActivityUIPermitted(Activity activity) {
         return activity != null && !activity.isFinishing() && !Utils.isActivityDestroyed(activity);
+    }
+
+    public static String getStringFromRes(@StringRes int msg) {
+        return SmartShow.getContext().getString(msg);
     }
 }
