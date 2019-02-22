@@ -1,4 +1,5 @@
 ## SmartShow
+近几天大家反映的问题，都会得到改善，请及时使用最新版本。
 ### 模块导航：
 * [SmartToast](#SmartToast部分)
 * [SmartSnackbar](#SmartSnackbar部分)
@@ -56,7 +57,7 @@ allprojects {
 第一种方式，引入所有模块
 <pre><code>
 
-    implementation ('com.github.the-pig-of-jungle.smart-show:all:2.5.6'){
+    implementation ('com.github.the-pig-of-jungle.smart-show:all:2.5.7'){
     
         exclude group: 'com.android.support'
         
@@ -72,19 +73,19 @@ allprojects {
 <pre><code>
     //smart toast
     
-    implementation 'com.github.the-pig-of-jungle.smart-show:toast:2.5.6'
+    implementation 'com.github.the-pig-of-jungle.smart-show:toast:2.5.7'
 </code></pre>
 
 <pre><code>
     // smart dialog
     
-    implementation 'com.github.the-pig-of-jungle.smart-show:dialog:2.5.6'
+    implementation 'com.github.the-pig-of-jungle.smart-show:dialog:2.5.7'
 </code></pre>
 
 <pre><code>  
     // smart topbar
     
-    implementation('com.github.the-pig-of-jungle.smart-show:topbar:2.5.6') {
+    implementation('com.github.the-pig-of-jungle.smart-show:topbar:2.5.7') {
     
         exclude group: 'com.android.support'
         
@@ -98,7 +99,7 @@ allprojects {
 <pre><code>
     // smart snackbar
     
-    implementation('com.github.the-pig-of-jungle.smart-show:snackbar:2.5.6') {
+    implementation('com.github.the-pig-of-jungle.smart-show:snackbar:2.5.7') {
     
         exclude group: 'com.android.support'
         
