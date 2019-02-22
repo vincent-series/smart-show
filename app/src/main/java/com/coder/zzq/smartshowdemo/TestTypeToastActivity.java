@@ -16,36 +16,36 @@ public class TestTypeToastActivity extends AppCompatActivity {
     }
 
     public void onInfoClick(View view) {
-        SmartToast.info("当前网络良好");
+        SmartToast.info(R.string.net_fine);
     }
 
     public void onSuccessClick(View view) {
-        SmartToast.success("删除成功");
+        SmartToast.success(R.string.delete_succ);
     }
 
     public void onErrorClick(View view) {
-        SmartToast.error("数据解析出错");
+        SmartToast.error(R.string.data_parse_error);
     }
 
     public void onWarningClick(View view) {
-        SmartToast.warning("电量过低，请尽快充电");
+        SmartToast.warning(R.string.power_low);
     }
 
     public void onFailClick(View view) {
-        SmartToast.fail("保存失败");
+        SmartToast.fail(R.string.save_fail);
     }
 
     public void onCompleteClick(View view) {
-        SmartToast.complete("下载完成");
+        SmartToast.complete(R.string.download_complete);
     }
 
 
     public void onForbidClick(View view) {
-        SmartToast.forbid("当前账户不允许汇款操作");
+        SmartToast.forbid(R.string.forbid_op);
     }
 
     public void onWaitingClick(View view) {
-        SmartToast.waiting("已在后台下载，请耐心等待");
+        SmartToast.waiting(R.string.wait_to_download);
     }
 
 

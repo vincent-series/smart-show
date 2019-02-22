@@ -23,22 +23,22 @@ public class TestToastActivity extends AppCompatActivity {
 
 
     public void onShowClick(View view) {
-        SmartToast.show("苹果");
+        SmartToast.show(R.string.apple);
     }
 
     public void onShowAtTopClick(View view) {
-        SmartToast.showAtTop("香蕉");
+        SmartToast.showAtTop(R.string.banana);
     }
 
     public void onShowInCenterClick(View view) {
-        SmartToast.showInCenter("橘子");
+        SmartToast.showInCenter(R.string.orange);
     }
 
     public void onShowAtLocationClick(View view) {
-        SmartToast.showAtLocation("荔枝", Gravity.LEFT | Gravity.TOP, 10, 90);
+        SmartToast.showAtLocation(R.string.litchi, Gravity.LEFT | Gravity.TOP, 10, 90);
     }
 
     public void onShowAnotherClick(View view) {
-        SmartToast.show("芒果");
+        SmartToast.show(R.string.mango);
     }
 }

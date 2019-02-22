@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">SmartShowDemo</string>
+    <string name="apple">苹果</string>
+    <string name="banana">香蕉</string>
+    <string name="orange">橘子</string>
+    <string name="litchi">荔枝</string>
+    <string name="mango">芒果</string>
+    <string name="net_fine">当前网络良好</string>
+    <string name="delete_succ">删除成功</string>
+    <string name="data_parse_error">数据解析出错</string>
+    <string name="power_low">电量过低，请尽快充电</string>
+    <string name="save_fail">保存失败</string>
+    <string name="download_complete">下载完成</string>
+    <string name="forbid_op">当前账户不允许汇款操作</string>
+    <string name="wait_to_download">已在后台下载，请耐心等待</string>
 </resources>
