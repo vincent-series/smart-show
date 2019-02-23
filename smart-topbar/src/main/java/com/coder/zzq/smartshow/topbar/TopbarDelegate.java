@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Build;
 import android.support.annotation.RestrictTo;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.v4.view.ViewCompat;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,7 @@ public final class TopbarDelegate extends BarDelegate<TopBar, TopBar.TopbarLayou
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT
                 );
+                ViewCompat.setElevation(topbarContainer, 1f);
                 decorView.addView(topbarContainer, lp);
             }
 
