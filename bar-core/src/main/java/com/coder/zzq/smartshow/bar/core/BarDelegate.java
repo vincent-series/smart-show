@@ -2,12 +2,18 @@ package com.coder.zzq.smartshow.bar.core;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.RestrictTo;
+import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.coder.zzq.smartshow.core.Utils;
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public abstract class BarDelegate<Bar, ViewParam, BarSetting extends BarSettingImpl> implements IBarShow, View.OnClickListener, Runnable {
@@ -16,6 +22,10 @@ public abstract class BarDelegate<Bar, ViewParam, BarSetting extends BarSettingI
     protected CharSequence mCurMsg;
     protected CharSequence mCurActionText;
     protected View.OnClickListener mOnActionClickListener;
+    @DrawableRes
+    protected int mCurrentIcon;
+    protected Rect mIconRange;
+    protected SparseArray<Drawable> mCacheDrawables;
     protected int mDuration;
     protected View mBaseTraceView;
     protected Bar mBar;
@@ -86,11 +96,16 @@ public abstract class BarDelegate<Bar, ViewParam, BarSetting extends BarSettingI
             mBar = null;
             mPageContext = null;
             mBaseTraceView = null;
+            if (mCacheDrawables != null) {
+                mCacheDrawables.clear();
+                mCacheDrawables = null;
+            }
+            mIconRange = null;
         }
     }
 
 
-    private void showHelper(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener, int duration) {
+    private void showHelper(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener, @DrawableRes int icon, int duration) {
 
         if (mBaseTraceView == null) {
             return;
@@ -100,9 +115,9 @@ public abstract class BarDelegate<Bar, ViewParam, BarSetting extends BarSettingI
         actionText = actionText == null ? "" : actionText;
         onActionClickListener = onActionClickListener == null ? this : onActionClickListener;
 
-        boolean appearanceChanged = appearanceChanged(msg, actionText);
+        boolean appearanceChanged = appearanceChanged(msg, actionText, icon);
 
-        setting(msg, actionText, onActionClickListener, duration);
+        setting(msg, actionText, onActionClickListener, icon, duration);
 
         if ((isShowing() && appearanceChanged) || mBaseTraceView.getVisibility() != View.VISIBLE) {
             //如果Snackbar正在显示，且内容发生了变化，先隐藏掉再显示，具有切换效果
@@ -125,18 +140,47 @@ public abstract class BarDelegate<Bar, ViewParam, BarSetting extends BarSettingI
     }
 
 
-    private boolean appearanceChanged(CharSequence msg, CharSequence actionText) {
-        return !mCurMsg.equals(msg) || !mCurActionText.equals(actionText);
+    private boolean appearanceChanged(CharSequence msg, CharSequence actionText, @DrawableRes int icon) {
+        return !mCurMsg.equals(msg) || !mCurActionText.equals(actionText) || mCurrentIcon != icon;
     }
 
     //正常显示bar
     protected abstract void normalShow();
 
-    private void setting(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener, int duration) {
+    protected SparseArray<Drawable> getCacheDrawables() {
+        if (mCacheDrawables == null) {
+            mCacheDrawables = new SparseArray<>();
+        }
+        return mCacheDrawables;
+    }
+
+    private void setting(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener, @DrawableRes int icon, int duration) {
         mCurMsg = msg;
         mCurActionText = actionText;
         mOnActionClickListener = onActionClickListener;
+        mCurrentIcon = icon;
+        if (icon != 0 && getCacheDrawables().get(icon, null) == null) {
+            getCacheDrawables().put(icon, Utils.getDrawableFromRes(icon));
+        }
         mDuration = duration;
+    }
+
+    public Rect getIconRange() {
+        if (mIconRange == null) {
+            mIconRange = new Rect();
+        }
+        return mIconRange;
+    }
+
+    protected void setMsgIcon() {
+        Drawable drawable = mCurrentIcon == 0 ? null : getCacheDrawables().get(mCurrentIcon);
+        if (drawable != null) {
+            getMsgView().getPaint().getTextBounds(mCurMsg.toString(), 0, mCurMsg.length(), getIconRange());
+            int drawableSize = getIconRange().height() + Utils.dpToPx(2);
+            drawable.setBounds(0, 0, drawableSize, drawableSize);
+        }
+        getMsgView().setCompoundDrawablePadding(Utils.dpToPx(8));
+        getMsgView().setCompoundDrawables(drawable, null, null, null);
     }
 
     @Override
@@ -153,7 +197,7 @@ public abstract class BarDelegate<Bar, ViewParam, BarSetting extends BarSettingI
 
     @Override
     public void show(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener) {
-        showHelper(msg, actionText, onActionClickListener, getShortDuration());
+        showHelper(msg, actionText, onActionClickListener, 0, getShortDuration());
     }
 
 
@@ -170,7 +214,7 @@ public abstract class BarDelegate<Bar, ViewParam, BarSetting extends BarSettingI
 
     @Override
     public void showLong(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener) {
-        showHelper(msg, actionText, onActionClickListener, getLongDuration());
+        showHelper(msg, actionText, onActionClickListener, 0, getLongDuration());
     }
 
 
@@ -188,9 +232,54 @@ public abstract class BarDelegate<Bar, ViewParam, BarSetting extends BarSettingI
 
     @Override
     public void showIndefinite(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener) {
-        showHelper(msg, actionText, onActionClickListener, getIndefiniteDuration());
+        showHelper(msg, actionText, onActionClickListener, 0, getIndefiniteDuration());
     }
 
+
+    @Override
+    public void show(CharSequence msg, int icon) {
+        show(msg, null, icon);
+    }
+
+    @Override
+    public void show(CharSequence msg, CharSequence actionText, int icon) {
+        show(msg, actionText, null, icon);
+    }
+
+    @Override
+    public void show(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener, int icon) {
+        showHelper(msg, actionText, onActionClickListener, icon, getShortDuration());
+    }
+
+    @Override
+    public void showLong(CharSequence msg, int icon) {
+        showLong(msg, null, icon);
+    }
+
+    @Override
+    public void showLong(CharSequence msg, CharSequence actionText, int icon) {
+        showLong(msg, actionText, null, icon);
+    }
+
+    @Override
+    public void showLong(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener, int icon) {
+        showHelper(msg, actionText, onActionClickListener, icon, getLongDuration());
+    }
+
+    @Override
+    public void showIndefinite(CharSequence msg, int icon) {
+        showIndefinite(msg, null, icon);
+    }
+
+    @Override
+    public void showIndefinite(CharSequence msg, CharSequence actionText, int icon) {
+        showIndefinite(msg, actionText, null, icon);
+    }
+
+    @Override
+    public void showIndefinite(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener, int icon) {
+        showHelper(msg, actionText, onActionClickListener, icon, getIndefiniteDuration());
+    }
 
     @Override
     public void onClick(View v) {

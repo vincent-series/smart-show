@@ -132,6 +132,7 @@ public final class TopbarDelegate extends BarDelegate<TopBar, TopBar.TopbarLayou
 
     @Override
     protected void normalShow() {
+        setMsgIcon();
         mBar.setText(mCurMsg).setAction(mCurActionText, mOnActionClickListener).setDuration(mDuration).show();
     }
 

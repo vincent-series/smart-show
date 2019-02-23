@@ -93,6 +93,7 @@ public class SnackbarDeligate extends BarDelegate<Snackbar, Snackbar.SnackbarLay
 
     @Override
     protected void normalShow() {
+        setMsgIcon();
         mBar.setText(mCurMsg).setAction(mCurActionText, mOnActionClickListener)
                 .setDuration(mDuration).show();
     }
