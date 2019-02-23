@@ -1,5 +1,5 @@
 ## SmartShow
-近几天大家反映的问题，都会得到改善，请及时使用最新版本。
+近几天大家反映的问题，都会得到改善，请及时使用最新版本。当前最新版本2.6.0
 ### 模块导航：
 * [SmartToast](#SmartToast部分)
 * [SmartSnackbar](#SmartSnackbar部分)
