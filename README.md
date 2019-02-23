@@ -57,7 +57,7 @@ allprojects {
 第一种方式，引入所有模块
 <pre><code>
 
-    implementation ('com.github.the-pig-of-jungle.smart-show:all:2.5.7'){
+    implementation ('com.github.the-pig-of-jungle.smart-show:all:2.5.8'){
     
         exclude group: 'com.android.support'
         
@@ -73,19 +73,19 @@ allprojects {
 <pre><code>
     //smart toast
     
-    implementation 'com.github.the-pig-of-jungle.smart-show:toast:2.5.7'
+    implementation 'com.github.the-pig-of-jungle.smart-show:toast:2.5.8'
 </code></pre>
 
 <pre><code>
     // smart dialog
     
-    implementation 'com.github.the-pig-of-jungle.smart-show:dialog:2.5.7'
+    implementation 'com.github.the-pig-of-jungle.smart-show:dialog:2.5.8'
 </code></pre>
 
 <pre><code>  
     // smart topbar
     
-    implementation('com.github.the-pig-of-jungle.smart-show:topbar:2.5.7') {
+    implementation('com.github.the-pig-of-jungle.smart-show:topbar:2.5.8') {
     
         exclude group: 'com.android.support'
         
@@ -99,7 +99,7 @@ allprojects {
 <pre><code>
     // smart snackbar
     
-    implementation('com.github.the-pig-of-jungle.smart-show:snackbar:2.5.7') {
+    implementation('com.github.the-pig-of-jungle.smart-show:snackbar:2.5.8') {
     
         exclude group: 'com.android.support'
         
