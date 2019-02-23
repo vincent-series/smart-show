@@ -14,6 +14,7 @@ public class TestTopbarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_topbar);
+        SmartTopbar.get(this).show("你好");
     }
 
     public void onShortClick(View view) {

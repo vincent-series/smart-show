@@ -9,6 +9,7 @@ import com.coder.zzq.smartshow.core.lifecycle.ActivityStack;
 import com.coder.zzq.smartshow.core.lifecycle.IBarCallback;
 import com.coder.zzq.smartshow.core.lifecycle.IDialogCallback;
 import com.coder.zzq.smartshow.core.lifecycle.IToastCallback;
+import com.coder.zzq.smartshow.core.lifecycle.ITopbarCallback;
 
 /**
  * Created by 朱志强 on 2018/08/19.
@@ -18,7 +19,7 @@ public final class SmartShow {
     private static Application sApplication;
     private static IToastCallback sToastCallback;
     private static IBarCallback sSnackbarCallback;
-    private static IBarCallback sTopbarCallback;
+    private static ITopbarCallback sTopbarCallback;
     private static IDialogCallback sDialogCallback;
 
     public static void init(Application application) {
@@ -34,6 +35,9 @@ public final class SmartShow {
             public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
                 super.onActivityCreated(activity, savedInstanceState);
                 ActivityStack.push(activity);
+                if (sTopbarCallback != null) {
+                    sTopbarCallback.adjustTopbarContainerIfNecessary(activity);
+                }
             }
 
             @Override
@@ -91,7 +95,7 @@ public final class SmartShow {
         sSnackbarCallback = snackbarCallback;
     }
 
-    public static void setTopbarCallback(IBarCallback topbarCallback) {
+    public static void setTopbarCallback(ITopbarCallback topbarCallback) {
         sTopbarCallback = topbarCallback;
     }
 
