@@ -41,7 +41,7 @@ abstract class NormalDialogCreator<B> extends DialogCreator implements INormalDi
 
     @Override
     public B cancelable(boolean b) {
-        mCancelable = true;
+        mCancelable = b;
         return (B) this;
     }
 
