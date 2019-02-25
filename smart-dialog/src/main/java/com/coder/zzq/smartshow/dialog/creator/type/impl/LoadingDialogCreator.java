@@ -3,6 +3,7 @@ package com.coder.zzq.smartshow.dialog.creator.type.impl;
 import android.app.Dialog;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ import com.coder.zzq.smartshow.dialog.creator.type.ILoadingDialogCreator;
 
 class LoadingDialogCreator extends NormalDialogCreator<ILoadingDialogCreator> implements ILoadingDialogCreator {
     private CharSequence mMsg = "加载中...";
+    private boolean mWithoutMsgTip;
     @DrawableRes
     private int mDrawablRes = R.drawable.smart_show_loading_img;
     @LayoutRes
@@ -33,6 +35,12 @@ class LoadingDialogCreator extends NormalDialogCreator<ILoadingDialogCreator> im
     @Override
     public ILoadingDialogCreator message(CharSequence msg) {
         mMsg = Utils.isEmpty(msg) ? "加载中..." : msg;
+        return this;
+    }
+
+    @Override
+    public ILoadingDialogCreator withoutMsgTip() {
+        mWithoutMsgTip = true;
         return this;
     }
 
@@ -62,6 +70,7 @@ class LoadingDialogCreator extends NormalDialogCreator<ILoadingDialogCreator> im
         TextView msgView = dialogRootView.findViewById(R.id.smart_show_loading_message_view);
         if (msgView != null) {
             msgView.setText(mMsg);
+            msgView.setVisibility(TextUtils.isEmpty(mMsg) || mWithoutMsgTip ? View.GONE : View.VISIBLE);
         }
     }
 

@@ -22,8 +22,7 @@ public class TestDialogActivity extends AppCompatActivity {
 
     public void onShowDialogClick(View view) {
         if (mExampleDialog == null) {
-            mExampleDialog = new SmartDialog()
-                    .dialogCreator(new ExampleDialogCreator())
+            mExampleDialog = SmartDialog.newInstance(new ExampleDialogCreator())
                     .reuse(true);
         }
         mExampleDialog.show(this);
@@ -33,8 +32,11 @@ public class TestDialogActivity extends AppCompatActivity {
 
     public void onNotificationClick(View view) {
         if (mResetSuccTip == null) {
-            mResetSuccTip = new SmartDialog()
-                    .dialogCreator(DialogCreatorFactory.notification().message("重置成功"))
+            mResetSuccTip = SmartDialog.newInstance(
+                    DialogCreatorFactory
+                            .notification()
+                            .message("重置成功")
+            )
                     .reuse(true);
         }
         mResetSuccTip.show(this);
@@ -44,14 +46,13 @@ public class TestDialogActivity extends AppCompatActivity {
 
     public void onEnsureClick(View view) {
         if (mCancelConcernDialog == null) {
-            mCancelConcernDialog = new SmartDialog()
-                    .dialogCreator(
-                            DialogCreatorFactory
-                                    .ensure()
-                                    .confirmBtn("确定")
-                                    .cancelBtn("取消")
-                                    .message("确定不再关注此人？")
-                    )
+            mCancelConcernDialog = SmartDialog.newInstance(
+                    DialogCreatorFactory
+                            .ensure()
+                            .confirmBtn("确定")
+                            .cancelBtn("取消")
+                            .message("确定不再关注此人？")
+            )
                     .reuse(true);
         }
         mCancelConcernDialog.show(this);
@@ -61,13 +62,12 @@ public class TestDialogActivity extends AppCompatActivity {
 
     public void onEnsureDelayClick(View view) {
         if (mEnableDevelopModeDialog == null) {
-            mEnableDevelopModeDialog = new SmartDialog()
-                    .dialogCreator(
-                            DialogCreatorFactory
-                                    .ensure()
-                                    .message("确定开启开发者模式？")
-                                    .secondsDelayConfirm(10)
-                    )
+            mEnableDevelopModeDialog = SmartDialog.newInstance(
+                    DialogCreatorFactory
+                            .ensure()
+                            .message("确定开启开发者模式？")
+                            .secondsDelayConfirm(10)
+            )
                     .reuse(true);
         }
         mEnableDevelopModeDialog.show(this);
@@ -77,27 +77,27 @@ public class TestDialogActivity extends AppCompatActivity {
 
     public void onInputClick(View view) {
         if (mInputSuggestionDialog == null) {
-            mInputSuggestionDialog = new SmartDialog()
-                    .dialogCreator(
-                            DialogCreatorFactory
-                                    .input()
-                                    .inputAtMost(60)
-                                    .hint("输入建议")
-                                    .confirmBtn("提交", new DialogBtnClickListener() {
+            mInputSuggestionDialog = SmartDialog.newInstance(
+                    DialogCreatorFactory
+                            .input()
+                            .inputAtMost(60)
+                            .hint("输入建议")
+                            .confirmBtn("提交", new DialogBtnClickListener() {
 
-                                        @Override
-                                        public void onBtnClick(Dialog dialog, int which, Object data) {
-                                            if (data.toString().length() > 60) {
-                                                SmartToast.showInCenter("最多只能输入70个字符");
-                                                return;
-                                            } else {
-                                                dialog.dismiss();
-                                                SmartToast.showInCenter(data.toString());
-                                            }
-                                        }
-                                    })
-                                    .inputCountMarkColor(Utils.getColorFromRes(R.color.colorPrimary))
-                    )
+                                @Override
+                                public void onBtnClick(Dialog dialog, int which, Object data) {
+                                    if (data.toString().length() > 60) {
+                                        SmartToast.showInCenter("最多只能输入70个字符");
+                                        return;
+                                    } else {
+                                        dialog.dismiss();
+                                        SmartToast.showInCenter(data.toString());
+                                    }
+                                }
+                            })
+                            .inputCountMarkColor(Utils.getColorFromRes(R.color.colorPrimary))
+
+            )
                     .reuse(true);
         }
 
@@ -108,13 +108,13 @@ public class TestDialogActivity extends AppCompatActivity {
 
     public void onLoadingLargeClick(View view) {
         if (mLargeLoadingDialog == null) {
-            mLargeLoadingDialog = new SmartDialog()
-                    .dialogCreator(
-                            DialogCreatorFactory
-                                    .loading()
-                                    .large()
-                                    .message("加载中")
-                    )
+            mLargeLoadingDialog = SmartDialog.newInstance(
+                    DialogCreatorFactory
+                            .loading()
+                            .large()
+//                            .withoutMsgTip()
+                            .message("加载中")
+            )
                     .reuse(true);
         }
         mLargeLoadingDialog.show(this);
@@ -124,8 +124,7 @@ public class TestDialogActivity extends AppCompatActivity {
 
     public void onLoadingMiddleClick(View view) {
         if (mMiddleLoadingDialog == null) {
-            mMiddleLoadingDialog = new SmartDialog();
-            mMiddleLoadingDialog.dialogCreator(DialogCreatorFactory.loading().middle().message("加载中"))
+            mMiddleLoadingDialog = SmartDialog.newInstance(DialogCreatorFactory.loading().middle().message("加载中"))
                     .reuse(true);
         }
         mMiddleLoadingDialog.show(this);
@@ -135,9 +134,8 @@ public class TestDialogActivity extends AppCompatActivity {
 
     public void onLoadingSmallClick(View view) {
         if (mSmallLoadingDialog == null) {
-            mSmallLoadingDialog = new SmartDialog()
-                    .reuse(false)
-                    .dialogCreator(DialogCreatorFactory.loading().small());
+            mSmallLoadingDialog = SmartDialog.newInstance(DialogCreatorFactory.loading().small())
+                    .reuse(true);
         }
         mSmallLoadingDialog.show(this);
     }

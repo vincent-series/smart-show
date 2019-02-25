@@ -62,8 +62,10 @@ abstract class NormalDialogCreator<B> extends DialogCreator implements INormalDi
         if (mWindowBackground != 0) {
             dialog.getWindow().setBackgroundDrawableResource(mWindowBackground);
         }
+
+        dialog.setCanceledOnTouchOutside(mCancelable ? mCancelableOnTouchOutside : false);
         dialog.setCancelable(mCancelable);
-        dialog.setCanceledOnTouchOutside(mCancelableOnTouchOutside);
+
         View dialogRootView = Utils.inflate(provideDialogRootView(), null);
         initView(dialog, dialogRootView);
         ViewGroup.MarginLayoutParams rootLp = new ViewGroup.MarginLayoutParams(provideDialogWidth(), ViewGroup.LayoutParams.WRAP_CONTENT);
