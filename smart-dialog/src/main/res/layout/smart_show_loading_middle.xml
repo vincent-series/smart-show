@@ -17,7 +17,7 @@
         android:indeterminateOnly="true" />
 
     <TextView
-        android:id="@+id/loading_message"
+        android:id="@+id/smart_show_loading_message_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
