@@ -29,7 +29,7 @@ public class TestDialogActivity extends AppCompatActivity {
         mExampleDialog.show(this);
     }
 
-    public static SmartDialog mResetSuccTip;
+    public SmartDialog mResetSuccTip;
 
     public void onNotificationClick(View view) {
         if (mResetSuccTip == null) {
