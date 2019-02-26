@@ -8,6 +8,7 @@ import android.view.View;
 import com.coder.zzq.smartshow.core.Utils;
 import com.coder.zzq.smartshow.dialog.DialogBtnClickListener;
 import com.coder.zzq.smartshow.dialog.SmartDialog;
+import com.coder.zzq.smartshow.dialog.creator.type.IInputTextDialogCreator;
 import com.coder.zzq.smartshow.dialog.creator.type.impl.DialogCreatorFactory;
 import com.coder.zzq.smartshow.toast.SmartToast;
 
@@ -80,14 +81,16 @@ public class TestDialogActivity extends AppCompatActivity {
             mInputSuggestionDialog = SmartDialog.newInstance(
                     DialogCreatorFactory
                             .input()
-                            .inputAtMost(60)
+                            .inputAtMost(30)
                             .hint("输入建议")
+                            .textOfDefaultFill("我提个建议")
+                            .clearInputPerShow(true)
                             .confirmBtn("提交", new DialogBtnClickListener() {
 
                                 @Override
                                 public void onBtnClick(Dialog dialog, int which, Object data) {
-                                    if (data.toString().length() > 60) {
-                                        SmartToast.showInCenter("最多只能输入70个字符");
+                                    if (data.toString().length() > 30) {
+                                        SmartToast.showInCenter("最多只能输入30个字符");
                                         return;
                                     } else {
                                         dialog.dismiss();
@@ -112,7 +115,7 @@ public class TestDialogActivity extends AppCompatActivity {
                     DialogCreatorFactory
                             .loading()
                             .large()
-//                            .withoutMsgTip()
+//                            .withNoMsgTip()
                             .message("加载中")
             )
                     .reuse(true);
@@ -124,7 +127,12 @@ public class TestDialogActivity extends AppCompatActivity {
 
     public void onLoadingMiddleClick(View view) {
         if (mMiddleLoadingDialog == null) {
-            mMiddleLoadingDialog = SmartDialog.newInstance(DialogCreatorFactory.loading().middle().message("加载中"))
+            mMiddleLoadingDialog = SmartDialog.newInstance(
+                    DialogCreatorFactory
+                            .loading()
+                            .middle()
+                            .message("加载中")
+            )
                     .reuse(true);
         }
         mMiddleLoadingDialog.show(this);
