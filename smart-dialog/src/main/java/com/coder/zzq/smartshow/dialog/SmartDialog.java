@@ -34,6 +34,7 @@ public final class SmartDialog {
             mNestedDialog = mDialogCreator.createDialog(activity);
             EasyLogger.d("create a new dialog:\n " + mNestedDialog);
         } else {
+            mDialogCreator.resetDialogPerShow(mNestedDialog);
             EasyLogger.d("reuse dialog:\n " + mNestedDialog);
         }
 
