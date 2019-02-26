@@ -16,17 +16,28 @@ import com.coder.zzq.smartshow.dialog.R;
 import com.coder.zzq.smartshow.dialog.creator.type.IInputTextDialogCreator;
 
 class InputTextDialogCreator extends SimpleBranchCreator<IInputTextDialogCreator> implements IInputTextDialogCreator {
+
+    protected CharSequence mDefaultText;
+
     protected CharSequence mHint;
-    ;
-    private int mAtMostInputNum;
+
+    protected int mAtMostInputNum;
     @ColorInt
-    private int mInputNumMarkColor;
+    protected int mInputNumMarkColor;
+
+    protected boolean mClearPerShow;
 
     public InputTextDialogCreator() {
         super();
         mTitle = "输入";
         mAtMostInputNum = 20;
         mInputNumMarkColor = Utils.getColorFromRes(R.color.colorPrimary);
+    }
+
+    @Override
+    public IInputTextDialogCreator textOfDefaultFill(CharSequence defaultText) {
+        mDefaultText = defaultText;
+        return this;
     }
 
     @Override
@@ -37,7 +48,9 @@ class InputTextDialogCreator extends SimpleBranchCreator<IInputTextDialogCreator
 
     @Override
     public IInputTextDialogCreator inputAtMost(int num) {
-        mAtMostInputNum = num;
+        if (num > 0 || num == INPUT_NO_LIMIT) {
+            mAtMostInputNum = num;
+        }
         return this;
     }
 
@@ -50,10 +63,25 @@ class InputTextDialogCreator extends SimpleBranchCreator<IInputTextDialogCreator
     }
 
     @Override
+    public IInputTextDialogCreator clearInputPerShow(boolean clear) {
+        mClearPerShow = clear;
+        return this;
+    }
+
+    @Override
     public Dialog createDialog(Activity activity) {
         Dialog dialog = super.createDialog(activity);
         Utils.popKeyboardWhenDialogShow(dialog);
         return dialog;
+    }
+
+    @Override
+    public void resetDialogPerShow(Dialog dialog) {
+        super.resetDialogPerShow(dialog);
+        if (mClearPerShow) {
+            EditText editText = dialog.findViewById(R.id.smart_show_input_edt);
+            editText.setText(mDefaultText);
+        }
     }
 
     @Override
@@ -78,23 +106,34 @@ class InputTextDialogCreator extends SimpleBranchCreator<IInputTextDialogCreator
 
             @Override
             public void afterTextChanged(Editable s) {
-                mStringBuilder.delete(0, mStringBuilder.length());
-                if (s.length() > mAtMostInputNum) {
-                    inputNumView.setTextColor(Color.RED);
-                    mStringBuilder.append("-")
-                            .append(s.length() - mAtMostInputNum);
-                    inputNumView.setText(mStringBuilder);
-                } else {
+                if (mAtMostInputNum == INPUT_NO_LIMIT) {
                     inputNumView.setTextColor(Utils.getColorFromRes(R.color.colorPrimary));
-                    mStringBuilder.append(mAtMostInputNum - s.length());
-                    inputNumView.setText(mStringBuilder);
+                    inputNumView.setText(String.valueOf(s.length()));
+                } else {
+                    processWhenInputLimit(s, inputNumView, mStringBuilder);
                 }
-
             }
-
         });
         if (!Utils.isEmpty(mHint)) {
             inputEdt.setHint(mHint);
+        }
+
+        if (!Utils.isEmpty(mDefaultText)) {
+            inputEdt.setText(mDefaultText);
+        }
+    }
+
+    private void processWhenInputLimit(Editable s, TextView inputNumView, StringBuilder stringBuilder) {
+        stringBuilder.delete(0, stringBuilder.length());
+        if (s.length() > mAtMostInputNum) {
+            inputNumView.setTextColor(Color.RED);
+            stringBuilder.append("-")
+                    .append(s.length() - mAtMostInputNum);
+            inputNumView.setText(stringBuilder);
+        } else {
+            inputNumView.setTextColor(Utils.getColorFromRes(R.color.colorPrimary));
+            stringBuilder.append(mAtMostInputNum - s.length());
+            inputNumView.setText(stringBuilder);
         }
     }
 
