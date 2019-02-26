@@ -1,5 +1,5 @@
 ## SmartShow
-近几天大家反映的问题，都会得到改善，请及时使用最新版本。当前最新版本2.6.1。
+近几天大家反映的问题，都会得到改善，请及时使用最新版本。当前最新版本2.6.2。
 ### 模块导航：
 * [SmartToast](#SmartToast部分)
 * [SmartSnackbar](#SmartSnackbar部分)
@@ -57,7 +57,7 @@ allprojects {
 第一种方式，引入所有模块
 <pre><code>
 
-    implementation ('com.github.the-pig-of-jungle.smart-show:all:2.6.1'){
+    implementation ('com.github.the-pig-of-jungle.smart-show:all:2.6.2'){
     
         exclude group: 'com.android.support'
         
@@ -73,19 +73,19 @@ allprojects {
 <pre><code>
     //smart toast
     
-    implementation 'com.github.the-pig-of-jungle.smart-show:toast:2.6.1'
+    implementation 'com.github.the-pig-of-jungle.smart-show:toast:2.6.2'
 </code></pre>
 
 <pre><code>
     // smart dialog
     
-    implementation 'com.github.the-pig-of-jungle.smart-show:dialog:2.6.1'
+    implementation 'com.github.the-pig-of-jungle.smart-show:dialog:2.6.2'
 </code></pre>
 
 <pre><code>  
     // smart topbar
     
-    implementation('com.github.the-pig-of-jungle.smart-show:topbar:2.6.1') {
+    implementation('com.github.the-pig-of-jungle.smart-show:topbar:2.6.2') {
     
         exclude group: 'com.android.support'
         
@@ -99,7 +99,7 @@ allprojects {
 <pre><code>
     // smart snackbar
     
-    implementation('com.github.the-pig-of-jungle.smart-show:snackbar:2.6.1') {
+    implementation('com.github.the-pig-of-jungle.smart-show:snackbar:2.6.2') {
     
         exclude group: 'com.android.support'
         
@@ -784,15 +784,14 @@ public class ExampleDialogCreator extends DialogCreator {
     
         if (mExampleDialog == null) {
         
-            mExampleDialog = new SmartDialog()
+            mExampleDialog = SmartDialog.newInstance(new ExampleDialogCreator())
             
-                    .dialogCreator(new ExampleDialogCreator())
-                    
                     .reuse(true);
                     
         }
         
         mExampleDialog.show(this);
+        
     }
 </code></pre>
 #### 预定义的DialogCreator
@@ -816,39 +815,54 @@ public interface INormalDialogCreator&ltB&gt {
     //触碰Dialog窗口外的区域是否取消
     
     B cancelableOnTouchOutside(boolean b);
+    
+    //cancel 监听器
+    
+    B cancelListener(DialogInterface.OnCancelListener cancelListener);
+    
+    //show监听器
+    
+    B showListener(DialogInterface.OnShowListener showListener);
+    
+    //dimiss监听器
+    
+    B dismissListener(DialogInterface.OnDismissListener dismissListener);
    
 </code></pre>
 #### LoadingDialogCreator
 <pre><code>
-    private SmartDialog mLargeLoadingDialog;
+    private SmartDialog mLoadingDialog;
 
     public void onLoadingLargeClick(View view) {
     
         if (mLargeLoadingDialog == null) {
         
-            mLargeLoadingDialog = new SmartDialog()
+            mLargeLoadingDialog = SmartDialog.newInstance(
             
-                    .dialogCreator(
+                    DialogCreatorFactory
                     
-                            DialogCreatorFactory
+                            .loading()
                             
-                                    .loading()
-                                    
-                                    .large()
-                                    
-                                    .message("加载中")
-                                    
-                    )
-                    
+                            .large()
+                            
+                            .message("加载中")
+                            
+            )
+            
                     .reuse(true);
                     
         }
         
         mLargeLoadingDialog.show(this);
-    }  
+        
+    }
 </code></pre>
 ILoadingDialogCreator的全部方法
 <pre><code>
+    //不带提示文本
+
+    ILoadingDialogCreator withNoMsgTip();
+    
     //设置提示文本
     
     ILoadingDialogCreator message(CharSequence msg);
@@ -871,27 +885,28 @@ ILoadingDialogCreator的全部方法
 </code></pre>
 #### NotificationCreator
 <pre><code>
-    private SmartDialog mResetSuccTip;
+    public SmartDialog mResetSuccTip;
 
     public void onNotificationClick(View view) {
     
         if (mResetSuccTip == null) {
         
-            mResetSuccTip = new SmartDialog()
+            mResetSuccTip = SmartDialog.newInstance(
             
-                    .dialogCreator(
+                    DialogCreatorFactory
                     
-                            DialogCreatorFactory
+                            .notification()
                             
-                                    .notification()
-                                    
-                                    .message("重置成功")
-                                    
-                    )
+                            .message("重置成功")
+                            
+            )
+            
                     .reuse(true);
+                    
         }
-
+        
         mResetSuccTip.show(this);
+        
     }
 
 </code></pre>
@@ -932,34 +947,34 @@ INotificationDialogCreator的全部方法
 </code></pre>
 #### IEnsureDialogCreator
 <pre><code>
-          pivate SmartDialog mCancelConcernDialog;
-      
-          public void onEnsureClick(View view) {
-          
-              if (mCancelConcernDialog == null) {
-              
-                  mCancelConcernDialog = new SmartDialog()
-                  
-                          .dialogCreator(
-                          
-                                  DialogCreatorFactory
-                                  
-                                          .ensure()
-                                          
-                                          .confirmBtn("确定")
-                                          
-                                          .cancelBtn("取消")
-                                          
-                                          .message("确定不再关注此人？")
-                                          
-                          )
-                          
-                          .reuse(true);
-                          
-              }
-              
-              mCancelConcernDialog.show(this);
-          }
+    private SmartDialog mCancelConcernDialog;
+
+    public void onEnsureClick(View view) {
+    
+        if (mCancelConcernDialog == null) {
+        
+            mCancelConcernDialog = SmartDialog.newInstance(
+            
+                    DialogCreatorFactory
+                    
+                            .ensure()
+                            
+                            .confirmBtn("确定")
+                            
+                            .cancelBtn("取消")
+                            
+                            .message("确定不再关注此人？")
+                            
+            )
+            
+                    .reuse(true);
+                    
+        }
+        
+        mCancelConcernDialog.show(this);
+        
+    }
+
 </code></pre>
 除了具有INotificationDialogCreator的全部方法外，IEnsureDialogCreator如外的方法
 <pre><code>
@@ -977,54 +992,65 @@ INotificationDialogCreator的全部方法
 </code></pre>
 #### InputTextDialogCreator
 <pre><code>
-        private SmartDialog mInputSuggestionDialog;
+    private SmartDialog mInputSuggestionDialog;
+
+    public void onInputClick(View view) {
     
-        public void onInputClick(View view) {
+        if (mInputSuggestionDialog == null) {
         
-            if (mInputSuggestionDialog == null) {
+            mInputSuggestionDialog = SmartDialog.newInstance(
             
-                mInputSuggestionDialog = new SmartDialog()
-                
-                        .dialogCreator(
-                        
-                                DialogCreatorFactory
+                    DialogCreatorFactory
+                    
+                            .input()
+                            
+                            // 传入 IInputTextDialogCreator.INPUT_NO_LIMIT 表示不限制字数
+                            
+                            .inputAtMost(30)
+                            
+                            .hint("输入建议")
+                            
+                            // 默认填充的文本
+                            
+                            .textOfDefaultFill("我提个建议")
+                            
+                            //每次显示前，输入框是否清空，如果有预设文本，则恢复为预设文本
+                            
+                            .clearInputPerShow(true)
+                            
+                            .confirmBtn("提交", new DialogBtnClickListener() {
+                            
+                                @Override
+                                public void onBtnClick(Dialog dialog, int which, Object data) {
                                 
-                                        .input()
+                                    if (data.toString().length() > 30) {
+                                    
+                                        SmartToast.showInCenter("最多只能输入30个字符");
                                         
-                                        .inputAtMost(60)
+                                        return;
                                         
-                                        .hint("输入建议")
+                                    } else {
+                                    
+                                        dialog.dismiss();
                                         
-                                        .confirmBtn("提交", new DialogBtnClickListener() {
-    
-                                            @Override
-                                            public void onBtnClick(Dialog dialog, int which, Object data) {
-                                            
-                                                if (data.toString().length() > 60) {
-                                                
-                                                    SmartToast.showInCenter("最多只能输入70个字符");
-                                                    
-                                                    return;
-                                                    
-                                                } else {
-                                                
-                                                    dialog.dismiss();
-                                                    
-                                                    SmartToast.showInCenter(data.toString());
-                                                    
-                                                }
-                                                
-                                            }
-                                            
-                                        })
+                                        SmartToast.showInCenter(data.toString());
                                         
-                                        //设置标记已输入字符数量的数字的颜色，默认为colorPrimary
-                                        
-                                        .inputCountMarkColor(Utils.getColorFromRes(R.color.colorPrimary))
-                        )
-                        .reuse(true);
-            }
-    
-            mInputSuggestionDialog.show(this);
+                                    }
+                                    
+                                }
+                                
+                            })
+                            
+                            .inputCountMarkColor(Utils.getColorFromRes(R.color.colorPrimary))
+
+            )
+            
+                    .reuse(true);
+                    
         }
+
+        mInputSuggestionDialog.show(this);
+        
+    }
+
 </code></pre>
