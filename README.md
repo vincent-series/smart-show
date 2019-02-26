@@ -68,7 +68,7 @@ allprojects {
         implementation 'com.android.support:design:x.y.z'
         
 </code></pre>
-第二种方式，自由引入各个模块<br/>
+   第二种方式，自由引入各个模块<br/>
 
 <pre><code>
     //smart toast
