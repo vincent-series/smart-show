@@ -133,4 +133,9 @@ public class Utils {
     public static String getStringFromRes(@StringRes int msg) {
         return SmartShow.getContext().getString(msg);
     }
+
+    public static float pxToDp(int px) {
+        float scale = SmartShow.getContext().getResources().getDisplayMetrics().density;
+        return px / scale;
+    }
 }
