@@ -62,8 +62,9 @@ public class PlainToastManager extends BaseToastManager implements IPlainShow {
     protected void setupToast() {
         super.setupToast();
         if (ToastDelegate.get().hasToastSetting()) {
-
-            if (ToastDelegate.get().getToastSetting().isBgColorSetup()) {
+            if (ToastDelegate.get().getToastSetting().isBgDrawableSetup()) {
+                mView.setBackgroundResource(ToastDelegate.get().getToastSetting().getBgDrawableRes());
+            } else if (ToastDelegate.get().getToastSetting().isBgColorSetup()) {
                 if (ToastDelegate.get().getToastSetting().isCustom()) {
                     mView.setBackgroundColor(ToastDelegate.get().getToastSetting().getBgColor());
                 } else {

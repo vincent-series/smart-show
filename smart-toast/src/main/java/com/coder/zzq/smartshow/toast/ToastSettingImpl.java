@@ -2,6 +2,7 @@ package com.coder.zzq.smartshow.toast;
 
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -12,6 +13,8 @@ import com.coder.zzq.smartshow.core.SmartShow;
 
 public class ToastSettingImpl implements IToastSetting {
     private View mCustomView;
+    @DrawableRes
+    private int mBgDrawableRes;
     @ColorInt
     private int mBgColor;
     @ColorInt
@@ -51,6 +54,12 @@ public class ToastSettingImpl implements IToastSetting {
     @Override
     public IToastSetting backgroundColorRes(@ColorRes int colorRes) {
         return backgroundColor(ContextCompat.getColor(SmartShow.getContext(), colorRes));
+    }
+
+    @Override
+    public IToastSetting backgroundDrawableRes(int drawableRes) {
+        mBgDrawableRes = drawableRes;
+        return this;
     }
 
     @Override
@@ -114,6 +123,14 @@ public class ToastSettingImpl implements IToastSetting {
 
     public boolean isBgColorSetup() {
         return mBgColor != -1;
+    }
+
+    public int getBgDrawableRes() {
+        return mBgDrawableRes;
+    }
+
+    public boolean isBgDrawableSetup(){
+        return mBgDrawableRes != 0;
     }
 
     public int getTextColor() {
