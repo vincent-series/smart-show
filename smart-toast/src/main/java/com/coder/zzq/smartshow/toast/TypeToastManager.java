@@ -71,10 +71,10 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
         boolean typeChanged = mCurInfoType != infoType;
 
 
-        boolean needInvodeShow = !isShowing();
+        boolean needInvokeShow = !isShowing();
         if (isShowing() && (contentChanged || typeChanged)) {
             dismiss();
-            needInvodeShow = true;
+            needInvokeShow = true;
         }
 
         mCurMsg = msg;
@@ -86,7 +86,7 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
 
         mToast.setGravity(Gravity.CENTER, 0, 0);
         mToast.setDuration(mDuration);
-        if (needInvodeShow) {
+        if (needInvokeShow) {
             mToast.show();
         }
     }

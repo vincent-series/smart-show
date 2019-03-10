@@ -149,11 +149,11 @@ public class PlainToastManager extends BaseToastManager implements IPlainShow {
         //文本是否改变
         boolean contentChanged = !mCurMsg.equals(msg);
 
-        boolean needInvodeShow = !isShowing();
+        boolean needInvokeShow = !isShowing();
 
         if (isShowing() && (locationChanged || contentChanged)) {
             dismiss();
-            needInvodeShow = true;
+            needInvokeShow = true;
         }
 
         mCurMsg = msg;
@@ -164,7 +164,7 @@ public class PlainToastManager extends BaseToastManager implements IPlainShow {
         updateToast();
         mToast.setGravity(mGravity, mXOffset, mYOffset);
         mToast.setDuration(mDuration);
-        if (needInvodeShow) {
+        if (needInvokeShow) {
             mToast.show();
         }
     }
