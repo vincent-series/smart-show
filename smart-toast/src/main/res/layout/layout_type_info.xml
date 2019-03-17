@@ -19,6 +19,7 @@
         android:textSize="14sp"
         android:maxLines="3"
         android:ellipsize="end"
+        android:gravity="center_horizontal"
         android:id="@+id/type_info_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
