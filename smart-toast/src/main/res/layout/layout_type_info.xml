@@ -1,34 +1,32 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:minWidth="148dp"
     android:paddingTop="16dp"
     android:paddingBottom="10dp"
     android:background="@drawable/smart_show_type_info_toast_bg">
     <ImageView
-
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal|top"
         android:id="@+id/type_info_icon"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/type_info_error"/>
 
     <TextView
+        android:lineSpacingExtra="2dp"
+        android:layout_marginTop="10dp"
         android:textSize="14sp"
-        android:maxLines="1"
-        android:singleLine="true"
+        android:maxLines="3"
         android:ellipsize="end"
         android:id="@+id/type_info_message"
         android:layout_width="wrap_content"
-        android:minWidth="100dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
-        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"
         android:textColor="#ffffff"
         android:text="I'm a Toast"
         />
 
-</RelativeLayout>
+</LinearLayout>

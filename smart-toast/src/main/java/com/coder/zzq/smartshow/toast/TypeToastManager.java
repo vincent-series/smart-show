@@ -4,6 +4,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.RestrictTo;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -53,7 +54,7 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
         mCurInfoType = TYPE_INFO_NORMAL;
         mCurIcon = R.drawable.type_info_normal;
         mWindowParams.windowAnimations = R.style.type_info_toast_anim;
-        mWindowParams.height = Utils.dpToPx(85);
+        mWindowParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
         if (ToastDelegate.get().hasToastSetting()
                 && ToastDelegate.get().getToastSetting().isTypeInfoThemeColorSetup()) {
             GradientDrawable drawable = (GradientDrawable) mView.getBackground();
