@@ -64,6 +64,9 @@ public final class SmartShow {
             public void onActivityDestroyed(Activity activity) {
                 super.onActivityDestroyed(activity);
                 ActivityStack.pop(activity);
+                if (sToastCallback != null) {
+                    sToastCallback.recycleOnDestroy(activity);
+                }
                 if (sSnackbarCallback != null) {
                     sSnackbarCallback.recycleOnDestroy(activity);
                 }
