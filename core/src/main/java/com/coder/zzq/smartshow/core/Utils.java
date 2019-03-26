@@ -10,6 +10,7 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.StringRes;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.TypedValue;
@@ -137,5 +138,9 @@ public class Utils {
     public static float pxToDp(int px) {
         float scale = SmartShow.getContext().getResources().getDisplayMetrics().density;
         return px / scale;
+    }
+
+    public static boolean isNotificationPermitted() {
+        return NotificationManagerCompat.from(SmartShow.getContext()).areNotificationsEnabled();
     }
 }
