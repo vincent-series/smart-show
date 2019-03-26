@@ -96,6 +96,11 @@ public class PlainToastManager extends BaseToastManager implements IPlainShow {
 
     }
 
+    @Override
+    protected int getToastType() {
+        return PLAIN_TOAST;
+    }
+
 
     @Override
     public void show(CharSequence msg) {
@@ -165,7 +170,7 @@ public class PlainToastManager extends BaseToastManager implements IPlainShow {
         mToast.setGravity(mGravity, mXOffset, mYOffset);
         mToast.setDuration(mDuration);
         if (needInvokeShow) {
-            mToast.show();
+            showToast();
         }
     }
 

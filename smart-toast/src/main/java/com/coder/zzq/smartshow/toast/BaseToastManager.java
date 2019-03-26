@@ -8,10 +8,13 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.coder.zzq.smartshow.core.Utils;
+
 import java.lang.reflect.Field;
 
 public abstract class BaseToastManager {
-
+    public static final int PLAIN_TOAST = 1;
+    public static final int TYPE_TOAST = 2;
     protected Toast mToast;
     protected CharSequence mCurMsg;
     protected int mDuration;
@@ -69,13 +72,30 @@ public abstract class BaseToastManager {
     }
 
     protected boolean isShowing() {
-        return ViewCompat.isAttachedToWindow(mView);
+        if (Utils.isNotificationPermitted()) {
+            return ViewCompat.isAttachedToWindow(mView);
+        } else {
+            return VirtualToastManager.get().isShowing(getToastType());
+        }
     }
+
+    protected abstract int getToastType();
 
 
     public void dismiss() {
         mToast.cancel();
         rebuildToast();
+        if (!Utils.isNotificationPermitted()){
+            VirtualToastManager.get().dismiss(getToastType());
+        }
+    }
+
+    public void showToast() {
+        if (Utils.isNotificationPermitted()) {
+            mToast.show();
+        } else{
+            VirtualToastManager.get().show(getToastType(),mToast,mWindowParams);
+        }
     }
 
     protected boolean isSdk25() {

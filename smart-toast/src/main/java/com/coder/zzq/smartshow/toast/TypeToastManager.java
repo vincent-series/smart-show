@@ -62,6 +62,11 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
         }
     }
 
+    @Override
+    protected int getToastType() {
+        return TYPE_TOAST;
+    }
+
     private final void showHelper(CharSequence msg, int infoType, int duration) {
         ToastDelegate.get().dismissPlainShowIfNeed();
         msg = (msg == null) ? "" : msg;
@@ -88,7 +93,7 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
         mToast.setGravity(Gravity.CENTER, 0, 0);
         mToast.setDuration(mDuration);
         if (needInvokeShow) {
-            mToast.show();
+            showToast();
         }
     }
 
