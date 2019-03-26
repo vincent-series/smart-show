@@ -122,7 +122,7 @@ allprojects {
 4. 可修改Toast默认布局的风格，如背景颜色，文字大小和颜色等
 5. 可为Toast设置自定义布局
 6. 完美解决Android 7.1的系统bug——Toast BadTokenException
-7. 完美解决应用关闭通知权限后Toast显示问题
+7. 完美解决应用关闭通知权限后Toast不显示问题
 8. 可配置离开当前页面（退出当前activity或进入新的activity），立即消失正在显示的Toast
 9. 结合主流app消息提示的效果，提供info、success、error、warnign、complete、forbid、wait、fail 8 种类型的Toast
 ### 注意
