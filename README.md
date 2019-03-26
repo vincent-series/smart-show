@@ -124,7 +124,7 @@ allprojects {
 6. 完美解决Android 7.1的系统bug——Toast BadTokenException
 7. 完美解决应用关闭通知权限后Toast不显示问题
 8. 可配置离开当前页面（退出当前activity或进入新的activity），立即消失正在显示的Toast
-9. 结合主流app消息提示的效果，提供info、success、error、warnign、complete、forbid、wait、fail 8 种类型的Toast
+9. 结合主流app消息提示的效果，提供info、success、error、warning、complete、forbid、wait、fail 8 种类型的Toast
 ### 注意
 关闭app的系统通知权限,Toast将无法显示。Toast的内部原理使用NotificationManagerService，关闭通知权限后，将无法显示。<br/>
 这是原生Toast本身的特性，以淘宝app和优酷app的"再按一次退出程序"的Toast提示为例，关闭通知权限，Toast将不再显示。
