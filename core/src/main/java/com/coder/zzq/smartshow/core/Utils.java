@@ -10,6 +10,7 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.StringRes;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
@@ -131,6 +132,11 @@ public class Utils {
         return activity != null && !activity.isFinishing() && !Utils.isActivityDestroyed(activity);
     }
 
+    public static boolean isUpdateFragmentUIPermitted(Fragment fragment) {
+        return fragment != null && fragment.isVisible() && !fragment.isRemoving()
+                && isUpdateActivityUIPermitted(fragment.getActivity());
+    }
+
     public static String getStringFromRes(@StringRes int msg) {
         return SmartShow.getContext().getString(msg);
     }
@@ -143,4 +149,9 @@ public class Utils {
     public static boolean isNotificationPermitted() {
         return NotificationManagerCompat.from(SmartShow.getContext()).areNotificationsEnabled();
     }
+
+    public static int screenHeight() {
+        return SmartShow.getContext().getResources().getDisplayMetrics().heightPixels;
+    }
+
 }
