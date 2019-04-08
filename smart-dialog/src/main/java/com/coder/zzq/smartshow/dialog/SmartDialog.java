@@ -21,7 +21,7 @@ public abstract class SmartDialog<NestedDialog extends Dialog> {
     }
 
     public boolean showInFragment(Fragment fragment) {
-        return show(fragment == null ? null : fragment.getActivity(), Utils.isUpdateFragmentUIPermitted(fragment));
+        return show(fragment == null ? null : fragment.getActivity(), Utils.isCanShowDialogInFragment(fragment));
     }
 
 

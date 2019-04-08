@@ -22,18 +22,18 @@ public class ChooseListAdapter extends BaseAdapter {
     @ColorInt
     private int mCheckMarkColor = Utils.getColorFromRes(R.color.colorPrimary);
 
-    private boolean mUseCubeMarkWhenUseMultiple;
+    private boolean mUseCubeMark;
 
-    public void setItems(List items, int checkMarkPos, int checkMarkColor, boolean useCubeMarkWhenMultipleChoose) {
+    public void setItems(List items, int checkMarkPos, int checkMarkColor, boolean useCubeMark) {
         boolean needNotify = !mItems.equals(items) || mCheckMarkPos != checkMarkPos || mCheckMarkColor != checkMarkColor
-                || useCubeMarkWhenMultipleChoose != mUseCubeMarkWhenUseMultiple;
+                || useCubeMark != mUseCubeMark;
         if (!mItems.equals(items)) {
             mItems.clear();
             mItems.addAll(items);
         }
         mCheckMarkPos = checkMarkPos;
         mCheckMarkColor = checkMarkColor;
-        mUseCubeMarkWhenUseMultiple = useCubeMarkWhenMultipleChoose;
+        mUseCubeMark = useCubeMark;
         if (needNotify) {
             notifyDataSetChanged();
         }
@@ -61,7 +61,7 @@ public class ChooseListAdapter extends BaseAdapter {
             itemView = (CheckedTextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_single_choice, parent, false);
         }
         StateListDrawable stateListDrawable = new StateListDrawable();
-        Drawable checkedDrawable = Utils.getDrawableFromRes(mUseCubeMarkWhenUseMultiple ? R.drawable.smart_show_multiple_choose : R.drawable.smart_show_single_choose);
+        Drawable checkedDrawable = Utils.getDrawableFromRes(mUseCubeMark ? R.drawable.smart_show_multiple_choose : R.drawable.smart_show_single_choose);
         DrawableCompat.setTint(checkedDrawable, mCheckMarkColor);
         stateListDrawable.addState(
                 new int[]{
@@ -69,7 +69,7 @@ public class ChooseListAdapter extends BaseAdapter {
                 },
                 checkedDrawable
         );
-        Drawable uncheckedDrawable = Utils.getDrawableFromRes(mUseCubeMarkWhenUseMultiple ? R.drawable.smart_show_multiple_unchoose : R.drawable.smart_show_single_unchoose);
+        Drawable uncheckedDrawable = Utils.getDrawableFromRes(mUseCubeMark ? R.drawable.smart_show_multiple_unchoose : R.drawable.smart_show_single_unchoose);
         uncheckedDrawable.setBounds(0, 0, Utils.dpToPx(5), Utils.dpToPx(5));
         stateListDrawable.addState(
                 new int[]{
