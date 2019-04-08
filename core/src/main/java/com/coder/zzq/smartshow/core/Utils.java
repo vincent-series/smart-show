@@ -137,6 +137,10 @@ public class Utils {
                 && isUpdateActivityUIPermitted(fragment.getActivity());
     }
 
+    public static boolean isCanShowDialogInFragment(Fragment fragment) {
+        return isUpdateFragmentUIPermitted(fragment) && fragment.getUserVisibleHint();
+    }
+
     public static String getStringFromRes(@StringRes int msg) {
         return SmartShow.getContext().getString(msg);
     }
