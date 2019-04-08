@@ -1,20 +1,19 @@
-package com.coder.zzq.smartshow.dialog.creator.type.impl;
+package com.coder.zzq.smartshow.dialog;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatDialog;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import com.coder.zzq.smartshow.core.Utils;
-import com.coder.zzq.smartshow.dialog.R;
-import com.coder.zzq.smartshow.dialog.creator.type.INormalDialogCreator;
 
-abstract class NormalDialogCreator<B> extends DialogCreator implements INormalDialogCreator<B> {
+public abstract class NormalDialog<D extends SmartDialog> extends SmartDialog<AppCompatDialog> {
+
     protected boolean mDarkAroundWhenShow;
     protected boolean mCancelableOnTouchOutside;
     protected boolean mCancelable;
@@ -25,61 +24,73 @@ abstract class NormalDialogCreator<B> extends DialogCreator implements INormalDi
     protected DialogInterface.OnDismissListener mOnDismissListener;
     protected DialogInterface.OnCancelListener mOnCancelListener;
 
-    public NormalDialogCreator() {
+    protected View mContentView;
+
+    public NormalDialog() {
         mWindowBackground = R.drawable.smart_show_round_dialog_bg;
         mCancelable = true;
         mCancelableOnTouchOutside = true;
         mDarkAroundWhenShow = true;
     }
 
-    @Override
-    public B darkAroundWhenShow(boolean dim) {
+    public D darkAroundWhenShow(boolean dim) {
         mDarkAroundWhenShow = dim;
-        return (B) this;
+        return (D) this;
     }
 
-    @Override
-    public B windowBackground(int bgRes) {
+    public D windowBackground(int bgRes) {
         mWindowBackground = bgRes;
-        return (B) this;
+        return (D) this;
     }
 
-    @Override
-    public B cancelable(boolean b) {
+    public D cancelable(boolean b) {
         mCancelable = b;
         if (!b) {
             mCancelableOnTouchOutside = false;
         }
-        return (B) this;
+        return (D) this;
     }
 
-    @Override
-    public B cancelableOnTouchOutside(boolean b) {
+    public D cancelableOnTouchOutside(boolean b) {
         mCancelableOnTouchOutside = b;
-        return (B) this;
+        return (D) this;
     }
 
-    @Override
-    public B cancelListener(DialogInterface.OnCancelListener cancelListener) {
+    public D dialogCancelListener(DialogInterface.OnCancelListener cancelListener) {
         mOnCancelListener = cancelListener;
-        return (B) this;
+        return (D) this;
     }
 
-    @Override
-    public B showListener(DialogInterface.OnShowListener showListener) {
+    public D dialogShowListener(DialogInterface.OnShowListener showListener) {
         mOnShowListener = showListener;
-        return (B) this;
+        return (D) this;
     }
 
-    @Override
-    public B dismissListener(DialogInterface.OnDismissListener dismissListener) {
+    public D dialogDismissListener(DialogInterface.OnDismissListener dismissListener) {
         mOnDismissListener = dismissListener;
-        return (B) this;
+        return (D) this;
     }
 
+    @NonNull
     @Override
-    public Dialog createDialog(Activity activity) {
-        Dialog dialog = new AppCompatDialog(activity, provideDialogStyle());
+    protected AppCompatDialog createDialog(Activity activity) {
+        AppCompatDialog dialog = new AppCompatDialog(activity, provideDialogStyle());
+        mContentView = Utils.inflate(provideContentLayout(), null);
+        initView(dialog, mContentView);
+        applyNewSetting(dialog);
+        ViewGroup.MarginLayoutParams rootLp = new ViewGroup.MarginLayoutParams(provideDialogWidth(), ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setContentView(mContentView, rootLp);
+        return dialog;
+    }
+
+    public SmartDialog apply() {
+        if (mNestedDialog != null) {
+            applyNewSetting(mNestedDialog);
+        }
+        return this;
+    }
+
+    protected void applyNewSetting(AppCompatDialog dialog) {
         if (mDarkAroundWhenShow) {
             dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         } else {
@@ -91,30 +102,16 @@ abstract class NormalDialogCreator<B> extends DialogCreator implements INormalDi
 
         dialog.setCanceledOnTouchOutside(mCancelable ? mCancelableOnTouchOutside : false);
         dialog.setCancelable(mCancelable);
-        if (mOnShowListener != null) {
-            dialog.setOnShowListener(mOnShowListener);
-        }
-
-        if (mOnDismissListener != null) {
-            dialog.setOnDismissListener(mOnDismissListener);
-        }
-
-        if (mOnCancelListener != null) {
-            dialog.setOnCancelListener(mOnCancelListener);
-        }
-
-        View dialogRootView = Utils.inflate(provideDialogRootView(), null);
-        initView(dialog, dialogRootView);
-        ViewGroup.MarginLayoutParams rootLp = new ViewGroup.MarginLayoutParams(provideDialogWidth(), ViewGroup.LayoutParams.WRAP_CONTENT);
-        dialog.setContentView(dialogRootView, rootLp);
-        return dialog;
+        dialog.setOnShowListener(mOnShowListener);
+        dialog.setOnDismissListener(mOnDismissListener);
+        dialog.setOnCancelListener(mOnCancelListener);
     }
 
     protected int provideDialogStyle() {
         return R.style.smart_show_dialog;
     }
 
-    protected void initView(Dialog dialog, View dialogRootView) {
+    protected void initView(AppCompatDialog dialog, View contentView) {
 
     }
 
@@ -123,5 +120,5 @@ abstract class NormalDialogCreator<B> extends DialogCreator implements INormalDi
     }
 
     @LayoutRes
-    protected abstract int provideDialogRootView();
+    protected abstract int provideContentLayout();
 }

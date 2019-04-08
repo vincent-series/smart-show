@@ -2,44 +2,45 @@ package com.coder.zzq.smartshow.dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.view.WindowManager;
 
 import com.coder.zzq.smartshow.core.EasyLogger;
 import com.coder.zzq.smartshow.core.Utils;
-import com.coder.zzq.smartshow.dialog.creator.type.IDialogCreator;
 
-public final class SmartDialog {
-    private Dialog mNestedDialog;
-    private IDialogCreator mDialogCreator;
-    private boolean mReuseDialog = true;
+public abstract class SmartDialog<NestedDialog extends Dialog> {
+    protected NestedDialog mNestedDialog;
 
-    private SmartDialog() {
+    public SmartDialog() {
 
     }
 
-    public static SmartDialog newInstance(IDialogCreator dialogCreator) {
-        SmartDialog smartDialog = new SmartDialog();
-        smartDialog.mDialogCreator = Utils.requireNonNull(dialogCreator, "dialog creator can not null!");
-        return smartDialog;
+    public boolean showInActivity(Activity activity) {
+        return show(activity, Utils.isUpdateActivityUIPermitted(activity));
     }
 
-    public boolean show(Activity activity) {
-        if (!Utils.isUpdateActivityUIPermitted(activity) ||
-                (mNestedDialog == null && mDialogCreator == null)) {
+    public boolean showInFragment(Fragment fragment) {
+        return show(fragment == null ? null : fragment.getActivity(), Utils.isUpdateFragmentUIPermitted(fragment));
+    }
+
+
+    private boolean show(Activity activity, boolean canUpdateUI) {
+        if (!canUpdateUI) {
             EasyLogger.d("do nothing but recycle when conditions not available!");
-            recycle();
+            mNestedDialog = null;
             return false;
         }
 
-        if (mNestedDialog == null || !mReuseDialog) {
-            mNestedDialog = mDialogCreator.createDialog(activity);
+        if (mNestedDialog == null) {
+            mNestedDialog = Utils.requireNonNull(createDialog(activity), "the method createDialog must return a non-null dialog!");
             EasyLogger.d("create a new dialog:\n " + mNestedDialog);
         } else {
+            resetDialogWhenShowAgain(mNestedDialog);
             EasyLogger.d("reuse dialog:\n " + mNestedDialog);
         }
 
         if (mNestedDialog != null) {
-            mDialogCreator.resetDialogPerShow(mNestedDialog);
             try {
                 mNestedDialog.show();
                 return true;
@@ -52,12 +53,16 @@ public final class SmartDialog {
         return false;
     }
 
+    @NonNull
+    protected abstract NestedDialog createDialog(Activity activity);
 
-    public boolean dismiss(Activity activity) {
-        if (!Utils.isUpdateActivityUIPermitted(activity) ||
-                (mNestedDialog == null || !mNestedDialog.isShowing())) {
+    protected void resetDialogWhenShowAgain(NestedDialog dialog) {
+
+    }
+
+    public boolean dismiss() {
+        if (mNestedDialog == null || !mNestedDialog.isShowing()) {
             EasyLogger.d("do nothing but recycle when conditions not available!");
-            recycle();
             return false;
         }
 
@@ -70,33 +75,7 @@ public final class SmartDialog {
         }
     }
 
-    private void recycle() {
-        mNestedDialog = null;
-        mDialogCreator = null;
-    }
-
-    public SmartDialog reuse(boolean reuseDialog) {
-        mReuseDialog = reuseDialog;
-        return this;
-    }
-
     public boolean isShowing() {
         return mNestedDialog != null && mNestedDialog.isShowing();
-    }
-
-    public boolean doSomething(Activity activity, DoSomethingCallback callback) {
-        if (!Utils.isUpdateActivityUIPermitted(activity) || mNestedDialog == null || callback == null) {
-            EasyLogger.d("do nothing but recycle when conditions not available!");
-            recycle();
-            return false;
-        }
-
-        callback.doSomething(mNestedDialog);
-
-        return true;
-    }
-
-    public interface DoSomethingCallback {
-        void doSomething(Dialog nestedDialog);
     }
 }
