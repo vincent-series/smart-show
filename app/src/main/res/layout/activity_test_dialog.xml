@@ -50,6 +50,14 @@
             android:onClick="onLoadingSmallClick"
             android:text="loading small" />
 
+        <Button
+            style="@style/normal_btn"
+            android:onClick="onSingleChooseListClick"
+            android:text="single choose list" />
 
+        <Button
+            style="@style/normal_btn"
+            android:onClick="onMultipleChooseListClick"
+            android:text="multiple choose list" />
     </LinearLayout>
 </LinearLayout>
