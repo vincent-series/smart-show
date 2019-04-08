@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,55 +8,12 @@
 
     <include layout="@layout/copyright_toolbar" />
 
-    <LinearLayout
+    <ListView
+        android:divider="#cccccc"
+        android:dividerHeight="0.5dp"
+        android:entries="@array/test_dialog_items"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <Button
-            style="@style/normal_btn"
-            android:onClick="onNotificationClick"
-            android:text="notification" />
-
-        <Button
-            style="@style/normal_btn"
-            android:onClick="onEnsureClick"
-            android:text="ensure" />
-
-        <Button
-            style="@style/normal_btn"
-            android:onClick="onEnsureDelayClick"
-            android:text="ensure delay" />
-
-        <Button
-            style="@style/normal_btn"
-            android:onClick="onInputClick"
-            android:text="input" />
-
-        <Button
-            style="@style/normal_btn"
-            android:onClick="onLoadingLargeClick"
-            android:text="loading large" />
-
-        <Button
-            style="@style/normal_btn"
-            android:onClick="onLoadingMiddleClick"
-            android:text="loading middle" />
-
-        <Button
-            style="@style/normal_btn"
-            android:onClick="onLoadingSmallClick"
-            android:text="loading small" />
-
-        <Button
-            style="@style/normal_btn"
-            android:onClick="onSingleChooseListClick"
-            android:text="single choose list" />
-
-        <Button
-            style="@style/normal_btn"
-            android:onClick="onMultipleChooseListClick"
-            android:text="multiple choose list" />
-    </LinearLayout>
+        android:background="#ffffff"
+        android:id="@+id/list_view" />
 </LinearLayout>

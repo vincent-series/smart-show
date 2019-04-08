@@ -1,6 +1,6 @@
 package com.coder.zzq.smartshowdemo;
 /**
- * 常见的具有问题的Toast封装
+ * 常见的存在问题的Toast封装
  */
 
 import android.view.Gravity;

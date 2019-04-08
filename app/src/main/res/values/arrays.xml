@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="test_dialog_items">
+        <item>notification</item>
+        <item>ensure</item>
+        <item>ensure delay</item>
+        <item>input</item>
+        <item>single choose list</item>
+        <item>multiple choose list</item>
+        <item>multiple choose list(use cube)</item>
+        <item>large loading</item>
+        <item>middle loading</item>
+        <item>small loading</item>
+    </string-array>
+    <string-array name="test_dialog_in_fragment_items">
+        <item>normal state</item>
+        <item>hide fragment</item>
+        <item>detach fragment</item>
+        <item>remove fragment</item>
+        <item>user visible hint (false)</item>
+    </string-array>
+
+</resources>
