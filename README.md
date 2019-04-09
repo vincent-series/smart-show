@@ -740,37 +740,44 @@ public class SnackbarActivity extends BaseActivity implements ITopbarShowCallbac
 1. 解决因activity、fragment生命周期导致的BadTokenException、NullPointException等问题
 2. 提供主流APP中使用的message、input、list、loading等对话框<br/>
 ![图片加载失败](images/dialog.gif)
-#### API
-第一步，继承DialogCreator，实现你的Dialog创建逻辑。
+#### 原理
+SmartDialog并不是android.app.Dialog的子类,只是个包装器，它内部持有一个真正的Dialog，用来显示。SmartDialog负责处理当Activity、Fragment
+生命周期异常时，取消创建及显示Dialog。SmartDialog类的泛型参数代表所持Dialog的类型，默认是android.app.Dialog。
+#### 完全定制化
+继承SmartDialog，实现抽象方法createDialog(Activity activity)。
 <pre><code>
-public class ExampleDialogCreator extends DialogCreator {
+public class MyDialog extends SmartDialog {
     /**
-     * 抽象方法，必须实现
+     * 必须实现的方法，负责创建内部持有的Dialog。
      *
-     * @param activity
-     * @return
+     * @param activity 创建Dialog所需的activity context
+     * @return 返回内部持有的Dialog
      */
+    @NonNull
     @Override
-    public Dialog createDialog(Activity activity) {
-    
-        //创建Dialog，在这里可以保证activity不为null，并且没有destroyed或isFinishing
-        
-        Dialog dialog = null;
-        
-        ...
-        
-        return dialog;
-        
+    protected Dialog createDialog(Activity activity) {
+        //要使用该方法传入的activity创建Dialog
+        // 这里可以保证activity不为null且没有正在finish或已经销毁
+        //这里要每次返回一个新的Dialog对象，不要做缓存操作，缓存功能已内部处理
+        return new AlertDialog.Builder(activity)
+                .setMessage("为该库star一下好么")
+                .setPositiveButton("好的", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        SmartToast.showInCenter("谢谢");
+                    }
+                }).create();
     }
 
     /**
-     * 非抽象方法，默认实现为空，可选择性覆写，用于Dialog每次显示前的一些重置工作，例如EditText清空等
+     * 不是必须重写的方法，该方法会在下一次显示Dialog前调用，进行
+     * 重置操作，如清除出入框的内容
      *
      * @param dialog
      */
     @Override
-    public void resetDialogPerShow(Dialog dialog) {
-
+    protected void resetDialogWhenShowAgain(Dialog dialog) {
+        super.resetDialogWhenShowAgain(dialog);
     }
 }
 </code></pre>
