@@ -2,18 +2,19 @@ package com.coder.zzq.smartshowdemo;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDialog;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.coder.zzq.smartshow.dialog.ChooseListDialog;
 import com.coder.zzq.smartshow.dialog.ChooseResult;
+import com.coder.zzq.smartshow.dialog.ClickListDialog;
 import com.coder.zzq.smartshow.dialog.DialogBtnClickListener;
 import com.coder.zzq.smartshow.dialog.EnsureDialog;
 import com.coder.zzq.smartshow.dialog.InputTextDialog;
 import com.coder.zzq.smartshow.dialog.LoadingDialog;
 import com.coder.zzq.smartshow.dialog.NotificationDialog;
+import com.coder.zzq.smartshow.dialog.SmartDialog;
 import com.coder.zzq.smartshow.toast.SmartToast;
 
 import java.util.Arrays;
@@ -45,24 +46,51 @@ public class TestDialogActivity extends AppCompatActivity implements AdapterView
                 onShowInputDialog();
                 break;
             case 4:
-                onShowSingleChooseDialog();
+                onShowClickListDialog();
                 break;
             case 5:
-                onShowMultipleChooseDialog();
+                onShowSingleChooseDialog();
                 break;
             case 6:
-                onShowMultipleChooseWithCubeCheckedMarkDialog();
+                onShowMultipleChooseDialog();
                 break;
             case 7:
-                onShowLargeLoading();
+                onShowMultipleChooseWithCubeCheckedMarkDialog();
                 break;
             case 8:
-                onShowMiddleLoading();
+                onShowLargeLoading();
                 break;
             case 9:
+                onShowMiddleLoading();
+                break;
+            case 10:
                 onShowSmallLoading();
                 break;
         }
+    }
+
+    ClickListDialog mClickListDialog;
+
+    private void onShowClickListDialog() {
+        if (mClickListDialog == null) {
+            mClickListDialog = new ClickListDialog()
+                    .itemCenter(true)
+                    .items(new String[]{
+                            "回复",
+                            "转发",
+                            "私信回复",
+                            "复制",
+                            "举报"
+                    })
+                    .itemClickListener(new ClickListDialog.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(ClickListDialog dialog, int position, Object data) {
+                            dialog.dismiss();
+                            SmartToast.show(data.toString());
+                        }
+                    });
+        }
+        mClickListDialog.showInActivity(this);
     }
 
     private LoadingDialog mSmallLoadingDialog;
@@ -120,7 +148,7 @@ public class TestDialogActivity extends AppCompatActivity implements AdapterView
                     })
                     .confirmBtn("选好了", new DialogBtnClickListener() {
                         @Override
-                        public void onBtnClick(AppCompatDialog dialog, int which, Object data) {
+                        public void onBtnClick(SmartDialog dialog, int which, Object data) {
                             dialog.dismiss();
                             ChooseResult chooseResult = (ChooseResult) data;
                             String showMsg = "pos:" + Arrays.toString(chooseResult.getChoosePositions())
@@ -153,7 +181,7 @@ public class TestDialogActivity extends AppCompatActivity implements AdapterView
                     })
                     .confirmBtn("选好了", new DialogBtnClickListener() {
                         @Override
-                        public void onBtnClick(AppCompatDialog dialog, int which, Object data) {
+                        public void onBtnClick(SmartDialog dialog, int which, Object data) {
                             dialog.dismiss();
                             ChooseResult chooseResult = (ChooseResult) data;
                             String showMsg = "pos:" + Arrays.toString(chooseResult.getChoosePositions())
@@ -185,7 +213,7 @@ public class TestDialogActivity extends AppCompatActivity implements AdapterView
                     })
                     .confirmBtn("确定", new DialogBtnClickListener() {
                         @Override
-                        public void onBtnClick(AppCompatDialog dialog, int which, Object data) {
+                        public void onBtnClick(SmartDialog dialog, int which, Object data) {
                             dialog.dismiss();
                             ChooseResult chooseResult = (ChooseResult) data;
                             String showMsg = "pos:" + Arrays.toString(chooseResult.getChoosePositions())
@@ -209,7 +237,7 @@ public class TestDialogActivity extends AppCompatActivity implements AdapterView
                     .textOfDefaultFill("默认填充的文本")
                     .confirmBtn("确定", new DialogBtnClickListener() {
                         @Override
-                        public void onBtnClick(AppCompatDialog dialog, int which, Object data) {
+                        public void onBtnClick(SmartDialog dialog, int which, Object data) {
                             if (data.toString().length() > 20) {
                                 SmartToast.error("最多输入20个字符");
                                 return;
@@ -232,7 +260,7 @@ public class TestDialogActivity extends AppCompatActivity implements AdapterView
                     .secondsDelayConfirm(5)
                     .confirmBtn("确定", new DialogBtnClickListener() {
                         @Override
-                        public void onBtnClick(AppCompatDialog dialog, int which, Object data) {
+                        public void onBtnClick(SmartDialog dialog, int which, Object data) {
                             dialog.dismiss();
                             SmartToast.show("开启成功");
                         }
@@ -249,7 +277,7 @@ public class TestDialogActivity extends AppCompatActivity implements AdapterView
                     .message("确定不再关注此人？")
                     .confirmBtn("确定", new DialogBtnClickListener() {
                         @Override
-                        public void onBtnClick(AppCompatDialog dialog, int which, Object data) {
+                        public void onBtnClick(SmartDialog dialog, int which, Object data) {
                             dialog.dismiss();
                             SmartToast.show("取消成功");
                         }
