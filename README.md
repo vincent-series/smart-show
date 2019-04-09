@@ -742,9 +742,12 @@ public class SnackbarActivity extends BaseActivity implements ITopbarShowCallbac
 ![图片加载失败](images/dialog.gif)
 #### 原理
 SmartDialog并不是android.app.Dialog的子类,只是个包装器，它内部持有一个真正的Dialog，用来显示。SmartDialog负责处理当Activity、Fragment
-生命周期异常时，取消创建及显示Dialog。SmartDialog类的泛型参数代表所持Dialog的类型，默认是android.app.Dialog。
+生命周期异常时，取消创建或显示Dialog。
 #### 完全定制化
-继承SmartDialog，实现抽象方法createDialog(Activity activity)。
+继承SmartDialog，实现抽象方法createDialog(Activity activity)。<br/>
+适用于：
+1. 完全控制所持Dialog的创建，包括实现类及各种配置。
+2. 包装项目代码中已存在的各种自定义Dialog
 <pre><code>
 public class MyDialog extends SmartDialog {
     /**
@@ -756,24 +759,37 @@ public class MyDialog extends SmartDialog {
     @NonNull
     @Override
     protected Dialog createDialog(Activity activity) {
+    
         //要使用该方法传入的activity创建Dialog
+
         // 这里可以保证activity不为null且没有正在finish或已经销毁
+
         //这里要每次返回一个新的Dialog对象，不要做缓存操作，缓存功能已内部处理
+
         return new AlertDialog.Builder(activity)
+
                 .setMessage("为该库star一下好么")
+
                 .setPositiveButton("好的", new DialogInterface.OnClickListener() {
+
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
                         SmartToast.showInCenter("谢谢");
+
                     }
-                }).create();
+
+                })
+                .create();
     }
 
     /**
-     * 不是必须重写的方法，该方法会在下一次显示Dialog前调用，进行
-     * 重置操作，如清除出入框的内容
-     *
-     * @param dialog
+     * 
+     * 不是必须重写的方法，默认实现为空，
+     * 
+     * 该方法会在下一次显示Dialog前调用，进行重置操作，如清除出入框的内容
+     * 
+     * @param dialog 内部持有的Dialog
      */
     @Override
     protected void resetDialogWhenShowAgain(Dialog dialog) {
