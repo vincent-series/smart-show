@@ -9,22 +9,16 @@ import android.widget.TextView;
 
 import com.coder.zzq.smartshow.core.Utils;
 
-public abstract class SimpleBranchDialog<D extends SmartDialog> extends BranchDialog<D> implements View.OnClickListener {
-    protected CharSequence mTitle;
-    protected float mTitleTextSizeSp;
-    @ColorInt
-    protected int mTitleColor;
-    protected boolean mTitleBold;
-
+public abstract class SimpleBranchDialog<D extends SmartDialog> extends TitleBranchDialog<D> {
     protected CharSequence mConfirmLabel;
-    protected DialogBtnClickListener mOnConfirmClickListener;
+    protected DialogBtnClickListener<D> mOnConfirmClickListener;
     protected float mConfirmLabelTextSizeSp;
     @ColorInt
     protected int mConfirmLabelColor;
     protected boolean mConfirmLabelBold;
 
     protected CharSequence mCancelLabel;
-    protected DialogBtnClickListener mOnCancelClickListener;
+    protected DialogBtnClickListener<D> mOnCancelClickListener;
     protected float mCancelLabelTextSizeSp;
     @ColorInt
     protected int mCancelLabelColor;
@@ -33,19 +27,6 @@ public abstract class SimpleBranchDialog<D extends SmartDialog> extends BranchDi
 
     protected TextView mConfirmBtn;
     protected TextView mCancelBtn;
-    private TextView mTitleView;
-
-    public D title(CharSequence title) {
-        mTitle = title;
-        return (D) this;
-    }
-
-    public D titleStyle(int color, float textSizeSp, boolean bold) {
-        mTitleColor = color;
-        mTitleTextSizeSp = textSizeSp;
-        mTitleBold = bold;
-        return (D) this;
-    }
 
     public D confirmBtn(CharSequence label, DialogBtnClickListener clickListener) {
         mConfirmLabel = label;
@@ -107,32 +88,18 @@ public abstract class SimpleBranchDialog<D extends SmartDialog> extends BranchDi
 
     @Override
     protected int provideHeaderLayout() {
-        return R.layout.smart_show_message_title;
+        return super.provideHeaderLayout();
     }
 
     @Override
     protected void initHeader(AppCompatDialog dialog, FrameLayout headerViewWrapper) {
         super.initHeader(dialog, headerViewWrapper);
-        mTitleView = mHeaderViewWrapper.findViewById(R.id.smart_show_dialog_title_view);
     }
 
     @Override
     protected void applyHeader() {
-        mHeaderViewWrapper.setVisibility(Utils.isEmpty(mTitle) ? View.GONE : View.VISIBLE);
-        if (!Utils.isEmpty(mTitle)) {
-            mTitleView.setText(mTitle);
-            if (mTitleColor != 0) {
-                mTitleView.setTextColor(mTitleColor);
-            }
-            if (mTitleTextSizeSp > 0) {
-                mTitleView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTitleTextSizeSp);
-            }
-            if (mTitleBold) {
-                mTitleView.getPaint().setFakeBoldText(mTitleBold);
-            }
-        }
+        super.applyHeader();
     }
-
 
     @Override
     protected abstract int provideBodyLayout();
@@ -153,8 +120,8 @@ public abstract class SimpleBranchDialog<D extends SmartDialog> extends BranchDi
         super.initFooter(dialog, footerViewWrapper);
         mConfirmBtn = footerViewWrapper.findViewById(R.id.smart_show_dialog_confirm_btn);
         mCancelBtn = footerViewWrapper.findViewById(R.id.smart_show_dialog_cancel_btn);
-        mConfirmBtn.setOnClickListener(this);
-        mCancelBtn.setOnClickListener(this);
+        mConfirmBtn.setOnClickListener(mOnClickListener);
+        mCancelBtn.setOnClickListener(mOnClickListener);
     }
 
     @Override
@@ -178,31 +145,33 @@ public abstract class SimpleBranchDialog<D extends SmartDialog> extends BranchDi
         btn.getPaint().setFakeBoldText(btnLabelBold);
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.smart_show_dialog_confirm_btn) {
-            if (mOnConfirmClickListener == null) {
-                dismiss();
-            } else {
-                onConfirmBtnClick();
+    protected View.OnClickListener mOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (v.getId() == R.id.smart_show_dialog_confirm_btn) {
+                if (mOnConfirmClickListener == null) {
+                    dismiss();
+                } else {
+                    onConfirmBtnClick();
+                }
+                return;
             }
-            return;
-        }
 
-        if (v.getId() == R.id.smart_show_dialog_cancel_btn) {
-            if (mOnCancelClickListener == null) {
-                dismiss();
-            } else {
-                onCancelBtnClick();
+            if (v.getId() == R.id.smart_show_dialog_cancel_btn) {
+                if (mOnCancelClickListener == null) {
+                    dismiss();
+                } else {
+                    onCancelBtnClick();
+                }
             }
         }
-    }
+    };
 
     protected void onConfirmBtnClick() {
-        mOnConfirmClickListener.onBtnClick(mNestedDialog, DialogBtnClickListener.BTN_CONFIRM, null);
+        mOnConfirmClickListener.onBtnClick((D) this, DialogBtnClickListener.BTN_CONFIRM, null);
     }
 
     protected void onCancelBtnClick() {
-        mOnCancelClickListener.onBtnClick(mNestedDialog, DialogBtnClickListener.BTN_CANCEL, null);
+        mOnCancelClickListener.onBtnClick((D) this, DialogBtnClickListener.BTN_CANCEL, null);
     }
 }

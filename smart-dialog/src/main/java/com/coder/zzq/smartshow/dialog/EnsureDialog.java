@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 public class EnsureDialog extends MessageDialog<EnsureDialog> {
     protected CharSequence mCancelLabel;
-    protected DialogBtnClickListener mOnCancelClickListener;
+    protected DialogBtnClickListener<EnsureDialog> mOnCancelClickListener;
     protected float mCancelLabelTextSizeSp;
     @ColorInt
     protected int mCancelLabelColor;
@@ -59,7 +59,7 @@ public class EnsureDialog extends MessageDialog<EnsureDialog> {
     protected void initFooter(AppCompatDialog dialog, FrameLayout footerViewWrapper) {
         super.initFooter(dialog, footerViewWrapper);
         mCancelBtn = footerViewWrapper.findViewById(R.id.smart_show_dialog_cancel_btn);
-        mCancelBtn.setOnClickListener(this);
+        mCancelBtn.setOnClickListener(mOnClickListener);
     }
 
     @Override
@@ -69,8 +69,8 @@ public class EnsureDialog extends MessageDialog<EnsureDialog> {
     }
 
     @Override
-    public void onClick(View v) {
-        super.onClick(v);
+    protected void onBtnClick(View v) {
+        super.onBtnClick(v);
         if (v.getId() == R.id.smart_show_dialog_cancel_btn) {
             if (mOnCancelClickListener == null) {
                 dismiss();
@@ -82,6 +82,6 @@ public class EnsureDialog extends MessageDialog<EnsureDialog> {
 
 
     protected void onCancelBtnClick() {
-        mOnCancelClickListener.onBtnClick(mNestedDialog, DialogBtnClickListener.BTN_CANCEL, null);
+        mOnCancelClickListener.onBtnClick(this, DialogBtnClickListener.BTN_CANCEL, null);
     }
 }

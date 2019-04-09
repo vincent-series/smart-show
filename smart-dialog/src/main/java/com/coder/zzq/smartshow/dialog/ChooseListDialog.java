@@ -151,7 +151,7 @@ public class ChooseListDialog extends SimpleBranchDialog<ChooseListDialog> {
         ChooseResult chooseResult = new ChooseResult();
         chooseResult.setChooseItems(chooseItems);
         chooseResult.setChoosePositions(choosePositions);
-        mOnConfirmClickListener.onBtnClick(mNestedDialog, DialogBtnClickListener.BTN_CONFIRM, chooseResult);
+        mOnConfirmClickListener.onBtnClick(this, DialogBtnClickListener.BTN_CONFIRM, chooseResult);
     }
 
 

@@ -23,12 +23,20 @@ public abstract class BranchDialog<D extends SmartDialog> extends NormalDialog<D
         mHeaderViewWrapper = dialogContentView.findViewById(R.id.smart_show_dialog_header_wrapper);
         mBodyViewWrapper = dialogContentView.findViewById(R.id.smart_show_dialog_body_wrapper);
         mFooterViewWrapper = dialogContentView.findViewById(R.id.smart_show_dialog_foot_wrapper);
-        Utils.inflate(provideHeaderLayout(), mHeaderViewWrapper, true);
-        Utils.inflate(provideBodyLayout(), mBodyViewWrapper, true);
-        Utils.inflate(provideFooterLayout(), mFooterViewWrapper, true);
+
+        inflateWrappedView(provideHeaderLayout(), mHeaderViewWrapper);
+        inflateWrappedView(provideBodyLayout(), mBodyViewWrapper);
+        inflateWrappedView(provideFooterLayout(), mFooterViewWrapper);
+
         initHeader(dialog, mHeaderViewWrapper);
         initBody(dialog, mBodyViewWrapper);
         initFooter(dialog, mFooterViewWrapper);
+    }
+
+    private void inflateWrappedView(@LayoutRes int layout, FrameLayout parent) {
+        if (layout != 0) {
+            Utils.inflate(layout, parent, true);
+        }
     }
 
     @Override

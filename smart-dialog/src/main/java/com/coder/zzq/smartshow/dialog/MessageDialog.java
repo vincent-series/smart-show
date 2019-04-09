@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.coder.zzq.smartshow.core.Utils;
 
-public class MessageDialog<D extends SmartDialog> extends BranchDialog<D> implements View.OnClickListener {
+public class MessageDialog<D extends SmartDialog> extends BranchDialog<D> {
     public static final int DISABLE_COLOR = Color.parseColor("#bbbbbb");
     protected CharSequence mTitle;
     protected float mTitleTextSizeSp;
@@ -21,7 +21,7 @@ public class MessageDialog<D extends SmartDialog> extends BranchDialog<D> implem
     protected boolean mTitleBold;
 
     protected CharSequence mConfirmLabel;
-    protected DialogBtnClickListener mOnConfirmClickListener;
+    protected DialogBtnClickListener<D> mOnConfirmClickListener;
     protected float mConfirmLabelTextSizeSp;
     @ColorInt
     protected int mConfirmLabelColor;
@@ -183,7 +183,7 @@ public class MessageDialog<D extends SmartDialog> extends BranchDialog<D> implem
     protected void initFooter(AppCompatDialog dialog, FrameLayout footerViewWrapper) {
         super.initFooter(dialog, footerViewWrapper);
         mConfirmBtn = mFooterViewWrapper.findViewById(R.id.smart_show_dialog_confirm_btn);
-        mConfirmBtn.setOnClickListener(this);
+        mConfirmBtn.setOnClickListener(mOnClickListener);
         mConfirmBtn.addOnAttachStateChangeListener(new ConfirmDelayCallback() {
             private int mSecondsDelayConfirmCopy;
             private int mSecondsDelayInitValue = mSecondsDelayConfirmCopy;
@@ -255,8 +255,14 @@ public class MessageDialog<D extends SmartDialog> extends BranchDialog<D> implem
         btn.getPaint().setFakeBoldText(labelBold);
     }
 
-    @Override
-    public void onClick(View v) {
+    protected View.OnClickListener mOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            onBtnClick(v);
+        }
+    };
+
+    protected void onBtnClick(View v) {
         if (v.getId() == R.id.smart_show_dialog_confirm_btn) {
             if (mOnConfirmClickListener == null) {
                 dismiss();
@@ -268,7 +274,7 @@ public class MessageDialog<D extends SmartDialog> extends BranchDialog<D> implem
     }
 
     protected void onConfirmBtnClick() {
-        mOnConfirmClickListener.onBtnClick(mNestedDialog, DialogBtnClickListener.BTN_CONFIRM, null);
+        mOnConfirmClickListener.onBtnClick((D) this, DialogBtnClickListener.BTN_CONFIRM, null);
     }
 
 }

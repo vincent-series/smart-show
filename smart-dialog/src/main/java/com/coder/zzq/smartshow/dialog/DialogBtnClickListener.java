@@ -1,12 +1,11 @@
 package com.coder.zzq.smartshow.dialog;
 
 import android.support.annotation.IntDef;
-import android.support.v7.app.AppCompatDialog;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-public interface DialogBtnClickListener {
+public interface DialogBtnClickListener<D extends SmartDialog> {
     int BTN_CONFIRM = 0;
     int BTN_CANCEL = 1;
 
@@ -15,5 +14,5 @@ public interface DialogBtnClickListener {
     @interface DialogBtn {
     }
 
-    void onBtnClick(AppCompatDialog dialog, @DialogBtn int which, Object data);
+    void onBtnClick(D dialog, @DialogBtn int which, Object data);
 }

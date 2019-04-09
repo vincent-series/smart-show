@@ -138,6 +138,6 @@ public class InputTextDialog extends SimpleBranchDialog<InputTextDialog> {
 
     @Override
     protected void onConfirmBtnClick() {
-        mOnConfirmClickListener.onBtnClick(mNestedDialog, DialogBtnClickListener.BTN_CONFIRM, mInputEdt.getText().toString());
+        mOnConfirmClickListener.onBtnClick(this, DialogBtnClickListener.BTN_CONFIRM, mInputEdt.getText().toString());
     }
 }
