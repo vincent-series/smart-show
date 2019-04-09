@@ -742,10 +742,31 @@ public class SnackbarActivity extends BaseActivity implements ITopbarShowCallbac
 ![图片加载失败](images/dialog.gif)
 #### 原理
 SmartDialog并不是android.app.Dialog的子类,只是个包装器，它内部持有一个真正的Dialog，用来显示。SmartDialog负责处理当Activity、Fragment
-生命周期异常时，取消创建或显示Dialog。
+生命周期异常时，取消创建或显示所持Dialog。<br/>
+
+#### 预定义
+NotificationDialog
+<pre><code>
+    private NotificationDialog mNotificationDialog;
+
+    private void onShowNotificationDialog() {
+    
+        if (mNotificationDialog == null) {
+        
+            mNotificationDialog = new NotificationDialog()
+            
+                    .message("重置成功");
+                    
+        }
+        
+        mNotificationDialog.showInActivity(this);
+    }
+</code></pre>
+#### 原理
+SmartDialog并不是android.app.Dialog的子类,只是个包装器，它内部持有一个真正的Dialog，用来显示。SmartDialog负责处理当Activity、Fragment
+生命周期异常时，取消创建或显示所持Dialog。
 #### 完全定制化
-继承SmartDialog，实现抽象方法createDialog(Activity activity)。<br/>
-适用于：
+继承SmartDialog，实现抽象方法createDialog(Activity activity)。适用于：
 1. 完全控制所持Dialog的创建，包括实现类及各种配置。
 2. 包装项目代码中已存在的各种自定义Dialog
 <pre><code>
@@ -754,6 +775,7 @@ public class MyDialog extends SmartDialog {
      * 必须实现的方法，负责创建内部持有的Dialog。
      *
      * @param activity 创建Dialog所需的activity context
+     *
      * @return 返回内部持有的Dialog
      */
     @NonNull
@@ -797,7 +819,7 @@ public class MyDialog extends SmartDialog {
     }
 }
 </code></pre>
-第二步，创建SmartDialog，传入DialogCreator。实际上SmartDialog并没有继承Dialog，只是个Dialog的包装器，管理Dialog。reuse(boolean b)方法表示是否复用Dialog，如果不复用，每次显示都调用DialogCreator创建新的Dialog。
+#### 自定义布局
 <pre><code>
     private SmartDialog mExampleDialog;
 
