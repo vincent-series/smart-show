@@ -737,10 +737,8 @@ public class SnackbarActivity extends BaseActivity implements ITopbarShowCallbac
 </code></pre>
 ## SmartDialog部分
 [回到模块导航](#模块导航)<br/><br/>
-1. 不会因activity生命周期问题导致BadTokenException,在activity为null值、正在finish、已销毁的情况下,取消Dialog的创建或显示
-2. 不会因fragment生命周期问题导致NullPointException(getActivity == null),<br/>在fragment hidden、detach、removed、userVisibleHint == false的情况下，
-取消掉Dialog的显示
-3. 提供主流APP中使用的message、input、list、loading等对话框<br/><br/>
+1. 解决因activity、fragment生命周期导致的BadTokenException、NullPointException等问题
+2. 提供主流APP中使用的message、input、list、loading等对话框<br/>
 ![图片加载失败](images/dialog.gif)
 #### API
 第一步，继承DialogCreator，实现你的Dialog创建逻辑。
