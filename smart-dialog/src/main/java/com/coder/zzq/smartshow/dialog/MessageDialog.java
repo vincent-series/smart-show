@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.coder.zzq.smartshow.core.Utils;
 
-public class MessageDialog<D extends SmartDialog> extends BranchDialog<D> {
+public abstract class MessageDialog<D extends SmartDialog> extends BranchDialog<D> {
     public static final int DISABLE_COLOR = Color.parseColor("#bbbbbb");
     protected CharSequence mTitle;
     protected float mTitleTextSizeSp;
