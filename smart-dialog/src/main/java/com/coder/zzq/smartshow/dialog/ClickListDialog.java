@@ -24,8 +24,11 @@ public class ClickListDialog extends TitleBranchDialog<ClickListDialog> {
     private OnItemClickListener mOnItemClickListener;
 
     public ClickListDialog items(List items) {
-        mItems.clear();
-        mItems.addAll(items);
+        if (!mItems.equals(items)) {
+            mItems.clear();
+            mItems.addAll(items);
+            applyItems(mNestedDialog);
+        }
         return this;
     }
 
@@ -34,9 +37,30 @@ public class ClickListDialog extends TitleBranchDialog<ClickListDialog> {
         return this;
     }
 
+    protected void applyItems(AppCompatDialog dialog) {
+        if (dialog == null) {
+            return;
+        }
+        ViewGroup.LayoutParams lp = mListView.getLayoutParams();
+        if (mItems.size() <= 5) {
+            lp.height = ListView.LayoutParams.WRAP_CONTENT;
+        } else {
+            lp.height = Utils.dpToPx(50) * 5;
+        }
+        mListView.setLayoutParams(lp);
+        mClickListAdapter.setItems(mItems);
+    }
+
     public ClickListDialog itemCenter(boolean itemCenter) {
         mItemCenter = itemCenter;
+        applyItemCenter(mNestedDialog);
         return this;
+    }
+
+    protected void applyItemCenter(AppCompatDialog dialog) {
+        if (dialog != null) {
+            mClickListAdapter.setItemCenter(mItemCenter);
+        }
     }
 
     public ClickListDialog itemClickListener(OnItemClickListener itemClickListener) {
@@ -69,16 +93,10 @@ public class ClickListDialog extends TitleBranchDialog<ClickListDialog> {
     }
 
     @Override
-    protected void applyBody() {
-        super.applyBody();
-        ViewGroup.LayoutParams lp = mListView.getLayoutParams();
-        if (mItems.size() <= 5) {
-            lp.height = ListView.LayoutParams.WRAP_CONTENT;
-        } else {
-            lp.height = Utils.dpToPx(50) * 5;
-        }
-        mListView.setLayoutParams(lp);
-        mClickListAdapter.setItems(mItems, mItemCenter);
+    protected void applyBody(AppCompatDialog dialog) {
+        super.applyBody(dialog);
+        applyItems(dialog);
+        applyItemCenter(dialog);
     }
 
     @Override
