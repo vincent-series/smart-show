@@ -58,13 +58,19 @@ public class InputTextDialog extends SimpleBranchDialog<InputTextDialog> {
         } else {
             mAtMostInputNum = INPUT_NO_LIMIT;
         }
-        applyAtMostInput(mNestedDialog);
+        applyInputCount(mNestedDialog, mInputEdt == null ? "" : mInputEdt.getText().toString());
         return this;
     }
 
-    protected void applyAtMostInput(AppCompatDialog dialog) {
-        if (dialog != null) {
-            mInputCountView.setText(String.valueOf(mAtMostInputNum));
+    protected void applyInputCount(AppCompatDialog dialog, String s) {
+        if (dialog == null) {
+            return;
+        }
+        if (mAtMostInputNum == INPUT_NO_LIMIT) {
+            applyInputNumMarkColor(dialog);
+            mInputCountView.setText(String.valueOf(s.length()));
+        } else {
+            processWhenInputLimit(s, mInputCountView, mStringBuilder);
         }
     }
 
@@ -120,16 +126,9 @@ public class InputTextDialog extends SimpleBranchDialog<InputTextDialog> {
 
             }
 
-            protected StringBuilder mStringBuilder = new StringBuilder();
-
             @Override
             public void afterTextChanged(Editable s) {
-                if (mAtMostInputNum == INPUT_NO_LIMIT) {
-                    applyInputNumMarkColor(dialog);
-                    mInputCountView.setText(String.valueOf(s.length()));
-                } else {
-                    processWhenInputLimit(s, mInputCountView, mStringBuilder);
-                }
+                applyInputCount(dialog, s.toString());
             }
         });
     }
@@ -138,12 +137,13 @@ public class InputTextDialog extends SimpleBranchDialog<InputTextDialog> {
     protected void applyBody(AppCompatDialog dialog) {
         super.applyBody(dialog);
         applyInputNumMarkColor(dialog);
-        applyAtMostInput(dialog);
         applyHint(dialog);
         mInputEdt.setText(mDefaultText);
     }
 
-    private void processWhenInputLimit(Editable s, TextView inputNumView, StringBuilder stringBuilder) {
+    protected StringBuilder mStringBuilder = new StringBuilder();
+
+    private void processWhenInputLimit(String s, TextView inputNumView, StringBuilder stringBuilder) {
         stringBuilder.delete(0, stringBuilder.length());
         if (s.length() > mAtMostInputNum) {
             inputNumView.setTextColor(Color.RED);
