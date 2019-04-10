@@ -14,14 +14,15 @@ public class ClickListAdapter extends BaseAdapter {
     private List mItems = new ArrayList();
     private boolean mItemCenter = true;
 
-    public void setItems(List items, boolean itemCenter) {
-        boolean needNotify = !mItems.equals(items) || mItemCenter != itemCenter;
-        if (!mItems.equals(items)) {
-            mItems.clear();
-            mItems.addAll(items);
-        }
-        mItemCenter = itemCenter;
-        if (needNotify) {
+    public void setItems(List items) {
+        mItems.clear();
+        mItems.addAll(items);
+        notifyDataSetChanged();
+    }
+
+    public void setItemCenter(boolean itemCenter) {
+        if (mItemCenter != itemCenter) {
+            mItemCenter = itemCenter;
             notifyDataSetChanged();
         }
     }
