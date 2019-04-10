@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.coder.zzq.smartshow.core.Utils;
 
 public class InputTextDialog extends SimpleBranchDialog<InputTextDialog> {
-    int INPUT_NO_LIMIT = -1;
+    public static int INPUT_NO_LIMIT = -1;
 
     protected CharSequence mDefaultText;
 
