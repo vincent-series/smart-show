@@ -2,11 +2,11 @@ package com.coder.zzq.smartshowdemo;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.coder.zzq.smartshow.core.Utils;
 import com.coder.zzq.smartshow.dialog.ChooseListDialog;
 import com.coder.zzq.smartshow.dialog.ChooseResult;
 import com.coder.zzq.smartshow.dialog.ClickListDialog;
@@ -70,29 +70,6 @@ public class TestDialogActivity extends AppCompatActivity implements AdapterView
         }
     }
 
-    ClickListDialog mClickListDialog;
-
-    private void onShowClickListDialog() {
-        if (mClickListDialog == null) {
-            mClickListDialog = new ClickListDialog()
-                    .itemCenter(true)
-                    .items(new String[]{
-                            "回复",
-                            "转发",
-                            "私信回复",
-                            "复制",
-                            "举报"
-                    })
-                    .itemClickListener(new ClickListDialog.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(ClickListDialog dialog, int position, Object data) {
-                            dialog.dismiss();
-                            SmartToast.show(data.toString());
-                        }
-                    });
-        }
-        mClickListDialog.showInActivity(this);
-    }
 
     private LoadingDialog mSmallLoadingDialog;
 
@@ -198,75 +175,85 @@ public class TestDialogActivity extends AppCompatActivity implements AdapterView
     private ChooseListDialog mSingleChooseListDialog;
 
     private void onShowSingleChooseDialog() {
-//        if (mSingleChooseListDialog == null) {
-//            mSingleChooseListDialog = new ChooseListDialog()
-//                    .title("请选择语言")
-//                    .defaultChoosePos(0)
-//                    .choiceMode(ChooseListDialog.CHOICE_MODE_SINGLE)
-//                    .keepChosenPosByLast(true)
-//                    .items(new String[]{
-//                            "Java",
-//                            "Kotlin",
-//                            "C",
-//                            "C++",
-//                            "C#",
-//                            "Html"
-//                    })
-//                    .confirmBtn("确定", new DialogBtnClickListener() {
-//                        @Override
-//                        public void onBtnClick(SmartDialog dialog, int which, Object data) {
-//                            dialog.dismiss();
-//                            ChooseResult chooseResult = (ChooseResult) data;
-//                            String showMsg = "pos:" + Arrays.toString(chooseResult.getChoosePositions())
-//                                    + "\n\n"
-//                                    + "items:" + Arrays.toString(chooseResult.getChooseItems());
-//                            SmartToast.show(showMsg);
-//                        }
-//                    });
-//        }
-//        mSingleChooseListDialog.showInActivity(this);
-        mInputTextDialog.title("入")
-                .clearInputPerShow(true)
-                .inputAtMost(50)
-                .textOfDefaultFill("默认填充")
-                .titleStyle(Utils.getColorFromRes(R.color.colorPrimary), 20, true)
-                .confirmBtn("确", new DialogBtnClickListener() {
-                    @Override
-                    public void onBtnClick(SmartDialog dialog, int which, Object data) {
-                        if (data.toString().length() > 50) {
-                            SmartToast.error("最多输入50个字符");
-                            return;
-                        } else {
+        if (mSingleChooseListDialog == null) {
+            mSingleChooseListDialog = new ChooseListDialog()
+                    .title("请选择语言")
+                    .defaultChoosePos(0)
+                    .checkMarkPos(Gravity.LEFT)
+                    .checkMarkColorRes(R.color.colorPrimaryDark)
+                    .useCubeMarkWhenMultipleChoice(true)
+                    .choiceMode(ChooseListDialog.CHOICE_MODE_SINGLE)
+                    .keepChosenPosByLast(true)
+                    .items(new String[]{
+                            "Java",
+                            "Kotlin",
+                            "C",
+                            "C++",
+                            "C#",
+                            "Html"
+                    })
+                    .confirmBtn("确定", new DialogBtnClickListener() {
+                        @Override
+                        public void onBtnClick(SmartDialog dialog, int which, Object data) {
                             dialog.dismiss();
+                            ChooseResult chooseResult = (ChooseResult) data;
+                            String showMsg = "pos:" + Arrays.toString(chooseResult.getChoosePositions())
+                                    + "\n\n"
+                                    + "items:" + Arrays.toString(chooseResult.getChooseItems());
+                            SmartToast.show(showMsg);
                         }
-                    }
-                });
-        mInputTextDialog.showInActivity(this);
+                    });
+        }
+        mSingleChooseListDialog.showInActivity(this);
+    }
+
+    private ClickListDialog mClickListDialog;
+
+    private void onShowClickListDialog() {
+        if (mClickListDialog == null) {
+            mClickListDialog = new ClickListDialog()
+                    .itemCenter(true)
+                    .items(new String[]{
+                            "回复",
+                            "转发",
+                            "私信回复",
+                            "复制",
+                            "举报"
+                    })
+                    .itemClickListener(new ClickListDialog.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(ClickListDialog dialog, int position, Object data) {
+                            dialog.dismiss();
+                            SmartToast.show(data.toString());
+                        }
+                    });
+        }
+
+        mClickListDialog.showInActivity(this);
     }
 
     private InputTextDialog mInputTextDialog;
 
     private void onShowInputDialog() {
         if (mInputTextDialog == null) {
-            mInputTextDialog = new InputTextDialog();
-        }
-        mInputTextDialog.title("请输入")
-                    .clearInputPerShow(true)
-                .inputAtMost(InputTextDialog.INPUT_NO_LIMIT)
-                .titleStyle(Utils.getColorFromRes(R.color.colorAccent), 16, false)
+            mInputTextDialog = new InputTextDialog()
+                    .title("输入")
                     .textOfDefaultFill("默认填充的文本")
+                    .hint("请输入建议")
+                    .inputAtMost(50)
+                    .clearInputPerShow(true)
                     .confirmBtn("确定", new DialogBtnClickListener() {
                         @Override
                         public void onBtnClick(SmartDialog dialog, int which, Object data) {
-                            if (data.toString().length() > 20) {
-                                SmartToast.error("最多输入20个字符");
-                                return;
+                            if (data.toString().length() > 50) {
+                                SmartToast.show("最多输入50个字");
                             } else {
                                 dialog.dismiss();
-                                SmartToast.show("输入的内容:" + data.toString());
+                                SmartToast.show("输入的内容为：" + data.toString());
                             }
                         }
                     });
+        }
         mInputTextDialog.showInActivity(this);
     }
 
