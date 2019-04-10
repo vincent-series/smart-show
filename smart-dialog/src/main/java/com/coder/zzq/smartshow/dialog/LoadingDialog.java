@@ -48,22 +48,33 @@ public class LoadingDialog extends NormalDialog<LoadingDialog> {
 
     public LoadingDialog large() {
         mSize = SIZE_MODE_LARGE;
+        applySize(mNestedDialog);
         return this;
     }
 
     public LoadingDialog middle() {
         mSize = SIZE_MIDDLE;
+        applySize(mNestedDialog);
         return this;
     }
 
     public LoadingDialog small() {
         mSize = SIZE_SMALL;
+        applySize(mNestedDialog);
+        applyWithMsg(mNestedDialog);
         return this;
     }
 
     public LoadingDialog message(CharSequence msg) {
         mMsg = msg;
+        applyMsg(mNestedDialog);
         return this;
+    }
+
+    protected void applyMsg(AppCompatDialog dialog) {
+        if (dialog != null) {
+            mMsgView.setText(mMsg);
+        }
     }
 
     public LoadingDialog message(@StringRes int msgRes) {
@@ -72,7 +83,14 @@ public class LoadingDialog extends NormalDialog<LoadingDialog> {
 
     public LoadingDialog withMsg(boolean with) {
         mWithMsg = with;
+        applyWithMsg(mNestedDialog);
         return this;
+    }
+
+    protected void applyWithMsg(AppCompatDialog dialog) {
+        if (dialog != null) {
+            mMsgView.setVisibility(mSize != SIZE_SMALL && mWithMsg ? View.VISIBLE : View.GONE);
+        }
     }
 
     public LoadingDialog() {
@@ -96,10 +114,17 @@ public class LoadingDialog extends NormalDialog<LoadingDialog> {
     }
 
     @Override
-    protected void applyNewSetting(AppCompatDialog dialog) {
-        super.applyNewSetting(dialog);
-        mMsgView.setVisibility(mSize != SIZE_SMALL && mWithMsg ? View.VISIBLE : View.GONE);
-        mMsgView.setText(mMsg);
+    protected void applySetting(AppCompatDialog dialog) {
+        super.applySetting(dialog);
+        applyMsg(dialog);
+        applyWithMsg(dialog);
+        applySize(dialog);
+    }
+
+    protected void applySize(AppCompatDialog dialog) {
+        if (dialog == null) {
+            return;
+        }
         FrameLayout.LayoutParams loadingPartViewLp = (FrameLayout.LayoutParams) mLoadingPartView.getLayoutParams();
         LinearLayout.LayoutParams progressbarLp = (LinearLayout.LayoutParams) mLoadingProgressBar.getLayoutParams();
         int msgTextSize = TEXT_SIZE_LARGE;

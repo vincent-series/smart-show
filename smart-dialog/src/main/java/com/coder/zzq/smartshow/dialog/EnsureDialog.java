@@ -22,18 +22,20 @@ public class EnsureDialog extends MessageDialog<EnsureDialog> {
     }
 
     public EnsureDialog cancelBtn(CharSequence label) {
-        return cancelBtn(label, null);
+        mCancelLabel = label;
+        applyBtnLabel(mNestedDialog, mCancelBtn, mCancelLabel);
+        return this;
     }
 
     public EnsureDialog cancelBtn(CharSequence label, DialogBtnClickListener clickListener) {
-        mCancelLabel = label;
+        cancelBtn(label);
         mOnCancelClickListener = clickListener;
         return this;
     }
 
     public EnsureDialog cancelBtn(CharSequence label, int color) {
-        mCancelLabel = label;
-        mCancelLabelColor = color;
+        cancelBtn(label);
+        cancelBtnTextStyle(color, mCancelLabelTextSizeSp, mCancelLabelBold);
         return this;
     }
 
@@ -47,6 +49,7 @@ public class EnsureDialog extends MessageDialog<EnsureDialog> {
         mCancelLabelColor = color;
         mCancelLabelTextSizeSp = textSizeSp;
         mCancelLabelBold = bold;
+        applyBtnStyle(mNestedDialog, mCancelBtn, mCancelLabelTextSizeSp, mCancelLabelColor, mCancelLabelBold);
         return this;
     }
 
@@ -63,9 +66,10 @@ public class EnsureDialog extends MessageDialog<EnsureDialog> {
     }
 
     @Override
-    protected void applyFooter() {
-        super.applyFooter();
-        setBtnStyle(mCancelBtn, mCancelLabel, mCancelLabelTextSizeSp, mCancelLabelColor, mCancelLabelBold);
+    protected void applyFooter(AppCompatDialog dialog) {
+        super.applyFooter(dialog);
+        applyBtnLabel(dialog, mCancelBtn, mCancelLabel);
+        applyBtnStyle(dialog, mCancelBtn, mCancelLabelTextSizeSp, mCancelLabelColor, mCancelLabelBold);
     }
 
     @Override

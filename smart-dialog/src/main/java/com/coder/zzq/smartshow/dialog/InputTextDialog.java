@@ -42,7 +42,14 @@ public class InputTextDialog extends SimpleBranchDialog<InputTextDialog> {
 
     public InputTextDialog hint(CharSequence hintMsg) {
         mHint = hintMsg;
+        applyHint(mNestedDialog);
         return this;
+    }
+
+    protected void applyHint(AppCompatDialog dialog) {
+        if (dialog != null) {
+            mInputEdt.setHint(mHint);
+        }
     }
 
     public InputTextDialog inputAtMost(int num) {
@@ -51,12 +58,26 @@ public class InputTextDialog extends SimpleBranchDialog<InputTextDialog> {
         } else {
             mAtMostInputNum = INPUT_NO_LIMIT;
         }
+        applyAtMostInput(mNestedDialog);
         return this;
+    }
+
+    protected void applyAtMostInput(AppCompatDialog dialog) {
+        if (dialog != null) {
+            mInputCountView.setText(String.valueOf(mAtMostInputNum));
+        }
     }
 
     public InputTextDialog inputCountMarkColor(@ColorInt int color) {
         mInputNumMarkColor = color;
+        applyInputNumMarkColor(mNestedDialog);
         return this;
+    }
+
+    protected void applyInputNumMarkColor(AppCompatDialog dialog) {
+        if (dialog != null) {
+            mInputCountView.setTextColor(mInputNumMarkColor);
+        }
     }
 
     public InputTextDialog clearInputPerShow(boolean clear) {
@@ -84,7 +105,7 @@ public class InputTextDialog extends SimpleBranchDialog<InputTextDialog> {
     }
 
     @Override
-    protected void initBody(AppCompatDialog dialog, FrameLayout bodyViewWrapper) {
+    protected void initBody(final AppCompatDialog dialog, FrameLayout bodyViewWrapper) {
         super.initBody(dialog, bodyViewWrapper);
         mInputEdt = bodyViewWrapper.findViewById(R.id.smart_show_input_edt);
         mInputCountView = bodyViewWrapper.findViewById(R.id.smart_show_input_count_mark);
@@ -104,7 +125,7 @@ public class InputTextDialog extends SimpleBranchDialog<InputTextDialog> {
             @Override
             public void afterTextChanged(Editable s) {
                 if (mAtMostInputNum == INPUT_NO_LIMIT) {
-                    mInputCountView.setTextColor(mInputNumMarkColor);
+                    applyInputNumMarkColor(dialog);
                     mInputCountView.setText(String.valueOf(s.length()));
                 } else {
                     processWhenInputLimit(s, mInputCountView, mStringBuilder);
@@ -114,11 +135,11 @@ public class InputTextDialog extends SimpleBranchDialog<InputTextDialog> {
     }
 
     @Override
-    protected void applyBody() {
-        super.applyBody();
-        mInputCountView.setTextColor(mInputNumMarkColor);
-        mInputCountView.setText(String.valueOf(mAtMostInputNum));
-        mInputEdt.setHint(mHint);
+    protected void applyBody(AppCompatDialog dialog) {
+        super.applyBody(dialog);
+        applyInputNumMarkColor(dialog);
+        applyAtMostInput(dialog);
+        applyHint(dialog);
         mInputEdt.setText(mDefaultText);
     }
 

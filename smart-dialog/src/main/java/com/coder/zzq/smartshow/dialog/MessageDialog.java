@@ -49,29 +49,56 @@ public abstract class MessageDialog<D extends SmartDialog> extends BranchDialog<
             return (D) this;
         }
         mMessage = msg;
+        applyMsg(mNestedDialog);
         return (D) this;
+    }
+
+    protected void applyMsg(AppCompatDialog dialog) {
+        if (dialog == null) {
+            return;
+        }
+        mMsgView.setText(mMessage);
+        ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) mMsgView.getLayoutParams();
+        lp.topMargin = Utils.isEmpty(mTitle) ? Utils.dpToPx(7) : 0;
+        mMsgView.setLayoutParams(lp);
     }
 
     public D messageStyle(int color, float textSizeSp, boolean bold) {
         mMessageColor = color;
         mMessageTextSizeSp = textSizeSp;
         mMessageBold = bold;
+        applyMsgStyle(mNestedDialog);
+        return (D) this;
+    }
+
+    protected void applyMsgStyle(AppCompatDialog dialog) {
+        if (dialog == null) {
+            return;
+        }
+        if (mMessageColor != 0) {
+            mMsgView.setTextColor(mMessageColor);
+        }
+        if (mMessageTextSizeSp > 0) {
+            mMsgView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mMessageTextSizeSp);
+        }
+        mMsgView.getPaint().setFakeBoldText(mMessageBold);
+    }
+
+    public D confirmBtn(CharSequence label) {
+        mConfirmLabel = label;
+        applyBtnLabel(mNestedDialog, mConfirmBtn, mConfirmLabel);
         return (D) this;
     }
 
     public D confirmBtn(CharSequence label, DialogBtnClickListener clickListener) {
-        mConfirmLabel = label;
+        confirmBtn(label);
         mOnConfirmClickListener = clickListener;
         return (D) this;
     }
 
-    public D confirmBtn(CharSequence label) {
-        return confirmBtn(label, null);
-    }
-
     public D confirmBtn(CharSequence label, int color) {
-        mConfirmLabel = label;
-        mConfirmLabelColor = color;
+        confirmBtn(label);
+        confirmBtnTextStyle(color, mConfirmLabelTextSizeSp, mConfirmLabelBold);
         return (D) this;
     }
 
@@ -85,6 +112,7 @@ public abstract class MessageDialog<D extends SmartDialog> extends BranchDialog<
         mConfirmLabelColor = color;
         mConfirmLabelTextSizeSp = textSizeSp;
         mConfirmLabelBold = bold;
+        applyBtnStyle(mNestedDialog, mConfirmBtn, mConfirmLabelTextSizeSp, mConfirmLabelColor, mConfirmLabelBold);
         return (D) this;
     }
 
@@ -95,14 +123,36 @@ public abstract class MessageDialog<D extends SmartDialog> extends BranchDialog<
 
     public D title(CharSequence title) {
         mTitle = title;
+        applyTitle(mNestedDialog);
         return (D) this;
+    }
+
+    protected void applyTitle(AppCompatDialog dialog) {
+        if (dialog != null) {
+            mHeaderViewWrapper.setVisibility(Utils.isEmpty(mTitle) ? View.GONE : View.VISIBLE);
+            mTitleView.setText(mTitle);
+        }
     }
 
     public D titleStyle(int color, float textSizeSp, boolean bold) {
         mTitleColor = color;
         mTitleTextSizeSp = textSizeSp;
         mTitleBold = bold;
+        applyTitleStyle(mNestedDialog);
         return (D) this;
+    }
+
+    protected void applyTitleStyle(AppCompatDialog dialog) {
+        if (dialog == null) {
+            return;
+        }
+        if (mTitleColor != 0) {
+            mTitleView.setTextColor(mTitleColor);
+        }
+        if (mTitleTextSizeSp > 0) {
+            mTitleView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTitleTextSizeSp);
+        }
+        mTitleView.getPaint().setFakeBoldText(mTitleBold);
     }
 
     @Override
@@ -116,20 +166,12 @@ public abstract class MessageDialog<D extends SmartDialog> extends BranchDialog<
     }
 
     @Override
-    protected void applyHeader() {
-        super.applyHeader();
-        mHeaderViewWrapper.setVisibility(Utils.isEmpty(mTitle) ? View.GONE : View.VISIBLE);
-        if (!Utils.isEmpty(mTitle)) {
-            mTitleView.setText(mTitle);
-            if (mTitleColor != 0) {
-                mTitleView.setTextColor(mTitleColor);
-            }
-            if (mTitleTextSizeSp > 0) {
-                mTitleView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTitleTextSizeSp);
-            }
-            mTitleView.getPaint().setFakeBoldText(mTitleBold);
-        }
+    protected void applyHeader(AppCompatDialog dialog) {
+        super.applyHeader(dialog);
+        applyTitle(dialog);
+        applyTitleStyle(dialog);
     }
+
 
     @Override
     protected int provideBodyLayout() {
@@ -159,20 +201,12 @@ public abstract class MessageDialog<D extends SmartDialog> extends BranchDialog<
     }
 
     @Override
-    protected void applyBody() {
-        super.applyBody();
-        mMsgView.setText(mMessage);
-        ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) mMsgView.getLayoutParams();
-        lp.topMargin = Utils.isEmpty(mTitle) ? Utils.dpToPx(7) : 0;
-        mMsgView.setLayoutParams(lp);
-        if (mMessageColor != 0) {
-            mMsgView.setTextColor(mMessageColor);
-        }
-        if (mMessageTextSizeSp > 0) {
-            mMsgView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mMessageTextSizeSp);
-        }
-        mMsgView.getPaint().setFakeBoldText(mMessageBold);
+    protected void applyBody(AppCompatDialog dialog) {
+        super.applyBody(dialog);
+        applyMsg(dialog);
+        applyMsgStyle(dialog);
     }
+
 
     @Override
     protected int provideFooterLayout() {
@@ -237,14 +271,21 @@ public abstract class MessageDialog<D extends SmartDialog> extends BranchDialog<
     }
 
     @Override
-    protected void applyFooter() {
-        super.applyFooter();
-        setBtnStyle(mConfirmBtn, mConfirmLabel, mConfirmLabelTextSizeSp, mConfirmLabelColor, mConfirmLabelBold);
+    protected void applyFooter(AppCompatDialog dialog) {
+        super.applyFooter(dialog);
+        applyBtnLabel(dialog, mConfirmBtn, mConfirmLabel);
+        applyBtnStyle(dialog, mConfirmBtn, mConfirmLabelTextSizeSp, mConfirmLabelColor, mConfirmLabelBold);
     }
 
-    protected void setBtnStyle(TextView btn, CharSequence btnLabel, float labelSizeSp, @ColorInt int labelColor, boolean labelBold) {
-        if (!Utils.isEmpty(btnLabel)) {
+    protected void applyBtnLabel(AppCompatDialog dialog, TextView btn, CharSequence btnLabel) {
+        if (dialog != null && !Utils.isEmpty(btnLabel)) {
             btn.setText(btnLabel);
+        }
+    }
+
+    protected void applyBtnStyle(AppCompatDialog dialog, TextView btn, float labelSizeSp, @ColorInt int labelColor, boolean labelBold) {
+        if (dialog == null) {
+            return;
         }
         if (labelColor != 0) {
             btn.setTextColor(labelColor);
