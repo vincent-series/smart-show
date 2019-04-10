@@ -40,11 +40,11 @@ public abstract class BranchDialog<D extends SmartDialog> extends NormalDialog<D
     }
 
     @Override
-    protected void applyNewSetting(AppCompatDialog dialog) {
-        super.applyNewSetting(dialog);
-        applyHeader();
-        applyBody();
-        applyFooter();
+    protected void applySetting(AppCompatDialog dialog) {
+        super.applySetting(dialog);
+        applyHeader(dialog);
+        applyBody(dialog);
+        applyFooter(dialog);
     }
 
     @LayoutRes
@@ -54,7 +54,7 @@ public abstract class BranchDialog<D extends SmartDialog> extends NormalDialog<D
 
     }
 
-    protected void applyHeader() {
+    protected void applyHeader(AppCompatDialog dialog) {
 
     }
 
@@ -65,7 +65,7 @@ public abstract class BranchDialog<D extends SmartDialog> extends NormalDialog<D
 
     }
 
-    protected void applyBody() {
+    protected void applyBody(AppCompatDialog dialog) {
 
     }
 
@@ -76,7 +76,7 @@ public abstract class BranchDialog<D extends SmartDialog> extends NormalDialog<D
 
     }
 
-    protected void applyFooter() {
+    protected void applyFooter(AppCompatDialog dialog) {
 
     }
 }
