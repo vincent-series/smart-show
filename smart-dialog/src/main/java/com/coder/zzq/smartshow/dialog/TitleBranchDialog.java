@@ -16,18 +16,40 @@ public abstract class TitleBranchDialog<D extends SmartDialog> extends BranchDia
     protected int mTitleColor;
     protected boolean mTitleBold;
 
-    private TextView mTitleView;
+    protected TextView mTitleView;
 
     public D title(CharSequence title) {
         mTitle = title;
+        applyTitle(mNestedDialog);
         return (D) this;
+    }
+
+    protected void applyTitle(AppCompatDialog dialog) {
+        if (dialog != null) {
+            mHeaderViewWrapper.setVisibility(Utils.isEmpty(mTitle) ? View.GONE : View.VISIBLE);
+            mTitleView.setText(mTitle);
+        }
     }
 
     public D titleStyle(int color, float textSizeSp, boolean bold) {
         mTitleColor = color;
         mTitleTextSizeSp = textSizeSp;
         mTitleBold = bold;
+        applyTitleStyle(mNestedDialog);
         return (D) this;
+    }
+
+    protected void applyTitleStyle(AppCompatDialog dialog) {
+        if (dialog == null) {
+            return;
+        }
+        if (mTitleColor != 0) {
+            mTitleView.setTextColor(mTitleColor);
+        }
+        if (mTitleTextSizeSp > 0) {
+            mTitleView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTitleTextSizeSp);
+        }
+        mTitleView.getPaint().setFakeBoldText(mTitleBold);
     }
 
     @Override
@@ -42,20 +64,10 @@ public abstract class TitleBranchDialog<D extends SmartDialog> extends BranchDia
     }
 
     @Override
-    protected void applyHeader() {
-        mHeaderViewWrapper.setVisibility(Utils.isEmpty(mTitle) ? View.GONE : View.VISIBLE);
-        if (!Utils.isEmpty(mTitle)) {
-            mTitleView.setText(mTitle);
-            if (mTitleColor != 0) {
-                mTitleView.setTextColor(mTitleColor);
-            }
-            if (mTitleTextSizeSp > 0) {
-                mTitleView.setTextSize(TypedValue.COMPLEX_UNIT_SP, mTitleTextSizeSp);
-            }
-            if (mTitleBold) {
-                mTitleView.getPaint().setFakeBoldText(mTitleBold);
-            }
-        }
+    protected void applyHeader(AppCompatDialog dialog) {
+        super.applyHeader(dialog);
+        applyTitle(dialog);
+        applyTitleStyle(dialog);
     }
 
 
