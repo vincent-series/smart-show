@@ -3,7 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="smart_show_light_gray">#eeeeee</color>
+    <color name="smart_show_light_gray">#33cccccc</color>
 
     <item name="smart_show_dialog_confirm_btn" type="id" />
     <item name="smart_show_dialog_cancel_btn" type="id" />
