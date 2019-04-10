@@ -50,6 +50,8 @@ public class ChooseListDialog extends SimpleBranchDialog<ChooseListDialog> {
         if (dialog == null) {
             return;
         }
+        mListView.clearChoices();
+        mNeedUpdateChecked = true;
         ViewGroup.LayoutParams lp = mListView.getLayoutParams();
         if (mItems.size() < 4) {
             lp.height = Utils.dpToPx(50) * (mItems.size() + 2);
@@ -97,6 +99,9 @@ public class ChooseListDialog extends SimpleBranchDialog<ChooseListDialog> {
     }
 
     public ChooseListDialog checkMarkPos(int pos) {
+        if (pos != Gravity.LEFT && pos != Gravity.RIGHT) {
+            pos = Gravity.LEFT;
+        }
         mCheckMarkPos = pos;
         applyCheckMarkPos(mNestedDialog);
         return this;
@@ -155,7 +160,6 @@ public class ChooseListDialog extends SimpleBranchDialog<ChooseListDialog> {
     @Override
     protected void applySetting(AppCompatDialog dialog) {
         super.applySetting(dialog);
-        setDefaultCheckedItems(mListView);
     }
 
     @Override
@@ -166,6 +170,7 @@ public class ChooseListDialog extends SimpleBranchDialog<ChooseListDialog> {
         applyCheckMarkPos(dialog);
         applyCheckMarkColor(dialog);
         applyUseCubeMark(dialog);
+        setDefaultCheckedItems(mListView);
     }
 
     @Override
@@ -197,13 +202,15 @@ public class ChooseListDialog extends SimpleBranchDialog<ChooseListDialog> {
         mOnConfirmClickListener.onBtnClick(this, DialogBtnClickListener.BTN_CONFIRM, chooseResult);
     }
 
+    private boolean mNeedUpdateChecked = false;
 
     @Override
     public void resetDialogWhenShowAgain(AppCompatDialog dialog) {
         super.resetDialogWhenShowAgain(dialog);
-        if (!mKeepChosenPosByLast) {
+        if (!mKeepChosenPosByLast || mNeedUpdateChecked) {
             mListView.clearChoices();
             setDefaultCheckedItems(mListView);
+            mNeedUpdateChecked = false;
         }
     }
 
