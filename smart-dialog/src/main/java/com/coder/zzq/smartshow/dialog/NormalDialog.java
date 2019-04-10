@@ -35,12 +35,31 @@ public abstract class NormalDialog<D extends SmartDialog> extends SmartDialog<Ap
 
     public D darkAroundWhenShow(boolean dim) {
         mDarkAroundWhenShow = dim;
+        applyDarkAround(mNestedDialog);
         return (D) this;
+    }
+
+    protected void applyDarkAround(AppCompatDialog dialog) {
+        if (dialog == null) {
+            return;
+        }
+        if (mDarkAroundWhenShow) {
+            dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        } else {
+            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        }
     }
 
     public D windowBackground(int bgRes) {
         mWindowBackground = bgRes;
+        applyWindowBackground(mNestedDialog);
         return (D) this;
+    }
+
+    protected void applyWindowBackground(AppCompatDialog dialog) {
+        if (dialog != null && mWindowBackground != 0) {
+            dialog.getWindow().setBackgroundDrawableResource(mWindowBackground);
+        }
     }
 
     public D cancelable(boolean b) {
@@ -48,27 +67,62 @@ public abstract class NormalDialog<D extends SmartDialog> extends SmartDialog<Ap
         if (!b) {
             mCancelableOnTouchOutside = false;
         }
+        applyCancelable(mNestedDialog);
         return (D) this;
+    }
+
+    protected void applyCancelable(AppCompatDialog dialog) {
+        if (dialog != null) {
+            dialog.setCancelable(mCancelable);
+        }
     }
 
     public D cancelableOnTouchOutside(boolean b) {
         mCancelableOnTouchOutside = b;
+        applyCancelableOnTouchOutside(mNestedDialog);
         return (D) this;
+    }
+
+    protected void applyCancelableOnTouchOutside(AppCompatDialog dialog) {
+        if (dialog != null) {
+            dialog.setCanceledOnTouchOutside(mCancelable ? mCancelableOnTouchOutside : false);
+        }
     }
 
     public D dialogCancelListener(DialogInterface.OnCancelListener cancelListener) {
         mOnCancelListener = cancelListener;
+        applyOnCancelListener(mNestedDialog);
         return (D) this;
+    }
+
+    protected void applyOnCancelListener(AppCompatDialog dialog) {
+        if (dialog != null) {
+            dialog.setOnCancelListener(mOnCancelListener);
+        }
     }
 
     public D dialogShowListener(DialogInterface.OnShowListener showListener) {
         mOnShowListener = showListener;
+        applyOnShowListener(mNestedDialog);
         return (D) this;
+    }
+
+    protected void applyOnShowListener(AppCompatDialog dialog) {
+        if (dialog != null) {
+            dialog.setOnShowListener(mOnShowListener);
+        }
     }
 
     public D dialogDismissListener(DialogInterface.OnDismissListener dismissListener) {
         mOnDismissListener = dismissListener;
+        applyOnDismissListener(mNestedDialog);
         return (D) this;
+    }
+
+    protected void applyOnDismissListener(AppCompatDialog dialog) {
+        if (dialog != null) {
+            dialog.setOnDismissListener(mOnDismissListener);
+        }
     }
 
     @NonNull
@@ -77,35 +131,22 @@ public abstract class NormalDialog<D extends SmartDialog> extends SmartDialog<Ap
         AppCompatDialog dialog = new AppCompatDialog(activity, provideDialogStyle());
         mContentView = Utils.inflate(provideContentLayout(), null);
         initView(dialog, mContentView);
-        applyNewSetting(dialog);
+        applySetting(dialog);
         ViewGroup.MarginLayoutParams rootLp = new ViewGroup.MarginLayoutParams(provideDialogWidth(), ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.setContentView(mContentView, rootLp);
         return dialog;
     }
 
-    public SmartDialog apply() {
-        if (mNestedDialog != null) {
-            applyNewSetting(mNestedDialog);
-        }
-        return this;
+    protected void applySetting(AppCompatDialog dialog) {
+        applyDarkAround(dialog);
+        applyWindowBackground(dialog);
+        applyCancelableOnTouchOutside(dialog);
+        applyCancelable(dialog);
+        applyOnShowListener(dialog);
+        applyOnDismissListener(dialog);
+        applyOnCancelListener(dialog);
     }
 
-    protected void applyNewSetting(AppCompatDialog dialog) {
-        if (mDarkAroundWhenShow) {
-            dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-        } else {
-            dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-        }
-        if (mWindowBackground != 0) {
-            dialog.getWindow().setBackgroundDrawableResource(mWindowBackground);
-        }
-
-        dialog.setCanceledOnTouchOutside(mCancelable ? mCancelableOnTouchOutside : false);
-        dialog.setCancelable(mCancelable);
-        dialog.setOnShowListener(mOnShowListener);
-        dialog.setOnDismissListener(mOnDismissListener);
-        dialog.setOnCancelListener(mOnCancelListener);
-    }
 
     protected int provideDialogStyle() {
         return R.style.smart_show_dialog;
