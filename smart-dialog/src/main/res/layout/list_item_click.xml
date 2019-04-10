@@ -2,6 +2,8 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@drawable/smart_show_dialog_btn_bg"
     android:id="@+id/list_item"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:textColor="#333333"
