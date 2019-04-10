@@ -28,19 +28,21 @@ public abstract class SimpleBranchDialog<D extends SmartDialog> extends TitleBra
     protected TextView mConfirmBtn;
     protected TextView mCancelBtn;
 
-    public D confirmBtn(CharSequence label, DialogBtnClickListener clickListener) {
+    public D confirmBtn(CharSequence label) {
         mConfirmLabel = label;
+        applyBtnLabel(mNestedDialog, mConfirmBtn, mConfirmLabel);
+        return (D) this;
+    }
+
+    public D confirmBtn(CharSequence label, DialogBtnClickListener clickListener) {
+        confirmBtn(label);
         mOnConfirmClickListener = clickListener;
         return (D) this;
     }
 
-    public D confirmBtn(CharSequence label) {
-        return confirmBtn(label, null);
-    }
-
     public D confirmBtn(CharSequence label, int color) {
-        mConfirmLabel = label;
-        mConfirmLabelColor = color;
+        confirmBtn(label);
+        confirmBtnTextStyle(color, mConfirmLabelTextSizeSp, mConfirmLabelBold);
         return (D) this;
     }
 
@@ -54,22 +56,25 @@ public abstract class SimpleBranchDialog<D extends SmartDialog> extends TitleBra
         mConfirmLabelColor = color;
         mConfirmLabelTextSizeSp = textSizeSp;
         mConfirmLabelBold = bold;
-        return (D) this;
-    }
-
-    public D cancelBtn(CharSequence label, DialogBtnClickListener clickListener) {
-        mCancelLabel = label;
-        mOnCancelClickListener = clickListener;
+        applyBtnStyle(mNestedDialog, mConfirmBtn, mConfirmLabelTextSizeSp, mConfirmLabelColor, mConfirmLabelBold);
         return (D) this;
     }
 
     public D cancelBtn(CharSequence label) {
-        return cancelBtn(label, null);
+        mCancelLabel = label;
+        applyBtnLabel(mNestedDialog, mCancelBtn, mCancelLabel);
+        return (D) this;
+    }
+
+    public D cancelBtn(CharSequence label, DialogBtnClickListener clickListener) {
+        cancelBtn(label);
+        mOnCancelClickListener = clickListener;
+        return (D) this;
     }
 
     public D cancelBtn(CharSequence label, int color) {
-        mCancelLabel = label;
-        mCancelLabelColor = color;
+        cancelBtn(label);
+        cancelBtnTextStyle(color, mCancelLabelTextSizeSp, mCancelLabelBold);
         return (D) this;
     }
 
@@ -83,6 +88,7 @@ public abstract class SimpleBranchDialog<D extends SmartDialog> extends TitleBra
         mCancelLabelColor = color;
         mCancelLabelTextSizeSp = textSizeSp;
         mCancelLabelBold = bold;
+        applyBtnStyle(mNestedDialog, mCancelBtn, mCancelLabelTextSizeSp, mCancelLabelColor, mCancelLabelBold);
         return (D) this;
     }
 
@@ -97,8 +103,8 @@ public abstract class SimpleBranchDialog<D extends SmartDialog> extends TitleBra
     }
 
     @Override
-    protected void applyHeader() {
-        super.applyHeader();
+    protected void applyHeader(AppCompatDialog dialog) {
+        super.applyHeader(dialog);
     }
 
     @Override
@@ -125,24 +131,31 @@ public abstract class SimpleBranchDialog<D extends SmartDialog> extends TitleBra
     }
 
     @Override
-    protected void applyFooter() {
-        setBtnStyle(mConfirmBtn, mConfirmLabel, mConfirmLabelColor, mConfirmLabelTextSizeSp,
-                mConfirmLabelBold, mOnConfirmClickListener);
-        setBtnStyle(mCancelBtn, mCancelLabel, mCancelLabelColor, mCancelLabelTextSizeSp,
-                mCancelLabelBold, mOnCancelClickListener);
+    protected void applyFooter(AppCompatDialog dialog) {
+        super.applyFooter(dialog);
+        applyBtnLabel(dialog, mConfirmBtn, mConfirmLabel);
+        applyBtnStyle(dialog, mConfirmBtn, mConfirmLabelTextSizeSp, mConfirmLabelColor, mConfirmLabelBold);
+        applyBtnLabel(dialog, mCancelBtn, mCancelLabel);
+        applyBtnStyle(dialog, mCancelBtn, mCancelLabelTextSizeSp, mCancelLabelColor, mCancelLabelBold);
     }
 
-    protected void setBtnStyle(TextView btn, CharSequence btnLabel, int btnLabelColor, float btnLabelTextSizeSp, boolean btnLabelBold, DialogBtnClickListener onBtnClickListener) {
-        if (!Utils.isEmpty(btnLabel)) {
+    protected void applyBtnLabel(AppCompatDialog dialog, TextView btn, CharSequence btnLabel) {
+        if (dialog != null && !Utils.isEmpty(btnLabel)) {
             btn.setText(btnLabel);
         }
-        if (btnLabelColor != 0) {
-            btn.setTextColor(btnLabelColor);
+    }
+
+    protected void applyBtnStyle(AppCompatDialog dialog, TextView btn, float labelSizeSp, @ColorInt int labelColor, boolean labelBold) {
+        if (dialog == null) {
+            return;
         }
-        if (btnLabelTextSizeSp > 0) {
-            btn.setTextSize(TypedValue.COMPLEX_UNIT_SP, btnLabelTextSizeSp);
+        if (labelColor != 0) {
+            btn.setTextColor(labelColor);
         }
-        btn.getPaint().setFakeBoldText(btnLabelBold);
+        if (labelSizeSp > 0) {
+            btn.setTextSize(TypedValue.COMPLEX_UNIT_SP, labelSizeSp);
+        }
+        btn.getPaint().setFakeBoldText(labelBold);
     }
 
     protected View.OnClickListener mOnClickListener = new View.OnClickListener() {
