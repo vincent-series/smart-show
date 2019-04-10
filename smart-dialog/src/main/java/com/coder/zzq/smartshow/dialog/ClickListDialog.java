@@ -87,6 +87,8 @@ public class ClickListDialog extends TitleBranchDialog<ClickListDialog> {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (mOnItemClickListener != null) {
                     mOnItemClickListener.onItemClick(ClickListDialog.this, position, mItems.get(position));
+                } else {
+                    ClickListDialog.this.dismiss();
                 }
             }
         });
