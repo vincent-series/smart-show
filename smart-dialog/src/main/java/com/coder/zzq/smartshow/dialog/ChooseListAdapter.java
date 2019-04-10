@@ -24,17 +24,29 @@ public class ChooseListAdapter extends BaseAdapter {
 
     private boolean mUseCubeMark;
 
-    public void setItems(List items, int checkMarkPos, int checkMarkColor, boolean useCubeMark) {
-        boolean needNotify = !mItems.equals(items) || mCheckMarkPos != checkMarkPos || mCheckMarkColor != checkMarkColor
-                || useCubeMark != mUseCubeMark;
-        if (!mItems.equals(items)) {
-            mItems.clear();
-            mItems.addAll(items);
+    public void setItems(List items) {
+        mItems.clear();
+        mItems.addAll(items);
+        notifyDataSetChanged();
+    }
+
+    public void setCheckMarkPos(int checkMarkPos) {
+        if (mCheckMarkPos != checkMarkPos) {
+            mCheckMarkPos = checkMarkPos;
+            notifyDataSetChanged();
         }
-        mCheckMarkPos = checkMarkPos;
-        mCheckMarkColor = checkMarkColor;
-        mUseCubeMark = useCubeMark;
-        if (needNotify) {
+    }
+
+    public void setCheckMarkColor(@ColorInt int checkMarkColor) {
+        if (mCheckMarkColor != checkMarkColor) {
+            mCheckMarkColor = checkMarkColor;
+            notifyDataSetChanged();
+        }
+    }
+
+    public void setUseCubeMark(boolean useCubeMark) {
+        if (mUseCubeMark != useCubeMark) {
+            mUseCubeMark = useCubeMark;
             notifyDataSetChanged();
         }
     }

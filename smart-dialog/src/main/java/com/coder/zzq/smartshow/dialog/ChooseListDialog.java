@@ -33,8 +33,11 @@ public class ChooseListDialog extends SimpleBranchDialog<ChooseListDialog> {
     protected ChooseListAdapter mChooseListAdapter;
 
     public ChooseListDialog items(List items) {
-        mItems.clear();
-        mItems.addAll(items);
+        if (!mItems.equals(items)) {
+            mItems.clear();
+            mItems.addAll(items);
+            applyItems(mNestedDialog);
+        }
         return this;
     }
 
@@ -43,10 +46,33 @@ public class ChooseListDialog extends SimpleBranchDialog<ChooseListDialog> {
         return this;
     }
 
+    protected void applyItems(AppCompatDialog dialog) {
+        if (dialog == null) {
+            return;
+        }
+        ViewGroup.LayoutParams lp = mListView.getLayoutParams();
+        if (mItems.size() < 4) {
+            lp.height = Utils.dpToPx(50) * (mItems.size() + 2);
+        } else if (mItems.size() > 5) {
+            lp.height = Utils.dpToPx(50) * 5;
+        } else {
+            lp.height = ListView.LayoutParams.WRAP_CONTENT;
+        }
+        mListView.setLayoutParams(lp);
+        mChooseListAdapter.setItems(mItems);
+    }
+
 
     public ChooseListDialog useCubeMarkWhenMultipleChoice(boolean useCubeMarkWhenMultipleChoose) {
         mUseCubeMarkWhenMultipleChoose = useCubeMarkWhenMultipleChoose;
+        applyUseCubeMark(mNestedDialog);
         return this;
+    }
+
+    protected void applyUseCubeMark(AppCompatDialog dialog) {
+        if (dialog != null) {
+            mChooseListAdapter.setUseCubeMark(mUseCubeMarkWhenMultipleChoose && mChoiceMode == ListView.CHOICE_MODE_MULTIPLE);
+        }
     }
 
 
@@ -59,17 +85,39 @@ public class ChooseListDialog extends SimpleBranchDialog<ChooseListDialog> {
                 mChoiceMode = ListView.CHOICE_MODE_MULTIPLE;
                 break;
         }
+        applyChoiceMode(mNestedDialog);
         return this;
+    }
+
+    protected void applyChoiceMode(AppCompatDialog dialog) {
+        if (dialog != null && mListView.getChoiceMode() != mChoiceMode) {
+            mListView.clearChoices();
+            mListView.setChoiceMode(mChoiceMode);
+        }
     }
 
     public ChooseListDialog checkMarkPos(int pos) {
         mCheckMarkPos = pos;
+        applyCheckMarkPos(mNestedDialog);
         return this;
+    }
+
+    protected void applyCheckMarkPos(AppCompatDialog dialog) {
+        if (dialog != null) {
+            mChooseListAdapter.setCheckMarkPos(mCheckMarkPos);
+        }
     }
 
     public ChooseListDialog checkMarkColor(int color) {
         mCheckMarkColor = color;
+        applyCheckMarkColor(mNestedDialog);
         return this;
+    }
+
+    protected void applyCheckMarkColor(AppCompatDialog dialog) {
+        if (dialog != null) {
+            mChooseListAdapter.setCheckMarkColor(mCheckMarkColor);
+        }
     }
 
     public ChooseListDialog checkMarkColorRes(int colorRes) {
@@ -105,24 +153,19 @@ public class ChooseListDialog extends SimpleBranchDialog<ChooseListDialog> {
     }
 
     @Override
-    protected void applyNewSetting(AppCompatDialog dialog) {
-        super.applyNewSetting(dialog);
-        if (mListView.getChoiceMode() != mChoiceMode) {
-            mListView.clearChoices();
-            mListView.setChoiceMode(mChoiceMode);
-        }
-        ViewGroup.LayoutParams lp = mListView.getLayoutParams();
-        if (mItems.size() < 4) {
-            lp.height = Utils.dpToPx(50) * (mItems.size() + 2);
-        } else if (mItems.size() > 5) {
-            lp.height = Utils.dpToPx(50) * 5;
-        } else {
-            lp.height = ListView.LayoutParams.WRAP_CONTENT;
-        }
-        mListView.setLayoutParams(lp);
-        mChooseListAdapter.setItems(mItems, mCheckMarkPos, mCheckMarkColor,
-                mUseCubeMarkWhenMultipleChoose && mChoiceMode == ListView.CHOICE_MODE_MULTIPLE);
+    protected void applySetting(AppCompatDialog dialog) {
+        super.applySetting(dialog);
         setDefaultCheckedItems(mListView);
+    }
+
+    @Override
+    protected void applyBody(AppCompatDialog dialog) {
+        super.applyBody(dialog);
+        applyChoiceMode(dialog);
+        applyItems(dialog);
+        applyCheckMarkPos(dialog);
+        applyCheckMarkColor(dialog);
+        applyUseCubeMark(dialog);
     }
 
     @Override
