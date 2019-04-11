@@ -50,7 +50,7 @@ public abstract class NormalDialog<D extends SmartDialog> extends SmartDialog<Ap
         }
     }
 
-    public D windowBackground(int bgRes) {
+    public D windowBackground(@DrawableRes int bgRes) {
         mWindowBackground = bgRes;
         applyWindowBackground(mNestedDialog);
         return (D) this;
