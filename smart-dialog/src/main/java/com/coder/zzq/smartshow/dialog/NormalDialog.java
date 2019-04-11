@@ -12,7 +12,7 @@ import android.view.WindowManager;
 
 import com.coder.zzq.smartshow.core.Utils;
 
-public abstract class NormalDialog<D extends SmartDialog> extends SmartDialog<AppCompatDialog> {
+public abstract class NormalDialog<D extends NormalDialog> extends SmartDialog<AppCompatDialog> {
 
     protected boolean mDarkAroundWhenShow;
     protected boolean mCancelableOnTouchOutside;
