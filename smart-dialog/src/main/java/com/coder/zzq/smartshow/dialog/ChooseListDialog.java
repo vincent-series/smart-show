@@ -3,6 +3,7 @@ package com.coder.zzq.smartshow.dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
 import android.support.v7.app.AppCompatDialog;
 import android.util.SparseBooleanArray;
 import android.view.Gravity;
@@ -113,7 +114,7 @@ public class ChooseListDialog extends SimpleBranchDialog<ChooseListDialog> {
         }
     }
 
-    public ChooseListDialog checkMarkColor(int color) {
+    public ChooseListDialog checkMarkColor(@ColorInt int color) {
         mCheckMarkColor = color;
         applyCheckMarkColor(mNestedDialog);
         return this;
@@ -125,7 +126,7 @@ public class ChooseListDialog extends SimpleBranchDialog<ChooseListDialog> {
         }
     }
 
-    public ChooseListDialog checkMarkColorRes(int colorRes) {
+    public ChooseListDialog checkMarkColorRes(@ColorRes int colorRes) {
         return checkMarkColor(Utils.getColorFromRes(colorRes));
     }
 
