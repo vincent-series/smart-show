@@ -7,7 +7,7 @@ import android.widget.FrameLayout;
 
 import com.coder.zzq.smartshow.core.Utils;
 
-public abstract class BranchDialog<D extends SmartDialog> extends NormalDialog<D> {
+public abstract class BranchDialog<D extends NormalDialog> extends NormalDialog<D> {
     protected FrameLayout mHeaderViewWrapper;
     protected FrameLayout mBodyViewWrapper;
     protected FrameLayout mFooterViewWrapper;

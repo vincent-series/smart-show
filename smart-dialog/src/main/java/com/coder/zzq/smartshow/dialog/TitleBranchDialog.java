@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.coder.zzq.smartshow.core.Utils;
 
-public abstract class TitleBranchDialog<D extends SmartDialog> extends BranchDialog<D> {
+public abstract class TitleBranchDialog<D extends NormalDialog> extends BranchDialog<D> {
     protected CharSequence mTitle;
     protected float mTitleTextSizeSp;
     @ColorInt

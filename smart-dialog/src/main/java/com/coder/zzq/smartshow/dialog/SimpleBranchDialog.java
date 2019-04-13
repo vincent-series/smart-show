@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.coder.zzq.smartshow.core.Utils;
 
-public abstract class SimpleBranchDialog<D extends SmartDialog> extends TitleBranchDialog<D> {
+public abstract class SimpleBranchDialog<D extends NormalDialog> extends TitleBranchDialog<D> {
     protected CharSequence mConfirmLabel;
     protected DialogBtnClickListener<D> mOnConfirmClickListener;
     protected float mConfirmLabelTextSizeSp;
