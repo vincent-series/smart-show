@@ -181,7 +181,6 @@ public class TestDialogActivity extends AppCompatActivity implements AdapterView
                     .defaultChoosePos(0)
                     .checkMarkPos(Gravity.LEFT)
                     .checkMarkColorRes(R.color.colorPrimaryDark)
-                    .useCubeMarkWhenMultipleChoice(true)
                     .choiceMode(ChooseListDialog.CHOICE_MODE_SINGLE)
                     .keepChosenPosByLast(true)
                     .items(new String[]{
@@ -280,7 +279,6 @@ public class TestDialogActivity extends AppCompatActivity implements AdapterView
     private void onShowEnsureDialog() {
         if (mEnsureDialog == null) {
             mEnsureDialog = new EnsureDialog()
-                    .title("提示")
                     .message("确定不再关注此人？")
                     .confirmBtn("确定", new DialogBtnClickListener() {
                         @Override
