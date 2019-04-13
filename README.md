@@ -739,6 +739,7 @@ public class SnackbarActivity extends BaseActivity implements ITopbarShowCallbac
 [回到模块导航](#模块导航)<br/><br/>
 1. 解决因activity、fragment生命周期导致的BadTokenException、NullPointException等问题
 2. 提供主流APP中使用的message、input、list、loading等对话框<br/>
+#### 效果图
 ![图片加载失败](images/dialog.gif)
 #### 原理
 SmartDialog并不是android.app.Dialog的子类,只是个包装器，它内部持有一个真正的Dialog，用来显示。SmartDialog负责处理当Activity、Fragment
