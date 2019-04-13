@@ -743,7 +743,7 @@ public class SnackbarActivity extends BaseActivity implements ITopbarShowCallbac
 #### 原理
 SmartDialog并不是android.app.Dialog的子类,只是个包装器，它内部持有一个真正的Dialog，用来显示。SmartDialog负责处理当Activity、Fragment
 生命周期异常时，取消创建或显示所持Dialog。<br/>
-#### 详细文档(wiki)
+#### 详细文档（wiki）
 
 * 预定义的SmartDialog实现
   * [NotificationDialog](https://github.com/the-pig-of-jungle/smart-show/wiki/NotificationDialog)
