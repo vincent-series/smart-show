@@ -1,5 +1,7 @@
 ## SmartShow
-近几天大家反映的问题，都会得到改善，请及时使用最新版本。当前最新版本2.6.8。
+请及时使用最新版本。当前最新版本2.6.8。
+关注技术公众号，随时获知库的更新及其他优质技术文章。
+![图片加载失败](images/gz_logo.png)
 ### 模块导航：
 * [SmartToast](#SmartToast部分)
 * [SmartSnackbar](#SmartSnackbar部分)
