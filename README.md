@@ -6,7 +6,7 @@
 * [SmartTopBar](#SmartTopbar部分)
 * [SmartDialog](#SmartDialog部分)
 * [关于实现](#代码实现)
-* [关于作者](#关于作者)
+* [关于作者及技术交流](#关于作者)
 * [引入该库](#引入SmartShow)
 ### 功能总览：
 1. 优雅封装，简化调用
