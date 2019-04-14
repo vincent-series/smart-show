@@ -9,7 +9,9 @@ import com.coder.zzq.smartshow.core.SmartShow;
  */
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public final class ToastDelegate {
-    private ToastSettingImpl mToastSetting;
+    private GlobalSetting mGlobalSetting;
+    private PlainToastSetting mPlainSetting;
+    private TypeToastSetting mTypeSetting;
     private PlainToastManager mPlainToastManager;
     private TypeToastManager mTypeToastManager;
 
@@ -18,22 +20,54 @@ public final class ToastDelegate {
 
     }
 
-    public ToastSettingImpl createToastSetting() {
-        if (mToastSetting == null) {
-            mToastSetting = new ToastSettingImpl();
+    public IPlainToastSetting createPlainSetting() {
+        if (mPlainSetting == null) {
+            mPlainSetting = new PlainToastSetting();
         }
-        return mToastSetting;
+        return mPlainSetting;
     }
 
 
-    protected boolean hasToastSetting() {
-        return mToastSetting != null;
+    protected boolean hasPlainSetting() {
+        return mPlainSetting != null;
+    }
+
+    public PlainToastSetting getPlainSetting() {
+        return mPlainSetting;
     }
 
 
-    public boolean isDismissOnLeave() {
-        return hasToastSetting() && getToastSetting().isDismissOnleave();
+    public ITypeToastSetting createTypeSetting() {
+        if (mTypeSetting == null) {
+            mTypeSetting = new TypeToastSetting();
+        }
+        return mTypeSetting;
     }
+
+
+    protected boolean hasTypeSetting() {
+        return mTypeSetting != null;
+    }
+
+    public TypeToastSetting getTypeSetting() {
+        return mTypeSetting;
+    }
+
+    public IGlobalSetting createGlobalSetting() {
+        if (mGlobalSetting == null) {
+            mGlobalSetting = new GlobalSetting();
+        }
+        return mGlobalSetting;
+    }
+
+    public boolean hasGlobalSetting() {
+        return mGlobalSetting != null;
+    }
+
+    public GlobalSetting getGlobalSetting() {
+        return mGlobalSetting;
+    }
+
 
     public boolean isShowing() {
         return isPlainShowing() || isTypeShowing();
@@ -187,12 +221,11 @@ public final class ToastDelegate {
         return sSmartToastDelegate;
     }
 
-    public ToastSettingImpl getToastSetting() {
-        return mToastSetting;
-    }
-
-
     public static boolean hasCreated() {
         return sSmartToastDelegate != null;
+    }
+
+    public boolean isDismissOnLeave() {
+        return hasGlobalSetting() && getGlobalSetting().isDismissOnLeave();
     }
 }

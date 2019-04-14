@@ -1,5 +1,6 @@
 package com.coder.zzq.smartshow.toast;
 
+import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 
 import com.coder.zzq.smartshow.core.Utils;
@@ -106,6 +107,16 @@ public final class SmartToast {
         info(Utils.getStringFromRes(msg));
     }
 
+    public static void info(CharSequence msg, @DrawableRes int iconRes) {
+
+        ToastDelegate.get().getTypeShowManager().info(msg, iconRes);
+    }
+
+    public static void info(@StringRes int msg, @DrawableRes int iconRes) {
+
+        info(Utils.getStringFromRes(msg), iconRes);
+    }
+
 
     public static void infoLong(CharSequence msg) {
         ToastDelegate.get().getTypeShowManager().infoLong(msg);
@@ -113,6 +124,14 @@ public final class SmartToast {
 
     public static void infoLong(@StringRes int msg) {
         infoLong(Utils.getStringFromRes(msg));
+    }
+
+    public static void infoLong(CharSequence msg, @DrawableRes int iconRes) {
+        ToastDelegate.get().getTypeShowManager().infoLong(msg, iconRes);
+    }
+
+    public static void infoLong(@StringRes int msg, @DrawableRes int iconRes) {
+        infoLong(Utils.getStringFromRes(msg), iconRes);
     }
 
     public static void warning(CharSequence msg) {
@@ -123,12 +142,28 @@ public final class SmartToast {
         warning(Utils.getStringFromRes(msg));
     }
 
+    public static void warning(CharSequence msg, @DrawableRes int iconRes) {
+        ToastDelegate.get().getTypeShowManager().warning(msg, iconRes);
+    }
+
+    public static void warning(@StringRes int msg, @DrawableRes int iconRes) {
+        warning(Utils.getStringFromRes(msg), iconRes);
+    }
+
     public static void warningLong(CharSequence msg) {
         ToastDelegate.get().getTypeShowManager().warningLong(msg);
     }
 
     public static void warningLong(@StringRes int msg) {
-        waitingLong(Utils.getStringFromRes(msg));
+        warningLong(Utils.getStringFromRes(msg));
+    }
+
+    public static void warningLong(CharSequence msg, @DrawableRes int iconRes) {
+        ToastDelegate.get().getTypeShowManager().warningLong(msg, iconRes);
+    }
+
+    public static void warningLong(@StringRes int msg, @DrawableRes int iconRes) {
+        warningLong(Utils.getStringFromRes(msg), iconRes);
     }
 
 
@@ -140,6 +175,14 @@ public final class SmartToast {
         success(Utils.getStringFromRes(msg));
     }
 
+    public static void success(CharSequence msg, @DrawableRes int iconRes) {
+        ToastDelegate.get().getTypeShowManager().success(msg, iconRes);
+    }
+
+    public static void success(@StringRes int msg, @DrawableRes int iconRes) {
+        success(Utils.getStringFromRes(msg), iconRes);
+    }
+
 
     public static void successLong(CharSequence msg) {
         ToastDelegate.get().getTypeShowManager().successLong(msg);
@@ -149,12 +192,28 @@ public final class SmartToast {
         successLong(Utils.getStringFromRes(msg));
     }
 
+    public static void successLong(CharSequence msg, @DrawableRes int iconRes) {
+        ToastDelegate.get().getTypeShowManager().successLong(msg, iconRes);
+    }
+
+    public static void successLong(@StringRes int msg, @DrawableRes int iconRes) {
+        successLong(Utils.getStringFromRes(msg), iconRes);
+    }
+
     public static void error(CharSequence msg) {
         ToastDelegate.get().getTypeShowManager().error(msg);
     }
 
     public static void error(@StringRes int msg) {
         error(Utils.getStringFromRes(msg));
+    }
+
+    public static void error(CharSequence msg, @DrawableRes int iconRes) {
+        ToastDelegate.get().getTypeShowManager().error(msg, iconRes);
+    }
+
+    public static void error(@StringRes int msg, @DrawableRes int iconRes) {
+        error(Utils.getStringFromRes(msg), iconRes);
     }
 
 
@@ -166,12 +225,28 @@ public final class SmartToast {
         errorLong(Utils.getStringFromRes(msg));
     }
 
+    public static void errorLong(CharSequence msg, @DrawableRes int iconRes) {
+        ToastDelegate.get().getTypeShowManager().errorLong(msg, iconRes);
+    }
+
+    public static void errorLong(@StringRes int msg, @DrawableRes int iconRes) {
+        errorLong(Utils.getStringFromRes(msg), iconRes);
+    }
+
     public static void fail(CharSequence msg) {
         ToastDelegate.get().getTypeShowManager().fail(msg);
     }
 
     public static void fail(@StringRes int msg) {
         fail(Utils.getStringFromRes(msg));
+    }
+
+    public static void fail(CharSequence msg, @DrawableRes int iconRes) {
+        ToastDelegate.get().getTypeShowManager().fail(msg, iconRes);
+    }
+
+    public static void fail(@StringRes int msg, @DrawableRes int iconRes) {
+        fail(Utils.getStringFromRes(msg), iconRes);
     }
 
     public static void failLong(CharSequence msg) {
@@ -182,12 +257,28 @@ public final class SmartToast {
         failLong(Utils.getStringFromRes(msg));
     }
 
+    public static void failLong(CharSequence msg, @DrawableRes int iconRes) {
+        ToastDelegate.get().getTypeShowManager().failLong(msg, iconRes);
+    }
+
+    public static void failLong(@StringRes int msg, @DrawableRes int iconRes) {
+        failLong(Utils.getStringFromRes(msg), iconRes);
+    }
+
     public static void complete(CharSequence msg) {
         ToastDelegate.get().getTypeShowManager().complete(msg);
     }
 
     public static void complete(@StringRes int msg) {
         complete(Utils.getStringFromRes(msg));
+    }
+
+    public static void complete(CharSequence msg, @DrawableRes int iconRes) {
+        ToastDelegate.get().getTypeShowManager().complete(msg, iconRes);
+    }
+
+    public static void complete(@StringRes int msg, @DrawableRes int iconRes) {
+        complete(Utils.getStringFromRes(msg), iconRes);
     }
 
     public static void completeLong(CharSequence msg) {
@@ -198,6 +289,13 @@ public final class SmartToast {
         completeLong(Utils.getStringFromRes(msg));
     }
 
+    public static void completeLong(CharSequence msg, @DrawableRes int iconRes) {
+        ToastDelegate.get().getTypeShowManager().completeLong(msg, iconRes);
+    }
+
+    public static void completeLong(@StringRes int msg, @DrawableRes int iconRes) {
+        completeLong(Utils.getStringFromRes(msg), iconRes);
+    }
 
     public static void forbid(CharSequence msg) {
         ToastDelegate.get().getTypeShowManager().forbid(msg);
@@ -207,12 +305,28 @@ public final class SmartToast {
         forbid(Utils.getStringFromRes(msg));
     }
 
+    public static void forbid(CharSequence msg, @DrawableRes int iconRes) {
+        ToastDelegate.get().getTypeShowManager().forbid(msg, iconRes);
+    }
+
+    public static void forbid(@StringRes int msg, @DrawableRes int iconRes) {
+        forbid(Utils.getStringFromRes(msg), iconRes);
+    }
+
     public static void forbidLong(CharSequence msg) {
         ToastDelegate.get().getTypeShowManager().forbidLong(msg);
     }
 
     public static void forbidLong(@StringRes int msg) {
         forbidLong(Utils.getStringFromRes(msg));
+    }
+
+    public static void forbidLong(CharSequence msg, @DrawableRes int iconRes) {
+        ToastDelegate.get().getTypeShowManager().forbidLong(msg, iconRes);
+    }
+
+    public static void forbidLong(@StringRes int msg, @DrawableRes int iconRes) {
+        forbidLong(Utils.getStringFromRes(msg), iconRes);
     }
 
 
@@ -224,12 +338,28 @@ public final class SmartToast {
         waiting(Utils.getStringFromRes(msg));
     }
 
+    public static void waiting(CharSequence msg, @DrawableRes int iconRes) {
+        ToastDelegate.get().getTypeShowManager().waiting(msg, iconRes);
+    }
+
+    public static void waiting(@StringRes int msg, @DrawableRes int iconRes) {
+        waiting(Utils.getStringFromRes(msg), iconRes);
+    }
+
     public static void waitingLong(CharSequence msg) {
         ToastDelegate.get().getTypeShowManager().waitingLong(msg);
     }
 
     public static void waitingLong(@StringRes int msg) {
         waitingLong(Utils.getStringFromRes(msg));
+    }
+
+    public static void waitingLong(CharSequence msg, @DrawableRes int iconRes) {
+        ToastDelegate.get().getTypeShowManager().waitingLong(msg, iconRes);
+    }
+
+    public static void waitingLong(@StringRes int msg, @DrawableRes int iconRes) {
+        waitingLong(Utils.getStringFromRes(msg), iconRes);
     }
 
     public static boolean isShowing() {
@@ -246,8 +376,16 @@ public final class SmartToast {
         }
     }
 
-
-    public static IToastSetting setting() {
-        return ToastDelegate.get().createToastSetting();
+    public static ITypeToastSetting typeSetting() {
+        return ToastDelegate.get().createTypeSetting();
     }
+
+    public static IPlainToastSetting plainSetting() {
+        return ToastDelegate.get().createPlainSetting();
+    }
+
+    public static IGlobalSetting globalSetting() {
+        return ToastDelegate.get().createGlobalSetting();
+    }
+
 }

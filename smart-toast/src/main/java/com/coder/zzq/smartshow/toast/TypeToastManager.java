@@ -1,6 +1,7 @@
 package com.coder.zzq.smartshow.toast;
 
 import android.graphics.drawable.GradientDrawable;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.RestrictTo;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -8,11 +9,13 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.coder.zzq.smartshow.core.EasyLogger;
 import com.coder.zzq.smartshow.core.SmartShow;
-import com.coder.zzq.smartshow.core.Utils;
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public class TypeToastManager extends BaseToastManager implements ITypeShow {
+
+    public static final int ICON_DEFAULT = 0;
 
     public static final int TYPE_INFO_NORMAL = 0;
     public static final int TYPE_INFO_WARNING = 1;
@@ -49,17 +52,27 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
     }
 
     @Override
-    protected void setupToast() {
-        super.setupToast();
+    protected void initSetup() {
+        super.initSetup();
         mCurInfoType = TYPE_INFO_NORMAL;
         mCurIcon = R.drawable.type_info_normal;
         mWindowParams.windowAnimations = R.style.type_info_toast_anim;
         mWindowParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        if (ToastDelegate.get().hasToastSetting()
-                && ToastDelegate.get().getToastSetting().isTypeInfoThemeColorSetup()) {
-            GradientDrawable drawable = (GradientDrawable) mView.getBackground();
-            drawable.setColor(ToastDelegate.get().getToastSetting().getTypeInfoThemeColor());
+    }
+
+    @Override
+    protected void applySetting() {
+        super.applySetting();
+        if (!ToastDelegate.get().hasTypeSetting()) {
+            return;
         }
+
+        int color = ToastDelegate.get().getTypeSetting().getThemeColor();
+        if (color != 0) {
+            GradientDrawable drawable = (GradientDrawable) mView.getBackground();
+            drawable.setColor(color);
+        }
+
     }
 
     @Override
@@ -68,6 +81,10 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
     }
 
     private final void showHelper(CharSequence msg, int infoType, int duration) {
+        showHelper(msg, infoType, ICON_DEFAULT, duration);
+    }
+
+    private final void showHelper(CharSequence msg, int infoType, @DrawableRes int iconRes, int duration) {
         ToastDelegate.get().dismissPlainShowIfNeed();
         msg = (msg == null) ? "" : msg;
         //文本是否改变
@@ -76,9 +93,15 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
         //类型是否改变
         boolean typeChanged = mCurInfoType != infoType;
 
+        iconRes = iconRes == ICON_DEFAULT ? getIcon(infoType) : iconRes;
+
+        boolean iconChanged = mCurIcon != iconRes;
+
+        EasyLogger.d("typeChanged:" + typeChanged + ",iconChanged:" + iconChanged +
+                ",contentChanged:" + contentChanged);
 
         boolean needInvokeShow = !isShowing();
-        if (isShowing() && (contentChanged || typeChanged)) {
+        if (isShowing() && (contentChanged || typeChanged || iconChanged)) {
             dismiss();
             needInvokeShow = true;
         }
@@ -86,7 +109,7 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
         mCurMsg = msg;
         mDuration = duration;
         mCurInfoType = infoType;
-        mCurIcon = getIcon(mCurInfoType);
+        mCurIcon = iconRes;
 
         updateToast();
 
@@ -126,8 +149,18 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
     }
 
     @Override
+    public void info(CharSequence msg, int iconRes) {
+        showHelper(msg, TYPE_INFO_NORMAL, iconRes, Toast.LENGTH_SHORT);
+    }
+
+    @Override
     public void infoLong(CharSequence msg) {
         showHelper(msg, TYPE_INFO_NORMAL, Toast.LENGTH_LONG);
+    }
+
+    @Override
+    public void infoLong(CharSequence msg, int iconRes) {
+        showHelper(msg, TYPE_INFO_NORMAL, iconRes, Toast.LENGTH_LONG);
     }
 
     @Override
@@ -136,8 +169,18 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
     }
 
     @Override
+    public void warning(CharSequence msg, int iconRes) {
+        showHelper(msg, TYPE_INFO_WARNING, iconRes, Toast.LENGTH_SHORT);
+    }
+
+    @Override
     public void warningLong(CharSequence msg) {
         showHelper(msg, TYPE_INFO_WARNING, Toast.LENGTH_LONG);
+    }
+
+    @Override
+    public void warningLong(CharSequence msg, int iconRes) {
+        showHelper(msg, TYPE_INFO_WARNING, iconRes, Toast.LENGTH_LONG);
     }
 
     @Override
@@ -146,8 +189,18 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
     }
 
     @Override
+    public void success(CharSequence msg, int iconRes) {
+        showHelper(msg, TYPE_INFO_SUCCESS, iconRes, Toast.LENGTH_SHORT);
+    }
+
+    @Override
     public void successLong(CharSequence msg) {
         showHelper(msg, TYPE_INFO_SUCCESS, Toast.LENGTH_LONG);
+    }
+
+    @Override
+    public void successLong(CharSequence msg, int iconRes) {
+        showHelper(msg, TYPE_INFO_SUCCESS, iconRes, Toast.LENGTH_LONG);
     }
 
     @Override
@@ -156,8 +209,18 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
     }
 
     @Override
+    public void error(CharSequence msg, int iconRes) {
+        showHelper(msg, TYPE_INFO_ERROR, iconRes, Toast.LENGTH_SHORT);
+    }
+
+    @Override
     public void errorLong(CharSequence msg) {
         showHelper(msg, TYPE_INFO_ERROR, Toast.LENGTH_LONG);
+    }
+
+    @Override
+    public void errorLong(CharSequence msg, int iconRes) {
+        showHelper(msg, TYPE_INFO_ERROR, iconRes, Toast.LENGTH_LONG);
     }
 
     @Override
@@ -166,8 +229,18 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
     }
 
     @Override
+    public void fail(CharSequence msg, int iconRes) {
+        showHelper(msg, TYPE_INFO_FAIL, iconRes, Toast.LENGTH_SHORT);
+    }
+
+    @Override
     public void failLong(CharSequence msg) {
         showHelper(msg, TYPE_INFO_FAIL, Toast.LENGTH_LONG);
+    }
+
+    @Override
+    public void failLong(CharSequence msg, int iconRes) {
+        showHelper(msg, TYPE_INFO_FAIL, iconRes, Toast.LENGTH_LONG);
     }
 
     @Override
@@ -176,8 +249,18 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
     }
 
     @Override
+    public void complete(CharSequence msg, int iconRes) {
+        showHelper(msg, TYPE_INFO_COMPLETE, iconRes, Toast.LENGTH_SHORT);
+    }
+
+    @Override
     public void completeLong(CharSequence msg) {
         showHelper(msg, TYPE_INFO_COMPLETE, Toast.LENGTH_LONG);
+    }
+
+    @Override
+    public void completeLong(CharSequence msg, int iconRes) {
+        showHelper(msg, TYPE_INFO_COMPLETE, iconRes, Toast.LENGTH_LONG);
     }
 
     @Override
@@ -186,8 +269,18 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
     }
 
     @Override
+    public void forbid(CharSequence msg, int iconRes) {
+        showHelper(msg, TYPE_INFO_FORBID, iconRes, Toast.LENGTH_SHORT);
+    }
+
+    @Override
     public void forbidLong(CharSequence msg) {
         showHelper(msg, TYPE_INFO_FORBID, Toast.LENGTH_LONG);
+    }
+
+    @Override
+    public void forbidLong(CharSequence msg, int iconRes) {
+        showHelper(msg, TYPE_INFO_FORBID, iconRes, Toast.LENGTH_LONG);
     }
 
     @Override
@@ -196,8 +289,18 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
     }
 
     @Override
+    public void waiting(CharSequence msg, int iconRes) {
+        showHelper(msg, TYPE_INFO_WAITING, iconRes, Toast.LENGTH_SHORT);
+    }
+
+    @Override
     public void waitingLong(CharSequence msg) {
         showHelper(msg, TYPE_INFO_WAITING, Toast.LENGTH_LONG);
+    }
+
+    @Override
+    public void waitingLong(CharSequence msg, int iconRes) {
+        showHelper(msg, TYPE_INFO_WAITING, iconRes, Toast.LENGTH_LONG);
     }
 
 }

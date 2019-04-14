@@ -8,6 +8,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.coder.zzq.smartshow.core.EasyLogger;
 import com.coder.zzq.smartshow.core.Utils;
 
 import java.lang.reflect.Field;
@@ -27,7 +28,7 @@ public abstract class BaseToastManager {
     public BaseToastManager() {
         mToast = createToast();
         setupReflectInfo();
-        setupToast();
+        initSetup();
     }
 
 
@@ -35,12 +36,15 @@ public abstract class BaseToastManager {
 
     protected void rebuildToast() {
         mToast = createToast();
+        EasyLogger.d("toast has rebuild : " + getToastType());
         setupReflectInfo();
-        setupToast();
+        initSetup();
     }
 
     protected void updateToast() {
-        mMsgView.setText(mCurMsg);
+        if (mMsgView != null) {
+            mMsgView.setText(mCurMsg);
+        }
     }
 
     protected void setupReflectInfo() {
@@ -66,7 +70,7 @@ public abstract class BaseToastManager {
         }
     }
 
-    protected void setupToast() {
+    protected void initSetup() {
         mCurMsg = "";
         mDuration = Toast.LENGTH_SHORT;
     }
@@ -83,18 +87,26 @@ public abstract class BaseToastManager {
 
 
     public void dismiss() {
+        if (!isShowing()) {
+            return;
+        }
         mToast.cancel();
         rebuildToast();
-        if (!Utils.isNotificationPermitted()){
+        if (!Utils.isNotificationPermitted()) {
             VirtualToastManager.get().dismiss(getToastType());
         }
     }
 
+    protected void applySetting() {
+
+    }
+
     public void showToast() {
+        applySetting();
         if (Utils.isNotificationPermitted()) {
             mToast.show();
-        } else{
-            VirtualToastManager.get().show(getToastType(),mToast,mWindowParams);
+        } else {
+            VirtualToastManager.get().show(getToastType(), mToast, mWindowParams);
         }
     }
 

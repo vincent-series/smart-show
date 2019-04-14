@@ -4,10 +4,12 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.RestrictTo;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v4.view.ViewCompat;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.widget.Toast;
 
+import com.coder.zzq.smartshow.core.EasyLogger;
 import com.coder.zzq.smartshow.core.SmartShow;
 import com.coder.zzq.smartshow.core.Utils;
 
@@ -19,6 +21,8 @@ public class PlainToastManager extends BaseToastManager implements IPlainShow {
     private int mVerticalAxisOffsetWhenBottom;
     private int mVerticalAxisOffsetWhenTop;
     private int mGravity;
+    private Drawable mSrcBg;
+    private Drawable mColorDrawable;
 
     public PlainToastManager() {
         super();
@@ -27,17 +31,23 @@ public class PlainToastManager extends BaseToastManager implements IPlainShow {
 
     @Override
     protected Toast createToast() {
-        if (ToastDelegate.get().hasToastSetting()
-                && ToastDelegate.get().getToastSetting().isCustom()) {
+        if (ToastDelegate.get().hasPlainSetting()
+                && ToastDelegate.get().getPlainSetting().getCustomViewCallback() != null) {
 
-            mView = ToastDelegate.get().getToastSetting().getCustomView();
+            mView = Utils.requireNonNull(
+                    ToastDelegate.get().getPlainSetting().getCustomViewCallback().createToastView(Utils.getInflater()),
+                    "customViewCallback must return a non null view!"
+            );
             mMsgView = mView.findViewById(R.id.custom_toast_msg);
             mToast = new Toast(SmartShow.getContext());
             mToast.setView(mView);
-
         } else {
             mToast = Toast.makeText(SmartShow.getContext(), "", Toast.LENGTH_SHORT);
             mView = mToast.getView();
+            if (mSrcBg == null) {
+                mSrcBg = mView.getBackground();
+                mSrcBg.mutate();
+            }
             mMsgView = mView.findViewById(android.R.id.message);
         }
 
@@ -58,42 +68,64 @@ public class PlainToastManager extends BaseToastManager implements IPlainShow {
         mVerticalAxisOffsetWhenTop = Utils.getToolbarHeight() + Utils.dpToPx(40);
     }
 
+
     @Override
-    protected void setupToast() {
-        super.setupToast();
-        if (ToastDelegate.get().hasToastSetting()) {
-            if (ToastDelegate.get().getToastSetting().isBgDrawableSetup()) {
-                mView.setBackgroundResource(ToastDelegate.get().getToastSetting().getBgDrawableRes());
-            } else if (ToastDelegate.get().getToastSetting().isBgColorSetup()) {
-                if (ToastDelegate.get().getToastSetting().isCustom()) {
-                    mView.setBackgroundColor(ToastDelegate.get().getToastSetting().getBgColor());
-                } else {
-                    Drawable bg = mView.getBackground();
-                    if (bg instanceof GradientDrawable) {
-                        ((GradientDrawable) bg).setColor(ToastDelegate.get().getToastSetting().getBgColor());
-                    } else {
-                        DrawableCompat.setTint(bg, ToastDelegate.get().getToastSetting().getBgColor());
-                    }
-
-                    mView.setBackgroundDrawable(bg);
-                }
-            }
-
-            if (ToastDelegate.get().getToastSetting().isTextColorSetup()) {
-                mMsgView.setTextColor(ToastDelegate.get().getToastSetting().getTextColor());
-            }
-            if (ToastDelegate.get().getToastSetting().isTextSizeSetup()) {
-                mMsgView.setTextSize(TypedValue.COMPLEX_UNIT_SP, ToastDelegate.get().getToastSetting().getTextSizeSp());
-            }
-
-            mMsgView.setGravity(Gravity.CENTER);
-            mMsgView.getPaint().setFakeBoldText(ToastDelegate.get().getToastSetting().isTextBold());
-            if (ToastDelegate.get().getToastSetting().isViewCallbackSetup()) {
-                ToastDelegate.get().getToastSetting().getIProcessToastCallback().processView(mView, mMsgView);
-            }
-
+    protected void applySetting() {
+        super.applySetting();
+        if (!ToastDelegate.get().hasPlainSetting()) {
+            return;
         }
 
+        int bgMode = ToastDelegate.get().getPlainSetting().getBgMode();
+        switch (bgMode) {
+            case IPlainToastSetting.BG_MODE_SRC:
+                ViewCompat.setBackground(mView, mSrcBg);
+                break;
+            case IPlainToastSetting.BG_MODE_COLOR:
+                int color = ToastDelegate.get().getPlainSetting().getBgColor();
+                if (color != 0) {
+                    if (getColorDrawable() instanceof GradientDrawable) {
+                        ((GradientDrawable) getColorDrawable()).setColor(color);
+                    } else {
+                        DrawableCompat.setTint(getColorDrawable(), color);
+                    }
+                    ViewCompat.setBackground(mView, getColorDrawable());
+                }
+                break;
+            case IPlainToastSetting.BG_MODE_DRAWABLE:
+                int drawableRes = ToastDelegate.get().getPlainSetting().getBgDrawableRes();
+                if (drawableRes != 0) {
+                    mView.setBackgroundResource(drawableRes);
+                }
+                break;
+        }
+
+
+        if (mMsgView == null) {
+            return;
+        }
+
+        int color = ToastDelegate.get().getPlainSetting().getTextColor();
+        if (color != 0) {
+            mMsgView.setTextColor(color);
+        }
+
+        float textSizeSp = ToastDelegate.get().getPlainSetting().getTextSizeSp();
+        if (textSizeSp != 0) {
+            mMsgView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSizeSp);
+        }
+
+        mMsgView.getPaint().setFakeBoldText(ToastDelegate.get().getPlainSetting().isTextBold());
+
+        mMsgView.setGravity(Gravity.CENTER);
+    }
+
+    public Drawable getColorDrawable() {
+        if (mColorDrawable == null) {
+            mColorDrawable = Utils.getDrawableFromRes(android.R.drawable.toast_frame);
+            mColorDrawable.mutate();
+        }
+        return mColorDrawable;
     }
 
     @Override
@@ -155,6 +187,8 @@ public class PlainToastManager extends BaseToastManager implements IPlainShow {
         boolean contentChanged = !mCurMsg.equals(msg);
 
         boolean needInvokeShow = !isShowing();
+
+        EasyLogger.d("contentChanged:" + contentChanged + ",posChanged:" + locationChanged);
 
         if (isShowing() && (locationChanged || contentChanged)) {
             dismiss();
