@@ -226,104 +226,82 @@ type toast 均居中显示<br/><br/>
 </pre></code>
 
 #### 定制化
-定制化SmartToast，调用setting方法获取IToastSetting对象进行全局配置<br/><br/>
-在application的onCreate方法里执行配置代码
-<pre><code>  
-        //获取IToastSetting对象
-        
-        SmartToast.setting()                   
-</code></pre>
 若自定义布局，可调用View方法传入，在布局中必须定义id为android:id="@id/custom_toast_msg"的TextView显示消息文本<br/>
 <pre><code>
-          //自定义布局，直接传入View
-    
-          IToastSetting view(View view);
-    
-         //自定义布局，传入布局资源
-    
-         IToastSetting view(@LayoutRes int layout);
-</code></pre>      
+          //自定义布局
+
+          IPlainToastSetting customView(CustomViewCallback callback);
+</code></pre>
 <pre><code>
-            
+
          //设置布局背景颜色
-         
-         IToastSetting backgroundColor(@ColorInt int color);
-         
-         IToastSetting backgroundColorRes(@ColorRes int colorRes);
-         
-         
-         
+
+         IPlainToastSetting backgroundColor(@ColorInt int color);
+
+         IPlainToastSetting backgroundColorRes(@ColorRes int colorRes);
+
+
+
          // 设置消息文本颜色
-         
-         IToastSetting textColor(@ColorInt int color);
-         
-         IToastSetting textColorRes(@ColorRes int color);
-         
-         
-         
+
+         IPlainToastSetting textColor(@ColorInt int color);
+
+         IPlainToastSetting textColorRes(@ColorRes int color);
+
+
+
          //设置消息文本大小
-         
-         IToastSetting textSizeSp(float sp);
-         
-         
-         
+
+         IPlainToastSetting textSizeSp(float sp);
+
+
+
          //消息文本是否为粗体
-         
-         IToastSetting textBold(boolean bold);
-         
-         
-         
-         //对布局进一步处理，callback中会传入布局的根View和显示消息的TextView，
-         
-         //callback中的处理和以上配置方法的处理有冲突时，将覆盖掉以上的配置
-         
-         IToastSetting processView(IProcessToastCallback callback);  
-         
-         
-         
+
+         IPlainToastSetting textBold(boolean bold);
+
          例子：
-         
-          SmartToast.setting()
-                         
+
+          SmartToast.plainSetting()
+
                     .backgroundColorRes(R.color.colorPrimary)
-                         
+
                     .textSizeSp(18)
-                    
+
                     .textBold(true)
-                         
-                    .processView(new IProcessToastCallback() {
-                    
-                             //root 为布局根View，msgView为显示消息的TextView
-                             
-                             @Override                           
-                             public void processView(View rootView, TextView msgView) {
-                             
-                                //... 
-                                
-                             }
-                         });         
+
+                    .customView(new IPlainToastSetting.CustomViewCallback() {
+
+                         @Override
+                         public View createToastView(LayoutInflater inflater) {
+
+                            View view = inflater.inflate(R.layout.custom_toast,null);
+
+                            return view;
+                         }
+                    });
 </code></pre>
 配置 Type Toast 的主题色
 <pre><code>
-        IToastSetting typeInfoToastThemeColor(@ColorInt int color);
-        
-        IToastSetting typeInfoToastThemeColorRes(@ColorRes int colorRes);
-        
+        ITypeToastSetting themeColor(@ColorInt int color);
+
+        ITypeToastSetting themeColorRes(@ColorRes int colorRes);
+
         例子：
-        
-        SmartToast.setting()
-        
-                  .typeInfoToastThemeColorRes(R.color.colorPrimary);
+
+        SmartToast.typeSetting()
+
+                .themeColorRes(R.color.colorPrimary);
 </code></pre>
 配置离开当前activity时，是否立即隐藏正在显示的Toast（不管是普通Toast还是 Type Toast），默认false
 <pre><code>
-        IToastSetting dismissOnLeave(boolean b);
+        IGlobalSetting dismissOnLeave(boolean b);
         
         例子：
         
-        SmartToast.setting()
-        
-                  .dismissOnLeave(true);
+        SmartToast.globalSetting()
+
+                        .dismissOnLeave(true);
 </code></pre>
 #### 判断显示和隐藏
 <pre><code>
