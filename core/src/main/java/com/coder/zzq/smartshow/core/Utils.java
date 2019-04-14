@@ -35,6 +35,10 @@ public class Utils {
         return ContextCompat.getColor(SmartShow.getContext(), colorRes);
     }
 
+    public static LayoutInflater getInflater() {
+        return LayoutInflater.from(SmartShow.getContext());
+    }
+
     public static <T> T requireNonNull(T obj, String tip) {
         if (obj == null) {
             throw new NullPointerException(tip);
