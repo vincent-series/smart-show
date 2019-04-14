@@ -26,6 +26,11 @@ public class TestToastActivity extends AppCompatActivity {
         SmartToast.show(R.string.apple);
     }
 
+    public void onShowAnotherClick(View view) {
+        SmartToast.show(R.string.mango);
+    }
+
+
     public void onShowAtTopClick(View view) {
         SmartToast.showAtTop(R.string.banana);
     }
@@ -38,7 +43,4 @@ public class TestToastActivity extends AppCompatActivity {
         SmartToast.showAtLocation(R.string.litchi, Gravity.LEFT | Gravity.TOP, 10, 90);
     }
 
-    public void onShowAnotherClick(View view) {
-        SmartToast.show(R.string.mango);
-    }
 }
