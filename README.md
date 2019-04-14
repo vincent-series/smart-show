@@ -280,6 +280,7 @@ type toast 均居中显示<br/><br/>
                             return view;
                          }
                     });
+
 </code></pre>
 配置 Type Toast 的主题色
 <pre><code>
