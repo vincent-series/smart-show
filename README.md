@@ -1,5 +1,5 @@
 ## SmartShow
-请及时使用最新版本2.6.9。
+请及时使用最新版本2.7.0。
 <br/><br/>关注技术公众号，随时获知库的更新及其他优质技术文章。<br/><br/>
 ![图片加载失败](images/gz_logo.png)
 ### 模块导航：
@@ -59,7 +59,7 @@ allprojects {
 第一种方式，引入所有模块
 <pre><code>
 
-    implementation ('com.github.the-pig-of-jungle.smart-show:all:2.6.9'){
+    implementation ('com.github.the-pig-of-jungle.smart-show:all:2.7.0'){
     
         exclude group: 'com.android.support'
         
@@ -75,19 +75,19 @@ allprojects {
 <pre><code>
     //smart toast
     
-    implementation 'com.github.the-pig-of-jungle.smart-show:toast:2.6.9'
+    implementation 'com.github.the-pig-of-jungle.smart-show:toast:2.7.0'
 </code></pre>
 
 <pre><code>
     // smart dialog
     
-    implementation 'com.github.the-pig-of-jungle.smart-show:dialog:2.6.9'
+    implementation 'com.github.the-pig-of-jungle.smart-show:dialog:2.7.0'
 </code></pre>
 
 <pre><code>  
     // smart topbar
     
-    implementation('com.github.the-pig-of-jungle.smart-show:topbar:2.6.9') {
+    implementation('com.github.the-pig-of-jungle.smart-show:topbar:2.7.0') {
     
         exclude group: 'com.android.support'
         
@@ -101,7 +101,7 @@ allprojects {
 <pre><code>
     // smart snackbar
     
-    implementation('com.github.the-pig-of-jungle.smart-show:snackbar:2.6.9') {
+    implementation('com.github.the-pig-of-jungle.smart-show:snackbar:2.7.0') {
     
         exclude group: 'com.android.support'
         
