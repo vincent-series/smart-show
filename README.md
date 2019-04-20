@@ -62,6 +62,10 @@ allprojects {
 第一种方式，引入所有模块
 <pre><code>
 
+    //公用core库
+
+    implementation 'com.github.the-pig-of-jungle.smart-show:core:2.7.1'
+
     implementation ('com.github.the-pig-of-jungle.smart-show:all:2.7.1'){
     
         exclude group: 'com.android.support'
@@ -76,18 +80,33 @@ allprojects {
    第二种方式，自由引入各个模块<br/>
 
 <pre><code>
+
+    //公用core库
+
+    implementation 'com.github.the-pig-of-jungle.smart-show:core:2.7.1'
+
     //smart toast
-    
+
     implementation 'com.github.the-pig-of-jungle.smart-show:toast:2.7.1'
 </code></pre>
 
 <pre><code>
+
+    //公用core库
+
+    implementation 'com.github.the-pig-of-jungle.smart-show:core:2.7.1'
+
     // smart dialog
     
     implementation 'com.github.the-pig-of-jungle.smart-show:dialog:2.7.1'
 </code></pre>
 
-<pre><code>  
+<pre><code>
+
+    //公用core库
+
+    implementation 'com.github.the-pig-of-jungle.smart-show:core:2.7.1'
+
     // smart topbar
     
     implementation('com.github.the-pig-of-jungle.smart-show:topbar:2.7.1') {
@@ -102,6 +121,11 @@ allprojects {
 </code></pre>
 
 <pre><code>
+
+    //公用core库
+
+    implementation 'com.github.the-pig-of-jungle.smart-show:core:2.7.1'
+
     // smart snackbar
     
     implementation('com.github.the-pig-of-jungle.smart-show:snackbar:2.7.1') {
