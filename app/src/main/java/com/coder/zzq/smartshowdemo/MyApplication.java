@@ -25,16 +25,7 @@ public class MyApplication extends Application {
         SmartShow.init(this);
         SmartToast.globalSetting()
                 .dismissOnLeave(true);
-        SmartToast.typeSetting()
-                .themeColorRes(R.color.colorPrimary);
-        SmartToast.plainSetting()
-                .customView(new IPlainToastSetting.CustomViewCallback() {
-                    @Override
-                    public View createToastView(LayoutInflater inflater) {
-                        View view = inflater.inflate(R.layout.custom_toast, null);
-                        return view;
-                    }
-                });
+
         SmartSnackbar.setting()
                 .backgroundColorRes(R.color.colorPrimary)
                 .dismissOnLeave(true);
