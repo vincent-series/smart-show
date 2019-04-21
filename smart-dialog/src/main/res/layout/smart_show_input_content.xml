@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <EditText
         android:id="@+id/smart_show_input_edt"
@@ -11,7 +12,7 @@
         android:gravity="top|left"
         android:lineSpacingExtra="2dp"
         android:maxHeight="200dp"
-        android:minHeight="100dp"
+        android:minHeight="120dp"
         android:padding="4dp"
         android:selectAllOnFocus="true"
         android:textColor="#333333"
@@ -24,4 +25,4 @@
         android:layout_gravity="bottom|right"
         android:padding="4dp"
         android:textColor="@color/colorPrimary" />
-</FrameLayout>
+</LinearLayout>
