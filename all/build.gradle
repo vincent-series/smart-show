@@ -27,8 +27,8 @@ android {
 }
 
 dependencies {
-    implementation project(':smart-toast')
-    implementation project(':smart-topbar')
-    implementation project(':smart-snackbar')
-    implementation project(':smart-dialog')
+    api project(':smart-toast')
+    api project(':smart-topbar')
+    api project(':smart-snackbar')
+    api project(':smart-dialog')
 }
