@@ -1,8 +1,5 @@
 ## SmartShow
-android studio 升至3.4（gradle5.1.1），编译报错，需要显示依赖core库：<br/>
-implementation 'com.github.the-pig-of-jungle.smart-show:core:2.7.2'<br/>
-另外，各个模块的版本号要保持一致。
-请及时使用最新版本2.7.2。
+android studio 升至3.4（gradle5.1.1），编译报错问题，请尽快使用最新版本2.7.3
 <br/><br/>关注技术公众号，随时获知库的更新及其他优质技术文章。<br/><br/>
 ![图片加载失败](images/gz_logo.png)
 ### 模块导航：
@@ -62,11 +59,7 @@ allprojects {
 第一种方式，引入所有模块
 <pre><code>
 
-    //公用core库
-
-    implementation 'com.github.the-pig-of-jungle.smart-show:core:2.7.2'
-
-    implementation ('com.github.the-pig-of-jungle.smart-show:all:2.7.2'){
+    implementation ('com.github.the-pig-of-jungle.smart-show:all:2.7.3'){
     
         exclude group: 'com.android.support'
         
@@ -81,35 +74,23 @@ allprojects {
 
 <pre><code>
 
-    //公用core库
-
-    implementation 'com.github.the-pig-of-jungle.smart-show:core:2.7.2'
-
     //smart toast
 
-    implementation 'com.github.the-pig-of-jungle.smart-show:toast:2.7.2'
+    implementation 'com.github.the-pig-of-jungle.smart-show:toast:2.7.3'
 </code></pre>
 
 <pre><code>
-
-    //公用core库
-
-    implementation 'com.github.the-pig-of-jungle.smart-show:core:2.7.2'
 
     // smart dialog
     
-    implementation 'com.github.the-pig-of-jungle.smart-show:dialog:2.7.2'
+    implementation 'com.github.the-pig-of-jungle.smart-show:dialog:2.7.3'
 </code></pre>
 
 <pre><code>
 
-    //公用core库
-
-    implementation 'com.github.the-pig-of-jungle.smart-show:core:2.7.2'
-
     // smart topbar
     
-    implementation('com.github.the-pig-of-jungle.smart-show:topbar:2.7.2') {
+    implementation('com.github.the-pig-of-jungle.smart-show:topbar:2.7.3') {
     
         exclude group: 'com.android.support'
         
@@ -122,13 +103,9 @@ allprojects {
 
 <pre><code>
 
-    //公用core库
-
-    implementation 'com.github.the-pig-of-jungle.smart-show:core:2.7.2'
-
     // smart snackbar
     
-    implementation('com.github.the-pig-of-jungle.smart-show:snackbar:2.7.2') {
+    implementation('com.github.the-pig-of-jungle.smart-show:snackbar:2.7.3') {
     
         exclude group: 'com.android.support'
         
