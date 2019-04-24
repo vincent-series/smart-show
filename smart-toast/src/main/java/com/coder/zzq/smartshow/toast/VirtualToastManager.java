@@ -33,6 +33,8 @@ public final class VirtualToastManager {
                 : getVirtualTypeToastDialog(hostActivityChanged);
         virtualToastDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         virtualToastDialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+        virtualToastDialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        virtualToastDialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         WindowManager.LayoutParams lp = virtualToastDialog.getWindow().getAttributes();
         lp.width = windowParams.width;
         lp.height = windowParams.height;
@@ -45,8 +47,8 @@ public final class VirtualToastManager {
             if (toast.getView().getParent() != null) {
                 ViewGroup parent = (ViewGroup) toast.getView().getParent();
                 parent.removeView(toast.getView());
-                content.removeAllViews();
             }
+            content.removeAllViews();
             virtualToastDialog.setContentView(toast.getView());
         }
         try {
