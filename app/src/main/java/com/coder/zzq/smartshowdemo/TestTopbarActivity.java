@@ -4,32 +4,63 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
+import com.coder.zzq.smartshow.dialog.ClickListAdapter;
 import com.coder.zzq.smartshow.toast.SmartToast;
 import com.coder.zzq.smartshow.topbar.SmartTopbar;
 
+import java.util.Arrays;
+
 public class TestTopbarActivity extends AppCompatActivity {
+    private ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_topbar);
-        SmartTopbar.get(this).show("你好");
+        mListView = findViewById(R.id.list_view);
+        ClickListAdapter adapter = new ClickListAdapter();
+        adapter.setItemCenter(true);
+        adapter.setItems(Arrays.asList(new String[]{
+                "short topbar",
+                "long topbar",
+                "indefinite topbar"
+        }));
+
+        mListView.setAdapter(adapter);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        onShortClick(view);
+                        break;
+                    case 1:
+                        onLongClick(view);
+                        break;
+                    case 2:
+                        onIndefinite(view);
+                        break;
+                }
+            }
+        });
     }
 
     public void onShortClick(View view) {
-        SmartTopbar.get(this).show("来晚了一步，老弟", R.drawable.type_info_warning);
+        SmartTopbar.get(this).show("苹果");
     }
 
     public void onLongClick(View view) {
-        SmartTopbar.get(this).showLong("香蕉", R.drawable.type_info_error);
+        SmartTopbar.get(this).showLong("香蕉");
     }
 
     public void onIndefinite(View view) {
         SmartTopbar.get(this).showIndefinite("为该库Start一下好么", "好的", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SmartToast.showInCenter("Thank you");
+                SmartToast.showAtTop("Thank you");
             }
         });
 

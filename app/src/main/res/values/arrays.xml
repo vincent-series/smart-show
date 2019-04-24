@@ -21,4 +21,12 @@
         <item>user visible hint (false)</item>
     </string-array>
 
+    <string-array name="test_plain_toast_items">
+        <item>show</item>
+        <item>show another</item>
+        <item>show at top</item>
+        <item>show in center</item>
+        <item>show at location（top|left，10dp，90dp）</item>
+    </string-array>
+
 </resources>

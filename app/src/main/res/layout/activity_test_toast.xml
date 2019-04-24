@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,27 +8,12 @@
 
     <include layout="@layout/copyright_toolbar" />
 
-    <LinearLayout
-        android:gravity="center"
+    <ListView
+        android:id="@+id/list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <Button style="@style/normal_btn"
-            android:onClick="onShowClick"
-            android:text="show"/>
-        <Button style="@style/normal_btn"
-            android:onClick="onShowAnotherClick"
-            android:text="showAnother"/>
-        <Button style="@style/normal_btn"
-            android:onClick="onShowAtTopClick"
-            android:text="showAtTop"/>
-        <Button style="@style/normal_btn"
-            android:onClick="onShowInCenterClick"
-            android:text="showInCenter"/>
-        <Button style="@style/normal_btn"
-            android:lineSpacingExtra="4dp"
-            android:onClick="onShowAtLocationClick"
-            android:text="showAtLocation\n（Top|Left，xOffset 10dp,yOffset 90dp）"/>
-
-    </LinearLayout>
+        android:layout_gravity="center"
+        android:background="#ffffff"
+        android:divider="#cccccc"
+        android:dividerHeight="0.5dp" />
 </LinearLayout>

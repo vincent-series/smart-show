@@ -24,14 +24,13 @@ public class MyApplication extends Application {
         sContext = this;
         SmartShow.init(this);
         SmartToast.globalSetting()
-                .dismissOnLeave(true);
+                .dismissOnLeave(false);
 
         SmartSnackbar.setting()
                 .backgroundColorRes(R.color.colorPrimary)
                 .dismissOnLeave(true);
 
         SmartTopbar.setting()
-                .backgroundColorRes(R.color.colorPrimary)
                 .msgTextColorRes(R.color.white)
                 .actionColorRes(R.color.colorAccent)
                 .dismissOnLeave(true);

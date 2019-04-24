@@ -1,34 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <include layout="@layout/copyright_toolbar"/>
-    <android.support.design.widget.CoordinatorLayout
-        android:id="@+id/coordinator"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <LinearLayout
-        android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/copyright_toolbar" />
+
+    <ListView
+        android:id="@+id/list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <Button
-            android:layout_width="150dp"
-            style="@style/normal_btn"
-            android:text="short snackbar"
-            android:onClick="onShortClick"/>
-
-        <Button
-            android:layout_width="150dp"
-            style="@style/normal_btn"
-            android:text="long snackbar"
-            android:onClick="onLongClick"/>
-        <Button
-            android:layout_width="150dp"
-            style="@style/normal_btn"
-            android:text="indefinite snackbar"
-            android:onClick="onIndefiniteClick"/>
-
-    </LinearLayout>
-    </android.support.design.widget.CoordinatorLayout>
+        android:background="#ffffff"
+        android:divider="#cccccc"
+        android:dividerHeight="0.5dp"
+        android:entries="@array/test_dialog_items" />
 </LinearLayout>

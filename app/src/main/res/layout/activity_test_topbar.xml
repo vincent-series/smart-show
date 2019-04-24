@@ -9,31 +9,12 @@
 
     <include layout="@layout/copyright_toolbar" />
 
-    <LinearLayout
-        android:gravity="center"
+    <ListView
+        android:divider="#cccccc"
+        android:dividerHeight="0.5dp"
+        android:entries="@array/test_dialog_items"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <Button
-            android:layout_width="150dp"
-            style="@style/normal_btn"
-            android:onClick="onShortClick"
-            android:text="short topbar" />
-
-        <Button
-            android:layout_width="150dp"
-            style="@style/normal_btn"
-            android:onClick="onLongClick"
-            android:text="long topbar"
-            />
-
-        <Button
-            android:layout_width="150dp"
-            style="@style/normal_btn"
-            android:onClick="onIndefinite"
-            android:text="indefinite topbar" />
-
-    </LinearLayout>
-
+        android:background="#ffffff"
+        android:id="@+id/list_view" />
 </LinearLayout>

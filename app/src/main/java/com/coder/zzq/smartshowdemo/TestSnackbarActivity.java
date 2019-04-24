@@ -5,16 +5,50 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import com.coder.zzq.smartshow.dialog.ClickListAdapter;
 import com.coder.zzq.smartshow.snackbar.SmartSnackbar;
+
+import java.util.Arrays;
 
 
 public class TestSnackbarActivity extends AppCompatActivity {
+    private ListView mListView;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_snackbar);
+        mListView = findViewById(R.id.list_view);
+        ClickListAdapter adapter = new ClickListAdapter();
+        adapter.setItemCenter(true);
+        adapter.setItems(Arrays.asList(
+                new String[]{
+                        "short snackbar",
+                        "long snackbar",
+                        "indefinite snackbar"
+                }
+        ));
+        mListView.setAdapter(adapter);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        onShortClick(view);
+                        break;
+                    case 1:
+                        onLongClick(view);
+                        break;
+                    case 2:
+                        onIndefiniteClick(view);
+                        break;
+                }
+            }
+        });
     }
 
     public void onNextPageClick(View view) {

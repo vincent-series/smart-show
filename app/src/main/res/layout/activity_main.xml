@@ -8,36 +8,12 @@
 
     <include layout="@layout/copyright_toolbar" />
 
-    <LinearLayout
+    <ListView
+        android:divider="#cccccc"
+        android:dividerHeight="0.5dp"
+        android:entries="@array/test_dialog_items"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <Button
-            style="@style/normal_btn"
-            android:text="Toast"
-            android:onClick="onToastClick"/>
-
-
-        <Button
-            style="@style/normal_btn"
-            android:text="TypeToast"
-            android:onClick="onTypeToastClick"/>
-
-        <Button
-            style="@style/normal_btn"
-            android:text="Snackbar"
-            android:onClick="onSnackbarClick"/>
-
-        <Button
-            style="@style/normal_btn"
-            android:text="TopBar"
-            android:onClick="onTopBarClick"/>
-
-        <Button
-            style="@style/normal_btn"
-            android:text="Dialog"
-            android:onClick="onDialogClick"/>
-    </LinearLayout>
+        android:background="#ffffff"
+        android:id="@+id/list_view" />
 </LinearLayout>

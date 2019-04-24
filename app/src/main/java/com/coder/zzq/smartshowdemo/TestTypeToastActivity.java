@@ -4,15 +4,68 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
+import com.coder.zzq.smartshow.dialog.ClickListAdapter;
 import com.coder.zzq.smartshow.toast.SmartToast;
 
+import java.util.Arrays;
+
 public class TestTypeToastActivity extends AppCompatActivity {
+    private ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_type_toast);
+        mListView = findViewById(R.id.list_view);
+        ClickListAdapter adapter = new ClickListAdapter();
+        adapter.setItemCenter(true);
+        adapter.setItems(Arrays.asList(
+                new String[]{
+                        "info",
+                        "warning",
+                        "success",
+                        "error",
+                        "fail",
+                        "complete",
+                        "forbid",
+                        "waiting"
+                }
+        ));
+        mListView.setAdapter(adapter);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        onInfoClick(view);
+                        break;
+                    case 1:
+                        onWarningClick(view);
+                        break;
+                    case 2:
+                        onSuccessClick(view);
+                        break;
+                    case 3:
+                        onErrorClick(view);
+                        break;
+                    case 4:
+                        onFailClick(view);
+                        break;
+                    case 5:
+                        onCompleteClick(view);
+                        break;
+                    case 6:
+                        onForbidClick(view);
+                        break;
+                    case 7:
+                        onWaitingClick(view);
+                        break;
+                }
+            }
+        });
     }
 
     public void onInfoClick(View view) {
