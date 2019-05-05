@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.support.v4.view.ViewCompat;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -104,6 +105,10 @@ public abstract class BaseToastManager {
     public void showToast() {
         applySetting();
         if (Utils.isNotificationPermitted()) {
+            ViewGroup parent = (ViewGroup) mToast.getView().getParent();
+            if (parent != null) {
+                parent.removeView(mToast.getView());
+            }
             mToast.show();
         } else {
             VirtualToastManager.get().show(getToastType(), mToast, mWindowParams);
