@@ -46,7 +46,9 @@ public class PlainToastManager extends BaseToastManager implements IPlainShow {
             mView = mToast.getView();
             if (mSrcBg == null) {
                 mSrcBg = mView.getBackground();
-                mSrcBg.mutate();
+                if (mSrcBg != null) {
+                    mSrcBg.mutate();
+                }
             }
             mMsgView = mView.findViewById(android.R.id.message);
         }
@@ -79,6 +81,10 @@ public class PlainToastManager extends BaseToastManager implements IPlainShow {
         int bgMode = ToastDelegate.get().getPlainSetting().getBgMode();
         switch (bgMode) {
             case IPlainToastSetting.BG_MODE_SRC:
+                if (mSrcBg == null) {
+                    mSrcBg = Utils.getDrawableFromRes(android.R.drawable.toast_frame);
+                    mSrcBg.mutate();
+                }
                 ViewCompat.setBackground(mView, mSrcBg);
                 break;
             case IPlainToastSetting.BG_MODE_COLOR:
