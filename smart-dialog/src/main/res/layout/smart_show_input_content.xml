@@ -16,6 +16,7 @@
         android:padding="4dp"
         android:selectAllOnFocus="true"
         android:textColor="#333333"
+        android:textColorHint="@color/default_edt_hint_color"
         android:textSize="15sp" />
 
     <TextView

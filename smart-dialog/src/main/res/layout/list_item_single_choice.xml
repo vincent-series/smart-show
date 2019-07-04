@@ -2,6 +2,7 @@
 <CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/list_item"
     android:textSize="14sp"
+    android:textColor="#333333"
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:drawablePadding="16dp"
