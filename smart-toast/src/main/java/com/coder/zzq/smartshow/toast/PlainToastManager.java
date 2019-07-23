@@ -209,6 +209,7 @@ public class PlainToastManager extends BaseToastManager implements IPlainShow {
         updateToast();
         mToast.setGravity(mGravity, mXOffset, mYOffset);
         mToast.setDuration(mDuration);
+        needInvokeShow = needInvokeShow && !isShortInterval();
         if (needInvokeShow) {
             showToast();
         }

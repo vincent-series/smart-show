@@ -115,6 +115,7 @@ public class TypeToastManager extends BaseToastManager implements ITypeShow {
 
         mToast.setGravity(Gravity.CENTER, 0, 0);
         mToast.setDuration(mDuration);
+        needInvokeShow = needInvokeShow && !isShortInterval();
         if (needInvokeShow) {
             showToast();
         }

@@ -25,6 +25,7 @@ public abstract class BaseToastManager {
     protected TextView mMsgView;
     protected Object mTn;
     protected WindowManager.LayoutParams mWindowParams;
+    protected long mLastShowTime;
 
 
     public BaseToastManager() {
@@ -114,10 +115,14 @@ public abstract class BaseToastManager {
         } else {
             VirtualToastManager.get().show(getToastType(), mToast, mWindowParams);
         }
+        mLastShowTime = System.currentTimeMillis();
     }
 
     protected boolean isSdk25() {
         return Build.VERSION.SDK_INT == Build.VERSION_CODES.N_MR1;
     }
 
+    protected boolean isShortInterval(){
+        return System.currentTimeMillis() - mLastShowTime < 100;
+    }
 }
