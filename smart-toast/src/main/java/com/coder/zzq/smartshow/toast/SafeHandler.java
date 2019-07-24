@@ -17,6 +17,8 @@ class SafeHandler extends Handler {
         try {
             super.dispatchMessage(msg);
         } catch (WindowManager.BadTokenException e) {
+        } catch (Exception e) {
+
         }
     }
 
