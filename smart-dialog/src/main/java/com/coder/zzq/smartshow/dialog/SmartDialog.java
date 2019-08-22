@@ -7,10 +7,16 @@ import android.support.v4.app.Fragment;
 import android.view.WindowManager;
 
 import com.coder.zzq.smartshow.core.EasyLogger;
+import com.coder.zzq.smartshow.core.SmartShow;
 import com.coder.zzq.smartshow.core.Utils;
 
 public abstract class SmartDialog<NestedDialog extends Dialog> {
+    static {
+        SmartShow.setDialogCallback(new DialogCallback());
+    }
+
     protected NestedDialog mNestedDialog;
+    protected Activity mOwnerActivity;
 
     public SmartDialog() {
 
@@ -27,30 +33,29 @@ public abstract class SmartDialog<NestedDialog extends Dialog> {
 
     private boolean show(Activity activity, boolean canUpdateUI) {
         if (!canUpdateUI) {
-            EasyLogger.d("do nothing but recycle when conditions not available!");
-            mNestedDialog = null;
+            EasyLogger.d("do nothing when the condition is not met!");
             return false;
         }
 
-        if (mNestedDialog == null) {
-            mNestedDialog = Utils.requireNonNull(createDialog(activity), "the method createDialog must return a non-null dialog!");
+        if (mNestedDialog == null || mOwnerActivity != activity) {
+            mOwnerActivity = activity;
+            mNestedDialog = Utils.requireNonNull(createDialog(mOwnerActivity), "the method createDialog must return a non-null dialog!");
+            DialogRecycleManager.putDialog(this, mOwnerActivity);
             EasyLogger.d("create a new dialog:\n " + mNestedDialog);
         } else {
             resetDialogWhenShowAgain(mNestedDialog);
             EasyLogger.d("reuse dialog:\n " + mNestedDialog);
         }
 
-        if (mNestedDialog != null) {
-            try {
-                mNestedDialog.show();
-                return true;
-            } catch (WindowManager.BadTokenException e) {
-                EasyLogger.e("BadToken has happened when show dialog: \n" + mNestedDialog.getClass().getSimpleName());
-                return false;
-            }
+
+        try {
+            mNestedDialog.show();
+            return true;
+        } catch (WindowManager.BadTokenException e) {
+            EasyLogger.e("BadToken has happened when show dialog: \n" + mNestedDialog.getClass().getSimpleName());
+            return false;
         }
 
-        return false;
     }
 
     @NonNull
@@ -58,6 +63,12 @@ public abstract class SmartDialog<NestedDialog extends Dialog> {
 
     protected void resetDialogWhenShowAgain(NestedDialog dialog) {
 
+    }
+
+    protected void recycle() {
+        mOwnerActivity = null;
+        mNestedDialog = null;
+        EasyLogger.d("the dialog:" + Utils.getObjectDesc(this) + "has recycled.");
     }
 
     public boolean dismiss() {
