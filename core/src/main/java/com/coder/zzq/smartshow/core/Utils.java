@@ -162,4 +162,7 @@ public class Utils {
         return SmartShow.getContext().getResources().getDisplayMetrics().heightPixels;
     }
 
+    public static String getObjectDesc(Object obj) {
+        return obj == null ? "null" : obj.getClass().getSimpleName() + obj.hashCode();
+    }
 }
