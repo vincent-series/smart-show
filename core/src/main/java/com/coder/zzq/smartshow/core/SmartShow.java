@@ -74,7 +74,6 @@ public final class SmartShow {
                     sTopbarCallback.recycleOnDestroy(activity);
                 }
                 if (sDialogCallback != null) {
-                    EasyLogger.d("recycle dialog");
                     sDialogCallback.recycleOnDestroy(activity);
                 }
             }
