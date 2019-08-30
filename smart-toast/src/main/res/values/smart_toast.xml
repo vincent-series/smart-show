@@ -6,8 +6,8 @@
     <item name="custom_toast_msg" type="id" />
 
     <style name="type_info_toast_anim">
-        <item name="android:windowEnterAnimation">@anim/type_info_toast_enter</item>
-        <item name="android:windowExitAnimation">@anim/type_info_toast_exit</item>
+        <item name="android:windowEnterAnimation">@anim/emotion_toast_enter</item>
+        <item name="android:windowExitAnimation">@anim/emotion_toast_exit</item>
     </style>
 
     <style name="smart_show_virtual_toast_dialog" parent="Theme.AppCompat.Light.NoActionBar">

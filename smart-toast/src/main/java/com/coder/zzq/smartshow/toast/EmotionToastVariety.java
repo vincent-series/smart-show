@@ -25,7 +25,7 @@ public class EmotionToastVariety extends AbstractToastVariety implements IEmotio
     @Override
     protected Toast createToast() {
         mToast = new Toast(Toolkit.getContext());
-        mView = LayoutInflater.from(Toolkit.getContext()).inflate(R.layout.layout_type_info, null);
+        mView = LayoutInflater.from(Toolkit.getContext()).inflate(R.layout.layout_emotion_toast, null);
         mMsgView = mView.findViewById(R.id.type_info_message);
         mIconView = mView.findViewById(R.id.type_info_icon);
         mToast.setView(mView);

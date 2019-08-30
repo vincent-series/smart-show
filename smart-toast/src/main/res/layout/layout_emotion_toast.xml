@@ -5,7 +5,7 @@
     android:minWidth="148dp"
     android:paddingTop="16dp"
     android:paddingBottom="10dp"
-    android:background="@drawable/smart_show_type_info_toast_bg">
+    android:background="@drawable/smart_show_emotion_toast_bg">
     <ImageView
         android:layout_gravity="center_horizontal|top"
         android:id="@+id/type_info_icon"
