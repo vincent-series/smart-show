@@ -11,7 +11,7 @@
         android:id="@+id/type_info_icon"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:src="@drawable/type_info_error"/>
+        android:src="@drawable/emotion_error"/>
 
     <TextView
         android:lineSpacingExtra="2dp"
