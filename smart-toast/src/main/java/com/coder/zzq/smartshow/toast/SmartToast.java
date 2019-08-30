@@ -1,9 +1,6 @@
 package com.coder.zzq.smartshow.toast;
 
-import android.support.annotation.DrawableRes;
-import android.support.annotation.StringRes;
-
-import com.coder.zzq.smartshow.core.Utils;
+import com.coder.zzq.smartshow.core.SmartShow;
 
 /**
  * Created by 朱志强 on 2017/11/14.
@@ -11,381 +8,432 @@ import com.coder.zzq.smartshow.core.Utils;
 
 public final class SmartToast {
 
+    static {
+        SmartShow.setToastCallback(new ToastCallback());
+    }
+
+
     private SmartToast() {
 
     }
 
+
     public static void show(CharSequence msg) {
-
-        ToastDelegate.get().getPlainShowManager().show(msg);
+        ToastDelegate.get().getDefaultToastVariety().show(msg);
     }
 
-    public static void show(@StringRes int msg) {
-        show(Utils.getStringFromRes(msg));
+    public static void show(int msg) {
+        ToastDelegate.get().getDefaultToastVariety().show(msg);
     }
-
 
     public static void showAtTop(CharSequence msg) {
-
-        ToastDelegate.get().getPlainShowManager().showAtTop(msg);
+        ToastDelegate.get().getDefaultToastVariety().showAtTop(msg);
     }
 
-    public static void showAtTop(@StringRes int msg) {
-        showAtTop(Utils.getStringFromRes(msg));
+    public static void showAtTop(int msg) {
+        ToastDelegate.get().getDefaultToastVariety().showAtTop(msg);
     }
 
 
     public static void showInCenter(CharSequence msg) {
-
-        ToastDelegate.get().getPlainShowManager().showInCenter(msg);
+        ToastDelegate.get().getDefaultToastVariety().showInCenter(msg);
     }
 
-    public static void showInCenter(@StringRes int msg) {
 
-        showInCenter(Utils.getStringFromRes(msg));
+    public static void showInCenter(int msg) {
+        ToastDelegate.get().getDefaultToastVariety().showInCenter(msg);
     }
 
 
     public static void showAtLocation(CharSequence msg, int gravity, float xOffsetDp, float yOffsetDp) {
-
-        ToastDelegate.get().getPlainShowManager().showAtLocation(msg, gravity, xOffsetDp, yOffsetDp);
+        ToastDelegate.get().getDefaultToastVariety().showAtLocation(msg, gravity, xOffsetDp, yOffsetDp);
     }
 
-    public static void showAtLocation(@StringRes int msg, int gravity, float xOffsetDp, float yOffsetDp) {
 
-        showAtLocation(Utils.getStringFromRes(msg), gravity, xOffsetDp, yOffsetDp);
+    public static void showAtLocation(int msg, int gravity, float xOffsetDp, float yOffsetDp) {
+        ToastDelegate.get().getDefaultToastVariety().showAtLocation(msg, gravity, xOffsetDp, yOffsetDp);
     }
+
 
     public static void showLong(CharSequence msg) {
-
-        ToastDelegate.get().getPlainShowManager().showLong(msg);
+        ToastDelegate.get().getDefaultToastVariety().showLong(msg);
     }
 
-    public static void showLong(@StringRes int msg) {
 
-        showLong(Utils.getStringFromRes(msg));
+    public static void showLong(int msg) {
+        ToastDelegate.get().getDefaultToastVariety().showLong(msg);
     }
 
 
     public static void showLongAtTop(CharSequence msg) {
-
-        ToastDelegate.get().getPlainShowManager().showLongAtTop(msg);
+        ToastDelegate.get().getDefaultToastVariety().showLongAtTop(msg);
     }
 
-    public static void showLongAtTop(@StringRes int msg) {
-        showLongAtTop(Utils.getStringFromRes(msg));
+
+    public static void showLongAtTop(int msg) {
+        ToastDelegate.get().getDefaultToastVariety().showLongAtTop(msg);
     }
 
 
     public static void showLongInCenter(CharSequence msg) {
-
-        ToastDelegate.get().getPlainShowManager().showLongInCenter(msg);
+        ToastDelegate.get().getDefaultToastVariety().showLongInCenter(msg);
     }
 
-    public static void showLongInCenter(@StringRes int msg) {
 
-        showLongInCenter(Utils.getStringFromRes(msg));
+    public static void showLongInCenter(int msg) {
+        ToastDelegate.get().getDefaultToastVariety().showLongInCenter(msg);
     }
+
 
     public static void showLongAtLocation(CharSequence msg, int gravity, float xOffsetDp, float yOffsetDp) {
-
-        ToastDelegate.get().getPlainShowManager().showLongAtLocation(msg, gravity, xOffsetDp, yOffsetDp);
+        ToastDelegate.get().getDefaultToastVariety().showLongAtLocation(msg, gravity, xOffsetDp, yOffsetDp);
     }
 
-    public static void showLongAtLocation(@StringRes int msg, int gravity, float xOffsetDp, float yOffsetDp) {
-
-        showLongAtLocation(Utils.getStringFromRes(msg), gravity, xOffsetDp, yOffsetDp);
+    public static void showLongAtLocation(int msg, int gravity, float xOffsetDp, float yOffsetDp) {
+        ToastDelegate.get().getDefaultToastVariety().showLongAtLocation(msg, gravity, xOffsetDp, yOffsetDp);
     }
+
 
     public static void info(CharSequence msg) {
-
-        ToastDelegate.get().getTypeShowManager().info(msg);
+        ToastDelegate.get().getEmotionToastVariety().info(msg);
     }
 
-    public static void info(@StringRes int msg) {
 
-        info(Utils.getStringFromRes(msg));
+    public static void info(int msg) {
+        ToastDelegate.get().getEmotionToastVariety().info(msg);
     }
 
-    public static void info(CharSequence msg, @DrawableRes int iconRes) {
 
-        ToastDelegate.get().getTypeShowManager().info(msg, iconRes);
+    public static void info(int msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().info(msg, iconRes);
     }
 
-    public static void info(@StringRes int msg, @DrawableRes int iconRes) {
 
-        info(Utils.getStringFromRes(msg), iconRes);
+    public static void info(CharSequence msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().info(msg, iconRes);
     }
 
 
     public static void infoLong(CharSequence msg) {
-        ToastDelegate.get().getTypeShowManager().infoLong(msg);
+        ToastDelegate.get().getEmotionToastVariety().infoLong(msg);
     }
 
-    public static void infoLong(@StringRes int msg) {
-        infoLong(Utils.getStringFromRes(msg));
+
+    public static void infoLong(int msg) {
+        ToastDelegate.get().getEmotionToastVariety().infoLong(msg);
     }
 
-    public static void infoLong(CharSequence msg, @DrawableRes int iconRes) {
-        ToastDelegate.get().getTypeShowManager().infoLong(msg, iconRes);
+
+    public static void infoLong(int msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().infoLong(msg, iconRes);
     }
 
-    public static void infoLong(@StringRes int msg, @DrawableRes int iconRes) {
-        infoLong(Utils.getStringFromRes(msg), iconRes);
+
+    public static void infoLong(CharSequence msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().infoLong(msg, iconRes);
     }
+
 
     public static void warning(CharSequence msg) {
-        ToastDelegate.get().getTypeShowManager().warning(msg);
+        ToastDelegate.get().getEmotionToastVariety().warning(msg);
     }
 
-    public static void warning(@StringRes int msg) {
-        warning(Utils.getStringFromRes(msg));
+
+    public static void warning(int msg) {
+        ToastDelegate.get().getEmotionToastVariety().warning(msg);
     }
 
-    public static void warning(CharSequence msg, @DrawableRes int iconRes) {
-        ToastDelegate.get().getTypeShowManager().warning(msg, iconRes);
+
+    public static void warning(int msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().warning(msg, iconRes);
     }
 
-    public static void warning(@StringRes int msg, @DrawableRes int iconRes) {
-        warning(Utils.getStringFromRes(msg), iconRes);
+
+    public static void warning(CharSequence msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().warning(msg, iconRes);
     }
+
 
     public static void warningLong(CharSequence msg) {
-        ToastDelegate.get().getTypeShowManager().warningLong(msg);
+        ToastDelegate.get().getEmotionToastVariety().warningLong(msg);
     }
 
-    public static void warningLong(@StringRes int msg) {
-        warningLong(Utils.getStringFromRes(msg));
+
+    public static void warningLong(int msg) {
+        ToastDelegate.get().getEmotionToastVariety().warningLong(msg);
     }
 
-    public static void warningLong(CharSequence msg, @DrawableRes int iconRes) {
-        ToastDelegate.get().getTypeShowManager().warningLong(msg, iconRes);
+
+    public static void warningLong(int msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().warningLong(msg, iconRes);
     }
 
-    public static void warningLong(@StringRes int msg, @DrawableRes int iconRes) {
-        warningLong(Utils.getStringFromRes(msg), iconRes);
+
+    public static void warningLong(CharSequence msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().warningLong(msg, iconRes);
     }
 
 
     public static void success(CharSequence msg) {
-        ToastDelegate.get().getTypeShowManager().success(msg);
+        ToastDelegate.get().getEmotionToastVariety().success(msg);
     }
 
-    public static void success(@StringRes int msg) {
-        success(Utils.getStringFromRes(msg));
+
+    public static void success(int msg) {
+        ToastDelegate.get().getEmotionToastVariety().success(msg);
     }
 
-    public static void success(CharSequence msg, @DrawableRes int iconRes) {
-        ToastDelegate.get().getTypeShowManager().success(msg, iconRes);
+
+    public static void success(int msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().success(msg, iconRes);
     }
 
-    public static void success(@StringRes int msg, @DrawableRes int iconRes) {
-        success(Utils.getStringFromRes(msg), iconRes);
+
+    public static void success(CharSequence msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().success(msg, iconRes);
     }
 
 
     public static void successLong(CharSequence msg) {
-        ToastDelegate.get().getTypeShowManager().successLong(msg);
+        ToastDelegate.get().getEmotionToastVariety().successLong(msg);
     }
 
-    public static void successLong(@StringRes int msg) {
-        successLong(Utils.getStringFromRes(msg));
+
+    public static void successLong(int msg) {
+        ToastDelegate.get().getEmotionToastVariety().successLong(msg);
     }
 
-    public static void successLong(CharSequence msg, @DrawableRes int iconRes) {
-        ToastDelegate.get().getTypeShowManager().successLong(msg, iconRes);
+
+    public static void successLong(int msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().successLong(msg, iconRes);
     }
 
-    public static void successLong(@StringRes int msg, @DrawableRes int iconRes) {
-        successLong(Utils.getStringFromRes(msg), iconRes);
+
+    public static void successLong(CharSequence msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().successLong(msg, iconRes);
     }
+
 
     public static void error(CharSequence msg) {
-        ToastDelegate.get().getTypeShowManager().error(msg);
+        ToastDelegate.get().getEmotionToastVariety().error(msg);
     }
 
-    public static void error(@StringRes int msg) {
-        error(Utils.getStringFromRes(msg));
+
+    public static void error(int msg) {
+        ToastDelegate.get().getEmotionToastVariety().error(msg);
     }
 
-    public static void error(CharSequence msg, @DrawableRes int iconRes) {
-        ToastDelegate.get().getTypeShowManager().error(msg, iconRes);
+
+    public static void error(int msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().error(msg, iconRes);
     }
 
-    public static void error(@StringRes int msg, @DrawableRes int iconRes) {
-        error(Utils.getStringFromRes(msg), iconRes);
+
+    public static void error(CharSequence msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().error(msg, iconRes);
     }
 
 
     public static void errorLong(CharSequence msg) {
-        ToastDelegate.get().getTypeShowManager().errorLong(msg);
+        ToastDelegate.get().getEmotionToastVariety().errorLong(msg);
     }
 
-    public static void errorLong(@StringRes int msg) {
-        errorLong(Utils.getStringFromRes(msg));
+
+    public static void errorLong(int msg) {
+        ToastDelegate.get().getEmotionToastVariety().errorLong(msg);
     }
 
-    public static void errorLong(CharSequence msg, @DrawableRes int iconRes) {
-        ToastDelegate.get().getTypeShowManager().errorLong(msg, iconRes);
+
+    public static void errorLong(int msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().errorLong(msg, iconRes);
     }
 
-    public static void errorLong(@StringRes int msg, @DrawableRes int iconRes) {
-        errorLong(Utils.getStringFromRes(msg), iconRes);
+
+    public static void errorLong(CharSequence msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().errorLong(msg, iconRes);
     }
+
 
     public static void fail(CharSequence msg) {
-        ToastDelegate.get().getTypeShowManager().fail(msg);
+        ToastDelegate.get().getEmotionToastVariety().fail(msg);
     }
 
-    public static void fail(@StringRes int msg) {
-        fail(Utils.getStringFromRes(msg));
+
+    public static void fail(int msg) {
+        ToastDelegate.get().getEmotionToastVariety().fail(msg);
     }
 
-    public static void fail(CharSequence msg, @DrawableRes int iconRes) {
-        ToastDelegate.get().getTypeShowManager().fail(msg, iconRes);
+
+    public static void fail(int msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().fail(msg, iconRes);
     }
 
-    public static void fail(@StringRes int msg, @DrawableRes int iconRes) {
-        fail(Utils.getStringFromRes(msg), iconRes);
+
+    public static void fail(CharSequence msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().fail(msg, iconRes);
     }
+
 
     public static void failLong(CharSequence msg) {
-        ToastDelegate.get().getTypeShowManager().failLong(msg);
+        ToastDelegate.get().getEmotionToastVariety().failLong(msg);
     }
 
-    public static void failLong(@StringRes int msg) {
-        failLong(Utils.getStringFromRes(msg));
+
+    public static void failLong(int msg) {
+        ToastDelegate.get().getEmotionToastVariety().failLong(msg);
     }
 
-    public static void failLong(CharSequence msg, @DrawableRes int iconRes) {
-        ToastDelegate.get().getTypeShowManager().failLong(msg, iconRes);
+
+    public static void failLong(int msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().failLong(msg, iconRes);
     }
 
-    public static void failLong(@StringRes int msg, @DrawableRes int iconRes) {
-        failLong(Utils.getStringFromRes(msg), iconRes);
+
+    public static void failLong(CharSequence msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().failLong(msg, iconRes);
     }
+
 
     public static void complete(CharSequence msg) {
-        ToastDelegate.get().getTypeShowManager().complete(msg);
+        ToastDelegate.get().getEmotionToastVariety().complete(msg);
     }
 
-    public static void complete(@StringRes int msg) {
-        complete(Utils.getStringFromRes(msg));
+
+    public static void complete(int msg) {
+        ToastDelegate.get().getEmotionToastVariety().complete(msg);
     }
 
-    public static void complete(CharSequence msg, @DrawableRes int iconRes) {
-        ToastDelegate.get().getTypeShowManager().complete(msg, iconRes);
+
+    public static void complete(int msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().complete(msg, iconRes);
     }
 
-    public static void complete(@StringRes int msg, @DrawableRes int iconRes) {
-        complete(Utils.getStringFromRes(msg), iconRes);
+
+    public static void complete(CharSequence msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().complete(msg, iconRes);
     }
 
     public static void completeLong(CharSequence msg) {
-        ToastDelegate.get().getTypeShowManager().completeLong(msg);
+        ToastDelegate.get().getEmotionToastVariety().completeLong(msg);
     }
 
-    public static void completeLong(@StringRes int msg) {
-        completeLong(Utils.getStringFromRes(msg));
+
+    public static void completeLong(int msg) {
+        ToastDelegate.get().getEmotionToastVariety().completeLong(msg);
     }
 
-    public static void completeLong(CharSequence msg, @DrawableRes int iconRes) {
-        ToastDelegate.get().getTypeShowManager().completeLong(msg, iconRes);
+
+    public static void completeLong(int msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().completeLong(msg, iconRes);
     }
 
-    public static void completeLong(@StringRes int msg, @DrawableRes int iconRes) {
-        completeLong(Utils.getStringFromRes(msg), iconRes);
+
+    public static void completeLong(CharSequence msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().completeLong(msg, iconRes);
     }
+
 
     public static void forbid(CharSequence msg) {
-        ToastDelegate.get().getTypeShowManager().forbid(msg);
+        ToastDelegate.get().getEmotionToastVariety().forbid(msg);
     }
 
-    public static void forbid(@StringRes int msg) {
-        forbid(Utils.getStringFromRes(msg));
+
+    public static void forbid(int msg) {
+        ToastDelegate.get().getEmotionToastVariety().forbid(msg);
     }
 
-    public static void forbid(CharSequence msg, @DrawableRes int iconRes) {
-        ToastDelegate.get().getTypeShowManager().forbid(msg, iconRes);
+
+    public static void forbid(int msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().forbid(msg, iconRes);
     }
 
-    public static void forbid(@StringRes int msg, @DrawableRes int iconRes) {
-        forbid(Utils.getStringFromRes(msg), iconRes);
+    public static void forbid(CharSequence msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().forbid(msg, iconRes);
     }
+
 
     public static void forbidLong(CharSequence msg) {
-        ToastDelegate.get().getTypeShowManager().forbidLong(msg);
+        ToastDelegate.get().getEmotionToastVariety().forbidLong(msg);
     }
 
-    public static void forbidLong(@StringRes int msg) {
-        forbidLong(Utils.getStringFromRes(msg));
+    public static void forbidLong(int msg) {
+        ToastDelegate.get().getEmotionToastVariety().forbidLong(msg);
     }
 
-    public static void forbidLong(CharSequence msg, @DrawableRes int iconRes) {
-        ToastDelegate.get().getTypeShowManager().forbidLong(msg, iconRes);
+
+    public static void forbidLong(int msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().forbidLong(msg, iconRes);
     }
 
-    public static void forbidLong(@StringRes int msg, @DrawableRes int iconRes) {
-        forbidLong(Utils.getStringFromRes(msg), iconRes);
+
+    public static void forbidLong(CharSequence msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().forbidLong(msg, iconRes);
     }
 
 
     public static void waiting(CharSequence msg) {
-        ToastDelegate.get().getTypeShowManager().waiting(msg);
+        ToastDelegate.get().getEmotionToastVariety().waiting(msg);
     }
 
-    public static void waiting(@StringRes int msg) {
-        waiting(Utils.getStringFromRes(msg));
+
+    public static void waiting(int msg) {
+        ToastDelegate.get().getEmotionToastVariety().waiting(msg);
     }
 
-    public static void waiting(CharSequence msg, @DrawableRes int iconRes) {
-        ToastDelegate.get().getTypeShowManager().waiting(msg, iconRes);
+
+    public static void waiting(int msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().waiting(msg, iconRes);
     }
 
-    public static void waiting(@StringRes int msg, @DrawableRes int iconRes) {
-        waiting(Utils.getStringFromRes(msg), iconRes);
+
+    public static void waiting(CharSequence msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().waiting(msg, iconRes);
     }
+
 
     public static void waitingLong(CharSequence msg) {
-        ToastDelegate.get().getTypeShowManager().waitingLong(msg);
+        ToastDelegate.get().getEmotionToastVariety().waitingLong(msg);
     }
 
-    public static void waitingLong(@StringRes int msg) {
-        waitingLong(Utils.getStringFromRes(msg));
+
+    public static void waitingLong(int msg) {
+        ToastDelegate.get().getEmotionToastVariety().waitingLong(msg);
     }
 
-    public static void waitingLong(CharSequence msg, @DrawableRes int iconRes) {
-        ToastDelegate.get().getTypeShowManager().waitingLong(msg, iconRes);
+
+    public static void waitingLong(int msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().waitingLong(msg, iconRes);
     }
 
-    public static void waitingLong(@StringRes int msg, @DrawableRes int iconRes) {
-        waitingLong(Utils.getStringFromRes(msg), iconRes);
+
+    public static void waitingLong(CharSequence msg, int iconRes) {
+        ToastDelegate.get().getEmotionToastVariety().waitingLong(msg, iconRes);
     }
+
+
+    public static ITextShow get(int tag) {
+        return ToastDelegate.get().getToastVarietyByTag(tag);
+    }
+
+
+    public static <T> T variety(int tag) {
+
+        return ToastDelegate.get().getToastVarietyByTag(tag);
+    }
+
 
     public static boolean isShowing() {
-        return ToastDelegate.get().isPlainShowing() || ToastDelegate.get().isTypeShowing();
+        return ToastDelegate.hasCreated() && ToastDelegate.get().isShowing();
     }
 
     public static void dismiss() {
-        if (ToastDelegate.get().isPlainShowing()) {
-            ToastDelegate.get().getPlainShowManager().dismiss();
-        }
-
-        if (ToastDelegate.get().isTypeShowing()) {
-            ToastDelegate.get().getTypeShowManager().dismiss();
+        if (ToastDelegate.hasCreated()) {
+            ToastDelegate.get().dismiss();
         }
     }
 
-    public static ITypeToastSetting typeSetting() {
-        return ToastDelegate.get().createTypeSetting();
-    }
 
-    public static IPlainToastSetting plainSetting() {
-        return ToastDelegate.get().createPlainSetting();
+    public static ISetting setting() {
+        return ToastDelegate.get().setting();
     }
-
-    public static IGlobalSetting globalSetting() {
-        return ToastDelegate.get().createGlobalSetting();
-    }
-
 }
