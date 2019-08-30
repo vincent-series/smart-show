@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.coder.zzq.smartshow.core.Utils;
+import com.coder.zzq.toolkit.Utils;
 
 public abstract class MessageDialog<D extends NormalDialog> extends BranchDialog<D> {
     public static final int DISABLE_COLOR = Color.parseColor("#bbbbbb");

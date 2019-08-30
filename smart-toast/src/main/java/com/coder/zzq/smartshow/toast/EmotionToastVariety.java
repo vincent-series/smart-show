@@ -7,8 +7,8 @@ import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.coder.zzq.smartshow.core.SmartShow;
-import com.coder.zzq.smartshow.core.Utils;
+import com.coder.zzq.toolkit.Toolkit;
+import com.coder.zzq.toolkit.Utils;
 
 import static com.coder.zzq.smartshow.toast.ToastTags.TOAST_TAG_EMOTION;
 
@@ -24,8 +24,8 @@ public class EmotionToastVariety extends AbstractToastVariety implements IEmotio
 
     @Override
     protected Toast createToast() {
-        mToast = new Toast(SmartShow.getContext());
-        mView = LayoutInflater.from(SmartShow.getContext()).inflate(R.layout.layout_type_info, null);
+        mToast = new Toast(Toolkit.getContext());
+        mView = LayoutInflater.from(Toolkit.getContext()).inflate(R.layout.layout_type_info, null);
         mMsgView = mView.findViewById(R.id.type_info_message);
         mIconView = mView.findViewById(R.id.type_info_icon);
         mToast.setView(mView);

@@ -4,6 +4,8 @@ import android.util.SparseArray;
 import android.widget.Toast;
 
 import com.coder.zzq.smartshow.core.SmartShow;
+import com.coder.zzq.toolkit.Toolkit;
+import com.coder.zzq.toolkit.Utils;
 
 public class ToastCache {
     private static ToastCache sToastCache;
@@ -54,7 +56,7 @@ public class ToastCache {
                     toastVariety = new TextToastVariety(toastTag) {
                         @Override
                         protected Toast createToast() {
-                            return mToastProvider.createCustomToast(toastTag, SmartShow.getContext());
+                            return mToastProvider.createCustomToast(toastTag, Toolkit.getContext());
                         }
                     };
                     break;

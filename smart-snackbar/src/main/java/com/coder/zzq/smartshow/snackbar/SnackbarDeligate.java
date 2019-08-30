@@ -13,7 +13,7 @@ import com.coder.zzq.smartshow.bar.core.BarDelegate;
 import com.coder.zzq.smartshow.bar.core.IBarShow;
 import com.coder.zzq.smartshow.bar.core.IBarShowCallback;
 import com.coder.zzq.smartshow.core.SmartShow;
-import com.coder.zzq.smartshow.core.Utils;
+import com.coder.zzq.toolkit.Utils;
 
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)

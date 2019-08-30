@@ -11,7 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.coder.zzq.smartshow.core.Utils;
+import com.coder.zzq.toolkit.Utils;
 
 public class LoadingDialog extends NormalDialog<LoadingDialog> {
     private static final int SIZE_MODE_LARGE = 0;

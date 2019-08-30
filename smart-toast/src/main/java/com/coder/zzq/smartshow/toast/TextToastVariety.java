@@ -4,7 +4,7 @@ package com.coder.zzq.smartshow.toast;
 import android.view.Gravity;
 import android.widget.Toast;
 
-import com.coder.zzq.smartshow.core.Utils;
+import com.coder.zzq.toolkit.Utils;
 
 public abstract class TextToastVariety extends AbstractToastVariety implements ITextShow {
 

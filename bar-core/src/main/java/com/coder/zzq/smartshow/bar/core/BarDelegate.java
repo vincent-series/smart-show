@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.coder.zzq.smartshow.core.Utils;
+import com.coder.zzq.toolkit.Utils;
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public abstract class BarDelegate<Bar, ViewParam, BarSetting extends BarSettingImpl> implements IBarShow, View.OnClickListener, Runnable {

@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.coder.zzq.smartshow.core.EasyLogger;
-import com.coder.zzq.smartshow.core.Utils;
-import com.coder.zzq.smartshow.core.lifecycle.ActivityStack;
+import com.coder.zzq.toolkit.Utils;
+import com.coder.zzq.toolkit.lifecycle.ActivityStack;
+import com.coder.zzq.toolkit.log.EasyLogger;
 
 public final class VirtualToastManager {
     public static final int DURATION_SHORT = 2000;

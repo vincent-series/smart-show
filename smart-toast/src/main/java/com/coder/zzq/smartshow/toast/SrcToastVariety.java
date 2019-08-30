@@ -3,6 +3,7 @@ package com.coder.zzq.smartshow.toast;
 import android.widget.Toast;
 
 import com.coder.zzq.smartshow.core.SmartShow;
+import com.coder.zzq.toolkit.Toolkit;
 
 import static com.coder.zzq.smartshow.toast.ToastTags.TOAST_TAG_SRC;
 
@@ -13,6 +14,6 @@ public class SrcToastVariety extends TextToastVariety {
 
     @Override
     protected Toast createToast() {
-        return Toast.makeText(SmartShow.getContext(), "", Toast.LENGTH_SHORT);
+        return Toast.makeText(Toolkit.getContext(), "", Toast.LENGTH_SHORT);
     }
 }

@@ -13,7 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.coder.zzq.smartshow.core.SmartShow;
-import com.coder.zzq.smartshow.core.Utils;
+import com.coder.zzq.toolkit.Toolkit;
+import com.coder.zzq.toolkit.Utils;
 
 public class SrcToastDecorator {
     private static final int BG_MODE_SRC = 0;
@@ -73,7 +74,7 @@ public class SrcToastDecorator {
 
 
     public Toast apply() {
-        Toast toast = Toast.makeText(SmartShow.getContext(), "", Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(Toolkit.getContext(), "", Toast.LENGTH_SHORT);
 
         switch (mBgMode) {
             case BG_MODE_COLOR:

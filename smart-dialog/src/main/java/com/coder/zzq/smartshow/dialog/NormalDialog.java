@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
-import com.coder.zzq.smartshow.core.Utils;
+import com.coder.zzq.toolkit.Utils;
 
 public abstract class NormalDialog<D extends NormalDialog> extends SmartDialog<AppCompatDialog> {
 

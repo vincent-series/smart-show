@@ -2,9 +2,9 @@ package com.coder.zzq.smartshow.dialog;
 
 import android.app.Activity;
 
-import com.coder.zzq.smartshow.core.EasyLogger;
-import com.coder.zzq.smartshow.core.Utils;
 import com.coder.zzq.smartshow.core.lifecycle.IDialogCallback;
+import com.coder.zzq.toolkit.Utils;
+import com.coder.zzq.toolkit.log.EasyLogger;
 
 public class DialogCallback implements IDialogCallback {
     @Override

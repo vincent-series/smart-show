@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.coder.zzq.smartshow.core.Utils;
+import com.coder.zzq.toolkit.Utils;
 
 public abstract class TitleBranchDialog<D extends NormalDialog> extends BranchDialog<D> {
     protected CharSequence mTitle;

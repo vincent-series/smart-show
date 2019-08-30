@@ -3,8 +3,8 @@ package com.coder.zzq.smartshow.dialog;
 import android.app.Activity;
 import android.util.SparseArray;
 
-import com.coder.zzq.smartshow.core.EasyLogger;
-import com.coder.zzq.smartshow.core.Utils;
+import com.coder.zzq.toolkit.Utils;
+import com.coder.zzq.toolkit.log.EasyLogger;
 
 import java.util.HashSet;
 import java.util.Iterator;

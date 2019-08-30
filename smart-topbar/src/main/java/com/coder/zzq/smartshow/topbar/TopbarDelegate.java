@@ -16,9 +16,9 @@ import com.coder.zzq.smartshow.bar.core.BarDelegate;
 import com.coder.zzq.smartshow.bar.core.IBarShow;
 import com.coder.zzq.smartshow.bar.core.IBarShowCallback;
 import com.coder.zzq.smartshow.core.SmartShow;
-import com.coder.zzq.smartshow.core.Utils;
 import com.coder.zzq.smartshow.topbar.view.BaseTopBar;
 import com.coder.zzq.smartshow.topbar.view.TopBar;
+import com.coder.zzq.toolkit.Utils;
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public final class TopbarDelegate extends BarDelegate<TopBar, TopBar.TopbarLayout, TopbarSettingImpl> {

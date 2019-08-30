@@ -6,9 +6,9 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.WindowManager;
 
-import com.coder.zzq.smartshow.core.EasyLogger;
 import com.coder.zzq.smartshow.core.SmartShow;
-import com.coder.zzq.smartshow.core.Utils;
+import com.coder.zzq.toolkit.Utils;
+import com.coder.zzq.toolkit.log.EasyLogger;
 
 public abstract class SmartDialog<NestedDialog extends Dialog> {
     static {

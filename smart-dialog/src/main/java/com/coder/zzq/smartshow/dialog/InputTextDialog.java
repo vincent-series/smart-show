@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.coder.zzq.smartshow.core.Utils;
+import com.coder.zzq.toolkit.Utils;
 
 public class InputTextDialog extends SimpleBranchDialog<InputTextDialog> {
     public static int INPUT_NO_LIMIT = -1;

@@ -3,7 +3,7 @@ package com.coder.zzq.smartshow.bar.core;
 import android.graphics.Color;
 import android.support.annotation.ColorInt;
 
-import com.coder.zzq.smartshow.core.Utils;
+import com.coder.zzq.toolkit.Utils;
 
 
 public class BarSettingImpl<View, BarSetting> implements IBarSetting<View, BarSetting> {

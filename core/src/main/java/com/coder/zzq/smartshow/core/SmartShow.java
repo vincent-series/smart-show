@@ -4,19 +4,18 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
 
-import com.coder.zzq.smartshow.core.lifecycle.ActivityLifecycleCallback;
-import com.coder.zzq.smartshow.core.lifecycle.ActivityStack;
 import com.coder.zzq.smartshow.core.lifecycle.IBarCallback;
 import com.coder.zzq.smartshow.core.lifecycle.IDialogCallback;
 import com.coder.zzq.smartshow.core.lifecycle.IToastCallback;
 import com.coder.zzq.smartshow.core.lifecycle.ITopbarCallback;
+import com.coder.zzq.toolkit.Toolkit;
+import com.coder.zzq.toolkit.lifecycle.ActivityCallback;
 
 /**
  * Created by 朱志强 on 2018/08/19.
  */
 public final class SmartShow {
 
-    private static Application sApplication;
     private static IToastCallback sToastCallback;
     private static IBarCallback sSnackbarCallback;
     private static ITopbarCallback sTopbarCallback;
@@ -26,15 +25,13 @@ public final class SmartShow {
         if (application == null) {
             throw new NullPointerException("初始化SmartShow的application不可为null！");
         }
-        if (sApplication != null) {
-            return;
-        }
-        sApplication = application;
-        sApplication.registerActivityLifecycleCallbacks(new ActivityLifecycleCallback() {
+
+        Toolkit.init(application);
+
+        application.registerActivityLifecycleCallbacks(new ActivityCallback() {
             @Override
             public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
                 super.onActivityCreated(activity, savedInstanceState);
-                ActivityStack.push(activity);
                 if (sTopbarCallback != null) {
                     sTopbarCallback.adjustTopbarContainerIfNecessary(activity);
                 }
@@ -63,7 +60,6 @@ public final class SmartShow {
             @Override
             public void onActivityDestroyed(Activity activity) {
                 super.onActivityDestroyed(activity);
-                ActivityStack.pop(activity);
                 if (sToastCallback != null) {
                     sToastCallback.recycleOnDestroy(activity);
                 }
@@ -80,13 +76,6 @@ public final class SmartShow {
 
         });
 
-    }
-
-    public static Application getContext() {
-        if (sApplication == null) {
-            throw new NullPointerException("尚未初始化SmartShow:SmartShow.init(applicationContext)");
-        }
-        return sApplication;
     }
 
     public static void setToastCallback(IToastCallback toastCallback) {

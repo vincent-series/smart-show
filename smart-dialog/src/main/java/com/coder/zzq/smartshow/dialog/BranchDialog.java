@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatDialog;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.coder.zzq.smartshow.core.Utils;
+import com.coder.zzq.toolkit.Utils;
 
 public abstract class BranchDialog<D extends NormalDialog> extends NormalDialog<D> {
     protected FrameLayout mHeaderViewWrapper;

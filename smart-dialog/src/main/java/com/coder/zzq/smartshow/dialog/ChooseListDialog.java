@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 
-import com.coder.zzq.smartshow.core.Utils;
+import com.coder.zzq.toolkit.Utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;

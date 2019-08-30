@@ -1,6 +1,6 @@
 package com.coder.zzq.smartshow.toast;
 
-import com.coder.zzq.smartshow.core.Utils;
+import com.coder.zzq.toolkit.Utils;
 
 import static com.coder.zzq.smartshow.toast.ToastTags.TOAST_TAG_EMOTION;
 
