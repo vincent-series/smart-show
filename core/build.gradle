@@ -28,5 +28,5 @@ android {
 
 dependencies {
     compileOnly 'com.android.support:appcompat-v7:28.0.0'
-    api 'com.github.the-pig-of-jungle:toolkit:1.0.2'
+    api 'com.github.the-pig-of-jungle:toolkit:1.0.3'
 }
