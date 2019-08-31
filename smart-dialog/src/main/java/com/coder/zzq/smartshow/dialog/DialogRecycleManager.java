@@ -1,67 +1,46 @@
 package com.coder.zzq.smartshow.dialog;
 
 import android.app.Activity;
-import android.util.SparseArray;
 
-import com.coder.zzq.toolkit.Utils;
-import com.coder.zzq.toolkit.log.EasyLogger;
-
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 class DialogRecycleManager {
 
-    private static SparseArray<Set<SmartDialog>> sDialogContainer;
+    private static List<SmartDialog> sDialogSet;
 
-    public static void recycleDialogsOfActivity(Activity activity) {
-        if (activity == null || isEmpty()) {
+    public static void recycleDialogs(Activity activity) {
+
+        if (isEmpty()) {
             return;
         }
 
-        Set<SmartDialog> dialogs = getDialogContainer().get(activity.hashCode());
-
-        if (dialogs == null || dialogs.isEmpty()) {
-            return;
+        for (int index = sDialogSet.size() - 1; index >= 0; index--) {
+            SmartDialog dialog = sDialogSet.get(index);
+            if (dialog.recycle(activity)) {
+                sDialogSet.remove(index);
+            }
         }
-
-        Iterator<SmartDialog> iterator = dialogs.iterator();
-        while (iterator.hasNext()) {
-            SmartDialog dialog = iterator.next();
-            dialog.recycle();
-            iterator.remove();
-            EasyLogger.d("the dialog:" + Utils.getObjectDesc(dialog) + "has removed from the dialog collection of the activity:" + activity);
-        }
-
-        getDialogContainer().remove(activity.hashCode());
-        EasyLogger.d("the dialog collection of the activity(" + Utils.getObjectDesc(activity) + ")is removed.");
-        EasyLogger.d("the collections of the activity(" + Utils.getObjectDesc(activity) + ")is now:" + getDialogContainer().size());
     }
 
 
-    public static void putDialog(SmartDialog dialog, Activity activity) {
-        if (dialog == null || activity == null) {
+    public static void saveDialog(SmartDialog dialog) {
+        if (dialog == null) {
             return;
         }
-
-        Set<SmartDialog> dialogs = getDialogContainer().get(activity.hashCode());
-        if (dialogs == null) {
-            dialogs = new HashSet<>();
-            getDialogContainer().put(activity.hashCode(), dialogs);
-        }
-        dialogs.add(dialog);
+        getDialogSet().add(dialog);
     }
 
     public static boolean isEmpty() {
-        return sDialogContainer == null || sDialogContainer.size() == 0;
+        return sDialogSet == null || sDialogSet.size() == 0;
     }
 
 
-    private static SparseArray<Set<SmartDialog>> getDialogContainer() {
-        if (sDialogContainer == null) {
-            sDialogContainer = new SparseArray<>();
+    private static List<SmartDialog> getDialogSet() {
+        if (sDialogSet == null) {
+            sDialogSet = new ArrayList<>();
         }
-        return sDialogContainer;
+        return sDialogSet;
     }
 
 }

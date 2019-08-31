@@ -1,5 +1,6 @@
 package com.coder.zzq.smartshow.dialog;
 
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.ColorInt;
@@ -54,6 +55,19 @@ public class ChooseListDialog extends SimpleBranchDialog<ChooseListDialog> {
         mListView.clearChoices();
         mNeedUpdateChecked = true;
         ViewGroup.LayoutParams lp = mListView.getLayoutParams();
+        switch (Utils.screenOrientation()) {
+            case Configuration.ORIENTATION_PORTRAIT:
+                adjustHeightWhenScreenPortrait(lp);
+                break;
+            case Configuration.ORIENTATION_LANDSCAPE:
+                adjustHeightWhenScreenLandscape(lp);
+                break;
+        }
+        mListView.setLayoutParams(lp);
+        mChooseListAdapter.setItems(mItems);
+    }
+
+    private void adjustHeightWhenScreenPortrait(ViewGroup.LayoutParams lp) {
         if (mItems.size() < 4) {
             lp.height = Utils.dpToPx(50) * (mItems.size() + 2);
         } else if (mItems.size() > 5) {
@@ -61,10 +75,15 @@ public class ChooseListDialog extends SimpleBranchDialog<ChooseListDialog> {
         } else {
             lp.height = ListView.LayoutParams.WRAP_CONTENT;
         }
-        mListView.setLayoutParams(lp);
-        mChooseListAdapter.setItems(mItems);
     }
 
+    private void adjustHeightWhenScreenLandscape(ViewGroup.LayoutParams lp) {
+        if (mItems.size() <= 3) {
+            lp.height = Utils.dpToPx(50) * (mItems.size() + (3 - mItems.size()));
+        } else {
+            lp.height = Utils.dpToPx(50) * 3;
+        }
+    }
 
     public ChooseListDialog useCubeMarkWhenMultipleChoice(boolean useCubeMarkWhenMultipleChoose) {
         mUseCubeMarkWhenMultipleChoose = useCubeMarkWhenMultipleChoose;

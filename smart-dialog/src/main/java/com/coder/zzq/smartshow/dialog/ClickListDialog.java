@@ -42,10 +42,10 @@ public class ClickListDialog extends TitleBranchDialog<ClickListDialog> {
             return;
         }
         ViewGroup.LayoutParams lp = mListView.getLayoutParams();
-        if (mItems.size() <= 5) {
+        if (mItems.size() <= (Utils.isScreenPortrait() ? 5 : 4)) {
             lp.height = ListView.LayoutParams.WRAP_CONTENT;
         } else {
-            lp.height = Utils.dpToPx(50) * 5;
+            lp.height = Utils.dpToPx(50) * (Utils.isScreenPortrait() ? 5 : 4);
         }
         mListView.setLayoutParams(lp);
         mClickListAdapter.setItems(mItems);

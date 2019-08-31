@@ -10,7 +10,7 @@ public class DialogCallback implements IDialogCallback {
     @Override
     public void recycleOnDestroy(Activity activity) {
         EasyLogger.d("start recycling dialog of activity: " + Utils.getObjectDesc(activity));
-        DialogRecycleManager.recycleDialogsOfActivity(activity);
+        DialogRecycleManager.recycleDialogs(activity);
         EasyLogger.d("complete recycling dialog of activity: " + Utils.getObjectDesc(activity));
     }
 }

@@ -16,10 +16,9 @@ public abstract class SmartDialog<NestedDialog extends Dialog> {
     }
 
     protected NestedDialog mNestedDialog;
-    protected Activity mOwnerActivity;
 
     public SmartDialog() {
-
+        DialogRecycleManager.saveDialog(this);
     }
 
     public boolean showInActivity(Activity activity) {
@@ -37,10 +36,10 @@ public abstract class SmartDialog<NestedDialog extends Dialog> {
             return false;
         }
 
-        if (mNestedDialog == null || mOwnerActivity != activity) {
-            mOwnerActivity = activity;
-            mNestedDialog = Utils.requireNonNull(createDialog(mOwnerActivity), "the method createDialog must return a non-null dialog!");
-            DialogRecycleManager.putDialog(this, mOwnerActivity);
+
+        if (mNestedDialog == null || mNestedDialog.getOwnerActivity() != activity) {
+            mNestedDialog = Utils.requireNonNull(createDialog(activity), "the method createDialog must return a non-null dialog!");
+            mNestedDialog.setOwnerActivity(activity);
             EasyLogger.d("create a new dialog:\n " + mNestedDialog);
         } else {
             resetDialogWhenShowAgain(mNestedDialog);
@@ -65,10 +64,15 @@ public abstract class SmartDialog<NestedDialog extends Dialog> {
 
     }
 
-    protected void recycle() {
-        mOwnerActivity = null;
-        mNestedDialog = null;
-        EasyLogger.d("the dialog:" + Utils.getObjectDesc(this) + "has recycled.");
+    protected boolean recycle(Activity activity) {
+        if (mNestedDialog != null && mNestedDialog.getOwnerActivity() == activity) {
+            mNestedDialog = null;
+            EasyLogger.d("the dialog:" + Utils.getObjectDesc(this) + "has recycled.");
+            return true;
+        }
+
+
+        return false;
     }
 
     public boolean dismiss() {
