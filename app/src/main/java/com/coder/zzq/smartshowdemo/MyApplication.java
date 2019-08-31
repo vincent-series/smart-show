@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.coder.zzq.smartshow.core.SmartShow;
 import com.coder.zzq.smartshow.snackbar.SmartSnackbar;
-import com.coder.zzq.smartshow.toast.IPlainToastSetting;
+
 import com.coder.zzq.smartshow.toast.SmartToast;
 import com.coder.zzq.smartshow.topbar.SmartTopbar;
 
@@ -23,8 +23,7 @@ public class MyApplication extends Application {
         super.onCreate();
         sContext = this;
         SmartShow.init(this);
-        SmartToast.globalSetting()
-                .dismissOnLeave(false);
+
 
         SmartSnackbar.setting()
                 .backgroundColorRes(R.color.colorPrimary)
