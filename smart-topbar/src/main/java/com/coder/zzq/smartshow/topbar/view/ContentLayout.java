@@ -1,18 +1,3 @@
-/*
- * Copyright (C) 2016 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.coder.zzq.smartshow.topbar.view;
 
 import android.content.Context;
@@ -40,10 +25,10 @@ public class ContentLayout extends LinearLayout implements
 
     public ContentLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        TypedArray a = context.obtainStyledAttributes(attrs, android.support.design.R.styleable.SnackbarLayout);
-        mMaxWidth = a.getDimensionPixelSize(android.support.design.R.styleable.SnackbarLayout_android_maxWidth, -1);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TopbarLayout);
+        mMaxWidth = a.getDimensionPixelSize(R.styleable.TopbarLayout_android_maxWidth, -1);
         mMaxInlineActionWidth = a.getDimensionPixelSize(
-                android.support.design.R.styleable.SnackbarLayout_maxActionInlineWidth, -1);
+                R.styleable.TopbarLayout_maxActionInlineWidth, -1);
         a.recycle();
     }
 
@@ -72,9 +57,9 @@ public class ContentLayout extends LinearLayout implements
         }
 
         final int multiLineVPadding = getResources().getDimensionPixelSize(
-                android.support.design.R.dimen.design_snackbar_padding_vertical_2lines);
+                R.dimen.topbar_padding_vertical_2lines);
         final int singleLineVPadding = getResources().getDimensionPixelSize(
-                android.support.design.R.dimen.design_snackbar_padding_vertical);
+                R.dimen.topbar_padding_vertical);
         final boolean isMultiLine = mMessageView.getLayout().getLineCount() > 1;
 
         boolean remeasure = false;

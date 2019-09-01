@@ -4,4 +4,23 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <item name="smart_show_top_bar_container" type="id" />
+
+    <style name="TextAppearance.Topbar.Message" parent="android:TextAppearance">
+        <item name="android:textSize">@dimen/design_snackbar_text_size</item>
+        <item name="android:textColor">?android:textColorPrimary</item>
+    </style>
+
+    <declare-styleable name="TopbarLayout">
+        <attr name="android:maxWidth" />
+        <attr name="elevation" />
+        <attr name="maxActionInlineWidth" format="dimension" />
+    </declare-styleable>
+    <dimen name="topbar_padding_vertical_2lines">24dp</dimen>
+    <dimen name="topbar_padding_vertical">14dp</dimen>
+
+    <dimen name="topbar_padding_horizontal">12dp</dimen>
+
+    <dimen name="topbar_extra_spacing_horizontal">0dp</dimen>
+
+    <integer name="topbar_text_max_lines">2</integer>
 </resources>

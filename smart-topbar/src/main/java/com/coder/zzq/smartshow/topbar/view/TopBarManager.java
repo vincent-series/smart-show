@@ -1,25 +1,8 @@
-/*
- * Copyright (C) 2015 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.coder.zzq.smartshow.topbar.view;
 
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.support.design.widget.Snackbar;
 
 import java.lang.ref.WeakReference;
 
@@ -87,7 +70,7 @@ public class TopBarManager {
             }
 
             if (mCurrentSnackbar != null && cancelSnackbarLocked(mCurrentSnackbar,
-                    Snackbar.Callback.DISMISS_EVENT_CONSECUTIVE)) {
+                    TopBar.Callback.DISMISS_EVENT_CONSECUTIVE)) {
                 // If we currently have a Snackbar, try and cancel it and wait in line
                 return;
             } else {
@@ -211,7 +194,7 @@ public class TopBarManager {
     }
 
     private void scheduleTimeoutLocked(SnackbarRecord r) {
-        if (r.duration == Snackbar.LENGTH_INDEFINITE) {
+        if (r.duration == TopBar.LENGTH_INDEFINITE) {
             // If we're set to indefinite, we don't want to set a timeout
             return;
         }
@@ -219,7 +202,7 @@ public class TopBarManager {
         int durationMs = LONG_DURATION_MS;
         if (r.duration > 0) {
             durationMs = r.duration;
-        } else if (r.duration == Snackbar.LENGTH_SHORT) {
+        } else if (r.duration == TopBar.LENGTH_SHORT) {
             durationMs = SHORT_DURATION_MS;
         }
         mHandler.removeCallbacksAndMessages(r);
@@ -229,7 +212,7 @@ public class TopBarManager {
     void handleTimeout(SnackbarRecord record) {
         synchronized (mLock) {
             if (mCurrentSnackbar == record || mNextSnackbar == record) {
-                cancelSnackbarLocked(record, Snackbar.Callback.DISMISS_EVENT_TIMEOUT);
+                cancelSnackbarLocked(record, TopBar.Callback.DISMISS_EVENT_TIMEOUT);
             }
         }
     }

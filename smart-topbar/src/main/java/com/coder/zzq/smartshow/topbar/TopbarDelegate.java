@@ -3,7 +3,6 @@ package com.coder.zzq.smartshow.topbar;
 import android.app.Activity;
 import android.os.Build;
 import android.support.annotation.RestrictTo;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewCompat;
 import android.view.Gravity;
 import android.view.View;
@@ -44,11 +43,11 @@ public final class TopbarDelegate extends BarDelegate<TopBar, TopBar.TopbarLayou
         mPageContext = activity;
         //取出DecorView
         ViewGroup decorView = activity == null ? null : (ViewGroup) activity.getWindow().getDecorView();
-        CoordinatorLayout topbarContainer = null;
+        FrameLayout topbarContainer = null;
         if (decorView != null) {
             topbarContainer = decorView.findViewById(R.id.smart_show_top_bar_container);
             if (topbarContainer == null) {
-                topbarContainer = new CoordinatorLayout(activity);
+                topbarContainer = new FrameLayout(activity);
                 topbarContainer.setId(R.id.smart_show_top_bar_container);
                 ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,

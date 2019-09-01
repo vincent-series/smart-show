@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2015 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.coder.zzq.smartshow.topbar.view;
 
 import android.animation.Animator;
@@ -28,22 +12,24 @@ import android.os.Message;
 import android.support.annotation.IntDef;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.SwipeDismissBehavior;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.WindowInsetsCompat;
 import android.util.AttributeSet;
-import android.view.Gravity;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.accessibility.AccessibilityManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.coder.zzq.smartshow.topbar.R;
 import com.coder.zzq.smartshow.topbar.utils.ThemeUtils;
+import com.coder.zzq.toolkit.Utils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -312,44 +298,42 @@ public abstract class BaseTopBar<B extends BaseTopBar<B>> {
 
     final void showView() {
         if (mView.getParent() == null) {
-            final ViewGroup.LayoutParams lp = mView.getLayoutParams();
-
-            if (lp instanceof CoordinatorLayout.LayoutParams) {
-                // If our LayoutParams are from a CoordinatorLayout, we'll setup our Behavior
-                final CoordinatorLayout.LayoutParams clp = (CoordinatorLayout.LayoutParams) lp;
-
-                final Behavior behavior = new Behavior();
-                behavior.setStartAlphaSwipeDistance(0.1f);
-                behavior.setEndAlphaSwipeDistance(0.6f);
-                behavior.setSwipeDirection(SwipeDismissBehavior.SWIPE_DIRECTION_START_TO_END);
-                behavior.setListener(new SwipeDismissBehavior.OnDismissListener() {
+            if (mView.getOnSwipeCallback() == null) {
+                mView.setOnSwipeCallback(new OnSwipeCallback() {
                     @Override
-                    public void onDismiss(View view) {
-                        view.setVisibility(View.GONE);
-                        dispatchDismiss(BaseCallback.DISMISS_EVENT_SWIPE);
+                    public void onSwipe() {
+                        Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.topbar_swipe);
+                        animation.setAnimationListener(new Animation.AnimationListener() {
+                            @Override
+                            public void onAnimationStart(Animation animation) {
+
+                            }
+
+                            @Override
+                            public void onAnimationEnd(Animation animation) {
+                                mView.setVisibility(View.GONE);
+                                dispatchDismiss(BaseCallback.DISMISS_EVENT_SWIPE);
+                            }
+
+                            @Override
+                            public void onAnimationRepeat(Animation animation) {
+
+                            }
+                        });
+                        mView.startAnimation(animation);
                     }
 
                     @Override
-                    public void onDragStateChanged(int state) {
-                        switch (state) {
-                            case SwipeDismissBehavior.STATE_DRAGGING:
-                            case SwipeDismissBehavior.STATE_SETTLING:
-                                // If the view is being dragged or settling, pause the timeout
-                                TopBarManager.getInstance().pauseTimeout(mManagerCallback);
-                                break;
-                            case SwipeDismissBehavior.STATE_IDLE:
-                                // If the view has been released and is idle, restore the timeout
-                                TopBarManager.getInstance()
-                                        .restoreTimeoutIfPaused(mManagerCallback);
-                                break;
-                        }
+                    public void onPauseTimeout() {
+                        TopBarManager.getInstance().pauseTimeout(mManagerCallback);
+                    }
+
+                    @Override
+                    public void onRestoreTimeout() {
+                        TopBarManager.getInstance().restoreTimeoutIfPaused(mManagerCallback);
                     }
                 });
-                clp.setBehavior(behavior);
-                // Also set the inset edge so that views can dodge the bar correctly
-                clp.insetEdge = Gravity.BOTTOM;
             }
-
             mTargetParent.addView(mView);
         }
 
@@ -537,9 +521,20 @@ public abstract class BaseTopBar<B extends BaseTopBar<B>> {
         return !mAccessibilityManager.isEnabled();
     }
 
-    static class TopbarBaseLayout extends FrameLayout {
+    public interface OnSwipeCallback {
+        void onSwipe();
+
+        void onPauseTimeout();
+
+        void onRestoreTimeout();
+    }
+
+    public static class TopbarBaseLayout extends FrameLayout {
         private BaseTopBar.OnLayoutChangeListener mOnLayoutChangeListener;
         private BaseTopBar.OnAttachStateChangeListener mOnAttachStateChangeListener;
+        private GestureDetector mGestureDetector;
+        private OnSwipeCallback mOnSwipeCallback;
+        private Button mActionBtn;
 
         TopbarBaseLayout(Context context) {
             this(context, null);
@@ -547,14 +542,47 @@ public abstract class BaseTopBar<B extends BaseTopBar<B>> {
 
         TopbarBaseLayout(Context context, AttributeSet attrs) {
             super(context, attrs);
-            TypedArray a = context.obtainStyledAttributes(attrs, android.support.design.R.styleable.SnackbarLayout);
-            if (a.hasValue(android.support.design.R.styleable.SnackbarLayout_elevation)) {
+            TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TopbarLayout);
+            if (a.hasValue(R.styleable.TopbarLayout_elevation)) {
                 ViewCompat.setElevation(this, a.getDimensionPixelSize(
-                        android.support.design.R.styleable.SnackbarLayout_elevation, 0));
+                        R.styleable.TopbarLayout_elevation, 0));
             }
             a.recycle();
 
             setClickable(true);
+            mGestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
+                @Override
+                public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                    if (isOutOfActionBtn(e1) && e2.getX() - e1.getX() > Utils.dpToPx(20)) {
+                        mOnSwipeCallback.onSwipe();
+                    }
+                    return true;
+                }
+            });
+        }
+
+        private boolean isOutOfActionBtn(MotionEvent e1) {
+            if (mActionBtn == null) {
+                mActionBtn = findViewById(R.id.topbar_action);
+            }
+            return (mActionBtn.getVisibility() != View.VISIBLE)
+                    || e1.getX() < mActionBtn.getX();
+        }
+
+
+        @Override
+        public boolean dispatchTouchEvent(MotionEvent ev) {
+            switch (ev.getActionMasked()) {
+                case MotionEvent.ACTION_DOWN:
+                    mOnSwipeCallback.onPauseTimeout();
+                    break;
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    mOnSwipeCallback.onRestoreTimeout();
+                    break;
+            }
+            mGestureDetector.onTouchEvent(ev);
+            return super.dispatchTouchEvent(ev);
         }
 
         @Override
@@ -592,32 +620,13 @@ public abstract class BaseTopBar<B extends BaseTopBar<B>> {
                 BaseTopBar.OnAttachStateChangeListener listener) {
             mOnAttachStateChangeListener = listener;
         }
-    }
 
-    protected class Behavior extends SwipeDismissBehavior<TopbarBaseLayout> {
-        @Override
-        public boolean canSwipeDismissView(View child) {
-            return child instanceof TopbarBaseLayout;
+        public OnSwipeCallback getOnSwipeCallback() {
+            return mOnSwipeCallback;
         }
 
-        @Override
-        public boolean onInterceptTouchEvent(CoordinatorLayout parent, TopbarBaseLayout child,
-                                             MotionEvent event) {
-            switch (event.getActionMasked()) {
-                case MotionEvent.ACTION_DOWN:
-                    // We want to make sure that we disable any Snackbar timeouts if the user is
-                    // currently touching the Snackbar. We restore the timeout when complete
-                    if (parent.isPointInChildBounds(child, (int) event.getX(),
-                            (int) event.getY())) {
-                        TopBarManager.getInstance().pauseTimeout(mManagerCallback);
-                    }
-                    break;
-                case MotionEvent.ACTION_UP:
-                case MotionEvent.ACTION_CANCEL:
-                    TopBarManager.getInstance().restoreTimeoutIfPaused(mManagerCallback);
-                    break;
-            }
-            return super.onInterceptTouchEvent(parent, child, event);
+        public void setOnSwipeCallback(OnSwipeCallback onSwipeCallback) {
+            mOnSwipeCallback = onSwipeCallback;
         }
     }
 }
