@@ -22,7 +22,9 @@
         <activity android:name=".TestTypeToastActivity" />
         <activity android:name=".TestTopbarActivity" />
         <activity android:name=".TestSnackbarActivity" />
-        <activity android:name=".TestDialogActivity" />
+        <activity
+            android:name=".TestDialogActivity"
+            android:configChanges="orientation|screenSize" />
         <activity android:name=".TestDuplicateActivity" />
     </application>
 

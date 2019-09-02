@@ -1,5 +1,6 @@
 package com.coder.zzq.smartshowdemo;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -12,7 +13,7 @@ import com.coder.zzq.smartshow.dialog.ChooseResult;
 import com.coder.zzq.smartshow.dialog.ClickListDialog;
 import com.coder.zzq.smartshow.dialog.DialogBtnClickListener;
 import com.coder.zzq.smartshow.dialog.EnsureDialog;
-import com.coder.zzq.smartshow.dialog.InputTextDialog;
+import com.coder.zzq.smartshow.dialog.InputNumberDialog;
 import com.coder.zzq.smartshow.dialog.LoadingDialog;
 import com.coder.zzq.smartshow.dialog.NotificationDialog;
 import com.coder.zzq.smartshow.dialog.SmartDialog;
@@ -231,27 +232,28 @@ public class TestDialogActivity extends AppCompatActivity implements AdapterView
         mClickListDialog.showInActivity(this);
     }
 
-    private InputTextDialog mInputTextDialog;
+    private InputNumberDialog mInputTextDialog;
 
     private void onShowInputDialog() {
         if (mInputTextDialog == null) {
-            mInputTextDialog = new InputTextDialog()
-                    .title("输入")
-                    .textOfDefaultFill("默认填充的文本")
-                    .hint("请输入建议")
-                    .inputAtMost(50)
-                    .clearInputPerShow(true)
-                    .confirmBtn("确定", new DialogBtnClickListener() {
-                        @Override
-                        public void onBtnClick(SmartDialog dialog, int which, Object data) {
-                            if (data.toString().length() > 50) {
-                                SmartToast.show("最多输入50个字");
-                            } else {
-                                dialog.dismiss();
-                                SmartToast.show("输入的内容为：" + data.toString());
-                            }
-                        }
-                    });
+//            mInputTextDialog = new InputTextDialog()
+//                    .title("输入")
+//                    .textOfDefaultFill("默认填充的文本")
+//                    .hint("请输入建议")
+//                    .inputAtMost(50)
+//                    .clearInputPerShow(true)
+//                    .confirmBtn("确定", new DialogBtnClickListener() {
+//                        @Override
+//                        public void onBtnClick(SmartDialog dialog, int which, Object data) {
+//                            if (data.toString().length() > 50) {
+//                                SmartToast.show("最多输入50个字");
+//                            } else {
+//                                dialog.dismiss();
+//                                SmartToast.show("输入的内容为：" + data.toString());
+//                            }
+//                        }
+//                    });
+            mInputTextDialog = new InputNumberDialog().title("输入货物件数");
         }
         mInputTextDialog.showInActivity(this);
     }
@@ -299,5 +301,25 @@ public class TestDialogActivity extends AppCompatActivity implements AdapterView
                     .message("重置成功");
         }
         mNotificationDialog.showInActivity(this);
+    }
+
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (mClickListDialog != null) {
+            mClickListDialog.onScreenOrientationChanged();
+        }
+        if (mSingleChooseListDialog != null) {
+            mSingleChooseListDialog.onScreenOrientationChanged();
+        }
+
+        if (mMultipleChooseListDialog != null) {
+            mMultipleChooseListDialog.onScreenOrientationChanged();
+        }
+
+        if (mMultipleChooseListWithCubeMarkDialog != null) {
+            mMultipleChooseListWithCubeMarkDialog.onScreenOrientationChanged();
+        }
     }
 }
