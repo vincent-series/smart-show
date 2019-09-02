@@ -2,9 +2,9 @@ package com.coder.zzq.smartshow.topbar;
 
 import android.app.Activity;
 import android.os.Build;
-import android.support.design.widget.CoordinatorLayout;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.FrameLayout;
 
 import com.coder.zzq.smartshow.core.lifecycle.ITopbarCallback;
 
@@ -31,7 +31,7 @@ public class TopbarCallback implements ITopbarCallback {
                         @Override
                         public boolean onPreDraw() {
                             ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
-                            CoordinatorLayout topContainer = decorView.findViewById(R.id.smart_show_top_bar_container);
+                            FrameLayout topContainer = decorView.findViewById(R.id.smart_show_top_bar_container);
                             if (topContainer != null && decorView.getChildAt(decorView.getChildCount() - 1) != topContainer) {
                                 decorView.removeView(topContainer);
                                 decorView.addView(topContainer);
