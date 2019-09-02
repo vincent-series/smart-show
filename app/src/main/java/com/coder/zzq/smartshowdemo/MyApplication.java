@@ -9,6 +9,7 @@ import com.coder.zzq.smartshow.snackbar.SmartSnackbar;
 
 import com.coder.zzq.smartshow.toast.SmartToast;
 import com.coder.zzq.smartshow.topbar.SmartTopbar;
+import com.coder.zzq.toolkit.Toolkit;
 
 
 /**
@@ -23,7 +24,7 @@ public class MyApplication extends Application {
         super.onCreate();
         sContext = this;
         SmartShow.init(this);
-
+        Toolkit.setEnablePrintLog(true);
 
         SmartSnackbar.setting()
                 .backgroundColorRes(R.color.colorPrimary)
