@@ -41,6 +41,11 @@ public class ClickListDialog extends TitleBranchDialog<ClickListDialog> {
         if (dialog == null) {
             return;
         }
+        adjustHeight();
+        mClickListAdapter.setItems(mItems);
+    }
+
+    private void adjustHeight() {
         ViewGroup.LayoutParams lp = mListView.getLayoutParams();
         if (mItems.size() <= (Utils.isScreenPortrait() ? 5 : 4)) {
             lp.height = ListView.LayoutParams.WRAP_CONTENT;
@@ -48,7 +53,6 @@ public class ClickListDialog extends TitleBranchDialog<ClickListDialog> {
             lp.height = Utils.dpToPx(50) * (Utils.isScreenPortrait() ? 5 : 4);
         }
         mListView.setLayoutParams(lp);
-        mClickListAdapter.setItems(mItems);
     }
 
     public ClickListDialog itemCenter(boolean itemCenter) {
@@ -66,6 +70,11 @@ public class ClickListDialog extends TitleBranchDialog<ClickListDialog> {
     public ClickListDialog itemClickListener(OnItemClickListener itemClickListener) {
         mOnItemClickListener = itemClickListener;
         return this;
+    }
+
+    @Override
+    public void onScreenOrientationChanged() {
+        adjustHeight();
     }
 
     @Override

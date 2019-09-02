@@ -93,4 +93,10 @@ public abstract class SmartDialog<NestedDialog extends Dialog> {
     public boolean isShowing() {
         return mNestedDialog != null && mNestedDialog.isShowing();
     }
+
+
+
+    public void onScreenOrientationChanged() {
+
+    }
 }

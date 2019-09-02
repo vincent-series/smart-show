@@ -54,6 +54,11 @@ public class ChooseListDialog extends SimpleBranchDialog<ChooseListDialog> {
         }
         mListView.clearChoices();
         mNeedUpdateChecked = true;
+        adjustHeight();
+        mChooseListAdapter.setItems(mItems);
+    }
+
+    private void adjustHeight() {
         ViewGroup.LayoutParams lp = mListView.getLayoutParams();
         switch (Utils.screenOrientation()) {
             case Configuration.ORIENTATION_PORTRAIT:
@@ -64,7 +69,6 @@ public class ChooseListDialog extends SimpleBranchDialog<ChooseListDialog> {
                 break;
         }
         mListView.setLayoutParams(lp);
-        mChooseListAdapter.setItems(mItems);
     }
 
     private void adjustHeightWhenScreenPortrait(ViewGroup.LayoutParams lp) {
@@ -157,6 +161,11 @@ public class ChooseListDialog extends SimpleBranchDialog<ChooseListDialog> {
     public ChooseListDialog keepChosenPosByLast(boolean keep) {
         mKeepChosenPosByLast = keep;
         return this;
+    }
+
+    @Override
+    public void onScreenOrientationChanged() {
+        adjustHeight();
     }
 
     @Override
