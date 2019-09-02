@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <EditText
+            android:id="@+id/smart_show_input_edt"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:background="@drawable/smart_show_round_edt_bg"
+            android:gravity="center"
+            android:lineSpacingExtra="2dp"
+            android:lines="1"
+            android:padding="4dp"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:textColor="#333333"
+            android:textColorHint="@color/default_edt_hint_color"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/smart_show_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/smart_show_input_edt"
+            android:gravity="center"
+            android:maxWidth="48dp"
+            android:paddingLeft="16dp"
+            android:text="(件)"
+            android:textSize="14sp" />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:background="#cccccc"/>
+    <TextView
+        android:padding="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:width="110dp"
+        android:text="错误："
+        android:textColor="#ff0000"
+        android:textSize="11sp" />
+
+
+</LinearLayout>
