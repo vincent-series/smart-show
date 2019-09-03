@@ -14,6 +14,7 @@ import com.coder.zzq.smartshow.dialog.ClickListDialog;
 import com.coder.zzq.smartshow.dialog.DialogBtnClickListener;
 import com.coder.zzq.smartshow.dialog.EnsureDialog;
 import com.coder.zzq.smartshow.dialog.InputNumberDialog;
+import com.coder.zzq.smartshow.dialog.InputTextDialog;
 import com.coder.zzq.smartshow.dialog.LoadingDialog;
 import com.coder.zzq.smartshow.dialog.NotificationDialog;
 import com.coder.zzq.smartshow.dialog.SmartDialog;
@@ -47,25 +48,29 @@ public class TestDialogActivity extends AppCompatActivity implements AdapterView
             case 3:
                 onShowInputDialog();
                 break;
+
             case 4:
-                onShowClickListDialog();
+                onShowInputNumDialog();
                 break;
             case 5:
-                onShowSingleChooseDialog();
+                onShowClickListDialog();
                 break;
             case 6:
-                onShowMultipleChooseDialog();
+                onShowSingleChooseDialog();
                 break;
             case 7:
-                onShowMultipleChooseWithCubeCheckedMarkDialog();
+                onShowMultipleChooseDialog();
                 break;
             case 8:
-                onShowLargeLoading();
+                onShowMultipleChooseWithCubeCheckedMarkDialog();
                 break;
             case 9:
-                onShowMiddleLoading();
+                onShowLargeLoading();
                 break;
             case 10:
+                onShowMiddleLoading();
+                break;
+            case 11:
                 onShowSmallLoading();
                 break;
         }
@@ -232,30 +237,45 @@ public class TestDialogActivity extends AppCompatActivity implements AdapterView
         mClickListDialog.showInActivity(this);
     }
 
-    private InputNumberDialog mInputTextDialog;
+    private InputTextDialog mInputTextDialog;
 
     private void onShowInputDialog() {
         if (mInputTextDialog == null) {
-//            mInputTextDialog = new InputTextDialog()
-//                    .title("输入")
-//                    .textOfDefaultFill("默认填充的文本")
-//                    .hint("请输入建议")
-//                    .inputAtMost(50)
-//                    .clearInputPerShow(true)
-//                    .confirmBtn("确定", new DialogBtnClickListener() {
-//                        @Override
-//                        public void onBtnClick(SmartDialog dialog, int which, Object data) {
-//                            if (data.toString().length() > 50) {
-//                                SmartToast.show("最多输入50个字");
-//                            } else {
-//                                dialog.dismiss();
-//                                SmartToast.show("输入的内容为：" + data.toString());
-//                            }
-//                        }
-//                    });
-            mInputTextDialog = new InputNumberDialog().title("输入货物件数");
+            mInputTextDialog = new InputTextDialog()
+                    .title("输入")
+                    .textOfDefaultFill("默认填充的文本")
+                    .hint("请输入建议")
+                    .inputAtMost(50)
+                    .clearInputPerShow(true)
+                    .confirmBtn("确定", new DialogBtnClickListener() {
+                        @Override
+                        public void onBtnClick(SmartDialog dialog, int which, Object data) {
+                            if (data.toString().length() > 50) {
+                                SmartToast.show("最多输入50个字");
+                            } else {
+                                dialog.dismiss();
+                                SmartToast.show("输入的内容为：" + data.toString());
+                            }
+                        }
+                    });
         }
         mInputTextDialog.showInActivity(this);
+    }
+
+
+    private InputNumberDialog mInputNumberDialog;
+
+    private void onShowInputNumDialog() {
+        if (mInputNumberDialog == null) {
+            mInputNumberDialog = new InputNumberDialog()
+                    .title("请输入货物件数")
+                    .numberOfDefaultShow("5")
+                    .numUnit("件")
+                    .clearInputPerShow(true)
+                    .numberType(InputNumberDialog.NUMBER_TYPE_INT);
+        }
+
+        mInputNumberDialog.showInActivity(this);
     }
 
     private EnsureDialog mEnsureDelayDialog;

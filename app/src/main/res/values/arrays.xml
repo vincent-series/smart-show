@@ -4,7 +4,8 @@
         <item>notification</item>
         <item>ensure</item>
         <item>ensure delay</item>
-        <item>input</item>
+        <item>input text</item>
+        <item>input num</item>
         <item>click list</item>
         <item>single choose list</item>
         <item>multiple choose list</item>
