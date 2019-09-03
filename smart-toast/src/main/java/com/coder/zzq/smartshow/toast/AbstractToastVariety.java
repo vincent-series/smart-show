@@ -85,7 +85,7 @@ public abstract class AbstractToastVariety {
 
         updateToast();
 
-        if (!isShowing()) {
+        if (!isShowing() && !isShortInterval()) {
             show();
         }
 
@@ -101,6 +101,7 @@ public abstract class AbstractToastVariety {
             VirtualToastManager.get().show(mToast, mWindowParams);
         }
         mLastShowTime = System.currentTimeMillis();
+        EasyLogger.d("show toast" + Utils.getObjectDesc(mToast));
     }
 
     protected void updateToast() {
