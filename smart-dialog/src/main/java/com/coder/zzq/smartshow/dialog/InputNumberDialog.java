@@ -134,6 +134,7 @@ public class InputNumberDialog extends SimpleBranchDialog<InputNumberDialog> {
         applyNumType(dialog);
         applyHint(dialog);
         mInputEdt.setText(mDefaultNum);
+        mInputEdt.setSelection(mInputEdt.getText().length());
         mNumUnitTv.setText(mNumUnit);
     }
 
@@ -150,6 +151,7 @@ public class InputNumberDialog extends SimpleBranchDialog<InputNumberDialog> {
         if (mClearWhenShowAgain) {
             mInputEdt.setText(mDefaultNum);
         }
+        mInputEdt.setSelection(mInputEdt.getText().length());
     }
 
 }

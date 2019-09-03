@@ -20,7 +20,6 @@
             android:lineSpacingExtra="2dp"
             android:lines="1"
             android:padding="4dp"
-            android:selectAllOnFocus="true"
             android:singleLine="true"
             android:textColor="#333333"
             android:textColorHint="@color/default_edt_hint_color"

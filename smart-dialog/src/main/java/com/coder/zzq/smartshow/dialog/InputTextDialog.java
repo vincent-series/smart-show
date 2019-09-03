@@ -5,8 +5,10 @@ import android.support.annotation.ColorInt;
 import android.support.v7.app.AppCompatDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.coder.zzq.toolkit.Utils;
@@ -26,6 +28,8 @@ public class InputTextDialog extends SimpleBranchDialog<InputTextDialog> {
 
     protected EditText mInputEdt;
     protected TextView mInputCountView;
+
+    protected ImageView mClearInputView;
 
     public InputTextDialog() {
         super();
@@ -137,6 +141,13 @@ public class InputTextDialog extends SimpleBranchDialog<InputTextDialog> {
                 }
             }
         });
+        mClearInputView = mBodyViewWrapper.findViewById(R.id.smart_show_clear_input);
+        mClearInputView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mInputEdt.setText("");
+            }
+        });
     }
 
     @Override
@@ -149,21 +160,6 @@ public class InputTextDialog extends SimpleBranchDialog<InputTextDialog> {
         mInputEdt.setSelection(mInputEdt.getText().length());
     }
 
-    protected StringBuilder mStringBuilder = new StringBuilder();
-
-//    private void processWhenInputLimit(String s, TextView inputNumView, StringBuilder stringBuilder) {
-//        stringBuilder.delete(0, stringBuilder.length());
-//        if (s.length() > mAtMostInputNum) {
-//            inputNumView.setTextColor(Color.RED);
-//            stringBuilder.append("-")
-//                    .append(s.length() - mAtMostInputNum);
-//            inputNumView.setText(stringBuilder);
-//        } else {
-//            inputNumView.setTextColor(mInputNumMarkColor);
-//            stringBuilder.append(mAtMostInputNum - s.length());
-//            inputNumView.setText(stringBuilder);
-//        }
-//    }
 
     @Override
     protected void onConfirmBtnClick() {
