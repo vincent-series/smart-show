@@ -1,40 +1,76 @@
 package com.coder.zzq.smartshow.dialog;
 
+import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatDialog;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.coder.zzq.toolkit.Utils;
 
 public class InputNumberDialog extends SimpleBranchDialog<InputNumberDialog> {
+
+    public static final int NUMBER_TYPE_INT = 0;
+
+    public static final int NUMBER_TYPE_DECIMAL = 1;
+
 
     protected CharSequence mDefaultNum;
 
     protected CharSequence mHint;
 
-    protected int mNumberType = EditorInfo.TYPE_CLASS_NUMBER | EditorInfo.TYPE_NUMBER_FLAG_SIGNED | EditorInfo.TYPE_NUMBER_FLAG_DECIMAL;
+
+    protected int mNumberType = NUMBER_TYPE_INT;
+
+    protected boolean mHasSigned = false;
 
     protected boolean mClearWhenShowAgain;
 
+    protected CharSequence mNumUnit;
+
     protected EditText mInputEdt;
+    protected LinearLayout mErrorTipLine;
+    protected TextView mErrorTipTv;
+    protected TextView mNumUnitTv;
 
     public InputNumberDialog() {
         super();
         mTitle = "输入";
     }
 
-    public InputNumberDialog numberType(int numberType) {
+    public InputNumberDialog numberType(int numberType, boolean hasSigned) {
         mNumberType = numberType;
+        mHasSigned = hasSigned;
         applyNumType(mNestedDialog);
         return this;
     }
 
+    public InputNumberDialog numberType(int numberType) {
+        return numberType(numberType, false);
+    }
+
     protected void applyNumType(AppCompatDialog dialog) {
         if (dialog != null) {
-            mInputEdt.setInputType(mNumberType);
+            int type = EditorInfo.TYPE_CLASS_NUMBER;
+            switch (mNumberType) {
+                case NUMBER_TYPE_INT:
+                    type = EditorInfo.TYPE_CLASS_NUMBER;
+                    break;
+                case NUMBER_TYPE_DECIMAL:
+                    type |= EditorInfo.TYPE_NUMBER_FLAG_DECIMAL;
+                    break;
+            }
+            if (mHasSigned) {
+                type |= EditorInfo.TYPE_NUMBER_FLAG_SIGNED;
+            }
+            mInputEdt.setInputType(type);
         }
     }
 
-    public InputNumberDialog numberOfDefaultFill(CharSequence defaultText) {
+    public InputNumberDialog numberOfDefaultShow(CharSequence defaultText) {
         mDefaultNum = defaultText;
         return this;
     }
@@ -57,6 +93,27 @@ public class InputNumberDialog extends SimpleBranchDialog<InputNumberDialog> {
         return this;
     }
 
+    public InputNumberDialog numUnit(String numUnit) {
+        mNumUnit = "(" + numUnit + ")";
+        applyNumUnit(mNestedDialog);
+        return this;
+    }
+
+    protected void applyNumUnit(AppCompatDialog dialog) {
+        if (dialog != null) {
+            mNumUnitTv.setText(mNumUnit);
+        }
+    }
+
+    public void showErrorTip(CharSequence errorTip) {
+        mErrorTipLine.setVisibility(Utils.isEmpty(errorTip) ? View.GONE : View.VISIBLE);
+        mErrorTipTv.setText("错误：" + errorTip);
+    }
+
+    public void showErrorTip(@StringRes int errorTip) {
+        showErrorTip(Utils.getStringFromRes(errorTip));
+    }
+
     @Override
     protected int provideBodyLayout() {
         return R.layout.smart_show_input_num;
@@ -66,6 +123,9 @@ public class InputNumberDialog extends SimpleBranchDialog<InputNumberDialog> {
     protected void initBody(AppCompatDialog dialog, FrameLayout bodyViewWrapper) {
         super.initBody(dialog, bodyViewWrapper);
         mInputEdt = bodyViewWrapper.findViewById(R.id.smart_show_input_edt);
+        mErrorTipLine = bodyViewWrapper.findViewById(R.id.smart_show_error_tip_line);
+        mErrorTipTv = bodyViewWrapper.findViewById(R.id.smart_show_error_tip);
+        mNumUnitTv = bodyViewWrapper.findViewById(R.id.smart_show_num_unit);
     }
 
     @Override
@@ -74,6 +134,7 @@ public class InputNumberDialog extends SimpleBranchDialog<InputNumberDialog> {
         applyNumType(dialog);
         applyHint(dialog);
         mInputEdt.setText(mDefaultNum);
+        mNumUnitTv.setText(mNumUnit);
     }
 
 
@@ -81,4 +142,14 @@ public class InputNumberDialog extends SimpleBranchDialog<InputNumberDialog> {
     protected void onConfirmBtnClick() {
         mOnConfirmClickListener.onBtnClick(this, DialogBtnClickListener.BTN_CONFIRM, mInputEdt.getText().toString());
     }
+
+    @Override
+    protected void resetDialogWhenShowAgain(AppCompatDialog dialog) {
+        super.resetDialogWhenShowAgain(dialog);
+        showErrorTip(null);
+        if (mClearWhenShowAgain) {
+            mInputEdt.setText(mDefaultNum);
+        }
+    }
+
 }

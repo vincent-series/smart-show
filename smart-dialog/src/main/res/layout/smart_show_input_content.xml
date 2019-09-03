@@ -7,12 +7,10 @@
     <EditText
         android:id="@+id/smart_show_input_edt"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="120dp"
         android:background="@drawable/smart_show_round_edt_bg"
         android:gravity="top|left"
         android:lineSpacingExtra="2dp"
-        android:maxHeight="200dp"
-        android:minHeight="120dp"
         android:padding="4dp"
         android:selectAllOnFocus="true"
         android:textColor="#333333"

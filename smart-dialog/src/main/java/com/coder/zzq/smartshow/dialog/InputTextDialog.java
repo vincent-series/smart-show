@@ -1,7 +1,6 @@
 package com.coder.zzq.smartshow.dialog;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.support.annotation.ColorInt;
 import android.support.v7.app.AppCompatDialog;
 import android.text.Editable;
@@ -67,11 +66,11 @@ public class InputTextDialog extends SimpleBranchDialog<InputTextDialog> {
             return;
         }
         if (mAtMostInputNum == INPUT_NO_LIMIT) {
-            applyInputNumMarkColor(dialog);
             mInputCountView.setText(String.valueOf(s.length()));
         } else {
-            processWhenInputLimit(s, mInputCountView, mStringBuilder);
+            mInputCountView.setText(String.valueOf(s.length()) + "/" + mAtMostInputNum);
         }
+
     }
 
     public InputTextDialog inputCountMarkColor(@ColorInt int color) {
@@ -103,6 +102,7 @@ public class InputTextDialog extends SimpleBranchDialog<InputTextDialog> {
         if (mClearWhenShowAgain) {
             mInputEdt.setText(mDefaultText);
         }
+        mInputEdt.setSelection(mInputEdt.getText().length());
     }
 
     @Override
@@ -131,6 +131,10 @@ public class InputTextDialog extends SimpleBranchDialog<InputTextDialog> {
             @Override
             public void afterTextChanged(Editable s) {
                 applyInputCount(dialog, s.toString());
+                if (s.length() > mAtMostInputNum) {
+                    mInputEdt.setText(s.subSequence(0, mAtMostInputNum));
+                    mInputEdt.setSelection(mInputEdt.getText().length());
+                }
             }
         });
     }
@@ -140,24 +144,26 @@ public class InputTextDialog extends SimpleBranchDialog<InputTextDialog> {
         super.applyBody(dialog);
         applyInputNumMarkColor(dialog);
         applyHint(dialog);
+        applyInputNumMarkColor(dialog);
         mInputEdt.setText(mDefaultText);
+        mInputEdt.setSelection(mInputEdt.getText().length());
     }
 
     protected StringBuilder mStringBuilder = new StringBuilder();
 
-    private void processWhenInputLimit(String s, TextView inputNumView, StringBuilder stringBuilder) {
-        stringBuilder.delete(0, stringBuilder.length());
-        if (s.length() > mAtMostInputNum) {
-            inputNumView.setTextColor(Color.RED);
-            stringBuilder.append("-")
-                    .append(s.length() - mAtMostInputNum);
-            inputNumView.setText(stringBuilder);
-        } else {
-            inputNumView.setTextColor(mInputNumMarkColor);
-            stringBuilder.append(mAtMostInputNum - s.length());
-            inputNumView.setText(stringBuilder);
-        }
-    }
+//    private void processWhenInputLimit(String s, TextView inputNumView, StringBuilder stringBuilder) {
+//        stringBuilder.delete(0, stringBuilder.length());
+//        if (s.length() > mAtMostInputNum) {
+//            inputNumView.setTextColor(Color.RED);
+//            stringBuilder.append("-")
+//                    .append(s.length() - mAtMostInputNum);
+//            inputNumView.setText(stringBuilder);
+//        } else {
+//            inputNumView.setTextColor(mInputNumMarkColor);
+//            stringBuilder.append(mAtMostInputNum - s.length());
+//            inputNumView.setText(stringBuilder);
+//        }
+//    }
 
     @Override
     protected void onConfirmBtnClick() {

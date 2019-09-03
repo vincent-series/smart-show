@@ -3,9 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:orientation="vertical"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp">
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -29,7 +27,7 @@
             android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/smart_show_unit"
+            android:id="@+id/smart_show_num_unit"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
@@ -37,22 +35,32 @@
             android:gravity="center"
             android:maxWidth="48dp"
             android:paddingLeft="16dp"
-            android:text="(件)"
             android:textSize="14sp" />
     </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.3dp"
-        android:background="#cccccc"/>
-    <TextView
-        android:padding="4dp"
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/smart_show_error_tip_line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:width="110dp"
-        android:text="错误："
-        android:textColor="#ff0000"
-        android:textSize="11sp" />
+        android:orientation="vertical">
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.3dp"
+            android:background="#cccccc" />
+
+        <TextView
+            android:id="@+id/smart_show_error_tip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:width="110dp"
+            android:padding="4dp"
+            android:text="错误："
+            android:textColor="#ff0000"
+            android:textSize="11sp" />
+
+    </LinearLayout>
 
 </LinearLayout>
