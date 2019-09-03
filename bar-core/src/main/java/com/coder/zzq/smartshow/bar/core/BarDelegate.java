@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.coder.zzq.toolkit.Utils;
+import com.coder.zzq.toolkit.log.EasyLogger;
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 public abstract class BarDelegate<Bar, ViewParam, BarSetting extends BarSettingImpl> implements IBarShow, View.OnClickListener, Runnable {
@@ -70,7 +71,7 @@ public abstract class BarDelegate<Bar, ViewParam, BarSetting extends BarSettingI
             }
             setup();
         }
-
+        EasyLogger.d("rebuild the bar" + Utils.getObjectDesc(mBar));
     }
 
 
@@ -90,6 +91,7 @@ public abstract class BarDelegate<Bar, ViewParam, BarSetting extends BarSettingI
 
     public void destroy(Activity activity) {
         if (mPageContext == activity) {
+            EasyLogger.d("the bar" + Utils.getObjectDesc(mBar) + "has recycled");
             mCurMsg = "";
             mCurActionText = "";
             mOnActionClickListener = null;
@@ -101,6 +103,7 @@ public abstract class BarDelegate<Bar, ViewParam, BarSetting extends BarSettingI
                 mCacheDrawables = null;
             }
             mIconRange = null;
+
         }
     }
 
@@ -132,6 +135,7 @@ public abstract class BarDelegate<Bar, ViewParam, BarSetting extends BarSettingI
     protected void dismissAndShowAgain() {
         dismiss();
         mBaseTraceView.postDelayed(this, 400);
+        EasyLogger.d("dismiss and show again");
     }
 
     @Override

@@ -135,7 +135,7 @@ public class InputTextDialog extends SimpleBranchDialog<InputTextDialog> {
             @Override
             public void afterTextChanged(Editable s) {
                 applyInputCount(dialog, s.toString());
-                if (s.length() > mAtMostInputNum) {
+                if (mAtMostInputNum != INPUT_NO_LIMIT && s.length() > mAtMostInputNum) {
                     mInputEdt.setText(s.subSequence(0, mAtMostInputNum));
                     mInputEdt.setSelection(mInputEdt.getText().length());
                 }

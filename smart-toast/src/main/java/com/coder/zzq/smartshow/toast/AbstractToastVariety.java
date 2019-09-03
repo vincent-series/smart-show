@@ -8,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.coder.zzq.toolkit.Utils;
+import com.coder.zzq.toolkit.log.EasyLogger;
 
 import java.lang.reflect.Field;
 
@@ -31,6 +32,7 @@ public abstract class AbstractToastVariety {
     public AbstractToastVariety(int tag) {
         mTag = tag;
         ensureToastHasCreated();
+        EasyLogger.d("toast variety" + Utils.getObjectDesc(this) + "has created");
     }
 
     protected int mTag;
@@ -122,6 +124,7 @@ public abstract class AbstractToastVariety {
         mVerticalAxisOffsetWhenBottom = mYOffset = mToast.getYOffset();
         mVerticalAxisOffsetWhenTop = Utils.getToolbarHeight() + Utils.dpToPx(40);
         setupReflectInfo();
+        EasyLogger.d("rebuild toast" + Utils.getObjectDesc(mToast));
     }
 
     protected void retrieveMsgView() {

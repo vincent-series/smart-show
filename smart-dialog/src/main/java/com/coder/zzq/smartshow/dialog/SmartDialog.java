@@ -40,10 +40,10 @@ public abstract class SmartDialog<NestedDialog extends Dialog> {
         if (mNestedDialog == null || mNestedDialog.getOwnerActivity() != activity) {
             mNestedDialog = Utils.requireNonNull(createDialog(activity), "the method createDialog must return a non-null dialog!");
             mNestedDialog.setOwnerActivity(activity);
-            EasyLogger.d("create a new dialog:\n " + mNestedDialog);
+            EasyLogger.d(logForCreated());
         } else {
             resetDialogWhenShowAgain(mNestedDialog);
-            EasyLogger.d("reuse dialog:\n " + mNestedDialog);
+            EasyLogger.d(logForReuse());
         }
 
 
@@ -51,7 +51,7 @@ public abstract class SmartDialog<NestedDialog extends Dialog> {
             mNestedDialog.show();
             return true;
         } catch (WindowManager.BadTokenException e) {
-            EasyLogger.e("BadToken has happened when show dialog: \n" + mNestedDialog.getClass().getSimpleName());
+            EasyLogger.e("BadToken has happened when show dialog: \n" + Utils.getObjectDesc(mNestedDialog));
             return false;
         }
 
@@ -66,8 +66,8 @@ public abstract class SmartDialog<NestedDialog extends Dialog> {
 
     protected boolean recycle(Activity activity) {
         if (mNestedDialog != null && mNestedDialog.getOwnerActivity() == activity) {
+            EasyLogger.d(logForRecycle());
             mNestedDialog = null;
-            EasyLogger.d("the dialog:" + Utils.getObjectDesc(this) + "has recycled.");
             return true;
         }
 
@@ -98,5 +98,18 @@ public abstract class SmartDialog<NestedDialog extends Dialog> {
 
     public void onScreenOrientationChanged() {
 
+    }
+
+
+    private String logForCreated() {
+        return "create a dialog" + Utils.getObjectDesc(mNestedDialog) + "of" + Utils.getObjectDesc(this);
+    }
+
+    private String logForReuse() {
+        return "the dialog" + Utils.getObjectDesc(mNestedDialog) + "of" + Utils.getObjectDesc(this) + "reused again";
+    }
+
+    private String logForRecycle() {
+        return "the dialog" + Utils.getObjectDesc(mNestedDialog) + "of" + Utils.getObjectDesc(this) + "has recycled";
     }
 }

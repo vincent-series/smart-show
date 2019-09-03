@@ -66,6 +66,7 @@ public final class VirtualToastManager {
     public void recreateVirtualToastDialog(boolean hostActivityChanged) {
         if (mVirtualToastDialog == null || hostActivityChanged) {
             mVirtualToastDialog = new AppCompatDialog(mHostActivity, R.style.smart_show_virtual_toast_dialog);
+            EasyLogger.d("virtual toast dialog" + Utils.getObjectDesc(mVirtualToastDialog) + "has created");
         }
     }
 
@@ -90,7 +91,7 @@ public final class VirtualToastManager {
 
     public void destroy(Activity activity) {
         if (mHostActivity == activity) {
-            EasyLogger.d("recycle resource when host activity of virtual toast destroyed");
+            EasyLogger.d("recycle resource when host activity" + Utils.getObjectDesc(activity) + "of virtual toast destroyed");
             mHostActivity = null;
             dismiss();
             mVirtualToastDialog = null;
