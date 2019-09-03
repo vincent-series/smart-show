@@ -19,6 +19,8 @@ import com.coder.zzq.smartshow.dialog.LoadingDialog;
 import com.coder.zzq.smartshow.dialog.NotificationDialog;
 import com.coder.zzq.smartshow.dialog.SmartDialog;
 import com.coder.zzq.smartshow.toast.SmartToast;
+import com.coder.zzq.smartshow.topbar.SmartTopbar;
+import com.coder.zzq.toolkit.Utils;
 
 import java.util.Arrays;
 
@@ -245,17 +247,13 @@ public class TestDialogActivity extends AppCompatActivity implements AdapterView
                     .title("输入")
                     .textOfDefaultFill("默认填充的文本")
                     .hint("请输入建议")
-                    .inputAtMost(50)
+                    .inputAtMost(30)
                     .clearInputPerShow(true)
                     .confirmBtn("确定", new DialogBtnClickListener() {
                         @Override
                         public void onBtnClick(SmartDialog dialog, int which, Object data) {
-                            if (data.toString().length() > 50) {
-                                SmartToast.show("最多输入50个字");
-                            } else {
                                 dialog.dismiss();
                                 SmartToast.show("输入的内容为：" + data.toString());
-                            }
                         }
                     });
         }
@@ -271,8 +269,21 @@ public class TestDialogActivity extends AppCompatActivity implements AdapterView
                     .title("请输入货物件数")
                     .numberOfDefaultShow("5")
                     .numUnit("件")
+                    .numberType(InputNumberDialog.NUMBER_TYPE_INT)
                     .clearInputPerShow(true)
-                    .numberType(InputNumberDialog.NUMBER_TYPE_INT);
+                    .confirmBtn("确定", new DialogBtnClickListener() {
+                        @Override
+                        public void onBtnClick(SmartDialog dialog, int which, Object data) {
+                            Integer num = Utils.isEmpty(data.toString()) ? 0 : Integer.parseInt(data.toString());
+                            if (num > 15) {
+                                ((InputNumberDialog) dialog).showErrorTip("最多15件");
+                            } else {
+                                dialog.dismiss();
+                                SmartTopbar.get(TestDialogActivity.this)
+                                        .show("您选择的件数为" + num);
+                            }
+                        }
+                    });
         }
 
         mInputNumberDialog.showInActivity(this);
