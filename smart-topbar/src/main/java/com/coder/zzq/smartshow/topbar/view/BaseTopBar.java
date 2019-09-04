@@ -28,6 +28,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.coder.zzq.smartshow.topbar.R;
+import com.coder.zzq.smartshow.topbar.utils.ThemeUtils;
 import com.coder.zzq.toolkit.Utils;
 
 import java.lang.annotation.Retention;
@@ -157,7 +158,7 @@ public abstract class BaseTopBar<B extends BaseTopBar<B>> {
         mContentViewCallback = contentViewCallback;
         mContext = parent.getContext();
 
-
+        ThemeUtils.checkAppCompatTheme(mContext);
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         // Note that for backwards compatibility reasons we inflate a layout that is defined

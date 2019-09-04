@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <view xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     class="com.coder.zzq.smartshow.topbar.view.TopBar$TopbarLayout"
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:layout_gravity="top"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
-    style="@style/Widget.Design.Snackbar"/>
+    style="@style/Widget.Design.Topbar" />

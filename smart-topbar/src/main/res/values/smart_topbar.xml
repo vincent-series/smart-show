@@ -26,4 +26,28 @@
 
     <dimen name="topbar_text_size">14sp</dimen>
 
+    <style name="Widget.Design.Topbar" parent="android:Widget">
+        <item name="android:minWidth">@dimen/topbar_min_width</item>
+        <item name="android:maxWidth">@dimen/topbar_max_width</item>
+        <item name="android:background">@drawable/design_snackbar_background</item>
+        <item name="android:paddingLeft">@dimen/topbar_padding_horizontal</item>
+        <item name="android:paddingRight">@dimen/topbar_padding_horizontal</item>
+        <item name="elevation">@dimen/topbar_elevation</item>
+        <item name="maxActionInlineWidth">@dimen/topbar_action_inline_max_width</item>
+
+
+    </style>
+
+    <color name="topbar_background_color">#323232</color>
+
+    <dimen name="topbar_background_corner_radius">0dp</dimen>
+    <dimen name="topbar_max_width">-1px</dimen>
+
+    <dimen name="topbar_min_width">-1px</dimen>
+
+    <dimen name="topbar_elevation">6dp</dimen>
+
+
+    <dimen name="topbar_action_inline_max_width">128dp</dimen>
+
 </resources>
