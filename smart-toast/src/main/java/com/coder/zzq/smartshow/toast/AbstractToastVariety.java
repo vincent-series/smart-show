@@ -12,10 +12,10 @@ import com.coder.zzq.toolkit.log.EasyLogger;
 
 import java.lang.reflect.Field;
 
-import static com.coder.zzq.smartshow.toast.ToastTags.TOAST_TAG_EMOTION;
 import static com.coder.zzq.smartshow.toast.ToastTags.TOAST_TAG_SRC;
 
-public abstract class AbstractToastVariety {
+abstract class AbstractToastVariety {
+    public static final int TOAST_TAG_EMOTION = -2;
 
     public static final int EMOTION_NONE = 0;
 

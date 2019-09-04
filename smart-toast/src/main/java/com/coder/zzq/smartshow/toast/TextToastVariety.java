@@ -6,7 +6,7 @@ import android.widget.Toast;
 
 import com.coder.zzq.toolkit.Utils;
 
-public abstract class TextToastVariety extends AbstractToastVariety implements ITextShow {
+abstract class TextToastVariety extends AbstractToastVariety implements ITextShow {
 
     public TextToastVariety(int tag) {
         super(tag);

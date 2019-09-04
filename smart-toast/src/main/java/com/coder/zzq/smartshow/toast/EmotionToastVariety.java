@@ -10,9 +10,8 @@ import android.widget.Toast;
 import com.coder.zzq.toolkit.Toolkit;
 import com.coder.zzq.toolkit.Utils;
 
-import static com.coder.zzq.smartshow.toast.ToastTags.TOAST_TAG_EMOTION;
 
-public class EmotionToastVariety extends AbstractToastVariety implements IEmotionShow {
+final class EmotionToastVariety extends AbstractToastVariety implements IEmotionShow {
 
     protected ImageView mIconView;
     protected int mThemeColor;

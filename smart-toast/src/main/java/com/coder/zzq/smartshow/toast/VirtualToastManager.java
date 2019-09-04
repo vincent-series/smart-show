@@ -12,7 +12,7 @@ import com.coder.zzq.toolkit.Utils;
 import com.coder.zzq.toolkit.lifecycle.ActivityStack;
 import com.coder.zzq.toolkit.log.EasyLogger;
 
-public final class VirtualToastManager {
+final class VirtualToastManager {
     public static final int DURATION_SHORT = 2000;
     public static final int DURATION_LONG = 3500;
 

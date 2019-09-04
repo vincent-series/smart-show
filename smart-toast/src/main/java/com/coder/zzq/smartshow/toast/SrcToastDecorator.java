@@ -12,7 +12,6 @@ import android.view.Gravity;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.coder.zzq.smartshow.core.SmartShow;
 import com.coder.zzq.toolkit.Toolkit;
 import com.coder.zzq.toolkit.Utils;
 

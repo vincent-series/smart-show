@@ -5,7 +5,7 @@ import android.app.Activity;
 
 import com.coder.zzq.smartshow.core.lifecycle.IToastCallback;
 
-class ToastCallback implements IToastCallback {
+final class ToastCallback implements IToastCallback {
     @Override
     public void dismissOnLeave() {
         if (ToastDelegate.hasCreated() && ToastDelegate.get().isDismissOnLeave()) {

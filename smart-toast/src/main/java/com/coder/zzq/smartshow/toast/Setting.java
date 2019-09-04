@@ -1,6 +1,6 @@
 package com.coder.zzq.smartshow.toast;
 
-public class Setting implements ISetting {
+final class Setting implements ISetting {
     private boolean mDismissOnLeave;
     private int mEmotionToastThemeColor = DEFAULT_EMOTION_TOAST_THEME_COLOR;
     private int mDefaultToastTag = ToastTags.TOAST_TAG_SRC;

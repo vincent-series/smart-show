@@ -2,8 +2,6 @@ package com.coder.zzq.smartshow.toast;
 
 import com.coder.zzq.toolkit.Utils;
 
-import static com.coder.zzq.smartshow.toast.ToastTags.TOAST_TAG_EMOTION;
-
 /**
  * Created by 朱志强 on 2018/9/8.
  */
@@ -44,7 +42,7 @@ final class ToastDelegate implements AbstractToastVariety.ShowCallback {
 
 
     public EmotionToastVariety getEmotionToastVariety() {
-        return (EmotionToastVariety) ToastCache.get().retrieveToastTagFromCache(TOAST_TAG_EMOTION);
+        return (EmotionToastVariety) ToastCache.get().retrieveToastTagFromCache(AbstractToastVariety.TOAST_TAG_EMOTION);
     }
 
     public boolean isShowing() {
