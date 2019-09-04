@@ -2,12 +2,13 @@ package com.coder.zzq.smartshow.dialog;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.AppCompatDialog;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+
+import androidx.appcompat.app.AppCompatDialog;
 
 import com.coder.zzq.toolkit.Utils;
 

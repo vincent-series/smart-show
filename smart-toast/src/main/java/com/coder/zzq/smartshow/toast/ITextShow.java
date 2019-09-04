@@ -1,6 +1,7 @@
 package com.coder.zzq.smartshow.toast;
 
-import android.support.annotation.StringRes;
+
+import androidx.annotation.StringRes;
 
 public interface ITextShow {
 

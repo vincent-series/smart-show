@@ -2,12 +2,13 @@ package com.coder.zzq.smartshowdemo;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.coder.zzq.smartshow.dialog.ClickListAdapter;
 import com.coder.zzq.smartshow.snackbar.SmartSnackbar;

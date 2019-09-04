@@ -4,14 +4,15 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.RestrictTo;
 import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.RestrictTo;
 
 import com.coder.zzq.toolkit.Utils;
 import com.coder.zzq.toolkit.log.EasyLogger;

@@ -1,11 +1,12 @@
 package com.coder.zzq.smartshow.toast;
 
 import android.graphics.drawable.GradientDrawable;
-import android.support.annotation.ColorInt;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.ColorInt;
 
 import com.coder.zzq.toolkit.Toolkit;
 import com.coder.zzq.toolkit.Utils;

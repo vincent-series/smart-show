@@ -9,11 +9,6 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.support.annotation.IntDef;
-import android.support.annotation.IntRange;
-import android.support.annotation.NonNull;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.view.WindowInsetsCompat;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -26,6 +21,13 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.FrameLayout;
+
+import androidx.annotation.IntDef;
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
+import androidx.core.view.OnApplyWindowInsetsListener;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import com.coder.zzq.smartshow.topbar.R;
 import com.coder.zzq.toolkit.Utils;
@@ -173,7 +175,7 @@ public abstract class BaseTopBar<B extends BaseTopBar<B>> {
         // Make sure that we fit system windows and have a listener to apply any insets
         ViewCompat.setFitsSystemWindows(mView, true);
         ViewCompat.setOnApplyWindowInsetsListener(mView,
-                new android.support.v4.view.OnApplyWindowInsetsListener() {
+                new OnApplyWindowInsetsListener() {
                     @Override
                     public WindowInsetsCompat onApplyWindowInsets(View v,
                                                                   WindowInsetsCompat insets) {

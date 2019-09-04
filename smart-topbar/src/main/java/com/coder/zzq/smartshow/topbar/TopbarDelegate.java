@@ -2,14 +2,14 @@ package com.coder.zzq.smartshow.topbar;
 
 import android.app.Activity;
 import android.os.Build;
-import android.support.annotation.RestrictTo;
-import android.support.v4.view.ViewCompat;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import androidx.core.view.ViewCompat;
 
 import com.coder.zzq.smartshow.bar.core.BarDelegate;
 import com.coder.zzq.smartshow.bar.core.IBarShow;

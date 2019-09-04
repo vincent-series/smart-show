@@ -2,13 +2,14 @@ package com.coder.zzq.smartshow.dialog;
 
 import android.app.Activity;
 import android.content.DialogInterface;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatDialog;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDialog;
 
 import com.coder.zzq.toolkit.Utils;
 

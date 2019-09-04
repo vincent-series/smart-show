@@ -2,7 +2,8 @@ package com.coder.zzq.smartshow.snackbar;
 
 
 import android.app.Activity;
-import android.support.design.widget.CoordinatorLayout;
+
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.coder.zzq.smartshow.bar.core.IBarShow;
 

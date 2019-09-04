@@ -1,10 +1,11 @@
 package com.coder.zzq.smartshow.dialog;
 
-import android.support.annotation.ColorInt;
-import android.support.v7.app.AppCompatDialog;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import androidx.annotation.ColorInt;
+import androidx.appcompat.app.AppCompatDialog;
 
 public class EnsureDialog extends MessageDialog<EnsureDialog> {
     protected CharSequence mCancelLabel;

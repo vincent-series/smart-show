@@ -1,9 +1,10 @@
 package com.coder.zzq.smartshow.dialog;
 
-import android.support.annotation.LayoutRes;
-import android.support.v7.app.AppCompatDialog;
 import android.view.View;
 import android.widget.FrameLayout;
+
+import androidx.annotation.LayoutRes;
+import androidx.appcompat.app.AppCompatDialog;
 
 import com.coder.zzq.toolkit.Utils;
 

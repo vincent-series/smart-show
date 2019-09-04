@@ -1,8 +1,9 @@
 package com.coder.zzq.smartshow.bar.core;
 
 import android.graphics.Color;
-import android.support.annotation.ColorInt;
-import android.support.annotation.ColorRes;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
 
 public interface IBarSetting<View, BarSetting> {
     @ColorInt

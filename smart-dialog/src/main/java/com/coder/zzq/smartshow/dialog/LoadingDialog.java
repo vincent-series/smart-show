@@ -1,7 +1,5 @@
 package com.coder.zzq.smartshow.dialog;
 
-import android.support.annotation.StringRes;
-import android.support.v7.app.AppCompatDialog;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +8,9 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AppCompatDialog;
 
 import com.coder.zzq.toolkit.Utils;
 

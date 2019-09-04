@@ -3,10 +3,11 @@ package com.coder.zzq.smartshow.toast;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Handler;
-import android.support.v7.app.AppCompatDialog;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatDialog;
 
 import com.coder.zzq.toolkit.Utils;
 import com.coder.zzq.toolkit.lifecycle.ActivityStack;

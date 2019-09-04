@@ -2,9 +2,10 @@ package com.coder.zzq.smartshow.dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.view.WindowManager;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.coder.zzq.smartshow.core.SmartShow;
 import com.coder.zzq.toolkit.Utils;

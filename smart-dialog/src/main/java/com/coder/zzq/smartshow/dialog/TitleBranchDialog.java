@@ -1,11 +1,12 @@
 package com.coder.zzq.smartshow.dialog;
 
-import android.support.annotation.ColorInt;
-import android.support.v7.app.AppCompatDialog;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import androidx.annotation.ColorInt;
+import androidx.appcompat.app.AppCompatDialog;
 
 import com.coder.zzq.toolkit.Utils;
 

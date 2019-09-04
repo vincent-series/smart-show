@@ -1,7 +1,8 @@
 package com.coder.zzq.smartshow.bar.core;
 
 import android.graphics.Color;
-import android.support.annotation.ColorInt;
+
+import androidx.annotation.ColorInt;
 
 import com.coder.zzq.toolkit.Utils;
 

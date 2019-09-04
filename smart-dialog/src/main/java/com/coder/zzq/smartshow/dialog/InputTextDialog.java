@@ -1,8 +1,6 @@
 package com.coder.zzq.smartshow.dialog;
 
 import android.app.Activity;
-import android.support.annotation.ColorInt;
-import android.support.v7.app.AppCompatDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -10,6 +8,9 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.ColorInt;
+import androidx.appcompat.app.AppCompatDialog;
 
 import com.coder.zzq.toolkit.Utils;
 

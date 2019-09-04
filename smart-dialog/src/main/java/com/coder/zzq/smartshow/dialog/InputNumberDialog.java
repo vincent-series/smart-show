@@ -1,13 +1,14 @@
 package com.coder.zzq.smartshow.dialog;
 
-import android.support.annotation.StringRes;
-import android.support.v7.app.AppCompatDialog;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AppCompatDialog;
 
 import com.coder.zzq.toolkit.Utils;
 

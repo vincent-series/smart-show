@@ -3,14 +3,15 @@ package com.coder.zzq.smartshow.dialog;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.support.annotation.ColorInt;
-import android.support.annotation.ColorRes;
-import android.support.v7.app.AppCompatDialog;
 import android.util.SparseBooleanArray;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.appcompat.app.AppCompatDialog;
 
 import com.coder.zzq.toolkit.Utils;
 

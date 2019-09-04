@@ -1,7 +1,8 @@
 package com.coder.zzq.smartshow.bar.core;
 
-import android.support.annotation.DrawableRes;
 import android.view.View;
+
+import androidx.annotation.DrawableRes;
 
 public interface IBarShow {
     void show(CharSequence msg);

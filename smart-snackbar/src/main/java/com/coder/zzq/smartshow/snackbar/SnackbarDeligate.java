@@ -1,19 +1,20 @@
 package com.coder.zzq.smartshow.snackbar;
 
 import android.app.Activity;
-import android.support.annotation.NonNull;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.coder.zzq.smartshow.bar.core.BarDelegate;
 import com.coder.zzq.smartshow.bar.core.IBarShow;
 import com.coder.zzq.smartshow.bar.core.IBarShowCallback;
 import com.coder.zzq.smartshow.core.SmartShow;
 import com.coder.zzq.toolkit.Utils;
+import com.google.android.material.snackbar.Snackbar;
 
 final class SnackbarDeligate extends BarDelegate<Snackbar, Snackbar.SnackbarLayout, SnackbarSettingImpl> {
     private SnackbarSettingImpl mSnackbarSetting;
