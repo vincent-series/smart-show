@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -79,12 +80,16 @@ final class SnackbarDeligate extends BarDelegate<Snackbar, Snackbar.SnackbarLayo
 
     @Override
     protected Button getActionView() {
-        return mBar.getView().findViewById(android.support.design.R.id.snackbar_action);
+        ViewGroup snackbarLayout = (ViewGroup) mBar.getView();
+        ViewGroup contentLayout = (ViewGroup) snackbarLayout.getChildAt(0);
+        return (Button) contentLayout.getChildAt(1);
     }
 
     @Override
     protected TextView getMsgView() {
-        return mBar.getView().findViewById(android.support.design.R.id.snackbar_text);
+        ViewGroup snackbarLayout = (ViewGroup) mBar.getView();
+        ViewGroup contentLayout = (ViewGroup) snackbarLayout.getChildAt(0);
+        return (TextView) contentLayout.getChildAt(0);
     }
 
 
