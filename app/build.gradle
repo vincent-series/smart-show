@@ -8,7 +8,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -20,17 +20,17 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    implementation('com.github.the-pig-of-jungle.smart-show:all:2.8.1');
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation('com.github.the-pig-of-jungle.smart-show:all:x2.8.1');
 
 //    implementation project(path: ':smart-snackbar')
 //    implementation project(path: ':smart-dialog')
 //    implementation project(path: ':smart-toast')
 //    implementation project(path: ':smart-topbar')
 
-    //添加与你项目匹配的design依赖库的相应版本
+    //添加与你项目匹配的material依赖库的相应版本
 
-    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.google.android.material:material:1.1.0-alpha09'
 
 }
