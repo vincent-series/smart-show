@@ -5,7 +5,7 @@ import android.app.Activity;
 import com.coder.zzq.smartshow.core.lifecycle.IBarCallback;
 
 
-public class SnackbarCallback implements IBarCallback {
+final class SnackbarCallback implements IBarCallback {
     @Override
     public void dismissOnLeave(Activity activity) {
         if (SnackbarDeligate.hasCreated() && SnackbarDeligate.get().isDismissOnLeave()) {

@@ -2,7 +2,6 @@ package com.coder.zzq.smartshow.snackbar;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
-import android.support.annotation.RestrictTo;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -15,9 +14,7 @@ import com.coder.zzq.smartshow.bar.core.IBarShowCallback;
 import com.coder.zzq.smartshow.core.SmartShow;
 import com.coder.zzq.toolkit.Utils;
 
-
-@RestrictTo(RestrictTo.Scope.LIBRARY)
-public class SnackbarDeligate extends BarDelegate<Snackbar, Snackbar.SnackbarLayout, SnackbarSettingImpl> {
+final class SnackbarDeligate extends BarDelegate<Snackbar, Snackbar.SnackbarLayout, SnackbarSettingImpl> {
     private SnackbarSettingImpl mSnackbarSetting;
 
     private SnackbarDeligate() {

@@ -19,8 +19,8 @@ import com.coder.zzq.smartshow.topbar.view.BaseTopBar;
 import com.coder.zzq.smartshow.topbar.view.TopBar;
 import com.coder.zzq.toolkit.Utils;
 
-@RestrictTo(RestrictTo.Scope.LIBRARY)
-public final class TopbarDelegate extends BarDelegate<TopBar, TopBar.TopbarLayout, TopbarSettingImpl> {
+
+final class TopbarDelegate extends BarDelegate<TopBar, TopBar.TopbarLayout, TopbarSettingImpl> {
 
     private TopbarSettingImpl mTopbarSetting;
 

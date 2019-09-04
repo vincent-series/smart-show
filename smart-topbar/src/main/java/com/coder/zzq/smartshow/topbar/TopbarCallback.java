@@ -9,7 +9,7 @@ import android.widget.FrameLayout;
 import com.coder.zzq.smartshow.core.lifecycle.ITopbarCallback;
 
 
-public class TopbarCallback implements ITopbarCallback {
+final class TopbarCallback implements ITopbarCallback {
     @Override
     public void dismissOnLeave(Activity activity) {
         if (TopbarDelegate.hasCreated() && TopbarDelegate.get().isDismissOnLeave()) {
