@@ -6,6 +6,7 @@
     <color name="smart_show_light_gray">#33cccccc</color>
     <color name="default_cancel_btn_color">#8a000000</color>
     <color name="default_edt_hint_color">#8a000000</color>
+    <color name="default_text_color">#8a000000</color>
 
     <item name="smart_show_dialog_confirm_btn" type="id" />
     <item name="smart_show_dialog_cancel_btn" type="id" />
