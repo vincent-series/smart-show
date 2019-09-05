@@ -94,7 +94,7 @@ public class InputNumberDialog extends SimpleBranchDialog<InputNumberDialog> {
     }
 
     public InputNumberDialog numUnit(String numUnit) {
-        mNumUnit = "(" + numUnit + ")";
+        mNumUnit = numUnit;
         applyNumUnit(mNestedDialog);
         return this;
     }
@@ -107,7 +107,7 @@ public class InputNumberDialog extends SimpleBranchDialog<InputNumberDialog> {
 
     public void showErrorTip(CharSequence errorTip) {
         mErrorTipLine.setVisibility(Utils.isEmpty(errorTip) ? View.GONE : View.VISIBLE);
-        mErrorTipTv.setText("错误：" + errorTip);
+        mErrorTipTv.setText(errorTip);
     }
 
     public void showErrorTip(@StringRes int errorTip) {
@@ -123,9 +123,11 @@ public class InputNumberDialog extends SimpleBranchDialog<InputNumberDialog> {
     protected void initBody(AppCompatDialog dialog, FrameLayout bodyViewWrapper) {
         super.initBody(dialog, bodyViewWrapper);
         mInputEdt = bodyViewWrapper.findViewById(R.id.smart_show_input_edt);
+        mInputEdt.getLayoutParams().width = provideDialogWidth() / 3;
         mErrorTipLine = bodyViewWrapper.findViewById(R.id.smart_show_error_tip_line);
         mErrorTipTv = bodyViewWrapper.findViewById(R.id.smart_show_error_tip);
         mNumUnitTv = bodyViewWrapper.findViewById(R.id.smart_show_num_unit);
+        mNumUnitTv.setMaxWidth(provideDialogWidth() / 3 - Utils.dpToPx(40));
     }
 
     @Override
