@@ -36,7 +36,7 @@
 ![图片加载失败](images/qrcode.jpg)
 ## 引入SmartShow
 [回到模块导航](#模块导航)<br/>
-### 第一步，在Project的gradle文件中添加jitpack仓库
+#### 第一步，在Project的gradle文件中添加jitpack仓库
 <pre><code>
 allprojects {
 
@@ -50,7 +50,7 @@ allprojects {
 
 }
 </code></pre>
-### 第二步，在Module的gradle文件中添加依赖
+#### 第二步，在Module的gradle文件中添加依赖
 * 第一种方式，引入所有模块
 <pre><code>
 
@@ -139,7 +139,7 @@ allprojects {
 
 </code></pre>
 
-### 第三步骤，在Application的onCreate方法中初始化<br/>
+#### 第三步骤，在Application的onCreate方法中初始化<br/>
 <pre><code>
         SmartShow.init(this);
 </code></pre>
