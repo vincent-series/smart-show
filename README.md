@@ -36,8 +36,7 @@
 ![图片加载失败](images/qrcode.jpg)
 ## 引入SmartShow
 [回到模块导航](#模块导航)<br/>
-1. 添加jitpack仓库
-在Project的gradle文件中<br/>
+### 第一步，在Project的gradle文件中添加jitpack仓库
 <pre><code>
 allprojects {
 
@@ -51,9 +50,8 @@ allprojects {
 
 }
 </code></pre>
-2. 添加依赖
-在Module的gradle文件中<br/><br/>
-   * 第一种方式，引入所有模块
+### 第二步，在Module的gradle文件中添加依赖
+* 第一种方式，引入所有模块
 <pre><code>
 
     implementation ('com.github.the-pig-of-jungle.smart-show:all:2.8.3')
@@ -63,16 +61,31 @@ allprojects {
     implementation 'com.android.support:design:x.y.z'
         
 </code></pre>
-   * 第二种方式，自由引入各个模块<br/>
+
+<pre><code>
+    // for androidx
+
+    implementation ('com.github.the-pig-of-jungle.smart-show:all:x2.8.3')
+
+    //如果会使用到SmartSnackbar模块，需添加material库,such as 1.1.0-alpha09
+
+    implementation 'com.google.android.material:material:x.y.z'
+
+</code></pre>
+* 第二种方式，自由引入各个模块<br/>
 
 <pre><code>
 
     //smart toast
 
     implementation 'com.github.the-pig-of-jungle.smart-show:toast:2.8.3'
+</code></pre>
 
-    // for androidx,
+<pre><code>
 
+    //smart toast for androidx
+
+    implementation 'com.github.the-pig-of-jungle.smart-show:toast:x2.8.3'
 </code></pre>
 
 <pre><code>
@@ -84,6 +97,13 @@ allprojects {
 
 <pre><code>
 
+    // smart dialog for androidx
+
+    implementation 'com.github.the-pig-of-jungle.smart-show:dialog:x2.8.3'
+</code></pre>
+
+<pre><code>
+
     // smart topbar
     
     implementation('com.github.the-pig-of-jungle.smart-show:topbar:2.8.3')
@@ -91,15 +111,35 @@ allprojects {
 
 <pre><code>
 
+    // smart topbar for androidx
+
+    implementation('com.github.the-pig-of-jungle.smart-show:topbar:x2.8.3')
+</code></pre>
+
+<pre><code>
+
     // smart snackbar
-    
-    implementation('com.github.the-pig-of-jungle.smart-show:snackbar:2.8.3')
-    
+
+    implementation('com.github.the-pig-of-jungle.smart-show:snackbar:x2.8.3')
+
     //添加与你项目匹配的design依赖库的相应版本
-                
+
     implementation 'com.android.support:design:x.y.z'
 </code></pre>
-3. 在Application的onCreate方法中初始化<br/>
+
+<pre><code>
+
+    // smart snackbar for androidx
+
+    implementation('com.github.the-pig-of-jungle.smart-show:snackbar:x2.8.3')
+
+    //添加material依赖库,such as 1.1.0-alpha09
+
+    implementation 'com.google.android.material:material:x.y.z'
+
+</code></pre>
+
+### 第三步骤，在Application的onCreate方法中初始化<br/>
 <pre><code>
         SmartShow.init(this);
 </code></pre>
