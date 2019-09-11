@@ -50,15 +50,15 @@ public class TestTopbarActivity extends AppCompatActivity {
     }
 
     public void onShortClick(View view) {
-        SmartTopbar.get(this).show("苹果");
+        SmartTopbar.get(this).show(R.string.apple);
     }
 
     public void onLongClick(View view) {
-        SmartTopbar.get(this).showLong("香蕉");
+        SmartTopbar.get(this).showLong(R.string.banana);
     }
 
     public void onIndefinite(View view) {
-        SmartTopbar.get(this).showIndefinite("为该库Start一下好么", "好的", new View.OnClickListener() {
+        SmartTopbar.get(this).showIndefinite("为该库Star一下好么", "好的", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SmartToast.showAtTop("Thank you");
