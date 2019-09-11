@@ -7,10 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.coder.zzq.smartshow.dialog.ClickListAdapter;
 import com.coder.zzq.smartshow.snackbar.SmartSnackbar;
+import com.coder.zzq.smartshow.toast.SmartToast;
 
 import java.util.Arrays;
 
@@ -56,22 +56,22 @@ public class TestSnackbarActivity extends AppCompatActivity {
     }
 
     public void onIndefiniteClick(View view) {
-        SmartSnackbar.get(this).showIndefinite("为该库Start一下好么", "好的",
+        SmartSnackbar.get(this).showIndefinite("为该库Star一下好么", "好的",
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(TestSnackbarActivity.this, "Thank you", Toast.LENGTH_SHORT).show();
+                        SmartToast.showInCenter("Thank you");
                     }
                 });
 
     }
 
     public void onLongClick(View view) {
-        SmartSnackbar.get(this).showLong("香蕉");
+        SmartSnackbar.get(this).show(R.string.banana);
     }
 
     public void onShortClick(View view) {
-        SmartSnackbar.get(this).show("苹果");
+        SmartSnackbar.get(this).show(R.string.apple);
     }
 
 
