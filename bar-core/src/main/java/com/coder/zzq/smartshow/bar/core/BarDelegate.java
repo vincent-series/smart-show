@@ -25,6 +25,8 @@ public abstract class BarDelegate<Bar, ViewParam, BarSetting extends BarSettingI
     protected View.OnClickListener mOnActionClickListener;
     @DrawableRes
     protected int mCurrentIcon;
+    @DrawableRes
+    protected int mTempIcon;
     protected Rect mIconRange;
     protected SparseArray<Drawable> mCacheDrawables;
     protected int mDuration;
@@ -108,7 +110,7 @@ public abstract class BarDelegate<Bar, ViewParam, BarSetting extends BarSettingI
     }
 
 
-    private void showHelper(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener, @DrawableRes int icon, int duration) {
+    private void showHelper(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener, int duration) {
 
         if (mBaseTraceView == null) {
             return;
@@ -118,9 +120,10 @@ public abstract class BarDelegate<Bar, ViewParam, BarSetting extends BarSettingI
         actionText = actionText == null ? "" : actionText;
         onActionClickListener = onActionClickListener == null ? this : onActionClickListener;
 
-        boolean appearanceChanged = appearanceChanged(msg, actionText, icon);
+        boolean appearanceChanged = appearanceChanged(msg, actionText, mTempIcon);
 
-        setting(msg, actionText, onActionClickListener, icon, duration);
+        setting(msg, actionText, onActionClickListener, mTempIcon, duration);
+
 
         if ((isShowing() && appearanceChanged) || mBaseTraceView.getVisibility() != View.VISIBLE) {
             //如果Snackbar正在显示，且内容发生了变化，先隐藏掉再显示，具有切换效果
@@ -167,6 +170,8 @@ public abstract class BarDelegate<Bar, ViewParam, BarSetting extends BarSettingI
             getCacheDrawables().put(icon, Utils.getDrawableFromRes(icon));
         }
         mDuration = duration;
+
+        mTempIcon = 0;
     }
 
     public Rect getIconRange() {
@@ -201,7 +206,7 @@ public abstract class BarDelegate<Bar, ViewParam, BarSetting extends BarSettingI
 
     @Override
     public void show(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener) {
-        showHelper(msg, actionText, onActionClickListener, 0, getShortDuration());
+        showHelper(msg, actionText, onActionClickListener, getShortDuration());
     }
 
 
@@ -218,7 +223,7 @@ public abstract class BarDelegate<Bar, ViewParam, BarSetting extends BarSettingI
 
     @Override
     public void showLong(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener) {
-        showHelper(msg, actionText, onActionClickListener, 0, getLongDuration());
+        showHelper(msg, actionText, onActionClickListener, getLongDuration());
     }
 
 
@@ -236,53 +241,58 @@ public abstract class BarDelegate<Bar, ViewParam, BarSetting extends BarSettingI
 
     @Override
     public void showIndefinite(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener) {
-        showHelper(msg, actionText, onActionClickListener, 0, getIndefiniteDuration());
-    }
-
-
-    @Override
-    public void show(CharSequence msg, int icon) {
-        show(msg, null, icon);
+        showHelper(msg, actionText, onActionClickListener, getIndefiniteDuration());
     }
 
     @Override
-    public void show(CharSequence msg, CharSequence actionText, int icon) {
-        show(msg, actionText, null, icon);
+    public void show(int msg) {
+        show(Utils.getStringFromRes(msg));
     }
 
     @Override
-    public void show(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener, int icon) {
-        showHelper(msg, actionText, onActionClickListener, icon, getShortDuration());
+    public void show(int msg, int actionText) {
+        show(Utils.getStringFromRes(msg), Utils.getStringFromRes(actionText));
     }
 
     @Override
-    public void showLong(CharSequence msg, int icon) {
-        showLong(msg, null, icon);
+    public void show(int msg, int actionText, View.OnClickListener onActionClickListener) {
+        show(Utils.getStringFromRes(msg), Utils.getStringFromRes(actionText), onActionClickListener);
     }
 
     @Override
-    public void showLong(CharSequence msg, CharSequence actionText, int icon) {
-        showLong(msg, actionText, null, icon);
+    public void showLong(int msg) {
+        showLong(Utils.getStringFromRes(msg));
     }
 
     @Override
-    public void showLong(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener, int icon) {
-        showHelper(msg, actionText, onActionClickListener, icon, getLongDuration());
+    public void showLong(int msg, int actionText) {
+        showLong(Utils.getStringFromRes(msg), Utils.getStringFromRes(actionText));
     }
 
     @Override
-    public void showIndefinite(CharSequence msg, int icon) {
-        showIndefinite(msg, null, icon);
+    public void showLong(int msg, int actionText, View.OnClickListener onActionClickListener) {
+        showLong(Utils.getStringFromRes(msg), Utils.getStringFromRes(actionText), onActionClickListener);
     }
 
     @Override
-    public void showIndefinite(CharSequence msg, CharSequence actionText, int icon) {
-        showIndefinite(msg, actionText, null, icon);
+    public void showIndefinite(int msg) {
+        showIndefinite(Utils.getStringFromRes(msg));
     }
 
     @Override
-    public void showIndefinite(CharSequence msg, CharSequence actionText, View.OnClickListener onActionClickListener, int icon) {
-        showHelper(msg, actionText, onActionClickListener, icon, getIndefiniteDuration());
+    public void showIndefinite(int msg, int actionText) {
+        showIndefinite(Utils.getStringFromRes(msg), Utils.getStringFromRes(actionText));
+    }
+
+    @Override
+    public void showIndefinite(int msg, int actionText, View.OnClickListener onActionClickListener) {
+        showIndefinite(Utils.getStringFromRes(msg), Utils.getStringFromRes(actionText), onActionClickListener);
+    }
+
+    @Override
+    public IBarShow icon(int icon) {
+        mTempIcon = icon;
+        return this;
     }
 
     @Override
