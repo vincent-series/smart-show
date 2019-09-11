@@ -139,7 +139,7 @@ allprojects {
 
 </code></pre>
 
-#### 第三步骤，在Application的onCreate方法中初始化<br/>
+#### 第三步，在Application的onCreate方法中初始化<br/>
 <pre><code>
         SmartShow.init(this);
 </code></pre>
@@ -156,16 +156,24 @@ allprojects {
 8. 可配置离开当前页面（退出当前activity或进入新的activity），立即消失正在显示的Toast
 9. 结合主流app消息提示的效果，提供info、success、error、warning、complete、forbid、wait、fail 8 种类型的Toast
 ### API
-调用show方法显示Toast，duration和常用的显示位置体现在方法名上，而不是传参，调用非常简易
+详细文档请参阅wiki:
+* [normal toast](https://github.com/the-pig-of-jungle/smart-show/wiki/NormalToast)
+  * [show at bottom](https://github.com/the-pig-of-jungle/smart-show/wiki/NormalToast#%E9%BB%98%E8%AE%A4%E4%BD%8D%E7%BD%AE%E6%98%BE%E7%A4%BA)
+  * [show in center](https://github.com/the-pig-of-jungle/smart-show/wiki/NormalToast#%E4%B8%AD%E5%A4%AE%E6%98%BE%E7%A4%BA)
+  * [show at top](https://github.com/the-pig-of-jungle/smart-show/wiki/NormalToast#%E9%A1%B6%E9%83%A8%E6%98%BE%E7%A4%BA)
+  * [somewhere](https://github.com/the-pig-of-jungle/smart-show/wiki/NormalToast#%E4%BB%BB%E6%84%8F%E4%BD%8D%E7%BD%AE%E6%98%BE%E7%A4%BA)
+* [emotion toast](https://github.com/the-pig-of-jungle/smart-show/wiki/EmotionToast)
+  * [info](https://github.com/the-pig-of-jungle/smart-show/wiki/EmotionToast#info)
+  * [warning](https://github.com/the-pig-of-jungle/smart-show/wiki/EmotionToast#warning)
+  * [success](https://github.com/the-pig-of-jungle/smart-show/wiki/EmotionToast#success)
+  * [error](https://github.com/the-pig-of-jungle/smart-show/wiki/EmotionToast#error)
+  * [fail](https://github.com/the-pig-of-jungle/smart-show/wiki/EmotionToast#fail)
+  * [complete](https://github.com/the-pig-of-jungle/smart-show/wiki/EmotionToast#complete)
+  * [forbid](https://github.com/the-pig-of-jungle/smart-show/wiki/EmotionToast#forbid)
+  * [waiting](https://github.com/the-pig-of-jungle/smart-show/wiki/EmotionToast#waiting)
 #### 普通 Toast
 默认样式：![图片加载失败](images/toast_normal.gif)设置背景色：![图片加载失败](images/toast_color.gif)
 
-## SmartSnackbar部分
-[回到模块导航](#模块导航)<br/><br/>
-![图片加载失败](images/snackbar_color.gif)
-1. 复用Snackbar实例，当Snackbar正在显示，多次触发时，若msg和actionTex均未改变，则不会重复弹出，否则会有弹出效果
-2. 可修改布局风格，如背景颜色，文字大小和颜色等
-3. 可配置离开当前Activity时，立即消失正在显示的Snackbar。如，在Activity A 上显示了一个Indefinite Snackbar，并且用户没有点击响应，启动activity B，然后再返回A，原来的Snackbar已自动消失
 
 ## SmartTopbar部分
 [回到模块导航](#模块导航)<br/><br/>
@@ -186,8 +194,8 @@ allprojects {
 #### 原理
 SmartDialog并不是android.app.Dialog的子类,只是个包装器，它内部持有一个真正的Dialog，用来显示。SmartDialog负责处理当Activity、Fragment
 生命周期异常时，取消创建或显示所持Dialog。<br/>
-#### 详细文档请移步 [wiki](https://github.com/the-pig-of-jungle/smart-show/wiki)
-
+#### API
+详细文档请参阅wiki:
 * 预定义的SmartDialog实现
   * [NotificationDialog](https://github.com/the-pig-of-jungle/smart-show/wiki/NotificationDialog)
   * [EnsureDialog](https://github.com/the-pig-of-jungle/smart-show/wiki/EnsureDialog)
@@ -202,6 +210,13 @@ SmartDialog并不是android.app.Dialog的子类,只是个包装器，它内部�
   * [Dialog Style](https://github.com/the-pig-of-jungle/smart-show/wiki/%E8%87%AA%E5%AE%9A%E4%B9%89-Dialog-Style)
   * [Dialog 宽度](https://github.com/the-pig-of-jungle/smart-show/wiki/%E8%87%AA%E5%AE%9A%E4%B9%89-Dialog-%E5%AE%BD%E5%BA%A6)
   * [Dialog 属性](https://github.com/the-pig-of-jungle/smart-show/wiki/%E8%87%AA%E5%AE%9A%E4%B9%89-Dialog-%E5%B1%9E%E6%80%A7)
+## SmartSnackbar部分
+[回到模块导航](#模块导航)<br/><br/>
+![图片加载失败](images/snackbar_color.gif)
+1. 复用Snackbar实例，当Snackbar正在显示，多次触发时，若msg和actionTex均未改变，则不会重复弹出，否则会有弹出效果
+2. 可修改布局风格，如背景颜色，文字大小和颜色等
+3. 可配置离开当前Activity时，立即消失正在显示的Snackbar。如，在Activity A 上显示了一个Indefinite Snackbar，并且用户没有点击响应，启动activity B，然后再返回A，原来的Snackbar已自动消失
+
 
 
 
