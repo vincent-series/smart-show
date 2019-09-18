@@ -1,6 +1,6 @@
 ## SmartShow
 关注技术公众号，随时获知库的更新及其他优质技术文章。<br/><br/>
-<img src="images/gz_logo.jpg" width="150" hegiht="150"/>
+<img src="images/gz_logo.jpg" width="150" height="150"/>
 ### 模块导航：
 * [SmartToast](#SmartToast部分)
 * [SmartSnackbar](#SmartSnackbar部分)
@@ -30,10 +30,10 @@
 为使SmartShow库更加健壮，如果您在使用过程中发现任何问题，请联系我，我会立即跟进修复和维护。感谢您的支持！<br/><br/>
 作者：朱志强<br/><br/>
 微信：w361281607<br/><br/>
-<img src="images/wx_2d.jpg" width="150" hegiht="150"/>
+<img src="images/wx_2d.jpg" width="150" height="150"/><br/>
 邮箱：coder_zzq@163.com<br/><br/>
 技术公众号：<br/><br/>
-<img src="images/gz_logo.jpg" width="150" hegiht="150"/>
+<img src="images/gz_logo.jpg" width="150" height="150"/>
 ## 引入SmartShow
 [回到模块导航](#模块导航)<br/>
 #### 第一步，在Project的gradle文件中添加jitpack仓库
