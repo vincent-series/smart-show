@@ -184,6 +184,23 @@ allprojects {
 4. 可配置离开当前Activity时，立即消失正在显示的Topbar。如，在Activity A 上显示了一个Indefinite Topbar，并且用户没有
 点击响应，启动activity B，然后再返回A，原来的Topbar已自动消失
 5. 可通过手势右滑隐藏Topbar
+* normal topbar
+  * [short topbar](https://github.com/the-pig-of-jungle/smart-show/wiki/Short-Topbar)
+    * [show message](https://github.com/the-pig-of-jungle/smart-show/wiki/Short-Topbar#%E6%98%BE%E7%A4%BA%E4%B8%80%E6%9D%A1%E6%B6%88%E6%81%AF)
+    * [show message and aciton](https://github.com/the-pig-of-jungle/smart-show/wiki/Short-Topbar#%E6%8C%87%E5%AE%9A%E5%8A%A8%E4%BD%9C%E6%8C%89%E9%92%AE%E5%93%8D%E5%BA%94%E7%82%B9%E5%87%BB)
+    * [message with icon](https://github.com/the-pig-of-jungle/smart-show/wiki/Short-Topbar#%E4%B8%BA%E6%B6%88%E6%81%AF%E6%96%87%E6%9C%AC%E6%8C%87%E5%AE%9Aicon)
+  * [long topbar](https://github.com/the-pig-of-jungle/smart-show/wiki/Long-Topbar)
+  * [indefinite topbar](https://github.com/the-pig-of-jungle/smart-show/wiki/Indefinite-Topbar)
+* [custom topbar](https://github.com/the-pig-of-jungle/smart-show/wiki/%E5%AE%9A%E5%88%B6%E5%8C%96Topbar)
+  * [background](https://github.com/the-pig-of-jungle/smart-show/wiki/%E5%AE%9A%E5%88%B6%E5%8C%96Topbar#%E8%AE%BE%E7%BD%AE%E8%83%8C%E6%99%AF%E9%A2%9C%E8%89%B2)
+  * [msg text color and size](https://github.com/the-pig-of-jungle/smart-show/wiki/%E5%AE%9A%E5%88%B6%E5%8C%96Topbar#%E8%AE%BE%E7%BD%AE%E6%B6%88%E6%81%AF%E6%96%87%E6%9C%AC%E9%A2%9C%E8%89%B2%E5%8F%8A%E5%A4%A7%E5%B0%8F)
+  * [action text color and size](https://github.com/the-pig-of-jungle/smart-show/wiki/%E5%AE%9A%E5%88%B6%E5%8C%96Topbar#%E8%AE%BE%E7%BD%AE%E5%8A%A8%E4%BD%9C%E6%96%87%E6%9C%AC%E9%A2%9C%E8%89%B2%E5%8F%8A%E5%A4%A7%E5%B0%8F)
+  * [进一步处理UI](https://github.com/the-pig-of-jungle/smart-show/wiki/%E5%AE%9A%E5%88%B6%E5%8C%96Topbar#%E8%BF%9B%E4%B8%80%E6%AD%A5%E5%A4%84%E7%90%86ui)
+  * [离开页面时自动消失](https://github.com/the-pig-of-jungle/smart-show/wiki/%E5%AE%9A%E5%88%B6%E5%8C%96Topbar#%E8%AE%BE%E7%BD%AE%E7%A6%BB%E5%BC%80%E5%BD%93%E5%89%8Dactivity%E6%97%B6%E6%98%AF%E5%90%A6%E7%AB%8B%E5%8D%B3%E9%9A%90%E8%97%8F%E6%AD%A3%E5%9C%A8%E6%98%BE%E7%A4%BA%E7%9A%84topbar%E9%BB%98%E8%AE%A4false)
+* [other API](https://github.com/the-pig-of-jungle/smart-show/wiki/Topbar-other-api)
+  * [isShowing](https://github.com/the-pig-of-jungle/smart-show/wiki/Topbar-other-api#%E5%BD%93%E5%89%8D%E6%98%AF%E5%90%A6%E6%9C%89topbar%E5%9C%A8%E6%98%BE%E7%A4%BA)
+  * [dismiss](https://github.com/the-pig-of-jungle/smart-show/wiki/Topbar-other-api#%E9%9A%90%E8%97%8F%E5%BD%93%E5%89%8D%E6%AD%A3%E5%9C%A8%E6%98%BE%E7%A4%BA%E7%9A%84topbar)
+  * [callback when shown and dismissed](https://github.com/the-pig-of-jungle/smart-show/wiki/Topbar-other-api#%E7%9B%91%E5%90%AC%E6%98%BE%E7%A4%BA%E5%92%8C%E9%9A%90%E8%97%8F)
 
 ## SmartDialog部分
 [回到模块导航](#模块导航)<br/><br/>
