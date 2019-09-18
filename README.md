@@ -184,6 +184,8 @@ allprojects {
 4. 可配置离开当前Activity时，立即消失正在显示的Topbar。如，在Activity A 上显示了一个Indefinite Topbar，并且用户没有
 点击响应，启动activity B，然后再返回A，原来的Topbar已自动消失
 5. 可通过手势右滑隐藏Topbar
+### API
+详细文档请参阅wiki:
 * normal topbar
   * [short topbar](https://github.com/the-pig-of-jungle/smart-show/wiki/Short-Topbar)
     * [show message](https://github.com/the-pig-of-jungle/smart-show/wiki/Short-Topbar#%E6%98%BE%E7%A4%BA%E4%B8%80%E6%9D%A1%E6%B6%88%E6%81%AF)
