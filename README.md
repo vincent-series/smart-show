@@ -1,6 +1,6 @@
 ## SmartShow
 关注技术公众号，随时获知库的更新及其他优质技术文章。<br/><br/>
-![图片加载失败](images/gz_logo.jpg =200x)
+<img src="images/gz_logo.jpg" width="150" hegiht="150"/>
 ### 模块导航：
 * [SmartToast](#SmartToast部分)
 * [SmartSnackbar](#SmartSnackbar部分)
