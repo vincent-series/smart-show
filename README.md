@@ -186,7 +186,7 @@ allprojects {
 5. 可通过手势右滑隐藏Topbar
 ### API
 详细文档请参阅wiki:
-* normal topbar
+* [normal topbar](https://github.com/the-pig-of-jungle/smart-show/wiki/Short-Topbar)
   * [short topbar](https://github.com/the-pig-of-jungle/smart-show/wiki/Short-Topbar)
     * [show message](https://github.com/the-pig-of-jungle/smart-show/wiki/Short-Topbar#%E6%98%BE%E7%A4%BA%E4%B8%80%E6%9D%A1%E6%B6%88%E6%81%AF)
     * [show message and aciton](https://github.com/the-pig-of-jungle/smart-show/wiki/Short-Topbar#%E6%8C%87%E5%AE%9A%E5%8A%A8%E4%BD%9C%E6%8C%89%E9%92%AE%E5%93%8D%E5%BA%94%E7%82%B9%E5%87%BB)
@@ -237,7 +237,7 @@ SmartDialog并不是android.app.Dialog的子类,只是个包装器，它内部�
 3. 可配置离开当前Activity时，立即消失正在显示的Snackbar。如，在Activity A 上显示了一个Indefinite Snackbar，并且用户没有点击响应，启动activity B，然后再返回A，原来的Snackbar已自动消失
 ### API
 详细文档请参阅wiki:
-* normal snackbar
+* [normal snackbar](https://github.com/the-pig-of-jungle/smart-show/wiki/Short-Snackbar)
   * [short snackbar](https://github.com/the-pig-of-jungle/smart-show/wiki/Short-Snackbar)
     * [show message](https://github.com/the-pig-of-jungle/smart-show/wiki/Short-Snackbar#%E6%98%BE%E7%A4%BA%E4%B8%80%E6%9D%A1%E6%B6%88%E6%81%AF)
     * [show message and aciton](https://github.com/the-pig-of-jungle/smart-show/wiki/Short-Snackbar#%E6%8C%87%E5%AE%9A%E5%8A%A8%E4%BD%9C%E6%8C%89%E9%92%AE%E5%93%8D%E5%BA%94%E7%82%B9%E5%87%BB)
