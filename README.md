@@ -30,10 +30,10 @@
 为使SmartShow库更加健壮，如果您在使用过程中发现任何问题，请联系我，我会立即跟进修复和维护。感谢您的支持！<br/><br/>
 作者：朱志强<br/><br/>
 微信：w361281607<br/><br/>
-![图片加载失败](images/wx_2d.jpg)<br/><br/>
+<img src="images/wx_2d.jpg" width="150" hegiht="150"/>
 邮箱：coder_zzq@163.com<br/><br/>
 技术公众号：<br/><br/>
-![图片加载失败](images/qrcode.jpg)
+<img src="images/gz_logo.jpg" width="150" hegiht="150"/>
 ## 引入SmartShow
 [回到模块导航](#模块导航)<br/>
 #### 第一步，在Project的gradle文件中添加jitpack仓库
