@@ -1,5 +1,6 @@
 package com.coder.zzq.smartshow.dialog;
 
+import android.app.Activity;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
@@ -7,6 +8,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatDialog;
 
@@ -115,6 +117,14 @@ public class InputNumberDialog extends SimpleBranchDialog<InputNumberDialog> {
         showErrorTip(Utils.getStringFromRes(errorTip));
     }
 
+    @NonNull
+    @Override
+    protected AppCompatDialog createDialog(Activity activity) {
+        AppCompatDialog dialog = super.createDialog(activity);
+        Utils.popKeyboardWhenDialogShow(dialog);
+        return dialog;
+    }
+
     @Override
     protected int provideBodyLayout() {
         return R.layout.smart_show_input_num;
@@ -125,6 +135,7 @@ public class InputNumberDialog extends SimpleBranchDialog<InputNumberDialog> {
         super.initBody(dialog, bodyViewWrapper);
         mInputEdt = bodyViewWrapper.findViewById(R.id.smart_show_input_edt);
         mInputEdt.getLayoutParams().width = provideDialogWidth() / 3;
+        mInputEdt.requestFocus();
         mErrorTipLine = bodyViewWrapper.findViewById(R.id.smart_show_error_tip_line);
         mErrorTipTv = bodyViewWrapper.findViewById(R.id.smart_show_error_tip);
         mNumUnitTv = bodyViewWrapper.findViewById(R.id.smart_show_num_unit);
@@ -136,7 +147,7 @@ public class InputNumberDialog extends SimpleBranchDialog<InputNumberDialog> {
         super.applyBody(dialog);
         applyNumType(dialog);
         applyHint(dialog);
-        mInputEdt.setText(mDefaultNum);
+        mInputEdt.setText(Utils.isEmpty(mDefaultNum) ? (mNumberType == NUMBER_TYPE_INT ? "0" : "0.00") : mDefaultNum);
         mInputEdt.setSelection(mInputEdt.getText().length());
         mNumUnitTv.setText(mNumUnit);
     }
@@ -152,7 +163,7 @@ public class InputNumberDialog extends SimpleBranchDialog<InputNumberDialog> {
         super.resetDialogWhenShowAgain(dialog);
         showErrorTip(null);
         if (mClearWhenShowAgain) {
-            mInputEdt.setText(mDefaultNum);
+            mInputEdt.setText(Utils.isEmpty(mDefaultNum) ? (mNumberType == NUMBER_TYPE_INT ? "0" : "0.00") : mDefaultNum);
         }
         mInputEdt.setSelection(mInputEdt.getText().length());
     }

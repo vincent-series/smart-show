@@ -121,6 +121,7 @@ public class InputTextDialog extends SimpleBranchDialog<InputTextDialog> {
         bodyViewWrapper.setPadding(bodyViewWrapper.getPaddingLeft(), bodyViewWrapper.getPaddingTop(),
                 bodyViewWrapper.getPaddingRight(), 0);
         mInputEdt = bodyViewWrapper.findViewById(R.id.smart_show_input_edt);
+        mInputEdt.requestFocus();
         mInputCountView = bodyViewWrapper.findViewById(R.id.smart_show_input_count_mark);
         mInputEdt.addTextChangedListener(new TextWatcher() {
             @Override

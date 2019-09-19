@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/smart_show_edt_cursor_color"/>
+    <size android:width="2dp"/>
+    <corners android:radius="1dp"/>
+</shape>
