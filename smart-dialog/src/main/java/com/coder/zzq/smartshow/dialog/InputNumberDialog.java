@@ -1,5 +1,7 @@
 package com.coder.zzq.smartshow.dialog;
 
+import android.app.Activity;
+import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatDialog;
 import android.view.View;
@@ -114,6 +116,14 @@ public class InputNumberDialog extends SimpleBranchDialog<InputNumberDialog> {
         showErrorTip(Utils.getStringFromRes(errorTip));
     }
 
+    @NonNull
+    @Override
+    protected AppCompatDialog createDialog(Activity activity) {
+        AppCompatDialog dialog = super.createDialog(activity);
+        Utils.popKeyboardWhenDialogShow(dialog);
+        return dialog;
+    }
+
     @Override
     protected int provideBodyLayout() {
         return R.layout.smart_show_input_num;
@@ -124,6 +134,7 @@ public class InputNumberDialog extends SimpleBranchDialog<InputNumberDialog> {
         super.initBody(dialog, bodyViewWrapper);
         mInputEdt = bodyViewWrapper.findViewById(R.id.smart_show_input_edt);
         mInputEdt.getLayoutParams().width = provideDialogWidth() / 3;
+        mInputEdt.requestFocus();
         mErrorTipLine = bodyViewWrapper.findViewById(R.id.smart_show_error_tip_line);
         mErrorTipTv = bodyViewWrapper.findViewById(R.id.smart_show_error_tip);
         mNumUnitTv = bodyViewWrapper.findViewById(R.id.smart_show_num_unit);
