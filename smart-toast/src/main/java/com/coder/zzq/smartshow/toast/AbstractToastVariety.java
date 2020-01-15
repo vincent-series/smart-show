@@ -14,7 +14,7 @@ import java.lang.reflect.Field;
 
 import static com.coder.zzq.smartshow.toast.ToastTags.TOAST_TAG_SRC;
 
-abstract class AbstractToastVariety {
+abstract class AbstractToastVariety implements Runnable {
     public static final int TOAST_TAG_EMOTION = -2;
 
     public static final int EMOTION_NONE = 0;
@@ -27,6 +27,8 @@ abstract class AbstractToastVariety {
     public static final int EMOTION_COMPLETE = 6;
     public static final int EMOTION_FORBID = 7;
     public static final int EMOTION_WAITING = 8;
+
+    public static final int DELAY_SHOW_TIME = 400;
 
 
     public AbstractToastVariety(int tag) {
@@ -60,6 +62,8 @@ abstract class AbstractToastVariety {
     protected ShowCallback mShowCallback;
 
     protected long mLastShowTime;
+    protected boolean mDelayShow;
+    protected Handler mShowHandler = new Handler();
 
 
     protected void showHelper(CharSequence msg, int emotionType, int gravity, int xOffset, int yOffset, int duration) {
@@ -97,11 +101,28 @@ abstract class AbstractToastVariety {
     protected void show() {
         if (Utils.isNotificationPermitted()) {
             mToast.show();
-        } else {
-            VirtualToastManager.get().show(mToast, mWindowParams);
+            recordShowTime();
+            return;
         }
+
+        if (mDelayShow) {
+            mShowHandler.removeCallbacks(this);
+            mShowHandler.postDelayed(this, DELAY_SHOW_TIME);
+            mDelayShow = false;
+        } else {
+            run();
+        }
+    }
+
+    private void recordShowTime() {
         mLastShowTime = System.currentTimeMillis();
         EasyLogger.d("show toast" + Utils.getObjectDesc(mToast));
+    }
+
+    @Override
+    public void run() {
+        VirtualToastManager.get().show(mToast, mWindowParams);
+        recordShowTime();
     }
 
     protected void updateToast() {

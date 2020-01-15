@@ -47,4 +47,6 @@ public interface ITextShow {
 
     void showLongAtLocation(@StringRes int msg, int gravity, float xOffsetDp, float yOffsetDp);
 
+    ITextShow leave();
+
 }

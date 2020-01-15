@@ -410,14 +410,18 @@ public final class SmartToast {
         ToastDelegate.get().getEmotionToastVariety().waitingLong(msg, iconRes);
     }
 
+    public static ITextShow leave(){
+        ToastDelegate.get().getDefaultToastVariety().mDelayShow = true;
+        return ToastDelegate.get().getDefaultToastVariety();
+    }
 
-    public static ITextShow get(int tag) {
-        return ToastDelegate.get().getToastVarietyByTag(tag);
+    public static IEmotionShow leaveForEmotion(){
+        ToastDelegate.get().getEmotionToastVariety().mDelayShow = true;
+        return ToastDelegate.get().getEmotionToastVariety();
     }
 
 
-    public static <T> T variety(int tag) {
-
+    public static ITextShow get(int tag) {
         return ToastDelegate.get().getToastVarietyByTag(tag);
     }
 
