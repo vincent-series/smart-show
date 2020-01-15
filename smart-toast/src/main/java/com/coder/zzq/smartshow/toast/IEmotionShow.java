@@ -149,4 +149,7 @@ public interface IEmotionShow {
 
     void waitingLong(CharSequence msg, @DrawableRes int iconRes);
 
+
+    IEmotionShow leave();
+
 }

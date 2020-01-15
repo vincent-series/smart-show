@@ -95,4 +95,10 @@ abstract class TextToastVariety extends AbstractToastVariety implements ITextSho
     public void showLongAtLocation(int msg, int gravity, float xOffsetDp, float yOffsetDp) {
         showLongAtLocation(Utils.getStringFromRes(msg), gravity, xOffsetDp, yOffsetDp);
     }
+
+    @Override
+    public ITextShow leave() {
+        mDelayShow = true;
+        return this;
+    }
 }

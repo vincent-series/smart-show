@@ -414,4 +414,10 @@ final class EmotionToastVariety extends AbstractToastVariety implements IEmotion
     public void waitingLong(CharSequence msg, int iconRes) {
         showHelper(msg, EMOTION_WAITING, Gravity.CENTER, 0, 0, Toast.LENGTH_LONG);
     }
+
+    @Override
+    public IEmotionShow leave() {
+        mDelayShow = true;
+        return this;
+    }
 }
