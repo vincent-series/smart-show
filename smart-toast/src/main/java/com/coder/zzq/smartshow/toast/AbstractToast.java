@@ -22,7 +22,8 @@ class AbstractToast<ToastType extends IToast, ShowApi> implements IToast<ToastTy
     protected int mGravity;
     protected int mXOffset;
     protected int mYOffset = -1;
-    protected boolean mLeave = false;
+    protected boolean mGoForAnotherPage = false;
+    protected boolean mForceDismissWhenLeave = false;
 
 
     protected AbstractToast<ToastType, ShowApi> toastUI(AbstractToastUI toastUI) {
@@ -72,9 +73,19 @@ class AbstractToast<ToastType extends IToast, ShowApi> implements IToast<ToastTy
     }
 
     @Override
-    public ToastType leave() {
-        mLeave = true;
+    public ToastType goForAnotherPage() {
+        mGoForAnotherPage = true;
         return (ToastType) this;
+    }
+
+    @Override
+    public ToastType forceDismissWhenLeave(boolean forceDismiss) {
+        mForceDismissWhenLeave = forceDismiss;
+        return (ToastType) this;
+    }
+
+    public boolean isForceDismissWhenLeave() {
+        return mForceDismissWhenLeave;
     }
 
     protected Object getArg(@NonNull String argName) {
@@ -134,7 +145,7 @@ class AbstractToast<ToastType extends IToast, ShowApi> implements IToast<ToastTy
         if (Utils.isNotificationPermitted()) {
             mToast.show();
         } else {
-            VirtualToastManager.get().show(mToast, mLeave);
+            VirtualToastManager.get().show(mToast, mGoForAnotherPage);
         }
     }
 
@@ -188,7 +199,8 @@ class AbstractToast<ToastType extends IToast, ShowApi> implements IToast<ToastTy
         mGravity = 0;
         mXOffset = 0;
         mYOffset = -1;
-        mLeave = false;
+        mGoForAnotherPage = false;
+        mForceDismissWhenLeave = false;
 
         EasyLogger.d("reset toast " + Utils.getObjectDesc(this));
     }

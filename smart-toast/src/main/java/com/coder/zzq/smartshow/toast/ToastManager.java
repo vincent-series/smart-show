@@ -7,7 +7,6 @@ import com.coder.zzq.toolkit.log.EasyLogger;
  * Created by 朱志强 on 2018/9/8.
  */
 final class ToastManager {
-    private Setting mSetting;
     private AbstractToast mCurrentToast;
 
     private ToastManager() {
@@ -31,7 +30,7 @@ final class ToastManager {
 
 
     public boolean isDismissOnLeave() {
-        return !Utils.isNotificationPermitted() || (mSetting != null && mSetting.isDismissOnLeave());
+        return !Utils.isNotificationPermitted() || (mCurrentToast != null && mCurrentToast.isForceDismissWhenLeave());
     }
 
     public boolean isShowing() {
@@ -58,5 +57,9 @@ final class ToastManager {
         }
 
         return needShow;
+    }
+
+    public boolean goForAnotherPage() {
+        return mCurrentToast != null && mCurrentToast.mGoForAnotherPage;
     }
 }

@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 
 
 public interface IToast<ToastType extends IToast, ShowApi> {
-    ToastType leave();
+    ToastType goForAnotherPage();
+
+    ToastType forceDismissWhenLeave(boolean forceDismiss);
 
     ToastType addArg(@NonNull String argName, Object argValue);
 
