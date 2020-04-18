@@ -1,70 +1,84 @@
 package com.coder.zzq.smartshow.toast;
 
-import android.util.SparseArray;
-import android.widget.Toast;
+import com.coder.zzq.toolkit.Utils;
+import com.coder.zzq.toolkit.log.EasyLogger;
 
-import com.coder.zzq.toolkit.Toolkit;
+import java.util.LinkedList;
+import java.util.List;
 
-class ToastCache {
-    private static ToastCache sToastCache;
-    private SparseArray<AbstractToastVariety> mToastVarieties;
-    private IToastProvider mToastProvider;
+public class ToastCache {
+    private static List<CustomToast> sCustomToasts;
+    private static List<OriginalToast> sOriginalToasts;
+    private static List<EmotionToast> sEmotionToasts;
 
-    private ToastCache() {
-
-    }
-
-    public static ToastCache get() {
-        if (sToastCache == null) {
-            sToastCache = new ToastCache();
+    private static List<CustomToast> getCustomToasts() {
+        if (sCustomToasts == null) {
+            sCustomToasts = new LinkedList<>();
         }
-
-        return sToastCache;
+        return sCustomToasts;
     }
 
-
-    private SparseArray<AbstractToastVariety> getToastTagContainer() {
-        if (mToastVarieties == null) {
-            mToastVarieties = new SparseArray<>(4);
+    private static List<OriginalToast> getOriginalToasts() {
+        if (sOriginalToasts == null) {
+            sOriginalToasts = new LinkedList<>();
         }
-        return mToastVarieties;
+        return sOriginalToasts;
     }
 
 
-    private boolean isToastVarietyCacheEmpty() {
-        return mToastVarieties == null || mToastVarieties.size() == 0;
-    }
-
-    public void setToastProvider(IToastProvider toastProvider) {
-        mToastProvider = toastProvider;
-    }
-
-    public AbstractToastVariety retrieveToastTagFromCache(final int toastTag) {
-        AbstractToastVariety toastVariety = getToastTagContainer().get(toastTag);
-        if (toastVariety == null) {
-            switch (toastTag) {
-                case ToastTags.TOAST_TAG_SRC:
-                    toastVariety = new SrcToastVariety();
-                    break;
-                case AbstractToastVariety.TOAST_TAG_EMOTION:
-                    int color = ToastDelegate.get().hasSetting() ? ToastDelegate.get().setting().getEmotionToastThemeColor() : ISetting.DEFAULT_EMOTION_TOAST_THEME_COLOR;
-                    toastVariety = new EmotionToastVariety(color);
-                    break;
-                default:
-                    toastVariety = new TextToastVariety(toastTag) {
-                        @Override
-                        protected Toast createToast() {
-                            return mToastProvider.createCustomToast(toastTag, Toolkit.getContext());
-                        }
-                    };
-                    break;
-            }
-            toastVariety.setShowCallback(ToastDelegate.get());
-            getToastTagContainer().put(toastTag, toastVariety);
+    private static List<EmotionToast> getEmotionToasts() {
+        if (sEmotionToasts == null) {
+            sEmotionToasts = new LinkedList<>();
         }
-
-        return toastVariety;
+        return sEmotionToasts;
     }
 
+    private static boolean withoutCachedToasts(List toastRecords) {
+        return toastRecords == null || toastRecords.isEmpty();
+    }
 
+    public static void cacheRecord(AbstractToast record) {
+        if (record == null) {
+            return;
+        }
+        record.reset();
+        EasyLogger.d("cached toast " + Utils.getObjectDesc(record));
+        if (record.getClass() == PlainToast.class) {
+            getCustomToasts().add((CustomToast) record);
+        } else if (record.getClass() == OriginalToast.class) {
+            getOriginalToasts().add((OriginalToast) record);
+        } else if (record.getClass() == EmotionToast.class) {
+            getEmotionToasts().add((EmotionToast) record);
+        }
+    }
+
+    public static CustomToast provideCustomToast() {
+        if (withoutCachedToasts(sCustomToasts)) {
+            EasyLogger.d("no cached custom toast and create new one");
+            return new CustomToast();
+        } else {
+            EasyLogger.d("use cached custom toast " + Utils.getObjectDesc(sCustomToasts.get(0)));
+            return sCustomToasts.remove(0);
+        }
+    }
+
+    public static OriginalToast provideOriginalToast() {
+        if (withoutCachedToasts(sOriginalToasts)) {
+            EasyLogger.d("no cached original toast and create new one");
+            return new OriginalToast();
+        } else {
+            EasyLogger.d("use cached original toast " + Utils.getObjectDesc(sOriginalToasts.get(0)));
+            return (OriginalToast) sOriginalToasts.remove(0).toastUI(new OriginalToastUI());
+        }
+    }
+
+    public static IEmotionToast provideEmotionToast() {
+        if (withoutCachedToasts(sEmotionToasts)) {
+            EasyLogger.d("no cached emotion toast and create new one");
+            return new EmotionToast();
+        } else {
+            EasyLogger.d("use cached emotion toast " + Utils.getObjectDesc(sEmotionToasts.get(0)));
+            return (EmotionToast) sEmotionToasts.remove(0).toastUI(new EmotionToastUI());
+        }
+    }
 }

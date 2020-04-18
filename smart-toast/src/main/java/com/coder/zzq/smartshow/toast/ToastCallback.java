@@ -8,14 +8,14 @@ import com.coder.zzq.smartshow.core.lifecycle.IToastCallback;
 final class ToastCallback implements IToastCallback {
     @Override
     public void dismissOnLeave() {
-        if (ToastDelegate.hasCreated() && ToastDelegate.get().isDismissOnLeave()) {
-            ToastDelegate.get().dismiss();
+        if (ToastManager.hasCreated() && ToastManager.get().isDismissOnLeave()) {
+            ToastManager.get().dismiss();
         }
     }
 
     @Override
     public void recycleOnDestroy(Activity activity) {
-        if (VirtualToastManager.hasCreated()){
+        if (VirtualToastManager.hasCreated()) {
             VirtualToastManager.get().destroy(activity);
         }
     }
