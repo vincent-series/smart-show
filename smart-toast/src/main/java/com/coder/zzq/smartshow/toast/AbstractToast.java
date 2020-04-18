@@ -108,7 +108,7 @@ class AbstractToast<ToastType extends IToast, ShowApi> implements IToast<ToastTy
 
     private boolean uiChanged(AbstractToast toast) {
         return mToastUI.getClass() != toast.getToastUI().getClass()
-                || !TextUtils.equals(mMsg, toast.mMsg) || !com.coder.zzq.smartshow.toast.Utils.equals(getUIArguments(), toast.getUIArguments());
+                || !TextUtils.equals(mMsg, toast.mMsg) || !Utils.equals(getUIArguments(), toast.getUIArguments());
     }
 
     private boolean locationChanged(AbstractToast toast) {

@@ -48,7 +48,7 @@ public class UIArguments {
 
     @Override
     public boolean equals(@Nullable Object obj) {
-        return com.coder.zzq.smartshow.toast.Utils.equals(getArgumentsMap(), ((UIArguments) obj).getArgumentsMap());
+        return Utils.equals(getArgumentsMap(), ((UIArguments) obj).getArgumentsMap());
     }
 
     @NonNull
