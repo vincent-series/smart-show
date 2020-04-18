@@ -22,7 +22,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-//    implementation('com.github.the-pig-of-jungle.smart-show:all:x2.8.3');
+//    implementation('com.github.the-pig-of-jungle.smart-show:all:3.0.0');
 
     implementation project(path: ':all')
 
