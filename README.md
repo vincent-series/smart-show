@@ -58,7 +58,7 @@ allprojects {
 <pre><code>
     // for androidx
 
-    implementation ('com.github.the-pig-of-jungle.smart-show:all:3.0.1')
+    implementation ('com.github.the-pig-of-jungle.smart-show:all:3.0.2')
 
     //如果会使用到SmartSnackbar模块，需添加material库,such as 1.1.0-alpha09
 
@@ -69,7 +69,7 @@ allprojects {
 <pre><code>
     //for support
 
-    implementation ('com.github.the-pig-of-jungle.smart-show-support:all:3.0.1')
+    implementation ('com.github.the-pig-of-jungle.smart-show-support:all:3.0.2')
 
     //如果会使用到SmartSnackbar模块，需添加design库
 
@@ -82,7 +82,7 @@ allprojects {
 
     //smart toast for androidx
 
-    implementation 'com.github.the-pig-of-jungle.smart-show:toast:3.0.1'
+    implementation 'com.github.the-pig-of-jungle.smart-show:toast:3.0.2'
 
 </code></pre>
 
@@ -90,7 +90,7 @@ allprojects {
 
     //smart toast for support
 
-    implementation 'com.github.the-pig-of-jungle.smart-show-support:toast:3.0.1'
+    implementation 'com.github.the-pig-of-jungle.smart-show-support:toast:3.0.2'
 
 </code></pre>
 
@@ -98,7 +98,7 @@ allprojects {
 
     //smart dialog for androidx
 
-    implementation 'com.github.the-pig-of-jungle.smart-show:dialog:3.0.1'
+    implementation 'com.github.the-pig-of-jungle.smart-show:dialog:3.0.2'
 
 </code></pre>
 
@@ -106,7 +106,7 @@ allprojects {
 
     // smart dialog for support
 
-    implementation 'com.github.the-pig-of-jungle.smart-show-support:dialog:3.0.1'
+    implementation 'com.github.the-pig-of-jungle.smart-show-support:dialog:3.0.2'
 
 </code></pre>
 
@@ -114,7 +114,7 @@ allprojects {
 
     //smart topbar for androidx
 
-    implementation('com.github.the-pig-of-jungle.smart-show:topbar:3.0.1')
+    implementation('com.github.the-pig-of-jungle.smart-show:topbar:3.0.2')
 
 </code></pre>
 
@@ -122,14 +122,14 @@ allprojects {
 
     // smart topbar for support
 
-    implementation('com.github.the-pig-of-jungle.smart-show-support:topbar:3.0.1')
+    implementation('com.github.the-pig-of-jungle.smart-show-support:topbar:3.0.2')
 </code></pre>
 
 <pre><code>
 
     //smart snackbar for androidx
 
-    implementation('com.github.the-pig-of-jungle.smart-show:snackbar:3.0.1')
+    implementation('com.github.the-pig-of-jungle.smart-show:snackbar:3.0.2')
 
     //添加material依赖库,such as 1.1.0-alpha09
 
@@ -141,7 +141,7 @@ allprojects {
 
     // smart snackbar for support
 
-    implementation('com.github.the-pig-of-jungle.smart-show-support:snackbar:3.0.1')
+    implementation('com.github.the-pig-of-jungle.smart-show-support:snackbar:3.0.2')
 
     //添加与你项目匹配的design依赖库的相应版本
 
