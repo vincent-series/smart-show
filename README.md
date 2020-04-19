@@ -1,6 +1,6 @@
 ## SmartShow
-★★★ 从3.0.0版本开始，默认的依赖引用方式引用的是androidx版本，support版本会同步更新。<br/><br/>
-★★★ support版本的源码单独抽离成库,详见[smart-show-support](https://github.com/the-pig-of-jungle/smart-show-support)<br/><br/>
+★★★ 从3.0.0版本开始，默认的依赖引用方式引用的是androidx版本，support版本也会同步更新。<br/><br/>
+★★★ support版本的源码单独分离成库,详见[smart-show-support](https://github.com/the-pig-of-jungle/smart-show-support)<br/><br/>
 ★★★ 详细的API文档请查看[wiki](https://github.com/the-pig-of-jungle/smart-show/wiki)。<br/><br/>
 ★★★ 关注技术公众号，随时获知库的更新及其他优质技术文章。<br/><br/>
 <img src="images/gz_logo.jpeg" width="200" height="200"/>
@@ -33,10 +33,10 @@
 为使SmartShow库更加健壮，如果您在使用过程中发现任何问题，请联系我，我会立即跟进修复和维护。感谢您的支持！<br/><br/>
 作者：朱志强<br/><br/>
 微信：w361281607<br/><br/>
-<img src="images/wx_2d.jpg" width="150" height="150"/><br/>
+<img src="images/wx_2d.jpeg" width="180" height="180"/><br/>
 邮箱：coder_zzq@163.com<br/><br/>
 技术公众号：<br/><br/>
-<img src="images/gz_logo.jpg" width="150" height="150"/>
+<img src="images/gz_logo.jpeg" width="180" height="180"/>
 ## 引入SmartShow
 [回到模块导航](#模块导航)<br/>
 #### 第一步，在Project的gradle文件中添加jitpack仓库
@@ -56,8 +56,19 @@ allprojects {
 #### 第二步，在Module的gradle文件中添加依赖
 * 第一种方式，引入所有模块
 <pre><code>
+    // for androidx
 
-    implementation ('com.github.the-pig-of-jungle.smart-show:all:2.8.5')
+    implementation ('com.github.the-pig-of-jungle.smart-show:all:3.0.1')
+
+    //如果会使用到SmartSnackbar模块，需添加material库,such as 1.1.0-alpha09
+
+    implementation 'com.google.android.material:material:x.y.z'
+
+</code></pre>
+
+<pre><code>
+
+    implementation ('com.github.the-pig-of-jungle.smart-show-support:all:3.0.1')
 
     //如果会使用到SmartSnackbar模块，需添加design库
 
@@ -65,81 +76,72 @@ allprojects {
 
 </code></pre>
 
-<pre><code>
-    // for androidx
-
-    implementation ('com.github.the-pig-of-jungle.smart-show:all:x2.8.5')
-
-    //如果会使用到SmartSnackbar模块，需添加material库,such as 1.1.0-alpha09
-
-    implementation 'com.google.android.material:material:x.y.z'
-
-</code></pre>
 * 第二种方式，自由引入各个模块<br/>
-
-<pre><code>
-
-    //smart toast
-
-    implementation 'com.github.the-pig-of-jungle.smart-show:toast:2.8.5'
-</code></pre>
 
 <pre><code>
 
     //smart toast for androidx
 
-    implementation 'com.github.the-pig-of-jungle.smart-show:toast:x2.8.5'
+    implementation 'com.github.the-pig-of-jungle.smart-show:toast:3.0.1'
 </code></pre>
 
 <pre><code>
 
-    // smart dialog
+    //smart toast for support
 
-    implementation 'com.github.the-pig-of-jungle.smart-show:dialog:2.8.5'
+    implementation 'com.github.the-pig-of-jungle.smart-show-support:toast:3.0.1'
 </code></pre>
+
 
 <pre><code>
 
     // smart dialog for androidx
 
-    implementation 'com.github.the-pig-of-jungle.smart-show:dialog:x2.8.5'
+    implementation 'com.github.the-pig-of-jungle.smart-show:dialog:3.0.1'
 </code></pre>
 
 <pre><code>
 
-    // smart topbar
+    // smart dialog for support
 
-    implementation('com.github.the-pig-of-jungle.smart-show:topbar:2.8.5')
+    implementation 'com.github.the-pig-of-jungle.smart-show-support:dialog:3.0.1'
 </code></pre>
 
 <pre><code>
 
     // smart topbar for androidx
 
-    implementation('com.github.the-pig-of-jungle.smart-show:topbar:x2.8.5')
+    implementation('com.github.the-pig-of-jungle.smart-show:topbar:3.0.1')
 </code></pre>
 
 <pre><code>
 
-    // smart snackbar
+    // smart topbar for support
 
-    implementation('com.github.the-pig-of-jungle.smart-show:snackbar:x2.8.5')
-
-    //添加与你项目匹配的design依赖库的相应版本
-
-    implementation 'com.android.support:design:x.y.z'
+    implementation('com.github.the-pig-of-jungle.smart-show-support:topbar:3.0.1')
 </code></pre>
 
 <pre><code>
 
     // smart snackbar for androidx
 
-    implementation('com.github.the-pig-of-jungle.smart-show:snackbar:x2.8.5')
+    implementation('com.github.the-pig-of-jungle.smart-show:snackbar:3.0.1')
 
     //添加material依赖库,such as 1.1.0-alpha09
 
     implementation 'com.google.android.material:material:x.y.z'
 
+</code></pre>
+
+<pre><code>
+
+    // smart snackbar for support
+
+    implementation('com.github.the-pig-of-jungle.smart-show-support:snackbar:3.0.1')
+
+    //添加与你项目匹配的design依赖库的相应版本
+
+    implementation 'com.android.support:design:x.y.z'
 </code></pre>
 
 #### 第三步，在Application的onCreate方法中初始化<br/>
