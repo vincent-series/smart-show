@@ -1,5 +1,6 @@
 ## SmartShow
-*** 从3.0.0版本开始，默认的依赖引用方式引用的是androidx版本，support版本的源码单独抽离成库,详见[smart-show-support]
+★★★ 从3.0.0版本开始，默认的依赖引用方式引用的是androidx版本，support版本会同步更新。
+    support版本的源码单独抽离成库,详见[smart-show-support]
 ★★★ 详细的API文档请查看[wiki](https://github.com/the-pig-of-jungle/smart-show/wiki)。<br/><br/>
 ★★★ 关注技术公众号，随时获知库的更新及其他优质技术文章。<br/><br/>
 <img src="images/gz_logo.jpg" width="150" height="150"/>
