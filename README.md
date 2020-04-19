@@ -3,7 +3,7 @@
 ★★★ support版本的源码单独抽离成库,详见[smart-show-support](https://github.com/the-pig-of-jungle/smart-show-support)<br/><br/>
 ★★★ 详细的API文档请查看[wiki](https://github.com/the-pig-of-jungle/smart-show/wiki)。<br/><br/>
 ★★★ 关注技术公众号，随时获知库的更新及其他优质技术文章。<br/><br/>
-<img src="images/gz_logo_img.jpg" width="150" height="150"/>
+<img src="images/gz_logo_img.jpg"/>
 ### 模块导航：
 * [SmartToast](#SmartToast部分)
 * [SmartSnackbar](#SmartSnackbar部分)
