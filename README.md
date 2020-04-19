@@ -78,6 +78,7 @@ allprojects {
 </code></pre>
 
 * 第二种方式，自由引入各个模块<br/>
+最好保证不同模块的版本号一致，以便其内部依赖的基本库版本相同。
 <pre><code>
 
     //smart toast for androidx
