@@ -67,6 +67,7 @@ allprojects {
 </code></pre>
 
 <pre><code>
+    //for support
 
     implementation ('com.github.the-pig-of-jungle.smart-show-support:all:3.0.1')
 
@@ -77,53 +78,32 @@ allprojects {
 </code></pre>
 
 * 第二种方式，自由引入各个模块<br/>
-
+for androidx
 <pre><code>
 
-    //smart toast for androidx
+    //smart toast
 
     implementation 'com.github.the-pig-of-jungle.smart-show:toast:3.0.1'
+
 </code></pre>
 
 <pre><code>
 
-    //smart toast for support
-
-    implementation 'com.github.the-pig-of-jungle.smart-show-support:toast:3.0.1'
-</code></pre>
-
-
-<pre><code>
-
-    // smart dialog for androidx
+    //smart dialog
 
     implementation 'com.github.the-pig-of-jungle.smart-show:dialog:3.0.1'
+
 </code></pre>
 
 <pre><code>
 
-    // smart dialog for support
-
-    implementation 'com.github.the-pig-of-jungle.smart-show-support:dialog:3.0.1'
-</code></pre>
-
-<pre><code>
-
-    // smart topbar for androidx
+    //smart topbar
 
     implementation('com.github.the-pig-of-jungle.smart-show:topbar:3.0.1')
+
 </code></pre>
 
 <pre><code>
-
-    // smart topbar for support
-
-    implementation('com.github.the-pig-of-jungle.smart-show-support:topbar:3.0.1')
-</code></pre>
-
-<pre><code>
-
-    // smart snackbar for androidx
 
     implementation('com.github.the-pig-of-jungle.smart-show:snackbar:3.0.1')
 
@@ -131,6 +111,28 @@ allprojects {
 
     implementation 'com.google.android.material:material:x.y.z'
 
+</code></pre>
+for support
+<pre><code>
+
+    //smart toast
+
+    implementation 'com.github.the-pig-of-jungle.smart-show-support:toast:3.0.1'
+</code></pre>
+
+<pre><code>
+
+    // smart dialog
+
+    implementation 'com.github.the-pig-of-jungle.smart-show-support:dialog:3.0.1'
+
+</code></pre>
+
+<pre><code>
+
+    // smart topbar
+
+    implementation('com.github.the-pig-of-jungle.smart-show-support:topbar:3.0.1')
 </code></pre>
 
 <pre><code>
