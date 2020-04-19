@@ -166,11 +166,18 @@ allprojects {
 9. 结合主流app消息提示的效果，提供info、success、error、warning、complete、forbid、wait、fail 8 种类型的Toast
 ### API
 详细文档请参阅wiki:
-* [normal toast](https://github.com/the-pig-of-jungle/smart-show/wiki/NormalToast)
+* [original toast](https://github.com/the-pig-of-jungle/smart-show/wiki/OriginalToast)
   * [show at bottom](https://github.com/the-pig-of-jungle/smart-show/wiki/NormalToast#%E9%BB%98%E8%AE%A4%E4%BD%8D%E7%BD%AE%E6%98%BE%E7%A4%BA)
   * [show in center](https://github.com/the-pig-of-jungle/smart-show/wiki/NormalToast#%E4%B8%AD%E5%A4%AE%E6%98%BE%E7%A4%BA)
   * [show at top](https://github.com/the-pig-of-jungle/smart-show/wiki/NormalToast#%E9%A1%B6%E9%83%A8%E6%98%BE%E7%A4%BA)
   * [somewhere](https://github.com/the-pig-of-jungle/smart-show/wiki/NormalToast#%E4%BB%BB%E6%84%8F%E4%BD%8D%E7%BD%AE%E6%98%BE%E7%A4%BA)
+  * [set up](https://github.com/the-pig-of-jungle/smart-show/wiki/SetupOriginalToast)
+    * [background color](https://github.com/the-pig-of-jungle/smart-show/wiki/SetupOriginalToast#设置背景颜色)
+    * [icon](https://github.com/the-pig-of-jungle/smart-show/wiki/SetupOriginalToast#设置icon及icon相对于文本的位置)
+    * [text color](https://github.com/the-pig-of-jungle/smart-show/wiki/SetupOriginalToast#设置文本颜色)
+    * [text size](https://github.com/the-pig-of-jungle/smart-show/wiki/SetupOriginalToast#设置文本大小)
+    * [go for another page](https://github.com/the-pig-of-jungle/smart-show/wiki/SetupOriginalToast#设置离开页面时强制隐藏正在显示的Toast)
+    * [force dismiss when leave](https://github.com/the-pig-of-jungle/smart-show/wiki/SetupOriginalToast#显示标识该Toast在页面跳转的场合下显示)
 * [emotion toast](https://github.com/the-pig-of-jungle/smart-show/wiki/EmotionToast)
   * [info](https://github.com/the-pig-of-jungle/smart-show/wiki/EmotionToast#info)
   * [warning](https://github.com/the-pig-of-jungle/smart-show/wiki/EmotionToast#warning)
@@ -180,7 +187,20 @@ allprojects {
   * [complete](https://github.com/the-pig-of-jungle/smart-show/wiki/EmotionToast#complete)
   * [forbid](https://github.com/the-pig-of-jungle/smart-show/wiki/EmotionToast#forbid)
   * [waiting](https://github.com/the-pig-of-jungle/smart-show/wiki/EmotionToast#waiting)
-* [自定义Toast](https://github.com/the-pig-of-jungle/smart-show/wiki/%E8%87%AA%E5%AE%9A%E4%B9%89Toast)
+* [set up](https://github.com/the-pig-of-jungle/smart-show/wiki/SetupEmotionToast)
+  * [background color](https://github.com/the-pig-of-jungle/smart-show/wiki/SetupEmotionToast#设置背景颜色)
+  * [icon](https://github.com/the-pig-of-jungle/smart-show/wiki/SetupEmotionToast#设置自定义图标)
+  * [go for another page](https://github.com/the-pig-of-jungle/smart-show/wiki/SetupEmotionToast#设置离开页面时强制隐藏正在显示的Toast)
+  * [force dismiss when leave](https://github.com/the-pig-of-jungle/smart-show/wiki/SetupEmotionToast#显示标识该Toast在页面跳转的场合下显示)
+* [custom toast](https://github.com/the-pig-of-jungle/smart-show/wiki/CustomToast)
+  * [custom view](https://github.com/the-pig-of-jungle/smart-show/wiki/CustomToast#自定义View)
+  * [add create arguments](https://github.com/the-pig-of-jungle/smart-show/wiki/CustomToast#添加构建参数)
+  * [go for another page](https://github.com/the-pig-of-jungle/smart-show/wiki/SetupCustomToast#设置离开页面时强制隐藏正在显示的Toast)
+  * [force dismiss when leave](https://github.com/the-pig-of-jungle/smart-show/wiki/CustomToast#显示标识该Toast在页面跳转的场合下显示)
+* [其他api](https://github.com/the-pig-of-jungle/smart-show/wiki/SmartToastOtherApi)
+  * [isShowing](https://github.com/the-pig-of-jungle/smart-show/wiki/SmartToastOtherApi#当前是否有Toast在显示
+)
+  * [dismiss](https://github.com/the-pig-of-jungle/smart-show/wiki/SmartToastOtherApi#隐藏当前显示的Toast)
 #### 普通 Toast
 默认样式：![图片加载失败](images/toast_normal.gif)设置背景色：![图片加载失败](images/toast_color.gif)
 
