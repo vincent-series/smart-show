@@ -1,6 +1,6 @@
 ## SmartShow
-越来越多的项目开始采用androidx系列支持库，这也是所google推荐的，support系列支持库终将被淘汰。
-SmartShow从3.0.0版开始仅支持androidx项目。同时support版本被单独抽离成库，进行同步更新。
+越来越多的项目开始采用androidx系列支持库，这也是所google推荐的，support系列支持库终将被淘汰。<br/>
+SmartShow从3.0.0版开始仅支持androidx项目。同时support版本被单独抽离成库，进行同步更新。<br/>
 如果你需要继续使用，请转到[smart-show-support](https://github.com/the-pig-of-jungle/smart-show-support)
 <br/><br/>关注技术公众号，随时获知库的更新及其他优质技术文章。<br/><br/>
 ![图片加载失败](images/gz_logo.png)
