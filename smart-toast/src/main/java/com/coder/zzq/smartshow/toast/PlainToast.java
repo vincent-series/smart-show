@@ -13,14 +13,18 @@ class PlainToast<ToastType extends IToast> extends AbstractToast<ToastType, IPla
 
     @Override
     public void show(CharSequence msg) {
-        message(msg);
-        showUI(true);
+        message(msg).
+                gravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL)
+                .yOffset(-1)
+                .showUI(true);
     }
 
     @Override
     public void show(int msg) {
         message(msg).
-                showUI(true);
+                gravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL)
+                .yOffset(-1)
+                .showUI(true);
     }
 
     @Override

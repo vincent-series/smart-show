@@ -4,7 +4,6 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,11 +22,12 @@ import static com.coder.zzq.smartshow.toast.UIArguments.ARGUMENT_TEXT_COLOR;
 import static com.coder.zzq.smartshow.toast.UIArguments.ARGUMENT_TEXT_SIZE_SP;
 
 class OriginalToastUI extends AbstractToastUI {
+    public static int sVerticalAxisOffsetWhenBottom;
 
     @Override
     protected Toast createToast(CharSequence msg, UIArguments arguments) {
         Toast toast = Toast.makeText(Toolkit.getContext(), "", Toast.LENGTH_SHORT);
-        View toastView = toast.getView();
+        sVerticalAxisOffsetWhenBottom = toast.getYOffset();
         TextView msgView = toast.getView().findViewById(android.R.id.message);
         msgView.setGravity(Gravity.CENTER);
         msgView.setText(msg);

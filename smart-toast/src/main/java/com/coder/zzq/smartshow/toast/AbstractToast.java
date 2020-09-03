@@ -136,7 +136,7 @@ class AbstractToast<ToastType extends IToast, ShowApi> implements IToast<ToastTy
             return;
         }
         mToast = mToastUI.createToast(mMsg, mUIArguments);
-        mToast.setGravity(getGravity(), getXOffset(), getYOffset() == -1 ? mToast.getYOffset() : getYOffset());
+        mToast.setGravity(getGravity(), getXOffset(), getYOffset() == -1 ? OriginalToastUI.sVerticalAxisOffsetWhenBottom : getYOffset());
         mToast.setDuration(shortDuration ? Toast.LENGTH_SHORT : Toast.LENGTH_LONG);
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.N
                 || Build.VERSION.SDK_INT == Build.VERSION_CODES.N_MR1) {
