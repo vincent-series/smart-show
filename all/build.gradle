@@ -3,13 +3,13 @@ apply plugin: 'com.github.dcendents.android-maven'
 project.archivesBaseName ='all'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 30
 
 
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 28
+        minSdkVersion 17
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
@@ -23,7 +23,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
