@@ -2,8 +2,10 @@ package com.coder.zzq.smartshow.toast;
 
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,9 +28,22 @@ class OriginalToastUI extends AbstractToastUI {
 
     @Override
     protected Toast createToast(CharSequence msg, UIArguments arguments) {
-        Toast toast = Toast.makeText(Toolkit.getContext(), "", Toast.LENGTH_SHORT);
+        boolean isAbove11 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.R;
+        Toast toast = null;
+        TextView msgView = null;
+        if (isAbove11){
+            toast = new Toast(Toolkit.getContext());
+            View view = Utils.getInflater().inflate(R.layout.smart_show_classic_toast,null);
+            toast.setView(view);
+            msgView = view.findViewById(R.id.smart_toast_message);
+
+        }else {
+            toast = Toast.makeText(Toolkit.getContext(), "", Toast.LENGTH_SHORT);
+            msgView = toast.getView().findViewById(android.R.id.message);
+        }
+
         sVerticalAxisOffsetWhenBottom = toast.getYOffset();
-        TextView msgView = toast.getView().findViewById(android.R.id.message);
+
         msgView.setGravity(Gravity.CENTER);
         msgView.setText(msg);
 
