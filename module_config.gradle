@@ -1,0 +1,24 @@
+android {
+    compileSdkVersion sdkVersionConfig.compileSdkVersion
+    defaultConfig {
+        minSdkVersion sdkVersionConfig.minSdkVersion
+        targetSdkVersion sdkVersionConfig.targetSdkVersion
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    compileOnly "androidx.appcompat:appcompat:${dependencyLibVersion.appcompat}"
+}
