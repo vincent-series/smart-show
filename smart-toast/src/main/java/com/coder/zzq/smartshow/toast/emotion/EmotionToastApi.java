@@ -1,14 +1,11 @@
-package com.coder.zzq.smartshow.toast;
-
+package com.coder.zzq.smartshow.toast.emotion;
 
 import androidx.annotation.StringRes;
 
-public interface IEmotionToastShow {
-
+public interface EmotionToastApi {
     void info(CharSequence msg);
 
     void info(@StringRes int msg);
-
 
 
     void infoLong(CharSequence msg);
@@ -16,18 +13,14 @@ public interface IEmotionToastShow {
     void infoLong(@StringRes int msg);
 
 
-
     void warning(CharSequence msg);
 
     void warning(@StringRes int msg);
 
 
-
-
     void warningLong(CharSequence msg);
 
     void warningLong(@StringRes int msg);
-
 
 
     void success(CharSequence msg);
@@ -40,11 +33,9 @@ public interface IEmotionToastShow {
     void successLong(@StringRes int msg);
 
 
-
     void error(CharSequence msg);
 
     void error(@StringRes int msg);
-
 
 
     void errorLong(CharSequence msg);
@@ -52,11 +43,9 @@ public interface IEmotionToastShow {
     void errorLong(@StringRes int msg);
 
 
-
     void fail(CharSequence msg);
 
     void fail(@StringRes int msg);
-
 
 
     void failLong(CharSequence msg);
@@ -64,11 +53,9 @@ public interface IEmotionToastShow {
     void failLong(@StringRes int msg);
 
 
-
     void complete(CharSequence msg);
 
     void complete(@StringRes int msg);
-
 
 
     void completeLong(CharSequence msg);
@@ -76,11 +63,9 @@ public interface IEmotionToastShow {
     void completeLong(@StringRes int msg);
 
 
-
     void forbid(CharSequence msg);
 
     void forbid(@StringRes int msg);
-
 
 
     void forbidLong(CharSequence msg);
@@ -88,16 +73,12 @@ public interface IEmotionToastShow {
     void forbidLong(@StringRes int msg);
 
 
-
     void waiting(CharSequence msg);
 
     void waiting(@StringRes int msg);
 
 
-
     void waitingLong(CharSequence msg);
 
     void waitingLong(@StringRes int msg);
-
-
 }

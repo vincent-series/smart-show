@@ -3,7 +3,7 @@ package com.coder.zzq.smartshow.toast;
 
 import androidx.annotation.StringRes;
 
-public interface IPlainToastShow {
+public interface PlainToastApi {
 
     // short text toast
 

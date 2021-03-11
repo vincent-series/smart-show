@@ -1,4 +1,4 @@
-package com.coder.zzq.smartshow.toast;
+package com.coder.zzq.smartshow.toast.compact;
 
 
 import android.os.Handler;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
-final class SafeHandler extends Handler {
+public final class SafeHandler extends Handler {
     private Handler mNestedHandler;
     private View mToastView;
 
