@@ -1,5 +1,5 @@
 ## SmartShow
-
+★★★ 本库基于androidx支持库开发。
 ### 模块导航：
 * [SmartToast](#SmartToast部分)
 * [SmartSnackbar](#SmartSnackbar部分)
