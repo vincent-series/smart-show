@@ -4,7 +4,9 @@ import androidx.annotation.StringRes;
 
 import com.coder.zzq.smartshow.core.SmartShow;
 import com.coder.zzq.smartshow.toast.classic.ClassicToastInvoker;
+import com.coder.zzq.smartshow.toast.classic.ClassicToastView;
 import com.coder.zzq.smartshow.toast.emotion.EmotionToastInvoker;
+import com.coder.zzq.smartshow.toast.emotion.EmotionToastView;
 
 
 /**
@@ -22,11 +24,11 @@ public final class SmartToast {
 
     }
 
-    public static ClassicToastInvoker classic() {
+    public static ClassicToastView.Overall classic() {
         return new ClassicToastInvoker();
     }
 
-    public static EmotionToastInvoker emotion() {
+    public static EmotionToastView.Overall emotion() {
         return new EmotionToastInvoker();
     }
 
