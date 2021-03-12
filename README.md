@@ -1,9 +1,5 @@
 ## SmartShow
-★★★ 从3.0.0版本开始，默认的依赖引用方式引用的是androidx版本，support版本也会同步更新。<br/><br/>
-★★★ support版本的源码单独分离成库,详见[smart-show-support](https://github.com/the-pig-of-jungle/smart-show-support)<br/><br/>
-★★★ 详细的API文档请查看[wiki](https://github.com/the-pig-of-jungle/smart-show/wiki)。<br/><br/>
-★★★ 关注技术公众号，随时获知库的更新及其他优质技术文章。<br/><br/>
-<img src="images/gz_logo.jpeg" width="200" height="200"/>
+
 ### 模块导航：
 * [SmartToast](#SmartToast部分)
 * [SmartSnackbar](#SmartSnackbar部分)
@@ -35,8 +31,6 @@
 微信：w361281607<br/><br/>
 <img src="images/wx_2d.jpeg" width="180" height="180"/><br/>
 邮箱：coder_zzq@163.com<br/><br/>
-技术公众号：<br/><br/>
-<img src="images/gz_logo.jpeg" width="180" height="180"/>
 ## 引入SmartShow
 [回到模块导航](#模块导航)<br/>
 #### 第一步，在Project的gradle文件中添加jitpack仓库
@@ -56,24 +50,12 @@ allprojects {
 #### 第二步，在Module的gradle文件中添加依赖
 * 第一种方式，引入所有模块
 <pre><code>
-    // for androidx
 
-    implementation ('com.github.the-pig-of-jungle.smart-show:all:3.0.3')
+    implementation ('com.github.zhiqiang-series:smart-show:all:3.1.0')
 
-    //如果会使用到SmartSnackbar模块，需添加material库,such as 1.1.0-alpha09
+    material库，SmartSnackbar模块需要用到
 
-    implementation 'com.google.android.material:material:x.y.z'
-
-</code></pre>
-
-<pre><code>
-    //for support
-
-    implementation ('com.github.the-pig-of-jungle.smart-show-support:all:3.0.3')
-
-    //如果会使用到SmartSnackbar模块，需添加design库
-
-    implementation 'com.android.support:design:x.y.z'
+    implementation 'com.google.android.material:material:1.3.0-alpha04'
 
 </code></pre>
 
@@ -81,72 +63,33 @@ allprojects {
 最好保证不同模块的版本号一致，以便其内部依赖的基本库版本相同。
 <pre><code>
 
-    //smart toast for androidx
-
-    implementation 'com.github.the-pig-of-jungle.smart-show:toast:3.0.3'
+    implementation 'com.github.zhiqiang-series:smart-show:toast:3.1.0'
 
 </code></pre>
 
+
 <pre><code>
 
-    //smart toast for support
-
-    implementation 'com.github.the-pig-of-jungle.smart-show-support:toast:3.0.3'
+    implementation 'com.github.zhiqiang-series:smart-show:dialog:3.1.0'
 
 </code></pre>
 
+
 <pre><code>
 
-    //smart dialog for androidx
-
-    implementation 'com.github.the-pig-of-jungle.smart-show:dialog:3.0.3'
+    implementation('com.github.zhiqiang-series:smart-show:topbar:3.1.0')
 
 </code></pre>
 
-<pre><code>
-
-    // smart dialog for support
-
-    implementation 'com.github.the-pig-of-jungle.smart-show-support:dialog:3.0.3'
-
-</code></pre>
 
 <pre><code>
 
-    //smart topbar for androidx
+    implementation('com.github.zhiqiang-series:smart-show:snackbar:3.1.0')
 
-    implementation('com.github.the-pig-of-jungle.smart-show:topbar:3.0.3')
+    //添加material依赖库
 
-</code></pre>
+    implementation 'com.google.android.material:material:1.3.0-alpha04'
 
-<pre><code>
-
-    // smart topbar for support
-
-    implementation('com.github.the-pig-of-jungle.smart-show-support:topbar:3.0.3')
-</code></pre>
-
-<pre><code>
-
-    //smart snackbar for androidx
-
-    implementation('com.github.the-pig-of-jungle.smart-show:snackbar:3.0.3')
-
-    //添加material依赖库,such as 1.1.0-alpha09
-
-    implementation 'com.google.android.material:material:x.y.z'
-
-</code></pre>
-
-<pre><code>
-
-    // smart snackbar for support
-
-    implementation('com.github.the-pig-of-jungle.smart-show-support:snackbar:3.0.3')
-
-    //添加与你项目匹配的design依赖库的相应版本
-
-    implementation 'com.android.support:design:x.y.z'
 </code></pre>
 
 #### 第三步，在Application的onCreate方法中初始化<br/>
@@ -163,6 +106,7 @@ allprojects {
 5. 可为Toast设置自定义布局
 6. 完美解决Android 7.1的系统bug——Toast BadTokenException
 7. 完美解决应用关闭通知权限后Toast不显示问题
+8. 适配android 11对toast的相关限制
 8. 可配置离开当前页面（退出当前activity或进入新的activity），立即消失正在显示的Toast
 9. 结合主流app消息提示的效果，提供info、success、error、warning、complete、forbid、wait、fail 8 种类型的Toast
 ### API
