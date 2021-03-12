@@ -58,15 +58,21 @@ public class ClassicToast {
             rootView = inflater.inflate(R.layout.smart_show_classic_toast, null);
         }
 
-        if (config.mBackgroundResource != Constants.DEFAULT_VALUE) {
-            rootView.setBackgroundResource(config.mBackgroundResource);
-        }
+        int bgResource = config.mBackgroundResource != Constants.DEFAULT_VALUE ?
+                config.mBackgroundResource
+                : R.drawable.smart_show_classic_toast_bg;
 
-        if (config.mBackgroundColor != Constants.DEFAULT_VALUE) {
-            Drawable bg = rootView.getBackground().mutate();
-            bg.mutate();
-            DrawableCompat.setTint(bg, config.mBackgroundColor);
-        }
+        rootView.setBackgroundResource(bgResource);
+
+
+        int bgColor = config.mBackgroundColor != Constants.DEFAULT_VALUE ?
+                config.mBackgroundColor
+                : Constants.DEFAULT_TOAST_BACKGROUND_COLOR;
+
+        Drawable bg = rootView.getBackground().mutate();
+        bg.mutate();
+        DrawableCompat.setTint(bg, bgColor);
+
 
         TextView msgView = rootView.findViewById(R.id.smart_toast_message);
         msgView.setText(config.mMsg);
@@ -75,23 +81,22 @@ public class ClassicToast {
         msgView.getPaint().setFakeBoldText(config.mMsgBold);
 
 
-        if (config.mIcon != Constants.DEFAULT_VALUE) {
-            Drawable icon = Utils.getDrawableFromRes(config.mIcon);
-            if (config.mIconSizeDp != Constants.DEFAULT_VALUE) {
-                icon.setBounds(0, 0, config.mIconSizeDp, config.mIconSizeDp);
-            }
-            msgView.setCompoundDrawables(
-                    config.mIconPosition == Config.ICON_POSITION_LEFT ? icon : null,
-                    null,
-                    config.mIconPosition == Config.ICON_POSITION_RIGHT ? icon : null,
-                    null
-            );
-
-            if (config.mIconPaddingDp != Constants.DEFAULT_VALUE) {
-                msgView.setCompoundDrawablePadding(config.mIconPaddingDp);
-            }
+        Drawable icon = config.mIcon != Constants.DEFAULT_VALUE ? Utils.getDrawableFromRes(config.mIcon) : null;
+        if (icon != null) {
+            int iconSize = config.mIconSizeDp != Constants.DEFAULT_VALUE ?
+                    config.mIconSizeDp
+                    : (icon.getIntrinsicWidth() == -1 ? Math.round(config.mMsgSize) : Math.max(icon.getIntrinsicWidth(), icon.getIntrinsicHeight()));
+            icon.setBounds(0, 0, iconSize, iconSize);
         }
 
+        msgView.setCompoundDrawables(
+                config.mIconPosition == Config.ICON_POSITION_LEFT ? icon : null,
+                null,
+                config.mIconPosition == Config.ICON_POSITION_RIGHT ? icon : null,
+                null
+        );
+
+        msgView.setCompoundDrawablePadding(config.mIconPaddingDp != Constants.DEFAULT_VALUE ? config.mIconPaddingDp : Constants.DEFAULT_ICON_PADDING);
         return rootView;
     }
 }

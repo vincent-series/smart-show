@@ -15,9 +15,9 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import com.coder.zzq.smart_show.annotations.CustomToast;
 import com.coder.zzq.smart_show.annotations.ToastConfig;
 import com.coder.zzq.smart_show.annotations.ToastView;
-import com.coder.zzq.smartshow.toast.factory.BaseToastConfig;
 import com.coder.zzq.smartshow.toast.Constants;
 import com.coder.zzq.smartshow.toast.R;
+import com.coder.zzq.smartshow.toast.factory.BaseToastConfig;
 import com.coder.zzq.toolkit.Utils;
 
 import java.lang.annotation.Retention;
@@ -64,24 +64,26 @@ public class EmotionToast {
             rootView = inflater.inflate(R.layout.smart_show_emotion_toast, null);
         }
 
-        if (config.mBackgroundColor != Constants.DEFAULT_VALUE) {
-            Drawable bg = rootView.getBackground();
-            bg.mutate();
-            DrawableCompat.setTint(bg, config.mBackgroundColor);
-        }
+        int bgColor = config.mBackgroundColor != Constants.DEFAULT_VALUE ? config.mBackgroundColor : Constants.DEFAULT_TOAST_BACKGROUND_COLOR;
+
+        Drawable bg = rootView.getBackground();
+        bg.mutate();
+        DrawableCompat.setTint(bg, bgColor);
 
         ImageView iconView = rootView.findViewById(R.id.emotion_icon);
 
-        if (config.mIcon != Constants.DEFAULT_VALUE) {
-            Drawable icon = Utils.getDrawableFromRes(config.mIcon);
-            if (config.mIconSize != Constants.DEFAULT_VALUE) {
-                icon.setBounds(0, 0, config.mIconSize, config.mIconSize);
-            }
-            iconView.setImageDrawable(icon);
-        } else {
-            int iconResource = parseDefaultIconResource(config.mEmotionType);
-            iconView.setImageResource(iconResource);
-        }
+        int iconResource = config.mIcon != Constants.DEFAULT_VALUE ?
+                config.mIcon
+                : parseDefaultIconResource(config.mEmotionType);
+        Drawable icon = Utils.getDrawableFromRes(iconResource);
+        int iconSize = config.mIconSize != Constants.DEFAULT_VALUE ?
+                config.mIconSize
+                : parseDefaultIconSize(config, icon, config.mIcon == Constants.DEFAULT_VALUE);
+
+        iconView.getLayoutParams().width = iconView.getLayoutParams().height = iconSize;
+        icon.setBounds(0, 0, iconSize, iconSize);
+
+        iconView.setImageDrawable(icon);
 
         TextView msgView = rootView.findViewById(R.id.emotion_message);
         msgView.setText(config.mMsg);
@@ -90,6 +92,10 @@ public class EmotionToast {
         msgView.getPaint().setFakeBoldText(config.mMsgBold);
 
         return rootView;
+    }
+
+    private static int parseDefaultIconSize(Config config, Drawable icon, boolean defaultIcon) {
+        return defaultIcon ? Utils.dpToPx(30) : (icon.getIntrinsicWidth() == -1 ? Math.round(config.mMsgSizeSp) * 2 : Math.max(icon.getIntrinsicWidth(), icon.getIntrinsicHeight()));
     }
 
     private static int parseDefaultIconResource(final int emotionType) {
