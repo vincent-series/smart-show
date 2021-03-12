@@ -13,12 +13,12 @@ android {
 //noinspection GradleDependency
 dependencies {
 
-//    implementation('com.github.the-pig-of-jungle.smart-show:all:3.0.0');
+//    implementation('com.github.the-pig-of-jungle.smart-show:all:3.1.0');
 
     implementation project(path: ':all')
 
     annotationProcessor project(path: ':annotation-compiler')
 
-    compileOnly "com.google.android.material:material:${dependencyLibVersion.material}"
+    implementation "com.google.android.material:material:${dependencyLibVersion.material}"
 
 }
