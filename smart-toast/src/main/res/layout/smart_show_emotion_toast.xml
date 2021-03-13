@@ -12,7 +12,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_gravity="center_horizontal|top"
-        android:src="@drawable/emotion_error" />
+        android:src="@drawable/ic_smart_toast_emotion_info" />
 
     <TextView
         android:id="@+id/emotion_message"

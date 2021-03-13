@@ -101,21 +101,21 @@ public class EmotionToast {
     private static int parseDefaultIconResource(final int emotionType) {
         switch (emotionType) {
             case Config.EMOTION_TYPE_INFO:
-                return R.drawable.emotion_info;
+                return R.drawable.ic_smart_toast_emotion_info;
             case Config.EMOTION_TYPE_WARNING:
-                return R.drawable.emotion_warning;
+                return R.drawable.ic_smart_toast_emotion_warning;
             case Config.EMOTION_TYPE_SUCCESS:
-                return R.drawable.emotion_success;
+                return R.drawable.ic_smart_toast_emotion_success;
             case Config.EMOTION_TYPE_ERROR:
-                return R.drawable.emotion_error;
+                return R.drawable.ic_smart_toast_emotion_error;
             case Config.EMOTION_TYPE_FORBID:
-                return R.drawable.emotion_forbid;
+                return R.drawable.ic_smart_toast_emotion_forbid;
             case Config.EMOTION_TYPE_WAITING:
-                return R.drawable.emotion_waiting;
+                return R.drawable.ic_smart_toast_emotion_wait;
             case Config.EMOTION_TYPE_COMPLETE:
-                return R.drawable.emotion_complete;
+                return R.drawable.ic_smart_toast_emotion_complete;
             case Config.EMOTION_TYPE_FAIL:
-                return R.drawable.emotion_fail;
+                return R.drawable.ic_smart_toast_emotion_fail;
         }
         return 0;
     }
