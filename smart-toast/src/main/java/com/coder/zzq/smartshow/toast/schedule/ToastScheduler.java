@@ -27,4 +27,14 @@ public class ToastScheduler {
             mCurrentToast = null;
         }
     }
+
+    public synchronized boolean isCurrentShowing() {
+        return mCurrentToast != null && mCurrentToast.isToastShowing();
+    }
+
+    public synchronized void dismiss() {
+        if (mCurrentToast != null) {
+            mCurrentToast.discard();
+        }
+    }
 }
