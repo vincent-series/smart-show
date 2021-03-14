@@ -51,11 +51,15 @@ allprojects {
 * 第一种方式，引入所有模块
 <pre><code>
 
-    implementation ('com.github.zhiqiang-series:smart-show:all:3.1.0')
+    implementation 'com.github.zhiqiang-series:smart-show:all:3.1.0'
 
-    material库，SmartSnackbar模块需要用到
+    //material库，SmartSnackbar模块需要用到
 
     implementation 'com.google.android.material:material:1.3.0-alpha04'
+
+    //注解处理库，只在编译期间起作用，不会打包到apk
+
+    annotationProcessor 'com.github.zhiqiang-series:smart-show:annotation-compiler：3.1.0'
 
 </code></pre>
 
@@ -65,6 +69,9 @@ allprojects {
 
     implementation 'com.github.zhiqiang-series:smart-show:toast:3.1.0'
 
+        //注解处理库，只在编译期间起作用，不会打包到apk
+    annotationProcessor 'com.github.zhiqiang-series:smart-show:annotation-compiler：3.1.0'
+
 </code></pre>
 
 
@@ -72,12 +79,18 @@ allprojects {
 
     implementation 'com.github.zhiqiang-series:smart-show:dialog:3.1.0'
 
+        //注解处理库，只在编译期间起作用，不会打包到apk
+    annotationProcessor 'com.github.zhiqiang-series:smart-show:annotation-compiler：3.1.0'
+
 </code></pre>
 
 
 <pre><code>
 
     implementation('com.github.zhiqiang-series:smart-show:topbar:3.1.0')
+
+        //注解处理库，只在编译期间起作用，不会打包到apk
+    annotationProcessor 'com.github.zhiqiang-series:smart-show:annotation-compiler：3.1.0'
 
 </code></pre>
 
@@ -90,6 +103,9 @@ allprojects {
 
     implementation 'com.google.android.material:material:1.3.0-alpha04'
 
+        //注解处理库，只在编译期间起作用，不会打包到apk
+    annotationProcessor 'com.github.zhiqiang-series:smart-show:annotation-compiler：3.1.0'
+
 </code></pre>
 
 #### 第三步，在Application的onCreate方法中初始化<br/>
@@ -101,7 +117,7 @@ allprojects {
 [回到模块导航](#模块导航)
 1. 使用application context，而不是activity，避免因activity生命周期问题引起的各种问题
 2. 复用Toast实例，当Toast正在显示时，多次触发内容和位置均未改变的Toast，不会重复弹出；下一个Toast不会等到上一个Toast的Duration耗尽才弹出
-3. 解决传统复用模式的功能缺陷，如正在显示一个内容为"A"的Toast，此时再弹出内容为"B"的Toast时，文本虽改变，但没有弹出效果；如果复用的Toast正在显示，改变其Gravity以改变显示位置会无效，直到消失后再次显示才生效
+3. 解决传统复用模式的功能缺陷，如果复用的Toast正在显示，改变其Gravity以改变显示位置会无效，直到消失后再次显示才生效
 4. 可修改Toast默认布局的风格，如背景颜色，文字大小和颜色等
 5. 可为Toast设置自定义布局
 6. 完美解决Android 7.1的系统bug——Toast BadTokenException
@@ -110,7 +126,7 @@ allprojects {
 8. 可配置离开当前页面（退出当前activity或进入新的activity），立即消失正在显示的Toast
 9. 结合主流app消息提示的效果，提供info、success、error、warning、complete、forbid、wait、fail 8 种类型的Toast
 ### API
-[查看API文档]()
+[查看API文档](https://github.com/zhiqiang-series/smart-show/tree/master/smart-toast)
 #### 普通 Toast
 默认样式：![图片加载失败](images/toast_normal.gif)设置背景色：![图片加载失败](images/toast_color.gif)
 
