@@ -32,7 +32,7 @@ public class EmotionToastInvoker implements EmotionToastView.Overall, EmotionToa
     }
 
     @Override
-    public EmotionToastView.ConfigSetter icon(int icon) {
+    public EmotionToastView.ConfigSetter iconResource(int icon) {
         mConfig.mIcon = icon;
         return this;
     }
@@ -40,6 +40,12 @@ public class EmotionToastInvoker implements EmotionToastView.Overall, EmotionToa
     @Override
     public EmotionToastView.ConfigSetter iconSizeDp(float sizeDp) {
         mConfig.mIconSize = Utils.dpToPx(sizeDp);
+        return this;
+    }
+
+    @Override
+    public EmotionToastView.ConfigSetter iconPaddingDp(float padding) {
+        mConfig.mIconPadding = Utils.dpToPx(padding);
         return this;
     }
 

@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -52,6 +53,7 @@ public class EmotionToast {
         @DrawableRes
         public int mIcon = Constants.DEFAULT_VALUE;
         public int mIconSize = Constants.DEFAULT_VALUE;
+        public int mIconPadding = Utils.dpToPx(10);
 
         public int mMsgColor = Color.WHITE;
         public float mMsgSizeSp = 14;
@@ -76,14 +78,17 @@ public class EmotionToast {
                 config.mIcon
                 : parseDefaultIconResource(config.mEmotionType);
         Drawable icon = Utils.getDrawableFromRes(iconResource);
-        int iconSize = config.mIconSize != Constants.DEFAULT_VALUE ?
-                config.mIconSize
-                : parseDefaultIconSize(config, icon, config.mIcon == Constants.DEFAULT_VALUE);
 
-        iconView.getLayoutParams().width = iconView.getLayoutParams().height = iconSize;
-        icon.setBounds(0, 0, iconSize, iconSize);
+        if (icon != null){
+            int iconSize = config.mIconSize != Constants.DEFAULT_VALUE ?
+                    config.mIconSize
+                    : parseDefaultIconSize(config, icon, config.mIcon == Constants.DEFAULT_VALUE);
 
+            iconView.getLayoutParams().width = iconView.getLayoutParams().height = iconSize;
+            icon.setBounds(0, 0, iconSize, iconSize);
+        }
         iconView.setImageDrawable(icon);
+        ((ViewGroup.MarginLayoutParams) iconView.getLayoutParams()).bottomMargin = config.mIconPadding;
 
         TextView msgView = rootView.findViewById(R.id.emotion_message);
         msgView.setText(config.mMsg);

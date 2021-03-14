@@ -17,9 +17,11 @@ public interface EmotionToastView {
 
         ConfigSetter backgroundColorResource(@ColorRes int colorResource);
 
-        ConfigSetter icon(@DrawableRes int icon);
+        ConfigSetter iconResource(@DrawableRes int icon);
 
         ConfigSetter iconSizeDp(float sizeDp);
+
+        ConfigSetter iconPaddingDp(float padding);
 
         ConfigSetter messageColor(@ColorInt int color);
 
