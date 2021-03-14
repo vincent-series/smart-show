@@ -10,7 +10,7 @@ dependencies {
     implementation 'com.squareup:javapoet:1.13.0'
     implementation "com.google.auto.service:auto-service:1.0-rc7"
     implementation 'androidx.annotation:annotation:1.1.0'
-    implementation project(path: ':annotations')
+    implementation project(path:':annotations')
     annotationProcessor "com.google.auto.service:auto-service:1.0-rc7"
 }
 
