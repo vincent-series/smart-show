@@ -148,6 +148,12 @@ public class ClassicToastInvoker implements ClassicToastView.Overall, ClassicToa
     }
 
     @Override
+    public ClassicToastView.ConfigSetter msgBold(boolean b) {
+        mConfig.mMsgBold = b;
+        return this;
+    }
+
+    @Override
     public ClassicToastView.ConfigSetter iconResource(int icon) {
         mConfig.mIcon = icon;
         return this;

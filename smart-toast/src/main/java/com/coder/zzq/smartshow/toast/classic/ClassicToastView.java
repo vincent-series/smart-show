@@ -28,6 +28,8 @@ public interface ClassicToastView {
 
         ConfigSetter msgSize(float size);
 
+        ConfigSetter msgBold(boolean b);
+
         ConfigSetter iconResource(@DrawableRes int icon);
 
         ConfigSetter iconPosition(@ClassicToast.Config.IconPosition int position);
