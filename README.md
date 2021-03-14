@@ -111,7 +111,7 @@ allprojects {
 9. 结合主流app消息提示的效果，提供info、success、error、warning、complete、forbid、wait、fail 8 种类型的Toast
 ### API
 详细文档请参阅wiki:
-* [original toast](https://github.com/the-pig-of-jungle/smart-show/wiki/OriginalToast)
+* [classic toast](https://github.com/the-pig-of-jungle/smart-show/wiki/OriginalToast)
   * [show at bottom](https://github.com/the-pig-of-jungle/smart-show/wiki/OriginalToast#%E9%BB%98%E8%AE%A4%E4%BD%8D%E7%BD%AE%E6%98%BE%E7%A4%BA)
   * [show in center](https://github.com/the-pig-of-jungle/smart-show/wiki/OriginalToast#%E4%B8%AD%E5%A4%AE%E6%98%BE%E7%A4%BA)
   * [show at top](https://github.com/the-pig-of-jungle/smart-show/wiki/OriginalToast#%E9%A1%B6%E9%83%A8%E6%98%BE%E7%A4%BA)
