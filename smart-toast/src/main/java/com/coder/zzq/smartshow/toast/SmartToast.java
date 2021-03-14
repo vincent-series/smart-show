@@ -7,6 +7,7 @@ import com.coder.zzq.smartshow.toast.classic.ClassicToastInvoker;
 import com.coder.zzq.smartshow.toast.classic.ClassicToastView;
 import com.coder.zzq.smartshow.toast.emotion.EmotionToastInvoker;
 import com.coder.zzq.smartshow.toast.emotion.EmotionToastView;
+import com.coder.zzq.smartshow.toast.schedule.ToastScheduler;
 
 
 /**
@@ -263,5 +264,13 @@ public final class SmartToast {
 
     public static void waitingLong(@StringRes int msg) {
         emotion().waitingLong(msg);
+    }
+
+    public static boolean isShowing() {
+        return ToastScheduler.get().isCurrentShowing();
+    }
+
+    public static void dismiss() {
+        ToastScheduler.get().dismiss();
     }
 }
