@@ -9,17 +9,18 @@ import android.widget.Toast;
 import com.coder.zzq.smartshow.toast.factory.BaseToastConfig;
 import com.coder.zzq.toolkit.Utils;
 
+import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 
 public class CompactToast {
-    private final String mToastAlias;
-    private final Toast mToast;
+    private String mToastAlias;
+    private WeakReference<Toast> mToastReference;
     private boolean mDiscard;
 
     private BaseToastConfig mConfig;
 
     public CompactToast(Toast toast, String alias, BaseToastConfig config) {
-        mToast = Utils.requireNonNull(toast, "the toast instance can not null!");
+        mToastReference = new WeakReference<>(Utils.requireNonNull(toast, "the toast instance can not null!"));
         if (Utils.isEmpty(alias)) {
             throw new IllegalStateException("the toast alias can not null or empty!");
         }
@@ -29,19 +30,22 @@ public class CompactToast {
 
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.N
                 || Build.VERSION.SDK_INT == Build.VERSION_CODES.N_MR1) {
-            injectSafeHandler(mToast);
+            injectSafeHandler(mToastReference.get());
         }
 
     }
 
 
     public Toast getToast() {
-        return mToast;
+        return mToastReference.get();
     }
 
     @SuppressWarnings("deprecation")
     public boolean isToastShowing() {
-        return mToast.getView().getWindowVisibility() == View.VISIBLE;
+        return mToastReference != null
+                && mToastReference.get() != null
+                && mToastReference.get().getView() != null
+                && mToastReference.get().getView().getWindowVisibility() == View.VISIBLE;
     }
 
 
@@ -58,12 +62,20 @@ public class CompactToast {
     }
 
     public boolean isDiscard() {
-        return mDiscard;
+        return mToastReference == null || mToastReference.get() == null || mDiscard;
     }
 
     public void discard() {
         mDiscard = true;
-        mToast.cancel();
+        if (mToastReference != null) {
+            if (mToastReference.get() != null) {
+                mToastReference.get().cancel();
+            }
+            mToastReference.clear();
+        }
+
+        mToastReference = null;
+
         if (!Utils.isNotificationPermitted()) {
             VirtualToastManager.dismiss();
         }
@@ -87,10 +99,14 @@ public class CompactToast {
 
     public void show() {
         if (Utils.isNotificationPermitted()) {
-            if (mToast.getView().getParent() != null && mToast.getView().getParent() instanceof ViewGroup) {
-                ((ViewGroup) mToast.getView().getParent()).removeAllViews();
+
+            if (mToastReference.get() != null && mToastReference.get().getView().getParent() != null && mToastReference.get().getView().getParent() instanceof ViewGroup) {
+                ((ViewGroup) mToastReference.get().getView().getParent()).removeAllViews();
             }
-            mToast.show();
+
+            if (mToastReference.get() != null){
+                mToastReference.get().show();
+            }
         } else {
             VirtualToastManager.get().show(this);
         }
