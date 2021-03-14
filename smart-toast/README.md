@@ -1,3 +1,4 @@
+## SmartToast API Doc
 * Classic Toast
   * [default style](https://github.com/zhiqiang-series/smart-show/wiki/ClassicToast)
     * [show at bottom](https://github.com/zhiqiang-series/smart-show/wiki/ClassicToast#%E5%BA%95%E9%83%A8%E6%98%BE%E7%A4%BA)
