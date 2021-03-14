@@ -15,9 +15,11 @@ dependencies {
 
 //    implementation('com.github.the-pig-of-jungle.smart-show:all:3.1.0');
 
-    implementation project(path: ':all')
+    implementation 'com.github.zhiqiang-series:smart-show:toast:3.1.1'
 
-    annotationProcessor project(path: ':annotation-compiler')
+    //注解处理库，只在编译期间起作用，不会打包到apk
+
+    annotationProcessor 'com.github.zhiqiang-series:smart-show:annotation-compiler:3.1.1'
 
     implementation "com.google.android.material:material:${dependencyLibVersion.material}"
 

@@ -1,6 +1,7 @@
 plugins {
     id 'java-library'
 }
+apply plugin: 'com.github.dcendents.android-maven'
 project.archivesBaseName ='annotations'
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
