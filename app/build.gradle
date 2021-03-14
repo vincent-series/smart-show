@@ -10,17 +10,8 @@ android {
 }
 
 
-//noinspection GradleDependency
 dependencies {
-
-//    implementation('com.github.the-pig-of-jungle.smart-show:all:3.1.0');
-
-    implementation 'com.github.zhiqiang-series:smart-show:toast:3.1.1'
-
-    //注解处理库，只在编译期间起作用，不会打包到apk
-
-    annotationProcessor 'com.github.zhiqiang-series:smart-show:annotation-compiler:3.1.1'
-
+    implementation project(path: ':all')
+    annotationProcessor project(path: ':annotation-compiler')
     implementation "com.google.android.material:material:${dependencyLibVersion.material}"
-
 }
