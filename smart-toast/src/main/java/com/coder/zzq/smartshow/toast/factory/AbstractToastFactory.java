@@ -28,8 +28,8 @@ public abstract class AbstractToastFactory<TOAST_CONFIG extends BaseToastConfig>
                 newConfig.mYOffset == Constants.DEFAULT_VALUE ? mDefaultYOffsetWhenBottom : newConfig.mYOffset
         );
 
-        if (mCachedCompactToast.getToast().getView() == null) {
-            mCachedCompactToast.getToast().setView(setupConfig(null, newConfig));
+        if (!mCachedCompactToast.isViewCreated()) {
+            mCachedCompactToast.setView(setupConfig(null, newConfig));
         } else {
             setupConfig(mCachedCompactToast.getToast().getView(), newConfig);
         }

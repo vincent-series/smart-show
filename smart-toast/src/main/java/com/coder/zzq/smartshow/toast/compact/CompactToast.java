@@ -27,12 +27,6 @@ public class CompactToast {
 
         mToastAlias = alias;
         mConfig = config;
-
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.N
-                || Build.VERSION.SDK_INT == Build.VERSION_CODES.N_MR1) {
-            injectSafeHandler(mToastReference.get());
-        }
-
     }
 
 
@@ -81,6 +75,36 @@ public class CompactToast {
         }
     }
 
+
+    public void show() {
+        if (Utils.isNotificationPermitted()) {
+
+            if (mToastReference.get() != null && mToastReference.get().getView().getParent() != null && mToastReference.get().getView().getParent() instanceof ViewGroup) {
+                ((ViewGroup) mToastReference.get().getView().getParent()).removeAllViews();
+            }
+
+            if (mToastReference.get() != null) {
+                mToastReference.get().show();
+            }
+        } else {
+            VirtualToastManager.get().show(this);
+        }
+    }
+
+    public boolean isViewCreated() {
+        return mToastReference.get() != null && mToastReference.get().getView() != null;
+    }
+
+    public void setView(View rootView) {
+
+        mToastReference.get().setView(rootView);
+
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.N
+                || Build.VERSION.SDK_INT == Build.VERSION_CODES.N_MR1) {
+            injectSafeHandler(mToastReference.get());
+        }
+    }
+
     protected void injectSafeHandler(Toast toast) {
         try {
             Field tnField = Toast.class.getDeclaredField("mTN");
@@ -94,21 +118,6 @@ public class CompactToast {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
-        }
-    }
-
-    public void show() {
-        if (Utils.isNotificationPermitted()) {
-
-            if (mToastReference.get() != null && mToastReference.get().getView().getParent() != null && mToastReference.get().getView().getParent() instanceof ViewGroup) {
-                ((ViewGroup) mToastReference.get().getView().getParent()).removeAllViews();
-            }
-
-            if (mToastReference.get() != null){
-                mToastReference.get().show();
-            }
-        } else {
-            VirtualToastManager.get().show(this);
         }
     }
 }
