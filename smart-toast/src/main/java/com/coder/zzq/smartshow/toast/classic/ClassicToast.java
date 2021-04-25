@@ -64,15 +64,11 @@ public class ClassicToast {
 
         rootView.setBackgroundResource(bgResource);
 
-
-        int bgColor = config.mBackgroundColor != Constants.DEFAULT_VALUE ?
-                config.mBackgroundColor
-                : Constants.DEFAULT_TOAST_BACKGROUND_COLOR;
-
-        Drawable bg = rootView.getBackground().mutate();
-        bg.mutate();
-        DrawableCompat.setTint(bg, bgColor);
-
+        if (config.mBackgroundColor != Constants.DEFAULT_VALUE){
+            Drawable bg = rootView.getBackground().mutate();
+            bg.mutate();
+            DrawableCompat.setTint(bg, config.mBackgroundColor);
+        }
 
         TextView msgView = rootView.findViewById(R.id.smart_toast_message);
         msgView.setText(config.mMsg);
