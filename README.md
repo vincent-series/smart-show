@@ -57,7 +57,7 @@ allprojects {
 
     implementation 'com.google.android.material:material:1.3.0-alpha04'
 
-    //如需要使用库里的注解功能需添加注解处理库
+    //如需要使用库里的注解功能，需添加注解处理库，否则不必添加
     //只在编译期间起作用，不会打包到apk
     
     annotationProcessor 'com.github.zhiqiang-series.smart-show:annotation-compiler:3.1.7'
@@ -70,7 +70,7 @@ allprojects {
 
     implementation 'com.github.zhiqiang-series.smart-show:toast:3.1.7'
 
-        //如需要使用库里的注解功能需添加注解处理库
+        //如需要使用库里的注解功能，需添加注解处理库，否则不必添加
         //只在编译期间起作用，不会打包到apk
 
     annotationProcessor 'com.github.zhiqiang-series.smart-show:annotation-compiler:3.1.7'
@@ -82,7 +82,7 @@ allprojects {
 
     implementation 'com.github.zhiqiang-series.smart-show:dialog:3.1.7'
 
-        //如需要使用库里的注解功能需添加注解处理库
+        //如需要使用库里的注解功能，需添加注解处理库，否则不必添加
         //只在编译期间起作用，不会打包到apk
 
     annotationProcessor 'com.github.zhiqiang-series.smart-show:annotation-compiler:3.1.7'
@@ -94,7 +94,7 @@ allprojects {
 
     implementation 'com.github.zhiqiang-series.smart-show:topbar:3.1.7'
 
-        //如需要使用库里的注解功能需添加注解处理库
+        //如需要使用库里的注解功能，需添加注解处理库，否则不必添加
         //只在编译期间起作用，不会打包到apk
 
     annotationProcessor 'com.github.zhiqiang-series.smart-show:annotation-compiler:3.1.7'
@@ -110,7 +110,7 @@ allprojects {
 
     implementation 'com.google.android.material:material:1.3.0-alpha04'
 
-        //如需要使用库里的注解功能需添加注解处理库
+        //如需要使用库里的注解功能，需添加注解处理库，否则不必添加
         //只在编译期间起作用，不会打包到apk
 
     annotationProcessor 'com.github.zhiqiang-series.smart-show:annotation-compiler:3.1.7'
