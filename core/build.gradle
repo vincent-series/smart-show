@@ -1,6 +1,6 @@
 apply from: "$rootDir/lib_module_config.gradle"
 project.archivesBaseName = 'core'
 dependencies {
-    api 'com.github.the-pig-of-jungle:toolkit:1.0.5'
+    api 'com.github.the-pig-of-jungle:toolkit:1.0.8'
     api project(':annotations')
 }
