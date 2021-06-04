@@ -3,8 +3,9 @@ package com.coder.zzq.smartshow.toast.classic;
 import android.view.Gravity;
 import android.widget.Toast;
 
-import com.coder.zzq.smartshow.toast.PlainToastApi;
 import com.coder.zzq.smartshow.toast.Constants;
+import com.coder.zzq.smartshow.toast.PlainToastApi;
+import com.coder.zzq.smartshow.toast.compact.CompactToast;
 import com.coder.zzq.smartshow.toast.schedule.ToastScheduler;
 import com.coder.zzq.toolkit.Utils;
 
@@ -102,7 +103,13 @@ public class ClassicToastInvoker implements ClassicToastView.Overall, ClassicToa
         mConfig.mXOffset = xOffsetDp;
         mConfig.mYOffset = yOffsetDp;
         mConfig.mDuration = duration;
-        ToastScheduler.get().schedule(ClassicToastFactory.get().produceToast(mConfig));
+        ToastScheduler.get().schedule(new CompactToast(ClassicToastFactory.get(), mConfig));
+    }
+
+    @Override
+    public ClassicToastView.ConfigSetter transition(boolean b) {
+        mConfig.mTransition = b;
+        return this;
     }
 
     @Override

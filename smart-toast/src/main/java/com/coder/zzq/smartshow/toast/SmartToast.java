@@ -267,7 +267,7 @@ public final class SmartToast {
     }
 
     public static boolean isShowing() {
-        return ToastScheduler.get().isCurrentShowing();
+        return false;
     }
 
     public static void dismiss() {

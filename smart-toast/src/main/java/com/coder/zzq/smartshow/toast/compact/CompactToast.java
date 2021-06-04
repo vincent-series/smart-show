@@ -1,123 +1,56 @@
 package com.coder.zzq.smartshow.toast.compact;
 
-import android.os.Build;
-import android.os.Handler;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.coder.zzq.smartshow.toast.factory.BaseToastConfig;
+import com.coder.zzq.smartshow.toast.factory.ToastFactory;
 import com.coder.zzq.toolkit.Utils;
 
-import java.lang.ref.WeakReference;
-import java.lang.reflect.Field;
+@SuppressWarnings("deprecation")
+public class CompactToast<CONFIG_TYPE extends BaseToastConfig> {
+    private final ToastFactory<CONFIG_TYPE> mToastFactory;
+    private CONFIG_TYPE mConfig;
 
-public class CompactToast {
-    private String mToastAlias;
-    private WeakReference<Toast> mToastReference;
-    private boolean mDiscard;
-
-    private BaseToastConfig mConfig;
-
-    public CompactToast(Toast toast, String alias, BaseToastConfig config) {
-        mToastReference = new WeakReference<>(Utils.requireNonNull(toast, "the toast instance can not null!"));
-        if (Utils.isEmpty(alias)) {
-            throw new IllegalStateException("the toast alias can not null or empty!");
-        }
-
-        mToastAlias = alias;
+    public CompactToast(ToastFactory<CONFIG_TYPE> toastFactory, CONFIG_TYPE config) {
+        mToastFactory = toastFactory;
         mConfig = config;
     }
 
-
-    public Toast getToast() {
-        return mToastReference.get();
-    }
-
-    @SuppressWarnings("deprecation")
-    public boolean isToastShowing() {
-        return mToastReference != null
-                && mToastReference.get() != null
-                && mToastReference.get().getView() != null
-                && mToastReference.get().getView().getWindowVisibility() == View.VISIBLE;
-    }
-
-
     public String getToastAlias() {
-        return mToastAlias;
+        return mToastFactory.toastAlias();
     }
 
-    public BaseToastConfig getConfig() {
+    public CONFIG_TYPE getConfig() {
         return mConfig;
     }
 
-    public void updateConfig(BaseToastConfig config) {
-        mConfig = config;
+    public ToastFactory<CONFIG_TYPE> getToastFactory() {
+        return mToastFactory;
     }
-
-    public boolean isDiscard() {
-        return mToastReference == null || mToastReference.get() == null || mDiscard;
-    }
-
-    public void discard() {
-        mDiscard = true;
-        if (mToastReference != null) {
-            if (mToastReference.get() != null) {
-                mToastReference.get().cancel();
-            }
-            mToastReference.clear();
-        }
-
-        mToastReference = null;
-
-        if (!Utils.isNotificationPermitted()) {
-            VirtualToastManager.dismiss();
-        }
-    }
-
 
     public void show() {
         if (Utils.isNotificationPermitted()) {
-
-            if (mToastReference.get() != null && mToastReference.get().getView().getParent() != null && mToastReference.get().getView().getParent() instanceof ViewGroup) {
-                ((ViewGroup) mToastReference.get().getView().getParent()).removeAllViews();
-            }
-
-            if (mToastReference.get() != null) {
-                mToastReference.get().show();
-            }
+            generateRealToast().show();
         } else {
             VirtualToastManager.get().show(this);
         }
     }
 
-    public boolean isViewCreated() {
-        return mToastReference.get() != null && mToastReference.get().getView() != null;
+    public Toast generateRealToast() {
+        Toast toast = mToastFactory.produceToast(mConfig);
+        if (toast.getView().getParent() != null && toast.getView().getParent() instanceof ViewGroup) {
+            ((ViewGroup) toast.getView().getParent()).removeAllViews();
+        }
+        return toast;
     }
 
-    public void setView(View rootView) {
-
-        mToastReference.get().setView(rootView);
-
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.N
-                || Build.VERSION.SDK_INT == Build.VERSION_CODES.N_MR1) {
-            injectSafeHandler(mToastReference.get());
-        }
+    public void reset() {
+        mToastFactory.reset();
+        VirtualToastManager.reset();
     }
 
-    protected void injectSafeHandler(Toast toast) {
-        try {
-            Field tnField = Toast.class.getDeclaredField("mTN");
-            tnField.setAccessible(true);
-            Object tn = tnField.get(toast);
-            Field handlerField = tn.getClass().getDeclaredField("mHandler");
-            handlerField.setAccessible(true);
-            Handler handlerOfTn = (Handler) handlerField.get(tn);
-            handlerField.set(tn, new SafeHandler(handlerOfTn, toast.getView()));
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
+    public int tag() {
+        return hashCode();
     }
 }

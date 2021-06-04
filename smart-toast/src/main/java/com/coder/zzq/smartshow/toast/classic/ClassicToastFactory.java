@@ -14,7 +14,7 @@ public class ClassicToastFactory extends AbstractToastFactory<ClassicToast.Confi
     }
 
     @Override
-    protected String provideToastAlias() {
+    public String toastAlias() {
         return Constants.TOAST_TYPE_CLASSIC;
     }
 

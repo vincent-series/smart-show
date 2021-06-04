@@ -10,7 +10,7 @@ import com.coder.zzq.smartshow.toast.schedule.ToastScheduler;
 final class ToastCallback implements IToastCallback {
     @Override
     public void dismissOnLeave() {
-        ToastScheduler.get().cancelCurrentIfNecessary();
+        ToastScheduler.get().dismissWhenSetCancelTag();
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.coder.zzq.smartshow.toast.emotion;
 import android.view.Gravity;
 import android.widget.Toast;
 
+import com.coder.zzq.smartshow.toast.compact.CompactToast;
 import com.coder.zzq.smartshow.toast.schedule.ToastScheduler;
 import com.coder.zzq.toolkit.Utils;
 
@@ -11,6 +12,12 @@ public class EmotionToastInvoker implements EmotionToastView.Overall, EmotionToa
 
     @Override
     public EmotionToastView.ConfigSetter config() {
+        return this;
+    }
+
+    @Override
+    public EmotionToastView.ConfigSetter transition(boolean b) {
+        mConfig.mTransition = b;
         return this;
     }
 
@@ -244,6 +251,6 @@ public class EmotionToastInvoker implements EmotionToastView.Overall, EmotionToa
         mConfig.mGravity = Gravity.CENTER;
         mConfig.mXOffset = 0;
         mConfig.mYOffset = 0;
-        ToastScheduler.get().schedule(EmotionToastFactory.get().produceToast(mConfig));
+        ToastScheduler.get().schedule(new CompactToast(EmotionToastFactory.get(), mConfig));
     }
 }

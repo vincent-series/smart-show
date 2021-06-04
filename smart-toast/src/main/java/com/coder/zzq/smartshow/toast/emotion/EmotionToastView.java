@@ -11,6 +11,8 @@ public interface EmotionToastView {
 
     interface ConfigSetter {
 
+        ConfigSetter transition(boolean b);
+
         ConfigSetter cancelOnActivityExit(boolean b);
 
         ConfigSetter backgroundColor(@ColorInt int color);

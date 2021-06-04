@@ -11,4 +11,5 @@ public class BaseToastConfig {
     public int mYOffset;
     //退出当前页面时是否隐藏当前正在显示的Toast
     public boolean mCancelOnActivityExit;
+    public boolean mTransition;
 }

@@ -13,4 +13,6 @@ public interface Constants {
 
     int DEFAULT_TOAST_BACKGROUND_COLOR = Color.parseColor("#cc000000");
     int DEFAULT_ICON_PADDING = Utils.dpToPx(10);
+
+    String DELAY_TOAST_TAG_KEY = "delay_toast";
 }

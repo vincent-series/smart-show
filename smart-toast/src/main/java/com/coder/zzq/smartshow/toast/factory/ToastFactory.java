@@ -1,7 +1,11 @@
 package com.coder.zzq.smartshow.toast.factory;
 
-import com.coder.zzq.smartshow.toast.compact.CompactToast;
+import android.widget.Toast;
 
 public interface ToastFactory<TOAST_CONFIG extends BaseToastConfig> {
-    CompactToast produceToast(TOAST_CONFIG newConfig);
+    Toast produceToast(TOAST_CONFIG newConfig);
+
+    String toastAlias();
+
+    void reset();
 }
