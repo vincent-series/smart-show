@@ -11,7 +11,8 @@
     * [icon、icon size、icon position、icon padding](https://github.com/zhiqiang-series/smart-show/wiki/SetupClassicToast#%E8%AE%BE%E7%BD%AEicon%E5%8F%8A%E5%85%B6%E4%BD%8D%E7%BD%AE%E5%A4%A7%E5%B0%8F%E9%97%B4%E8%B7%9D)
     * [msg color](https://github.com/zhiqiang-series/smart-show/wiki/SetupClassicToast#%E8%AE%BE%E7%BD%AE%E6%96%87%E6%9C%AC%E9%A2%9C%E8%89%B2)
     * [msg size、msg bold](https://github.com/zhiqiang-series/smart-show/wiki/SetupClassicToast#%E8%AE%BE%E7%BD%AE%E6%96%87%E6%9C%AC%E5%A4%A7%E5%B0%8F%E7%B2%97%E7%BB%86)
-    * [force dismiss when leave](https://github.com/zhiqiang-series/smart-show/wiki/SetupClassicToast#%E8%AE%BE%E7%BD%AE%E7%A6%BB%E5%BC%80%E5%BD%93%E5%89%8D%E9%A1%B5%E9%9D%A2%E6%97%B6%E5%BC%BA%E5%88%B6%E9%9A%90%E8%97%8F%E6%AD%A3%E5%9C%A8%E6%98%BE%E7%A4%BA%E7%9A%84toast)
+    * [forbid show toast across pages](https://github.com/zhiqiang-series/smart-show/wiki/SetupClassicToast#%E7%A6%81%E6%AD%A2%E8%B7%A8%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BAtoast)
+    * [solution to toast can't show when page transition](https://github.com/zhiqiang-series/smart-show/wiki/SetupClassicToast#%E9%A1%B5%E9%9D%A2%E8%B7%B3%E8%BD%AC%E7%9A%84%E5%90%8C%E6%97%B6%E6%98%BE%E7%A4%BAtoast%E5%B8%B8%E5%B8%B8%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98)
 * Emotion Toast
   * [default style](https://github.com/the-pig-of-jungle/smart-show/wiki/EmotionToast)
     * [info](https://github.com/the-pig-of-jungle/smart-show/wiki/EmotionToast#info)
@@ -27,7 +28,8 @@
     * [icon、icon size、icon padding](https://github.com/zhiqiang-series/smart-show/wiki/SetupEmotionToast#%E8%AE%BE%E7%BD%AE%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9B%BE%E6%A0%87%E5%8F%8A%E5%85%B6%E5%A4%A7%E5%B0%8F%E9%97%B4%E8%B7%9D)
     * [msg color](https://github.com/zhiqiang-series/smart-show/wiki/SetupEmotionToast#%E8%AE%BE%E7%BD%AE%E6%96%87%E6%9C%AC%E9%A2%9C%E8%89%B2)
     * [msg size、msg bold](https://github.com/zhiqiang-series/smart-show/wiki/SetupEmotionToast#%E8%AE%BE%E7%BD%AE%E6%9C%AC%E6%96%87%E5%A4%A7%E5%B0%8F%E5%8F%8A%E7%B2%97%E7%BB%86)
-    * [force dismiss when leave](https://github.com/the-pig-of-jungle/smart-show/wiki/SetupEmotionToast#设置离开页面时强制隐藏正在显示的Toast)
+    * [forbid show toast across pages](https://github.com/zhiqiang-series/smart-show/wiki/SetupEmotionToast#%E7%A6%81%E6%AD%A2%E8%B7%A8%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BAtoast)
+    * [solution to toast can't show when page transition](https://github.com/zhiqiang-series/smart-show/wiki/SetupEmotionToast#%E9%A1%B5%E9%9D%A2%E8%B7%B3%E8%BD%AC%E7%9A%84%E5%90%8C%E6%97%B6%E6%98%BE%E7%A4%BAtoast%E5%B8%B8%E5%B8%B8%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98)
 * [Custom Toast](https://github.com/the-pig-of-jungle/smart-show/wiki/CustomToast)
 * [Other Api](https://github.com/the-pig-of-jungle/smart-show/wiki/SmartToastOtherApi)
   * [isShowing](https://github.com/the-pig-of-jungle/smart-show/wiki/SmartToastOtherApi#当前是否有Toast在显示
