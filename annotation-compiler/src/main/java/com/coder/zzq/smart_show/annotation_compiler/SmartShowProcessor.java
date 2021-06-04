@@ -226,9 +226,9 @@ public class SmartShowProcessor extends AbstractProcessor {
                     .addStatement("return s$L", toastFactoryName)
                     .build();
 
-            MethodSpec provideAliasMethod = MethodSpec.methodBuilder("provideToastAlias")
+            MethodSpec provideAliasMethod = MethodSpec.methodBuilder("toastAlias")
                     .returns(String.class)
-                    .addModifiers(Modifier.PROTECTED)
+                    .addModifiers(Modifier.PUBLIC)
                     .addStatement("return $S", alias)
                     .addAnnotation(Override.class)
                     .build();
@@ -265,6 +265,11 @@ public class SmartShowProcessor extends AbstractProcessor {
             String toastViewName = !alias.endsWith("Toast") ? (alias + "ToastView") : (alias + "View");
             toastViewName = toastViewName.substring(0, 1).toUpperCase() + toastViewName.substring(1);
 
+            MethodSpec transition = MethodSpec.methodBuilder("transition")
+                    .returns(ClassNames.CONFIG_SETTER)
+                    .addParameter(ClassName.BOOLEAN, "b")
+                    .addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT)
+                    .build();
 
             MethodSpec cancelOnExit = MethodSpec.methodBuilder("cancelOnActivityExit")
                     .returns(ClassNames.CONFIG_SETTER)
@@ -273,7 +278,7 @@ public class SmartShowProcessor extends AbstractProcessor {
                     .build();
 
             List<MethodSpec> options = new ArrayList<>();
-            if (!toastConfigClass.isEmpty()){
+            if (!toastConfigClass.isEmpty()) {
                 ToastConfig toastConfig = toastConfigClass.get(0).getAnnotation(ToastConfig.class);
                 boolean withPrefix = toastConfig.withPrefix_m();
 
@@ -305,13 +310,13 @@ public class SmartShowProcessor extends AbstractProcessor {
             }
 
 
-
             MethodSpec applyMethod = MethodSpec.methodBuilder("apply")
                     .returns(ClassNames.PLAIN_TOAST_API)
                     .addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT)
                     .build();
 
             TypeSpec configSetterInterface = TypeSpec.interfaceBuilder(ClassNames.CONFIG_SETTER)
+                    .addMethod(transition)
                     .addMethod(cancelOnExit)
                     .addMethods(options)
                     .addMethod(applyMethod)
@@ -365,7 +370,7 @@ public class SmartShowProcessor extends AbstractProcessor {
 
             List<MethodSpec> optionsImpl = new ArrayList<>();
 
-            if (!toastConfigClass.isEmpty()){
+            if (!toastConfigClass.isEmpty()) {
                 ToastConfig toastConfig = toastConfigClass.get(0).getAnnotation(ToastConfig.class);
                 boolean withPrefix = toastConfig.withPrefix_m();
                 List<? extends Element> optionItemsImpl = toastConfigClass.get(0).getEnclosedElements();
@@ -395,6 +400,14 @@ public class SmartShowProcessor extends AbstractProcessor {
                     }
                 }
             }
+
+            MethodSpec transitionImpl = MethodSpec.methodBuilder("transition")
+                    .returns(ClassName.get(targetPackage, toastViewName, "ConfigSetter"))
+                    .addParameter(ClassName.BOOLEAN, "b")
+                    .addModifiers(Modifier.PUBLIC)
+                    .addStatement("mConfig.mTransition = b")
+                    .addStatement("return this")
+                    .build();
 
             MethodSpec cancelOnExitImpl = MethodSpec.methodBuilder("cancelOnActivityExit")
                     .returns(ClassName.get(targetPackage, toastViewName, "ConfigSetter"))
@@ -564,7 +577,7 @@ public class SmartShowProcessor extends AbstractProcessor {
                     .addStatement("mConfig.mXOffset = xOffsetDp", ClassNames.UTILS)
                     .addStatement("mConfig.mYOffset = yOffsetDp", ClassNames.UTILS)
                     .addStatement("mConfig.mDuration = duration")
-                    .addStatement("$T.get().schedule($T.get().produceToast(mConfig))", ClassNames.TOAST_SCHEDULER, toastFactoryClassName)
+                    .addStatement("$T.get().schedule(new $T($T.get(),mConfig))", ClassNames.TOAST_SCHEDULER, ClassNames.COMPACT_TOAST, toastFactoryClassName)
                     .build();
 
             TypeSpec invokerClass = TypeSpec.classBuilder(invokerName)
@@ -573,6 +586,7 @@ public class SmartShowProcessor extends AbstractProcessor {
                     .addSuperinterface(ClassName.get(targetPackage, toastViewName, "ConfigSetter"))
                     .addField(configField)
                     .addMethod(configMethodImpl)
+                    .addMethod(transitionImpl)
                     .addMethod(cancelOnExitImpl)
                     .addMethods(optionsImpl)
                     .addMethod(applyMethodImpl)

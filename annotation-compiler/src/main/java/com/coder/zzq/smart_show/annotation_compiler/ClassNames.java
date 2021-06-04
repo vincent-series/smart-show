@@ -17,13 +17,14 @@ public class ClassNames {
     public static final ClassName CONSTANTS = ClassName.get("com.coder.zzq.smartshow.toast", "Constants");
     public static final ClassName TOAST = ClassName.get("android.widget", "Toast");
     public static final ClassName TOAST_RETRIEVER = ClassName.get("com.coder.zzq.smartshow.toast", "VariousToastRetriever");
-    ;
+
     public static final ClassName CLASSIC_TOAST_OVERALL = ClassName.get("com.coder.zzq.smartshow.toast.classic", "ClassicToastView", "Overall");
     public static final ClassName CLASSIC_TOAST_INVOKER = ClassName.get("com.coder.zzq.smartshow.toast.classic", "ClassicToastInvoker");
     public static final ClassName EMOTION_TOAST_OVERALL = ClassName.get("com.coder.zzq.smartshow.toast.emotion", "EmotionToastView", "Overall");
     public static final ClassName EMOTION_TOAST_INVOKER = ClassName.get("com.coder.zzq.smartshow.toast.emotion", "EmotionToastInvoker");
     public static final ClassName LAYOUT_INFLATER = ClassName.get("android.view", "LayoutInflater");
-    ;
+
+    public static final ClassName COMPACT_TOAST = ClassName.get("com.coder.zzq.smartshow.toast.compact", "CompactToast");
 
     public static ParameterizedTypeName getGenericToastFactoryClassName(TypeName paramType) {
         return ParameterizedTypeName.get(BASE_TOAST_FACTORY, paramType);
