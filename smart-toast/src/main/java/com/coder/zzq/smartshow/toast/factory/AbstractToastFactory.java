@@ -35,7 +35,8 @@ public abstract class AbstractToastFactory<TOAST_CONFIG extends BaseToastConfig>
             EasyLogger.d("clear cache because of position changed");
         }
 
-        if (toast == null) {
+        boolean rebuild = (toast == null);
+        if (rebuild) {
             EasyLogger.d("create a new toast instance");
             toast = createToastInstance();
             mCachedToastReference = new WeakReference<>(toast);
@@ -54,6 +55,11 @@ public abstract class AbstractToastFactory<TOAST_CONFIG extends BaseToastConfig>
         }
 
         toast.getView().setTag(Utils.isNotificationPermitted());
+
+        if (rebuild && (Build.VERSION.SDK_INT == Build.VERSION_CODES.N
+                || Build.VERSION.SDK_INT == Build.VERSION_CODES.N_MR1)) {
+            injectSafeHandler(toast);
+        }
 
         return toast;
     }
@@ -76,10 +82,6 @@ public abstract class AbstractToastFactory<TOAST_CONFIG extends BaseToastConfig>
 
     protected Toast createToastInstance() {
         Toast toast = new Toast(Toolkit.getContext());
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.N
-                || Build.VERSION.SDK_INT == Build.VERSION_CODES.N_MR1) {
-            injectSafeHandler(toast);
-        }
         mDefaultYOffsetWhenBottom = toast.getYOffset();
         return toast;
     }
