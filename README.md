@@ -51,7 +51,7 @@ allprojects {
 * 第一种方式，引入所有模块
 <pre><code>
 
-    implementation 'com.github.zhiqiang-series.smart-show:all:3.1.8'
+    implementation 'com.github.zhiqiang-series.smart-show:all:3.1.9'
 
     //material库，SmartSnackbar模块需要用到
 
@@ -60,7 +60,7 @@ allprojects {
     //如需要使用库里的注解功能，需添加注解处理库，否则不必添加
     //只在编译期间起作用，不会打包到apk
     
-    annotationProcessor 'com.github.zhiqiang-series.smart-show:annotation-compiler:3.1.8'
+    annotationProcessor 'com.github.zhiqiang-series.smart-show:annotation-compiler:3.1.9'
 
 </code></pre>
 
@@ -68,43 +68,43 @@ allprojects {
 最好保证不同模块的版本号一致，以便其内部依赖的基本库版本相同。
 <pre><code>
 
-    implementation 'com.github.zhiqiang-series.smart-show:toast:3.1.8'
+    implementation 'com.github.zhiqiang-series.smart-show:toast:3.1.9'
 
     //如需要使用库里的注解功能，需添加注解处理库，否则不必添加
     //只在编译期间起作用，不会打包到apk
 
-    annotationProcessor 'com.github.zhiqiang-series.smart-show:annotation-compiler:3.1.8'
+    annotationProcessor 'com.github.zhiqiang-series.smart-show:annotation-compiler:3.1.9'
 
 </code></pre>
 
 
 <pre><code>
 
-    implementation 'com.github.zhiqiang-series.smart-show:dialog:3.1.8'
+    implementation 'com.github.zhiqiang-series.smart-show:dialog:3.1.9'
 
     //如需要使用库里的注解功能，需添加注解处理库，否则不必添加
     //只在编译期间起作用，不会打包到apk
 
-    annotationProcessor 'com.github.zhiqiang-series.smart-show:annotation-compiler:3.1.8'
+    annotationProcessor 'com.github.zhiqiang-series.smart-show:annotation-compiler:3.1.9'
 
 </code></pre>
 
 
 <pre><code>
 
-    implementation 'com.github.zhiqiang-series.smart-show:topbar:3.1.8'
+    implementation 'com.github.zhiqiang-series.smart-show:topbar:3.1.9'
 
     //如需要使用库里的注解功能，需添加注解处理库，否则不必添加
     //只在编译期间起作用，不会打包到apk
 
-    annotationProcessor 'com.github.zhiqiang-series.smart-show:annotation-compiler:3.1.8'
+    annotationProcessor 'com.github.zhiqiang-series.smart-show:annotation-compiler:3.1.9'
 
 </code></pre>
 
 
 <pre><code>
 
-    implementation 'com.github.zhiqiang-series.smart-show:snackbar:3.1.8'
+    implementation 'com.github.zhiqiang-series.smart-show:snackbar:3.1.9'
 
     //添加material依赖库
 
@@ -113,7 +113,7 @@ allprojects {
     //如需要使用库里的注解功能，需添加注解处理库，否则不必添加
     //只在编译期间起作用，不会打包到apk
 
-    annotationProcessor 'com.github.zhiqiang-series.smart-show:annotation-compiler:3.1.8'
+    annotationProcessor 'com.github.zhiqiang-series.smart-show:annotation-compiler:3.1.9'
 
 </code></pre>
 
