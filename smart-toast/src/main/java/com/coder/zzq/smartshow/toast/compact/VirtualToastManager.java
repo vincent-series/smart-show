@@ -129,7 +129,11 @@ public final class VirtualToastManager {
 
     public static void dismiss() {
         if (isShowing()) {
-            get().mToastDialogReference.get().dismiss();
+            try {
+                get().mToastDialogReference.get().dismiss();
+            } catch (IllegalStateException | IllegalArgumentException ex) {
+                EasyLogger.e("throw ex when dismiss dialog. Just ignore it!");
+            }
         }
     }
 
