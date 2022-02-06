@@ -8,8 +8,8 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.coder.vincent.smart_toast.SmartToast;
 import com.coder.zzq.smartshow.dialog.ClickListAdapter;
-import com.coder.zzq.smartshow.toast.SmartToast;
 import com.coder.zzq.smartshow.topbar.SmartTopbar;
 
 import java.util.Arrays;
@@ -61,7 +61,7 @@ public class TestTopbarActivity extends AppCompatActivity {
         SmartTopbar.get(this).showIndefinite("为该库Star一下好么", "好的", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SmartToast.showAtTop("Thank you");
+                SmartToast.classic().showAtTop("Thank you");
             }
         });
 

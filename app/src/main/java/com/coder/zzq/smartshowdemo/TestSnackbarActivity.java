@@ -9,9 +9,9 @@ import android.widget.ListView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.coder.vincent.smart_toast.SmartToast;
 import com.coder.zzq.smartshow.dialog.ClickListAdapter;
 import com.coder.zzq.smartshow.snackbar.SmartSnackbar;
-import com.coder.zzq.smartshow.toast.SmartToast;
 
 import java.util.Arrays;
 
@@ -61,7 +61,7 @@ public class TestSnackbarActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        SmartToast.showInCenter("Thank you");
+                        SmartToast.classic().showInCenter("Thank you");
                     }
                 });
 
