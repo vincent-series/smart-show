@@ -1,3 +1,12 @@
-include ':annotation-compiler'
-include ':annotations'
-include ':app', ':smart-toast', ':smart-dialog', ':smart-snackbar', ':smart-topbar', ':core', ':bar-core', ':all'
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
+        maven { url 'https://jitpack.io' }
+    }
+}
+rootProject.name = "smart-show"
+include ':app'
+include ':smart-toast', ':smart-dialog', ':smart-snackbar', ':smart-topbar', ':core', ':bar-core', ':all'

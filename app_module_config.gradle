@@ -1,7 +1,0 @@
-apply plugin: 'com.android.application'
-apply from: "$rootDir/module_config.gradle"
-dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "androidx.appcompat:appcompat:${dependencyLibVersion.appcompat}"
-    implementation "androidx.constraintlayout:constraintlayout:${dependencyLibVersion.constraintlayout}"
-}
