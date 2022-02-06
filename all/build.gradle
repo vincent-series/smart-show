@@ -1,5 +1,29 @@
-apply from: "$rootDir/lib_module_config.gradle"
-project.archivesBaseName = 'all'
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+android {
+    compileSdk 31
+
+    defaultConfig {
+        minSdk 17
+        targetSdk 31
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
 dependencies {
     api project(':smart-toast')
     api project(':smart-topbar')
