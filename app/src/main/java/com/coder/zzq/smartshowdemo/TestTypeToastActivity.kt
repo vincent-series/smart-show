@@ -3,8 +3,8 @@ package com.coder.zzq.smartshowdemo
 import android.os.Bundle
 import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
+import com.coder.vincent.smart_dialog.click_list.ClickListAdapter
 import com.coder.vincent.smart_toast.SmartToast
-import com.coder.zzq.smartshow.dialog.ClickListAdapter
 import com.coder.zzq.smartshowdemo.databinding.ActivityTestTypeToastBinding
 
 class TestTypeToastActivity : AppCompatActivity() {

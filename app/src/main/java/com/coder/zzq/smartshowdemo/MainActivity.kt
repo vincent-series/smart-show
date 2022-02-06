@@ -1,78 +1,58 @@
-package com.coder.zzq.smartshowdemo;
+package com.coder.zzq.smartshowdemo
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import android.content.Intent
+import android.os.Bundle
+import android.widget.AdapterView.OnItemClickListener
+import androidx.appcompat.app.AppCompatActivity
+import com.coder.vincent.smart_dialog.click_list.ClickListAdapter
+import com.coder.zzq.smartshowdemo.databinding.ActivityMainBinding
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.coder.zzq.smartshow.dialog.ClickListAdapter;
-
-import java.util.Arrays;
-
-public class MainActivity extends AppCompatActivity {
-    private ListView mListView;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        mListView = findViewById(R.id.list_view);
-        ClickListAdapter adapter = new ClickListAdapter();
-        adapter.setItemCenter(true);
-        adapter.setItems(Arrays.asList(
-                new String[]{
-                        "toast",
-                        "type toast",
-                        "snackbar",
-                        "topbar",
-                        "dialog"
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(ActivityMainBinding.inflate(layoutInflater).apply {
+            val adapter = ClickListAdapter()
+            adapter.setItemCenter(true, false)
+            adapter.setItems(
+                listOf(
+                    "toast",
+                    "type toast",
+                    "snackbar",
+                    "topbar",
+                    "dialog"
+                ), false
+            )
+            listView.adapter = adapter
+            listView.onItemClickListener =
+                OnItemClickListener { _, _, position, _ ->
+                    when (position) {
+                        0 -> onToastClick()
+                        1 -> onTypeToastClick()
+                        2 -> onSnackbarClick()
+                        3 -> onTopBarClick()
+                        4 -> onDialogClick()
+                    }
                 }
-        ));
-        mListView.setAdapter(adapter);
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
-                    case 0:
-                        onToastClick(view);
-                        break;
-                    case 1:
-                        onTypeToastClick(view);
-                        break;
-                    case 2:
-                        onSnackbarClick(view);
-                        break;
-                    case 3:
-                        onTopBarClick(view);
-                        break;
-                    case 4:
-                        onDialogClick(view);
-                        break;
-                }
-            }
-        });
+        }.root)
     }
 
-    public void onToastClick(View view) {
-        startActivity(new Intent(this, TestToastActivity.class));
+    fun onToastClick() {
+        startActivity(Intent(this, TestToastActivity::class.java))
     }
 
-    public void onSnackbarClick(View view) {
-        startActivity(new Intent(this, TestSnackbarActivity.class));
+    private fun onSnackbarClick() {
+        startActivity(Intent(this, TestSnackbarActivity::class.java))
     }
 
-    public void onTopBarClick(View view) {
-        startActivity(new Intent(this, TestTopbarActivity.class));
+    private fun onTopBarClick() {
+        startActivity(Intent(this, TestTopbarActivity::class.java))
     }
 
-    public void onTypeToastClick(View view) {
-        startActivity(new Intent(this, TestTypeToastActivity.class));
+    fun onTypeToastClick() {
+        startActivity(Intent(this, TestTypeToastActivity::class.java))
     }
 
-    public void onDialogClick(View view) {
-        startActivity(new Intent(this, TestDialogActivity.class));
+    private fun onDialogClick() {
+        startActivity(Intent(this, TestDialogActivity::class.java))
     }
 }
