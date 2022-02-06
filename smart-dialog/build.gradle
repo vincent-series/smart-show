@@ -33,8 +33,6 @@ android {
 dependencies {
     compileOnly "androidx.core:core-ktx:${dependencyLibVersion.core_ktx}"
     compileOnly "androidx.appcompat:appcompat:${dependencyLibVersion.appcompat}"
-    api "io.github.vincent-series:common:1.0.2-1.2.4-SNAPSHOT"
-    kapt "io.github.vincent-series:annotation-compiler:1.0.1-1.1.8-SNAPSHOT"
-    api "androidx.startup:startup-runtime:1.1.0"
-    api project(':core')
+    api "io.github.vincent-series:common:1.0.2"
+    kapt "io.github.vincent-series:annotation-compiler:1.0.2"
 }

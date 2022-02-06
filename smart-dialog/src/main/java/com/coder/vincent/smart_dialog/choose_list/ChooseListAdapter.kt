@@ -9,12 +9,12 @@ import android.widget.BaseAdapter
 import android.widget.CheckedTextView
 import androidx.core.graphics.drawable.DrawableCompat
 import com.coder.vincent.series.common_lib.bean.TextStyle
+import com.coder.vincent.series.common_lib.dpToPx
 import com.coder.vincent.series.common_lib.layoutInflater
 import com.coder.vincent.series.common_lib.resourceToColor
 import com.coder.vincent.series.common_lib.resourceToDrawable
 import com.coder.zzq.smartshow.dialog.R
 import com.coder.zzq.smartshow.dialog.databinding.ListItemChoiceBinding
-import com.coder.zzq.toolkit.Utils
 
 class ChooseListAdapter : BaseAdapter() {
     private var items: List<String> = listOf()
@@ -106,7 +106,7 @@ class ChooseListAdapter : BaseAdapter() {
                 else
                     R.drawable.smart_show_cube_unchoose.resourceToDrawable()
             stateListDrawable.addState(intArrayOf(0), uncheckedDrawable)
-            stateListDrawable.setBounds(0, 0, Utils.dpToPx(17f), Utils.dpToPx(17f))
+            stateListDrawable.setBounds(0, 0, 17f.dpToPx(), 17f.dpToPx())
             var leftDrawable: Drawable? = null
             var rightDrawable: Drawable? = null
             if (iconPosition == ICON_POSITION_LEFT) {
