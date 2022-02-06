@@ -2,43 +2,36 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:gravity="center">
-
-    <RelativeLayout
-        android:id="@+id/smart_show_loading_part"
-        android:layout_width="wrap_content"
-        android:layout_height="110dp">
-
+    android:gravity="center"
+    android:background="@drawable/smart_show_loading_bg">
         <LinearLayout
+            android:padding="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
             android:orientation="vertical">
 
             <ProgressBar
                 android:id="@+id/smart_show_loading_progress_bar"
-                android:layout_width="47dp"
-                android:layout_height="47dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_gravity="center_horizontal"
                 android:indeterminateBehavior="repeat"
                 android:indeterminateDrawable="@drawable/smart_show_loading_anim"
                 android:indeterminateOnly="true" />
 
             <TextView
-                android:paddingTop="10dp"
+                android:visibility="gone"
                 android:id="@+id/smart_show_loading_message_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:ellipsize="end"
                 android:lineSpacingExtra="2dp"
-                android:maxLines="2"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
+                android:maxLines="1"
+                android:paddingTop="8dp"
                 android:text="正在加载"
+                android:maxWidth="200dp"
                 android:textColor="#ffffff"
-                android:textSize="15sp" />
+                android:textSize="12sp" />
         </LinearLayout>
-
-    </RelativeLayout>
 </FrameLayout>
