@@ -1,5 +1,38 @@
-apply from: "$rootDir/lib_module_config.gradle"
-project.archivesBaseName = 'toast'
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+android {
+    compileSdk 31
+
+    defaultConfig {
+        minSdk 17
+        targetSdk 31
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
 dependencies {
-    api project(':core')
+    compileOnly "androidx.core:core-ktx:${dependencyLibVersion.core_ktx}"
+    compileOnly "androidx.appcompat:appcompat:${dependencyLibVersion.appcompat}"
+    api "io.github.vincent-series:common:1.0.2-1.2.5-SNAPSHOT"
+    api "androidx.startup:startup-runtime:1.1.0"
+    kapt "io.github.vincent-series:annotation-compiler:1.0.1-1.4.0-SNAPSHOT"
 }
