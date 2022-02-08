@@ -9,7 +9,7 @@ import com.coder.vincent.series.common_lib.application
 import com.coder.vincent.smart_toast.ToastConfig
 import java.lang.reflect.Field
 
-@SuppressLint("Deprecated")
+@Suppress("DEPRECATION")
 internal class RealToast(toastView: View, config: ToastConfig) : BaseCompactToast(toastView, config) {
     private val toast = Toast(application).apply {
         view = toastView

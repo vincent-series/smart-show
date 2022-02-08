@@ -9,7 +9,5 @@ abstract class DefaultToastConfig(override val alias: String) : ToastConfig {
     override var duration: Int = Toast.LENGTH_SHORT
     override lateinit var message: CharSequence
     override lateinit var location: Location
-
-    override fun isSameContent(config: ToastConfig?) = message == config?.message
     override fun isSameLocation(config: ToastConfig?) = location == config?.location
 }

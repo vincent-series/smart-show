@@ -6,7 +6,6 @@ interface ToastConfig {
     var message: CharSequence
     var duration: Int
     var location: Location
-    fun isSameContent(config: ToastConfig?): Boolean
     fun isSameLocation(config: ToastConfig?): Boolean
 }
 

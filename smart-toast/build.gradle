@@ -2,6 +2,8 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'maven-publish'
+    id 'signing'
 }
 android {
     compileSdk 31
@@ -13,7 +15,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -33,4 +35,70 @@ dependencies {
     compileOnly "androidx.core:core-ktx:${dependencyLibVersion.core_ktx}"
     compileOnly "androidx.appcompat:appcompat:${dependencyLibVersion.appcompat}"
     api "io.github.vincent-series:common:1.0.2"
+}
+
+afterEvaluate {
+    publishing {
+        def stagingVersion = "4.0.0"
+        def snapshotsVersion = "4.0.0-1.0.4-SNAPSHOT"
+        def uploadVersion = snapshotsVersion
+        publications {
+            maven(MavenPublication) {
+                from components.release
+                groupId = 'io.github.vincent-series'
+                artifactId = 'smart-toast'
+                version = uploadVersion
+
+                pom {
+                    name = 'smart-toast'
+                    description = 'compatible and robust toast lib developed by zhiqiang.zhu.'
+                    url = 'https://github.com/vincent-series/smart-show'
+
+                    licenses {
+                        license {
+                            name = 'The Apache License, Version 2.0'
+                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id = 'zhiqiang.zhu'
+                            name = 'zhiqiang.zhu'
+                            email = 'coder_zzq@aliyun.com'
+                        }
+                    }
+                    scm {
+                        connection = 'scm:git:https://github.com/vincent-series/smart-show.git'
+                        developerConnection = 'scm:git:https://github.com/vincent-series/smart-show.git'
+                        url = 'https://github.com/vincent-series/smart-show'
+                    }
+                }
+
+                artifact generateSourcesJar
+            }
+        }
+
+        repositories {
+            maven {
+                url = uploadVersion == stagingVersion ?
+                        'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
+                        : 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
+                credentials {
+                    username repo_user_name
+                    password repo_password
+                }
+            }
+        }
+
+        signing {
+            sign publishing.publications.maven
+        }
+    }
+}
+
+task generateSourcesJar(type: Jar) {
+    group = 'jar'
+    archiveClassifier.set("sources")
+    from("src/main/java")
 }
