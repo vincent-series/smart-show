@@ -1,6 +1,5 @@
 package com.coder.vincent.smart_toast.compact
 
-import android.annotation.SuppressLint
 import android.graphics.PixelFormat
 import android.os.Build
 import android.os.Handler
@@ -14,7 +13,7 @@ import com.coder.vincent.series.common_lib.sdkVersionBelow
 import com.coder.vincent.series.common_lib.windowManager
 import com.coder.vincent.smart_toast.ToastConfig
 
-@SuppressLint("Deprecated")
+@Suppress("DEPRECATION")
 internal class SystemWindowToast(toastView: View, config: ToastConfig) :
     BaseCompactToast(toastView, config) {
     private val handler = Handler(Looper.getMainLooper())
