@@ -3,7 +3,6 @@ package com.coder.zzq.smartshowdemo
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
-import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import com.coder.vincent.smart_dialog.SmartDialog
 import com.coder.vincent.smart_dialog.choose_list.CHOICE_MODE_MULTIPLE
@@ -15,14 +14,15 @@ import com.coder.vincent.smart_dialog.loading.BOX_SIZE_LARGE
 import com.coder.vincent.smart_dialog.loading.BOX_SIZE_MIDDLE
 import com.coder.vincent.smart_dialog.loading.BOX_SIZE_SMALL
 import com.coder.vincent.smart_toast.SmartToast
+import com.coder.zzq.smartshowdemo.databinding.ActivityTestDialogBinding
 
 class TestDialogActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
-    private lateinit var mListView: ListView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_test_dialog)
-        mListView = findViewById(R.id.list_view)
-        mListView.onItemClickListener = this
+        setContentView(
+            ActivityTestDialogBinding.inflate(layoutInflater)
+                .apply { listView.onItemClickListener = this@TestDialogActivity }.root
+        )
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
@@ -205,5 +205,6 @@ class TestDialogActivity : AppCompatActivity(), AdapterView.OnItemClickListener 
             }
             .create(this)
             .show()
+        recreate()
     }
 }

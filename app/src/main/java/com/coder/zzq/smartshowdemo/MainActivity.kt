@@ -15,8 +15,8 @@ class MainActivity : AppCompatActivity() {
             adapter.setItemCenter(true, false)
             adapter.setItems(
                 listOf(
-                    "toast",
-                    "type toast",
+                    "classic toast",
+                    "emotion toast",
                     "snackbar",
                     "topbar",
                     "dialog"
