@@ -22,9 +22,9 @@ import com.coder.vincent.series.common_lib.isScreenPortrait
 import com.coder.vincent.series.common_lib.layoutInflater
 import com.coder.vincent.series.common_lib.screenWidth
 import com.coder.vincent.smart_dialog.ItemClickedListener
-import com.coder.zzq.smartshow.dialog.R
-import com.coder.zzq.smartshow.dialog.databinding.ListItemClickBinding
-import com.coder.zzq.smartshow.dialog.databinding.SmartShowClickListDialogBinding
+import com.coder.vincent.smart_dialog.R
+import com.coder.vincent.smart_dialog.databinding.ListItemClickBinding
+import com.coder.vincent.smart_dialog.databinding.SmartShowClickListDialogBinding
 import kotlin.math.min
 
 @DialogDefinition(alias = "clickList")

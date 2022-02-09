@@ -21,8 +21,8 @@ import com.coder.vincent.series.common_lib.screenWidth
 import com.coder.vincent.smart_dialog.CancelBtnListener
 import com.coder.vincent.smart_dialog.DefaultCancelBtnListener
 import com.coder.vincent.smart_dialog.ItemChosenListener
-import com.coder.zzq.smartshow.dialog.R
-import com.coder.zzq.smartshow.dialog.databinding.SmartShowChooseListDialogBinding
+import com.coder.vincent.smart_dialog.R
+import com.coder.vincent.smart_dialog.databinding.SmartShowChooseListDialogBinding
 import kotlin.math.min
 
 @DialogDefinition(alias = "chooseList")

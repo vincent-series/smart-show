@@ -1,10 +1,12 @@
 package com.coder.vincent.smart_dialog
 
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDialog
 import androidx.lifecycle.*
 import androidx.lifecycle.Observer
 import java.util.*
+import java.util.concurrent.atomic.AtomicReference
 
 class DialogHandleManager : ViewModel() {
     private val dialogHandles = LinkedList<DialogHandle>()
@@ -18,12 +20,6 @@ class DialogHandleManager : ViewModel() {
     }
 
     override fun onCleared() {
-        dialogHandles.forEach {
-            if (it.status() == VisibilityStatus.VISIBLE) {
-                it.dismiss()
-            }
-            (it as LifecycleManager).onClear()
-        }
         dialogHandles.clear()
     }
 
@@ -31,11 +27,11 @@ class DialogHandleManager : ViewModel() {
         activity: AppCompatActivity,
         dialogCombiner: DialogCombiner,
     ): DialogHandle {
-        val statusChecker = StatusChecker()
+        val statusStorage = VisibilityStatusStorage()
         return DialogHandleImpl(
-            statusChecker,
+            statusStorage,
             InstructionEmitter().apply {
-                observe(activity, DialogObserver(statusChecker, dialogCombiner, activity))
+                observe(activity, DialogObserver(statusStorage, dialogCombiner, activity))
             }
         ).apply { dialogHandles.add(this) }
     }
@@ -54,11 +50,9 @@ interface StatusHandle {
     fun status(): VisibilityStatus
 }
 
-interface DialogHandle : InstructionHandle, StatusHandle {}
+interface DialogHandle : InstructionHandle, StatusHandle
 interface LifecycleManager {
     fun isDirty(): Boolean
-
-    fun onClear()
 }
 
 class DoNothingDialogHandle : DialogHandle, LifecycleManager {
@@ -73,20 +67,13 @@ class DoNothingDialogHandle : DialogHandle, LifecycleManager {
     override fun status() = VisibilityStatus.INVISIBLE
 
     override fun isDirty() = true
-
-    override fun onClear() {}
 }
 
 class DialogHandleImpl(
-    private var statusChecker: StatusChecker?,
+    private val statusStorage: VisibilityStatusStorage,
     private val instructionEmitter: InstructionEmitter
 ) : DialogHandle, LifecycleManager {
     override fun isDirty() = !instructionEmitter.hasObservers()
-
-    override fun onClear() {
-        statusChecker = null
-    }
-
     override fun show() {
         instructionEmitter.show()
     }
@@ -99,32 +86,34 @@ class DialogHandleImpl(
         instructionEmitter.cancel()
     }
 
-    override fun isShowing() = statusChecker?.isShowing() == true
+    override fun isShowing() = statusStorage.isShowing()
 
-    override fun status() = statusChecker?.status() ?: VisibilityStatus.INVISIBLE
+    override fun status() = statusStorage.status()
 
 }
 
 class DialogObserver(
-    private val statusChecker: StatusChecker,
+    private val visibilityStatusStorage: VisibilityStatusStorage,
     private val dialogCombiner: DialogCombiner,
     activity: AppCompatActivity,
-) : Observer<Instruction> {
+) : Observer<Instruction>, LifecycleObserver {
+    var dialog: AppCompatDialog? = null
+
     init {
-        activity.lifecycle.addObserver(object : LifecycleObserver {
-            @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-            fun onOwnerDestroyed() {
-                dialog?.dismiss()
-                dialog = null
-                statusChecker.statusFetcher = null
-            }
-        })
+        activity.lifecycle.addObserver(this)
+        dialog = dialogCombiner.createDialog(activity)
+        dialog?.window?.decorView?.addOnAttachStateChangeListener(
+            object : View.OnAttachStateChangeListener {
+                override fun onViewAttachedToWindow(v: View) {
+                    visibilityStatusStorage.visibilityStatus.set(VisibilityStatus.VISIBLE)
+                }
+
+                override fun onViewDetachedFromWindow(v: View) {
+                    visibilityStatusStorage.visibilityStatus.set(VisibilityStatus.VISIBLE)
+                }
+            })
     }
 
-    var dialog: AppCompatDialog? = dialogCombiner.createDialog(activity).apply {
-        statusChecker.statusFetcher =
-            { if (isShowing) VisibilityStatus.VISIBLE else VisibilityStatus.INVISIBLE }
-    }
 
     override fun onChanged(status: Instruction) {
         when (status) {
@@ -140,6 +129,15 @@ class DialogObserver(
                 dialog?.cancel()
             }
         }
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    fun onClear(lifecycleOwner: LifecycleOwner) {
+        if (dialog?.isShowing == true){
+            dialog?.dismiss()
+        }
+        dialog = null
+        lifecycleOwner.lifecycle.removeObserver(this)
     }
 }
 
@@ -164,11 +162,11 @@ enum class Instruction {
     CANCEL,
 }
 
-class StatusChecker : StatusHandle {
-    var statusFetcher: (() -> VisibilityStatus)? = null
-    override fun isShowing() = statusFetcher?.invoke() == VisibilityStatus.VISIBLE
+class VisibilityStatusStorage : StatusHandle {
+    val visibilityStatus: AtomicReference<VisibilityStatus> = AtomicReference()
+    override fun isShowing() = visibilityStatus.get() == VisibilityStatus.VISIBLE
 
-    override fun status() = statusFetcher?.invoke() ?: VisibilityStatus.INVISIBLE
+    override fun status() = visibilityStatus.get() ?: VisibilityStatus.INVISIBLE
 }
 
 enum class VisibilityStatus {

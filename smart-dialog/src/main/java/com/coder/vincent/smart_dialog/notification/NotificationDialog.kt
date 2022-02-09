@@ -16,8 +16,8 @@ import com.coder.vincent.series.common_lib.layoutInflater
 import com.coder.vincent.series.common_lib.screenWidth
 import com.coder.vincent.smart_dialog.ConfirmBtnListener
 import com.coder.vincent.smart_dialog.DefaultConfirmBtnListener
-import com.coder.zzq.smartshow.dialog.R
-import com.coder.zzq.smartshow.dialog.databinding.SmartShowNotificationDialogBinding
+import com.coder.vincent.smart_dialog.R
+import com.coder.vincent.smart_dialog.databinding.SmartShowNotificationDialogBinding
 import kotlin.math.min
 
 @DialogDefinition(alias = "notification")

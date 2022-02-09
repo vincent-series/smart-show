@@ -13,8 +13,8 @@ import com.coder.vincent.series.common_lib.dpToPx
 import com.coder.vincent.series.common_lib.layoutInflater
 import com.coder.vincent.series.common_lib.resourceToColor
 import com.coder.vincent.series.common_lib.resourceToDrawable
-import com.coder.zzq.smartshow.dialog.R
-import com.coder.zzq.smartshow.dialog.databinding.ListItemChoiceBinding
+import com.coder.vincent.smart_dialog.R
+import com.coder.vincent.smart_dialog.databinding.ListItemChoiceBinding
 
 class ChooseListAdapter : BaseAdapter() {
     private var items: List<String> = listOf()

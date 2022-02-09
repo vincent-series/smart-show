@@ -12,10 +12,10 @@ import com.coder.vincent.series.annotations.smart_dialog.DialogCreator
 import com.coder.vincent.series.annotations.smart_dialog.DialogDefinition
 import com.coder.vincent.series.common_lib.bean.DataItem
 import com.coder.vincent.series.common_lib.layoutInflater
-import com.coder.zzq.smartshow.dialog.R
-import com.coder.zzq.smartshow.dialog.databinding.SmartShowLargeLoadingDialogBinding
-import com.coder.zzq.smartshow.dialog.databinding.SmartShowMiddleLoadingDialogBinding
-import com.coder.zzq.smartshow.dialog.databinding.SmartShowSmallLoadingDialogBinding
+import com.coder.vincent.smart_dialog.R
+import com.coder.vincent.smart_dialog.databinding.SmartShowLargeLoadingDialogBinding
+import com.coder.vincent.smart_dialog.databinding.SmartShowMiddleLoadingDialogBinding
+import com.coder.vincent.smart_dialog.databinding.SmartShowSmallLoadingDialogBinding
 
 @DialogDefinition(alias = "loading")
 class LoadingDialog {
