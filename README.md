@@ -45,7 +45,7 @@
 9. 结合主流app消息提示的效果，提供info、success、error、warning、complete、forbid、wait、fail 8 种类型的Toast
 ### 引入依赖
 <pre><code>
-     implementation "io.github.vincent-series:smart-toast:4.0.1"
+implementation "io.github.vincent-series:smart-toast:4.0.1"
 </code></pre>
 ### API
 [查看API文档](https://github.com/zhiqiang-series/smart-show/tree/master/smart-toast)
