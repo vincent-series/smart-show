@@ -65,7 +65,7 @@ implementation "io.github.vincent-series:smart-toast:4.0.1"
 
 ### API
 
-[查看API文档](https://github.com/zhiqiang-series/smart-show/tree/master/smart-toast)
+[查看API文档](https://github.com/vincent-series/smart-show/tree/master/smart-toast)
 
 #### 普通 Toast
 
