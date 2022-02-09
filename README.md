@@ -43,6 +43,10 @@
 8. 适配android 11对toast的相关限制
 8. 可配置离开当前页面（退出当前activity或进入新的activity），立即消失正在显示的Toast
 9. 结合主流app消息提示的效果，提供info、success、error、warning、complete、forbid、wait、fail 8 种类型的Toast
+### 引入依赖
+<pre><code>
+     implementation "io.github.vincent-series:smart-toast:4.0.1"
+</code></pre>
 ### API
 [查看API文档](https://github.com/zhiqiang-series/smart-show/tree/master/smart-toast)
 #### 普通 Toast
