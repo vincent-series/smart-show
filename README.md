@@ -63,7 +63,7 @@ kapt "io.github.vincent-series:annotation-compiler:1.0.2"
 
 默认样式：![图片加载失败](images/toast_normal.gif)设置背景色：![图片加载失败](images/toast_color.gif)
 
-### Emotion Toast
+#### Emotion Toast
 默认样式: ![图片加载失败](images/type_toast_normal.gif) 设置背景色: ![图片加载失败](images/type_toast_color.gif)
 ## SmartDialog部分
 
