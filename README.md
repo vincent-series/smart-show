@@ -1,6 +1,9 @@
 ## SmartShow
 
-★★★ 本库为androidx支持库版。
+★★★ 从4.x版起，版本发布迁移至`mavenCentral`，不再发布到`jitpack`。目前`android studio`会默认为新创建的项目添加`mavenCentral`仓库，如果是
+比较老的项目，请自行添加mavenCentral仓库。
+
+★★★ 4.x版及后续版本全部使用`kotlin`实现。
 
 ### 模块导航：
 
