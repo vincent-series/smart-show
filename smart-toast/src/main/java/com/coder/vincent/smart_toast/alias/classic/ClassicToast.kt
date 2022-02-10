@@ -4,7 +4,6 @@ import android.graphics.Color
 import android.view.View
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
-import androidx.annotation.IntDef
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import com.coder.vincent.series.annotations.smart_toast.ToastConfig
@@ -13,46 +12,13 @@ import com.coder.vincent.series.annotations.smart_toast.ToastView
 import com.coder.vincent.series.common_lib.application
 import com.coder.vincent.series.common_lib.dpToPx
 import com.coder.vincent.series.common_lib.layoutInflater
-import com.coder.vincent.smart_toast.R
-import com.coder.vincent.smart_toast.TOAST_TYPE_CLASSIC
+import com.coder.vincent.smart_toast.*
 import com.coder.vincent.smart_toast.databinding.SmartShowClassicToastBinding
 import com.coder.vincent.smart_toast.factory.DefaultToastConfig
 import kotlin.math.max
 
 @ToastDefinition(alias = TOAST_TYPE_CLASSIC)
 internal class ClassicToast {
-    @ToastView
-    fun provideToastView(cachedView: View?, config: Config): View =
-        SmartShowClassicToastBinding.bind(
-            cachedView ?: layoutInflater.inflate(R.layout.smart_show_classic_toast, null)
-        ).apply {
-            root.setBackgroundResource(config.backgroundResource)
-            DrawableCompat.setTint(root.background.mutate(), config.backgroundColor)
-            smartToastMessage.text = config.message
-            smartToastMessage.setTextColor(config.messageColor)
-            smartToastMessage.textSize = config.messageSize
-            smartToastMessage.paint.isFakeBoldText = config.messageBold
-            val icon = config.icon?.let {
-                ContextCompat.getDrawable(application, it)?.apply {
-                    val finalIntrinsicWidth =
-                        if (intrinsicWidth == -1) config.messageSize.dpToPx() else intrinsicWidth
-                    val finalIntrinsicHeight =
-                        if (intrinsicHeight == -1) config.messageSize.dpToPx() else intrinsicHeight
-                    val iconSize = config.iconSizeDp?.dpToPx() ?: max(
-                        finalIntrinsicWidth,
-                        finalIntrinsicHeight
-                    )
-                    setBounds(0, 0, iconSize, iconSize)
-                }
-            }
-            smartToastMessage.setCompoundDrawables(
-                if (config.iconPosition == ICON_POSITION_LEFT) icon else null,
-                null,
-                if (config.iconPosition == ICON_POSITION_RIGHT) icon else null,
-                null
-            )
-            smartToastMessage.compoundDrawablePadding = config.iconPaddingDp.dpToPx()
-        }.root
 
     @ToastConfig
     class Config : DefaultToastConfig(TOAST_TYPE_CLASSIC) {
@@ -80,7 +46,7 @@ internal class ClassicToast {
 
         @JvmField
         @IconPosition
-        var iconPosition = ICON_POSITION_LEFT
+        var iconPosition = TOAST_ICON_POSITION_LEFT
 
         @JvmField
         var iconSizeDp: Float? = null
@@ -88,11 +54,37 @@ internal class ClassicToast {
         @JvmField
         var iconPaddingDp: Float = 10f
     }
+
+    @ToastView
+    fun provideToastView(cachedView: View?, config: Config): View =
+        SmartShowClassicToastBinding.bind(
+            cachedView ?: layoutInflater.inflate(R.layout.smart_show_classic_toast, null)
+        ).apply {
+            root.setBackgroundResource(config.backgroundResource)
+            DrawableCompat.setTint(root.background.mutate(), config.backgroundColor)
+            smartToastMessage.text = config.message
+            smartToastMessage.setTextColor(config.messageColor)
+            smartToastMessage.textSize = config.messageSize
+            smartToastMessage.paint.isFakeBoldText = config.messageBold
+            val icon = config.icon?.let {
+                ContextCompat.getDrawable(application, it)?.apply {
+                    val finalIntrinsicWidth =
+                        if (intrinsicWidth == -1) config.messageSize.dpToPx() else intrinsicWidth
+                    val finalIntrinsicHeight =
+                        if (intrinsicHeight == -1) config.messageSize.dpToPx() else intrinsicHeight
+                    val iconSize = config.iconSizeDp?.dpToPx() ?: max(
+                        finalIntrinsicWidth,
+                        finalIntrinsicHeight
+                    )
+                    setBounds(0, 0, iconSize, iconSize)
+                }
+            }
+            smartToastMessage.setCompoundDrawables(
+                if (config.iconPosition == TOAST_ICON_POSITION_LEFT) icon else null,
+                null,
+                if (config.iconPosition == TOAST_ICON_POSITION_RIGHT) icon else null,
+                null
+            )
+            smartToastMessage.compoundDrawablePadding = config.iconPaddingDp.dpToPx()
+        }.root
 }
-
-const val ICON_POSITION_LEFT = 0
-const val ICON_POSITION_RIGHT = 1
-
-@Retention(AnnotationRetention.BINARY)
-@IntDef(ICON_POSITION_LEFT, ICON_POSITION_RIGHT)
-annotation class IconPosition
