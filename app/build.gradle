@@ -44,8 +44,8 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
-    implementation "io.github.vincent-series:smart-toast:4.0.1"
-    implementation "io.github.vincent-series:smart-dialog:4.0.0-1.0.1-SNAPSHOT"
+    implementation "io.github.vincent-series:smart-toast:4.0.2"
+    implementation "io.github.vincent-series:smart-dialog:4.0.1-1.0.0-SNAPSHOT"
 //    implementation project(path: ':smart-toast')
     implementation project(path: ':smart-topbar')
 //    implementation project(path: ':smart-dialog')
