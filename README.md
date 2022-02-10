@@ -47,6 +47,9 @@
 
 <pre><code>
 implementation "io.github.vincent-series:smart-toast:4.0.1"
+
+//如需要注解处理功能,引入注解处理库
+kapt "io.github.vincent-series:annotation-compiler:1.0.2"
 </code></pre>
 
 ### API
@@ -73,6 +76,9 @@ implementation "io.github.vincent-series:smart-toast:4.0.1"
 
 <pre><code>
 implementation "io.github.vincent-series:smart-dialog:4.0.0"
+
+//如需要注解处理功能,引入注解处理库
+kapt "io.github.vincent-series:annotation-compiler:1.0.2"
 </code></pre>
 
 #### API
