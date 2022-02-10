@@ -1,7 +1,9 @@
 package com.coder.vincent.smart_toast.alias.classic
 
 import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import com.coder.vincent.smart_toast.IconPosition
 import com.coder.vincent.smart_toast.PlainToastApi
 import com.coder.vincent.smart_toast.compact.ToastTransitionIntent
 
@@ -15,9 +17,13 @@ interface ClassicToastFacade {
 
         fun backgroundColor(@ColorInt backgroundColor: Int): ConfigSetter
 
+        fun backgroundColorResource(@ColorRes colorResource: Int): ConfigSetter
+
         fun messageSize(messageSize: Float): ConfigSetter
 
         fun messageColor(@ColorInt messageColor: Int): ConfigSetter
+
+        fun messageColorResource(@ColorRes colorResource: Int): ConfigSetter
 
         fun messageBold(messageBold: Boolean): ConfigSetter
 

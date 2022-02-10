@@ -4,6 +4,7 @@ import android.view.Gravity
 import android.widget.Toast
 import com.coder.vincent.series.common_lib.dpToPx
 import com.coder.vincent.series.common_lib.getToolbarHeight
+import com.coder.vincent.series.common_lib.resourceToColor
 import com.coder.vincent.series.common_lib.resourceToString
 import com.coder.vincent.smart_toast.DEFAULT_TOAST_Y_OFFSET
 import com.coder.vincent.smart_toast.Location
@@ -169,6 +170,9 @@ class ClassicToastInvoker : ClassicToastFacade.Overall, ClassicToastFacade.Confi
             config.backgroundColor = backgroundColor
         }
 
+    override fun backgroundColorResource(colorResource: Int): ClassicToastFacade.ConfigSetter =
+        backgroundColor(colorResource.resourceToColor())
+
     override fun messageSize(messageSize: Float): ClassicToastFacade.ConfigSetter =
         this.apply {
             config.messageSize = messageSize
@@ -178,6 +182,9 @@ class ClassicToastInvoker : ClassicToastFacade.Overall, ClassicToastFacade.Confi
         this.apply {
             config.messageColor = messageColor
         }
+
+    override fun messageColorResource(colorResource: Int): ClassicToastFacade.ConfigSetter =
+        messageColor(colorResource.resourceToColor())
 
     override fun messageBold(messageBold: Boolean): ClassicToastFacade.ConfigSetter =
         this.apply {
