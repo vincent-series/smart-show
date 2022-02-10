@@ -1,14 +1,16 @@
-## 引入依赖
 
+
+
+
+## Smart Toast
+### 引入依赖
 <pre><code>
 implementation "io.github.vincent-series:smart-toast:4.0.2"
 
 //如需要注解处理功能,引入注解处理库
 kapt "io.github.vincent-series:annotation-compiler:1.0.2"
 </code></pre>
-
-## Smart Toast API DOC
-
+### API DOC
 * Classic Toast
   * [default style](https://github.com/vincent-series/smart-show/wiki/ClassicToast)
     * [show at bottom](https://github.com/vincent-series/smart-show/wiki/ClassicToast#%E5%BA%95%E9%83%A8%E6%98%BE%E7%A4%BA)
