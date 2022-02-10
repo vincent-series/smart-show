@@ -37,7 +37,7 @@ class ChooseListDialog {
         val itemLabelStyle = DataItem<TextStyle>()
         val iconColor = DataItem<Int>()
         val iconPosition = DataItem<Int>()
-        val choiceMode = DataItem(CHOICE_MODE_SINGLE)
+        val choiceMode = DataItem(LIST_CHOICE_MODE_SINGLE)
         val defaultChoosePos = DataItem(listOf(0))
         val confirmBtnLabel = DataItem<String>()
         val confirmBtnLabelStyle = DataItem<TextStyle>()
@@ -119,9 +119,9 @@ class ChooseListDialog {
 
                         config.choiceMode.applyOnChange {
                             smartShowListView.choiceMode =
-                                if (it == CHOICE_MODE_SINGLE) ListView.CHOICE_MODE_SINGLE else ListView.CHOICE_MODE_MULTIPLE
+                                if (it == LIST_CHOICE_MODE_SINGLE) ListView.CHOICE_MODE_SINGLE else ListView.CHOICE_MODE_MULTIPLE
                             if (!config.iconStyle.haveData()) {
-                                config.iconStyle.update(if (it == CHOICE_MODE_SINGLE) ICON_STYLE_CIRCLE else ICON_STYLE_CUBE)
+                                config.iconStyle.update(if (it == LIST_CHOICE_MODE_SINGLE) LIST_ITEM_ICON_STYLE_CIRCLE else LIST_ITEM_ICON_STYLE_CUBE)
                             }
                         }
                         smartShowListView.selector = ColorDrawable(Color.TRANSPARENT)
@@ -222,11 +222,11 @@ class ChooseListDialog {
 private fun visibleItems(totalItems: Int, maxItems: Int): Int = min(totalItems, maxItems)
 private fun additionalPadding(totalItems: Int, maxItems: Int) = if (totalItems > maxItems) 25 else 0
 
-const val CHOICE_MODE_SINGLE = 0
-const val CHOICE_MODE_MULTIPLE = 1
-const val ICON_STYLE_CIRCLE = 0
-const val ICON_STYLE_CUBE = 1
-const val ICON_POSITION_LEFT = 0
-const val ICON_POSITION_RIGHT = 1
+const val LIST_CHOICE_MODE_SINGLE = 0
+const val LIST_CHOICE_MODE_MULTIPLE = 1
+const val LIST_ITEM_ICON_STYLE_CIRCLE = 0
+const val LIST_ITEM_ICON_STYLE_CUBE = 1
+const val LIST_ITEM_ICON_POSITION_LEFT = 0
+const val LIST_ITEM_ICON_POSITION_RIGHT = 1
 
 data class ChosenItem(val position: Int, val value: String)
