@@ -1,7 +1,8 @@
 ## SmartShow
 
-★★★ 从4.x版起，版本发布迁移至`mavenCentral`，不再发布到`jitpack`。目前`android studio`会默认为新创建的项目添加`mavenCentral`仓库，
-    如果是比较老的项目，请自行添加`mavenCentral`仓库。
+★★★ 从4.x版起，版本发布迁移至`mavenCentral`，不再发布到`jitpack`。
+★★★ 请使用新的依赖方式拉取依赖
+★★★ 目前`android studio`会默认为新创建的项目添加`mavenCentral`仓库，如果是比较老的项目，请自行添加`mavenCentral`仓库。
 
 ★★★ 4.x版及后续版本全部使用`kotlin`实现。
 
@@ -13,7 +14,6 @@
 * [SmartDialog](#SmartDialog部分)
 * [关于实现](#代码实现)
 * [关于作者及技术交流](#关于作者)
-* [引入该库](#引入SmartShow)
 
 ## 代码实现
 
