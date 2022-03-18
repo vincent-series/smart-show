@@ -7,7 +7,7 @@ import com.coder.vincent.series.common_lib.resourceToString
 import com.coder.vincent.smart_snackbar.bean.Duration
 import com.coder.vincent.smart_snackbar.schedule.SnackBarScheduler
 
-class SnackBarInvoker(var container: ViewGroup) : SnackBarFacade.Overall,
+internal class SnackBarInvoker(var container: ViewGroup) : SnackBarFacade.Overall,
     SnackBarFacade.ConfigSetter {
 
     private var config: SnackBarConfig = SnackBarConfig()

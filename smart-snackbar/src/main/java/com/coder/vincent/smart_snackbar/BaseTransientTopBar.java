@@ -1,7 +1,9 @@
 package com.coder.vincent.smart_snackbar;
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
-import static com.coder.vincent.smart_snackbar.util.AnimationUtils.*;
+import static com.coder.vincent.smart_snackbar.util.AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR;
+import static com.coder.vincent.smart_snackbar.util.AnimationUtils.LINEAR_INTERPOLATOR;
+import static com.coder.vincent.smart_snackbar.util.AnimationUtils.LINEAR_OUT_SLOW_IN_INTERPOLATOR;
 import static com.google.android.material.theme.overlay.MaterialThemeOverlay.wrap;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
@@ -70,7 +72,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
+abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
 
     public static final int ANIMATION_MODE_SLIDE = 0;
     public static final int ANIMATION_MODE_FADE = 1;
@@ -268,7 +270,7 @@ public abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
             ((TopSnackBarContentLayout) content).setMaxInlineActionWidth(view.getMaxInlineActionWidth());
         }
         view.addView(content);
-        ViewCompat.setElevation(view,21f);
+        ViewCompat.setElevation(view, 21f);
         LayoutParams layoutParams = view.getLayoutParams();
         layoutParams.height = Utils.INSTANCE.statusBarHeight() + Utils.INSTANCE.actionBarHeight();
         if (layoutParams instanceof MarginLayoutParams) {

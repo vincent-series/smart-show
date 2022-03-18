@@ -6,7 +6,7 @@ import androidx.annotation.IntDef
 import com.coder.vincent.smart_snackbar.bean.AnimationMode
 import com.coder.vincent.smart_snackbar.bean.Duration
 
-class SnackBarConfig {
+internal class SnackBarConfig {
     lateinit var message: String
     lateinit var actionLabel: String
     lateinit var actionReaction: (View) -> Unit

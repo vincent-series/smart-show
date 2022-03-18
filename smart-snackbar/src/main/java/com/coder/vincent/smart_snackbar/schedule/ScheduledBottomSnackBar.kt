@@ -3,7 +3,7 @@ package com.coder.vincent.smart_snackbar.schedule
 import com.coder.vincent.smart_snackbar.SnackBarConfig
 import com.google.android.material.snackbar.Snackbar
 
-class ScheduledBottomSnackBar(private var config: SnackBarConfig) : ScheduledSnackBar {
+internal class ScheduledBottomSnackBar(private var config: SnackBarConfig) : ScheduledSnackBar {
     private val bar: Snackbar =
         Snackbar.make(config.targetParent, config.message, config.duration.value)
 

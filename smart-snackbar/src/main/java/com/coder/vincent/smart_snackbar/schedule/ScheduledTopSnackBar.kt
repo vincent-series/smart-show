@@ -3,7 +3,7 @@ package com.coder.vincent.smart_snackbar.schedule
 import com.coder.vincent.smart_snackbar.SnackBarConfig
 import com.coder.vincent.smart_snackbar.TopSnackBar
 
-class ScheduledTopSnackBar(private var config: SnackBarConfig) : ScheduledSnackBar {
+internal class ScheduledTopSnackBar(private var config: SnackBarConfig) : ScheduledSnackBar {
     private val bar: TopSnackBar =
         TopSnackBar.make(config.targetParent, config.message, config.duration.value)
 

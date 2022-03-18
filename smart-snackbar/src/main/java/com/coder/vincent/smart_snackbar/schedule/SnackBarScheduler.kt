@@ -8,7 +8,7 @@ import com.coder.vincent.smart_snackbar.SnackBarProvider
 import com.coder.vincent.smart_snackbar.view.ContainerValidStateChangeListener
 import com.coder.vincent.smart_snackbar.view.ViewAttachListener
 
-object SnackBarScheduler : ContainerValidStateChangeListener {
+internal object SnackBarScheduler : ContainerValidStateChangeListener {
     private var bottomBar: ScheduledSnackBar? = null
     private var topBar: ScheduledSnackBar? = null
     private val barProvider = SnackBarProvider()
