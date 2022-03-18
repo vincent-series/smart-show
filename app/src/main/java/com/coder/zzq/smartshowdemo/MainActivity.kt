@@ -2,23 +2,26 @@ package com.coder.zzq.smartshowdemo
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.AdapterView.OnItemClickListener
 import androidx.appcompat.app.AppCompatActivity
 import com.coder.vincent.smart_dialog.click_list.ClickListAdapter
 import com.coder.zzq.smartshowdemo.databinding.ActivityMainBinding
 
+
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(ActivityMainBinding.inflate(layoutInflater).apply {
+            val location = IntArray(2)
+            findViewById<View>(android.R.id.content).getLocationOnScreen(location)
             val adapter = ClickListAdapter()
-            adapter.setItemCenter(true, false)
+            adapter.setItemCenter(itemCenter = true, notify = false)
             adapter.setItems(
                 listOf(
                     "classic toast",
                     "emotion toast",
                     "snackbar",
-                    "topbar",
                     "dialog"
                 ), false
             )
@@ -28,9 +31,8 @@ class MainActivity : AppCompatActivity() {
                     when (position) {
                         0 -> onToastClick()
                         1 -> onTypeToastClick()
-                        2 -> onSnackbarClick()
-                        3 -> onTopBarClick()
-                        4 -> onDialogClick()
+                        2 -> onSnackBarClick()
+                        3 -> onDialogClick()
                     }
                 }
         }.root)
@@ -40,12 +42,9 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(this, TestToastActivity::class.java))
     }
 
-    private fun onSnackbarClick() {
-        startActivity(Intent(this, TestSnackbarActivity::class.java))
-    }
 
-    private fun onTopBarClick() {
-        startActivity(Intent(this, TestTopbarActivity::class.java))
+    private fun onSnackBarClick() {
+
     }
 
     fun onTypeToastClick() {
