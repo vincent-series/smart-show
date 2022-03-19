@@ -7,9 +7,9 @@
 
 ### 模块导航：
 
-* [SmartToast（latest version:4.0.2）](#SmartToast部分)
-* [SmartSnackBar](#SmartSnackBar部分)
-* [SmartDialog](#SmartDialog部分)
+* [SmartToast（latest version：4.0.2）](#SmartToast部分)
+* [SmartSnackBar（latest version：4.0.0）](#SmartSnackBar部分)
+* [SmartDialog（latest version：4.0.1）](#SmartDialog部分)
 * [关于实现](#代码实现)
 * [关于作者及技术交流](#关于作者)
 
