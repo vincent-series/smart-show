@@ -88,6 +88,10 @@ SmartSnackBar基于原生Snackbar进行封装改造，不仅使用上更加简�
 implementation "io.github.vincent-series:smart-snackbar:4.0.0"
 </code></pre>
 
+### 历史版本
+
+[查看历史版本](https://github.com/vincent-series/smart-show/wiki/SmartSnackBar%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC)
+
 #### API
 
 [查看API文档]()
