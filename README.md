@@ -11,8 +11,7 @@
 ### 模块导航：
 
 * [SmartToast](#SmartToast部分)
-* [SmartSnackbar](#SmartSnackbar部分)
-* [SmartTopBar](#SmartTopbar部分)
+* [SmartSnackBar](#SmartSnackBar部分)
 * [SmartDialog](#SmartDialog部分)
 * [关于实现](#代码实现)
 * [关于作者及技术交流](#关于作者)
@@ -66,7 +65,33 @@ kapt "io.github.vincent-series:annotation-compiler:1.0.2"
 默认样式：![图片加载失败](images/toast_normal.gif)设置背景色：![图片加载失败](images/toast_color.gif)
 
 #### Emotion Toast
+
 默认样式: ![图片加载失败](images/type_toast_normal.gif) 设置背景色: ![图片加载失败](images/type_toast_color.gif)
+
+## SmartSnackBar部分
+
+[回到模块导航](#模块导航)<br/><br/>
+SmartSnackBar基于原生Snackbar进行封装改造，不仅使用上更加简易，而且进行了功能扩展:
+
+1. 支持顶部弹出
+2. 支持指定背景颜色
+3. 支持修改message、actionLabel的文本风格，如字体大小、粗细、颜色
+4. 支持显示icon及指定icon位置
+
+#### 效果图
+
+![图片加载失败](images/topbar_normal.gif) ![图片加载失败](images/snackbar_color.gif)
+
+### 引入依赖
+
+<pre><code>
+implementation "io.github.vincent-series:smart-snackbar:4.0.0"
+</code></pre>
+
+#### API
+
+[查看API文档]()
+
 ## SmartDialog部分
 
 [回到模块导航](#模块导航)<br/><br/>
