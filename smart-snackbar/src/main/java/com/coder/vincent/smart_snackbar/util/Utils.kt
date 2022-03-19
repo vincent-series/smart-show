@@ -1,8 +1,8 @@
 package com.coder.vincent.smart_snackbar.util
 
+import android.util.TypedValue
 import com.coder.vincent.series.common_lib.application
 import com.coder.vincent.series.common_lib.dpToPx
-import com.google.android.material.snackbar.Snackbar
 
 object Utils {
     fun statusBarHeight(): Int {
@@ -25,4 +25,10 @@ object Utils {
         else
             application.resources.getDimensionPixelSize(resourceId)
     }
+
+    fun Float.spToPx(): Float = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_SP,
+        this,
+        application.resources.displayMetrics
+    )
 }

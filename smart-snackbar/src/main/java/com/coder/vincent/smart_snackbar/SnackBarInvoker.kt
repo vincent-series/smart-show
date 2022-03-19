@@ -3,9 +3,12 @@ package com.coder.vincent.smart_snackbar
 import android.view.View
 import android.view.ViewGroup
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import com.coder.vincent.series.common_lib.dpToPx
+import com.coder.vincent.series.common_lib.resourceToColor
 import com.coder.vincent.series.common_lib.resourceToString
 import com.coder.vincent.smart_snackbar.bean.Duration
 import com.coder.vincent.smart_snackbar.schedule.SnackBarScheduler
+import com.coder.vincent.smart_snackbar.util.Utils.spToPx
 
 internal class SnackBarInvoker(var container: ViewGroup) : SnackBarFacade.Overall,
     SnackBarFacade.ConfigSetter {
@@ -13,6 +16,69 @@ internal class SnackBarInvoker(var container: ViewGroup) : SnackBarFacade.Overal
     private var config: SnackBarConfig = SnackBarConfig()
 
     override fun config(): SnackBarFacade.ConfigSetter = this
+    override fun backgroundColor(color: Int): SnackBarFacade.ConfigSetter =
+        this.apply {
+            config.backgroundColor = color
+        }
+
+    override fun backgroundColorResource(colorResId: Int): SnackBarFacade.ConfigSetter =
+        backgroundColor(colorResId.resourceToColor())
+
+    override fun icon(iconResId: Int): SnackBarFacade.ConfigSetter = this.apply {
+        config.icon = iconResId
+    }
+
+    override fun iconPosition(iconPosition: Int): SnackBarFacade.ConfigSetter =
+        this.apply {
+            config.iconPosition = iconPosition
+        }
+
+    override fun iconSizeDp(size: Float) =
+        this.apply {
+            config.iconSize = size.dpToPx()
+        }
+
+    override fun iconPaddingDp(padding: Float): SnackBarFacade.ConfigSetter =
+        this.apply {
+            config.iconPadding = padding.dpToPx()
+        }
+
+
+    override fun messageColor(color: Int): SnackBarFacade.ConfigSetter =
+        this.apply {
+            config.messageColor = color
+        }
+
+    override fun messageColorResource(colorResId: Int): SnackBarFacade.ConfigSetter =
+        messageColor(colorResId.resourceToColor())
+
+    override fun messageBold(bold: Boolean): SnackBarFacade.ConfigSetter =
+        this.apply {
+            config.messageBold = bold
+        }
+
+    override fun messageSizeSp(size: Float): SnackBarFacade.ConfigSetter =
+        this.apply {
+            config.messageSize = size.spToPx()
+        }
+
+    override fun actionLabelColor(color: Int): SnackBarFacade.ConfigSetter =
+        this.apply {
+            config.actionLabelColor = color
+        }
+
+    override fun actionLabelColorResource(colorResId: Int): SnackBarFacade.ConfigSetter =
+        actionLabelColor(colorResId.resourceToColor())
+
+    override fun actionLabelBold(bold: Boolean): SnackBarFacade.ConfigSetter =
+        this.apply {
+            config.actionLabelBold = bold
+        }
+
+    override fun actionLabelSizeSp(size: Float): SnackBarFacade.ConfigSetter =
+        this.apply {
+            config.actionLabelSize = size.spToPx()
+        }
 
     override fun apply(): SnackBarFacade.ShowApi = this
 
