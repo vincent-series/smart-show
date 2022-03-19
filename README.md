@@ -1,8 +1,5 @@
 ## SmartShow
-
-★★★ 从4.x版起，版本发布迁移至`mavenCentral`，不再发布到`jitpack`。
-
-★★★ 请使用新的依赖方式拉取依赖.
+★★★ 4.x.x版起，库的发布迁移至`mavenCentral`，不再发布到`jitpack.io`。 请使用新的依赖方式拉取依赖.
 
 ★★★ 目前`android studio`会默认为新创建的项目添加`mavenCentral`仓库，如果是比较老的项目，请自行添加`mavenCentral`仓库。
 
@@ -10,7 +7,7 @@
 
 ### 模块导航：
 
-* [SmartToast](#SmartToast部分)
+* [SmartToast（最新版:4.0.2）](#SmartToast部分)
 * [SmartSnackBar](#SmartSnackBar部分)
 * [SmartDialog](#SmartDialog部分)
 * [关于实现](#代码实现)
@@ -27,7 +24,7 @@
 ## 关于作者
 
 [回到模块导航](#模块导航)<br/><br/>
-为使SmartShow库更加健壮，如果您在使用过程中发现任何问题，请联系我，我会立即跟进修复和维护。感谢您的支持！<br/><br/>
+如果您在使用过程中发现任何问题，请联系我，我会立即跟进修复和维护。感谢您的支持！<br/><br/>
 作者：朱志强<br/><br/>
 微信：w361281607<br/><br/>
 <img src="images/wx_2d.jpeg" width="180" height="180"/><br/>
