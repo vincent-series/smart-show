@@ -467,7 +467,7 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
     }
 
     public void show() {
-        TopSnackbarManager.getInstance().show(getDuration(), managerCallback);
+        TopSnackBarManager.getInstance().show(getDuration(), managerCallback);
     }
 
     public void dismiss() {
@@ -475,7 +475,7 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
     }
 
     protected void dispatchDismiss(@BaseCallback.DismissEvent int event) {
-        TopSnackbarManager.getInstance().dismiss(managerCallback, event);
+        TopSnackBarManager.getInstance().dismiss(managerCallback, event);
     }
 
     @NonNull
@@ -504,16 +504,16 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
     }
 
     public boolean isShown() {
-        return TopSnackbarManager.getInstance().isCurrent(managerCallback);
+        return TopSnackBarManager.getInstance().isCurrent(managerCallback);
     }
 
     public boolean isShownOrQueued() {
-        return TopSnackbarManager.getInstance().isCurrentOrNext(managerCallback);
+        return TopSnackBarManager.getInstance().isCurrentOrNext(managerCallback);
     }
 
     @NonNull
-    TopSnackbarManager.Callback managerCallback =
-            new TopSnackbarManager.Callback() {
+    TopSnackBarManager.Callback managerCallback =
+            new TopSnackBarManager.Callback() {
                 @Override
                 public void show() {
                     handler.sendMessage(handler.obtainMessage(MSG_SHOW, BaseTransientTopBar.this));
@@ -648,11 +648,11 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
                             case SwipeDismissBehavior.STATE_DRAGGING:
                             case SwipeDismissBehavior.STATE_SETTLING:
                                 // If the view is being dragged or settling, pause the timeout
-                                TopSnackbarManager.getInstance().pauseTimeout(managerCallback);
+                                TopSnackBarManager.getInstance().pauseTimeout(managerCallback);
                                 break;
                             case SwipeDismissBehavior.STATE_IDLE:
                                 // If the view has been released and is idle, restore the timeout
-                                TopSnackbarManager.getInstance().restoreTimeoutIfPaused(managerCallback);
+                                TopSnackBarManager.getInstance().restoreTimeoutIfPaused(managerCallback);
                                 break;
                             default:
                                 // Any other state is ignored
@@ -879,7 +879,7 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
     }
 
     void onViewShown() {
-        TopSnackbarManager.getInstance().onShown(managerCallback);
+        TopSnackBarManager.getInstance().onShown(managerCallback);
         if (callbacks != null) {
             // Notify the callbacks. Do that from the end of the list so that if a callback
             // removes itself as the result of being called, it won't mess up with our iteration
@@ -892,7 +892,7 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
 
     void onViewHidden(int event) {
         // First tell the SnackbarManager that it has been dismissed
-        TopSnackbarManager.getInstance().onDismissed(managerCallback);
+        TopSnackBarManager.getInstance().onDismissed(managerCallback);
         if (callbacks != null) {
             // Notify the callbacks. Do that from the end of the list so that if a callback
             // removes itself as the result of being called, it won't mess up with our iteration
@@ -1154,7 +1154,7 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
     @RestrictTo(LIBRARY_GROUP)
     // TODO(b/76413401): Delegate can be rolled up into behavior after widget migration is finished.
     public static class BehaviorDelegate {
-        private TopSnackbarManager.Callback managerCallback;
+        private TopSnackBarManager.Callback managerCallback;
 
         public BehaviorDelegate(@NonNull SwipeDismissBehavior<?> behavior) {
             behavior.setStartAlphaSwipeDistance(0.1f);
@@ -1178,12 +1178,12 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
                     // We want to make sure that we disable any Snackbar timeouts if the user is
                     // currently touching the Snackbar. We restore the timeout when complete
                     if (parent.isPointInChildBounds(child, (int) event.getX(), (int) event.getY())) {
-                        TopSnackbarManager.getInstance().pauseTimeout(managerCallback);
+                        TopSnackBarManager.getInstance().pauseTimeout(managerCallback);
                     }
                     break;
                 case MotionEvent.ACTION_UP:
                 case MotionEvent.ACTION_CANCEL:
-                    TopSnackbarManager.getInstance().restoreTimeoutIfPaused(managerCallback);
+                    TopSnackBarManager.getInstance().restoreTimeoutIfPaused(managerCallback);
                     break;
                 default:
                     break;

@@ -9,18 +9,18 @@ import androidx.annotation.Nullable;
 
 import java.lang.ref.WeakReference;
 
-class TopSnackbarManager {
+class TopSnackBarManager {
 
     static final int MSG_TIMEOUT = 0;
 
     private static final int SHORT_DURATION_MS = 1500;
     private static final int LONG_DURATION_MS = 2750;
 
-    private static TopSnackbarManager topSnackbarManager;
+    private static TopSnackBarManager topSnackbarManager;
 
-    static TopSnackbarManager getInstance() {
+    static TopSnackBarManager getInstance() {
         if (topSnackbarManager == null) {
-            topSnackbarManager = new TopSnackbarManager();
+            topSnackbarManager = new TopSnackBarManager();
         }
         return topSnackbarManager;
     }
@@ -35,7 +35,7 @@ class TopSnackbarManager {
     @Nullable
     private SnackbarRecord nextSnackbar;
 
-    private TopSnackbarManager() {
+    private TopSnackBarManager() {
         lock = new Object();
         handler =
                 new Handler(
