@@ -25,7 +25,7 @@ internal class SnackBarConfig {
     @SnackBarIconPosition
     var iconPosition: Int = SNACK_BAR_ICON_POSITION_LEFT
     var iconSize: Int = 0
-    var iconPadding: Int = 8f.dpToPx()
+    var iconPadding: Int = 10f.dpToPx()
 
     @ColorInt
     var messageColor: Int? = null

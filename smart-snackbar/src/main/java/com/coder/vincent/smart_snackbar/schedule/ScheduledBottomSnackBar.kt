@@ -6,6 +6,8 @@ import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.Space
 import android.widget.TextView
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.get
@@ -28,10 +30,17 @@ internal class ScheduledBottomSnackBar(private var config: SnackBarConfig) : Sch
         val parent = (bar.view as ViewGroup)[0] as ViewGroup
         messageView = parent[0] as TextView
         messageView.let {
+            (it.layoutParams as LinearLayout.LayoutParams).weight = 0f
             messageView.gravity = Gravity.CENTER_VERTICAL
             it.tag = TextStyle(it.textColors.defaultColor, it.textSize, it.paint.isFakeBoldText)
         }
-        actionView = parent[1] as Button
+        val spaceLp = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        spaceLp.weight = 1f
+        parent.addView(Space(parent.context), 1, spaceLp)
+        actionView = parent[2] as Button
         actionView.let {
             it.tag = TextStyle(it.textColors.defaultColor, it.textSize, it.paint.isFakeBoldText)
         }
@@ -92,7 +101,7 @@ internal class ScheduledBottomSnackBar(private var config: SnackBarConfig) : Sch
     }
 
     override fun dismiss() {
-        if (bar.isShown){
+        if (bar.isShown) {
             bar.dismiss()
         }
     }
