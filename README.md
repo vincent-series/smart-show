@@ -7,8 +7,8 @@
 ### 模块导航：
 
 * [SmartToast（latest version：4.0.2）](#SmartToast部分)
-* [SmartSnackBar（latest version：4.0.3）](#SmartSnackBar部分)
-* [SmartDialog（latest version：4.0.1）](#SmartDialog部分)
+* [SmartSnackBar（latest version：4.0.4）](#SmartSnackBar部分)
+* [SmartDialog（latest version：4.0.2）](#SmartDialog部分)
 * [关于实现](#代码实现)
 * [关于作者及技术交流](#关于作者)
 
@@ -49,7 +49,7 @@
 implementation "io.github.vincent-series:smart-toast:4.0.2"
 
 //如需要注解处理功能,引入注解处理库
-kapt "io.github.vincent-series:annotation-compiler:1.0.2"
+kapt "io.github.vincent-series:annotation-compiler:1.0.3"
 </code></pre>
 
 ### API
@@ -84,7 +84,7 @@ SmartSnackBar基于原生Snackbar进行封装改造，不仅使用上更加简�
 ### 引入依赖
 
 <pre><code>
-implementation "io.github.vincent-series:smart-snackbar:4.0.3"
+implementation "io.github.vincent-series:smart-snackbar:4.0.4"
 
 //material lib,such as 1.5.0
 implementation 'com.google.android.material:material:x.y.z'
@@ -113,10 +113,10 @@ implementation 'com.google.android.material:material:x.y.z'
 ### 引入依赖
 
 <pre><code>
-implementation "io.github.vincent-series:smart-dialog:4.0.1"
+implementation "io.github.vincent-series:smart-dialog:4.0.2"
 
 //如需要注解处理功能,引入注解处理库
-kapt "io.github.vincent-series:annotation-compiler:1.0.2"
+kapt "io.github.vincent-series:annotation-compiler:1.0.3"
 </code></pre>
 
 #### API
