@@ -2,7 +2,7 @@
 <view xmlns:android="http://schemas.android.com/apk/res/android"
     class="com.coder.vincent.smart_snackbar.view.TopSnackBarContentLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_gravity="bottom"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
@@ -10,7 +10,7 @@
         android:id="@+id/snackbar_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|left|start"
+        android:layout_gravity="bottom|left|start"
         android:layout_weight="1"
         android:ellipsize="end"
         android:maxLines="@integer/design_top_snackbar_text_max_lines"
@@ -26,7 +26,7 @@
         style="?attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|right|end"
+        android:layout_gravity="bottom|right|end"
         android:layout_marginStart="@dimen/design_top_snackbar_extra_spacing_horizontal"
         android:layout_marginLeft="@dimen/design_top_snackbar_extra_spacing_horizontal"
         android:minWidth="48dp"

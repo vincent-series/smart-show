@@ -47,12 +47,12 @@ internal class SnackBarConfig {
 @IntDef(SNACK_BAR_POSITION_BOTTOM, SNACK_BAR_POSITION_TOP)
 annotation class SnackBarPosition
 
-const val SNACK_BAR_POSITION_TOP = 0
-const val SNACK_BAR_POSITION_BOTTOM = 1
+internal const val SNACK_BAR_POSITION_TOP = 0
+internal const val SNACK_BAR_POSITION_BOTTOM = 1
 
 @Retention(AnnotationRetention.SOURCE)
 @IntDef(SNACK_BAR_ICON_POSITION_LEFT, SNACK_BAR_ICON_POSITION_RIGHT)
-annotation class SnackBarIconPosition
+internal annotation class SnackBarIconPosition
 
 const val SNACK_BAR_ICON_POSITION_LEFT = 0
 const val SNACK_BAR_ICON_POSITION_RIGHT = 1

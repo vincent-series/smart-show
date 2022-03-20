@@ -8,27 +8,27 @@
     <integer name="design_top_snackbar_text_max_lines">2</integer>
     <dimen name="design_top_snackbar_extra_spacing_horizontal">0dp</dimen>
     <declare-styleable name="SnackbarLayout">
-        <attr name="android:maxWidth"/>
-        <attr name="elevation"/>
-        <attr format="dimension" name="maxActionInlineWidth"/>
+        <attr name="android:maxWidth" />
+        <attr name="elevation" />
+        <attr name="maxActionInlineWidth" format="dimension" />
         <!-- Sets the enter and exit animations for a Snackbar. -->
-        <attr format="enum" name="animationMode">
+        <attr name="animationMode" format="enum">
             <!-- Mode that corresponds to the slide in and out animations. -->
-            <enum name="slide" value="0"/>
+            <enum name="slide" value="0" />
             <!-- Mode that corresponds to the fade in and out animations. -->
-            <enum name="fade" value="1"/>
+            <enum name="fade" value="1" />
         </attr>
         <!-- Alpha level for the color that is overlaid on top of the background color. Ignored if
              backgroundTint is set. -->
-        <attr format="float" name="backgroundOverlayColorAlpha"/>
+        <attr name="backgroundOverlayColorAlpha" format="float" />
         <!-- Background tint used by the Snackbar background drawable. Accepts a ColorStateList or
              ColorInt. -->
-        <attr name="backgroundTint"/>
+        <attr name="backgroundTint" />
         <!-- Background tint mode used by the Snackbar background drawable. -->
-        <attr name="backgroundTintMode"/>
+        <attr name="backgroundTintMode" />
         <!-- Alpha level for the action button text, to allow for adjusting the lightness or darkness of
              the theme color used for Snackbar text buttons (e.g., colorPrimary). -->
-        <attr format="float" name="actionTextColorAlpha"/>
+        <attr name="actionTextColorAlpha" format="float" />
     </declare-styleable>
 </resources>
 

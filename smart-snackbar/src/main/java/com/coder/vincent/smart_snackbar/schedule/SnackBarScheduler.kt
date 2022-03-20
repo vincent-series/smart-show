@@ -30,19 +30,19 @@ internal object SnackBarScheduler : ContainerValidStateChangeListener {
     }
 
     private fun prepareScheduledSnackBar(
-        scheduledSnackBar: ScheduledSnackBar?,
+        bar: ScheduledSnackBar?,
         config: SnackBarConfig
     ): ScheduledSnackBar {
-        if (scheduledSnackBar == null) {
+        if (bar == null || bar.isDismissedByGesture() || bar.config().targetParent != config.targetParent) {
             return barProvider.provideSnackBar(config)
         }
-        val isShowing = scheduledSnackBar.isShowing()
-        val messageChanged = scheduledSnackBar.config().message != config.message
-        val actionLabelChanged = scheduledSnackBar.config().actionLabel != config.actionLabel
+        val isShowing = bar.isShowing()
+        val messageChanged = bar.config().message != config.message
+        val actionLabelChanged = bar.config().actionLabel != config.actionLabel
         return if (isShowing && (messageChanged || actionLabelChanged)) {
             barProvider.provideSnackBar(config)
         } else {
-            scheduledSnackBar.applyNewConfig(config)
+            bar.applyNewConfig(config)
         }
     }
 
@@ -53,6 +53,19 @@ internal object SnackBarScheduler : ContainerValidStateChangeListener {
         if (topBar?.config()?.targetParent == targetParent && !valid) {
             topBar = null
         }
+    }
+
+    fun dismiss() {
+        topBar?.dismiss()
+        bottomBar?.dismiss()
+    }
+
+    fun dismissBottom() {
+        bottomBar?.dismiss()
+    }
+
+    fun dismissTop() {
+        topBar?.dismiss()
     }
 
 }

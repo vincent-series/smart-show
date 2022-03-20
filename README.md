@@ -8,7 +8,7 @@
 ### 模块导航：
 
 * [SmartToast（latest version：4.0.2）](#SmartToast部分)
-* [SmartSnackBar（latest version：4.0.1）](#SmartSnackBar部分)
+* [SmartSnackBar（latest version：4.0.2）](#SmartSnackBar部分)
 * [SmartDialog（latest version：4.0.1）](#SmartDialog部分)
 * [关于实现](#代码实现)
 * [关于作者及技术交流](#关于作者)
@@ -82,7 +82,7 @@ SmartSnackBar基于原生Snackbar进行封装改造，不仅使用上更加简�
 ### 引入依赖
 
 <pre><code>
-implementation "io.github.vincent-series:smart-snackbar:4.0.1"
+implementation "io.github.vincent-series:smart-snackbar:4.0.2"
 </code></pre>
 
 ### 历史版本

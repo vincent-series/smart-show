@@ -270,9 +270,7 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
             ((TopSnackBarContentLayout) content).setMaxInlineActionWidth(view.getMaxInlineActionWidth());
         }
         view.addView(content);
-        ViewCompat.setElevation(view, 21f);
         LayoutParams layoutParams = view.getLayoutParams();
-        layoutParams.height = Utils.INSTANCE.statusBarHeight() + Utils.INSTANCE.actionBarHeight();
         if (layoutParams instanceof MarginLayoutParams) {
             MarginLayoutParams marginParams = (MarginLayoutParams) layoutParams;
             originalMargins =

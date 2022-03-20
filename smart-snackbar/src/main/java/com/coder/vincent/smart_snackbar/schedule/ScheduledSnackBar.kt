@@ -8,4 +8,5 @@ internal interface ScheduledSnackBar {
     fun show()
     fun dismiss()
     fun isShowing(): Boolean
+    fun isDismissedByGesture(): Boolean
 }

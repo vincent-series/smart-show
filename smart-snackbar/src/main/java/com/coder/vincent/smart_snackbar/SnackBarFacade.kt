@@ -12,73 +12,37 @@ interface SnackBarFacade {
     }
 
     interface ShowApi {
-        fun showAtBottom(
+        fun show(
             msg: String,
             actionLabel: String = "",
             actionReaction: (View) -> Unit = emptyActionReaction
         )
 
-        fun showAtBottom(
+        fun show(
             @StringRes msg: Int,
             @StringRes actionLabel: Int = -1,
             actionReaction: (View) -> Unit = emptyActionReaction
         )
 
-        fun showLongAtBottom(
+        fun showLong(
             msg: String,
             actionLabel: String = "",
             actionReaction: (View) -> Unit = emptyActionReaction
         )
 
-        fun showLongAtBottom(
+        fun showLong(
             @StringRes msg: Int,
             @StringRes actionLabel: Int = -1,
             actionReaction: (View) -> Unit = emptyActionReaction
         )
 
-        fun showIndefiniteAtBottom(
+        fun showIndefinite(
             msg: String,
             actionLabel: String = "",
             actionReaction: (View) -> Unit = emptyActionReaction
         )
 
-        fun showIndefiniteAtBottom(
-            @StringRes msg: Int,
-            @StringRes actionLabel: Int = -1,
-            actionReaction: (View) -> Unit = emptyActionReaction
-        )
-
-        fun showAtTop(
-            msg: String,
-            actionLabel: String = "",
-            actionReaction: (View) -> Unit = emptyActionReaction
-        )
-
-        fun showAtTop(
-            @StringRes msg: Int,
-            @StringRes actionLabel: Int = -1,
-            actionReaction: (View) -> Unit = emptyActionReaction
-        )
-
-        fun showLongAtTop(
-            msg: String,
-            actionLabel: String = "",
-            actionReaction: (View) -> Unit = emptyActionReaction
-        )
-
-        fun showLongAtTop(
-            @StringRes msg: Int,
-            @StringRes actionLabel: Int = -1,
-            actionReaction: (View) -> Unit = emptyActionReaction
-        )
-
-        fun showIndefiniteAtTop(
-            msg: String,
-            actionLabel: String = "",
-            actionReaction: (View) -> Unit = emptyActionReaction
-        )
-
-        fun showIndefiniteAtTop(
+        fun showIndefinite(
             @StringRes msg: Int,
             @StringRes actionLabel: Int = -1,
             actionReaction: (View) -> Unit = emptyActionReaction

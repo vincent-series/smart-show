@@ -3,6 +3,7 @@ package com.coder.vincent.smart_snackbar.schedule
 import android.graphics.drawable.Drawable
 import android.util.TypedValue
 import android.view.Gravity
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
@@ -91,8 +92,11 @@ internal class ScheduledTopSnackBar(private var config: SnackBarConfig) : Schedu
     }
 
     override fun dismiss() {
-        bar.dismiss()
+        if (bar.isShown){
+            bar.dismiss()
+        }
     }
 
     override fun isShowing() = bar.isShown
+    override fun isDismissedByGesture(): Boolean = bar.view.visibility == View.GONE
 }
