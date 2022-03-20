@@ -1,10 +1,8 @@
 ## SmartShow
-★★★ 4.x.x版起，库的发布迁移至`mavenCentral`，不再发布到`jitpack.io`。 请使用新的依赖方式拉取依赖.
-
-★★★ 目前`android studio`会默认为新创建的项目添加`mavenCentral`仓库，如果是比较老的项目，请自行添加`mavenCentral`仓库。
-
-★★★ 4.x版及后续版本全部使用`kotlin`实现。
-
+★★★ 4.x.x版起，库的发布迁移至`mavenCentral`，不再发布到`jitpack.io`。 请使用新的依赖方式拉取依赖。<br/>
+★★★ `android studio`会默认为新建项目添加`mavenCentral`仓库，老项目请自行添加`mavenCentral`仓库。<br/>
+★★★ 4.x版及后续版本全部使用`kotlin`实现。<br/>
+★★★ SmartTopBar并入SmartSnackBar，SmartSnackBar现在既支持顶部弹出也支持底部弹出。
 ### 模块导航：
 
 * [SmartToast（latest version：4.0.2）](#SmartToast部分)
@@ -83,6 +81,9 @@ SmartSnackBar基于原生Snackbar进行封装改造，不仅使用上更加简�
 
 <pre><code>
 implementation "io.github.vincent-series:smart-snackbar:4.0.2"
+
+//material lib,such as 1.5.0
+implementation 'com.google.android.material:material:x.y.z'
 </code></pre>
 
 ### 历史版本
