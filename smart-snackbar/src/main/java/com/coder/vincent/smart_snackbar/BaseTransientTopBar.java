@@ -58,7 +58,6 @@ import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 
 import com.coder.vincent.smart_snackbar.util.MaterialResources;
 import com.coder.vincent.smart_snackbar.util.ThemeEnforcement;
-import com.coder.vincent.smart_snackbar.util.Utils;
 import com.coder.vincent.smart_snackbar.util.ViewUtils;
 import com.coder.vincent.smart_snackbar.view.ContentViewCallback;
 import com.coder.vincent.smart_snackbar.view.TopSnackBarContentLayout;

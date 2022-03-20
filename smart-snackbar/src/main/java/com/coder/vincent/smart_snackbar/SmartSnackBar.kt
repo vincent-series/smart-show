@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.ViewCompat
+import com.coder.vincent.series.common_lib.actionBarHeight
+import com.coder.vincent.series.common_lib.statusBarHeight
 import com.coder.vincent.smart_snackbar.schedule.SnackBarScheduler
-import com.coder.vincent.smart_snackbar.util.Utils
-
 object SmartSnackBar {
     @JvmStatic
     fun top(activity: AppCompatActivity): SnackBarFacade.Overall =
@@ -17,7 +17,7 @@ object SmartSnackBar {
             if (container == null) {
                 container = LayoutInflater.from(it.context)
                     .inflate(R.layout.top_snackbar_container, it, false) as ViewGroup
-                val height = Utils.statusBarHeight() + Utils.actionBarHeight()
+                val height = statusBarHeight() + actionBarHeight()
                 val lp = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height)
                 ViewCompat.setElevation(container, 21f)
                 it.addView(container, lp)

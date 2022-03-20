@@ -27,6 +27,7 @@ internal class ScheduledTopSnackBar(private var config: SnackBarConfig) : Schedu
     private val actionView: Button
 
     init {
+        bar.view.background.mutate()
         val parent = (bar.view as ViewGroup)[0] as ViewGroup
         messageView = parent[0] as TextView
         messageView.let {

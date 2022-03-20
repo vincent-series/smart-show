@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import com.coder.vincent.series.common_lib.dpToPx
 import com.coder.vincent.series.common_lib.resourceToColor
 import com.coder.vincent.series.common_lib.resourceToString
+import com.coder.vincent.series.common_lib.spToPx
 import com.coder.vincent.smart_snackbar.bean.Duration
 import com.coder.vincent.smart_snackbar.schedule.SnackBarScheduler
-import com.coder.vincent.smart_snackbar.util.Utils.spToPx
 
 internal class SnackBarInvoker(
     private val container: ViewGroup,
