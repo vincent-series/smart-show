@@ -1,12 +1,13 @@
 ## SmartShow
-★★★ 4.x.x版起，库的发布迁移至`mavenCentral`，不再发布到`jitpack.io`。 请使用新的依赖方式拉取依赖。<br/>
+★★★ 4.x版起，库的发布迁移至`mavenCentral`，不再发布到`jitpack.io`。 请使用新的依赖方式拉取依赖。<br/>
 ★★★ `android studio`会默认为新建项目添加`mavenCentral`仓库，老项目请自行添加`mavenCentral`仓库。<br/>
 ★★★ 4.x版及后续版本全部使用`kotlin`实现。<br/>
-★★★ SmartTopBar并入SmartSnackBar，SmartSnackBar现在既支持顶部弹出也支持底部弹出。
+★★★ SmartTopBar并入SmartSnackBar，SmartSnackBar现在既支持顶部弹出也支持底部弹出。<br/>
+★★★ 4.x版及后续版本不再需要显式初始化，旧版本迁移到4.x版直接将初始化相关代码删除即可。
 ### 模块导航：
 
 * [SmartToast（latest version：4.0.2）](#SmartToast部分)
-* [SmartSnackBar（latest version：4.0.2）](#SmartSnackBar部分)
+* [SmartSnackBar（latest version：4.0.3）](#SmartSnackBar部分)
 * [SmartDialog（latest version：4.0.1）](#SmartDialog部分)
 * [关于实现](#代码实现)
 * [关于作者及技术交流](#关于作者)
@@ -55,6 +56,9 @@ kapt "io.github.vincent-series:annotation-compiler:1.0.2"
 
 [查看API文档](https://github.com/vincent-series/smart-show/tree/master/smart-toast)
 
+### 历史版本
+[查看历史版本](https://github.com/vincent-series/smart-show/wiki/SmartToast%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC)
+
 #### Classic Toast
 
 默认样式：![图片加载失败](images/toast_normal.gif)设置背景色：![图片加载失败](images/toast_color.gif)
@@ -80,7 +84,7 @@ SmartSnackBar基于原生Snackbar进行封装改造，不仅使用上更加简�
 ### 引入依赖
 
 <pre><code>
-implementation "io.github.vincent-series:smart-snackbar:4.0.2"
+implementation "io.github.vincent-series:smart-snackbar:4.0.3"
 
 //material lib,such as 1.5.0
 implementation 'com.google.android.material:material:x.y.z'
@@ -92,7 +96,7 @@ implementation 'com.google.android.material:material:x.y.z'
 
 #### API
 
-[查看API文档]()
+[查看API文档](https://github.com/vincent-series/smart-show/tree/master/smart-snackbar)
 
 ## SmartDialog部分
 

@@ -1,16 +1,4 @@
-
-
-
-
-## Smart Toast
-### 引入依赖
-<pre><code>
-implementation "io.github.vincent-series:smart-toast:4.0.2"
-
-//如需要注解处理功能,引入注解处理库
-kapt "io.github.vincent-series:annotation-compiler:1.0.2"
-</code></pre>
-### API DOC
+## Smart Toast API DOC
 * Classic Toast
   * [default style](https://github.com/vincent-series/smart-show/wiki/ClassicToast)
     * [show at bottom](https://github.com/vincent-series/smart-show/wiki/ClassicToast#%E5%BA%95%E9%83%A8%E6%98%BE%E7%A4%BA)
@@ -43,5 +31,5 @@ kapt "io.github.vincent-series:annotation-compiler:1.0.2"
 * [Define New Type of Toast](https://github.com/vincent-series/smart-show/wiki/CustomToast)
 * [Other Api](https://github.com/vincent-series/smart-show/wiki/SmartToastOtherApi)
   * [isShowing](https://github.com/vincent-series/smart-show/wiki/SmartToastOtherApi#当前是否有Toast在显示
-)
+    )
   * [dismiss](https://github.com/vincent-series/smart-show/wiki/SmartToastOtherApi#隐藏当前显示的Toast)
