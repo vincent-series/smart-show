@@ -90,13 +90,13 @@ implementation "io.github.vincent-series:smart-snackbar:4.0.4"
 implementation 'com.google.android.material:material:x.y.z'
 </code></pre>
 
+### API
+
+[查看API文档](https://github.com/vincent-series/smart-show/tree/master/smart-snackbar)
+
 ### 历史版本
 
 [查看历史版本](https://github.com/vincent-series/smart-show/wiki/SmartSnackBar%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC)
-
-#### API
-
-[查看API文档](https://github.com/vincent-series/smart-show/tree/master/smart-snackbar)
 
 ## SmartDialog部分
 
@@ -119,9 +119,12 @@ implementation "io.github.vincent-series:smart-dialog:4.0.2"
 kapt "io.github.vincent-series:annotation-compiler:1.0.3"
 </code></pre>
 
-#### API
+### API
 
 [查看API文档]()
+
+### 历史版本
+[查看历史版本](https://github.com/vincent-series/smart-show/wiki/SmartDialog%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC)
 
 
 
