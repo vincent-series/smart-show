@@ -28,6 +28,7 @@ class InputNumberDialog {
     @DialogConfig
     class Config {
         val title = DataItem<String>()
+        val titleStyle = DataItem<TextStyle>()
         val defaultFilledNumber = DataItem<String>()
         val hint = DataItem<String>()
         val numberType = DataItem(NUMBER_TYPE_INT)
@@ -57,6 +58,11 @@ class InputNumberDialog {
                     smartShowDialogTitleView.text = it
                     smartShowDialogTitleView.visibility =
                         if (it.isBlank()) View.INVISIBLE else View.VISIBLE
+                }
+                config.titleStyle.applyOnChange {
+                    smartShowDialogTitleView.setTextColor(it.color)
+                    smartShowDialogTitleView.textSize = it.size
+                    smartShowDialogTitleView.paint.isFakeBoldText = it.bold
                 }
                 config.hint.applyOnChange {
                     smartShowInputEdt.hint = it

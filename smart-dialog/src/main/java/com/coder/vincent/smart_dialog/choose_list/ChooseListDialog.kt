@@ -32,7 +32,6 @@ class ChooseListDialog {
         val title = DataItem<String>()
         val titleStyle = DataItem<TextStyle>()
         val items = DataItem<List<String>>()
-        val iconStyle = DataItem<Int>()
         val itemCenter = DataItem<Boolean>()
         val itemLabelStyle = DataItem<TextStyle>()
         val iconColor = DataItem<Int>()
@@ -79,12 +78,6 @@ class ChooseListDialog {
                         config.items.applyOnChange {
                             adapter.setItems(it)
                         }
-                        config.iconStyle.currentValue {
-                            adapter.setIconStyle(it, false)
-                        }
-                        config.iconStyle.applyOnChange {
-                            adapter.setIconStyle(it)
-                        }
 
                         config.itemCenter.currentValue {
                             adapter.setItemCenter(it, false)
@@ -116,13 +109,10 @@ class ChooseListDialog {
                             adapter.setIconPosition(it)
                         }
 
-
                         config.choiceMode.applyOnChange {
                             smartShowListView.choiceMode =
                                 if (it == LIST_CHOICE_MODE_SINGLE) ListView.CHOICE_MODE_SINGLE else ListView.CHOICE_MODE_MULTIPLE
-                            if (!config.iconStyle.haveData()) {
-                                config.iconStyle.update(if (it == LIST_CHOICE_MODE_SINGLE) LIST_ITEM_ICON_STYLE_CIRCLE else LIST_ITEM_ICON_STYLE_CUBE)
-                            }
+                            adapter.setIconStyle(if (it == LIST_CHOICE_MODE_SINGLE) LIST_ITEM_ICON_STYLE_CIRCLE else LIST_ITEM_ICON_STYLE_CUBE)
                         }
                         smartShowListView.selector = ColorDrawable(Color.TRANSPARENT)
                         smartShowListView.selector = ColorDrawable(Color.TRANSPARENT)
