@@ -121,7 +121,7 @@ kapt "io.github.vincent-series:annotation-compiler:1.0.3"
 
 ### API
 
-[查看API文档]()
+[查看API文档](https://github.com/vincent-series/smart-show/tree/master/smart-dialog)
 
 ### 历史版本
 [查看历史版本](https://github.com/vincent-series/smart-show/wiki/SmartDialog%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC)
