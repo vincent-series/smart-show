@@ -10,7 +10,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".EmotionToastDemoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,10 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TestToastActivity" />
-        <activity android:name=".TestTypeToastActivity" />
-        <activity android:name=".TestTopbarActivity" />
-        <activity android:name=".TestSnackbarActivity" />
+        <activity android:name=".ClassicToastDemoActivity" />
         <activity
             android:name=".TestDialogActivity"
             android:configChanges="orientation|screenSize" />

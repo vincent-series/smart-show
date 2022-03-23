@@ -7,8 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.coder.vincent.smart_dialog.SmartDialog
 import com.coder.vincent.smart_dialog.choose_list.LIST_CHOICE_MODE_MULTIPLE
 import com.coder.vincent.smart_dialog.choose_list.LIST_CHOICE_MODE_SINGLE
-import com.coder.vincent.smart_dialog.choose_list.LIST_ITEM_ICON_STYLE_CIRCLE
-import com.coder.vincent.smart_dialog.choose_list.LIST_ITEM_ICON_STYLE_CUBE
 import com.coder.vincent.smart_dialog.input_num.NUMBER_TYPE_INT
 import com.coder.vincent.smart_dialog.loading.BOX_SIZE_LARGE
 import com.coder.vincent.smart_dialog.loading.BOX_SIZE_MIDDLE
@@ -35,10 +33,9 @@ class TestDialogActivity : AppCompatActivity(), AdapterView.OnItemClickListener 
             5 -> onShowClickListDialog()
             6 -> onShowSingleChooseDialog()
             7 -> onShowMultipleChooseDialog()
-            8 -> onShowMultipleChooseWithCubeCheckedMarkDialog()
-            9 -> onShowLargeLoading()
-            10 -> onShowMiddleLoading()
-            11 -> onShowSmallLoading()
+            8 -> onShowLargeLoading()
+            9 -> onShowMiddleLoading()
+            10 -> onShowSmallLoading()
         }
     }
 
@@ -73,30 +70,12 @@ class TestDialogActivity : AppCompatActivity(), AdapterView.OnItemClickListener 
             .show()
     }
 
-    private fun onShowMultipleChooseWithCubeCheckedMarkDialog() {
-        SmartDialog.chooseList()
-            .config {
-                it.title("你喜欢哪些城市")
-                it.defaultChoosePos(listOf(0, 1))
-                it.choiceMode(LIST_CHOICE_MODE_MULTIPLE)
-                it.items(listOf("上海", "北京", "广州", "深圳", "杭州", "青岛", "苏州"))
-                it.iconStyle(LIST_ITEM_ICON_STYLE_CUBE)
-                it.confirmBtnListener { appCompatDialog, list ->
-                    appCompatDialog.dismiss()
-                    SmartToast.classic().showInCenter(list.toString())
-                }
-            }
-            .create(this)
-            .show()
-    }
-
     private fun onShowMultipleChooseDialog() {
         SmartDialog.chooseList()
             .config {
                 it.title("你喜欢哪些城市")
                 it.defaultChoosePos(listOf(0, 1))
                 it.choiceMode(LIST_CHOICE_MODE_MULTIPLE)
-                it.iconStyle(LIST_ITEM_ICON_STYLE_CIRCLE)
                 it.items(listOf("上海", "北京", "广州", "深圳", "杭州", "青岛", "苏州"))
                 it.confirmBtnListener { appCompatDialog, list ->
                     appCompatDialog.dismiss()
@@ -201,10 +180,8 @@ class TestDialogActivity : AppCompatActivity(), AdapterView.OnItemClickListener 
         SmartDialog.notification()
             .config {
                 it.message("重置成功")
-                it.title("提示")
             }
             .create(this)
             .show()
-        recreate()
     }
 }

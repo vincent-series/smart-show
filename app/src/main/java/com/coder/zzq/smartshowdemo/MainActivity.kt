@@ -1,11 +1,13 @@
 package com.coder.zzq.smartshowdemo
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView.OnItemClickListener
 import androidx.appcompat.app.AppCompatActivity
 import com.coder.vincent.smart_dialog.click_list.ClickListAdapter
+import com.coder.vincent.smart_snackbar.SmartSnackBar
 import com.coder.zzq.smartshowdemo.databinding.ActivityMainBinding
 
 
@@ -39,16 +41,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onToastClick() {
-        startActivity(Intent(this, TestToastActivity::class.java))
+        startActivity(Intent(this, ClassicToastDemoActivity::class.java))
     }
 
 
     private fun onSnackBarClick() {
+        SmartSnackBar.top(this)
+            .config()
+            .actionLabelColor(Color.CYAN)
+            .actionLabelColorResource(R.color.colorAccent)
+            .actionLabelSizeSp(15f)
+            .actionLabelBold(true)
+            .apply()
+            .show("setup action text style")
 
     }
 
     fun onTypeToastClick() {
-        startActivity(Intent(this, TestTypeToastActivity::class.java))
+        startActivity(Intent(this, EmotionToastDemoActivity::class.java))
     }
 
     private fun onDialogClick() {
