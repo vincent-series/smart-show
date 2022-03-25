@@ -9,7 +9,7 @@
     <include layout="@layout/copyright_toolbar" />
 
     <RadioGroup
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="16dp"
         android:id="@+id/position_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -135,7 +135,7 @@
             android:layout_height="wrap_content"
             android:labelFor="@id/position_group"
             android:paddingLeft="16dp"
-            android:text="icon :"
+            android:text="icon position :"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -156,11 +156,15 @@
             android:layout_marginEnd="3dp"
             android:text="right" />
     </RadioGroup>
+
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/show_toast"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:text="Show" />
 </LinearLayout>

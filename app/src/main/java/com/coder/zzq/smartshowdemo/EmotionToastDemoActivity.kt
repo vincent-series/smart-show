@@ -2,10 +2,8 @@ package com.coder.zzq.smartshowdemo
 
 import android.graphics.Color
 import android.os.Bundle
-import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
 import com.coder.vincent.series.common_lib.resourceToColor
-import com.coder.vincent.smart_dialog.click_list.ClickListAdapter
 import com.coder.vincent.smart_toast.SmartToast
 import com.coder.zzq.smartshowdemo.databinding.ActivityEmotionToastDemoBinding
 
@@ -14,36 +12,33 @@ class EmotionToastDemoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(ActivityEmotionToastDemoBinding.inflate(layoutInflater).apply {
-            val adapter = ClickListAdapter()
-            adapter.setItemCenter(true)
-            adapter.setItems(
-                listOf(
-                    "info",
-                    "warning",
-                    "success",
-                    "error",
-                    "fail",
-                    "complete",
-                    "forbid",
-                    "waiting"
-                )
-            )
-            listView.adapter = adapter
-            listView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
-                when (position) {
-                    0 -> onInfoClick()
-                    1 -> onWarningClick()
-                    2 -> onSuccessClick()
-                    3 -> onErrorClick()
-                    4 -> onFailClick()
-                    5 -> onCompleteClick()
-                    6 -> onForbidClick()
-                    7 -> onWaitingClick()
-                }
-            }
             bgColorGroup.setOnCheckedChangeListener { _, checkedId ->
                 bgColor =
-                    if (checkedId == R.id.bg_color_default) Color.parseColor("#cc000000") else R.color.colorPrimary.resourceToColor()
+                    if (checkedId == R.id.bg_color_default) Color.parseColor("#cc000000") else R.color.colorAccent.resourceToColor()
+            }
+            showInfo.setOnClickListener {
+                onInfoClick()
+            }
+            showWarning.setOnClickListener {
+                onWarningClick()
+            }
+            showSuccess.setOnClickListener {
+                onSuccessClick()
+            }
+            showError.setOnClickListener {
+                onErrorClick()
+            }
+            showFail.setOnClickListener {
+                onFailClick()
+            }
+            showComplete.setOnClickListener {
+                onCompleteClick()
+            }
+            showForbid.setOnClickListener {
+                onForbidClick()
+            }
+            showWaiting.setOnClickListener {
+                onWaitingClick()
             }
         }.root)
     }

@@ -1,17 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:gravity="center_horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal|bottom"
     android:orientation="vertical">
 
     <include layout="@layout/copyright_toolbar" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="Emotion Toast"
+        android:textColor="#ffffff"
+        android:textSize="16sp" />
+
     <RadioGroup
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"
         android:id="@+id/bg_color_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:orientation="horizontal">
 
         <com.google.android.material.textview.MaterialTextView
@@ -19,8 +33,9 @@
             android:layout_height="wrap_content"
             android:labelFor="@id/bg_color_group"
             android:paddingLeft="16dp"
-            android:text="bgColor :"
+            android:text="bg color :"
             android:textSize="18sp"
+            android:textColor="#323232"
             android:textStyle="bold" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
@@ -30,7 +45,8 @@
             android:layout_marginStart="3dp"
             android:layout_marginEnd="3dp"
             android:checked="true"
-            android:text="default" />
+            android:textColor="#cc000000"
+            android:text="DEFAULT" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/bg_color_one"
@@ -38,14 +54,107 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="3dp"
             android:layout_marginEnd="3dp"
-            android:text="#3F51B5" />
+            android:textColor="@color/colorAccent"
+            android:text="#FF4081" />
     </RadioGroup>
-    <ListView
-        android:id="@+id/list_view"
+
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:background="#ffffff"
-        android:divider="#cccccc"
-        android:dividerHeight="0.5dp" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/show_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="info"
+            android:textSize="13sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/show_warning"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="warning"
+            android:textSize="13sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/show_success"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="success"
+            android:textSize="13sp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/show_error"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="error"
+            android:textSize="13sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/show_fail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="fail"
+            android:textSize="13sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/show_complete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="complete"
+            android:textSize="13sp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/show_forbid"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="forbid"
+            android:textSize="13sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/show_waiting"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="waiting"
+            android:textSize="13sp" />
+
+        <Space
+            android:id="@+id/space"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </LinearLayout>

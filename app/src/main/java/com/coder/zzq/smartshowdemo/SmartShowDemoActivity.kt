@@ -1,20 +1,19 @@
 package com.coder.zzq.smartshowdemo
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView.OnItemClickListener
 import androidx.appcompat.app.AppCompatActivity
 import com.coder.vincent.smart_dialog.click_list.ClickListAdapter
 import com.coder.vincent.smart_snackbar.SmartSnackBar
-import com.coder.zzq.smartshowdemo.databinding.ActivityMainBinding
+import com.coder.zzq.smartshowdemo.databinding.ActivitySmartShowDemoBinding
 
 
-class MainActivity : AppCompatActivity() {
+class SmartShowDemoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(ActivityMainBinding.inflate(layoutInflater).apply {
+        setContentView(ActivitySmartShowDemoBinding.inflate(layoutInflater).apply {
             val location = IntArray(2)
             findViewById<View>(android.R.id.content).getLocationOnScreen(location)
             val adapter = ClickListAdapter()
@@ -46,14 +45,12 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun onSnackBarClick() {
-        SmartSnackBar.top(this)
+        SmartSnackBar.bottom(this)
             .config()
-            .actionLabelColor(Color.CYAN)
-            .actionLabelColorResource(R.color.colorAccent)
-            .actionLabelSizeSp(15f)
-            .actionLabelBold(true)
+            .backgroundColorResource(R.color.colorAccent)
             .apply()
-            .show("setup action text style")
+            .show("123")
+//        startActivity(Intent(this, SnackbarDemoActivity::class.java))
 
     }
 

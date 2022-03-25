@@ -14,7 +14,7 @@
             android:name=".EmotionToastDemoActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".SmartShowDemoActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ClassicToastDemoActivity" />
+        <activity android:name=".SnackbarDemoActivity" />
         <activity
             android:name=".TestDialogActivity"
             android:configChanges="orientation|screenSize" />
