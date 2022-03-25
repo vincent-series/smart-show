@@ -4,14 +4,13 @@ import android.graphics.Color
 import android.view.View
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
-import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import com.coder.vincent.series.annotations.smart_toast.ToastConfig
 import com.coder.vincent.series.annotations.smart_toast.ToastDefinition
 import com.coder.vincent.series.annotations.smart_toast.ToastView
-import com.coder.vincent.series.common_lib.application
 import com.coder.vincent.series.common_lib.dpToPx
 import com.coder.vincent.series.common_lib.layoutInflater
+import com.coder.vincent.series.common_lib.resourceToDrawable
 import com.coder.vincent.smart_toast.*
 import com.coder.vincent.smart_toast.databinding.SmartShowClassicToastBinding
 import com.coder.vincent.smart_toast.factory.DefaultToastConfig
@@ -67,7 +66,7 @@ internal class ClassicToast {
             smartToastMessage.textSize = config.messageSize
             smartToastMessage.paint.isFakeBoldText = config.messageBold
             val icon = config.icon?.let {
-                ContextCompat.getDrawable(application, it)?.apply {
+                it.resourceToDrawable()?.apply {
                     val finalIntrinsicWidth =
                         if (intrinsicWidth == -1) config.messageSize.dpToPx() else intrinsicWidth
                     val finalIntrinsicHeight =
