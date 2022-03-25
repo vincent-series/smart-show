@@ -45,13 +45,7 @@ class SmartShowDemoActivity : AppCompatActivity() {
 
 
     private fun onSnackBarClick() {
-        SmartSnackBar.bottom(this)
-            .config()
-            .backgroundColorResource(R.color.colorAccent)
-            .apply()
-            .show("123")
-//        startActivity(Intent(this, SnackbarDemoActivity::class.java))
-
+        startActivity(Intent(this, SnackbarDemoActivity::class.java))
     }
 
     fun onTypeToastClick() {

@@ -21,17 +21,16 @@ class ClassicToastDemoActivity : AppCompatActivity() {
                         R.id.bg_color_two -> R.color.colorAccent.resourceToColor()
                         else -> Color.parseColor("#cc000000")
                     }
-
+                    val icon = if (iconGroup.checkedRadioButtonId == R.id.with_icon)
+                        R.drawable.ic_smart_toast_emotion_success
+                    else
+                        0
                     val iconPosition =
                         if (iconPositionGroup.checkedRadioButtonId == R.id.icon_position_left) TOAST_ICON_POSITION_LEFT else TOAST_ICON_POSITION_RIGHT
                     SmartToast.classic()
                         .config()
                         .backgroundColor(bgColor)
-                        .apply {
-                            if (iconGroup.checkedRadioButtonId == R.id.with_icon) {
-                                iconResource(R.drawable.ic_smart_toast_emotion_success)
-                            }
-                        }
+                        .iconResource(icon)
                         .iconSizeDp(20f)
                         .iconPosition(iconPosition)
                         .apply()
