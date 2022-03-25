@@ -24,11 +24,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import com.coder.vincent.smart_snackbar.bean.SnackBarStyle;
 import com.coder.vincent.smart_snackbar.view.ContentViewCallback;
-import com.coder.vincent.smart_snackbar.view.TopSnackBarContentLayout;
+import com.coder.vincent.smart_snackbar.view.SnackBarContentLayout;
 import com.google.android.material.R;
 
-public class TopSnackBar extends BaseTransientTopBar<TopSnackBar> {
+public class SnackBar extends BaseTransientSnackBar<SnackBar> {
 
     @Nullable
     private final AccessibilityManager accessibilityManager;
@@ -38,7 +39,7 @@ public class TopSnackBar extends BaseTransientTopBar<TopSnackBar> {
     private static final int[] SNACKBAR_CONTENT_STYLE_ATTRS =
             new int[]{R.attr.snackbarButtonStyle, R.attr.snackbarTextViewStyle};
 
-    public static class Callback extends BaseCallback<TopSnackBar> {
+    public static class Callback extends BaseCallback<SnackBar> {
         public static final int DISMISS_EVENT_SWIPE = BaseCallback.DISMISS_EVENT_SWIPE;
         public static final int DISMISS_EVENT_ACTION = BaseCallback.DISMISS_EVENT_ACTION;
         public static final int DISMISS_EVENT_TIMEOUT = BaseCallback.DISMISS_EVENT_TIMEOUT;
@@ -46,91 +47,74 @@ public class TopSnackBar extends BaseTransientTopBar<TopSnackBar> {
         public static final int DISMISS_EVENT_CONSECUTIVE = BaseCallback.DISMISS_EVENT_CONSECUTIVE;
 
         @Override
-        public void onShown(TopSnackBar sb) {
+        public void onShown(SnackBar sb) {
             // Stub implementation to make API check happy.
         }
 
         @Override
-        public void onDismissed(TopSnackBar transientBottomBar, @DismissEvent int event) {
+        public void onDismissed(SnackBar transientBottomBar, @DismissEvent int event) {
             // Stub implementation to make API check happy.
         }
     }
 
     @Nullable
-    private BaseCallback<TopSnackBar> callback;
+    private BaseCallback<SnackBar> callback;
 
-    private TopSnackBar(
+    private SnackBar(
             @NonNull Context context,
             @NonNull ViewGroup parent,
             @NonNull View content,
-            @NonNull ContentViewCallback contentViewCallback) {
-        super(context, parent, content, contentViewCallback);
+            @NonNull ContentViewCallback contentViewCallback,
+            SnackBarStyle style,
+            @SnackBarPosition int position) {
+        super(context, parent, content, contentViewCallback,style,position);
         accessibilityManager =
                 (AccessibilityManager) parent.getContext().getSystemService(Context.ACCESSIBILITY_SERVICE);
     }
 
-    // TODO: Delete this once custom Robolectric shadows no longer depend on this method being present
-    // (and instead properly utilize BaseTransientBottomBar hierarchy).
     @Override
     public void show() {
         super.show();
     }
 
-    // TODO: Delete this once custom Robolectric shadows no longer depend on this method being present
-    // (and instead properly utilize BaseTransientBottomBar hierarchy).
     @Override
     public void dismiss() {
         super.dismiss();
     }
 
-    // TODO: Delete this once custom Robolectric shadows no longer depend on this method being present
-    // (and instead properly utilize BaseTransientBottomBar hierarchy).
     @Override
     public boolean isShown() {
         return super.isShown();
     }
 
     @NonNull
-    public static TopSnackBar make(
-            @NonNull View view, @NonNull CharSequence text, @Duration int duration) {
-        return makeInternal(/* context= */ null, view, text, duration);
+    public static SnackBar make(
+            @NonNull ViewGroup parent,
+            @NonNull CharSequence text,
+            @Duration int duration,
+            SnackBarStyle style,
+            @SnackBarPosition int position) {
+        return makeInternal(parent, text, duration,style,position);
     }
 
     @NonNull
-    public static TopSnackBar make(
-            @NonNull Context context,
-            @NonNull View view,
+    private static SnackBar makeInternal(
+            @NonNull ViewGroup parent,
             @NonNull CharSequence text,
-            @Duration int duration) {
-        return makeInternal(context, view, text, duration);
-    }
-
-    @NonNull
-    private static TopSnackBar makeInternal(
-            @Nullable Context context,
-            @NonNull View view,
-            @NonNull CharSequence text,
-            @Duration int duration) {
-        final ViewGroup parent = findSuitableParent(view);
-        if (parent == null) {
-            throw new IllegalArgumentException(
-                    "No suitable parent found from the given view. Please provide a valid view.");
-        }
-
-        if (context == null) {
-            context = parent.getContext();
-        }
-
+            @Duration int duration,
+            SnackBarStyle style,
+            @SnackBarPosition int position) {
+        Context context = parent.getContext();
         final LayoutInflater inflater = LayoutInflater.from(context);
-        final TopSnackBarContentLayout content =
-                (TopSnackBarContentLayout)
+        final SnackBarContentLayout content =
+                (SnackBarContentLayout)
                         inflater.inflate(
-                                hasSnackbarContentStyleAttrs(context)
-                                        ? com.coder.vincent.smart_snackbar.R.layout.mtrl_layout_top_snackbar_include
-                                        : com.coder.vincent.smart_snackbar.R.layout.design_layout_top_snackbar_include,
+                                style == SnackBarStyle.AUTO && hasSnackbarContentStyleAttrs(context)
+                                        ? com.coder.vincent.smart_snackbar.R.layout.mtrl_layout_smart_snackbar_include
+                                        : com.coder.vincent.smart_snackbar.R.layout.design_layout_smart_snackbar_include,
                                 parent,
                                 false);
-        final TopSnackBar topSnackbar = new TopSnackBar(context, parent, content, content);
+        final SnackBar topSnackbar = new SnackBar(context, parent, content, content,style,position);
         topSnackbar.setText(text);
         topSnackbar.setDuration(duration);
         return topSnackbar;
@@ -152,39 +136,34 @@ public class TopSnackBar extends BaseTransientTopBar<TopSnackBar> {
         return snackbarButtonStyleResId != -1 && snackbarTextViewStyleResId != -1;
     }
 
-    @NonNull
-    public static TopSnackBar make(@NonNull View view, @StringRes int resId, @Duration int duration) {
-        return make(view, view.getResources().getText(resId), duration);
-    }
-
     @Nullable
     private static ViewGroup findSuitableParent(View view) {
         return (ViewGroup) view;
     }
 
     @NonNull
-    public TopSnackBar setText(@NonNull CharSequence message) {
-        final TopSnackBarContentLayout contentLayout = (TopSnackBarContentLayout) view.getChildAt(0);
+    public SnackBar setText(@NonNull CharSequence message) {
+        final SnackBarContentLayout contentLayout = (SnackBarContentLayout) view.getChildAt(0);
         final TextView tv = contentLayout.getMessageView();
         tv.setText(message);
         return this;
     }
 
     @NonNull
-    public TopSnackBar setText(@StringRes int resId) {
+    public SnackBar setText(@StringRes int resId) {
         return setText(getContext().getText(resId));
     }
 
 
     @NonNull
-    public TopSnackBar setAction(@StringRes int resId, View.OnClickListener listener) {
+    public SnackBar setAction(@StringRes int resId, View.OnClickListener listener) {
         return setAction(getContext().getText(resId), listener);
     }
 
     @NonNull
-    public TopSnackBar setAction(
+    public SnackBar setAction(
             @Nullable CharSequence text, @Nullable final View.OnClickListener listener) {
-        final TopSnackBarContentLayout contentLayout = (TopSnackBarContentLayout) this.view.getChildAt(0);
+        final SnackBarContentLayout contentLayout = (SnackBarContentLayout) this.view.getChildAt(0);
         final TextView tv = contentLayout.getActionView();
         if (TextUtils.isEmpty(text) || listener == null) {
             tv.setVisibility(View.GONE);
@@ -228,39 +207,39 @@ public class TopSnackBar extends BaseTransientTopBar<TopSnackBar> {
     }
 
     @NonNull
-    public TopSnackBar setTextColor(ColorStateList colors) {
-        final TopSnackBarContentLayout contentLayout = (TopSnackBarContentLayout) view.getChildAt(0);
+    public SnackBar setTextColor(ColorStateList colors) {
+        final SnackBarContentLayout contentLayout = (SnackBarContentLayout) view.getChildAt(0);
         final TextView tv = contentLayout.getMessageView();
         tv.setTextColor(colors);
         return this;
     }
 
     @NonNull
-    public TopSnackBar setTextColor(@ColorInt int color) {
-        final TopSnackBarContentLayout contentLayout = (TopSnackBarContentLayout) view.getChildAt(0);
+    public SnackBar setTextColor(@ColorInt int color) {
+        final SnackBarContentLayout contentLayout = (SnackBarContentLayout) view.getChildAt(0);
         final TextView tv = contentLayout.getMessageView();
         tv.setTextColor(color);
         return this;
     }
 
     @NonNull
-    public TopSnackBar setActionTextColor(ColorStateList colors) {
-        final TopSnackBarContentLayout contentLayout = (TopSnackBarContentLayout) view.getChildAt(0);
+    public SnackBar setActionTextColor(ColorStateList colors) {
+        final SnackBarContentLayout contentLayout = (SnackBarContentLayout) view.getChildAt(0);
         final TextView tv = contentLayout.getActionView();
         tv.setTextColor(colors);
         return this;
     }
 
     @NonNull
-    public TopSnackBar setMaxInlineActionWidth(@Dimension int width) {
-        final TopSnackBarContentLayout contentLayout = (TopSnackBarContentLayout) view.getChildAt(0);
+    public SnackBar setMaxInlineActionWidth(@Dimension int width) {
+        final SnackBarContentLayout contentLayout = (SnackBarContentLayout) view.getChildAt(0);
         contentLayout.setMaxInlineActionWidth(width);
         return this;
     }
 
     @NonNull
-    public TopSnackBar setActionTextColor(@ColorInt int color) {
-        final TopSnackBarContentLayout contentLayout = (TopSnackBarContentLayout) view.getChildAt(0);
+    public SnackBar setActionTextColor(@ColorInt int color) {
+        final SnackBarContentLayout contentLayout = (SnackBarContentLayout) view.getChildAt(0);
         final TextView tv = contentLayout.getActionView();
         tv.setTextColor(color);
         return this;
@@ -268,18 +247,18 @@ public class TopSnackBar extends BaseTransientTopBar<TopSnackBar> {
 
 
     @NonNull
-    public TopSnackBar setBackgroundTint(@ColorInt int color) {
+    public SnackBar setBackgroundTint(@ColorInt int color) {
         return setBackgroundTintList(ColorStateList.valueOf(color));
     }
 
     @NonNull
-    public TopSnackBar setBackgroundTintList(@Nullable ColorStateList colorStateList) {
+    public SnackBar setBackgroundTintList(@Nullable ColorStateList colorStateList) {
         view.setBackgroundTintList(colorStateList);
         return this;
     }
 
     @NonNull
-    public TopSnackBar setBackgroundTintMode(@Nullable PorterDuff.Mode mode) {
+    public SnackBar setBackgroundTintMode(@Nullable PorterDuff.Mode mode) {
         view.setBackgroundTintMode(mode);
         return this;
     }

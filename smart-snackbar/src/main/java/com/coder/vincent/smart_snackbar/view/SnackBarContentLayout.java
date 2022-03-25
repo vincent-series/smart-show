@@ -14,17 +14,17 @@ import androidx.core.view.ViewCompat;
 import com.google.android.material.R;
 import com.google.android.material.color.MaterialColors;
 
-public class TopSnackBarContentLayout extends LinearLayout implements ContentViewCallback {
+public class SnackBarContentLayout extends LinearLayout implements ContentViewCallback {
     private TextView messageView;
     private Button actionView;
 
     private int maxInlineActionWidth;
 
-    public TopSnackBarContentLayout(@NonNull Context context) {
+    public SnackBarContentLayout(@NonNull Context context) {
         this(context, null);
     }
 
-    public TopSnackBarContentLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public SnackBarContentLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 

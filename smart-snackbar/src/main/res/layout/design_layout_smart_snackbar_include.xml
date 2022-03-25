@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <view xmlns:android="http://schemas.android.com/apk/res/android"
-    class="com.coder.vincent.smart_snackbar.view.TopSnackBarContentLayout"
+    class="com.coder.vincent.smart_snackbar.view.SnackBarContentLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="bottom"
@@ -13,11 +13,11 @@
         android:layout_gravity="bottom|left|start"
         android:layout_weight="1"
         android:ellipsize="end"
-        android:maxLines="@integer/design_top_snackbar_text_max_lines"
-        android:paddingLeft="@dimen/design_top_snackbar_padding_horizontal"
-        android:paddingTop="@dimen/design_top_snackbar_padding_vertical"
-        android:paddingRight="@dimen/design_top_snackbar_padding_horizontal"
-        android:paddingBottom="@dimen/design_top_snackbar_padding_vertical"
+        android:maxLines="@integer/design_smart_snackbar_text_max_lines"
+        android:paddingLeft="@dimen/design_smart_snackbar_padding_horizontal"
+        android:paddingTop="@dimen/design_smart_snackbar_padding_vertical"
+        android:paddingRight="@dimen/design_smart_snackbar_padding_horizontal"
+        android:paddingBottom="@dimen/design_smart_snackbar_padding_vertical"
         android:textAlignment="viewStart"
         android:textAppearance="@style/TextAppearance.Design.Snackbar.Message" />
 
@@ -27,8 +27,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right|end"
-        android:layout_marginStart="@dimen/design_top_snackbar_extra_spacing_horizontal"
-        android:layout_marginLeft="@dimen/design_top_snackbar_extra_spacing_horizontal"
+        android:layout_marginStart="@dimen/design_smart_snackbar_extra_spacing_horizontal"
+        android:layout_marginLeft="@dimen/design_smart_snackbar_extra_spacing_horizontal"
         android:minWidth="48dp"
         android:textColor="?attr/colorAccent"
         android:visibility="gone" />

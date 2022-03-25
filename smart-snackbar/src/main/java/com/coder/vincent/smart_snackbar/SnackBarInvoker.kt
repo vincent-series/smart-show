@@ -7,6 +7,7 @@ import com.coder.vincent.series.common_lib.resourceToColor
 import com.coder.vincent.series.common_lib.resourceToString
 import com.coder.vincent.series.common_lib.spToPx
 import com.coder.vincent.smart_snackbar.bean.Duration
+import com.coder.vincent.smart_snackbar.bean.SnackBarStyle
 import com.coder.vincent.smart_snackbar.schedule.SnackBarScheduler
 
 internal class SnackBarInvoker(
@@ -17,6 +18,11 @@ internal class SnackBarInvoker(
     private var config: SnackBarConfig = SnackBarConfig()
 
     override fun config(): SnackBarFacade.ConfigSetter = this
+    override fun themeStyle(style: SnackBarStyle): SnackBarFacade.ConfigSetter =
+        this.apply {
+            config.style = style
+        }
+
     override fun backgroundColor(color: Int): SnackBarFacade.ConfigSetter =
         this.apply {
             config.backgroundColor = color

@@ -3,10 +3,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <dimen name="design_top_snackbar_padding_vertical">14dp</dimen>
-    <dimen name="design_top_snackbar_padding_horizontal">12dp</dimen>
-    <integer name="design_top_snackbar_text_max_lines">2</integer>
-    <dimen name="design_top_snackbar_extra_spacing_horizontal">0dp</dimen>
+    <dimen name="design_smart_snackbar_padding_vertical">14dp</dimen>
+    <dimen name="design_smart_snackbar_padding_horizontal">12dp</dimen>
+    <integer name="design_smart_snackbar_text_max_lines">2</integer>
+    <dimen name="design_smart_snackbar_extra_spacing_horizontal">0dp</dimen>
     <declare-styleable name="SnackbarLayout">
         <attr name="android:maxWidth" />
         <attr name="elevation" />

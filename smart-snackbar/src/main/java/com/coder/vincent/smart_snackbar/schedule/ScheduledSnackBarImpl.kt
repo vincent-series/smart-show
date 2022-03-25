@@ -16,13 +16,13 @@ import com.coder.vincent.series.common_lib.resourceToDrawable
 import com.coder.vincent.smart_snackbar.SNACK_BAR_ICON_POSITION_LEFT
 import com.coder.vincent.smart_snackbar.SNACK_BAR_ICON_POSITION_RIGHT
 import com.coder.vincent.smart_snackbar.SnackBarConfig
-import com.google.android.material.snackbar.Snackbar
+import com.coder.vincent.smart_snackbar.SnackBar
 import kotlin.math.max
 import kotlin.math.roundToInt
 
-internal class ScheduledBottomSnackBar(private var config: SnackBarConfig) : ScheduledSnackBar {
-    private val bar: Snackbar =
-        Snackbar.make(config.targetParent, config.message, config.duration.value)
+internal class ScheduledSnackBarImpl(private var config: SnackBarConfig) : ScheduledSnackBar {
+    private val bar: SnackBar =
+        SnackBar.make(config.targetParent, config.message, config.duration.value,config.style,config.position)
     private val messageView: TextView
     private val actionView: Button
 
@@ -102,7 +102,7 @@ internal class ScheduledBottomSnackBar(private var config: SnackBarConfig) : Sch
     }
 
     override fun dismiss() {
-        if (bar.isShown) {
+        if (bar.isShown){
             bar.dismiss()
         }
     }

@@ -5,6 +5,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import com.coder.vincent.smart_snackbar.bean.SnackBarStyle
 
 interface SnackBarFacade {
     interface Overall : ShowApi {
@@ -50,12 +51,13 @@ interface SnackBarFacade {
     }
 
     interface ConfigSetter {
+        fun themeStyle(style: SnackBarStyle): ConfigSetter
         fun backgroundColor(@ColorInt color: Int): ConfigSetter
         fun backgroundColorResource(@ColorRes colorResId: Int): ConfigSetter
         fun icon(@DrawableRes iconResId: Int): ConfigSetter
         fun iconPosition(@SnackBarIconPosition iconPosition: Int): ConfigSetter
         fun iconSizeDp(size: Float): ConfigSetter
-        fun iconPaddingDp(padding:Float): ConfigSetter
+        fun iconPaddingDp(padding: Float): ConfigSetter
         fun messageColor(@ColorInt color: Int): ConfigSetter
         fun messageColorResource(@ColorRes colorResId: Int): ConfigSetter
         fun messageBold(bold: Boolean): ConfigSetter

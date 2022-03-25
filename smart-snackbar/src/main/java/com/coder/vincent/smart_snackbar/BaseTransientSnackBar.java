@@ -1,6 +1,8 @@
 package com.coder.vincent.smart_snackbar;
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
+import static com.coder.vincent.smart_snackbar.SnackBarConfigKt.SNACK_BAR_POSITION_BOTTOM;
+import static com.coder.vincent.smart_snackbar.SnackBarConfigKt.SNACK_BAR_POSITION_TOP;
 import static com.coder.vincent.smart_snackbar.util.AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR;
 import static com.coder.vincent.smart_snackbar.util.AnimationUtils.LINEAR_INTERPOLATOR;
 import static com.coder.vincent.smart_snackbar.util.AnimationUtils.LINEAR_OUT_SLOW_IN_INTERPOLATOR;
@@ -56,11 +58,13 @@ import androidx.core.view.AccessibilityDelegateCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 
+import com.coder.vincent.series.common_lib.ToolkitKt;
+import com.coder.vincent.smart_snackbar.bean.SnackBarStyle;
 import com.coder.vincent.smart_snackbar.util.MaterialResources;
 import com.coder.vincent.smart_snackbar.util.ThemeEnforcement;
 import com.coder.vincent.smart_snackbar.util.ViewUtils;
 import com.coder.vincent.smart_snackbar.view.ContentViewCallback;
-import com.coder.vincent.smart_snackbar.view.TopSnackBarContentLayout;
+import com.coder.vincent.smart_snackbar.view.SnackBarContentLayout;
 import com.google.android.material.R;
 import com.google.android.material.behavior.SwipeDismissBehavior;
 import com.google.android.material.color.MaterialColors;
@@ -71,7 +75,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
+abstract class BaseTransientSnackBar<B extends BaseTransientSnackBar<B>> {
 
     public static final int ANIMATION_MODE_SLIDE = 0;
     public static final int ANIMATION_MODE_FADE = 1;
@@ -135,7 +139,7 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
 
     private static final int[] SNACKBAR_STYLE_ATTR = new int[]{R.attr.snackbarStyle};
 
-    private static final String TAG = BaseTransientTopBar.class.getSimpleName();
+    private static final String TAG = BaseTransientSnackBar.class.getSimpleName();
 
     static {
         handler =
@@ -144,10 +148,10 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
                         message -> {
                             switch (message.what) {
                                 case MSG_SHOW:
-                                    ((BaseTransientTopBar) message.obj).showView();
+                                    ((BaseTransientSnackBar) message.obj).showView();
                                     return true;
                                 case MSG_DISMISS:
-                                    ((BaseTransientTopBar) message.obj).hideView(message.arg1);
+                                    ((BaseTransientSnackBar) message.obj).hideView(message.arg1);
                                     return true;
                                 default:
                                     return false;
@@ -158,6 +162,9 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
     @NonNull
     private final ViewGroup targetParent;
     private final Context context;
+    private SnackBarStyle snackBarStyle;
+    @SnackBarPosition
+    private int snackBarPosition = SNACK_BAR_POSITION_BOTTOM;
     @NonNull
     protected final TopSnackbarBaseLayout view;
 
@@ -230,28 +237,15 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
         void onViewDetachedFromWindow(View v);
     }
 
-    protected BaseTransientTopBar(
-            @NonNull ViewGroup parent,
-            @NonNull View content,
-            @NonNull ContentViewCallback contentViewCallback) {
-        this(parent.getContext(), parent, content, contentViewCallback);
-    }
-
-    protected BaseTransientTopBar(
+    protected BaseTransientSnackBar(
             @NonNull Context context,
             @NonNull ViewGroup parent,
             @NonNull View content,
-            @NonNull ContentViewCallback contentViewCallback) {
-        if (parent == null) {
-            throw new IllegalArgumentException("Transient bottom bar must have non-null parent");
-        }
-        if (content == null) {
-            throw new IllegalArgumentException("Transient bottom bar must have non-null content");
-        }
-        if (contentViewCallback == null) {
-            throw new IllegalArgumentException("Transient bottom bar must have non-null callback");
-        }
-
+            @NonNull ContentViewCallback contentViewCallback,
+            SnackBarStyle style,
+            @SnackBarPosition int position) {
+        this.snackBarStyle = style;
+        this.snackBarPosition = position;
         targetParent = parent;
         this.contentViewCallback = contentViewCallback;
         this.context = context;
@@ -263,13 +257,30 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
         // in the extending Snackbar class. This is to prevent breakage of apps that have custom
         // coordinator layout behaviors that depend on that layout.
         view = (TopSnackbarBaseLayout) inflater.inflate(getSnackbarBaseLayoutResId(), targetParent, false);
-        if (content instanceof TopSnackBarContentLayout) {
-            ((TopSnackBarContentLayout) content)
+        if (content instanceof SnackBarContentLayout) {
+            ((SnackBarContentLayout) content)
                     .updateActionTextColorAlphaIfNeeded(view.getActionTextColorAlpha());
-            ((TopSnackBarContentLayout) content).setMaxInlineActionWidth(view.getMaxInlineActionWidth());
+            ((SnackBarContentLayout) content).setMaxInlineActionWidth(view.getMaxInlineActionWidth());
         }
         view.addView(content);
-        LayoutParams layoutParams = view.getLayoutParams();
+        LayoutParams layoutParams =  view.getLayoutParams();
+        FrameLayout.LayoutParams parentLp = (FrameLayout.LayoutParams) targetParent.getLayoutParams();
+        switch (snackBarPosition) {
+            case SNACK_BAR_POSITION_TOP:
+                parentLp.gravity = Gravity.TOP;
+                if (snackBarStyle == SnackBarStyle.CLASSIC || !ThemeEnforcement.isMaterialTheme(context)) {
+                    layoutParams.height = ToolkitKt.statusBarHeight() + ToolkitKt.actionBarHeight();
+                    parentLp.topMargin = 0;
+                } else {
+                    layoutParams.height = LayoutParams.WRAP_CONTENT;
+                    parentLp.topMargin = ToolkitKt.statusBarHeight() + ToolkitKt.actionBarHeight() / 4;
+                }
+                break;
+            case SNACK_BAR_POSITION_BOTTOM:
+                layoutParams.height = MarginLayoutParams.WRAP_CONTENT;
+                break;
+        }
+
         if (layoutParams instanceof MarginLayoutParams) {
             MarginLayoutParams marginParams = (MarginLayoutParams) layoutParams;
             originalMargins =
@@ -357,14 +368,9 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
 
     @LayoutRes
     protected int getSnackbarBaseLayoutResId() {
-        return hasSnackbarStyleAttr() ? com.coder.vincent.smart_snackbar.R.layout.mtrl_layout_top_snackbar : com.coder.vincent.smart_snackbar.R.layout.design_layout_top_snackbar;
+        return snackBarStyle == SnackBarStyle.AUTO && hasSnackbarStyleAttr() ? com.coder.vincent.smart_snackbar.R.layout.mtrl_layout_smart_snackbar : com.coder.vincent.smart_snackbar.R.layout.design_layout_smart_snackbar;
     }
 
-    /**
-     * {@link TopSnackBar}s should still work with AppCompat themes, which don't specify a {@code
-     * snackbarStyle}. This method helps to check if a valid {@code snackbarStyle} is set within the
-     * current context, so that we know whether we can use the attribute.
-     */
     protected boolean hasSnackbarStyleAttr() {
         TypedArray a = context.obtainStyledAttributes(SNACKBAR_STYLE_ATTR);
         int snackbarStyleResId = a.getResourceId(0, -1);
@@ -383,14 +389,6 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
         return duration;
     }
 
-    /**
-     * Sets whether this bottom bar should adjust it's position based on the system gesture area on
-     * Android Q and above.
-     *
-     * <p>Note: the bottom bar will only adjust it's position if it is dismissable via swipe (because
-     * that would cause a gesture conflict), gesture navigation is enabled, and this {@code
-     * gestureInsetBottomIgnored} flag is false.
-     */
     @NonNull
     public B setGestureInsetBottomIgnored(boolean gestureInsetBottomIgnored) {
         this.gestureInsetBottomIgnored = gestureInsetBottomIgnored;
@@ -464,7 +462,7 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
     }
 
     public void show() {
-        TopSnackBarManager.getInstance().show(getDuration(), managerCallback);
+        SnackBarManager.getInstance().show(getDuration(), managerCallback);
     }
 
     public void dismiss() {
@@ -472,7 +470,7 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
     }
 
     protected void dispatchDismiss(@BaseCallback.DismissEvent int event) {
-        TopSnackBarManager.getInstance().dismiss(managerCallback, event);
+        SnackBarManager.getInstance().dismiss(managerCallback, event);
     }
 
     @NonNull
@@ -501,25 +499,25 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
     }
 
     public boolean isShown() {
-        return TopSnackBarManager.getInstance().isCurrent(managerCallback);
+        return SnackBarManager.getInstance().isCurrent(managerCallback);
     }
 
     public boolean isShownOrQueued() {
-        return TopSnackBarManager.getInstance().isCurrentOrNext(managerCallback);
+        return SnackBarManager.getInstance().isCurrentOrNext(managerCallback);
     }
 
     @NonNull
-    TopSnackBarManager.Callback managerCallback =
-            new TopSnackBarManager.Callback() {
+    SnackBarManager.Callback managerCallback =
+            new SnackBarManager.Callback() {
                 @Override
                 public void show() {
-                    handler.sendMessage(handler.obtainMessage(MSG_SHOW, BaseTransientTopBar.this));
+                    handler.sendMessage(handler.obtainMessage(MSG_SHOW, BaseTransientSnackBar.this));
                 }
 
                 @Override
                 public void dismiss(int event) {
                     handler.sendMessage(
-                            handler.obtainMessage(MSG_DISMISS, event, 0, BaseTransientTopBar.this));
+                            handler.obtainMessage(MSG_DISMISS, event, 0, BaseTransientSnackBar.this));
                 }
             };
 
@@ -585,8 +583,8 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
                 new OnLayoutChangeListener() {
                     @Override
                     public void onLayoutChange(View view, int left, int top, int right, int bottom) {
-                        BaseTransientTopBar.this.view.setOnLayoutChangeListener(null);
-                        BaseTransientTopBar.this.showViewImpl();
+                        BaseTransientSnackBar.this.view.setOnLayoutChangeListener(null);
+                        BaseTransientSnackBar.this.showViewImpl();
                     }
                 });
     }
@@ -625,7 +623,7 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
         SwipeDismissBehavior<? extends View> behavior =
                 this.behavior == null ? getNewBehavior() : this.behavior;
 
-        if (behavior instanceof BaseTransientTopBar.Behavior) {
+        if (behavior instanceof BaseTransientSnackBar.Behavior) {
             ((Behavior) behavior).setBaseTransientBottomBar(this);
         }
 
@@ -645,11 +643,11 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
                             case SwipeDismissBehavior.STATE_DRAGGING:
                             case SwipeDismissBehavior.STATE_SETTLING:
                                 // If the view is being dragged or settling, pause the timeout
-                                TopSnackBarManager.getInstance().pauseTimeout(managerCallback);
+                                SnackBarManager.getInstance().pauseTimeout(managerCallback);
                                 break;
                             case SwipeDismissBehavior.STATE_IDLE:
                                 // If the view has been released and is idle, restore the timeout
-                                TopSnackBarManager.getInstance().restoreTimeoutIfPaused(managerCallback);
+                                SnackBarManager.getInstance().restoreTimeoutIfPaused(managerCallback);
                                 break;
                             default:
                                 // Any other state is ignored
@@ -863,7 +861,7 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
         if (layoutParams instanceof MarginLayoutParams) {
             translationY += ((MarginLayoutParams) layoutParams).bottomMargin;
         }
-        return -translationY;
+        return snackBarPosition == SNACK_BAR_POSITION_TOP ? -translationY : translationY;
     }
 
     final void hideView(@BaseCallback.DismissEvent int event) {
@@ -876,7 +874,7 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
     }
 
     void onViewShown() {
-        TopSnackBarManager.getInstance().onShown(managerCallback);
+        SnackBarManager.getInstance().onShown(managerCallback);
         if (callbacks != null) {
             // Notify the callbacks. Do that from the end of the list so that if a callback
             // removes itself as the result of being called, it won't mess up with our iteration
@@ -889,7 +887,7 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
 
     void onViewHidden(int event) {
         // First tell the SnackbarManager that it has been dismissed
-        TopSnackBarManager.getInstance().onDismissed(managerCallback);
+        SnackBarManager.getInstance().onDismissed(managerCallback);
         if (callbacks != null) {
             // Notify the callbacks. Do that from the end of the list so that if a callback
             // removes itself as the result of being called, it won't mess up with our iteration
@@ -931,8 +929,8 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
                     }
                 };
 
-        private BaseTransientTopBar.OnLayoutChangeListener onLayoutChangeListener;
-        private BaseTransientTopBar.OnAttachStateChangeListener onAttachStateChangeListener;
+        private BaseTransientSnackBar.OnLayoutChangeListener onLayoutChangeListener;
+        private BaseTransientSnackBar.OnAttachStateChangeListener onAttachStateChangeListener;
         @AnimationMode
         private int animationMode;
         private final float backgroundOverlayColorAlpha;
@@ -1062,12 +1060,12 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
         }
 
         void setOnLayoutChangeListener(
-                BaseTransientTopBar.OnLayoutChangeListener onLayoutChangeListener) {
+                BaseTransientSnackBar.OnLayoutChangeListener onLayoutChangeListener) {
             this.onLayoutChangeListener = onLayoutChangeListener;
         }
 
         void setOnAttachStateChangeListener(
-                BaseTransientTopBar.OnAttachStateChangeListener listener) {
+                BaseTransientSnackBar.OnAttachStateChangeListener listener) {
             onAttachStateChangeListener = listener;
         }
 
@@ -1128,8 +1126,8 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
         }
 
         private void setBaseTransientBottomBar(
-                @NonNull BaseTransientTopBar<?> baseTransientTopBar) {
-            delegate.setBaseTransientBottomBar(baseTransientTopBar);
+                @NonNull BaseTransientSnackBar<?> baseTransientSnackBar) {
+            delegate.setBaseTransientBottomBar(baseTransientSnackBar);
         }
 
         @Override
@@ -1145,13 +1143,8 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
         }
     }
 
-    /**
-     * @hide
-     */
-    @RestrictTo(LIBRARY_GROUP)
-    // TODO(b/76413401): Delegate can be rolled up into behavior after widget migration is finished.
     public static class BehaviorDelegate {
-        private TopSnackBarManager.Callback managerCallback;
+        private SnackBarManager.Callback managerCallback;
 
         public BehaviorDelegate(@NonNull SwipeDismissBehavior<?> behavior) {
             behavior.setStartAlphaSwipeDistance(0.1f);
@@ -1160,12 +1153,12 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
         }
 
         public void setBaseTransientBottomBar(
-                @NonNull BaseTransientTopBar<?> baseTransientTopBar) {
-            this.managerCallback = baseTransientTopBar.managerCallback;
+                @NonNull BaseTransientSnackBar<?> baseTransientSnackBar) {
+            this.managerCallback = baseTransientSnackBar.managerCallback;
         }
 
         public boolean canSwipeDismissView(View child) {
-            return child instanceof BaseTransientTopBar.TopSnackbarBaseLayout;
+            return child instanceof BaseTransientSnackBar.TopSnackbarBaseLayout;
         }
 
         public void onInterceptTouchEvent(
@@ -1175,12 +1168,12 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
                     // We want to make sure that we disable any Snackbar timeouts if the user is
                     // currently touching the Snackbar. We restore the timeout when complete
                     if (parent.isPointInChildBounds(child, (int) event.getX(), (int) event.getY())) {
-                        TopSnackBarManager.getInstance().pauseTimeout(managerCallback);
+                        SnackBarManager.getInstance().pauseTimeout(managerCallback);
                     }
                     break;
                 case MotionEvent.ACTION_UP:
                 case MotionEvent.ACTION_CANCEL:
-                    TopSnackBarManager.getInstance().restoreTimeoutIfPaused(managerCallback);
+                    SnackBarManager.getInstance().restoreTimeoutIfPaused(managerCallback);
                     break;
                 default:
                     break;
@@ -1192,13 +1185,13 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
     static class Anchor
             implements View.OnAttachStateChangeListener, OnGlobalLayoutListener {
         @NonNull
-        private final WeakReference<BaseTransientTopBar> transientBottomBar;
+        private final WeakReference<BaseTransientSnackBar> transientBottomBar;
 
         @NonNull
         private final WeakReference<View> anchorView;
 
         static Anchor anchor(
-                @NonNull BaseTransientTopBar transientBottomBar, @NonNull View anchorView) {
+                @NonNull BaseTransientSnackBar transientBottomBar, @NonNull View anchorView) {
             Anchor anchor = new Anchor(transientBottomBar, anchorView);
             if (ViewCompat.isAttachedToWindow(anchorView)) {
                 ViewUtils.addOnGlobalLayoutListener(anchorView, anchor);
@@ -1208,7 +1201,7 @@ abstract class BaseTransientTopBar<B extends BaseTransientTopBar<B>> {
         }
 
         private Anchor(
-                @NonNull BaseTransientTopBar transientBottomBar, @NonNull View anchorView) {
+                @NonNull BaseTransientSnackBar transientBottomBar, @NonNull View anchorView) {
             this.transientBottomBar = new WeakReference<>(transientBottomBar);
             this.anchorView = new WeakReference<>(anchorView);
         }

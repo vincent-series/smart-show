@@ -9,20 +9,20 @@ import androidx.annotation.Nullable;
 
 import java.lang.ref.WeakReference;
 
-class TopSnackBarManager {
+class SnackBarManager {
 
     static final int MSG_TIMEOUT = 0;
 
     private static final int SHORT_DURATION_MS = 1500;
     private static final int LONG_DURATION_MS = 2750;
 
-    private static TopSnackBarManager topSnackbarManager;
+    private static SnackBarManager snackbarManager;
 
-    static TopSnackBarManager getInstance() {
-        if (topSnackbarManager == null) {
-            topSnackbarManager = new TopSnackBarManager();
+    static SnackBarManager getInstance() {
+        if (snackbarManager == null) {
+            snackbarManager = new SnackBarManager();
         }
-        return topSnackbarManager;
+        return snackbarManager;
     }
 
     @NonNull
@@ -35,7 +35,7 @@ class TopSnackBarManager {
     @Nullable
     private SnackbarRecord nextSnackbar;
 
-    private TopSnackBarManager() {
+    private SnackBarManager() {
         lock = new Object();
         handler =
                 new Handler(
@@ -77,7 +77,7 @@ class TopSnackBarManager {
             }
 
             if (currentSnackbar != null
-                    && cancelSnackbarLocked(currentSnackbar, TopSnackBar.Callback.DISMISS_EVENT_CONSECUTIVE)) {
+                    && cancelSnackbarLocked(currentSnackbar, SnackBar.Callback.DISMISS_EVENT_CONSECUTIVE)) {
                 // If we currently have a Snackbar, try and cancel it and wait in line
                 return;
             } else {
@@ -200,7 +200,7 @@ class TopSnackBarManager {
     }
 
     private void scheduleTimeoutLocked(@NonNull SnackbarRecord r) {
-        if (r.duration == TopSnackBar.LENGTH_INDEFINITE) {
+        if (r.duration == SnackBar.LENGTH_INDEFINITE) {
             // If we're set to indefinite, we don't want to set a timeout
             return;
         }
@@ -208,7 +208,7 @@ class TopSnackBarManager {
         int durationMs = LONG_DURATION_MS;
         if (r.duration > 0) {
             durationMs = r.duration;
-        } else if (r.duration == TopSnackBar.LENGTH_SHORT) {
+        } else if (r.duration == SnackBar.LENGTH_SHORT) {
             durationMs = SHORT_DURATION_MS;
         }
         handler.removeCallbacksAndMessages(r);
@@ -218,7 +218,7 @@ class TopSnackBarManager {
     void handleTimeout(@NonNull SnackbarRecord record) {
         synchronized (lock) {
             if (currentSnackbar == record || nextSnackbar == record) {
-                cancelSnackbarLocked(record, TopSnackBar.Callback.DISMISS_EVENT_TIMEOUT);
+                cancelSnackbarLocked(record, SnackBar.Callback.DISMISS_EVENT_TIMEOUT);
             }
         }
     }

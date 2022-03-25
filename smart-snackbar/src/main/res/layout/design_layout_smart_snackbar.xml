@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <view xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/Widget.Design.Snackbar"
-    class="com.coder.vincent.smart_snackbar.TopSnackBar$TopSnackBarLayout"
+    class="com.coder.vincent.smart_snackbar.SnackBar$TopSnackBarLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="top"
+    android:layout_gravity="bottom"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"/>

@@ -9,6 +9,7 @@ import androidx.annotation.IntDef
 import com.coder.vincent.series.common_lib.dpToPx
 import com.coder.vincent.smart_snackbar.bean.AnimationMode
 import com.coder.vincent.smart_snackbar.bean.Duration
+import com.coder.vincent.smart_snackbar.bean.SnackBarStyle
 
 internal class SnackBarConfig {
     lateinit var message: String
@@ -41,6 +42,7 @@ internal class SnackBarConfig {
     var position: Int = SNACK_BAR_POSITION_BOTTOM
     var duration: Duration = Duration.SHORT
     var animationMode: AnimationMode = AnimationMode.SLIDE
+    var style: SnackBarStyle = SnackBarStyle.CLASSIC
 }
 
 @Retention(AnnotationRetention.SOURCE)
