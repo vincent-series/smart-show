@@ -6,8 +6,8 @@
 ★★★ 4.x版及后续版本不再需要显式初始化，旧版本迁移到4.x版直接将初始化相关代码删除即可。
 ### 模块导航：
 
-* [SmartToast（latest version：4.0.2）](#SmartToast部分)
-* [SmartSnackBar（latest version：4.0.4）](#SmartSnackBar部分)
+* [SmartToast（latest version：4.0.3）](#SmartToast部分)
+* [SmartSnackBar（latest version：4.0.5）](#SmartSnackBar部分)
 * [SmartDialog（latest version：4.0.3）](#SmartDialog部分)
 * [关于实现](#代码实现)
 * [关于作者及技术交流](#关于作者)
@@ -26,7 +26,7 @@
 如果您在使用过程中发现任何问题，请联系我，我会立即跟进修复和维护。感谢您的支持！<br/><br/>
 作者：朱志强<br/><br/>
 微信：w361281607<br/><br/>
-<img src="images/wx_2d.jpeg" width="180" height="180"/><br/>
+<img src="https://images.gitee.com/uploads/images/2022/0326/223808_1e7ed200_10660313.jpeg" width="180" height="180"/><br/>
 邮箱：coder_zzq@aliyun.com<br/><br/>
 
 ## SmartToast部分
@@ -46,7 +46,7 @@
 ### 引入依赖
 
 <pre><code>
-implementation "io.github.vincent-series:smart-toast:4.0.2"
+implementation "io.github.vincent-series:smart-toast:4.0.3"
 
 //如需要注解处理功能,引入注解处理库
 kapt "io.github.vincent-series:annotation-compiler:1.0.3"
@@ -59,13 +59,14 @@ kapt "io.github.vincent-series:annotation-compiler:1.0.3"
 ### 历史版本
 [查看历史版本](https://github.com/vincent-series/smart-show/wiki/SmartToast%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC)
 
-#### Classic Toast
+### Classic Toast
+<img src="https://images.gitee.com/uploads/images/2022/0326/202943_7d421501_10660313.jpeg" width="30%"/>    <img src="https://images.gitee.com/uploads/images/2022/0326/203654_925de088_10660313.jpeg" width="30%">    <img src="https://images.gitee.com/uploads/images/2022/0326/204003_19eca69c_10660313.jpeg" width="30%"/>
 
-默认样式：![图片加载失败](images/toast_normal.gif)设置背景色：![图片加载失败](images/toast_color.gif)
+### Emotion Toast
+<img src="https://images.gitee.com/uploads/images/2022/0326/204345_9baf83b2_10660313.jpeg" width="30%"/>    <img src="https://images.gitee.com/uploads/images/2022/0326/205052_3b6119bf_10660313.jpeg" width="30%">    <img src="https://images.gitee.com/uploads/images/2022/0326/205201_7cd7163e_10660313.jpeg" width="30%">
+<hr/>
 
-#### Emotion Toast
-
-默认样式: ![图片加载失败](images/type_toast_normal.gif) 设置背景色: ![图片加载失败](images/type_toast_color.gif)
+<img src="https://images.gitee.com/uploads/images/2022/0326/205226_7fbd0f17_10660313.jpeg" width="30%"/>    <img src="https://images.gitee.com/uploads/images/2022/0326/205303_45649a11_10660313.jpeg" width="30%">    <img src="https://images.gitee.com/uploads/images/2022/0326/214221_46bf3210_10660313.jpeg" width="30%">
 
 ## SmartSnackBar部分
 
@@ -77,14 +78,10 @@ SmartSnackBar基于原生Snackbar进行封装改造，不仅使用上更加简�
 3. 支持修改message、actionLabel的文本风格，如字体大小、粗细、颜色
 4. 支持显示icon及指定icon位置
 
-#### 效果图
-
-![图片加载失败](images/topbar_normal.gif) ![图片加载失败](images/snackbar_color.gif)
-
 ### 引入依赖
 
 <pre><code>
-implementation "io.github.vincent-series:smart-snackbar:4.0.4"
+implementation "io.github.vincent-series:smart-snackbar:4.0.5"
 
 //material lib,such as 1.5.0
 implementation 'com.google.android.material:material:x.y.z'
@@ -98,6 +95,14 @@ implementation 'com.google.android.material:material:x.y.z'
 
 [查看历史版本](https://github.com/vincent-series/smart-show/wiki/SmartSnackBar%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC)
 
+#### bottom snackbar
+
+<img src="https://images.gitee.com/uploads/images/2022/0326/214954_49b611b9_10660313.jpeg" width="30%"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://images.gitee.com/uploads/images/2022/0326/215134_489eb2d9_10660313.jpeg" width="30%"/>
+<hr/> 
+
+#### top snackbar
+<img src="https://images.gitee.com/uploads/images/2022/0326/215408_897ffe72_10660313.jpeg" width="30%"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://images.gitee.com/uploads/images/2022/0326/215707_6e8ef9fe_10660313.jpeg" width="30%"/>
+
 ## SmartDialog部分
 
 [回到模块导航](#模块导航)<br/><br/>
@@ -105,10 +110,6 @@ implementation 'com.google.android.material:material:x.y.z'
 1. 解决因activity、fragment生命周期导致的BadTokenException、NullPointException等问题
 2. 通过注解快速自定义Dialog
 3. 提供主流APP中使用的message、input、list、loading等对话框<br/>
-
-#### 效果图
-
-![图片加载失败](images/dialog.gif)
 
 ### 引入依赖
 
@@ -125,6 +126,19 @@ kapt "io.github.vincent-series:annotation-compiler:1.0.3"
 
 ### 历史版本
 [查看历史版本](https://github.com/vincent-series/smart-show/wiki/SmartDialog%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC)
+
+#### 效果图
+
+<img src="https://images.gitee.com/uploads/images/2022/0326/221516_8764c1c9_10660313.jpeg" width="30%"/>    <img src="https://images.gitee.com/uploads/images/2022/0326/221601_14f6ae57_10660313.jpeg" width="30%">    <img src="https://images.gitee.com/uploads/images/2022/0326/221636_67d59b13_10660313.jpeg" width="30%">
+<hr/>
+
+<img src="https://images.gitee.com/uploads/images/2022/0326/221835_c61500f8_10660313.jpeg" width="30%"/>    <img src="https://images.gitee.com/uploads/images/2022/0326/221939_6f5d683f_10660313.jpeg" width="30%"/>    <img src="https://images.gitee.com/uploads/images/2022/0326/222033_7c956d43_10660313.jpeg" width="30%">
+<hr/>
+
+<img src="https://images.gitee.com/uploads/images/2022/0326/222108_c1998f70_10660313.jpeg" width="30%">    <img src="https://images.gitee.com/uploads/images/2022/0326/222138_2fa6d358_10660313.jpeg" width="30%"/>     <img src="https://images.gitee.com/uploads/images/2022/0326/222313_6802d83e_10660313.jpeg" width="30%">
+<hr/>
+
+<img src="https://images.gitee.com/uploads/images/2022/0326/222230_af42b43a_10660313.jpeg" width="30%">    <img src="https://images.gitee.com/uploads/images/2022/0326/222349_6bdaea3c_10660313.jpeg" width="30%"/>
 
 
 
