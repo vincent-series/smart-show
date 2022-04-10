@@ -89,14 +89,34 @@ internal class SnackBarInvoker(
 
     override fun apply(): SnackBarFacade.ShowApi = this
 
+    override fun show(msg: String) {
+        showHelper(msg, "", emptyActionReaction, Duration.SHORT)
+    }
+
+    override fun show(msg: String, actionLabel: String) {
+        showHelper(msg, actionLabel, emptyActionReaction, Duration.SHORT)
+    }
+
     override fun show(msg: String, actionLabel: String, actionReaction: (View) -> Unit) {
         showHelper(
             msg,
             actionLabel,
             actionReaction,
             Duration.SHORT,
+        )
+    }
 
-            )
+    override fun show(msg: Int) {
+        showHelper(msg.resourceToString(), "", emptyActionReaction, Duration.SHORT)
+    }
+
+    override fun show(msg: Int, actionLabel: Int) {
+        showHelper(
+            msg.resourceToString(),
+            actionLabel.resourceToString(),
+            emptyActionReaction,
+            Duration.SHORT,
+        )
     }
 
     override fun show(msg: Int, actionLabel: Int, actionReaction: (View) -> Unit) {
@@ -106,6 +126,14 @@ internal class SnackBarInvoker(
             actionReaction,
             Duration.SHORT,
         )
+    }
+
+    override fun showLong(msg: String) {
+        showHelper(msg, "", emptyActionReaction, Duration.LONG)
+    }
+
+    override fun showLong(msg: String, actionLabel: String) {
+        showHelper(msg, actionLabel, emptyActionReaction, Duration.LONG)
     }
 
     override fun showLong(
@@ -121,6 +149,19 @@ internal class SnackBarInvoker(
         )
     }
 
+    override fun showLong(msg: Int) {
+        showHelper(msg.resourceToString(), "", emptyActionReaction, Duration.LONG)
+    }
+
+    override fun showLong(msg: Int, actionLabel: Int) {
+        showHelper(
+            msg.resourceToString(),
+            actionLabel.resourceToString(),
+            emptyActionReaction,
+            Duration.LONG,
+        )
+    }
+
     override fun showLong(msg: Int, actionLabel: Int, actionReaction: (View) -> Unit) {
         showHelper(
             msg.resourceToString(),
@@ -128,6 +169,14 @@ internal class SnackBarInvoker(
             actionReaction,
             Duration.LONG,
         )
+    }
+
+    override fun showIndefinite(msg: String) {
+        showHelper(msg, "", emptyActionReaction, Duration.INDEFINITE)
+    }
+
+    override fun showIndefinite(msg: String, actionLabel: String) {
+        showHelper(msg, actionLabel, emptyActionReaction, Duration.INDEFINITE)
     }
 
     override fun showIndefinite(
@@ -139,6 +188,19 @@ internal class SnackBarInvoker(
             msg,
             actionLabel,
             actionReaction,
+            Duration.INDEFINITE,
+        )
+    }
+
+    override fun showIndefinite(msg: Int) {
+        showHelper(msg.resourceToString(), "", emptyActionReaction, Duration.INDEFINITE)
+    }
+
+    override fun showIndefinite(msg: Int, actionLabel: Int) {
+        showHelper(
+            msg.resourceToString(),
+            actionLabel.resourceToString(),
+            emptyActionReaction,
             Duration.INDEFINITE,
         )
     }
@@ -171,3 +233,5 @@ internal class SnackBarInvoker(
         SnackBarScheduler.schedule(config)
     }
 }
+
+private val emptyActionReaction: (View) -> Unit = {}

@@ -13,40 +13,48 @@ interface SnackBarFacade {
     }
 
     interface ShowApi {
-        fun show(
-            msg: String,
-            actionLabel: String = "",
-            actionReaction: (View) -> Unit = emptyActionReaction
-        )
+        fun show(msg: String)
 
-        fun show(
-            @StringRes msg: Int,
-            @StringRes actionLabel: Int = -1,
-            actionReaction: (View) -> Unit = emptyActionReaction
-        )
+        fun show(msg: String, actionLabel: String)
+
+        fun show(msg: String, actionLabel: String, actionReaction: (View) -> Unit)
+
+        fun show(@StringRes msg: Int)
+
+        fun show(@StringRes msg: Int, @StringRes actionLabel: Int)
+
+        fun show(@StringRes msg: Int, @StringRes actionLabel: Int, actionReaction: (View) -> Unit)
+
+        fun showLong(msg: String)
+
+        fun showLong(msg: String, actionLabel: String)
+
+        fun showLong(msg: String, actionLabel: String, actionReaction: (View) -> Unit)
+
+        fun showLong(@StringRes msg: Int)
+
+        fun showLong(@StringRes msg: Int, @StringRes actionLabel: Int)
 
         fun showLong(
-            msg: String,
-            actionLabel: String = "",
-            actionReaction: (View) -> Unit = emptyActionReaction
-        )
-
-        fun showLong(
             @StringRes msg: Int,
-            @StringRes actionLabel: Int = -1,
-            actionReaction: (View) -> Unit = emptyActionReaction
+            @StringRes actionLabel: Int,
+            actionReaction: (View) -> Unit
         )
 
-        fun showIndefinite(
-            msg: String,
-            actionLabel: String = "",
-            actionReaction: (View) -> Unit = emptyActionReaction
-        )
+        fun showIndefinite(msg: String)
+
+        fun showIndefinite(msg: String, actionLabel: String)
+
+        fun showIndefinite(msg: String, actionLabel: String, actionReaction: (View) -> Unit)
+
+        fun showIndefinite(@StringRes msg: Int)
+
+        fun showIndefinite(@StringRes msg: Int, @StringRes actionLabel: Int)
 
         fun showIndefinite(
             @StringRes msg: Int,
-            @StringRes actionLabel: Int = -1,
-            actionReaction: (View) -> Unit = emptyActionReaction
+            @StringRes actionLabel: Int,
+            actionReaction: (View) -> Unit
         )
     }
 
@@ -69,5 +77,3 @@ interface SnackBarFacade {
         fun apply(): ShowApi
     }
 }
-
-private val emptyActionReaction: (View) -> Unit = {}
