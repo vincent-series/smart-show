@@ -7,7 +7,7 @@
 ### 模块导航：
 
 * [SmartToast（latest version：4.0.3）](#SmartToast部分)
-* [SmartSnackBar（latest version：4.0.5）](#SmartSnackBar部分)
+* [SmartSnackBar（latest version：4.0.6）](#SmartSnackBar部分)
 * [SmartDialog（latest version：4.0.3）](#SmartDialog部分)
 * [关于实现](#代码实现)
 * [关于作者及技术交流](#关于作者)
@@ -81,7 +81,7 @@ SmartSnackBar基于原生Snackbar进行封装改造，不仅使用上更加简�
 ### 引入依赖
 
 <pre><code>
-implementation "io.github.vincent-series:smart-snackbar:4.0.5"
+implementation "io.github.vincent-series:smart-snackbar:4.0.6"
 
 //material lib,such as 1.5.0
 implementation 'com.google.android.material:material:x.y.z'
