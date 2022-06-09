@@ -1,3 +1,5 @@
+##### 试试作者其他的开源库? 
+* [sharp-retrofit](https://github.com/vincent-series/sharp-retrofit)
 ## SmartShow
 ★★★ 4.x版起，库的发布迁移至`mavenCentral`，不再发布到`jitpack.io`。 请使用新的依赖方式拉取依赖。<br/>
 ★★★ `android studio`会默认为新建项目添加`mavenCentral`仓库，老项目请自行添加`mavenCentral`仓库。<br/>
