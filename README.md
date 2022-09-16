@@ -8,9 +8,9 @@
 ★★★ 4.x版及后续版本不再需要显式初始化，旧版本迁移到4.x版直接将初始化相关代码删除即可。
 ### 模块导航：
 
-* [SmartToast（latest version：4.0.3）](#SmartToast部分)
+* [SmartToast（latest version：4.0.4）](#SmartToast部分)
 * [SmartSnackBar（latest version：4.0.6）](#SmartSnackBar部分)
-* [SmartDialog（latest version：4.0.3）](#SmartDialog部分)
+* [SmartDialog（latest version：4.0.4）](#SmartDialog部分)
 * [关于实现](#代码实现)
 * [关于作者及技术交流](#关于作者)
 
@@ -48,7 +48,7 @@
 ### 引入依赖
 
 <pre><code>
-implementation "io.github.vincent-series:smart-toast:4.0.3"
+implementation "io.github.vincent-series:smart-toast:4.0.4"
 
 //如需要注解处理功能,引入注解处理库
 kapt "io.github.vincent-series:annotation-compiler:1.0.3"
@@ -116,7 +116,7 @@ implementation 'com.google.android.material:material:x.y.z'
 ### 引入依赖
 
 <pre><code>
-implementation "io.github.vincent-series:smart-dialog:4.0.3"
+implementation "io.github.vincent-series:smart-dialog:4.0.4"
 
 //如需要注解处理功能,引入注解处理库
 kapt "io.github.vincent-series:annotation-compiler:1.0.3"
