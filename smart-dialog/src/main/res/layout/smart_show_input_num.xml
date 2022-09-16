@@ -61,6 +61,7 @@
                     android:paddingLeft="10dp">
 
                     <TextView
+                        android:id="@+id/smart_show_num_unit_left_parentheses"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
@@ -79,6 +80,7 @@
                         android:textSize="13sp" />
 
                     <TextView
+                        android:id="@+id/smart_show_num_unit_right_parentheses"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"

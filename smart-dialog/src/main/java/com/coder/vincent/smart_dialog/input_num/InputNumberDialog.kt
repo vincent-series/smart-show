@@ -97,6 +97,8 @@ class InputNumberDialog {
 
                 config.numberUnit.applyOnChange {
                     smartShowNumUnit.text = it
+                    smartShowNumUnitLeftParentheses.visibility = if (it.isBlank()) View.GONE else View.VISIBLE
+                    smartShowNumUnitRightParentheses.visibility = if (it.isBlank()) View.GONE else View.VISIBLE
                 }
 
                 config.confirmBtnLabel.applyOnChange {
