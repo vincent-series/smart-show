@@ -26,6 +26,9 @@
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 
+    <style name="smart_show_no_dim_dialog" parent="smart_show_dialog">
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
 
     <style name="smart_show_dialog_button">
         <item name="android:layout_weight">1</item>

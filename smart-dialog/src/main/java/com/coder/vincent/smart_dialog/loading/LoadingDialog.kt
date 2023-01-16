@@ -33,7 +33,7 @@ class LoadingDialog {
 
     @DialogCreator
     fun createDialog(activity: AppCompatActivity, config: Config): AppCompatDialog =
-        AppCompatDialog(activity, R.style.smart_show_dialog).also { dialog ->
+        AppCompatDialog(activity, R.style.smart_show_no_dim_dialog).also { dialog ->
 
             config.boxSize.applyOnChange { boxSize ->
                 val contentViewBinding: ViewBinding =
