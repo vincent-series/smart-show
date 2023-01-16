@@ -48,7 +48,7 @@
 ### 引入依赖
 
 <pre><code>
-implementation "io.github.vincent-series:smart-toast:4.0.5"
+implementation "io.github.vincent-series:smart-toast:4.0.6"
 
 //如需要注解处理功能,引入注解处理库
 kapt "io.github.vincent-series:annotation-compiler:1.0.3"
