@@ -12,5 +12,5 @@ class SmartToastInitializer : Initializer<Unit> {
     }
 
     override fun dependencies() =
-        mutableListOf<Class<out Initializer<*>>>(CommonLibInitializer::class.java)
+        listOf<Class<out Initializer<*>>>(CommonLibInitializer::class.java)
 }
