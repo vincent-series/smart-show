@@ -15,12 +15,10 @@ import androidx.appcompat.app.AppCompatDialog
 import com.coder.vincent.series.annotations.smart_dialog.DialogConfig
 import com.coder.vincent.series.annotations.smart_dialog.DialogCreator
 import com.coder.vincent.series.annotations.smart_dialog.DialogDefinition
+import com.coder.vincent.series.common_lib.Toolkit
 import com.coder.vincent.series.common_lib.bean.DataItem
 import com.coder.vincent.series.common_lib.bean.TextStyle
 import com.coder.vincent.series.common_lib.dpToPx
-import com.coder.vincent.series.common_lib.isScreenPortrait
-import com.coder.vincent.series.common_lib.layoutInflater
-import com.coder.vincent.series.common_lib.screenWidth
 import com.coder.vincent.smart_dialog.ItemClickedListener
 import com.coder.vincent.smart_dialog.R
 import com.coder.vincent.smart_dialog.databinding.ListItemClickBinding
@@ -48,55 +46,56 @@ class ClickListDialog {
     @DialogCreator
     fun createDialog(activity: AppCompatActivity, config: Config): AppCompatDialog =
         AppCompatDialog(activity, R.style.smart_show_dialog).also { dialog ->
-            val contentViewBinding = SmartShowClickListDialogBinding.inflate(layoutInflater).apply {
-                config.title.applyOnChange {
-                    smartShowDialogTitleView.text = it
-                    smartShowDialogTitleView.visibility =
-                        if (it.isBlank()) View.GONE else View.VISIBLE
-                }
-                config.titleStyle.applyOnChange {
-                    smartShowDialogTitleView.setTextColor(it.color)
-                    smartShowDialogTitleView.textSize = it.size
-                    smartShowDialogTitleView.paint.isFakeBoldText = it.bold
-                }
-                val adapter = ClickListAdapter()
-                config.items.currentValue {
-                    adapter.setItems(it, false)
-                }
-                config.items.applyOnChange {
-                    adapter.setItems(it)
-                }
-                config.itemCenter.currentValue {
-                    adapter.setItemCenter(it, false)
-                }
-                config.itemCenter.applyOnChange {
-                    adapter.setItemCenter(it)
-                }
-                config.itemStyle.currentValue {
-                    adapter.setItemStyle(it, false)
-                }
-                config.itemStyle.applyOnChange {
-                    adapter.setItemStyle(it)
-                }
-                smartShowListView.selector = ColorDrawable(Color.TRANSPARENT)
-                smartShowListView.divider = ColorDrawable(Color.parseColor("#cccccc"))
-                smartShowListView.dividerHeight = 0.5f.dpToPx()
-                smartShowListView.layoutParams = smartShowListView.layoutParams.apply {
-                    val maxVisibleItems = if (isScreenPortrait()) 6 else 2
-                    height = (50 * visibleItems(adapter.count, maxVisibleItems)
-                            + additionalPadding(adapter.count, maxVisibleItems))
-                        .dpToPx()
-                }
-                smartShowListView.adapter = adapter
-                config.itemClickedListener.applyOnChange { listener ->
-                    smartShowListView.onItemClickListener =
-                        AdapterView.OnItemClickListener { _, _, position, _ ->
-                            config.items.currentValue {
-                                listener.invoke(dialog, ClickedItem(position, it[position]))
+            val contentViewBinding =
+                SmartShowClickListDialogBinding.inflate(Toolkit.layoutInflater()).apply {
+                    config.title.applyOnChange {
+                        smartShowDialogTitleView.text = it
+                        smartShowDialogTitleView.visibility =
+                            if (it.isBlank()) View.GONE else View.VISIBLE
+                    }
+                    config.titleStyle.applyOnChange {
+                        smartShowDialogTitleView.setTextColor(it.color)
+                        smartShowDialogTitleView.textSize = it.size
+                        smartShowDialogTitleView.paint.isFakeBoldText = it.bold
+                    }
+                    val adapter = ClickListAdapter()
+                    config.items.currentValue {
+                        adapter.setItems(it, false)
+                    }
+                    config.items.applyOnChange {
+                        adapter.setItems(it)
+                    }
+                    config.itemCenter.currentValue {
+                        adapter.setItemCenter(it, false)
+                    }
+                    config.itemCenter.applyOnChange {
+                        adapter.setItemCenter(it)
+                    }
+                    config.itemStyle.currentValue {
+                        adapter.setItemStyle(it, false)
+                    }
+                    config.itemStyle.applyOnChange {
+                        adapter.setItemStyle(it)
+                    }
+                    smartShowListView.selector = ColorDrawable(Color.TRANSPARENT)
+                    smartShowListView.divider = ColorDrawable(Color.parseColor("#cccccc"))
+                    smartShowListView.dividerHeight = 0.5f.dpToPx()
+                    smartShowListView.layoutParams = smartShowListView.layoutParams.apply {
+                        val maxVisibleItems = if (Toolkit.isScreenPortrait()) 6 else 2
+                        height = (50 * visibleItems(adapter.count, maxVisibleItems)
+                                + additionalPadding(adapter.count, maxVisibleItems))
+                            .dpToPx()
+                    }
+                    smartShowListView.adapter = adapter
+                    config.itemClickedListener.applyOnChange { listener ->
+                        smartShowListView.onItemClickListener =
+                            AdapterView.OnItemClickListener { _, _, position, _ ->
+                                config.items.currentValue {
+                                    listener.invoke(dialog, ClickedItem(position, it[position]))
+                                }
                             }
-                        }
+                    }
                 }
-            }
             config.dimBehind.applyOnChange {
                 if (it) {
                     dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
@@ -122,7 +121,7 @@ class ClickListDialog {
             config.dialogCancelListener.applyOnChange {
                 dialog.setOnCancelListener(it)
             }
-            val width = min(screenWidth() - 70.dpToPx(), 290.dpToPx())
+            val width = min(Toolkit.screenWidth() - 70.dpToPx(), 290.dpToPx())
             val height = ViewGroup.LayoutParams.WRAP_CONTENT
             val lp = ViewGroup.MarginLayoutParams(width, height)
             dialog.setContentView(contentViewBinding.root, lp)
@@ -165,7 +164,11 @@ class ClickListAdapter : BaseAdapter() {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val itemView =
-            convertView ?: ListItemClickBinding.inflate(layoutInflater, parent, false).root
+            convertView ?: ListItemClickBinding.inflate(
+                Toolkit.layoutInflater(),
+                parent,
+                false
+            ).root
         return (itemView as TextView).apply {
             gravity = if (itemCenter) Gravity.CENTER else Gravity.LEFT or Gravity.CENTER_VERTICAL
             text = items[position]

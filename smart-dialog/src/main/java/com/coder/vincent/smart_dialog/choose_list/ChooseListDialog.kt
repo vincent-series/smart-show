@@ -13,11 +13,10 @@ import androidx.core.util.forEach
 import com.coder.vincent.series.annotations.smart_dialog.DialogConfig
 import com.coder.vincent.series.annotations.smart_dialog.DialogCreator
 import com.coder.vincent.series.annotations.smart_dialog.DialogDefinition
+import com.coder.vincent.series.common_lib.Toolkit
 import com.coder.vincent.series.common_lib.bean.DataItem
 import com.coder.vincent.series.common_lib.bean.TextStyle
 import com.coder.vincent.series.common_lib.dpToPx
-import com.coder.vincent.series.common_lib.isScreenPortrait
-import com.coder.vincent.series.common_lib.screenWidth
 import com.coder.vincent.smart_dialog.CancelBtnListener
 import com.coder.vincent.smart_dialog.DefaultCancelBtnListener
 import com.coder.vincent.smart_dialog.ItemChosenListener
@@ -57,7 +56,7 @@ class ChooseListDialog {
     fun createDialog(activity: AppCompatActivity, config: Config): AppCompatDialog =
         AppCompatDialog(activity, R.style.smart_show_dialog).also { dialog ->
             val contentViewBinding =
-                SmartShowChooseListDialogBinding.inflate(com.coder.vincent.series.common_lib.layoutInflater)
+                SmartShowChooseListDialogBinding.inflate(Toolkit.layoutInflater())
                     .apply {
                         config.title.applyOnChange {
                             smartShowDialogTitleView.visibility =
@@ -120,7 +119,7 @@ class ChooseListDialog {
                         smartShowListView.dividerHeight = 0.5f.dpToPx()
                         smartShowListView.layoutParams = smartShowListView.layoutParams.apply {
                             smartShowListView.layoutParams = smartShowListView.layoutParams.apply {
-                                val maxVisibleItems = if (isScreenPortrait()) 6 else 2
+                                val maxVisibleItems = if (Toolkit.isScreenPortrait()) 6 else 2
                                 height = (50 * visibleItems(adapter.count, maxVisibleItems)
                                         + additionalPadding(adapter.count, maxVisibleItems))
                                     .dpToPx()
@@ -202,7 +201,7 @@ class ChooseListDialog {
             config.dialogCancelListener.applyOnChange {
                 dialog.setOnCancelListener(it)
             }
-            val width = min(screenWidth() - 70.dpToPx(), 290.dpToPx())
+            val width = min(Toolkit.screenWidth() - 70.dpToPx(), 290.dpToPx())
             val height = ViewGroup.LayoutParams.WRAP_CONTENT
             val lp = ViewGroup.MarginLayoutParams(width, height)
             dialog.setContentView(contentViewBinding.root, lp)

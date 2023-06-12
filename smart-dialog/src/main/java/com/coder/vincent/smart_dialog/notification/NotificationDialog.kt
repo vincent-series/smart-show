@@ -9,11 +9,10 @@ import androidx.appcompat.app.AppCompatDialog
 import com.coder.vincent.series.annotations.smart_dialog.DialogConfig
 import com.coder.vincent.series.annotations.smart_dialog.DialogCreator
 import com.coder.vincent.series.annotations.smart_dialog.DialogDefinition
+import com.coder.vincent.series.common_lib.Toolkit
 import com.coder.vincent.series.common_lib.bean.DataItem
 import com.coder.vincent.series.common_lib.bean.TextStyle
 import com.coder.vincent.series.common_lib.dpToPx
-import com.coder.vincent.series.common_lib.layoutInflater
-import com.coder.vincent.series.common_lib.screenWidth
 import com.coder.vincent.smart_dialog.ConfirmBtnListener
 import com.coder.vincent.smart_dialog.DefaultConfirmBtnListener
 import com.coder.vincent.smart_dialog.R
@@ -43,7 +42,7 @@ class NotificationDialog {
     fun createDialog(activity: AppCompatActivity, config: Config): AppCompatDialog =
         AppCompatDialog(activity, R.style.smart_show_dialog).also { dialog ->
             val contentViewBinding =
-                SmartShowNotificationDialogBinding.inflate(layoutInflater).apply {
+                SmartShowNotificationDialogBinding.inflate(Toolkit.layoutInflater()).apply {
                     config.title.applyOnChange {
                         smartShowDialogTitleView.text = it
                         smartShowDialogTitleView.visibility =
@@ -108,7 +107,7 @@ class NotificationDialog {
                         dialog.setOnCancelListener(it)
                     }
                 }
-            val width = min(screenWidth() - 70.dpToPx(), 290.dpToPx())
+            val width = min(Toolkit.screenWidth() - 70.dpToPx(), 290.dpToPx())
             val height = ViewGroup.LayoutParams.WRAP_CONTENT
             val lp = ViewGroup.MarginLayoutParams(width, height)
             dialog.setContentView(contentViewBinding.root, lp)

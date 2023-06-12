@@ -10,8 +10,8 @@ import androidx.viewbinding.ViewBinding
 import com.coder.vincent.series.annotations.smart_dialog.DialogConfig
 import com.coder.vincent.series.annotations.smart_dialog.DialogCreator
 import com.coder.vincent.series.annotations.smart_dialog.DialogDefinition
+import com.coder.vincent.series.common_lib.Toolkit
 import com.coder.vincent.series.common_lib.bean.DataItem
-import com.coder.vincent.series.common_lib.layoutInflater
 import com.coder.vincent.smart_dialog.R
 import com.coder.vincent.smart_dialog.databinding.SmartShowLargeLoadingDialogBinding
 import com.coder.vincent.smart_dialog.databinding.SmartShowMiddleLoadingDialogBinding
@@ -39,22 +39,24 @@ class LoadingDialog {
                 val contentViewBinding: ViewBinding =
                     when (boxSize) {
                         BOX_SIZE_LARGE -> SmartShowLargeLoadingDialogBinding
-                            .inflate(layoutInflater).apply {
+                            .inflate(Toolkit.layoutInflater()).apply {
                                 config.message.applyOnChange { message ->
                                     smartShowLoadingMessageView.text = message
                                     smartShowLoadingMessageView.visibility =
                                         if (message.isBlank()) View.GONE else View.VISIBLE
                                 }
                             }
+
                         BOX_SIZE_MIDDLE -> SmartShowMiddleLoadingDialogBinding
-                            .inflate(layoutInflater).apply {
+                            .inflate(Toolkit.layoutInflater()).apply {
                                 config.message.applyOnChange { message ->
                                     smartShowLoadingMessageView.text = message
                                     smartShowLoadingMessageView.visibility =
                                         if (message.isBlank()) View.GONE else View.VISIBLE
                                 }
                             }
-                        BOX_SIZE_SMALL -> SmartShowSmallLoadingDialogBinding.inflate(layoutInflater)
+
+                        BOX_SIZE_SMALL -> SmartShowSmallLoadingDialogBinding.inflate(Toolkit.layoutInflater())
                         else -> throw IllegalArgumentException("invalid box size:$boxSize")
                     }
                 config.dimBehind.applyOnChange {

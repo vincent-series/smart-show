@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.CheckedTextView
 import androidx.core.graphics.drawable.DrawableCompat
+import com.coder.vincent.series.common_lib.Toolkit
 import com.coder.vincent.series.common_lib.bean.TextStyle
 import com.coder.vincent.series.common_lib.dpToPx
-import com.coder.vincent.series.common_lib.layoutInflater
 import com.coder.vincent.series.common_lib.resourceToColor
 import com.coder.vincent.series.common_lib.resourceToDrawable
 import com.coder.vincent.smart_dialog.R
@@ -80,7 +80,7 @@ class ChooseListAdapter : BaseAdapter() {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val itemView = convertView ?: ListItemChoiceBinding.inflate(
-            layoutInflater,
+            Toolkit.layoutInflater(),
             parent,
             false
         ).root

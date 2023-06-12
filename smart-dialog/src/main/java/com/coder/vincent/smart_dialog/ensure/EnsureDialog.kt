@@ -10,12 +10,15 @@ import androidx.appcompat.app.AppCompatDialog
 import com.coder.vincent.series.annotations.smart_dialog.DialogConfig
 import com.coder.vincent.series.annotations.smart_dialog.DialogCreator
 import com.coder.vincent.series.annotations.smart_dialog.DialogDefinition
+import com.coder.vincent.series.common_lib.Toolkit
 import com.coder.vincent.series.common_lib.bean.DataItem
 import com.coder.vincent.series.common_lib.bean.TextStyle
 import com.coder.vincent.series.common_lib.dpToPx
-import com.coder.vincent.series.common_lib.layoutInflater
-import com.coder.vincent.series.common_lib.screenWidth
-import com.coder.vincent.smart_dialog.*
+import com.coder.vincent.smart_dialog.CancelBtnListener
+import com.coder.vincent.smart_dialog.ConfirmBtnListener
+import com.coder.vincent.smart_dialog.DefaultCancelBtnListener
+import com.coder.vincent.smart_dialog.DefaultConfirmBtnListener
+import com.coder.vincent.smart_dialog.R
 import com.coder.vincent.smart_dialog.databinding.SmartShowEnsureDialogBinding
 import kotlin.math.min
 
@@ -46,139 +49,140 @@ class EnsureDialog {
     @DialogCreator
     fun createDialog(activity: AppCompatActivity, config: Config): AppCompatDialog =
         AppCompatDialog(activity, R.style.smart_show_dialog).also { dialog ->
-            val contentViewBinding = SmartShowEnsureDialogBinding.inflate(layoutInflater).apply {
-                config.title.applyOnChange {
-                    smartShowDialogTitleView.text = it
-                    smartShowDialogTitleView.visibility =
-                        if (it.isBlank()) View.GONE else View.VISIBLE
-                }
-                config.titleStyle.applyOnChange {
-                    smartShowDialogTitleView.apply {
-                        setTextColor(it.color)
-                        paint.isFakeBoldText = it.bold
-                        textSize = it.size
+            val contentViewBinding =
+                SmartShowEnsureDialogBinding.inflate(Toolkit.layoutInflater()).apply {
+                    config.title.applyOnChange {
+                        smartShowDialogTitleView.text = it
+                        smartShowDialogTitleView.visibility =
+                            if (it.isBlank()) View.GONE else View.VISIBLE
                     }
-                }
-                config.message.applyOnChange {
-                    smartShowDialogMessageView.text = it
-                }
-                config.messageStyle.applyOnChange {
-                    smartShowDialogMessageView.apply {
-                        setTextColor(it.color)
-                        paint.isFakeBoldText = it.bold
-                        textSize = it.size
-                    }
-                }
-
-                config.confirmBtnLabel.applyOnChange {
-                    smartShowDialogConfirmBtn.text = it
-                }
-
-                config.confirmBtnLabelStyle.applyOnChange {
-                    smartShowDialogConfirmBtn.apply {
-                        setTextColor(it.color)
-                        paint.isFakeBoldText = it.bold
-                        textSize = it.size
-                    }
-                }
-
-                config.confirmBtnListener.applyOnChange { listener ->
-                    smartShowDialogConfirmBtn.setOnClickListener {
-                        listener.invoke(dialog)
-                    }
-                }
-                config.delayToConfirm.applyOnChange {
-                    smartShowDialogConfirmBtn.addOnAttachStateChangeListener(object :
-                        ConfirmDelayCallback {
-                        val srcConfirmBtnLabel = smartShowDialogConfirmBtn.text
-                        val srcConfirmBtnColor = smartShowDialogConfirmBtn.currentTextColor
-                        var delaySecondsCountDown = it
-                        var confirmLabelOnDelay = StringBuilder()
-                        override fun reset() {
-                            smartShowDialogConfirmBtn.removeCallbacks(this)
-                            delaySecondsCountDown = it
+                    config.titleStyle.applyOnChange {
+                        smartShowDialogTitleView.apply {
+                            setTextColor(it.color)
+                            paint.isFakeBoldText = it.bold
+                            textSize = it.size
                         }
+                    }
+                    config.message.applyOnChange {
+                        smartShowDialogMessageView.text = it
+                    }
+                    config.messageStyle.applyOnChange {
+                        smartShowDialogMessageView.apply {
+                            setTextColor(it.color)
+                            paint.isFakeBoldText = it.bold
+                            textSize = it.size
+                        }
+                    }
 
-                        override fun onViewAttachedToWindow(v: View?) {
-                            reset()
-                            if (delaySecondsCountDown > 0) {
-                                smartShowDialogConfirmBtn.isEnabled = false
-                                smartShowDialogConfirmBtn.setTextColor(disableColor)
-                                smartShowDialogConfirmBtn.post(this)
+                    config.confirmBtnLabel.applyOnChange {
+                        smartShowDialogConfirmBtn.text = it
+                    }
+
+                    config.confirmBtnLabelStyle.applyOnChange {
+                        smartShowDialogConfirmBtn.apply {
+                            setTextColor(it.color)
+                            paint.isFakeBoldText = it.bold
+                            textSize = it.size
+                        }
+                    }
+
+                    config.confirmBtnListener.applyOnChange { listener ->
+                        smartShowDialogConfirmBtn.setOnClickListener {
+                            listener.invoke(dialog)
+                        }
+                    }
+                    config.delayToConfirm.applyOnChange {
+                        smartShowDialogConfirmBtn.addOnAttachStateChangeListener(object :
+                            ConfirmDelayCallback {
+                            val srcConfirmBtnLabel = smartShowDialogConfirmBtn.text
+                            val srcConfirmBtnColor = smartShowDialogConfirmBtn.currentTextColor
+                            var delaySecondsCountDown = it
+                            var confirmLabelOnDelay = StringBuilder()
+                            override fun reset() {
+                                smartShowDialogConfirmBtn.removeCallbacks(this)
+                                delaySecondsCountDown = it
                             }
-                        }
 
-                        override fun onViewDetachedFromWindow(v: View?) {
-                            smartShowDialogConfirmBtn.text = srcConfirmBtnLabel
-                            smartShowDialogConfirmBtn.setTextColor(srcConfirmBtnColor)
-                            smartShowDialogConfirmBtn.removeCallbacks(this)
-                            smartShowDialogConfirmBtn.isEnabled = true
-                            delaySecondsCountDown = it
-                        }
+                            override fun onViewAttachedToWindow(v: View) {
+                                reset()
+                                if (delaySecondsCountDown > 0) {
+                                    smartShowDialogConfirmBtn.isEnabled = false
+                                    smartShowDialogConfirmBtn.setTextColor(disableColor)
+                                    smartShowDialogConfirmBtn.post(this)
+                                }
+                            }
 
-                        override fun run() {
-                            if (delaySecondsCountDown > 0) {
-                                confirmLabelOnDelay.clear()
-                                confirmLabelOnDelay.append(srcConfirmBtnLabel)
-                                    .append("(")
-                                    .append(delaySecondsCountDown)
-                                    .append("s)")
-                                smartShowDialogConfirmBtn.text = confirmLabelOnDelay
-                                delaySecondsCountDown--
-                                smartShowDialogConfirmBtn.postDelayed(this, 1000)
-                            } else {
-                                smartShowDialogConfirmBtn.isEnabled = true
+                            override fun onViewDetachedFromWindow(v: View) {
                                 smartShowDialogConfirmBtn.text = srcConfirmBtnLabel
                                 smartShowDialogConfirmBtn.setTextColor(srcConfirmBtnColor)
                                 smartShowDialogConfirmBtn.removeCallbacks(this)
+                                smartShowDialogConfirmBtn.isEnabled = true
+                                delaySecondsCountDown = it
                             }
+
+                            override fun run() {
+                                if (delaySecondsCountDown > 0) {
+                                    confirmLabelOnDelay.clear()
+                                    confirmLabelOnDelay.append(srcConfirmBtnLabel)
+                                        .append("(")
+                                        .append(delaySecondsCountDown)
+                                        .append("s)")
+                                    smartShowDialogConfirmBtn.text = confirmLabelOnDelay
+                                    delaySecondsCountDown--
+                                    smartShowDialogConfirmBtn.postDelayed(this, 1000)
+                                } else {
+                                    smartShowDialogConfirmBtn.isEnabled = true
+                                    smartShowDialogConfirmBtn.text = srcConfirmBtnLabel
+                                    smartShowDialogConfirmBtn.setTextColor(srcConfirmBtnColor)
+                                    smartShowDialogConfirmBtn.removeCallbacks(this)
+                                }
+                            }
+                        })
+                    }
+                    config.cancelBtnLabel.applyOnChange {
+                        smartShowDialogCancelBtn.text = it
+                    }
+
+                    config.cancelBtnLabelStyle.applyOnChange {
+                        smartShowDialogCancelBtn.apply {
+                            setTextColor(it.color)
+                            paint.isFakeBoldText = it.bold
+                            textSize = it.size
                         }
-                    })
-                }
-                config.cancelBtnLabel.applyOnChange {
-                    smartShowDialogCancelBtn.text = it
-                }
+                    }
 
-                config.cancelBtnLabelStyle.applyOnChange {
-                    smartShowDialogCancelBtn.apply {
-                        setTextColor(it.color)
-                        paint.isFakeBoldText = it.bold
-                        textSize = it.size
+                    config.cancelBtnListener.applyOnChange { listener ->
+                        smartShowDialogCancelBtn.setOnClickListener {
+                            listener.invoke(dialog)
+                        }
+                    }
+                    config.dimBehind.applyOnChange {
+                        if (it) {
+                            dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+                        } else {
+                            dialog.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+                        }
+                    }
+
+                    config.cancelable.applyOnChange {
+                        dialog.setCancelable(it)
+                    }
+
+                    config.cancelOnTouchOutside.applyOnChange {
+                        dialog.setCanceledOnTouchOutside(it)
+                    }
+                    config.dialogShowListener.applyOnChange {
+                        dialog.setOnShowListener(it)
+                    }
+                    config.dialogDismissListener.applyOnChange {
+                        dialog.setOnDismissListener(it)
+                    }
+
+                    config.dialogCancelListener.applyOnChange {
+                        dialog.setOnCancelListener(it)
                     }
                 }
-
-                config.cancelBtnListener.applyOnChange { listener ->
-                    smartShowDialogCancelBtn.setOnClickListener {
-                        listener.invoke(dialog)
-                    }
-                }
-                config.dimBehind.applyOnChange {
-                    if (it) {
-                        dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-                    } else {
-                        dialog.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-                    }
-                }
-
-                config.cancelable.applyOnChange {
-                    dialog.setCancelable(it)
-                }
-
-                config.cancelOnTouchOutside.applyOnChange {
-                    dialog.setCanceledOnTouchOutside(it)
-                }
-                config.dialogShowListener.applyOnChange {
-                    dialog.setOnShowListener(it)
-                }
-                config.dialogDismissListener.applyOnChange {
-                    dialog.setOnDismissListener(it)
-                }
-
-                config.dialogCancelListener.applyOnChange {
-                    dialog.setOnCancelListener(it)
-                }
-            }
-            val width = min(screenWidth() - 70.dpToPx(), 290.dpToPx())
+            val width = min(Toolkit.screenWidth() - 70.dpToPx(), 290.dpToPx())
             val height = ViewGroup.LayoutParams.WRAP_CONTENT
             val lp = ViewGroup.MarginLayoutParams(width, height)
             dialog.setContentView(contentViewBinding.root, lp)
