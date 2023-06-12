@@ -1,7 +1,7 @@
 package com.coder.zzq.smartshowdemo
 
 import android.app.Application
-import com.coder.vincent.series.common_lib.VincentLibDevTool
+import com.coder.vincent.series.common_lib.VincentLibDebugTool
 
 
 /**
@@ -10,6 +10,6 @@ import com.coder.vincent.series.common_lib.VincentLibDevTool
 class SmartShowApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        VincentLibDevTool.printDevLog = true
+        VincentLibDebugTool.enablePrintDevLog()
     }
 }
