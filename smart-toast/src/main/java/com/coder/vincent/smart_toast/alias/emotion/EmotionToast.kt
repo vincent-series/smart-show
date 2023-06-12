@@ -10,8 +10,8 @@ import androidx.core.graphics.drawable.DrawableCompat
 import com.coder.vincent.series.annotations.smart_toast.ToastConfig
 import com.coder.vincent.series.annotations.smart_toast.ToastDefinition
 import com.coder.vincent.series.annotations.smart_toast.ToastView
+import com.coder.vincent.series.common_lib.Toolkit
 import com.coder.vincent.series.common_lib.dpToPx
-import com.coder.vincent.series.common_lib.layoutInflater
 import com.coder.vincent.series.common_lib.resourceToDrawable
 import com.coder.vincent.smart_toast.DEFAULT_TOAST_BACKGROUND_COLOR
 import com.coder.vincent.smart_toast.DEFAULT_VALUE
@@ -25,7 +25,7 @@ internal class EmotionToast {
     @ToastView
     fun provideToastView(cachedView: View?, config: Config): View =
         SmartShowEmotionToastBinding.bind(
-            cachedView ?: layoutInflater.inflate(R.layout.smart_show_emotion_toast, null)
+            cachedView ?: Toolkit.layoutInflater().inflate(R.layout.smart_show_emotion_toast, null)
         ).apply {
             DrawableCompat.setTint(root.background.mutate(), config.backgroundColor)
             val icon = if (config.iconResource == DEFAULT_VALUE)

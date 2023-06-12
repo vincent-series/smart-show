@@ -8,10 +8,14 @@ import androidx.core.graphics.drawable.DrawableCompat
 import com.coder.vincent.series.annotations.smart_toast.ToastConfig
 import com.coder.vincent.series.annotations.smart_toast.ToastDefinition
 import com.coder.vincent.series.annotations.smart_toast.ToastView
+import com.coder.vincent.series.common_lib.Toolkit
 import com.coder.vincent.series.common_lib.dpToPx
-import com.coder.vincent.series.common_lib.layoutInflater
 import com.coder.vincent.series.common_lib.resourceToDrawable
-import com.coder.vincent.smart_toast.*
+import com.coder.vincent.smart_toast.IconPosition
+import com.coder.vincent.smart_toast.R
+import com.coder.vincent.smart_toast.TOAST_ICON_POSITION_LEFT
+import com.coder.vincent.smart_toast.TOAST_ICON_POSITION_RIGHT
+import com.coder.vincent.smart_toast.TOAST_TYPE_CLASSIC
 import com.coder.vincent.smart_toast.databinding.SmartShowClassicToastBinding
 import com.coder.vincent.smart_toast.factory.DefaultToastConfig
 import kotlin.math.max
@@ -57,7 +61,7 @@ internal class ClassicToast {
     @ToastView
     fun provideToastView(cachedView: View?, config: Config): View =
         SmartShowClassicToastBinding.bind(
-            cachedView ?: layoutInflater.inflate(R.layout.smart_show_classic_toast, null)
+            cachedView ?: Toolkit.layoutInflater().inflate(R.layout.smart_show_classic_toast, null)
         ).apply {
             root.setBackgroundResource(config.backgroundResource)
             DrawableCompat.setTint(root.background.mutate(), config.backgroundColor)

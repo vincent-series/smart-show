@@ -9,8 +9,7 @@ import android.view.WindowManager
 import android.view.WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
 import android.view.WindowManager.LayoutParams.TYPE_SYSTEM_ALERT
 import android.widget.Toast
-import com.coder.vincent.series.common_lib.sdkVersionBelow
-import com.coder.vincent.series.common_lib.windowManager
+import com.coder.vincent.series.common_lib.Toolkit
 import com.coder.vincent.smart_toast.ToastConfig
 
 @Suppress("DEPRECATION")
@@ -30,17 +29,17 @@ internal class SystemWindowToast(toastView: View, config: ToastConfig) :
                 height = WindowManager.LayoutParams.WRAP_CONTENT
                 format = PixelFormat.TRANSPARENT
                 type =
-                    if (sdkVersionBelow(Build.VERSION_CODES.O)) TYPE_SYSTEM_ALERT else TYPE_APPLICATION_OVERLAY
+                    if (Toolkit.sdkVersionBelow(Build.VERSION_CODES.O)) TYPE_SYSTEM_ALERT else TYPE_APPLICATION_OVERLAY
             }
-            windowManager.addView(toastView, lp)
+            Toolkit.windowManager().addView(toastView, lp)
             handler.postDelayed(
-                { kotlin.runCatching { windowManager.removeView(toastView) } },
+                { kotlin.runCatching { Toolkit.windowManager().removeView(toastView) } },
                 if (config().duration == Toast.LENGTH_SHORT) DURATION_SHORT else DURATION_LONG
             )
         }
     }
 
     override fun cancel() {
-        kotlin.runCatching { windowManager.removeView(toastView) }
+        kotlin.runCatching { Toolkit.windowManager().removeView(toastView) }
     }
 }

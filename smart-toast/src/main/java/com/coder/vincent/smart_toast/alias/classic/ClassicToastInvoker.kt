@@ -2,8 +2,8 @@ package com.coder.vincent.smart_toast.alias.classic
 
 import android.view.Gravity
 import android.widget.Toast
+import com.coder.vincent.series.common_lib.Toolkit
 import com.coder.vincent.series.common_lib.dpToPx
-import com.coder.vincent.series.common_lib.getToolbarHeight
 import com.coder.vincent.series.common_lib.resourceToColor
 import com.coder.vincent.series.common_lib.resourceToString
 import com.coder.vincent.smart_toast.DEFAULT_TOAST_Y_OFFSET
@@ -40,7 +40,7 @@ class ClassicToastInvoker : ClassicToastFacade.Overall, ClassicToastFacade.Confi
             Location(
                 Gravity.TOP or Gravity.CENTER_HORIZONTAL,
                 0,
-                getToolbarHeight() + 40f.dpToPx(),
+                Toolkit.getToolbarHeight() + 40f.dpToPx(),
             ),
         )
     }
@@ -106,7 +106,7 @@ class ClassicToastInvoker : ClassicToastFacade.Overall, ClassicToastFacade.Confi
             Location(
                 Gravity.TOP or Gravity.CENTER_HORIZONTAL,
                 0,
-                getToolbarHeight() + 40f.dpToPx(),
+                Toolkit.getToolbarHeight() + 40f.dpToPx(),
             )
         )
     }

@@ -37,14 +37,15 @@ internal class DialogToast(toastView: View, config: ToastConfig) :
     private fun pickAppropriateActivity(): Activity? =
         config.boundPageId.let {
             if (it.isBlank()) {
-                ActivityStack.findCurrentStartedActivity()
+                ActivityStack.currentStartedActivity()?.activity
             } else {
-                ActivityStack.find { activity ->
-                    activity.intent?.getStringExtra(INTENT_KEY_BOUND_PAGE_ID)?.isNotBlank() == true
-                }
+                ActivityStack.find { activityItem ->
+                    activityItem.activity.intent?.getStringExtra(INTENT_KEY_BOUND_PAGE_ID)
+                        ?.isNotBlank() == true
+                }?.activity
             }
         }?.apply {
-            this.intent.removeExtra(INTENT_KEY_BOUND_PAGE_ID)
+            intent.removeExtra(INTENT_KEY_BOUND_PAGE_ID)
         }
 
 
