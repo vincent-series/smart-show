@@ -5,10 +5,9 @@
     <application>
         <provider
             android:name="androidx.startup.InitializationProvider"
-            android:authorities="${applicationId}.androidx.startup"
+            android:authorities="${applicationId}.androidx-startup"
             android:exported="false"
-            tools:node="merge"
-            tools:replace="android:authorities">
+            tools:node="merge">
             <meta-data
                 android:name="com.coder.vincent.smart_dialog.SmartDialogInitializer"
                 android:value="androidx.startup" />
