@@ -1,6 +1,5 @@
 package com.coder.vincent.smart_snackbar;
 
-import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
 import static com.coder.vincent.smart_snackbar.SnackBarConfigKt.SNACK_BAR_POSITION_BOTTOM;
 import static com.coder.vincent.smart_snackbar.SnackBarConfigKt.SNACK_BAR_POSITION_TOP;
 import static com.coder.vincent.smart_snackbar.util.AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR;
@@ -51,21 +50,19 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.annotation.RestrictTo;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.AccessibilityDelegateCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 
-import com.coder.vincent.series.common_lib.ToolkitKt;
+import com.coder.vincent.series.common_lib.Toolkit;
 import com.coder.vincent.smart_snackbar.bean.SnackBarStyle;
 import com.coder.vincent.smart_snackbar.util.MaterialResources;
 import com.coder.vincent.smart_snackbar.util.ThemeEnforcement;
 import com.coder.vincent.smart_snackbar.util.ViewUtils;
 import com.coder.vincent.smart_snackbar.view.ContentViewCallback;
 import com.coder.vincent.smart_snackbar.view.SnackBarContentLayout;
-import com.google.android.material.R;
 import com.google.android.material.behavior.SwipeDismissBehavior;
 import com.google.android.material.color.MaterialColors;
 
@@ -263,17 +260,17 @@ abstract class BaseTransientSnackBar<B extends BaseTransientSnackBar<B>> {
             ((SnackBarContentLayout) content).setMaxInlineActionWidth(view.getMaxInlineActionWidth());
         }
         view.addView(content);
-        LayoutParams layoutParams =  view.getLayoutParams();
+        LayoutParams layoutParams = view.getLayoutParams();
         FrameLayout.LayoutParams parentLp = (FrameLayout.LayoutParams) targetParent.getLayoutParams();
         switch (snackBarPosition) {
             case SNACK_BAR_POSITION_TOP:
                 parentLp.gravity = Gravity.TOP;
                 if (snackBarStyle == SnackBarStyle.CLASSIC || !ThemeEnforcement.isMaterialTheme(context)) {
-                    layoutParams.height = ToolkitKt.statusBarHeight() + ToolkitKt.actionBarHeight();
+                    layoutParams.height = Toolkit.INSTANCE.statusBarHeight() + Toolkit.INSTANCE.actionBarHeight();
                     parentLp.topMargin = 0;
                 } else {
                     layoutParams.height = LayoutParams.WRAP_CONTENT;
-                    parentLp.topMargin = ToolkitKt.statusBarHeight() + ToolkitKt.actionBarHeight() / 4;
+                    parentLp.topMargin = Toolkit.INSTANCE.statusBarHeight() + Toolkit.INSTANCE.actionBarHeight() / 4;
                 }
                 break;
             case SNACK_BAR_POSITION_BOTTOM:
