@@ -6,11 +6,11 @@ plugins {
     id 'signing'
 }
 android {
-    compileSdk 31
+    compileSdk 33
 
     defaultConfig {
         minSdk 17
-        targetSdk 31
+        targetSdk 33
     }
 
     buildTypes {
@@ -35,12 +35,12 @@ android {
 dependencies {
     compileOnly "androidx.core:core-ktx:${dependencyLibVersion.core_ktx}"
     compileOnly "androidx.appcompat:appcompat:${dependencyLibVersion.appcompat}"
-    api "io.github.vincent-series:common:1.0.7"
+    api "io.github.vincent-series:common:1.0.9"
     kapt "io.github.vincent-series:annotation-compiler:1.0.3"
 }
 afterEvaluate {
     publishing {
-        def stagingVersion = "4.0.6"
+        def stagingVersion = "4.0.7"
         def snapshotsVersion = "4.0.1-1.0.0-SNAPSHOT"
         def uploadVersion = stagingVersion
         publications {
