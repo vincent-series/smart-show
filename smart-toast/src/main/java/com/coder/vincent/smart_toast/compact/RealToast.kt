@@ -13,6 +13,7 @@ import java.lang.reflect.Field
 internal class RealToast(toastView: View, config: ToastConfig) : BaseCompactToast(toastView, config) {
     private val toast = Toast(application).apply {
         view = toastView
+        duration = config.duration
         setGravity(config.location.gravity, config.location.xOffset, config.location.yOffset)
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
             injectSafeHandler(this)
