@@ -8,7 +8,7 @@
 ★★★ 4.x版及后续版本不再需要显式初始化，旧版本迁移到4.x版直接将初始化相关代码删除即可。
 ### 模块导航：
 
-* [SmartToast（latest version：4.0.8）](#SmartToast部分)
+* [SmartToast（latest version：4.0.8）](https://github.com/vincent-series/smart-show#smarttoast%E9%83%A8%E5%88%86)
 * [SmartSnackBar（latest version：4.0.8）](#SmartSnackBar部分)
 * [SmartDialog（latest version：4.0.7）](#SmartDialog部分)
 * [关于实现](#代码实现)
