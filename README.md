@@ -9,8 +9,8 @@
 ### 模块导航：
 
 * [SmartToast（latest version：4.0.8）](https://github.com/vincent-series/smart-show#smarttoast%E9%83%A8%E5%88%86)
-* [SmartSnackBar（latest version：4.0.8）](#SmartSnackBar部分)
-* [SmartDialog（latest version：4.0.7）](#SmartDialog部分)
+* [SmartSnackBar（latest version：4.0.8）](https://github.com/vincent-series/smart-show#smartsnackbar%E9%83%A8%E5%88%86)
+* [SmartDialog（latest version：4.0.7）](https://github.com/vincent-series/smart-show#smartdialog%E9%83%A8%E5%88%86)
 * [关于实现](#代码实现)
 * [关于作者及技术交流](#关于作者)
 
