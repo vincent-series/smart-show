@@ -19,6 +19,7 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build.VERSION;
@@ -134,7 +135,7 @@ abstract class BaseTransientSnackBar<B extends BaseTransientSnackBar<B>> {
     // positioning of all its child views
     private static final boolean USE_OFFSET_API = VERSION.SDK_INT <= VERSION_CODES.KITKAT;
 
-    private static final int[] SNACKBAR_STYLE_ATTR = new int[]{R.attr.snackbarStyle};
+//    private static final int[] SNACKBAR_STYLE_ATTR = new int[]{R.attr.snackbarStyle};
 
     private static final String TAG = BaseTransientSnackBar.class.getSimpleName();
 
@@ -369,10 +370,11 @@ abstract class BaseTransientSnackBar<B extends BaseTransientSnackBar<B>> {
     }
 
     protected boolean hasSnackbarStyleAttr() {
-        TypedArray a = context.obtainStyledAttributes(SNACKBAR_STYLE_ATTR);
-        int snackbarStyleResId = a.getResourceId(0, -1);
-        a.recycle();
-        return snackbarStyleResId != -1;
+//        TypedArray a = context.obtainStyledAttributes(SNACKBAR_STYLE_ATTR);
+//        int snackbarStyleResId = a.getResourceId(0, -1);
+//        a.recycle();
+//        return snackbarStyleResId != -1;
+        return false;
     }
 
     @NonNull
@@ -1093,24 +1095,25 @@ abstract class BaseTransientSnackBar<B extends BaseTransientSnackBar<B>> {
 
         @NonNull
         private Drawable createThemedBackground() {
-            float cornerRadius =
-                    getResources().getDimension(R.dimen.mtrl_snackbar_background_corner_radius);
-
-            GradientDrawable background = new GradientDrawable();
-            background.setShape(GradientDrawable.RECTANGLE);
-            background.setCornerRadius(cornerRadius);
-
-            int backgroundColor =
-                    MaterialColors.layer(
-                            this, R.attr.colorSurface, R.attr.colorOnSurface, getBackgroundOverlayColorAlpha());
-            background.setColor(backgroundColor);
-            if (backgroundTint != null) {
-                Drawable wrappedDrawable = DrawableCompat.wrap(background);
-                DrawableCompat.setTintList(wrappedDrawable, backgroundTint);
-                return wrappedDrawable;
-            } else {
-                return DrawableCompat.wrap(background);
-            }
+            return new ColorDrawable();
+//            float cornerRadius =
+//                    getResources().getDimension(R.dimen.mtrl_snackbar_background_corner_radius);
+//
+//            GradientDrawable background = new GradientDrawable();
+//            background.setShape(GradientDrawable.RECTANGLE);
+//            background.setCornerRadius(cornerRadius);
+//
+//            int backgroundColor =
+//                    MaterialColors.layer(
+//                            this, R.attr.colorSurface, R.attr.colorOnSurface, getBackgroundOverlayColorAlpha());
+//            background.setColor(backgroundColor);
+//            if (backgroundTint != null) {
+//                Drawable wrappedDrawable = DrawableCompat.wrap(background);
+//                DrawableCompat.setTintList(wrappedDrawable, backgroundTint);
+//                return wrappedDrawable;
+//            } else {
+//                return DrawableCompat.wrap(background);
+//            }
         }
     }
 

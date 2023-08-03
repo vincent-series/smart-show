@@ -4,7 +4,9 @@ plugins {
     id 'maven-publish'
     id 'signing'
 }
+apply from: '../versions.gradle'
 android {
+    namespace 'com.coder.vincent.smart_snackbar'
     compileSdk 33
 
     defaultConfig {
@@ -30,7 +32,7 @@ android {
 dependencies {
     compileOnly "androidx.core:core-ktx:${dependencyLibVersion.core_ktx}"
     compileOnly "androidx.appcompat:appcompat:${dependencyLibVersion.appcompat}"
-    api "io.github.vincent-series:common:1.0.9"
+    api "io.github.vincent-series:common:${dependencyLibVersion.common_lib}"
     compileOnly 'com.google.android.material:material:1.5.0'
 }
 afterEvaluate {

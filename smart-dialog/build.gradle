@@ -5,7 +5,9 @@ plugins {
     id 'maven-publish'
     id 'signing'
 }
+apply from: '../versions.gradle'
 android {
+    namespace 'com.coder.vincent.smart_dialog'
     compileSdk 33
 
     defaultConfig {
@@ -35,8 +37,8 @@ android {
 dependencies {
     compileOnly "androidx.core:core-ktx:${dependencyLibVersion.core_ktx}"
     compileOnly "androidx.appcompat:appcompat:${dependencyLibVersion.appcompat}"
-    api "io.github.vincent-series:common:1.0.9"
-    kapt "io.github.vincent-series:annotation-compiler:1.0.3"
+    api "io.github.vincent-series:common:${dependencyLibVersion.common_lib}"
+    kapt "io.github.vincent-series:annotation-compiler:${dependencyLibVersion.annotation_compiler}"
 }
 afterEvaluate {
     publishing {
