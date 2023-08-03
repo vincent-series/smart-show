@@ -5,16 +5,18 @@ import android.os.Build
 import android.os.Handler
 import android.view.View
 import android.widget.Toast
-import com.coder.vincent.series.common_lib.application
-import com.coder.vincent.smart_toast.ToastConfig
+import com.coder.vincent.series.common_lib.Toolkit
+import com.coder.vincent.smart_toast.factory.ToastConfig
 import java.lang.reflect.Field
 
 @Suppress("DEPRECATION")
-internal class RealToast(toastView: View, config: ToastConfig) : BaseCompactToast(toastView, config) {
-    private val toast = Toast(application).apply {
-        view = toastView
-        duration = config.duration
-        setGravity(config.location.gravity, config.location.xOffset, config.location.yOffset)
+internal class OriginalToast(
+    toastView: View, config: ToastConfig, configApplyCallback: (View, ToastConfig) -> Unit
+) : AbsCompactToast(toastView, config, configApplyCallback) {
+    private val toast = Toast(Toolkit.context()).apply {
+        view = view()
+        duration = config().duration
+        setGravity(config().location.gravity, config().location.xOffset, config().location.yOffset)
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
             injectSafeHandler(this)
         }
