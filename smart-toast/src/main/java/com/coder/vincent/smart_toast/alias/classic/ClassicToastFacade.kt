@@ -1,42 +1,47 @@
 package com.coder.vincent.smart_toast.alias.classic
 
+import android.graphics.drawable.Drawable
+import androidx.annotation.BoolRes
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
-import com.coder.vincent.smart_toast.IconPosition
-import com.coder.vincent.smart_toast.PlainToastApi
-import com.coder.vincent.smart_toast.compact.ToastTransitionIntent
+import com.coder.vincent.smart_toast.ShowToastApi
 
 interface ClassicToastFacade {
-    interface Overall : PlainToastApi {
+    interface Overall : ShowToastApi {
         fun config(): ConfigSetter
     }
 
     interface ConfigSetter {
-        fun backgroundResource(@DrawableRes backgroundResource: Int): ConfigSetter
+        fun backgroundDrawable(bgDrawable: Drawable): ConfigSetter
 
-        fun backgroundColor(@ColorInt backgroundColor: Int): ConfigSetter
+        fun backgroundResource(@DrawableRes bgResource: Int): ConfigSetter
 
-        fun backgroundColorResource(@ColorRes colorResource: Int): ConfigSetter
+        fun messageColor(@ColorInt msgColor: Int): ConfigSetter
 
-        fun messageSize(messageSize: Float): ConfigSetter
+        fun messageColorResource(@ColorRes msgColorResource: Int): ConfigSetter
 
-        fun messageColor(@ColorInt messageColor: Int): ConfigSetter
+        fun messageSize(msgSize: Float): ConfigSetter
 
-        fun messageColorResource(@ColorRes colorResource: Int): ConfigSetter
+        fun messageBold(msgBold: Boolean): ConfigSetter
 
-        fun messageBold(messageBold: Boolean): ConfigSetter
+        fun messageBoldResource(@BoolRes msgBoldResource: Int): ConfigSetter
 
-        fun iconResource(@DrawableRes icon: Int): ConfigSetter
+        fun iconDrawable(iconDrawable: Drawable?): ConfigSetter
 
-        fun iconPosition(@IconPosition iconPosition: Int): ConfigSetter
+        fun iconResource(@DrawableRes iconResource: Int): ConfigSetter
 
-        fun iconSizeDp(iconSizeDp: Float): ConfigSetter
+        fun backgroundColor(backgroundColor: Int): ConfigSetter
+
+        fun backgroundColorResource(@ColorRes backgroundColorResource: Int):
+                ConfigSetter
+
+        fun iconPosition(iconPosition: Int): ConfigSetter
+
+        fun iconSizeDp(iconSizeDp: Float?): ConfigSetter
 
         fun iconPaddingDp(iconPaddingDp: Float): ConfigSetter
 
-        fun targetPage(transitionIntent: ToastTransitionIntent): ConfigSetter
-
-        fun apply(): PlainToastApi
+        fun commit(): ShowToastApi
     }
 }
