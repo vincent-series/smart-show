@@ -8,7 +8,7 @@
 ★★★ 4.x版及后续版本不再需要显式初始化，旧版本迁移到4.x版直接将初始化相关代码删除即可。
 ### 模块导航：
 
-* [SmartToast（latest version：4.0.8）](https://github.com/vincent-series/smart-show#smarttoast%E9%83%A8%E5%88%86)
+* [SmartToast（latest version：4.1.0）](https://github.com/vincent-series/smart-show#smarttoast%E9%83%A8%E5%88%86)
 * [SmartSnackBar（latest version：4.0.8）](https://github.com/vincent-series/smart-show#smartsnackbar%E9%83%A8%E5%88%86)
 * [SmartDialog（latest version：4.0.7）](https://github.com/vincent-series/smart-show#smartdialog%E9%83%A8%E5%88%86)
 * [关于实现](#代码实现)
@@ -48,10 +48,7 @@
 ### 引入依赖
 
 <pre><code>
-implementation "io.github.vincent-series:smart-toast:4.0.8"
-
-//如需要注解处理功能,引入注解处理库
-kapt "io.github.vincent-series:annotation-compiler:1.0.3"
+implementation "io.github.vincent-series:smart-toast:4.1.0"
 </code></pre>
 
 ### API
