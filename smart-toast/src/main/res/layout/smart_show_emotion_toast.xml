@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/smart_show_classic_toast_bg"
+    android:background="@drawable/vincent_series_smart_toast_default_bg"
     android:minWidth="148dp"
     android:orientation="vertical"
     android:paddingTop="16dp"
@@ -13,7 +13,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_gravity="center_horizontal|top"
-        android:src="@drawable/ic_smart_toast_emotion_info" />
+        android:src="@drawable/ic_smart_toast_info" />
 
     <TextView
         android:id="@+id/emotion_message"
