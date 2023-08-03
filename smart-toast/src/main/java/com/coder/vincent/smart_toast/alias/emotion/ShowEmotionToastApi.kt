@@ -2,7 +2,7 @@ package com.coder.vincent.smart_toast.alias.emotion
 
 import androidx.annotation.StringRes
 
-interface EmotionToastApi {
+interface ShowEmotionToastApi {
     fun info(msg: CharSequence)
     fun info(@StringRes msg: Int)
     fun infoLong(msg: CharSequence)

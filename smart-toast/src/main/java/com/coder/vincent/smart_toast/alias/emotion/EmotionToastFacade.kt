@@ -1,26 +1,44 @@
 package com.coder.vincent.smart_toast.alias.emotion
 
+import android.graphics.drawable.Drawable
+import androidx.annotation.BoolRes
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
-import com.coder.vincent.smart_toast.compact.ToastTransitionIntent
 
 interface EmotionToastFacade {
-    interface Overall : EmotionToastApi {
+    interface Overall : ShowEmotionToastApi {
         fun config(): ConfigSetter
     }
 
     interface ConfigSetter {
-        fun backgroundColor(@ColorInt color: Int): ConfigSetter
-        fun backgroundColorResource(@ColorRes colorResource: Int): ConfigSetter
+        fun backgroundDrawable(bgDrawable: Drawable): ConfigSetter
+
+        fun backgroundResource(@DrawableRes bgResource: Int): ConfigSetter
+
+        fun messageColor(@ColorInt msgColor: Int): ConfigSetter
+
+        fun messageColorResource(@ColorRes msgColorResource: Int): ConfigSetter
+
+        fun messageSize(msgSize: Float): ConfigSetter
+
+        fun messageBold(msgBold: Boolean): ConfigSetter
+
+        fun messageBoldResource(@BoolRes msgBoldResource: Int): ConfigSetter
+
+        fun iconDrawable(iconDrawable: Drawable?): ConfigSetter
+
         fun iconResource(@DrawableRes iconResource: Int): ConfigSetter
-        fun iconSizeDp(sizeDp: Float): ConfigSetter
-        fun iconPaddingDp(padding: Float): ConfigSetter
-        fun messageColor(@ColorInt color: Int): ConfigSetter
-        fun messageColorResource(@ColorRes colorResource: Int): ConfigSetter
-        fun messageSizeSp(sizeSp: Float): ConfigSetter
-        fun messageBold(bold: Boolean): ConfigSetter
-        fun targetPage(transitionIntent: ToastTransitionIntent): ConfigSetter
-        fun apply(): EmotionToastApi
+
+        fun backgroundColor(backgroundColor: Int): ConfigSetter
+
+        fun backgroundColorResource(@ColorRes backgroundColorResource: Int):
+                ConfigSetter
+
+        fun iconSizeDp(iconSize: Float): ConfigSetter
+
+        fun iconPaddingDp(iconPadding: Float): ConfigSetter
+
+        fun commit(): ShowEmotionToastApi
     }
 }
