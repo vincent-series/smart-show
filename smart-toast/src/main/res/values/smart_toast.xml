@@ -3,14 +3,15 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <item name="custom_toast_msg" type="id" />
 
-    <style name="type_info_toast_anim">
+    <item name="vincent_series_custom_toast_msg" type="id" />
+
+    <style name="vincent_series_emotion_toast_anim">
         <item name="android:windowEnterAnimation">@anim/emotion_toast_enter</item>
         <item name="android:windowExitAnimation">@anim/emotion_toast_exit</item>
     </style>
 
-    <style name="smart_show_virtual_toast_dialog" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="vincent_series_dialog_toast_style" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowFrame">@null</item>
         <item name="android:windowNoTitle">true</item>
