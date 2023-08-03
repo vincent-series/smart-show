@@ -11,7 +11,6 @@
     * [icon、icon size、icon position、icon padding](https://github.com/vincent-series/smart-show/wiki/SetupClassicToast#%E8%AE%BE%E7%BD%AEicon%E5%8F%8A%E5%85%B6%E4%BD%8D%E7%BD%AE%E5%A4%A7%E5%B0%8F%E9%97%B4%E8%B7%9D)
     * [msg color](https://github.com/vincent-series/smart-show/wiki/SetupClassicToast#%E8%AE%BE%E7%BD%AE%E6%96%87%E6%9C%AC%E9%A2%9C%E8%89%B2)
     * [msg size、msg bold](https://github.com/vincent-series/smart-show/wiki/SetupClassicToast#%E8%AE%BE%E7%BD%AE%E6%96%87%E6%9C%AC%E5%A4%A7%E5%B0%8F%E7%B2%97%E7%BB%86)
-    * [target page](https://github.com/vincent-series/smart-show/wiki/SetupClassicToast#%E6%8C%87%E5%AE%9Atarget-page)
 * Emotion Toast
   * [default style](https://github.com/the-pig-of-jungle/smart-show/wiki/EmotionToast)
     * [info](https://github.com/the-pig-of-jungle/smart-show/wiki/EmotionToast#info)
@@ -27,7 +26,6 @@
     * [icon、icon size、icon padding](https://github.com/vincent-series/smart-show/wiki/SetupEmotionToast#%E8%AE%BE%E7%BD%AE%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9B%BE%E6%A0%87%E5%8F%8A%E5%85%B6%E5%A4%A7%E5%B0%8F%E9%97%B4%E8%B7%9D)
     * [msg color](https://github.com/vincent-series/smart-show/wiki/SetupEmotionToast#%E8%AE%BE%E7%BD%AE%E6%96%87%E6%9C%AC%E9%A2%9C%E8%89%B2)
     * [msg size、msg bold](https://github.com/vincent-series/smart-show/wiki/SetupEmotionToast#%E8%AE%BE%E7%BD%AE%E6%9C%AC%E6%96%87%E5%A4%A7%E5%B0%8F%E5%8F%8A%E7%B2%97%E7%BB%86)
-    * [target page](https://github.com/vincent-series/smart-show/wiki/SetupEmotionToast#%E6%8C%87%E5%AE%9Atarget-page)
 * [Define New Type of Toast](https://github.com/vincent-series/smart-show/wiki/CustomToast)
 * [Other Api](https://github.com/vincent-series/smart-show/wiki/SmartToastOtherApi)
   * [isShowing](https://github.com/vincent-series/smart-show/wiki/SmartToastOtherApi#当前是否有Toast在显示
