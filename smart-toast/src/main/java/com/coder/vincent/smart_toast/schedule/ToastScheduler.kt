@@ -2,75 +2,58 @@ package com.coder.vincent.smart_toast.schedule
 
 import android.view.View
 import com.coder.vincent.series.common_lib.Toolkit
-
-import com.coder.vincent.smart_toast.CompactToast
-import com.coder.vincent.smart_toast.ToastConfig
-import com.coder.vincent.smart_toast.compact.DialogToast
-import com.coder.vincent.smart_toast.compact.ToastVisibilityChangedListener
+import com.coder.vincent.smart_toast.factory.ToastConfig
+import com.coder.vincent.smart_toast.compact.CompactToast
+import com.coder.vincent.smart_toast.compact.PlaceholderToast
+import com.coder.vincent.smart_toast.compact.ToastVisibilityObserver
 import com.coder.vincent.smart_toast.factory.ToastFactory
 
-internal object ToastScheduler : ToastVisibilityChangedListener {
-    private var currentToast: CompactToast? = null
+object ToastScheduler : ToastVisibilityObserver {
+    private val placeholder = PlaceholderToast()
+    private var currentToast: CompactToast = placeholder
+
+    private fun canReuseToast(toastConfig: ToastConfig): Boolean {
+        val isShowing = currentToast.isShowing()
+        val isSameAlias = currentToast.config().alias == toastConfig.alias
+        val isSameLocation = currentToast.config().location == toastConfig.location
+        Toolkit.logD("isSameAlias:$isSameAlias#isSameLocation:$isSameLocation#isShowing:$isShowing")
+        return isSameAlias && isSameLocation && isShowing
+    }
 
     @JvmStatic
     @Synchronized
-    fun schedule(newToastConfig: ToastConfig, toastFactory: ToastFactory) {
-        Toolkit.logD(newToastConfig.toString())
-        val isSameAlias = currentToast?.config()?.alias == newToastConfig.alias
-        val isSameLocation = newToastConfig.isSameLocation(currentToast?.config())
-        val isShowing = currentToast?.isShowing() ?: false
-
-        Toolkit.logD("isSameAlias:$isSameAlias#isSameLocation:$isSameLocation#isShowing:$isShowing")
-
-        if (isShowing && isSameAlias && isSameLocation) {
-            toastFactory.applyNewConfig(currentToast!!.view(), newToastConfig)
-            currentToast!!.updateConfig(newToastConfig)
+    fun schedule(toastConfig: ToastConfig, toastFactory: ToastFactory) {
+        Toolkit.logD(toastConfig.toString())
+        if (canReuseToast(toastConfig)) {
+            currentToast.updateConfig(toastConfig)
             Toolkit.logD("just update toast config info:$currentToast.")
             return
         }
 
-        if (isShowing) {
-            currentToast?.cancel()
+        if (currentToast.isShowing()) {
+            currentToast.cancel()
             Toolkit.logD("cancel current toast:$currentToast.")
         }
 
-        toastFactory.produceToast(newToastConfig)?.apply {
-            currentToast?.removeVisibilityObserver(ToastScheduler)
-            setVisibilityObserver(ToastScheduler)
+        toastFactory.produceToast(toastConfig).apply {
+            currentToast.removeVisibilityObserver(ToastScheduler)
             currentToast = this
+            currentToast.setVisibilityObserver(ToastScheduler)
             Toolkit.logD("create new toast and show it:$currentToast.")
-        }?.let { compactToast ->
-            if (newToastConfig.boundPageId.isEmpty() || currentToast !is DialogToast) {
-                compactToast.show()
-                return
-            }
-            Toolkit.logD("suppress toast temporarily because of bound id(${newToastConfig.boundPageId}):$currentToast")
-        }
-
-    }
-
-    @JvmStatic
-    @Synchronized
-    fun schedule(boundPageId: String) {
-        currentToast?.let {
-            if (boundPageId == it.config().boundPageId && it is DialogToast && !it.isShowing()) {
-                it.show()
-                Toolkit.logD("show bounded toast($boundPageId):$it")
-            }
-        }
+        }.show()
     }
 
     @Synchronized
     override fun onToastVisibilityChanged(view: View, visible: Boolean) {
-        if (!visible && view == currentToast?.view()) {
+        if (!visible && view == currentToast.view()) {
             Toolkit.logD("release current toast because of natural dismiss:$currentToast")
-            currentToast = null
+            currentToast = PlaceholderToast()
         }
     }
 
     fun dismiss() {
-        currentToast?.cancel()
+        currentToast.cancel()
     }
 
-    fun isShowing() = currentToast?.isShowing() == true
+    fun isShowing() = currentToast.isShowing()
 }
