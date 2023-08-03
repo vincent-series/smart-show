@@ -26,7 +26,7 @@ class SnackbarDemoActivity : AppCompatActivity() {
                         else -> Color.parseColor("#323232")
                     }
                     val icon = if (iconGroup.checkedRadioButtonId == R.id.with_icon)
-                        R.drawable.ic_smart_toast_emotion_success
+                        com.coder.vincent.smart_toast.R.drawable.ic_smart_toast_success
                     else
                         0
                     val iconPosition =

@@ -7,6 +7,7 @@ import android.widget.AdapterView.OnItemClickListener
 import androidx.appcompat.app.AppCompatActivity
 import com.coder.vincent.smart_dialog.click_list.ClickListAdapter
 import com.coder.vincent.smart_snackbar.SmartSnackBar
+import com.coder.vincent.smart_toast.SmartToast
 import com.coder.zzq.smartshowdemo.databinding.ActivitySmartShowDemoBinding
 
 
@@ -14,8 +15,6 @@ class SmartShowDemoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(ActivitySmartShowDemoBinding.inflate(layoutInflater).apply {
-            val location = IntArray(2)
-            findViewById<View>(android.R.id.content).getLocationOnScreen(location)
             val adapter = ClickListAdapter()
             adapter.setItemCenter(itemCenter = true, notify = false)
             adapter.setItems(
