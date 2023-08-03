@@ -7,10 +7,12 @@ ext {
     ]
 
     dependencyLibVersion = [
-            core_ktx        : "1.7.0",
-            appcompat       : "1.4.1",
-            material        : "1.4.0",
-            constraintlayout: "2.1.2",
+            core_ktx           : "1.9.0",
+            appcompat          : "1.6.1",
+            material           : "1.5.0",
+            constraintlayout   : "2.1.2",
+            common_lib         : "1.1.6",
+            annotation_compiler: "1.0.6"
     ]
 
 }
