@@ -5,7 +5,9 @@ plugins {
     id 'maven-publish'
     id 'signing'
 }
+apply from: '../versions.gradle'
 android {
+    namespace 'com.coder.vincent.smart_toast'
     compileSdk 33
 
     defaultConfig {
@@ -34,13 +36,13 @@ android {
 dependencies {
     compileOnly "androidx.core:core-ktx:${dependencyLibVersion.core_ktx}"
     compileOnly "androidx.appcompat:appcompat:${dependencyLibVersion.appcompat}"
-    api "io.github.vincent-series:common:1.0.9"
+    api "io.github.vincent-series:common:${dependencyLibVersion.common_lib}"
 }
 
 afterEvaluate {
     publishing {
-        def stagingVersion = "4.0.8"
-        def snapshotsVersion = "4.0.2-1.0.0-SNAPSHOT"
+        def stagingVersion = "4.1.0"
+        def snapshotsVersion = "4.1.0-13-SNAPSHOT"
         def uploadVersion = stagingVersion
         publications {
             maven(MavenPublication) {
