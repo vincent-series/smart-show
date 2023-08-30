@@ -1,99 +1,114 @@
 package com.coder.vincent.smart_dialog.loading
 
 import android.content.DialogInterface
+import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDialog
-import androidx.viewbinding.ViewBinding
-import com.coder.vincent.series.annotations.smart_dialog.DialogConfig
-import com.coder.vincent.series.annotations.smart_dialog.DialogCreator
-import com.coder.vincent.series.annotations.smart_dialog.DialogDefinition
-import com.coder.vincent.series.common_lib.Toolkit
-import com.coder.vincent.series.common_lib.bean.DataItem
+import android.widget.FrameLayout
+import androidx.core.view.setPadding
+import com.coder.vincent.series.annotations.CustomizedConfig
+import com.coder.vincent.series.annotations.DataItem
+import com.coder.vincent.series.annotations.ResourceType
+import com.coder.vincent.series.annotations.smart_dialog.CustomizedDialog
+import com.coder.vincent.series.common_lib.bean.KData
+import com.coder.vincent.series.common_lib.bean.TextStyle
+import com.coder.vincent.series.common_lib.dpToPx
+import com.coder.vincent.smart_dialog.DialogConfig
+import com.coder.vincent.smart_dialog.DialogDefinition
 import com.coder.vincent.smart_dialog.R
-import com.coder.vincent.smart_dialog.databinding.SmartShowLargeLoadingDialogBinding
-import com.coder.vincent.smart_dialog.databinding.SmartShowMiddleLoadingDialogBinding
-import com.coder.vincent.smart_dialog.databinding.SmartShowSmallLoadingDialogBinding
+import com.coder.vincent.smart_dialog.databinding.SmartShowLoadingDialogBinding
 
-@DialogDefinition(alias = "loading")
-class LoadingDialog {
-    @DialogConfig
-    class Config {
-        val message = DataItem("正在加载")
-        val boxSize = DataItem(BOX_SIZE_LARGE)
-        val dimBehind = DataItem(false)
-        val cancelable = DataItem(true)
-        val cancelOnTouchOutside = DataItem(false)
-        val dialogShowListener = DataItem<DialogInterface.OnShowListener>()
-        val dialogDismissListener = DataItem<DialogInterface.OnDismissListener>()
-        val dialogCancelListener = DataItem<DialogInterface.OnCancelListener>()
-    }
-
-    @DialogCreator
-    fun createDialog(activity: AppCompatActivity, config: Config): AppCompatDialog =
-        AppCompatDialog(activity, R.style.smart_show_no_dim_dialog).also { dialog ->
-
-            config.boxSize.applyOnChange { boxSize ->
-                val contentViewBinding: ViewBinding =
-                    when (boxSize) {
-                        BOX_SIZE_LARGE -> SmartShowLargeLoadingDialogBinding
-                            .inflate(Toolkit.layoutInflater()).apply {
-                                config.message.applyOnChange { message ->
-                                    smartShowLoadingMessageView.text = message
-                                    smartShowLoadingMessageView.visibility =
-                                        if (message.isBlank()) View.GONE else View.VISIBLE
-                                }
-                            }
-
-                        BOX_SIZE_MIDDLE -> SmartShowMiddleLoadingDialogBinding
-                            .inflate(Toolkit.layoutInflater()).apply {
-                                config.message.applyOnChange { message ->
-                                    smartShowLoadingMessageView.text = message
-                                    smartShowLoadingMessageView.visibility =
-                                        if (message.isBlank()) View.GONE else View.VISIBLE
-                                }
-                            }
-
-                        BOX_SIZE_SMALL -> SmartShowSmallLoadingDialogBinding.inflate(Toolkit.layoutInflater())
-                        else -> throw IllegalArgumentException("invalid box size:$boxSize")
-                    }
-                config.dimBehind.applyOnChange {
-                    if (it) {
-                        dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-                    } else {
-                        dialog.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-                    }
-                }
-
-                config.cancelable.applyOnChange {
-                    dialog.setCancelable(it)
-                }
-
-                config.cancelOnTouchOutside.applyOnChange {
-                    dialog.setCanceledOnTouchOutside(it)
-                }
-
-                config.dialogShowListener.applyOnChange {
-                    dialog.setOnShowListener(it)
-                }
-                config.dialogDismissListener.applyOnChange {
-                    dialog.setOnDismissListener(it)
-                }
-
-                config.dialogCancelListener.applyOnChange {
-                    dialog.setOnCancelListener(it)
-                }
-                val lp = ViewGroup.MarginLayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
-                )
-                dialog.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-                dialog.setContentView(contentViewBinding.root, lp)
-            }
+@CustomizedDialog(alias = "loading")
+class LoadingDialog : DialogDefinition<LoadingDialog.Config> {
+    @CustomizedConfig
+    class Config : DialogConfig() {
+        init {
+            dimBehind.update(value = false, employ = false)
         }
 
+        @DataItem(supportedResource = ResourceType.STRING)
+        val message = KData("正在加载")
+
+        @DataItem
+        val messageStyle = KData<TextStyle>()
+
+        @DataItem
+        val boxSize = KData(BOX_SIZE_LARGE)
+    }
+
+    override fun dialogStyle(): Int = R.style.smart_show_no_dim_dialog
+    override fun setupRootViewLayoutParams(lp: FrameLayout.LayoutParams) {
+        lp.width = FrameLayout.LayoutParams.WRAP_CONTENT
+        lp.height = FrameLayout.LayoutParams.WRAP_CONTENT
+        56.dpToPx().let {
+            lp.topMargin = it
+            lp.bottomMargin = it
+        }
+    }
+
+    override fun dialogView(
+        inflater: LayoutInflater,
+        config: Config,
+        dialog: DialogInterface
+    ): View = SmartShowLoadingDialogBinding.inflate(inflater).apply {
+        config.boxSize.dataProcessor {
+            var loadPartPadding = 0
+            var progressBarSize = 0
+            var showMsg = true
+            var msgViewSidePadding = 0
+            var msgViewTextSize = 0
+            when (it) {
+                BOX_SIZE_LARGE -> {
+                    loadPartPadding = 15.dpToPx()
+                    progressBarSize = 32.dpToPx()
+                    showMsg = true
+                    msgViewSidePadding = 8.dpToPx()
+                    msgViewTextSize = 15
+                }
+
+                BOX_SIZE_MIDDLE -> {
+                    loadPartPadding = 15.dpToPx()
+                    progressBarSize = 24.dpToPx()
+                    showMsg = true
+                    msgViewSidePadding = 4.dpToPx()
+                    msgViewTextSize = 12
+                }
+
+                BOX_SIZE_SMALL -> {
+                    loadPartPadding = 8.dpToPx()
+                    progressBarSize = 20.dpToPx()
+                    showMsg = false
+                }
+            }
+            smartShowLoadingPart.setPadding(loadPartPadding)
+            smartShowLoadingProgressBar.layoutParams.apply {
+                width = progressBarSize
+                height = progressBarSize
+            }
+            if (!showMsg) {
+                smartShowLoadingMessageView.visibility = View.GONE
+            } else {
+                smartShowLoadingMessageView.visibility = View.VISIBLE
+                smartShowLoadingMessageView.setPadding(
+                    msgViewSidePadding,
+                    10.dpToPx(),
+                    msgViewSidePadding,
+                    0
+                )
+                smartShowLoadingMessageView.textSize = msgViewTextSize.toFloat()
+            }
+        }
+        config.message.dataProcessor {
+            if (it.isBlank()) {
+                smartShowLoadingMessageView.visibility = View.VISIBLE
+            } else {
+                smartShowLoadingMessageView.visibility = View.GONE
+            }
+            smartShowLoadingMessageView.text = it
+        }
+        config.messageStyle.dataProcessor {
+            it.applyToView(smartShowLoadingMessageView)
+        }
+    }.root
 }
 
 const val BOX_SIZE_LARGE = 0
