@@ -65,14 +65,27 @@
                 android:layout_height="match_parent"
                 android:background="#cccccc" />
 
-            <TextView
-                android:id="@id/smart_show_dialog_confirm_btn"
-                style="@style/smart_show_dialog_button"
+            <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="确定"
-                android:textColor="@color/colorPrimary" />
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@id/smart_show_dialog_confirm_btn"
+                    style="@style/smart_show_dialog_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="确定"
+                    android:textColor="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/smart_show_dialog_confirm_delay_btn"
+                    style="@style/smart_show_dialog_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:enabled="false"
+                    android:textColor="#bbbbbb" />
+            </FrameLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
