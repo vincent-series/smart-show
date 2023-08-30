@@ -5,26 +5,22 @@ import androidx.appcompat.app.AppCompatDialog
 import com.coder.vincent.smart_dialog.choose_list.ChosenItem
 import com.coder.vincent.smart_dialog.click_list.ClickedItem
 
-typealias ConfirmBtnListener = (dialog: AppCompatDialog) -> Unit
+typealias ConfirmBtnListener = (dialog: DialogInterface) -> Unit
 
 class DefaultConfirmBtnListener : ConfirmBtnListener {
-    override fun invoke(dialog: AppCompatDialog) {
+    override fun invoke(dialog: DialogInterface) {
         dialog.dismiss()
     }
 }
 
-typealias CancelBtnListener = (dialog: AppCompatDialog) -> Unit
+typealias CancelBtnListener = (dialog: DialogInterface) -> Unit
 
 class DefaultCancelBtnListener : CancelBtnListener {
-    override fun invoke(dialog: AppCompatDialog) {
+    override fun invoke(dialog: DialogInterface) {
         dialog.dismiss()
     }
 }
 
-class DefaultInputOnShowListener : DialogInterface.OnShowListener {
-    override fun onShow(dialog: DialogInterface) {}
-}
+typealias ItemClickedListener = (dialog: DialogInterface, clickedItem: ClickedItem) -> Unit
 
-typealias ItemClickedListener = (dialog: AppCompatDialog, clickedItem: ClickedItem) -> Unit
-
-typealias ItemChosenListener = (dialog: AppCompatDialog, chosenItems: List<ChosenItem>) -> Unit
+typealias ItemChosenListener = (dialog: DialogInterface, chosenItems: List<ChosenItem>) -> Unit
