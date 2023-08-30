@@ -1,115 +1,81 @@
 package com.coder.vincent.smart_dialog.notification
 
 import android.content.DialogInterface
+import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDialog
-import com.coder.vincent.series.annotations.smart_dialog.DialogConfig
-import com.coder.vincent.series.annotations.smart_dialog.DialogCreator
-import com.coder.vincent.series.annotations.smart_dialog.DialogDefinition
-import com.coder.vincent.series.common_lib.Toolkit
-import com.coder.vincent.series.common_lib.bean.DataItem
+import com.coder.vincent.series.annotations.CustomizedConfig
+import com.coder.vincent.series.annotations.DataItem
+import com.coder.vincent.series.annotations.ResourceType
+import com.coder.vincent.series.annotations.smart_dialog.CustomizedDialog
+import com.coder.vincent.series.common_lib.bean.KData
 import com.coder.vincent.series.common_lib.bean.TextStyle
-import com.coder.vincent.series.common_lib.dpToPx
 import com.coder.vincent.smart_dialog.ConfirmBtnListener
 import com.coder.vincent.smart_dialog.DefaultConfirmBtnListener
-import com.coder.vincent.smart_dialog.R
+import com.coder.vincent.smart_dialog.DialogConfig
+import com.coder.vincent.smart_dialog.DialogDefinition
 import com.coder.vincent.smart_dialog.databinding.SmartShowNotificationDialogBinding
-import kotlin.math.min
 
-@DialogDefinition(alias = "notification")
-class NotificationDialog {
-    @DialogConfig
-    class Config {
-        val title = DataItem<String>()
-        val titleStyle = DataItem<TextStyle>()
-        val message = DataItem("I'm a message.")
-        val messageStyle = DataItem<TextStyle>()
-        val confirmBtnLabel = DataItem<String>()
-        val confirmBtnLabelStyle = DataItem<TextStyle>()
-        val confirmBtnListener = DataItem<ConfirmBtnListener>(DefaultConfirmBtnListener())
-        val dimBehind = DataItem(true)
-        val cancelable = DataItem(true)
-        val cancelOnTouchOutside = DataItem(false)
-        val dialogShowListener = DataItem<DialogInterface.OnShowListener>()
-        val dialogDismissListener = DataItem<DialogInterface.OnDismissListener>()
-        val dialogCancelListener = DataItem<DialogInterface.OnCancelListener>()
+@CustomizedDialog(alias = "notification")
+class NotificationDialog : DialogDefinition<NotificationDialog.Config> {
+    @CustomizedConfig
+    class Config : DialogConfig() {
+        @DataItem(supportedResource = ResourceType.STRING)
+        val title = KData<String>()
+
+        @DataItem
+        val titleStyle = KData<TextStyle>()
+
+        @DataItem(supportedResource = ResourceType.STRING)
+        val message = KData("I'm a message.")
+
+        @DataItem
+        val messageStyle = KData<TextStyle>()
+
+        @DataItem(supportedResource = ResourceType.STRING)
+        val confirmBtnLabel = KData<String>()
+
+        @DataItem
+        val confirmBtnLabelStyle = KData<TextStyle>()
+
+        @DataItem
+        val confirmBtnListener = KData<ConfirmBtnListener>(DefaultConfirmBtnListener())
     }
 
-    @DialogCreator
-    fun createDialog(activity: AppCompatActivity, config: Config): AppCompatDialog =
-        AppCompatDialog(activity, R.style.smart_show_dialog).also { dialog ->
-            val contentViewBinding =
-                SmartShowNotificationDialogBinding.inflate(Toolkit.layoutInflater()).apply {
-                    config.title.applyOnChange {
-                        smartShowDialogTitleView.text = it
-                        smartShowDialogTitleView.visibility =
-                            if (it.isBlank()) View.INVISIBLE else View.VISIBLE
-                    }
-                    config.titleStyle.applyOnChange {
-                        smartShowDialogTitleView.setTextColor(it.color)
-                        smartShowDialogTitleView.textSize = it.size
-                        smartShowDialogTitleView.paint.isFakeBoldText = it.bold
-                    }
+    override fun dialogView(
+        inflater: LayoutInflater,
+        config: Config,
+        dialog: DialogInterface
+    ): View =
+        SmartShowNotificationDialogBinding.inflate(inflater).apply {
+            config.title.dataProcessor {
+                smartShowDialogTitleView.text = it
+                smartShowDialogTitleView.visibility =
+                    if (it.isBlank()) View.INVISIBLE else View.VISIBLE
+            }
+            config.titleStyle.dataProcessor {
+                it.applyToView(smartShowDialogTitleView)
+            }
 
-                    config.message.applyOnChange {
-                        smartShowDialogMessageView.text = it
-                    }
+            config.message.dataProcessor {
+                smartShowDialogMessageView.text = it
+            }
 
-                    config.messageStyle.applyOnChange {
-                        smartShowDialogMessageView.setTextColor(it.color)
-                        smartShowDialogMessageView.textSize = it.size
-                        smartShowDialogMessageView.paint.isFakeBoldText = it.bold
-                    }
+            config.messageStyle.dataProcessor {
+                it.applyToView(smartShowDialogMessageView)
+            }
 
-                    config.confirmBtnLabel.applyOnChange {
-                        smartShowDialogConfirmBtn.text = it
-                    }
+            config.confirmBtnLabel.dataProcessor {
+                smartShowDialogConfirmBtn.text = it
+            }
 
-                    config.confirmBtnLabelStyle.applyOnChange {
-                        smartShowDialogConfirmBtn.setTextColor(it.color)
-                        smartShowDialogConfirmBtn.textSize = it.size
-                        smartShowDialogConfirmBtn.paint.isFakeBoldText = it.bold
-                    }
+            config.confirmBtnLabelStyle.dataProcessor {
+                it.applyToView(smartShowDialogConfirmBtn)
+            }
 
-                    config.confirmBtnListener.applyOnChange { listener ->
-                        smartShowDialogConfirmBtn.setOnClickListener {
-                            listener.invoke(dialog)
-                        }
-                    }
-
-                    config.dimBehind.applyOnChange {
-                        if (it) {
-                            dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-                        } else {
-                            dialog.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-                        }
-                    }
-
-                    config.cancelable.applyOnChange {
-                        dialog.setCancelable(it)
-                    }
-
-                    config.cancelOnTouchOutside.applyOnChange {
-                        dialog.setCanceledOnTouchOutside(it)
-                    }
-
-                    config.dialogShowListener.applyOnChange {
-                        dialog.setOnShowListener(it)
-                    }
-                    config.dialogDismissListener.applyOnChange {
-                        dialog.setOnDismissListener(it)
-                    }
-
-                    config.dialogCancelListener.applyOnChange {
-                        dialog.setOnCancelListener(it)
-                    }
+            config.confirmBtnListener.dataProcessor { listener ->
+                smartShowDialogConfirmBtn.setOnClickListener {
+                    listener.invoke(dialog)
                 }
-            val width = min(Toolkit.screenWidth() - 70.dpToPx(), 290.dpToPx())
-            val height = ViewGroup.LayoutParams.WRAP_CONTENT
-            val lp = ViewGroup.MarginLayoutParams(width, height)
-            dialog.setContentView(contentViewBinding.root, lp)
-        }
+            }
+        }.root
 }
