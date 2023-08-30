@@ -38,12 +38,11 @@ dependencies {
     compileOnly "androidx.core:core-ktx:${dependencyLibVersion.core_ktx}"
     compileOnly "androidx.appcompat:appcompat:${dependencyLibVersion.appcompat}"
     api "io.github.vincent-series:common:${dependencyLibVersion.common_lib}"
-    kapt "io.github.vincent-series:annotation-compiler:${dependencyLibVersion.annotation_compiler}"
 }
 afterEvaluate {
     publishing {
-        def stagingVersion = "4.0.7"
-        def snapshotsVersion = "4.0.1-1.0.0-SNAPSHOT"
+        def stagingVersion = "4.1.0"
+        def snapshotsVersion = "4.0.8-1.0.7-SNAPSHOT"
         def uploadVersion = stagingVersion
         publications {
             maven(MavenPublication) {
