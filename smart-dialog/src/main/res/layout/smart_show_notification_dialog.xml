@@ -6,6 +6,8 @@
     android:orientation="vertical">
 
     <TextView
+        android:maxLines="1"
+        android:ellipsize="end"
         android:visibility="gone"
         android:id="@id/smart_show_dialog_title_view"
         android:layout_width="match_parent"
@@ -51,6 +53,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="确定"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:textColor="@color/colorPrimary" />
     </LinearLayout>
 </LinearLayout>
