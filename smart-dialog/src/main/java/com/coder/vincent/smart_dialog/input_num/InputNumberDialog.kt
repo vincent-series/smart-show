@@ -1,182 +1,153 @@
 package com.coder.vincent.smart_dialog.input_num
 
 import android.content.DialogInterface
+import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDialog
-import com.coder.vincent.series.annotations.smart_dialog.DialogConfig
-import com.coder.vincent.series.annotations.smart_dialog.DialogCreator
-import com.coder.vincent.series.annotations.smart_dialog.DialogDefinition
+import com.coder.vincent.series.annotations.CustomizedConfig
+import com.coder.vincent.series.annotations.DataItem
+import com.coder.vincent.series.annotations.ResourceType
+import com.coder.vincent.series.annotations.smart_dialog.CustomizedDialog
 import com.coder.vincent.series.common_lib.Toolkit
-import com.coder.vincent.series.common_lib.bean.DataItem
+import com.coder.vincent.series.common_lib.bean.KData
 import com.coder.vincent.series.common_lib.bean.TextStyle
-import com.coder.vincent.series.common_lib.dpToPx
-import com.coder.vincent.series.common_lib.popKeyboardWhenDialogShow
 import com.coder.vincent.smart_dialog.CancelBtnListener
 import com.coder.vincent.smart_dialog.DefaultCancelBtnListener
-import com.coder.vincent.smart_dialog.DefaultInputOnShowListener
-import com.coder.vincent.smart_dialog.R
+import com.coder.vincent.smart_dialog.DialogConfig
+import com.coder.vincent.smart_dialog.DialogDefinition
 import com.coder.vincent.smart_dialog.databinding.SmartShowInputNumBinding
-import kotlin.math.min
 
-@DialogDefinition(alias = "inputNumber")
-class InputNumberDialog {
-    @DialogConfig
-    class Config {
-        val title = DataItem<String>()
-        val titleStyle = DataItem<TextStyle>()
-        val defaultFilledNumber = DataItem<String>()
-        val hint = DataItem<String>()
-        val numberType = DataItem(NUMBER_TYPE_INT)
-        val numberSigned = DataItem(false)
-        val numberUnit = DataItem<String>()
-        val confirmBtnLabel = DataItem<String>()
-        val confirmBtnLabelStyle = DataItem<TextStyle>()
-        val confirmBtnListener = DataItem<InputNumberConfirmBtnListener>()
-        val cancelBtnLabel = DataItem<String>()
-        val cancelBtnLabelStyle = DataItem<TextStyle>()
-        val cancelBtnListener =
-            DataItem<CancelBtnListener>(DefaultCancelBtnListener())
-        val dimBehind = DataItem(true)
-        val cancelable = DataItem(true)
-        val cancelOnTouchOutside = DataItem(false)
-        val dialogShowListener =
-            DataItem<DialogInterface.OnShowListener>(DefaultInputOnShowListener())
-        val dialogDismissListener = DataItem<DialogInterface.OnDismissListener>()
-        val dialogCancelListener = DataItem<DialogInterface.OnCancelListener>()
+@CustomizedDialog(alias = "inputNumber")
+class InputNumberDialog : DialogDefinition<InputNumberDialog.Config> {
+    @CustomizedConfig
+    class Config : DialogConfig() {
+        @DataItem(supportedResource = ResourceType.STRING)
+        val title = KData<String>()
+
+        @DataItem
+        val titleStyle = KData<TextStyle>()
+
+        @DataItem
+        val defaultFilledNumber = KData<String>()
+
+        @DataItem(supportedResource = ResourceType.STRING)
+        val hint = KData<String>()
+
+        @DataItem
+        val numberType = KData(NUMBER_TYPE_INT)
+
+        @DataItem
+        val numberSigned = KData(false)
+
+        @DataItem(supportedResource = ResourceType.STRING)
+        val numberUnit = KData<String>()
+
+        @DataItem(supportedResource = ResourceType.STRING)
+        val confirmBtnLabel = KData<String>()
+
+        @DataItem
+        val confirmBtnLabelStyle = KData<TextStyle>()
+
+        @DataItem
+        val confirmBtnListener = KData<InputNumberConfirmBtnListener>()
+
+        @DataItem(supportedResource = ResourceType.STRING)
+        val cancelBtnLabel = KData<String>()
+
+        @DataItem
+        val cancelBtnLabelStyle = KData<TextStyle>()
+
+        @DataItem
+        val cancelBtnListener = KData<CancelBtnListener>(DefaultCancelBtnListener())
     }
 
-    @DialogCreator
-    fun createDialog(activity: AppCompatActivity, config: Config): AppCompatDialog =
-        AppCompatDialog(activity, R.style.smart_show_dialog).also { dialog ->
-            val contentViewBinding =
-                SmartShowInputNumBinding.inflate(Toolkit.layoutInflater()).apply {
-                    config.title.applyOnChange {
-                        smartShowDialogTitleView.text = it
-                        smartShowDialogTitleView.visibility =
-                            if (it.isBlank()) View.INVISIBLE else View.VISIBLE
-                    }
-                    config.titleStyle.applyOnChange {
-                        smartShowDialogTitleView.setTextColor(it.color)
-                        smartShowDialogTitleView.textSize = it.size
-                        smartShowDialogTitleView.paint.isFakeBoldText = it.bold
-                    }
-                    config.hint.applyOnChange {
-                        smartShowInputEdt.hint = it
-                    }
-                    config.defaultFilledNumber.applyOnChange {
-                        smartShowInputEdt.setText(it)
-                        smartShowInputEdt.setSelection(it.length)
-                    }
-                    config.numberType.applyOnChange {
-                        when (it) {
-                            NUMBER_TYPE_INT -> {
-                                smartShowInputEdt.inputType = EditorInfo.TYPE_CLASS_NUMBER
-                                if (!config.defaultFilledNumber.haveData()) {
-                                    config.defaultFilledNumber.update("0")
-                                }
-                            }
-
-                            NUMBER_TYPE_DECIMAL -> {
-                                smartShowInputEdt.inputType =
-                                    EditorInfo.TYPE_CLASS_NUMBER or EditorInfo.TYPE_NUMBER_FLAG_DECIMAL
-                                if (!config.defaultFilledNumber.haveData()) {
-                                    config.defaultFilledNumber.update("0.00")
-                                }
-                            }
-                        }
-                    }
-                    config.numberSigned.applyOnChange {
-                        smartShowInputEdt.inputType =
-                            smartShowInputEdt.inputType or EditorInfo.TYPE_NUMBER_FLAG_SIGNED
-                    }
-
-                    smartShowInputEdt.requestFocus()
-
-                    config.numberUnit.applyOnChange {
-                        smartShowNumUnit.text = it
-                        smartShowNumUnitLeftParentheses.visibility =
-                            if (it.isBlank()) View.GONE else View.VISIBLE
-                        smartShowNumUnitRightParentheses.visibility =
-                            if (it.isBlank()) View.GONE else View.VISIBLE
-                    }
-
-                    config.confirmBtnLabel.applyOnChange {
-                        smartShowDialogConfirmBtn.text = it
-                    }
-
-                    config.confirmBtnLabelStyle.applyOnChange {
-                        smartShowDialogConfirmBtn.apply {
-                            setTextColor(it.color)
-                            textSize = it.size
-                            paint.isFakeBoldText = it.bold
-                        }
-                    }
-
-                    config.confirmBtnListener.applyOnChange { listener ->
-                        smartShowDialogConfirmBtn.setOnClickListener {
-                            listener.invoke(dialog, smartShowInputEdt.text.toString().trim())
-                        }
-                    }
-
-                    config.cancelBtnLabel.applyOnChange {
-                        smartShowDialogCancelBtn.text = it
-                    }
-
-                    config.cancelBtnLabelStyle.applyOnChange {
-                        smartShowDialogCancelBtn.apply {
-                            setTextColor(it.color)
-                            paint.isFakeBoldText = it.bold
-                            textSize = it.size
-                        }
-                    }
-
-                    config.cancelBtnListener.applyOnChange { listener ->
-                        smartShowDialogCancelBtn.setOnClickListener {
-                            listener.invoke(dialog)
-                        }
-                    }
-                }
-
-            config.dimBehind.applyOnChange {
-                if (it) {
-                    dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-                } else {
-                    dialog.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-                }
-            }
-
-            config.cancelable.applyOnChange {
-                dialog.setCancelable(it)
-            }
-
-            config.cancelOnTouchOutside.applyOnChange {
-                dialog.setCanceledOnTouchOutside(it)
-            }
-
-            config.dialogShowListener.applyOnChange {
-                dialog.setOnShowListener(it)
-            }
-            config.dialogDismissListener.applyOnChange {
-                dialog.setOnDismissListener(it)
-            }
-
-            config.dialogCancelListener.applyOnChange {
-                dialog.setOnCancelListener(it)
-            }
-            val width = min(Toolkit.screenWidth() - 70.dpToPx(), 290.dpToPx())
-            val height = ViewGroup.LayoutParams.WRAP_CONTENT
-            val lp = ViewGroup.MarginLayoutParams(width, height)
-            dialog.setContentView(contentViewBinding.root, lp)
-            dialog.popKeyboardWhenDialogShow()
+    override fun dialogView(
+        inflater: LayoutInflater,
+        config: Config,
+        dialog: DialogInterface
+    ): View = SmartShowInputNumBinding.inflate(Toolkit.layoutInflater()).apply {
+        config.title.dataProcessor {
+            smartShowDialogTitleView.text = it
+            smartShowDialogTitleView.visibility =
+                if (it.isBlank()) View.INVISIBLE else View.VISIBLE
         }
+        config.titleStyle.dataProcessor {
+            it.applyToView(smartShowDialogTitleView)
+        }
+        config.hint.dataProcessor {
+            smartShowInputEdt.hint = it
+        }
+        config.defaultFilledNumber.dataProcessor {
+            smartShowInputEdt.setText(it)
+            smartShowInputEdt.setSelection(it.length)
+        }
+        config.numberType.dataProcessor {
+            when (it) {
+                NUMBER_TYPE_INT -> {
+                    smartShowInputEdt.inputType = EditorInfo.TYPE_CLASS_NUMBER
+                    val fill =
+                        if (smartShowInputEdt.text.isBlank() && !config.defaultFilledNumber.existsData()) "0" else config.defaultFilledNumber.data()
+                    config.defaultFilledNumber.update(fill, true)
+                }
+
+                NUMBER_TYPE_DECIMAL -> {
+                    smartShowInputEdt.inputType =
+                        EditorInfo.TYPE_CLASS_NUMBER or EditorInfo.TYPE_NUMBER_FLAG_DECIMAL
+                    val fill =
+                        if (smartShowInputEdt.text.isBlank() && !config.defaultFilledNumber.existsData()) "0.00" else config.defaultFilledNumber.data()
+                    config.defaultFilledNumber.update(fill, true)
+                }
+            }
+        }
+        config.numberSigned.dataProcessor {
+            smartShowInputEdt.inputType =
+                smartShowInputEdt.inputType or EditorInfo.TYPE_NUMBER_FLAG_SIGNED
+        }
+
+
+
+        config.numberUnit.dataProcessor {
+            smartShowNumUnit.text = it
+            smartShowNumUnitLeftParentheses.visibility =
+                if (it.isBlank()) View.GONE else View.VISIBLE
+            smartShowNumUnitRightParentheses.visibility =
+                if (it.isBlank()) View.GONE else View.VISIBLE
+        }
+
+        config.confirmBtnLabel.dataProcessor {
+            smartShowDialogConfirmBtn.text = it
+        }
+
+        config.confirmBtnLabelStyle.dataProcessor {
+            it.applyToView(smartShowDialogConfirmBtn)
+        }
+
+        config.confirmBtnListener.dataProcessor { listener ->
+            smartShowDialogConfirmBtn.setOnClickListener {
+                listener.invoke(dialog, smartShowInputEdt.text.toString().trim())
+            }
+        }
+
+        config.cancelBtnLabel.dataProcessor {
+            smartShowDialogCancelBtn.text = it
+        }
+
+        config.cancelBtnLabelStyle.dataProcessor {
+            it.applyToView(smartShowDialogCancelBtn)
+        }
+
+        config.cancelBtnListener.dataProcessor { listener ->
+            smartShowDialogCancelBtn.setOnClickListener {
+                listener.invoke(dialog)
+            }
+        }
+
+        smartShowInputEdt.requestFocus()
+    }.root
 }
 
 const val NUMBER_TYPE_INT = 0
 
 const val NUMBER_TYPE_DECIMAL = 1
 
-typealias InputNumberConfirmBtnListener = (dialog: AppCompatDialog, number: String) -> Unit
+typealias InputNumberConfirmBtnListener = (dialog: DialogInterface, number: String) -> Unit
