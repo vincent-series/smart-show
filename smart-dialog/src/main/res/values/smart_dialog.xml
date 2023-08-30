@@ -37,6 +37,4 @@
         <item name="android:clickable">true</item>
         <item name="android:background">@drawable/smart_show_dialog_btn_bg</item>
     </style>
-
-    <dimen name="smart_dialog_choose_list_height"></dimen>
 </resources>
