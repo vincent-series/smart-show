@@ -87,11 +87,7 @@ class ChooseListAdapter : BaseAdapter() {
         return (itemView as CheckedTextView).apply {
             gravity = if (itemCenter) Gravity.CENTER else Gravity.LEFT or Gravity.CENTER_VERTICAL
             text = items[position]
-            itemLabelStyle?.let {
-                setTextColor(it.color)
-                paint.isFakeBoldText = it.bold
-                textSize = it.size
-            }
+            itemLabelStyle?.applyToView(this)
             val stateListDrawable = StateListDrawable()
             val checkedDrawable =
                 if (iconStyle == LIST_ITEM_ICON_STYLE_CIRCLE)

@@ -3,209 +3,169 @@ package com.coder.vincent.smart_dialog.choose_list
 import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.ListView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDialog
 import androidx.core.util.forEach
-import com.coder.vincent.series.annotations.smart_dialog.DialogConfig
-import com.coder.vincent.series.annotations.smart_dialog.DialogCreator
-import com.coder.vincent.series.annotations.smart_dialog.DialogDefinition
+import com.coder.vincent.series.annotations.CustomizedConfig
+import com.coder.vincent.series.annotations.DataItem
+import com.coder.vincent.series.annotations.ResourceType
+import com.coder.vincent.series.annotations.smart_dialog.CustomizedDialog
 import com.coder.vincent.series.common_lib.Toolkit
-import com.coder.vincent.series.common_lib.bean.DataItem
+import com.coder.vincent.series.common_lib.bean.KData
 import com.coder.vincent.series.common_lib.bean.TextStyle
 import com.coder.vincent.series.common_lib.dpToPx
 import com.coder.vincent.smart_dialog.CancelBtnListener
 import com.coder.vincent.smart_dialog.DefaultCancelBtnListener
+import com.coder.vincent.smart_dialog.DialogConfig
+import com.coder.vincent.smart_dialog.DialogDefinition
 import com.coder.vincent.smart_dialog.ItemChosenListener
-import com.coder.vincent.smart_dialog.R
 import com.coder.vincent.smart_dialog.databinding.SmartShowChooseListDialogBinding
 import kotlin.math.min
 
-@DialogDefinition(alias = "chooseList")
-class ChooseListDialog {
-    @DialogConfig
-    class Config {
-        val title = DataItem<String>()
-        val titleStyle = DataItem<TextStyle>()
-        val items = DataItem<List<String>>()
-        val itemCenter = DataItem<Boolean>()
-        val itemLabelStyle = DataItem<TextStyle>()
-        val iconColor = DataItem<Int>()
-        val iconPosition = DataItem<Int>()
-        val choiceMode = DataItem(LIST_CHOICE_MODE_SINGLE)
-        val defaultChoosePos = DataItem(listOf(0))
-        val confirmBtnLabel = DataItem<String>()
-        val confirmBtnLabelStyle = DataItem<TextStyle>()
-        val confirmBtnListener = DataItem<ItemChosenListener>()
-        val cancelBtnLabel = DataItem<String>()
-        val cancelBtnLabelStyle = DataItem<TextStyle>()
-        val cancelBtnListener =
-            DataItem<CancelBtnListener>(DefaultCancelBtnListener())
-        val dimBehind = DataItem(true)
-        val cancelable = DataItem(true)
-        val cancelOnTouchOutside = DataItem(false)
-        val dialogShowListener = DataItem<DialogInterface.OnShowListener>()
-        val dialogDismissListener = DataItem<DialogInterface.OnDismissListener>()
-        val dialogCancelListener = DataItem<DialogInterface.OnCancelListener>()
+@CustomizedDialog(alias = "chooseList")
+class ChooseListDialog : DialogDefinition<ChooseListDialog.Config> {
+    @CustomizedConfig
+    class Config : DialogConfig() {
+        @DataItem
+        val title = KData("")
+
+        @DataItem
+        val titleStyle = KData<TextStyle>()
+
+        @DataItem
+        val items = KData<List<String>>()
+
+        @DataItem
+        val itemCenter = KData<Boolean>()
+
+        @DataItem
+        val itemLabelStyle = KData<TextStyle>()
+
+        @DataItem(supportedResource = ResourceType.COLOR)
+        val iconColor = KData<Int>()
+
+        @DataItem
+        val iconPosition = KData<Int>()
+
+        @DataItem
+        val singleChoice = KData(true)
+
+        @DataItem
+        val defaultChoosePos = KData(listOf(0))
+
+        @DataItem(supportedResource = ResourceType.STRING)
+        val confirmBtnLabel = KData<String>()
+
+        @DataItem
+        val confirmBtnLabelStyle = KData<TextStyle>()
+
+        @DataItem
+        val confirmBtnListener = KData<ItemChosenListener>()
+
+        @DataItem
+        val cancelBtnLabel = KData<String>()
+
+        @DataItem
+        val cancelBtnLabelStyle = KData<TextStyle>()
+
+        @DataItem
+        val cancelBtnListener = KData<CancelBtnListener>(DefaultCancelBtnListener())
+
     }
 
-    @DialogCreator
-    fun createDialog(activity: AppCompatActivity, config: Config): AppCompatDialog =
-        AppCompatDialog(activity, R.style.smart_show_dialog).also { dialog ->
-            val contentViewBinding =
-                SmartShowChooseListDialogBinding.inflate(Toolkit.layoutInflater())
-                    .apply {
-                        config.title.applyOnChange {
-                            smartShowDialogTitleView.visibility =
-                                if (it.isBlank()) View.GONE else View.VISIBLE
-                            smartShowDialogTitleView.text = it
-                        }
-                        config.titleStyle.applyOnChange {
-                            smartShowDialogTitleView.apply {
-                                setTextColor(it.color)
-                                paint.isFakeBoldText = it.bold
-                                textSize = it.size
-                            }
-                        }
-                        val adapter = ChooseListAdapter()
-                        config.items.currentValue {
-                            adapter.setItems(it, false)
-                        }
-                        config.items.applyOnChange {
-                            adapter.setItems(it)
-                        }
-
-                        config.itemCenter.currentValue {
-                            adapter.setItemCenter(it, false)
-                        }
-                        config.itemCenter.applyOnChange {
-                            adapter.setItemCenter(it)
-                        }
-                        config.itemLabelStyle.currentValue {
-                            adapter.setItemLabelStyle(it, false)
-                        }
-
-                        config.itemLabelStyle.applyOnChange {
-                            adapter.setItemLabelStyle(it)
-                        }
-
-                        config.iconColor.currentValue {
-                            adapter.setIconColor(it, false)
-                        }
-
-                        config.iconColor.applyOnChange {
-                            adapter.setIconColor(it)
-                        }
-
-                        config.iconPosition.currentValue {
-                            adapter.setIconPosition(it, false)
-                        }
-
-                        config.iconPosition.applyOnChange {
-                            adapter.setIconPosition(it)
-                        }
-
-                        config.choiceMode.applyOnChange {
-                            smartShowListView.choiceMode =
-                                if (it == LIST_CHOICE_MODE_SINGLE) ListView.CHOICE_MODE_SINGLE else ListView.CHOICE_MODE_MULTIPLE
-                            adapter.setIconStyle(if (it == LIST_CHOICE_MODE_SINGLE) LIST_ITEM_ICON_STYLE_CIRCLE else LIST_ITEM_ICON_STYLE_CUBE)
-                        }
-                        smartShowListView.selector = ColorDrawable(Color.TRANSPARENT)
-                        smartShowListView.selector = ColorDrawable(Color.TRANSPARENT)
-                        smartShowListView.divider = ColorDrawable(Color.parseColor("#cccccc"))
-                        smartShowListView.dividerHeight = 0.5f.dpToPx()
-                        smartShowListView.layoutParams = smartShowListView.layoutParams.apply {
-                            smartShowListView.layoutParams = smartShowListView.layoutParams.apply {
-                                val maxVisibleItems = if (Toolkit.isScreenPortrait()) 6 else 2
-                                height = (50 * visibleItems(adapter.count, maxVisibleItems)
-                                        + additionalPadding(adapter.count, maxVisibleItems))
-                                    .dpToPx()
-                            }
-                        }
-                        smartShowListView.adapter = adapter
-                        config.defaultChoosePos.applyOnChange {
-                            for (pos in 0..adapter.count) {
-                                smartShowListView.setItemChecked(pos, it.contains(pos))
-                            }
-                        }
-                        config.confirmBtnLabel.applyOnChange {
-                            smartShowDialogConfirmBtn.text = it
-                        }
-
-                        config.confirmBtnLabelStyle.applyOnChange {
-                            smartShowDialogConfirmBtn.apply {
-                                setTextColor(it.color)
-                                paint.isFakeBoldText = it.bold
-                                textSize = it.size
-                            }
-                        }
-
-                        config.confirmBtnListener.applyOnChange { listener ->
-                            smartShowDialogConfirmBtn.setOnClickListener {
-                                val chosenItems = mutableListOf<ChosenItem>()
-                                smartShowListView.checkedItemPositions.forEach { key, value ->
-                                    if (value) chosenItems.add(
-                                        ChosenItem(
-                                            key,
-                                            smartShowListView.getItemAtPosition(key).toString()
-                                        )
-                                    )
-                                }
-                                listener.invoke(dialog, chosenItems)
-                            }
-                        }
-
-                        config.cancelBtnLabel.applyOnChange {
-                            smartShowDialogCancelBtn.text = it
-                        }
-
-                        config.cancelBtnLabelStyle.applyOnChange {
-                            smartShowDialogCancelBtn.apply {
-                                setTextColor(it.color)
-                                paint.isFakeBoldText = it.bold
-                                textSize = it.size
-                            }
-                        }
-
-                        config.cancelBtnListener.applyOnChange { listener ->
-                            smartShowDialogCancelBtn.setOnClickListener {
-                                listener.invoke(dialog)
-                            }
-                        }
-                    }
-            config.dimBehind.applyOnChange {
-                if (it) {
-                    dialog.window?.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
-                } else {
-                    dialog.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+    override fun dialogView(
+        inflater: LayoutInflater,
+        config: Config,
+        dialog: DialogInterface
+    ): View = SmartShowChooseListDialogBinding.inflate(inflater).apply {
+        config.title.dataProcessor {
+            smartShowDialogTitleView.visibility =
+                if (it.isBlank()) View.GONE else View.VISIBLE
+            smartShowDialogTitleView.text = it
+        }
+        config.titleStyle.dataProcessor {
+            it.applyToView(smartShowDialogTitleView)
+        }
+        val adapter = ChooseListAdapter()
+        config.items.dataProcessor {
+            adapter.setItems(it, true)
+            smartShowListView.layoutParams = smartShowListView.layoutParams.apply {
+                smartShowListView.layoutParams = smartShowListView.layoutParams.apply {
+                    val maxVisibleItems = if (Toolkit.isScreenPortrait()) 6 else 2
+                    height = (50 * visibleItems(adapter.count, maxVisibleItems)
+                            + additionalPadding(adapter.count, maxVisibleItems))
+                        .dpToPx()
                 }
             }
-
-            config.cancelable.applyOnChange {
-                dialog.setCancelable(it)
-            }
-
-            config.cancelOnTouchOutside.applyOnChange {
-                dialog.setCanceledOnTouchOutside(it)
-            }
-            config.dialogShowListener.applyOnChange {
-                dialog.setOnShowListener(it)
-            }
-            config.dialogDismissListener.applyOnChange {
-                dialog.setOnDismissListener(it)
-            }
-
-            config.dialogCancelListener.applyOnChange {
-                dialog.setOnCancelListener(it)
-            }
-            val width = min(Toolkit.screenWidth() - 70.dpToPx(), 290.dpToPx())
-            val height = ViewGroup.LayoutParams.WRAP_CONTENT
-            val lp = ViewGroup.MarginLayoutParams(width, height)
-            dialog.setContentView(contentViewBinding.root, lp)
         }
+        config.itemCenter.dataProcessor {
+            adapter.setItemCenter(it, true)
+        }
+        config.itemLabelStyle.dataProcessor {
+            adapter.setItemLabelStyle(it, true)
+        }
+        config.iconColor.dataProcessor {
+            adapter.setIconColor(it, true)
+        }
+        config.iconPosition.dataProcessor {
+            adapter.setIconPosition(it, true)
+        }
+        config.singleChoice.dataProcessor {
+            smartShowListView.choiceMode =
+                if (it) ListView.CHOICE_MODE_SINGLE else ListView.CHOICE_MODE_MULTIPLE
+            adapter.setIconStyle(if (it) LIST_ITEM_ICON_STYLE_CIRCLE else LIST_ITEM_ICON_STYLE_CUBE)
+            adapter.notifyDataSetChanged()
+        }
+        smartShowListView.selector = ColorDrawable(Color.TRANSPARENT)
+        smartShowListView.selector = ColorDrawable(Color.TRANSPARENT)
+        smartShowListView.divider = ColorDrawable(Color.parseColor("#cccccc"))
+        smartShowListView.dividerHeight = 0.5f.dpToPx()
+
+        smartShowListView.adapter = adapter
+        config.defaultChoosePos.dataProcessor {
+            for (pos in 0..adapter.count) {
+                smartShowListView.setItemChecked(pos, it.contains(pos))
+            }
+        }
+        config.confirmBtnLabel.dataProcessor {
+            smartShowDialogConfirmBtn.text = it
+        }
+
+        config.confirmBtnLabelStyle.dataProcessor {
+            it.applyToView(smartShowDialogConfirmBtn)
+        }
+
+        config.confirmBtnListener.dataProcessor { listener ->
+            smartShowDialogConfirmBtn.setOnClickListener {
+                Toolkit.logD("confirm clicked")
+                val chosenItems = mutableListOf<ChosenItem>()
+                smartShowListView.checkedItemPositions.forEach { key, value ->
+                    if (value) chosenItems.add(
+                        ChosenItem(
+                            key,
+                            smartShowListView.getItemAtPosition(key).toString()
+                        )
+                    )
+                }
+                listener.invoke(dialog, chosenItems)
+            }
+        }
+
+        config.cancelBtnLabel.dataProcessor {
+            smartShowDialogCancelBtn.text = it
+        }
+
+        config.cancelBtnLabelStyle.dataProcessor {
+            it.applyToView(smartShowDialogCancelBtn)
+        }
+
+        config.cancelBtnListener.dataProcessor { listener ->
+            smartShowDialogCancelBtn.setOnClickListener {
+                listener.invoke(dialog)
+            }
+        }
+    }.root
 }
 
 private fun visibleItems(totalItems: Int, maxItems: Int): Int = min(totalItems, maxItems)
