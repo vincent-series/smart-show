@@ -34,7 +34,7 @@ class InputNumberDialog : DialogDefinition<InputNumberDialog.Config> {
         val hint = KData<String>()
 
         @DataItem
-        val numberType = KData(NUMBER_TYPE_INT)
+        val numberType = KData(NumberType.INTEGER)
 
         @DataItem
         val numberSigned = KData(false)
@@ -83,14 +83,14 @@ class InputNumberDialog : DialogDefinition<InputNumberDialog.Config> {
         }
         config.numberType.dataProcessor {
             when (it) {
-                NUMBER_TYPE_INT -> {
+                NumberType.INTEGER -> {
                     smartShowInputEdt.inputType = EditorInfo.TYPE_CLASS_NUMBER
                     val fill =
                         if (smartShowInputEdt.text.isBlank() && !config.defaultFilledNumber.existsData()) "0" else config.defaultFilledNumber.data()
                     config.defaultFilledNumber.update(fill, true)
                 }
 
-                NUMBER_TYPE_DECIMAL -> {
+                NumberType.DECIMAL -> {
                     smartShowInputEdt.inputType =
                         EditorInfo.TYPE_CLASS_NUMBER or EditorInfo.TYPE_NUMBER_FLAG_DECIMAL
                     val fill =
@@ -145,9 +145,4 @@ class InputNumberDialog : DialogDefinition<InputNumberDialog.Config> {
         smartShowInputEdt.requestFocus()
     }.root
 }
-
-const val NUMBER_TYPE_INT = 0
-
-const val NUMBER_TYPE_DECIMAL = 1
-
 typealias InputNumberConfirmBtnListener = (dialog: DialogInterface, number: String) -> Unit

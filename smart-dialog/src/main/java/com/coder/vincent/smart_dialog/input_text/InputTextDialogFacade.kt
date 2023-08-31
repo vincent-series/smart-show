@@ -2,6 +2,7 @@ package com.coder.vincent.smart_dialog.input_text
 
 import android.app.Activity
 import android.content.DialogInterface
+import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 
@@ -23,7 +24,7 @@ interface InputTextDialogFacade {
     }
 
     interface Updater : ConfigSetter<Updater> {
-        fun commit(): InputTextDialogFacade.Handle
+        fun commit(): Handle
     }
 
     interface ConfigSetter<T> {
@@ -44,9 +45,9 @@ interface InputTextDialogFacade {
         fun titleResource(@StringRes titleResource: Int): T
 
         fun titleStyle(
-            color: Int?,
-            size: Float?,
-            bold: Boolean?,
+            @ColorInt color: Int,
+            size: Float,
+            bold: Boolean,
         ): T
 
         fun defaultFilledText(defaultFilledText: String): T
@@ -66,9 +67,9 @@ interface InputTextDialogFacade {
         fun confirmBtnLabelResource(@StringRes confirmBtnLabelResource: Int): T
 
         fun confirmBtnLabelStyle(
-            color: Int?,
-            size: Float?,
-            bold: Boolean?,
+            @ColorInt color: Int,
+            size: Float,
+            bold: Boolean,
         ): T
 
         fun confirmBtnListener(confirmBtnListener: Function2<DialogInterface, String, Unit>): T
@@ -78,9 +79,9 @@ interface InputTextDialogFacade {
         fun cancelBtnLabelResource(@StringRes cancelBtnLabelResource: Int): T
 
         fun cancelBtnLabelStyle(
-            color: Int?,
-            size: Float?,
-            bold: Boolean?,
+            @ColorInt color: Int,
+            size: Float,
+            bold: Boolean,
         ): T
 
         fun cancelBtnListener(cancelBtnListener: Function1<DialogInterface, Unit>): T

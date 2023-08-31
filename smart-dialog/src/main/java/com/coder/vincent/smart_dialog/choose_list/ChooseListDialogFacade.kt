@@ -2,8 +2,10 @@ package com.coder.vincent.smart_dialog.choose_list
 
 import android.app.Activity
 import android.content.DialogInterface
+import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
+import com.coder.vincent.series.common_lib.bean.IconPosition
 
 interface ChooseListDialogFacade {
     interface Builder : ConfigSetter<Builder> {
@@ -42,9 +44,9 @@ interface ChooseListDialogFacade {
         fun title(title: String): T
 
         fun titleStyle(
-            color: Int?,
-            size: Float?,
-            bold: Boolean?,
+            @ColorInt color: Int,
+            size: Float,
+            bold: Boolean,
         ): T
 
         fun items(items: List<String>): T
@@ -52,16 +54,16 @@ interface ChooseListDialogFacade {
         fun itemCenter(itemCenter: Boolean): T
 
         fun itemLabelStyle(
-            color: Int?,
-            size: Float?,
-            bold: Boolean?,
+            @ColorInt color: Int,
+            size: Float,
+            bold: Boolean,
         ): T
 
         fun iconColor(iconColor: Int): T
 
         fun iconColorResource(@ColorRes iconColorResource: Int): T
 
-        fun iconPosition(iconPosition: Int): T
+        fun iconPosition(iconPosition: IconPosition): T
 
         fun singleChoice(singleChoice: Boolean): T
 
@@ -72,9 +74,9 @@ interface ChooseListDialogFacade {
         fun confirmBtnLabelResource(@StringRes confirmBtnLabelResource: Int): T
 
         fun confirmBtnLabelStyle(
-            color: Int?,
-            size: Float?,
-            bold: Boolean?,
+            @ColorInt color: Int,
+            size: Float,
+            bold: Boolean,
         ): T
 
 
@@ -84,9 +86,9 @@ interface ChooseListDialogFacade {
         fun cancelBtnLabel(cancelBtnLabel: String): T
 
         fun cancelBtnLabelStyle(
-            color: Int?,
-            size: Float?,
-            bold: Boolean?,
+            @ColorInt color: Int,
+            size: Float,
+            bold: Boolean,
         ): T
 
         fun cancelBtnListener(cancelBtnListener: Function1<DialogInterface, Unit>): T

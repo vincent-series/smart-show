@@ -2,6 +2,7 @@ package com.coder.vincent.smart_dialog.click_list
 
 import android.app.Activity
 import android.content.DialogInterface
+import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
 
 interface ClickListDialogFacade {
@@ -43,9 +44,9 @@ interface ClickListDialogFacade {
         fun titleResource(@StringRes titleResource: Int): T
 
         fun titleStyle(
-            color: Int?,
-            size: Float?,
-            bold: Boolean?,
+            @ColorInt color: Int,
+            size: Float,
+            bold: Boolean,
         ): T
 
         fun items(items: List<String>): T
@@ -53,9 +54,9 @@ interface ClickListDialogFacade {
         fun itemCenter(itemCenter: Boolean): T
 
         fun itemStyle(
-            color: Int?,
-            size: Float?,
-            bold: Boolean?,
+            @ColorInt color: Int,
+            size: Float,
+            bold: Boolean,
         ): T
 
 

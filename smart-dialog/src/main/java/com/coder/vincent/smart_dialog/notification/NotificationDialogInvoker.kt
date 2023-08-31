@@ -3,12 +3,13 @@ package com.coder.vincent.smart_dialog.notification
 import android.app.Activity
 import android.app.Dialog
 import android.content.DialogInterface
+import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
 import com.coder.vincent.series.common_lib.bean.TextStyle
 import com.coder.vincent.series.common_lib.canShowDialog
 import com.coder.vincent.series.common_lib.resourceToString
 
-internal class NotificationDialogImplementations : NotificationDialogFacade.Builder,
+internal class NotificationDialogInvoker : NotificationDialogFacade.Builder,
     NotificationDialogFacade.Handle {
     private val config: NotificationDialog.Config = NotificationDialog.Config()
 
@@ -84,9 +85,9 @@ internal class NotificationDialogImplementations : NotificationDialogFacade.Buil
         }
 
     override fun titleStyle(
-        color: Int?,
-        size: Float?,
-        bold: Boolean?,
+        @ColorInt color: Int,
+        size: Float,
+        bold: Boolean,
     ): NotificationDialogFacade.Builder = this.apply {
         config.titleStyle.update(value = TextStyle(color, size, bold), employ = false)
     }
@@ -101,9 +102,9 @@ internal class NotificationDialogImplementations : NotificationDialogFacade.Buil
         }
 
     override fun messageStyle(
-        color: Int?,
-        size: Float?,
-        bold: Boolean?,
+        @ColorInt color: Int,
+        size: Float,
+        bold: Boolean,
     ): NotificationDialogFacade.Builder = this.apply {
         config.messageStyle.update(value = TextStyle(color, size, bold), employ = false)
     }
@@ -122,9 +123,9 @@ internal class NotificationDialogImplementations : NotificationDialogFacade.Buil
     }
 
     override fun confirmBtnLabelStyle(
-        color: Int?,
-        size: Float?,
-        bold: Boolean?,
+        @ColorInt color: Int,
+        size: Float,
+        bold: Boolean,
     ): NotificationDialogFacade.Builder = this.apply {
         config.confirmBtnLabelStyle.update(value = TextStyle(color, size, bold), employ = false)
     }
@@ -160,10 +161,10 @@ internal class NotificationDialogImplementations : NotificationDialogFacade.Buil
                 config.cancelable.update(value = cancelable, employ = false)
             }
 
-        override fun cancelOnTouchOutside(cancelOnTouchOutside: Boolean): NotificationDialogFacade.Updater =
-            this.apply {
-                config.cancelOnTouchOutside.update(value = cancelOnTouchOutside, employ = false)
-            }
+        override fun cancelOnTouchOutside(cancelOnTouchOutside: Boolean):
+                NotificationDialogFacade.Updater = this.apply {
+            config.cancelOnTouchOutside.update(value = cancelOnTouchOutside, employ = false)
+        }
 
         override fun dialogShowListener(onShowListener: DialogInterface.OnShowListener):
                 NotificationDialogFacade.Updater = this.apply {
@@ -190,9 +191,9 @@ internal class NotificationDialogImplementations : NotificationDialogFacade.Buil
             }
 
         override fun titleStyle(
-            color: Int?,
-            size: Float?,
-            bold: Boolean?,
+            @ColorInt color: Int,
+            size: Float,
+            bold: Boolean,
         ): NotificationDialogFacade.Updater = this.apply {
             config.titleStyle.update(value = TextStyle(color, size, bold), employ = false)
         }
@@ -207,9 +208,9 @@ internal class NotificationDialogImplementations : NotificationDialogFacade.Buil
             }
 
         override fun messageStyle(
-            color: Int?,
-            size: Float?,
-            bold: Boolean?,
+            @ColorInt color: Int,
+            size: Float,
+            bold: Boolean,
         ): NotificationDialogFacade.Updater = this.apply {
             config.messageStyle.update(value = TextStyle(color, size, bold), employ = false)
         }
@@ -228,9 +229,9 @@ internal class NotificationDialogImplementations : NotificationDialogFacade.Buil
         }
 
         override fun confirmBtnLabelStyle(
-            color: Int?,
-            size: Float?,
-            bold: Boolean?,
+            @ColorInt color: Int,
+            size: Float,
+            bold: Boolean,
         ): NotificationDialogFacade.Updater = this.apply {
             config.confirmBtnLabelStyle.update(value = TextStyle(color, size, bold), employ = false)
         }
@@ -242,7 +243,7 @@ internal class NotificationDialogImplementations : NotificationDialogFacade.Buil
 
         override fun commit(): NotificationDialogFacade.Handle {
             employConfig()
-            return this@NotificationDialogImplementations
+            return this@NotificationDialogInvoker
         }
     }
 }

@@ -2,6 +2,7 @@ package com.coder.vincent.smart_dialog.input_num
 
 import android.app.Activity
 import android.content.DialogInterface
+import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
 
 interface InputNumberDialogFacade {
@@ -22,7 +23,7 @@ interface InputNumberDialogFacade {
     }
 
     interface Updater : ConfigSetter<Updater> {
-        fun commit(): InputNumberDialogFacade.Handle
+        fun commit(): Handle
     }
 
     interface ConfigSetter<T> {
@@ -43,9 +44,9 @@ interface InputNumberDialogFacade {
         fun titleResource(@StringRes titleResource: Int): T
 
         fun titleStyle(
-            color: Int?,
-            size: Float?,
-            bold: Boolean?,
+            @ColorInt color: Int,
+            size: Float,
+            bold: Boolean,
         ): T
 
         fun defaultFilledNumber(defaultFilledNumber: String): T
@@ -54,7 +55,7 @@ interface InputNumberDialogFacade {
 
         fun hintResource(@StringRes hintResource: Int): T
 
-        fun numberType(numberType: Int): T
+        fun numberType(numberType: NumberType): T
 
         fun numberSigned(numberSigned: Boolean): T
 
@@ -67,9 +68,9 @@ interface InputNumberDialogFacade {
         fun confirmBtnLabelResource(@StringRes confirmBtnLabelResource: Int): T
 
         fun confirmBtnLabelStyle(
-            color: Int?,
-            size: Float?,
-            bold: Boolean?,
+            @ColorInt color: Int,
+            size: Float,
+            bold: Boolean,
         ): T
 
         fun confirmBtnListener(confirmBtnListener: Function2<DialogInterface, String, Unit>): T
@@ -79,9 +80,9 @@ interface InputNumberDialogFacade {
         fun cancelBtnLabelResource(@StringRes cancelBtnLabelResource: Int): T
 
         fun cancelBtnLabelStyle(
-            color: Int?,
-            size: Float?,
-            bold: Boolean?,
+            @ColorInt color: Int,
+            size: Float,
+            bold: Boolean,
         ): T
 
         fun cancelBtnListener(cancelBtnListener: Function1<DialogInterface, Unit>): T

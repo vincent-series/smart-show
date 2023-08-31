@@ -64,12 +64,6 @@ class ClickListDialog : DialogDefinition<ClickListDialog.Config> {
         val adapter = ClickListAdapter()
         config.items.dataProcessor {
             adapter.setItems(it, true)
-            smartShowListView.layoutParams = smartShowListView.layoutParams.apply {
-                val maxVisibleItems = if (Toolkit.isScreenPortrait()) 6 else 2
-                height = (50 * visibleItems(it.size, maxVisibleItems)
-                        + additionalPadding(it.size, maxVisibleItems))
-                    .dpToPx()
-            }
         }
         config.itemCenter.dataProcessor {
             adapter.setItemCenter(it, true)
@@ -92,9 +86,6 @@ class ClickListDialog : DialogDefinition<ClickListDialog.Config> {
         }
     }.root
 }
-
-private fun visibleItems(totalItems: Int, maxItems: Int): Int = min(totalItems, maxItems)
-private fun additionalPadding(totalItems: Int, maxItems: Int) = if (totalItems > maxItems) 25 else 0
 
 class ClickListAdapter : BaseAdapter() {
     private var items = emptyList<String>()

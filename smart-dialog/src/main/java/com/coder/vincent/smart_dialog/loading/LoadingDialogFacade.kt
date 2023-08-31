@@ -2,6 +2,7 @@ package com.coder.vincent.smart_dialog.loading
 
 import android.app.Activity
 import android.content.DialogInterface
+import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
 
 interface LoadingDialogFacade {
@@ -22,7 +23,7 @@ interface LoadingDialogFacade {
     }
 
     interface Updater : ConfigSetter<Updater> {
-        fun commit(): LoadingDialogFacade.Handle
+        fun commit(): Handle
     }
 
     interface ConfigSetter<T> {
@@ -43,11 +44,11 @@ interface LoadingDialogFacade {
         fun messageResource(@StringRes messageResource: Int): T
 
         fun messageStyle(
-            color: Int?,
-            size: Float?,
-            bold: Boolean?,
+            @ColorInt color: Int,
+            size: Float,
+            bold: Boolean,
         ): T
 
-        fun boxSize(boxSize: Int): T
+        fun boxSize(boxSize: BoxSize): T
     }
 }

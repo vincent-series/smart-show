@@ -2,6 +2,7 @@ package com.coder.vincent.smart_dialog.ensure
 
 import android.app.Activity
 import android.content.DialogInterface
+import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
 
 interface EnsureDialogFacade {
@@ -22,7 +23,7 @@ interface EnsureDialogFacade {
     }
 
     interface Updater : ConfigSetter<Updater> {
-        fun commit(): EnsureDialogFacade.Handle
+        fun commit(): Handle
     }
 
     interface ConfigSetter<T> {
@@ -43,9 +44,9 @@ interface EnsureDialogFacade {
         fun titleResource(@StringRes titleResource: Int): T
 
         fun titleStyle(
-            color: Int?,
-            size: Float?,
-            bold: Boolean?,
+            @ColorInt color: Int,
+            size: Float,
+            bold: Boolean,
         ): T
 
         fun message(message: String): T
@@ -53,9 +54,9 @@ interface EnsureDialogFacade {
         fun messageResource(@StringRes messageResource: Int): T
 
         fun messageStyle(
-            color: Int?,
-            size: Float?,
-            bold: Boolean?,
+            @ColorInt color: Int,
+            size: Float,
+            bold: Boolean,
         ): T
 
         fun confirmBtnLabel(confirmBtnLabel: String): T
@@ -63,9 +64,9 @@ interface EnsureDialogFacade {
         fun confirmBtnLabelResource(@StringRes confirmBtnLabelResource: Int): T
 
         fun confirmBtnLabelStyle(
-            color: Int?,
-            size: Float?,
-            bold: Boolean?,
+            @ColorInt color: Int,
+            size: Float,
+            bold: Boolean,
         ): T
 
         fun confirmBtnListener(confirmBtnListener: Function1<DialogInterface, Unit>): T
@@ -77,9 +78,9 @@ interface EnsureDialogFacade {
         fun cancelBtnLabelResource(@StringRes cancelBtnLabelResource: Int): T
 
         fun cancelBtnLabelStyle(
-            color: Int?,
-            size: Float?,
-            bold: Boolean?,
+            @ColorInt color: Int,
+            size: Float,
+            bold: Boolean,
         ): T
 
         fun cancelBtnListener(cancelBtnListener: Function1<DialogInterface, Unit>): T

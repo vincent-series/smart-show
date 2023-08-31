@@ -10,7 +10,7 @@ import com.coder.vincent.smart_dialog.createDialogInstance
 internal class NotificationDialogFactory {
     private val definition: NotificationDialog = NotificationDialog()
 
-     fun produceDialog(activity: Activity, config: NotificationDialog.Config): Dialog =
+    fun produceDialog(activity: Activity, config: NotificationDialog.Config): Dialog =
         activity.createDialogInstance(definition.dialogStyle()).apply {
             definition.setupWindowAttributes(window!!)
             config.dimBehind.dataProcessor {

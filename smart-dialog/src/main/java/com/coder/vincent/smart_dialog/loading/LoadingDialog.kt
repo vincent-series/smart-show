@@ -32,7 +32,7 @@ class LoadingDialog : DialogDefinition<LoadingDialog.Config> {
         val messageStyle = KData<TextStyle>()
 
         @DataItem
-        val boxSize = KData(BOX_SIZE_LARGE)
+        val boxSize = KData(BoxSize.LARGE)
     }
 
     override fun dialogStyle(): Int = R.style.smart_show_no_dim_dialog
@@ -57,7 +57,7 @@ class LoadingDialog : DialogDefinition<LoadingDialog.Config> {
             var msgViewSidePadding = 0
             var msgViewTextSize = 0
             when (it) {
-                BOX_SIZE_LARGE -> {
+                BoxSize.LARGE -> {
                     loadPartPadding = 15.dpToPx()
                     progressBarSize = 32.dpToPx()
                     showMsg = true
@@ -65,7 +65,7 @@ class LoadingDialog : DialogDefinition<LoadingDialog.Config> {
                     msgViewTextSize = 15
                 }
 
-                BOX_SIZE_MIDDLE -> {
+                BoxSize.MIDDLE -> {
                     loadPartPadding = 15.dpToPx()
                     progressBarSize = 24.dpToPx()
                     showMsg = true
@@ -73,7 +73,7 @@ class LoadingDialog : DialogDefinition<LoadingDialog.Config> {
                     msgViewTextSize = 12
                 }
 
-                BOX_SIZE_SMALL -> {
+                BoxSize.SMALL -> {
                     loadPartPadding = 8.dpToPx()
                     progressBarSize = 20.dpToPx()
                     showMsg = false
@@ -110,7 +110,3 @@ class LoadingDialog : DialogDefinition<LoadingDialog.Config> {
         }
     }.root
 }
-
-const val BOX_SIZE_LARGE = 0
-const val BOX_SIZE_MIDDLE = 1
-const val BOX_SIZE_SMALL = 2

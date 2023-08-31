@@ -9,6 +9,7 @@ import android.widget.BaseAdapter
 import android.widget.CheckedTextView
 import androidx.core.graphics.drawable.DrawableCompat
 import com.coder.vincent.series.common_lib.Toolkit
+import com.coder.vincent.series.common_lib.bean.IconPosition
 import com.coder.vincent.series.common_lib.bean.TextStyle
 import com.coder.vincent.series.common_lib.dpToPx
 import com.coder.vincent.series.common_lib.resourceToColor
@@ -18,11 +19,11 @@ import com.coder.vincent.smart_dialog.databinding.ListItemChoiceBinding
 
 class ChooseListAdapter : BaseAdapter() {
     private var items: List<String> = listOf()
-    private var iconStyle: Int = LIST_ITEM_ICON_STYLE_CIRCLE
+    private var iconStyle = IconStyle.CIRCLE
     private var itemCenter: Boolean = true
     private var itemLabelStyle: TextStyle? = null
     private var iconColor: Int = R.color.colorPrimary.resourceToColor()
-    private var iconPosition: Int = LIST_ITEM_ICON_POSITION_LEFT
+    private var iconPosition = IconPosition.LEFT
 
     fun setItems(items: List<String>, notify: Boolean = true) {
         this.items = items
@@ -31,7 +32,7 @@ class ChooseListAdapter : BaseAdapter() {
         }
     }
 
-    fun setIconStyle(style: Int, notify: Boolean = true) {
+    fun setIconStyle(style: IconStyle, notify: Boolean = true) {
         this.iconStyle = style
         if (notify) {
             notifyDataSetChanged()
@@ -59,7 +60,7 @@ class ChooseListAdapter : BaseAdapter() {
         }
     }
 
-    fun setIconPosition(position: Int, notify: Boolean = true) {
+    fun setIconPosition(position: IconPosition, notify: Boolean = true) {
         this.iconPosition = position
         if (notify) {
             notifyDataSetChanged()
@@ -90,14 +91,14 @@ class ChooseListAdapter : BaseAdapter() {
             itemLabelStyle?.applyToView(this)
             val stateListDrawable = StateListDrawable()
             val checkedDrawable =
-                if (iconStyle == LIST_ITEM_ICON_STYLE_CIRCLE)
+                if (iconStyle == IconStyle.CIRCLE)
                     R.drawable.smart_show_circle_choose.resourceToDrawable()
                 else
                     R.drawable.smart_show_cube_choose.resourceToDrawable()
             DrawableCompat.setTint(checkedDrawable!!, iconColor)
             stateListDrawable.addState(intArrayOf(android.R.attr.state_checked), checkedDrawable)
             val uncheckedDrawable =
-                if (iconStyle == LIST_ITEM_ICON_STYLE_CIRCLE)
+                if (iconStyle == IconStyle.CIRCLE)
                     R.drawable.smart_show_circle_unchoose.resourceToDrawable()
                 else
                     R.drawable.smart_show_cube_unchoose.resourceToDrawable()
@@ -105,7 +106,7 @@ class ChooseListAdapter : BaseAdapter() {
             stateListDrawable.setBounds(0, 0, 17f.dpToPx(), 17f.dpToPx())
             var leftDrawable: Drawable? = null
             var rightDrawable: Drawable? = null
-            if (iconPosition == LIST_ITEM_ICON_POSITION_LEFT) {
+            if (iconPosition == IconPosition.LEFT) {
                 leftDrawable = stateListDrawable
             } else {
                 rightDrawable = stateListDrawable

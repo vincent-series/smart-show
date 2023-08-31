@@ -3,14 +3,16 @@ package com.coder.vincent.smart_dialog.choose_list
 import android.app.Activity
 import android.app.Dialog
 import android.content.DialogInterface
+import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
+import com.coder.vincent.series.common_lib.bean.IconPosition
 import com.coder.vincent.series.common_lib.bean.TextStyle
 import com.coder.vincent.series.common_lib.canShowDialog
 import com.coder.vincent.series.common_lib.resourceToColor
 import com.coder.vincent.series.common_lib.resourceToString
 
-internal class ChooseListDialogImplementations : ChooseListDialogFacade.Builder,
+internal class ChooseListDialogInvoker : ChooseListDialogFacade.Builder,
     ChooseListDialogFacade.Handle {
     private val config: ChooseListDialog.Config = ChooseListDialog.Config()
 
@@ -81,9 +83,9 @@ internal class ChooseListDialogImplementations : ChooseListDialogFacade.Builder,
     }
 
     override fun titleStyle(
-        color: Int?,
-        size: Float?,
-        bold: Boolean?,
+        @ColorInt color: Int,
+        size: Float,
+        bold: Boolean,
     ): ChooseListDialogFacade.Builder = this.apply {
         config.titleStyle.update(value = TextStyle(color, size, bold), employ = false)
     }
@@ -97,9 +99,9 @@ internal class ChooseListDialogImplementations : ChooseListDialogFacade.Builder,
     }
 
     override fun itemLabelStyle(
-        color: Int?,
-        size: Float?,
-        bold: Boolean?,
+        @ColorInt color: Int,
+        size: Float,
+        bold: Boolean,
     ): ChooseListDialogFacade.Builder = this.apply {
         config.itemLabelStyle.update(value = TextStyle(color, size, bold), employ = false)
     }
@@ -113,9 +115,10 @@ internal class ChooseListDialogImplementations : ChooseListDialogFacade.Builder,
             config.iconColor.update(value = iconColorResource.resourceToColor(), employ = false)
         }
 
-    override fun iconPosition(iconPosition: Int): ChooseListDialogFacade.Builder = this.apply {
-        config.iconPosition.update(value = iconPosition, employ = false)
-    }
+    override fun iconPosition(iconPosition: IconPosition): ChooseListDialogFacade.Builder =
+        this.apply {
+            config.iconPosition.update(value = iconPosition, employ = false)
+        }
 
     override fun singleChoice(singleChoice: Boolean): ChooseListDialogFacade.Builder = this.apply {
         config.singleChoice.update(value = singleChoice, employ = false)
@@ -140,9 +143,9 @@ internal class ChooseListDialogImplementations : ChooseListDialogFacade.Builder,
     }
 
     override fun confirmBtnLabelStyle(
-        color: Int?,
-        size: Float?,
-        bold: Boolean?,
+        @ColorInt color: Int,
+        size: Float,
+        bold: Boolean,
     ): ChooseListDialogFacade.Builder = this.apply {
         config.confirmBtnLabelStyle.update(value = TextStyle(color, size, bold), employ = false)
     }
@@ -159,9 +162,9 @@ internal class ChooseListDialogImplementations : ChooseListDialogFacade.Builder,
         }
 
     override fun cancelBtnLabelStyle(
-        color: Int?,
-        size: Float?,
-        bold: Boolean?,
+        @ColorInt color: Int,
+        size: Float,
+        bold: Boolean,
     ): ChooseListDialogFacade.Builder = this.apply {
         config.cancelBtnLabelStyle.update(value = TextStyle(color, size, bold), employ = false)
     }
@@ -229,9 +232,9 @@ internal class ChooseListDialogImplementations : ChooseListDialogFacade.Builder,
         }
 
         override fun titleStyle(
-            color: Int?,
-            size: Float?,
-            bold: Boolean?,
+            @ColorInt color: Int,
+            size: Float,
+            bold: Boolean,
         ): ChooseListDialogFacade.Updater = this.apply {
             config.titleStyle.update(value = TextStyle(color, size, bold), employ = false)
         }
@@ -245,9 +248,9 @@ internal class ChooseListDialogImplementations : ChooseListDialogFacade.Builder,
         }
 
         override fun itemLabelStyle(
-            color: Int?,
-            size: Float?,
-            bold: Boolean?,
+            @ColorInt color: Int,
+            size: Float,
+            bold: Boolean,
         ): ChooseListDialogFacade.Updater = this.apply {
             config.itemLabelStyle.update(value = TextStyle(color, size, bold), employ = false)
         }
@@ -261,9 +264,10 @@ internal class ChooseListDialogImplementations : ChooseListDialogFacade.Builder,
                 config.iconColor.update(value = iconColorResource.resourceToColor(), employ = false)
             }
 
-        override fun iconPosition(iconPosition: Int): ChooseListDialogFacade.Updater = this.apply {
-            config.iconPosition.update(value = iconPosition, employ = false)
-        }
+        override fun iconPosition(iconPosition: IconPosition): ChooseListDialogFacade.Updater =
+            this.apply {
+                config.iconPosition.update(value = iconPosition, employ = false)
+            }
 
         override fun singleChoice(singleChoice: Boolean): ChooseListDialogFacade.Updater =
             this.apply {
@@ -289,9 +293,9 @@ internal class ChooseListDialogImplementations : ChooseListDialogFacade.Builder,
         }
 
         override fun confirmBtnLabelStyle(
-            color: Int?,
-            size: Float?,
-            bold: Boolean?,
+            @ColorInt color: Int,
+            size: Float,
+            bold: Boolean,
         ): ChooseListDialogFacade.Updater = this.apply {
             config.confirmBtnLabelStyle.update(value = TextStyle(color, size, bold), employ = false)
         }
@@ -308,9 +312,9 @@ internal class ChooseListDialogImplementations : ChooseListDialogFacade.Builder,
             }
 
         override fun cancelBtnLabelStyle(
-            color: Int?,
-            size: Float?,
-            bold: Boolean?,
+            @ColorInt color: Int,
+            size: Float,
+            bold: Boolean,
         ): ChooseListDialogFacade.Updater = this.apply {
             config.cancelBtnLabelStyle.update(value = TextStyle(color, size, bold), employ = false)
         }
@@ -322,7 +326,7 @@ internal class ChooseListDialogImplementations : ChooseListDialogFacade.Builder,
 
         override fun commit(): ChooseListDialogFacade.Handle {
             employConfig()
-            return this@ChooseListDialogImplementations
+            return this@ChooseListDialogInvoker
         }
     }
 }

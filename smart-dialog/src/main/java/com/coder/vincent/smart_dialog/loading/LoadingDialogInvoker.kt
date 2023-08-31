@@ -3,13 +3,13 @@ package com.coder.vincent.smart_dialog.loading
 import android.app.Activity
 import android.app.Dialog
 import android.content.DialogInterface
+import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
 import com.coder.vincent.series.common_lib.bean.TextStyle
 import com.coder.vincent.series.common_lib.canShowDialog
 import com.coder.vincent.series.common_lib.resourceToString
 
-internal class LoadingDialogImplementations : LoadingDialogFacade.Builder,
-    LoadingDialogFacade.Handle {
+internal class LoadingDialogInvoker : LoadingDialogFacade.Builder, LoadingDialogFacade.Handle {
     private val config: LoadingDialog.Config = LoadingDialog.Config()
 
     private val updater: LoadingDialogFacade.Updater = InnerClass()
@@ -84,14 +84,14 @@ internal class LoadingDialogImplementations : LoadingDialogFacade.Builder,
         }
 
     override fun messageStyle(
-        color: Int?,
-        size: Float?,
-        bold: Boolean?,
+        @ColorInt color: Int,
+        size: Float,
+        bold: Boolean,
     ): LoadingDialogFacade.Builder = this.apply {
         config.messageStyle.update(value = TextStyle(color, size, bold), employ = false)
     }
 
-    override fun boxSize(boxSize: Int): LoadingDialogFacade.Builder = this.apply {
+    override fun boxSize(boxSize: BoxSize): LoadingDialogFacade.Builder = this.apply {
         config.boxSize.update(value = boxSize, employ = false)
     }
 
@@ -146,20 +146,20 @@ internal class LoadingDialogImplementations : LoadingDialogFacade.Builder,
             }
 
         override fun messageStyle(
-            color: Int?,
-            size: Float?,
-            bold: Boolean?,
+            @ColorInt color: Int,
+            size: Float,
+            bold: Boolean,
         ): LoadingDialogFacade.Updater = this.apply {
             config.messageStyle.update(value = TextStyle(color, size, bold), employ = false)
         }
 
-        override fun boxSize(boxSize: Int): LoadingDialogFacade.Updater = this.apply {
+        override fun boxSize(boxSize: BoxSize): LoadingDialogFacade.Updater = this.apply {
             config.boxSize.update(value = boxSize, employ = false)
         }
 
         override fun commit(): LoadingDialogFacade.Handle {
             employConfig()
-            return this@LoadingDialogImplementations
+            return this@LoadingDialogInvoker
         }
     }
 }

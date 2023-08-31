@@ -1,27 +1,23 @@
-package com.coder.vincent.smart_dialog.input_num
+package com.coder.vincent.smart_dialog.input_text
 
 import android.app.Activity
 import android.app.Dialog
 import android.content.DialogInterface
-import androidx.`annotation`.StringRes
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.annotation.StringRes
 import com.coder.vincent.series.common_lib.bean.TextStyle
 import com.coder.vincent.series.common_lib.canShowDialog
+import com.coder.vincent.series.common_lib.resourceToColor
 import com.coder.vincent.series.common_lib.resourceToString
-import kotlin.Boolean
-import kotlin.Float
-import kotlin.Function1
-import kotlin.Function2
-import kotlin.Int
-import kotlin.String
-import kotlin.Unit
 
-internal class InputNumberDialogImplementations : InputNumberDialogFacade.Builder,
-    InputNumberDialogFacade.Handle {
-    private val config: InputNumberDialog.Config = InputNumberDialog.Config()
+internal class InputTextDialogInvoker : InputTextDialogFacade.Builder,
+    InputTextDialogFacade.Handle {
+    private val config: InputTextDialog.Config = InputTextDialog.Config()
 
-    private val updater: InputNumberDialogFacade.Updater = InnerClass()
+    private val updater: InputTextDialogFacade.Updater = InnerClass()
 
-    private val dialogFactory: InputNumberDialogFactory = InputNumberDialogFactory()
+    private val dialogFactory: InputTextDialogFactory = InputTextDialogFactory()
 
     private var dialog: Dialog? = null
 
@@ -41,7 +37,7 @@ internal class InputNumberDialogImplementations : InputNumberDialogFacade.Builde
 
     override fun isShowing(): Boolean = dialog?.isShowing() == true
 
-    override fun build(activity: Activity): InputNumberDialogFacade.Handle {
+    override fun build(activity: Activity): InputTextDialogFacade.Handle {
         if (!activity.canShowDialog()) {
             return this
         }
@@ -51,91 +47,91 @@ internal class InputNumberDialogImplementations : InputNumberDialogFacade.Builde
         return this
     }
 
-    override fun updater(): InputNumberDialogFacade.Updater = updater
+    override fun updater(): InputTextDialogFacade.Updater = updater
 
-    override fun dimBehind(dim: Boolean): InputNumberDialogFacade.Builder = this.apply {
+    override fun dimBehind(dim: Boolean): InputTextDialogFacade.Builder = this.apply {
         config.dimBehind.update(value = dim, employ = false)
     }
 
-    override fun cancelable(cancelable: Boolean): InputNumberDialogFacade.Builder = this.apply {
+    override fun cancelable(cancelable: Boolean): InputTextDialogFacade.Builder = this.apply {
         config.cancelable.update(value = cancelable, employ = false)
     }
 
-    override fun cancelOnTouchOutside(cancelOnTouchOutside: Boolean): InputNumberDialogFacade.Builder =
+    override fun cancelOnTouchOutside(cancelOnTouchOutside: Boolean): InputTextDialogFacade.Builder =
         this.apply {
             config.cancelOnTouchOutside.update(value = cancelOnTouchOutside, employ = false)
         }
 
     override fun dialogShowListener(onShowListener: DialogInterface.OnShowListener):
-            InputNumberDialogFacade.Builder = this.apply {
+            InputTextDialogFacade.Builder = this.apply {
         config.dialogShowListener.update(value = onShowListener, employ = false)
     }
 
     override fun dialogDismissListener(onDismissListener: DialogInterface.OnDismissListener):
-            InputNumberDialogFacade.Builder = this.apply {
+            InputTextDialogFacade.Builder = this.apply {
         config.dialogDismissListener.update(value = onDismissListener, employ = false)
     }
 
     override fun dialogCancelListener(onCancelListener: DialogInterface.OnCancelListener):
-            InputNumberDialogFacade.Builder = this.apply {
+            InputTextDialogFacade.Builder = this.apply {
         config.dialogCancelListener.update(value = onCancelListener, employ = false)
     }
 
-    override fun title(title: String): InputNumberDialogFacade.Builder = this.apply {
+    override fun title(title: String): InputTextDialogFacade.Builder = this.apply {
         config.title.update(value = title, employ = false)
     }
 
-    override fun titleResource(@StringRes titleResource: Int): InputNumberDialogFacade.Builder =
+    override fun titleResource(@StringRes titleResource: Int): InputTextDialogFacade.Builder =
         this.apply {
             config.title.update(value = titleResource.resourceToString(), employ = false)
         }
 
     override fun titleStyle(
-        color: Int?,
-        size: Float?,
-        bold: Boolean?,
-    ): InputNumberDialogFacade.Builder = this.apply {
+        @ColorInt color: Int,
+        size: Float,
+        bold: Boolean,
+    ): InputTextDialogFacade.Builder = this.apply {
         config.titleStyle.update(value = TextStyle(color, size, bold), employ = false)
     }
 
-    override fun defaultFilledNumber(defaultFilledNumber: String): InputNumberDialogFacade.Builder =
+    override fun defaultFilledText(defaultFilledText: String): InputTextDialogFacade.Builder =
         this.apply {
-            config.defaultFilledNumber.update(value = defaultFilledNumber, employ = false)
+            config.defaultFilledText.update(value = defaultFilledText, employ = false)
         }
 
-    override fun hint(hint: String): InputNumberDialogFacade.Builder = this.apply {
+    override fun hint(hint: String): InputTextDialogFacade.Builder = this.apply {
         config.hint.update(value = hint, employ = false)
     }
 
-    override fun hintResource(@StringRes hintResource: Int): InputNumberDialogFacade.Builder =
+    override fun hintResource(@StringRes hintResource: Int): InputTextDialogFacade.Builder =
         this.apply {
             config.hint.update(value = hintResource.resourceToString(), employ = false)
         }
 
-    override fun numberType(numberType: Int): InputNumberDialogFacade.Builder = this.apply {
-        config.numberType.update(value = numberType, employ = false)
+    override fun mostInputNum(mostInputNum: Int): InputTextDialogFacade.Builder = this.apply {
+        config.mostInputNum.update(value = mostInputNum, employ = false)
     }
 
-    override fun numberSigned(numberSigned: Boolean): InputNumberDialogFacade.Builder = this.apply {
-        config.numberSigned.update(value = numberSigned, employ = false)
-    }
-
-    override fun numberUnit(numberUnit: String): InputNumberDialogFacade.Builder = this.apply {
-        config.numberUnit.update(value = numberUnit, employ = false)
-    }
-
-    override fun numberUnitResource(@StringRes numberUnitResource: Int): InputNumberDialogFacade.Builder =
+    override fun inputNumMarkColor(inputNumMarkColor: Int): InputTextDialogFacade.Builder =
         this.apply {
-            config.numberUnit.update(value = numberUnitResource.resourceToString(), employ = false)
+            config.inputNumMarkColor.update(value = inputNumMarkColor, employ = false)
         }
 
-    override fun confirmBtnLabel(confirmBtnLabel: String): InputNumberDialogFacade.Builder =
+    override fun inputNumMarkColorResource(@ColorRes inputNumMarkColorResource: Int):
+            InputTextDialogFacade.Builder = this.apply {
+        config.inputNumMarkColor.update(
+            value = inputNumMarkColorResource.resourceToColor(),
+            employ = false
+        )
+    }
+
+    override fun confirmBtnLabel(confirmBtnLabel: String): InputTextDialogFacade.Builder =
         this.apply {
             config.confirmBtnLabel.update(value = confirmBtnLabel, employ = false)
         }
 
     override fun confirmBtnLabelResource(@StringRes confirmBtnLabelResource: Int):
-            InputNumberDialogFacade.Builder = this.apply {
+            InputTextDialogFacade.Builder = this.apply {
         config.confirmBtnLabel.update(
             value = confirmBtnLabelResource.resourceToString(), employ =
             false
@@ -143,25 +139,25 @@ internal class InputNumberDialogImplementations : InputNumberDialogFacade.Builde
     }
 
     override fun confirmBtnLabelStyle(
-        color: Int?,
-        size: Float?,
-        bold: Boolean?,
-    ): InputNumberDialogFacade.Builder = this.apply {
+        @ColorInt color: Int,
+        size: Float,
+        bold: Boolean,
+    ): InputTextDialogFacade.Builder = this.apply {
         config.confirmBtnLabelStyle.update(value = TextStyle(color, size, bold), employ = false)
     }
 
     override fun confirmBtnListener(confirmBtnListener: Function2<DialogInterface, String, Unit>):
-            InputNumberDialogFacade.Builder = this.apply {
+            InputTextDialogFacade.Builder = this.apply {
         config.confirmBtnListener.update(value = confirmBtnListener, employ = false)
     }
 
-    override fun cancelBtnLabel(cancelBtnLabel: String): InputNumberDialogFacade.Builder =
+    override fun cancelBtnLabel(cancelBtnLabel: String): InputTextDialogFacade.Builder =
         this.apply {
             config.cancelBtnLabel.update(value = cancelBtnLabel, employ = false)
         }
 
     override fun cancelBtnLabelResource(@StringRes cancelBtnLabelResource: Int):
-            InputNumberDialogFacade.Builder = this.apply {
+            InputTextDialogFacade.Builder = this.apply {
         config.cancelBtnLabel.update(
             value = cancelBtnLabelResource.resourceToString(), employ =
             false
@@ -169,15 +165,15 @@ internal class InputNumberDialogImplementations : InputNumberDialogFacade.Builde
     }
 
     override fun cancelBtnLabelStyle(
-        color: Int?,
-        size: Float?,
-        bold: Boolean?,
-    ): InputNumberDialogFacade.Builder = this.apply {
+        @ColorInt color: Int,
+        size: Float,
+        bold: Boolean,
+    ): InputTextDialogFacade.Builder = this.apply {
         config.cancelBtnLabelStyle.update(value = TextStyle(color, size, bold), employ = false)
     }
 
     override fun cancelBtnListener(cancelBtnListener: Function1<DialogInterface, Unit>):
-            InputNumberDialogFacade.Builder = this.apply {
+            InputTextDialogFacade.Builder = this.apply {
         config.cancelBtnListener.update(value = cancelBtnListener, employ = false)
     }
 
@@ -190,11 +186,10 @@ internal class InputNumberDialogImplementations : InputNumberDialogFacade.Builde
         config.dialogCancelListener.employIfChanged()
         config.title.employIfChanged()
         config.titleStyle.employIfChanged()
-        config.defaultFilledNumber.employIfChanged()
+        config.defaultFilledText.employIfChanged()
         config.hint.employIfChanged()
-        config.numberType.employIfChanged()
-        config.numberSigned.employIfChanged()
-        config.numberUnit.employIfChanged()
+        config.mostInputNum.employIfChanged()
+        config.inputNumMarkColor.employIfChanged()
         config.confirmBtnLabel.employIfChanged()
         config.confirmBtnLabelStyle.employIfChanged()
         config.confirmBtnListener.employIfChanged()
@@ -203,94 +198,90 @@ internal class InputNumberDialogImplementations : InputNumberDialogFacade.Builde
         config.cancelBtnListener.employIfChanged()
     }
 
-    private inner class InnerClass : InputNumberDialogFacade.Updater {
-        override fun dimBehind(dim: Boolean): InputNumberDialogFacade.Updater = this.apply {
+    private inner class InnerClass : InputTextDialogFacade.Updater {
+        override fun dimBehind(dim: Boolean): InputTextDialogFacade.Updater = this.apply {
             config.dimBehind.update(value = dim, employ = false)
         }
 
-        override fun cancelable(cancelable: Boolean): InputNumberDialogFacade.Updater = this.apply {
+        override fun cancelable(cancelable: Boolean): InputTextDialogFacade.Updater = this.apply {
             config.cancelable.update(value = cancelable, employ = false)
         }
 
-        override fun cancelOnTouchOutside(cancelOnTouchOutside: Boolean): InputNumberDialogFacade.Updater =
+        override fun cancelOnTouchOutside(cancelOnTouchOutside: Boolean): InputTextDialogFacade.Updater =
             this.apply {
                 config.cancelOnTouchOutside.update(value = cancelOnTouchOutside, employ = false)
             }
 
         override fun dialogShowListener(onShowListener: DialogInterface.OnShowListener):
-                InputNumberDialogFacade.Updater = this.apply {
+                InputTextDialogFacade.Updater = this.apply {
             config.dialogShowListener.update(value = onShowListener, employ = false)
         }
 
         override fun dialogDismissListener(onDismissListener: DialogInterface.OnDismissListener):
-                InputNumberDialogFacade.Updater = this.apply {
+                InputTextDialogFacade.Updater = this.apply {
             config.dialogDismissListener.update(value = onDismissListener, employ = false)
         }
 
         override fun dialogCancelListener(onCancelListener: DialogInterface.OnCancelListener):
-                InputNumberDialogFacade.Updater = this.apply {
+                InputTextDialogFacade.Updater = this.apply {
             config.dialogCancelListener.update(value = onCancelListener, employ = false)
         }
 
-        override fun title(title: String): InputNumberDialogFacade.Updater = this.apply {
+        override fun title(title: String): InputTextDialogFacade.Updater = this.apply {
             config.title.update(value = title, employ = false)
         }
 
-        override fun titleResource(@StringRes titleResource: Int): InputNumberDialogFacade.Updater =
+        override fun titleResource(@StringRes titleResource: Int): InputTextDialogFacade.Updater =
             this.apply {
                 config.title.update(value = titleResource.resourceToString(), employ = false)
             }
 
         override fun titleStyle(
-            color: Int?,
-            size: Float?,
-            bold: Boolean?,
-        ): InputNumberDialogFacade.Updater = this.apply {
+            @ColorInt color: Int,
+            size: Float,
+            bold: Boolean,
+        ): InputTextDialogFacade.Updater = this.apply {
             config.titleStyle.update(value = TextStyle(color, size, bold), employ = false)
         }
 
-        override fun defaultFilledNumber(defaultFilledNumber: String): InputNumberDialogFacade.Updater =
+        override fun defaultFilledText(defaultFilledText: String): InputTextDialogFacade.Updater =
             this.apply {
-                config.defaultFilledNumber.update(value = defaultFilledNumber, employ = false)
+                config.defaultFilledText.update(value = defaultFilledText, employ = false)
             }
 
-        override fun hint(hint: String): InputNumberDialogFacade.Updater = this.apply {
+        override fun hint(hint: String): InputTextDialogFacade.Updater = this.apply {
             config.hint.update(value = hint, employ = false)
         }
 
-        override fun hintResource(@StringRes hintResource: Int): InputNumberDialogFacade.Updater =
+        override fun hintResource(@StringRes hintResource: Int): InputTextDialogFacade.Updater =
             this.apply {
                 config.hint.update(value = hintResource.resourceToString(), employ = false)
             }
 
-        override fun numberType(numberType: Int): InputNumberDialogFacade.Updater = this.apply {
-            config.numberType.update(value = numberType, employ = false)
+        override fun mostInputNum(mostInputNum: Int): InputTextDialogFacade.Updater = this.apply {
+            config.mostInputNum.update(value = mostInputNum, employ = false)
         }
 
-        override fun numberSigned(numberSigned: Boolean): InputNumberDialogFacade.Updater =
+        override fun inputNumMarkColor(inputNumMarkColor: Int): InputTextDialogFacade.Updater =
             this.apply {
-                config.numberSigned.update(value = numberSigned, employ = false)
+                config.inputNumMarkColor.update(value = inputNumMarkColor, employ = false)
             }
 
-        override fun numberUnit(numberUnit: String): InputNumberDialogFacade.Updater = this.apply {
-            config.numberUnit.update(value = numberUnit, employ = false)
+        override fun inputNumMarkColorResource(@ColorRes inputNumMarkColorResource: Int):
+                InputTextDialogFacade.Updater = this.apply {
+            config.inputNumMarkColor.update(
+                value = inputNumMarkColorResource.resourceToColor(),
+                employ = false
+            )
         }
 
-        override fun numberUnitResource(@StringRes numberUnitResource: Int): InputNumberDialogFacade.Updater =
-            this.apply {
-                config.numberUnit.update(
-                    value = numberUnitResource.resourceToString(),
-                    employ = false
-                )
-            }
-
-        override fun confirmBtnLabel(confirmBtnLabel: String): InputNumberDialogFacade.Updater =
+        override fun confirmBtnLabel(confirmBtnLabel: String): InputTextDialogFacade.Updater =
             this.apply {
                 config.confirmBtnLabel.update(value = confirmBtnLabel, employ = false)
             }
 
         override fun confirmBtnLabelResource(@StringRes confirmBtnLabelResource: Int):
-                InputNumberDialogFacade.Updater = this.apply {
+                InputTextDialogFacade.Updater = this.apply {
             config.confirmBtnLabel.update(
                 value = confirmBtnLabelResource.resourceToString(), employ
                 = false
@@ -298,25 +289,25 @@ internal class InputNumberDialogImplementations : InputNumberDialogFacade.Builde
         }
 
         override fun confirmBtnLabelStyle(
-            color: Int?,
-            size: Float?,
-            bold: Boolean?,
-        ): InputNumberDialogFacade.Updater = this.apply {
+            @ColorInt color: Int,
+            size: Float,
+            bold: Boolean,
+        ): InputTextDialogFacade.Updater = this.apply {
             config.confirmBtnLabelStyle.update(value = TextStyle(color, size, bold), employ = false)
         }
 
         override fun confirmBtnListener(confirmBtnListener: Function2<DialogInterface, String, Unit>):
-                InputNumberDialogFacade.Updater = this.apply {
+                InputTextDialogFacade.Updater = this.apply {
             config.confirmBtnListener.update(value = confirmBtnListener, employ = false)
         }
 
-        override fun cancelBtnLabel(cancelBtnLabel: String): InputNumberDialogFacade.Updater =
+        override fun cancelBtnLabel(cancelBtnLabel: String): InputTextDialogFacade.Updater =
             this.apply {
                 config.cancelBtnLabel.update(value = cancelBtnLabel, employ = false)
             }
 
         override fun cancelBtnLabelResource(@StringRes cancelBtnLabelResource: Int):
-                InputNumberDialogFacade.Updater = this.apply {
+                InputTextDialogFacade.Updater = this.apply {
             config.cancelBtnLabel.update(
                 value = cancelBtnLabelResource.resourceToString(), employ =
                 false
@@ -324,21 +315,21 @@ internal class InputNumberDialogImplementations : InputNumberDialogFacade.Builde
         }
 
         override fun cancelBtnLabelStyle(
-            color: Int?,
-            size: Float?,
-            bold: Boolean?,
-        ): InputNumberDialogFacade.Updater = this.apply {
+            @ColorInt color: Int,
+            size: Float,
+            bold: Boolean,
+        ): InputTextDialogFacade.Updater = this.apply {
             config.cancelBtnLabelStyle.update(value = TextStyle(color, size, bold), employ = false)
         }
 
         override fun cancelBtnListener(cancelBtnListener: Function1<DialogInterface, Unit>):
-                InputNumberDialogFacade.Updater = this.apply {
+                InputTextDialogFacade.Updater = this.apply {
             config.cancelBtnListener.update(value = cancelBtnListener, employ = false)
         }
 
-        override fun commit(): InputNumberDialogFacade.Handle {
+        override fun commit(): InputTextDialogFacade.Handle {
             employConfig()
-            return this@InputNumberDialogImplementations
+            return this@InputTextDialogInvoker
         }
     }
 }
