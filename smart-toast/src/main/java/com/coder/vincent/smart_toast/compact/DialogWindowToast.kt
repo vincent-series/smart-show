@@ -1,10 +1,12 @@
 package com.coder.vincent.smart_toast.compact
 
 import android.app.Activity
+import android.app.Dialog
 import android.os.SystemClock
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDialog
 import com.coder.vincent.series.common_lib.Toolkit
 import com.coder.vincent.series.common_lib.lifecycle.ActivityStack
@@ -18,7 +20,7 @@ internal class DialogWindowToast(
     config: ToastConfig,
     configApplyCallback: (View, ToastConfig) -> Unit
 ) : AbsCompactToast(toastView, config, configApplyCallback) {
-    lateinit var toast: AppCompatDialog
+    lateinit var toast: Dialog
     override fun show() {
         handler.removeCallbacksAndMessages(null)
         handler.postDelayed(ShowRunnable(), 100)
@@ -62,8 +64,15 @@ internal class DialogWindowToast(
         kotlin.runCatching { toast.dismiss() }
     }
 
-    private fun createToast(activity: Activity) =
-        AppCompatDialog(activity, R.style.vincent_series_dialog_toast_style).apply {
+
+    private fun createToast(activity: Activity): Dialog {
+        val dialog =
+            if (activity is AppCompatActivity)
+                AppCompatDialog(activity, R.style.vincent_series_dialog_toast_style)
+            else
+                Dialog(activity, R.style.vincent_series_dialog_toast_style)
+
+        return dialog.apply {
             window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
             window?.setFlags(
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
@@ -85,5 +94,7 @@ internal class DialogWindowToast(
             }
             setContentView(view())
         }
+    }
+
 }
 
