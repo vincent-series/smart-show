@@ -2,7 +2,7 @@ package com.coder.vincent.smart_toast
 
 import androidx.annotation.StringRes
 
-interface ShowToastApi {
+interface ShowToast {
     // short text toast
     fun show(msg: CharSequence)
     fun show(@StringRes msg: Int)

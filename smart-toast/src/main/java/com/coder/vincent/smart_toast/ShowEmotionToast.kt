@@ -1,8 +1,8 @@
-package com.coder.vincent.smart_toast.alias.emotion
+package com.coder.vincent.smart_toast
 
 import androidx.annotation.StringRes
 
-interface ShowEmotionToastApi {
+interface ShowEmotionToast {
     fun info(msg: CharSequence)
     fun info(@StringRes msg: Int)
     fun infoLong(msg: CharSequence)
@@ -36,3 +36,12 @@ interface ShowEmotionToastApi {
     fun waitingLong(msg: CharSequence)
     fun waitingLong(@StringRes msg: Int)
 }
+
+const val EMOTION_INFO = 0
+const val EMOTION_WARNING = 1
+const val EMOTION_SUCCESS = 2
+const val EMOTION_ERROR = 3
+const val EMOTION_FAIL = 4
+const val EMOTION_COMPLETE = 5
+const val EMOTION_FORBID = 6
+const val EMOTION_WAITING = 7
