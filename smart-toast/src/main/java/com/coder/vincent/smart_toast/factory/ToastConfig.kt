@@ -16,6 +16,8 @@ open class ToastConfig {
     var message: CharSequence = ""
     var messageStyle: TextStyle = TextStyle(Color.WHITE, 14f, false)
     var iconDrawable: Drawable? = null
+    var iconSize: Float = 14f
+    var marginBetweenIconAndMsg = 10f
     var duration: Int = Toast.LENGTH_SHORT
     var location: Location =
         Location(Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL, 0, DEFAULT_TOAST_Y_OFFSET)
