@@ -8,9 +8,9 @@
 ★★★ 4.x版及后续版本不再需要显式初始化，旧版本迁移到4.x版直接将初始化相关代码删除即可。
 ### 模块导航：
 
-* [SmartToast（latest version：4.1.0）](https://github.com/vincent-series/smart-show#smarttoast%E9%83%A8%E5%88%86)
-* [SmartSnackBar（latest version：4.0.8）](https://github.com/vincent-series/smart-show#smartsnackbar%E9%83%A8%E5%88%86)
-* [SmartDialog（latest version：4.0.7）](https://github.com/vincent-series/smart-show#smartdialog%E9%83%A8%E5%88%86)
+* [SmartToast（latest version：4.1.3）](https://github.com/vincent-series/smart-show#smarttoast%E9%83%A8%E5%88%86)
+* [SmartSnackBar（latest version：4.1.0）](https://github.com/vincent-series/smart-show#smartsnackbar%E9%83%A8%E5%88%86)
+* [SmartDialog（latest version：4.1.1）](https://github.com/vincent-series/smart-show#smartdialog%E9%83%A8%E5%88%86)
 * [关于实现](#代码实现)
 * [关于作者及技术交流](#关于作者)
 
@@ -27,9 +27,9 @@
 [回到模块导航](#模块导航)<br/><br/>
 如果您在使用过程中发现任何问题，请联系我，我会立即跟进修复和维护。感谢您的支持！<br/><br/>
 作者：朱志强<br/><br/>
-微信：w361281607<br/><br/>
+微信：<br/>
 <img src="https://images.gitee.com/uploads/images/2022/0326/223808_1e7ed200_10660313.jpeg" width="180" height="180"/><br/>
-邮箱：coder_zzq@aliyun.com<br/><br/>
+邮箱：vincent.k.zhu@gmail.com<br/><br/>
 
 ## SmartToast部分
 
@@ -48,7 +48,7 @@
 ### 引入依赖
 
 <pre><code>
-implementation "io.github.vincent-series:smart-toast:4.1.0"
+implementation "io.github.vincent-series:smart-toast:4.1.3"
 </code></pre>
 
 ### API
@@ -80,7 +80,7 @@ SmartSnackBar基于原生Snackbar进行封装改造，不仅使用上更加简�
 ### 引入依赖
 
 <pre><code>
-implementation "io.github.vincent-series:smart-snackbar:4.0.8"
+implementation "io.github.vincent-series:smart-snackbar:4.1.0"
 
 //material lib,such as 1.5.0
 implementation 'com.google.android.material:material:x.y.z'
@@ -113,10 +113,7 @@ implementation 'com.google.android.material:material:x.y.z'
 ### 引入依赖
 
 <pre><code>
-implementation "io.github.vincent-series:smart-dialog:4.0.7"
-
-//如需要注解处理功能,引入注解处理库
-kapt "io.github.vincent-series:annotation-compiler:1.0.3"
+implementation "io.github.vincent-series:smart-dialog:4.1.1"
 </code></pre>
 
 ### API
