@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".SmartDialogDemoForJavaActivity"
+            android:exported="false" />
+        <activity
             android:name=".EmotionToastDemoActivity"
             android:exported="false" />
         <activity
@@ -25,7 +28,7 @@
         <activity android:name=".ClassicToastDemoActivity" />
         <activity android:name=".SnackbarDemoActivity" />
         <activity
-            android:name=".TestDialogActivity"
+            android:name=".SmartDialogDemoActivity"
             android:configChanges="orientation|screenSize" />
     </application>
 

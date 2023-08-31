@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.coder.zzq.smartshowdemo.TestDialogActivity">
+    tools:context="com.coder.zzq.smartshowdemo.SmartDialogDemoActivity">
 
     <include layout="@layout/copyright_toolbar" />
 

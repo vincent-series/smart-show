@@ -2,12 +2,9 @@ package com.coder.zzq.smartshowdemo
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.AdapterView.OnItemClickListener
 import androidx.appcompat.app.AppCompatActivity
 import com.coder.vincent.smart_dialog.click_list.ClickListAdapter
-import com.coder.vincent.smart_snackbar.SmartSnackBar
-import com.coder.vincent.smart_toast.SmartToast
 import com.coder.zzq.smartshowdemo.databinding.ActivitySmartShowDemoBinding
 
 
@@ -52,6 +49,6 @@ class SmartShowDemoActivity : AppCompatActivity() {
     }
 
     private fun onDialogClick() {
-        startActivity(Intent(this, TestDialogActivity::class.java))
+        startActivity(Intent(this, SmartDialogDemoActivity::class.java))
     }
 }

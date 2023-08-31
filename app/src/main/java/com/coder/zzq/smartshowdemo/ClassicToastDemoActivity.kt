@@ -3,10 +3,9 @@ package com.coder.zzq.smartshowdemo
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.coder.vincent.series.common_lib.bean.IconPosition
 import com.coder.vincent.series.common_lib.resourceToColor
 import com.coder.vincent.smart_toast.SmartToast
-import com.coder.vincent.smart_toast.TOAST_ICON_POSITION_LEFT
-import com.coder.vincent.smart_toast.TOAST_ICON_POSITION_RIGHT
 import com.coder.zzq.smartshowdemo.databinding.ActivityClassicToastDemoBinding
 
 
@@ -26,7 +25,7 @@ class ClassicToastDemoActivity : AppCompatActivity() {
                     else
                         0
                     val iconPosition =
-                        if (iconPositionGroup.checkedRadioButtonId == R.id.icon_position_left) TOAST_ICON_POSITION_LEFT else TOAST_ICON_POSITION_RIGHT
+                        if (iconPositionGroup.checkedRadioButtonId == R.id.icon_position_left) IconPosition.LEFT else IconPosition.RIGHT
                     val shorDuration = durationGroup.checkedRadioButtonId == R.id.duration_short
                     val msgColor =
                         if (msgColorGroup.checkedRadioButtonId == R.id.color_default) Color.WHITE else Color.RED
@@ -36,12 +35,14 @@ class ClassicToastDemoActivity : AppCompatActivity() {
                         .config()
                         .backgroundColor(bgColor)
                         .iconResource(icon)
-                        .iconSizeDp(20f)
+                        .iconSize(20f)
                         .iconPosition(iconPosition)
-                        .iconPaddingDp(20f)
-                        .messageColor(msgColor)
-                        .messageSize(msgSize)
-                        .messageBold(msgBoldGroup.checkedRadioButtonId == R.id.bold)
+                        .marginBetweenIconAndMsg(20f)
+                        .messageStyle(
+                            msgColor,
+                            msgSize,
+                            msgBoldGroup.checkedRadioButtonId == R.id.bold
+                        )
                         .commit()
                         .apply {
                             when (positionGroup.checkedRadioButtonId) {

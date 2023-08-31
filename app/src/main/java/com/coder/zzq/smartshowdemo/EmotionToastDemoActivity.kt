@@ -26,9 +26,7 @@ class EmotionToastDemoActivity : AppCompatActivity() {
                 SmartToast.emotion()
                     .config()
                     .backgroundColor(bgColor)
-                    .messageColor(msgColor)
-                    .messageSize(msgSize)
-                    .messageBold(msgBoldGroup.checkedRadioButtonId == R.id.bold)
+                    .messageStyle(msgColor, msgSize, msgBoldGroup.checkedRadioButtonId == R.id.bold)
                     .commit()
                     .apply {
                         when (emotionGroup.checkedRadioButtonId) {
