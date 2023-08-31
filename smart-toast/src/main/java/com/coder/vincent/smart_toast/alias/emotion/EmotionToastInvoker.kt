@@ -3,18 +3,27 @@ package com.coder.vincent.smart_toast.alias.emotion
 import android.graphics.drawable.Drawable
 import android.view.Gravity
 import android.widget.Toast
-import androidx.annotation.BoolRes
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
-import com.coder.vincent.series.common_lib.resourceToBool
+import androidx.annotation.StringRes
+import com.coder.vincent.series.common_lib.bean.TextStyle
 import com.coder.vincent.series.common_lib.resourceToColor
 import com.coder.vincent.series.common_lib.resourceToDrawable
 import com.coder.vincent.series.common_lib.resourceToString
+import com.coder.vincent.smart_toast.EMOTION_COMPLETE
+import com.coder.vincent.smart_toast.EMOTION_ERROR
+import com.coder.vincent.smart_toast.EMOTION_FAIL
+import com.coder.vincent.smart_toast.EMOTION_FORBID
+import com.coder.vincent.smart_toast.EMOTION_INFO
+import com.coder.vincent.smart_toast.EMOTION_SUCCESS
+import com.coder.vincent.smart_toast.EMOTION_WAITING
+import com.coder.vincent.smart_toast.EMOTION_WARNING
+import com.coder.vincent.smart_toast.ShowEmotionToast
 import com.coder.vincent.smart_toast.factory.Location
 import com.coder.vincent.smart_toast.schedule.ToastScheduler
 
-public class EmotionToastInvoker : EmotionToastFacade.Overall, EmotionToastFacade.ConfigSetter {
+class EmotionToastInvoker : EmotionToastFacade.Overall, EmotionToastFacade.ConfigSetter {
     private val config: EmotionToast.Config = EmotionToast.Config()
 
     override fun config(): EmotionToastFacade.ConfigSetter = this
@@ -23,7 +32,7 @@ public class EmotionToastInvoker : EmotionToastFacade.Overall, EmotionToastFacad
         showHelper(EMOTION_INFO, msg, Toast.LENGTH_SHORT)
     }
 
-    override fun info(msg: Int) {
+    override fun info(@StringRes msg: Int) {
         info(msg.resourceToString())
     }
 
@@ -31,15 +40,15 @@ public class EmotionToastInvoker : EmotionToastFacade.Overall, EmotionToastFacad
         showHelper(EMOTION_INFO, msg, Toast.LENGTH_LONG)
     }
 
-    override fun infoLong(msg: Int) {
-        infoLong(msg.resourceToString())
+    override fun infoLong(@StringRes msg: Int) {
+        info(msg.resourceToString())
     }
 
     override fun warning(msg: CharSequence) {
         showHelper(EMOTION_WARNING, msg, Toast.LENGTH_SHORT)
     }
 
-    override fun warning(msg: Int) {
+    override fun warning(@StringRes msg: Int) {
         warning(msg.resourceToString())
     }
 
@@ -47,15 +56,15 @@ public class EmotionToastInvoker : EmotionToastFacade.Overall, EmotionToastFacad
         showHelper(EMOTION_WARNING, msg, Toast.LENGTH_LONG)
     }
 
-    override fun warningLong(msg: Int) {
-        warningLong(msg)
+    override fun warningLong(@StringRes msg: Int) {
+        warning(msg.resourceToString())
     }
 
     override fun success(msg: CharSequence) {
         showHelper(EMOTION_SUCCESS, msg, Toast.LENGTH_SHORT)
     }
 
-    override fun success(msg: Int) {
+    override fun success(@StringRes msg: Int) {
         success(msg.resourceToString())
     }
 
@@ -63,15 +72,15 @@ public class EmotionToastInvoker : EmotionToastFacade.Overall, EmotionToastFacad
         showHelper(EMOTION_SUCCESS, msg, Toast.LENGTH_LONG)
     }
 
-    override fun successLong(msg: Int) {
-        successLong(msg.resourceToString())
+    override fun successLong(@StringRes msg: Int) {
+        success(msg.resourceToString())
     }
 
     override fun error(msg: CharSequence) {
         showHelper(EMOTION_ERROR, msg, Toast.LENGTH_SHORT)
     }
 
-    override fun error(msg: Int) {
+    override fun error(@StringRes msg: Int) {
         error(msg.resourceToString())
     }
 
@@ -79,15 +88,15 @@ public class EmotionToastInvoker : EmotionToastFacade.Overall, EmotionToastFacad
         showHelper(EMOTION_ERROR, msg, Toast.LENGTH_LONG)
     }
 
-    override fun errorLong(msg: Int) {
-        errorLong(msg.resourceToString())
+    override fun errorLong(@StringRes msg: Int) {
+        error(msg.resourceToString())
     }
 
     override fun fail(msg: CharSequence) {
         showHelper(EMOTION_FAIL, msg, Toast.LENGTH_SHORT)
     }
 
-    override fun fail(msg: Int) {
+    override fun fail(@StringRes msg: Int) {
         fail(msg.resourceToString())
     }
 
@@ -95,15 +104,15 @@ public class EmotionToastInvoker : EmotionToastFacade.Overall, EmotionToastFacad
         showHelper(EMOTION_FAIL, msg, Toast.LENGTH_LONG)
     }
 
-    override fun failLong(msg: Int) {
-        failLong(msg.resourceToString())
+    override fun failLong(@StringRes msg: Int) {
+        fail(msg.resourceToString())
     }
 
     override fun complete(msg: CharSequence) {
         showHelper(EMOTION_COMPLETE, msg, Toast.LENGTH_SHORT)
     }
 
-    override fun complete(msg: Int) {
+    override fun complete(@StringRes msg: Int) {
         complete(msg.resourceToString())
     }
 
@@ -111,15 +120,15 @@ public class EmotionToastInvoker : EmotionToastFacade.Overall, EmotionToastFacad
         showHelper(EMOTION_COMPLETE, msg, Toast.LENGTH_LONG)
     }
 
-    override fun completeLong(msg: Int) {
-        completeLong(msg.resourceToString())
+    override fun completeLong(@StringRes msg: Int) {
+        complete(msg.resourceToString())
     }
 
     override fun forbid(msg: CharSequence) {
         showHelper(EMOTION_FORBID, msg, Toast.LENGTH_SHORT)
     }
 
-    override fun forbid(msg: Int) {
+    override fun forbid(@StringRes msg: Int) {
         forbid(msg.resourceToString())
     }
 
@@ -127,15 +136,15 @@ public class EmotionToastInvoker : EmotionToastFacade.Overall, EmotionToastFacad
         showHelper(EMOTION_FORBID, msg, Toast.LENGTH_LONG)
     }
 
-    override fun forbidLong(msg: Int) {
-        forbidLong(msg.resourceToString())
+    override fun forbidLong(@StringRes msg: Int) {
+        forbid(msg.resourceToString())
     }
 
     override fun waiting(msg: CharSequence) {
         showHelper(EMOTION_WAITING, msg, Toast.LENGTH_SHORT)
     }
 
-    override fun waiting(msg: Int) {
+    override fun waiting(@StringRes msg: Int) {
         waiting(msg.resourceToString())
     }
 
@@ -143,11 +152,15 @@ public class EmotionToastInvoker : EmotionToastFacade.Overall, EmotionToastFacad
         showHelper(EMOTION_WAITING, msg, Toast.LENGTH_LONG)
     }
 
-    override fun waitingLong(msg: Int) {
-        waitingLong(msg.resourceToString())
+    override fun waitingLong(@StringRes msg: Int) {
+        waiting(msg.resourceToString())
     }
 
-    private fun showHelper(@Emotion emotion: Int, msg: CharSequence, duration: Int) {
+    private fun showHelper(
+        emotion: Int,
+        msg: CharSequence,
+        duration: Int,
+    ) {
         config.emotion = emotion
         config.message = msg
         config.duration = duration
@@ -165,28 +178,13 @@ public class EmotionToastInvoker : EmotionToastFacade.Overall, EmotionToastFacad
             config.backgroundDrawable = bgResource.resourceToDrawable()!!
         }
 
-    override fun messageColor(@ColorInt msgColor: Int): EmotionToastFacade.ConfigSetter =
-        this.apply {
-            config.messageStyle.color = msgColor
-        }
-
-    override fun messageColorResource(@ColorRes msgColorResource: Int):
-            EmotionToastFacade.ConfigSetter = this.apply {
-        config.messageStyle.color = msgColorResource.resourceToColor()
+    override fun messageStyle(
+        @ColorInt color: Int,
+        size: Float,
+        bold: Boolean,
+    ): EmotionToastFacade.ConfigSetter = this.apply {
+        config.messageStyle = TextStyle(color, size, bold)
     }
-
-    override fun messageSize(msgSize: Float): EmotionToastFacade.ConfigSetter = this.apply {
-        config.messageStyle.size = msgSize
-    }
-
-    override fun messageBold(msgBold: Boolean): EmotionToastFacade.ConfigSetter = this.apply {
-        config.messageStyle.bold = msgBold
-    }
-
-    override fun messageBoldResource(@BoolRes msgBoldResource: Int): EmotionToastFacade.ConfigSetter =
-        this.apply {
-            config.messageStyle.bold = msgBoldResource.resourceToBool()
-        }
 
     override fun iconDrawable(iconDrawable: Drawable?): EmotionToastFacade.ConfigSetter =
         this.apply {
@@ -196,6 +194,15 @@ public class EmotionToastInvoker : EmotionToastFacade.Overall, EmotionToastFacad
     override fun iconResource(@DrawableRes iconResource: Int): EmotionToastFacade.ConfigSetter =
         this.apply {
             config.iconDrawable = iconResource.resourceToDrawable()
+        }
+
+    override fun iconSize(size: Float): EmotionToastFacade.ConfigSetter = this.apply {
+        config.iconSize = size
+    }
+
+    override fun marginBetweenIconAndMsg(margin: Float): EmotionToastFacade.ConfigSetter =
+        this.apply {
+            config.marginBetweenIconAndMsg = margin
         }
 
     override fun backgroundColor(backgroundColor: Int): EmotionToastFacade.ConfigSetter =
@@ -208,13 +215,5 @@ public class EmotionToastInvoker : EmotionToastFacade.Overall, EmotionToastFacad
         config.backgroundColor = backgroundColorResource.resourceToColor()
     }
 
-    override fun iconSizeDp(iconSize: Float): EmotionToastFacade.ConfigSetter = this.apply {
-        config.iconSizeDp = iconSize
-    }
-
-    override fun iconPaddingDp(iconPadding: Float): EmotionToastFacade.ConfigSetter = this.apply {
-        config.iconPaddingDp = iconPadding
-    }
-
-    override fun commit(): ShowEmotionToastApi = this
+    override fun commit(): ShowEmotionToast = this
 }
