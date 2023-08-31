@@ -3,27 +3,23 @@ package com.coder.vincent.smart_toast.alias.classic
 import android.graphics.drawable.Drawable
 import android.view.Gravity
 import android.widget.Toast
-import androidx.`annotation`.BoolRes
-import androidx.`annotation`.ColorInt
-import androidx.`annotation`.ColorRes
-import androidx.`annotation`.DrawableRes
-import androidx.`annotation`.StringRes
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import com.coder.vincent.series.common_lib.Toolkit
+import com.coder.vincent.series.common_lib.bean.IconPosition
+import com.coder.vincent.series.common_lib.bean.TextStyle
 import com.coder.vincent.series.common_lib.dpToPx
-import com.coder.vincent.series.common_lib.resourceToBool
 import com.coder.vincent.series.common_lib.resourceToColor
 import com.coder.vincent.series.common_lib.resourceToDrawable
 import com.coder.vincent.series.common_lib.resourceToString
 import com.coder.vincent.smart_toast.DEFAULT_TOAST_Y_OFFSET
-import com.coder.vincent.smart_toast.ShowToastApi
+import com.coder.vincent.smart_toast.ShowToast
 import com.coder.vincent.smart_toast.factory.Location
 import com.coder.vincent.smart_toast.schedule.ToastScheduler
-import kotlin.Boolean
-import kotlin.CharSequence
-import kotlin.Float
-import kotlin.Int
 
-public class ClassicToastInvoker : ClassicToastFacade.Overall, ClassicToastFacade.ConfigSetter {
+class ClassicToastInvoker : ClassicToastFacade.Overall, ClassicToastFacade.ConfigSetter {
     private val config: ClassicToast.Config = ClassicToast.Config()
 
     override fun config(): ClassicToastFacade.ConfigSetter = this
@@ -163,28 +159,13 @@ public class ClassicToastInvoker : ClassicToastFacade.Overall, ClassicToastFacad
             config.backgroundDrawable = bgResource.resourceToDrawable()!!
         }
 
-    override fun messageColor(@ColorInt msgColor: Int): ClassicToastFacade.ConfigSetter =
-        this.apply {
-            config.messageStyle.color = msgColor
-        }
-
-    override fun messageColorResource(@ColorRes msgColorResource: Int):
-            ClassicToastFacade.ConfigSetter = this.apply {
-        config.messageStyle.color = msgColorResource.resourceToColor()
+    override fun messageStyle(
+        @ColorInt color: Int,
+        size: Float,
+        bold: Boolean,
+    ): ClassicToastFacade.ConfigSetter = this.apply {
+        config.messageStyle = TextStyle(color, size, bold)
     }
-
-    override fun messageSize(msgSize: Float): ClassicToastFacade.ConfigSetter = this.apply {
-        config.messageStyle.size = msgSize
-    }
-
-    override fun messageBold(msgBold: Boolean): ClassicToastFacade.ConfigSetter = this.apply {
-        config.messageStyle.bold = msgBold
-    }
-
-    override fun messageBoldResource(@BoolRes msgBoldResource: Int): ClassicToastFacade.ConfigSetter =
-        this.apply {
-            config.messageStyle.bold = msgBoldResource.resourceToBool()
-        }
 
     override fun iconDrawable(iconDrawable: Drawable?): ClassicToastFacade.ConfigSetter =
         this.apply {
@@ -194,6 +175,15 @@ public class ClassicToastInvoker : ClassicToastFacade.Overall, ClassicToastFacad
     override fun iconResource(@DrawableRes iconResource: Int): ClassicToastFacade.ConfigSetter =
         this.apply {
             config.iconDrawable = iconResource.resourceToDrawable()
+        }
+
+    override fun iconSize(size: Float): ClassicToastFacade.ConfigSetter = this.apply {
+        config.iconSize = size
+    }
+
+    override fun marginBetweenIconAndMsg(margin: Float): ClassicToastFacade.ConfigSetter =
+        this.apply {
+            config.marginBetweenIconAndMsg = margin
         }
 
     override fun backgroundColor(backgroundColor: Int): ClassicToastFacade.ConfigSetter =
@@ -206,17 +196,10 @@ public class ClassicToastInvoker : ClassicToastFacade.Overall, ClassicToastFacad
         config.backgroundColor = backgroundColorResource.resourceToColor()
     }
 
-    override fun iconPosition(iconPosition: Int): ClassicToastFacade.ConfigSetter = this.apply {
-        config.iconPosition = iconPosition
-    }
+    override fun iconPosition(iconPosition: IconPosition): ClassicToastFacade.ConfigSetter =
+        this.apply {
+            config.iconPosition = iconPosition
+        }
 
-    override fun iconSizeDp(iconSizeDp: Float?): ClassicToastFacade.ConfigSetter = this.apply {
-        config.iconSizeDp = iconSizeDp
-    }
-
-    override fun iconPaddingDp(iconPaddingDp: Float): ClassicToastFacade.ConfigSetter = this.apply {
-        config.iconPaddingDp = iconPaddingDp
-    }
-
-    override fun commit(): ShowToastApi = this
+    override fun commit(): ShowToast = this
 }
