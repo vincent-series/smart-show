@@ -116,9 +116,9 @@ implementation 'com.google.android.material:material:x.y.z'
 implementation "io.github.vincent-series:smart-dialog:4.1.1"
 </code></pre>
 
-### API
-
-[查看API文档](https://github.com/vincent-series/smart-show/tree/master/smart-dialog)
+### API文档
+[Kotlin User Document](https://github.com/vincent-series/smart-show/wiki/smart-dialog-API-doc-for-Kotlin)<br/>
+[Java User Document](https://github.com/vincent-series/smart-show/wiki/smart-dialog-API-doc-for-Java)
 
 ### 历史版本
 [查看历史版本](https://github.com/vincent-series/smart-show/wiki/SmartDialog%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC)
