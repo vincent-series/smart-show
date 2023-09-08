@@ -122,9 +122,9 @@ class SmartDialogDemoActivity : AppCompatActivity(), AdapterView.OnItemClickList
             .defaultFilledText("默认填充的文本")
             .hint("请输入建议")
             .mostInputNum(30)
-            .confirmBtnListener { dialogInterface, s ->
-                dialogInterface.dismiss()
-                SmartToast.classic().showInCenter("输入的内容为：$s")
+            .confirmBtnListener { dialog, content ->
+                SmartToast.classic().showInCenter("输入的内容为：$content")
+                dialog.dismiss()
             }
             .build(this)
     }
