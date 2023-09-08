@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.DialogInterface
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
+import com.coder.vincent.smart_dialog.ConfirmBtnListener
 
 interface NotificationDialogFacade {
     interface Builder : ConfigSetter<Builder> {
@@ -69,6 +70,6 @@ interface NotificationDialogFacade {
             bold: Boolean,
         ): T
 
-        fun confirmBtnListener(confirmBtnListener: Function1<DialogInterface, Unit>): T
+        fun confirmBtnListener(confirmBtnListener: ConfirmBtnListener): T
     }
 }

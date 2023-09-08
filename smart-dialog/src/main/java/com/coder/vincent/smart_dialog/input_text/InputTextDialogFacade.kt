@@ -72,7 +72,7 @@ interface InputTextDialogFacade {
             bold: Boolean,
         ): T
 
-        fun confirmBtnListener(confirmBtnListener: Function2<DialogInterface, String, Unit>): T
+        fun confirmBtnListener(confirmBtnListener: InputTextConfirmListener): T
 
         fun cancelBtnLabel(cancelBtnLabel: String): T
 

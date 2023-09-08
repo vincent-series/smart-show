@@ -146,7 +146,7 @@ internal class InputTextDialogInvoker : InputTextDialogFacade.Builder,
         config.confirmBtnLabelStyle.update(value = TextStyle(color, size, bold), employ = false)
     }
 
-    override fun confirmBtnListener(confirmBtnListener: Function2<DialogInterface, String, Unit>):
+    override fun confirmBtnListener(confirmBtnListener: InputTextConfirmListener):
             InputTextDialogFacade.Builder = this.apply {
         config.confirmBtnListener.update(value = confirmBtnListener, employ = false)
     }
@@ -296,7 +296,7 @@ internal class InputTextDialogInvoker : InputTextDialogFacade.Builder,
             config.confirmBtnLabelStyle.update(value = TextStyle(color, size, bold), employ = false)
         }
 
-        override fun confirmBtnListener(confirmBtnListener: Function2<DialogInterface, String, Unit>):
+        override fun confirmBtnListener(confirmBtnListener: InputTextConfirmListener):
                 InputTextDialogFacade.Updater = this.apply {
             config.confirmBtnListener.update(value = confirmBtnListener, employ = false)
         }

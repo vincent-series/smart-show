@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.DialogInterface
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
+import com.coder.vincent.smart_dialog.ConfirmBtnListener
 
 interface EnsureDialogFacade {
     interface Builder : ConfigSetter<Builder> {
@@ -69,7 +70,7 @@ interface EnsureDialogFacade {
             bold: Boolean,
         ): T
 
-        fun confirmBtnListener(confirmBtnListener: Function1<DialogInterface, Unit>): T
+        fun confirmBtnListener(confirmBtnListener: ConfirmBtnListener): T
 
         fun delayToConfirm(delayToConfirm: Int): T
 

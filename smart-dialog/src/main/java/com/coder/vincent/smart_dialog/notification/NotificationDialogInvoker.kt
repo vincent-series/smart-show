@@ -8,6 +8,7 @@ import androidx.annotation.StringRes
 import com.coder.vincent.series.common_lib.bean.TextStyle
 import com.coder.vincent.series.common_lib.canShowDialog
 import com.coder.vincent.series.common_lib.resourceToString
+import com.coder.vincent.smart_dialog.ConfirmBtnListener
 
 internal class NotificationDialogInvoker : NotificationDialogFacade.Builder,
     NotificationDialogFacade.Handle {
@@ -130,7 +131,7 @@ internal class NotificationDialogInvoker : NotificationDialogFacade.Builder,
         config.confirmBtnLabelStyle.update(value = TextStyle(color, size, bold), employ = false)
     }
 
-    override fun confirmBtnListener(confirmBtnListener: Function1<DialogInterface, Unit>):
+    override fun confirmBtnListener(confirmBtnListener: ConfirmBtnListener):
             NotificationDialogFacade.Builder = this.apply {
         config.confirmBtnListener.update(value = confirmBtnListener, employ = false)
     }
@@ -236,7 +237,7 @@ internal class NotificationDialogInvoker : NotificationDialogFacade.Builder,
             config.confirmBtnLabelStyle.update(value = TextStyle(color, size, bold), employ = false)
         }
 
-        override fun confirmBtnListener(confirmBtnListener: Function1<DialogInterface, Unit>):
+        override fun confirmBtnListener(confirmBtnListener: ConfirmBtnListener):
                 NotificationDialogFacade.Updater = this.apply {
             config.confirmBtnListener.update(value = confirmBtnListener, employ = false)
         }
