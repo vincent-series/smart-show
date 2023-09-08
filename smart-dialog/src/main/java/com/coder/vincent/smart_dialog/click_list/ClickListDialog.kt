@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.BaseAdapter
+import android.widget.FrameLayout
 import android.widget.TextView
 import com.coder.vincent.series.annotations.CustomizedConfig
 import com.coder.vincent.series.annotations.DataItem
@@ -23,7 +24,6 @@ import com.coder.vincent.smart_dialog.DialogDefinition
 import com.coder.vincent.smart_dialog.ItemClickedListener
 import com.coder.vincent.smart_dialog.databinding.ListItemClickBinding
 import com.coder.vincent.smart_dialog.databinding.SmartShowClickListDialogBinding
-import kotlin.math.min
 
 @CustomizedDialog(alias = "clickList")
 class ClickListDialog : DialogDefinition<ClickListDialog.Config> {
@@ -85,6 +85,14 @@ class ClickListDialog : DialogDefinition<ClickListDialog.Config> {
                 }
         }
     }.root
+
+    override fun setupRootViewLayoutParams(lp: FrameLayout.LayoutParams) {
+        super.setupRootViewLayoutParams(lp)
+        (160).dpToPx().let {
+            lp.topMargin = it
+            lp.bottomMargin = it
+        }
+    }
 }
 
 class ClickListAdapter : BaseAdapter() {

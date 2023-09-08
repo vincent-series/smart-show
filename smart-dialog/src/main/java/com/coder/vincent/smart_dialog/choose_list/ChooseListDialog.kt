@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.ListView
 import androidx.core.util.forEach
 import com.coder.vincent.series.annotations.CustomizedConfig
@@ -109,12 +110,13 @@ class ChooseListDialog : DialogDefinition<ChooseListDialog.Config> {
             adapter.setIconStyle(if (it) IconStyle.CIRCLE else IconStyle.CUBE)
             adapter.notifyDataSetChanged()
         }
-        smartShowListView.selector = ColorDrawable(Color.TRANSPARENT)
-        smartShowListView.selector = ColorDrawable(Color.TRANSPARENT)
-        smartShowListView.divider = ColorDrawable(Color.parseColor("#cccccc"))
-        smartShowListView.dividerHeight = 0.5f.dpToPx()
-
-        smartShowListView.adapter = adapter
+        smartShowListView.let {
+            it.selector = ColorDrawable(Color.TRANSPARENT)
+            it.selector = ColorDrawable(Color.TRANSPARENT)
+            it.divider = ColorDrawable(Color.parseColor("#cccccc"))
+            it.dividerHeight = 0.5f.dpToPx()
+            it.adapter = adapter
+        }
         config.defaultChoosePos.dataProcessor {
             for (pos in 0..adapter.count) {
                 smartShowListView.setItemChecked(pos, it.contains(pos))
@@ -158,6 +160,14 @@ class ChooseListDialog : DialogDefinition<ChooseListDialog.Config> {
             }
         }
     }.root
+
+    override fun setupRootViewLayoutParams(lp: FrameLayout.LayoutParams) {
+        super.setupRootViewLayoutParams(lp)
+        (135).dpToPx().let {
+            lp.topMargin = it
+            lp.bottomMargin = it
+        }
+    }
 }
 
 data class ChosenItem(val position: Int, val value: String)
