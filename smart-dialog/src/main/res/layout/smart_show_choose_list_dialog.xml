@@ -17,19 +17,23 @@
         android:visibility="gone" />
 
     <FrameLayout
+        android:layout_weight="1"
         android:id="@+id/smart_show_dialog_body_wrapper"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="80dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp">
+        android:layout_height="0dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
         <ListView
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:id="@+id/smart_show_list_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:overScrollMode="never"
-            android:scrollbars="none" />
+            android:scrollbarStyle="outsideInset"
+            android:overScrollMode="ifContentScrolls"
+            android:scrollbarSize="1.5dp"
+            android:scrollbars="vertical" />
     </FrameLayout>
 
 
