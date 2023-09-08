@@ -8,6 +8,7 @@ import androidx.`annotation`.StringRes
 import com.coder.vincent.series.common_lib.bean.TextStyle
 import com.coder.vincent.series.common_lib.canShowDialog
 import com.coder.vincent.series.common_lib.resourceToString
+import com.coder.vincent.smart_dialog.CancelBtnListener
 import com.coder.vincent.smart_dialog.ConfirmBtnListener
 import kotlin.Boolean
 import kotlin.Float
@@ -160,7 +161,7 @@ internal class EnsureDialogInvoker : EnsureDialogFacade.Builder, EnsureDialogFac
           config.cancelBtnLabelStyle.update(value = TextStyle(color, size, bold), employ = false)
   }
 
-  override fun cancelBtnListener(cancelBtnListener: Function1<DialogInterface, Unit>):
+  override fun cancelBtnListener(cancelBtnListener: CancelBtnListener):
       EnsureDialogFacade.Builder = this.apply {
           config.cancelBtnListener.update(value = cancelBtnListener, employ = false)
   }
@@ -293,7 +294,7 @@ internal class EnsureDialogInvoker : EnsureDialogFacade.Builder, EnsureDialogFac
             config.cancelBtnLabelStyle.update(value = TextStyle(color, size, bold), employ = false)
     }
 
-    override fun cancelBtnListener(cancelBtnListener: Function1<DialogInterface, Unit>):
+    override fun cancelBtnListener(cancelBtnListener: CancelBtnListener):
         EnsureDialogFacade.Updater = this.apply {
             config.cancelBtnListener.update(value = cancelBtnListener, employ = false)
     }

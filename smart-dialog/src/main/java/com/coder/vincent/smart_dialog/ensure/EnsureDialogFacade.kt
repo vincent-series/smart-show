@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.DialogInterface
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
+import com.coder.vincent.smart_dialog.CancelBtnListener
 import com.coder.vincent.smart_dialog.ConfirmBtnListener
 
 interface EnsureDialogFacade {
@@ -84,6 +85,6 @@ interface EnsureDialogFacade {
             bold: Boolean,
         ): T
 
-        fun cancelBtnListener(cancelBtnListener: Function1<DialogInterface, Unit>): T
+        fun cancelBtnListener(cancelBtnListener: CancelBtnListener): T
     }
 }
