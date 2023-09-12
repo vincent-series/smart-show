@@ -13,14 +13,13 @@ class SmartShowDemoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(ActivitySmartShowDemoBinding.inflate(layoutInflater).apply {
             val adapter = ClickListAdapter()
-            adapter.setItemCenter(itemCenter = true, notify = false)
             adapter.setItems(
                 listOf(
                     "classic toast",
                     "emotion toast",
                     "snackbar",
                     "dialog"
-                ), false
+                )
             )
             listView.adapter = adapter
             listView.onItemClickListener =

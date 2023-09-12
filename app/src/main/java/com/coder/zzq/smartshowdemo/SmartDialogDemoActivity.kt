@@ -23,11 +23,11 @@ class SmartDialogDemoActivity : AppCompatActivity(), AdapterView.OnItemClickList
     override fun onItemClick(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
         when (position) {
             0 -> onShowNotificationDialog()
-            1 -> onShowEnsureDialog()
-            2 -> onShowEnsureDelayDialog()
+            1 -> onShowAcknowledgeDialog()
+            2 -> onShowAcknowledgeDelayDialog()
             3 -> onShowInputDialog()
             4 -> onShowInputNumDialog()
-            5 -> onShowClickListDialog()
+            5 -> onShowClickedListDialog()
             6 -> onShowSingleChooseDialog()
             7 -> onShowMultipleChooseDialog()
             8 -> onShowLargeLoading()
@@ -69,13 +69,13 @@ class SmartDialogDemoActivity : AppCompatActivity(), AdapterView.OnItemClickList
     }
 
     private val multipleChoice by lazy {
-        SmartDialog.builderOfChooseList()
+        SmartDialog.builderOfChosenList()
             .singleChoice(false)
-            .defaultChoosePos(listOf(0, 1))
+            .defaultChosenPos(listOf(0, 1))
             .title("你喜欢哪些城市")
             .items(listOf("上海", "北京", "广州", "深圳", "杭州", "青岛", "苏州"))
-            .confirmBtnListener { dialogInterface, chosenItems ->
-                dialogInterface.dismiss()
+            .confirmBtnListener { dialog, chosenItems ->
+                dialog.dismiss()
                 SmartToast.classic().showInCenter(chosenItems.toString())
             }
             .build(this)
@@ -86,11 +86,11 @@ class SmartDialogDemoActivity : AppCompatActivity(), AdapterView.OnItemClickList
     }
 
     private val singleChoice by lazy {
-        SmartDialog.builderOfChooseList()
+        SmartDialog.builderOfChosenList()
             .title("请选择语言")
             .items(listOf("Java", "Kotlin", "C", "C++", "C#", "Html"))
-            .confirmBtnListener { dialogInterface, chosenItems ->
-                dialogInterface.dismiss()
+            .confirmBtnListener { dialog, chosenItems ->
+                dialog.dismiss()
                 SmartToast.classic().showInCenter(chosenItems.toString())
             }
             .build(this)
@@ -102,17 +102,16 @@ class SmartDialogDemoActivity : AppCompatActivity(), AdapterView.OnItemClickList
     }
 
     private val clickList by lazy {
-        SmartDialog.builderOfClickList()
+        SmartDialog.builderOfClickedList()
             .items(listOf("回复", "转发", "私信回复", "复制", "举报"))
-            .itemCenter(true)
-            .itemClickedListener { dialogInterface, clickedItem ->
-                dialogInterface.dismiss()
+            .itemClickedListener { dialog, clickedItem ->
+                dialog.dismiss()
                 SmartToast.classic().showInCenter(clickedItem.value)
             }
             .build(this)
     }
 
-    private fun onShowClickListDialog() {
+    private fun onShowClickedListDialog() {
         clickList.show()
     }
 
@@ -121,10 +120,10 @@ class SmartDialogDemoActivity : AppCompatActivity(), AdapterView.OnItemClickList
             .title("输入")
             .defaultFilledText("默认填充的文本")
             .hint("请输入建议")
-            .mostInputNum(30)
+            .maxInputLength(30)
             .confirmBtnListener { dialog, content ->
-                SmartToast.classic().showInCenter("输入的内容为：$content")
                 dialog.dismiss()
+                SmartToast.classic().showInCenter("您输入的内容是:$content")
             }
             .build(this)
     }
@@ -150,8 +149,8 @@ class SmartDialogDemoActivity : AppCompatActivity(), AdapterView.OnItemClickList
         inputNumberDialog.show()
     }
 
-    private val ensureDelayDialog by lazy {
-        SmartDialog.builderOfEnsure()
+    private val acknowledgeDelayDialog by lazy {
+        SmartDialog.builderOfAcknowledge()
             .message("确定启用开发者模式？")
             .delayToConfirm(5)
             .confirmBtnListener {
@@ -161,12 +160,12 @@ class SmartDialogDemoActivity : AppCompatActivity(), AdapterView.OnItemClickList
             .build(this)
     }
 
-    private fun onShowEnsureDelayDialog() {
-        ensureDelayDialog.show()
+    private fun onShowAcknowledgeDelayDialog() {
+        acknowledgeDelayDialog.show()
     }
 
-    private val ensureDialog by lazy {
-        SmartDialog.builderOfEnsure()
+    private val acknowledgeDialog by lazy {
+        SmartDialog.builderOfAcknowledge()
             .message("确定不再关注此人？")
             .confirmBtnListener {
                 it.dismiss()
@@ -175,8 +174,8 @@ class SmartDialogDemoActivity : AppCompatActivity(), AdapterView.OnItemClickList
             .build(this)
     }
 
-    private fun onShowEnsureDialog() {
-        ensureDialog.show()
+    private fun onShowAcknowledgeDialog() {
+        acknowledgeDialog.show()
     }
 
     private val notificationDialog by lazy {
