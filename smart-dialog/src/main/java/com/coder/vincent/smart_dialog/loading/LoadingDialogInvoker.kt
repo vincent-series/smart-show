@@ -32,7 +32,7 @@ internal class LoadingDialogInvoker : LoadingDialogFacade.Builder, LoadingDialog
         dialog?.cancel()
     }
 
-    override fun isShowing(): Boolean = dialog?.isShowing() == true
+    override fun isShowing(): Boolean = dialog?.isShowing == true
 
     override fun build(activity: Activity): LoadingDialogFacade.Handle {
         if (!activity.canShowDialog()) {

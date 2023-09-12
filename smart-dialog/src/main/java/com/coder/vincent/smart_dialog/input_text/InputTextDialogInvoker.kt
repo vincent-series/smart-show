@@ -36,7 +36,7 @@ internal class InputTextDialogInvoker : InputTextDialogFacade.Builder,
         dialog?.cancel()
     }
 
-    override fun isShowing(): Boolean = dialog?.isShowing() == true
+    override fun isShowing(): Boolean = dialog?.isShowing == true
 
     override fun build(activity: Activity): InputTextDialogFacade.Handle {
         if (!activity.canShowDialog()) {

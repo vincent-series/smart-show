@@ -38,7 +38,7 @@ internal class AcknowledgeDialogInvoker : AcknowledgeDialogFacade.Builder, Ackno
     dialog?.cancel()
   }
 
-  override fun isShowing(): Boolean = dialog?.isShowing() == true
+  override fun isShowing(): Boolean = dialog?.isShowing == true
 
   override fun build(activity: Activity): AcknowledgeDialogFacade.Handle {
     if (!activity.canShowDialog()) {

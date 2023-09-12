@@ -35,7 +35,7 @@ internal class ClickedListDialogInvoker : ClickedListDialogFacade.Builder,
         dialog?.cancel()
     }
 
-    override fun isShowing(): Boolean = dialog?.isShowing() == true
+    override fun isShowing(): Boolean = dialog?.isShowing == true
 
     override fun build(activity: Activity): ClickedListDialogFacade.Handle {
         if (!activity.canShowDialog()) {
