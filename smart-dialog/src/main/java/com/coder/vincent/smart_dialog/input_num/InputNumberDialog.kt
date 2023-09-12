@@ -15,6 +15,7 @@ import com.coder.vincent.smart_dialog.CancelBtnListener
 import com.coder.vincent.smart_dialog.DefaultCancelBtnListener
 import com.coder.vincent.smart_dialog.DialogConfig
 import com.coder.vincent.smart_dialog.DialogDefinition
+import com.coder.vincent.smart_dialog.InputNumberConfirmListener
 import com.coder.vincent.smart_dialog.databinding.SmartShowInputNumBinding
 
 @CustomizedDialog(alias = "inputNumber")
@@ -49,7 +50,7 @@ class InputNumberDialog : DialogDefinition<InputNumberDialog.Config> {
         val confirmBtnLabelStyle = KData<TextStyle>()
 
         @DataItem
-        val confirmBtnListener = KData<InputNumberConfirmBtnListener>()
+        val confirmBtnListener = KData<InputNumberConfirmListener>()
 
         @DataItem(supportedResource = ResourceType.STRING)
         val cancelBtnLabel = KData<String>()
@@ -145,4 +146,3 @@ class InputNumberDialog : DialogDefinition<InputNumberDialog.Config> {
         smartShowInputEdt.requestFocus()
     }.root
 }
-typealias InputNumberConfirmBtnListener = (dialog: DialogInterface, number: String) -> Unit

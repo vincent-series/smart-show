@@ -8,6 +8,7 @@ import androidx.annotation.StringRes
 import com.coder.vincent.series.common_lib.bean.TextStyle
 import com.coder.vincent.series.common_lib.canShowDialog
 import com.coder.vincent.series.common_lib.resourceToString
+import com.coder.vincent.smart_dialog.InputNumberConfirmListener
 
 internal class InputNumberDialogInvoker : InputNumberDialogFacade.Builder,
     InputNumberDialogFacade.Handle {
@@ -144,7 +145,7 @@ internal class InputNumberDialogInvoker : InputNumberDialogFacade.Builder,
         config.confirmBtnLabelStyle.update(value = TextStyle(color, size, bold), employ = false)
     }
 
-    override fun confirmBtnListener(confirmBtnListener: Function2<DialogInterface, String, Unit>):
+    override fun confirmBtnListener(confirmBtnListener: InputNumberConfirmListener):
             InputNumberDialogFacade.Builder = this.apply {
         config.confirmBtnListener.update(value = confirmBtnListener, employ = false)
     }
@@ -297,7 +298,7 @@ internal class InputNumberDialogInvoker : InputNumberDialogFacade.Builder,
             config.confirmBtnLabelStyle.update(value = TextStyle(color, size, bold), employ = false)
         }
 
-        override fun confirmBtnListener(confirmBtnListener: Function2<DialogInterface, String, Unit>):
+        override fun confirmBtnListener(confirmBtnListener: InputNumberConfirmListener):
                 InputNumberDialogFacade.Updater = this.apply {
             config.confirmBtnListener.update(value = confirmBtnListener, employ = false)
         }
