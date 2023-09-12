@@ -3,7 +3,7 @@
     <string-array name="test_dialog_items">
         <item>notification</item>
         <item>acknowledge</item>
-        <item>ensure delay</item>
+        <item>acknowledge delay</item>
         <item>input text</item>
         <item>input num</item>
         <item>clicked list</item>
