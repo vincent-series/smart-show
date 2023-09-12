@@ -11,14 +11,17 @@ import com.coder.vincent.series.common_lib.bean.TextStyle
 import com.coder.vincent.series.common_lib.canShowDialog
 import com.coder.vincent.series.common_lib.resourceToColor
 import com.coder.vincent.series.common_lib.resourceToString
+import com.coder.vincent.series.common_lib.resourceToStringArray
+import com.coder.vincent.smart_dialog.CancelBtnListener
+import com.coder.vincent.smart_dialog.ItemChosenListener
 
-internal class ChooseListDialogInvoker : ChooseListDialogFacade.Builder,
-    ChooseListDialogFacade.Handle {
-    private val config: ChooseListDialog.Config = ChooseListDialog.Config()
+internal class ChosenListDialogInvoker : ChosenListDialogFacade.Builder,
+    ChosenListDialogFacade.Handle {
+    private val config: ChosenListDialog.Config = ChosenListDialog.Config()
 
-    private val updater: ChooseListDialogFacade.Updater = InnerClass()
+    private val updater: ChosenListDialogFacade.Updater = InnerClass()
 
-    private val dialogFactory: ChooseListDialogFactory = ChooseListDialogFactory()
+    private val dialogFactory: ChosenListDialogFactory = ChosenListDialogFactory()
 
     private var dialog: Dialog? = null
 
@@ -38,7 +41,7 @@ internal class ChooseListDialogInvoker : ChooseListDialogFacade.Builder,
 
     override fun isShowing(): Boolean = dialog?.isShowing() == true
 
-    override fun build(activity: Activity): ChooseListDialogFacade.Handle {
+    override fun build(activity: Activity): ChosenListDialogFacade.Handle {
         if (!activity.canShowDialog()) {
             return this
         }
@@ -48,53 +51,62 @@ internal class ChooseListDialogInvoker : ChooseListDialogFacade.Builder,
         return this
     }
 
-    override fun updater(): ChooseListDialogFacade.Updater = updater
+    override fun updater(): ChosenListDialogFacade.Updater = updater
 
-    override fun dimBehind(dim: Boolean): ChooseListDialogFacade.Builder = this.apply {
+    override fun dimBehind(dim: Boolean): ChosenListDialogFacade.Builder = this.apply {
         config.dimBehind.update(value = dim, employ = false)
     }
 
-    override fun cancelable(cancelable: Boolean): ChooseListDialogFacade.Builder = this.apply {
+    override fun cancelable(cancelable: Boolean): ChosenListDialogFacade.Builder = this.apply {
         config.cancelable.update(value = cancelable, employ = false)
     }
 
-    override fun cancelOnTouchOutside(cancelOnTouchOutside: Boolean): ChooseListDialogFacade.Builder =
+    override fun cancelOnTouchOutside(cancelOnTouchOutside: Boolean): ChosenListDialogFacade.Builder =
         this.apply {
             config.cancelOnTouchOutside.update(value = cancelOnTouchOutside, employ = false)
         }
 
     override fun dialogShowListener(onShowListener: DialogInterface.OnShowListener):
-            ChooseListDialogFacade.Builder = this.apply {
+            ChosenListDialogFacade.Builder = this.apply {
         config.dialogShowListener.update(value = onShowListener, employ = false)
     }
 
     override fun dialogDismissListener(onDismissListener: DialogInterface.OnDismissListener):
-            ChooseListDialogFacade.Builder = this.apply {
+            ChosenListDialogFacade.Builder = this.apply {
         config.dialogDismissListener.update(value = onDismissListener, employ = false)
     }
 
     override fun dialogCancelListener(onCancelListener: DialogInterface.OnCancelListener):
-            ChooseListDialogFacade.Builder = this.apply {
+            ChosenListDialogFacade.Builder = this.apply {
         config.dialogCancelListener.update(value = onCancelListener, employ = false)
     }
 
-    override fun title(title: String): ChooseListDialogFacade.Builder = this.apply {
+    override fun title(title: String): ChosenListDialogFacade.Builder = this.apply {
         config.title.update(value = title, employ = false)
     }
+
+    override fun titleResource(@StringRes titleResource: Int): ChosenListDialogFacade.Builder =
+        this.apply {
+            config.title.update(value = titleResource.resourceToString(), employ = false)
+        }
 
     override fun titleStyle(
         @ColorInt color: Int,
         size: Float,
         bold: Boolean,
-    ): ChooseListDialogFacade.Builder = this.apply {
+    ): ChosenListDialogFacade.Builder = this.apply {
         config.titleStyle.update(value = TextStyle(color, size, bold), employ = false)
     }
 
-    override fun items(items: List<String>): ChooseListDialogFacade.Builder = this.apply {
+    override fun items(items: List<String>): ChosenListDialogFacade.Builder = this.apply {
         config.items.update(value = items, employ = false)
     }
 
-    override fun itemCenter(itemCenter: Boolean): ChooseListDialogFacade.Builder = this.apply {
+    override fun itemsResource(itemsResource: Int): ChosenListDialogFacade.Builder = this.apply {
+        config.items.update(value = itemsResource.resourceToStringArray(), employ = false)
+    }
+
+    override fun itemCenter(itemCenter: Boolean): ChosenListDialogFacade.Builder = this.apply {
         config.itemCenter.update(value = itemCenter, employ = false)
     }
 
@@ -102,40 +114,40 @@ internal class ChooseListDialogInvoker : ChooseListDialogFacade.Builder,
         @ColorInt color: Int,
         size: Float,
         bold: Boolean,
-    ): ChooseListDialogFacade.Builder = this.apply {
+    ): ChosenListDialogFacade.Builder = this.apply {
         config.itemLabelStyle.update(value = TextStyle(color, size, bold), employ = false)
     }
 
-    override fun iconColor(iconColor: Int): ChooseListDialogFacade.Builder = this.apply {
+    override fun iconColor(iconColor: Int): ChosenListDialogFacade.Builder = this.apply {
         config.iconColor.update(value = iconColor, employ = false)
     }
 
-    override fun iconColorResource(@ColorRes iconColorResource: Int): ChooseListDialogFacade.Builder =
+    override fun iconColorResource(@ColorRes iconColorResource: Int): ChosenListDialogFacade.Builder =
         this.apply {
             config.iconColor.update(value = iconColorResource.resourceToColor(), employ = false)
         }
 
-    override fun iconPosition(iconPosition: IconPosition): ChooseListDialogFacade.Builder =
+    override fun iconPosition(iconPosition: IconPosition): ChosenListDialogFacade.Builder =
         this.apply {
             config.iconPosition.update(value = iconPosition, employ = false)
         }
 
-    override fun singleChoice(singleChoice: Boolean): ChooseListDialogFacade.Builder = this.apply {
+    override fun singleChoice(singleChoice: Boolean): ChosenListDialogFacade.Builder = this.apply {
         config.singleChoice.update(value = singleChoice, employ = false)
     }
 
-    override fun defaultChoosePos(defaultChoosePos: List<Int>): ChooseListDialogFacade.Builder =
+    override fun defaultChosenPos(defaultChosenPos: List<Int>): ChosenListDialogFacade.Builder =
         this.apply {
-            config.defaultChoosePos.update(value = defaultChoosePos, employ = false)
+            config.defaultChosenPos.update(value = defaultChosenPos, employ = false)
         }
 
-    override fun confirmBtnLabel(confirmBtnLabel: String): ChooseListDialogFacade.Builder =
+    override fun confirmBtnLabel(confirmBtnLabel: String): ChosenListDialogFacade.Builder =
         this.apply {
             config.confirmBtnLabel.update(value = confirmBtnLabel, employ = false)
         }
 
     override fun confirmBtnLabelResource(@StringRes confirmBtnLabelResource: Int):
-            ChooseListDialogFacade.Builder = this.apply {
+            ChosenListDialogFacade.Builder = this.apply {
         config.confirmBtnLabel.update(
             value = confirmBtnLabelResource.resourceToString(), employ =
             false
@@ -146,31 +158,39 @@ internal class ChooseListDialogInvoker : ChooseListDialogFacade.Builder,
         @ColorInt color: Int,
         size: Float,
         bold: Boolean,
-    ): ChooseListDialogFacade.Builder = this.apply {
+    ): ChosenListDialogFacade.Builder = this.apply {
         config.confirmBtnLabelStyle.update(value = TextStyle(color, size, bold), employ = false)
     }
 
     override
-    fun confirmBtnListener(confirmBtnListener: Function2<DialogInterface, List<ChosenItem>, Unit>):
-            ChooseListDialogFacade.Builder = this.apply {
+    fun confirmBtnListener(confirmBtnListener: ItemChosenListener):
+            ChosenListDialogFacade.Builder = this.apply {
         config.confirmBtnListener.update(value = confirmBtnListener, employ = false)
     }
 
-    override fun cancelBtnLabel(cancelBtnLabel: String): ChooseListDialogFacade.Builder =
+    override fun cancelBtnLabel(cancelBtnLabel: String): ChosenListDialogFacade.Builder =
         this.apply {
             config.cancelBtnLabel.update(value = cancelBtnLabel, employ = false)
+        }
+
+    override fun cancelBtnLabelResource(cancelBtnLabelResource: Int): ChosenListDialogFacade.Builder =
+        this.apply {
+            config.cancelBtnLabel.update(
+                value = cancelBtnLabelResource.resourceToString(),
+                employ = false
+            )
         }
 
     override fun cancelBtnLabelStyle(
         @ColorInt color: Int,
         size: Float,
         bold: Boolean,
-    ): ChooseListDialogFacade.Builder = this.apply {
+    ): ChosenListDialogFacade.Builder = this.apply {
         config.cancelBtnLabelStyle.update(value = TextStyle(color, size, bold), employ = false)
     }
 
-    override fun cancelBtnListener(cancelBtnListener: Function1<DialogInterface, Unit>):
-            ChooseListDialogFacade.Builder = this.apply {
+    override fun cancelBtnListener(cancelBtnListener: CancelBtnListener):
+            ChosenListDialogFacade.Builder = this.apply {
         config.cancelBtnListener.update(value = cancelBtnListener, employ = false)
     }
 
@@ -189,7 +209,7 @@ internal class ChooseListDialogInvoker : ChooseListDialogFacade.Builder,
         config.iconColor.employIfChanged()
         config.iconPosition.employIfChanged()
         config.singleChoice.employIfChanged()
-        config.defaultChoosePos.employIfChanged()
+        config.defaultChosenPos.employIfChanged()
         config.confirmBtnLabel.employIfChanged()
         config.confirmBtnLabelStyle.employIfChanged()
         config.confirmBtnListener.employIfChanged()
@@ -198,52 +218,62 @@ internal class ChooseListDialogInvoker : ChooseListDialogFacade.Builder,
         config.cancelBtnListener.employIfChanged()
     }
 
-    private inner class InnerClass : ChooseListDialogFacade.Updater {
-        override fun dimBehind(dim: Boolean): ChooseListDialogFacade.Updater = this.apply {
+    private inner class InnerClass : ChosenListDialogFacade.Updater {
+        override fun dimBehind(dim: Boolean): ChosenListDialogFacade.Updater = this.apply {
             config.dimBehind.update(value = dim, employ = false)
         }
 
-        override fun cancelable(cancelable: Boolean): ChooseListDialogFacade.Updater = this.apply {
+        override fun cancelable(cancelable: Boolean): ChosenListDialogFacade.Updater = this.apply {
             config.cancelable.update(value = cancelable, employ = false)
         }
 
-        override fun cancelOnTouchOutside(cancelOnTouchOutside: Boolean): ChooseListDialogFacade.Updater =
+        override fun cancelOnTouchOutside(cancelOnTouchOutside: Boolean): ChosenListDialogFacade.Updater =
             this.apply {
                 config.cancelOnTouchOutside.update(value = cancelOnTouchOutside, employ = false)
             }
 
         override fun dialogShowListener(onShowListener: DialogInterface.OnShowListener):
-                ChooseListDialogFacade.Updater = this.apply {
+                ChosenListDialogFacade.Updater = this.apply {
             config.dialogShowListener.update(value = onShowListener, employ = false)
         }
 
         override fun dialogDismissListener(onDismissListener: DialogInterface.OnDismissListener):
-                ChooseListDialogFacade.Updater = this.apply {
+                ChosenListDialogFacade.Updater = this.apply {
             config.dialogDismissListener.update(value = onDismissListener, employ = false)
         }
 
         override fun dialogCancelListener(onCancelListener: DialogInterface.OnCancelListener):
-                ChooseListDialogFacade.Updater = this.apply {
+                ChosenListDialogFacade.Updater = this.apply {
             config.dialogCancelListener.update(value = onCancelListener, employ = false)
         }
 
-        override fun title(title: String): ChooseListDialogFacade.Updater = this.apply {
+        override fun title(title: String): ChosenListDialogFacade.Updater = this.apply {
             config.title.update(value = title, employ = false)
         }
+
+        override fun titleResource(titleResource: Int): ChosenListDialogFacade.Updater =
+            this.apply {
+                config.title.update(value = titleResource.resourceToString(), employ = false)
+            }
 
         override fun titleStyle(
             @ColorInt color: Int,
             size: Float,
             bold: Boolean,
-        ): ChooseListDialogFacade.Updater = this.apply {
+        ): ChosenListDialogFacade.Updater = this.apply {
             config.titleStyle.update(value = TextStyle(color, size, bold), employ = false)
         }
 
-        override fun items(items: List<String>): ChooseListDialogFacade.Updater = this.apply {
+        override fun items(items: List<String>): ChosenListDialogFacade.Updater = this.apply {
             config.items.update(value = items, employ = false)
         }
 
-        override fun itemCenter(itemCenter: Boolean): ChooseListDialogFacade.Updater = this.apply {
+        override fun itemsResource(itemsResource: Int): ChosenListDialogFacade.Updater =
+            this.apply {
+                config.items.update(value = itemsResource.resourceToStringArray(), employ = false)
+            }
+
+        override fun itemCenter(itemCenter: Boolean): ChosenListDialogFacade.Updater = this.apply {
             config.itemCenter.update(value = itemCenter, employ = false)
         }
 
@@ -251,41 +281,41 @@ internal class ChooseListDialogInvoker : ChooseListDialogFacade.Builder,
             @ColorInt color: Int,
             size: Float,
             bold: Boolean,
-        ): ChooseListDialogFacade.Updater = this.apply {
+        ): ChosenListDialogFacade.Updater = this.apply {
             config.itemLabelStyle.update(value = TextStyle(color, size, bold), employ = false)
         }
 
-        override fun iconColor(iconColor: Int): ChooseListDialogFacade.Updater = this.apply {
+        override fun iconColor(iconColor: Int): ChosenListDialogFacade.Updater = this.apply {
             config.iconColor.update(value = iconColor, employ = false)
         }
 
-        override fun iconColorResource(@ColorRes iconColorResource: Int): ChooseListDialogFacade.Updater =
+        override fun iconColorResource(@ColorRes iconColorResource: Int): ChosenListDialogFacade.Updater =
             this.apply {
                 config.iconColor.update(value = iconColorResource.resourceToColor(), employ = false)
             }
 
-        override fun iconPosition(iconPosition: IconPosition): ChooseListDialogFacade.Updater =
+        override fun iconPosition(iconPosition: IconPosition): ChosenListDialogFacade.Updater =
             this.apply {
                 config.iconPosition.update(value = iconPosition, employ = false)
             }
 
-        override fun singleChoice(singleChoice: Boolean): ChooseListDialogFacade.Updater =
+        override fun singleChoice(singleChoice: Boolean): ChosenListDialogFacade.Updater =
             this.apply {
                 config.singleChoice.update(value = singleChoice, employ = false)
             }
 
-        override fun defaultChoosePos(defaultChoosePos: List<Int>): ChooseListDialogFacade.Updater =
+        override fun defaultChosenPos(defaultChosenPos: List<Int>): ChosenListDialogFacade.Updater =
             this.apply {
-                config.defaultChoosePos.update(value = defaultChoosePos, employ = false)
+                config.defaultChosenPos.update(value = defaultChosenPos, employ = false)
             }
 
-        override fun confirmBtnLabel(confirmBtnLabel: String): ChooseListDialogFacade.Updater =
+        override fun confirmBtnLabel(confirmBtnLabel: String): ChosenListDialogFacade.Updater =
             this.apply {
                 config.confirmBtnLabel.update(value = confirmBtnLabel, employ = false)
             }
 
         override fun confirmBtnLabelResource(@StringRes confirmBtnLabelResource: Int):
-                ChooseListDialogFacade.Updater = this.apply {
+                ChosenListDialogFacade.Updater = this.apply {
             config.confirmBtnLabel.update(
                 value = confirmBtnLabelResource.resourceToString(), employ
                 = false
@@ -296,37 +326,45 @@ internal class ChooseListDialogInvoker : ChooseListDialogFacade.Builder,
             @ColorInt color: Int,
             size: Float,
             bold: Boolean,
-        ): ChooseListDialogFacade.Updater = this.apply {
+        ): ChosenListDialogFacade.Updater = this.apply {
             config.confirmBtnLabelStyle.update(value = TextStyle(color, size, bold), employ = false)
         }
 
         override
-        fun confirmBtnListener(confirmBtnListener: Function2<DialogInterface, List<ChosenItem>, Unit>):
-                ChooseListDialogFacade.Updater = this.apply {
+        fun confirmBtnListener(confirmBtnListener: ItemChosenListener):
+                ChosenListDialogFacade.Updater = this.apply {
             config.confirmBtnListener.update(value = confirmBtnListener, employ = false)
         }
 
-        override fun cancelBtnLabel(cancelBtnLabel: String): ChooseListDialogFacade.Updater =
+        override fun cancelBtnLabel(cancelBtnLabel: String): ChosenListDialogFacade.Updater =
             this.apply {
                 config.cancelBtnLabel.update(value = cancelBtnLabel, employ = false)
+            }
+
+        override fun cancelBtnLabelResource(cancelBtnLabelResource: Int): ChosenListDialogFacade.Updater =
+            this.apply {
+                config.cancelBtnLabel.update(
+                    value = cancelBtnLabelResource.resourceToString(),
+                    employ = false
+                )
             }
 
         override fun cancelBtnLabelStyle(
             @ColorInt color: Int,
             size: Float,
             bold: Boolean,
-        ): ChooseListDialogFacade.Updater = this.apply {
+        ): ChosenListDialogFacade.Updater = this.apply {
             config.cancelBtnLabelStyle.update(value = TextStyle(color, size, bold), employ = false)
         }
 
-        override fun cancelBtnListener(cancelBtnListener: Function1<DialogInterface, Unit>):
-                ChooseListDialogFacade.Updater = this.apply {
+        override fun cancelBtnListener(cancelBtnListener: CancelBtnListener):
+                ChosenListDialogFacade.Updater = this.apply {
             config.cancelBtnListener.update(value = cancelBtnListener, employ = false)
         }
 
-        override fun commit(): ChooseListDialogFacade.Handle {
+        override fun commit(): ChosenListDialogFacade.Handle {
             employConfig()
-            return this@ChooseListDialogInvoker
+            return this@ChosenListDialogInvoker
         }
     }
 }

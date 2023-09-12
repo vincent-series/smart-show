@@ -2,12 +2,15 @@ package com.coder.vincent.smart_dialog.choose_list
 
 import android.app.Activity
 import android.content.DialogInterface
+import androidx.annotation.ArrayRes
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import com.coder.vincent.series.common_lib.bean.IconPosition
+import com.coder.vincent.smart_dialog.CancelBtnListener
+import com.coder.vincent.smart_dialog.ItemChosenListener
 
-interface ChooseListDialogFacade {
+interface ChosenListDialogFacade {
     interface Builder : ConfigSetter<Builder> {
         fun build(activity: Activity): Handle
     }
@@ -43,6 +46,8 @@ interface ChooseListDialogFacade {
 
         fun title(title: String): T
 
+        fun titleResource(@StringRes titleResource: Int): T
+
         fun titleStyle(
             @ColorInt color: Int,
             size: Float,
@@ -50,6 +55,8 @@ interface ChooseListDialogFacade {
         ): T
 
         fun items(items: List<String>): T
+
+        fun itemsResource(@ArrayRes itemsResource: Int): T
 
         fun itemCenter(itemCenter: Boolean): T
 
@@ -67,7 +74,7 @@ interface ChooseListDialogFacade {
 
         fun singleChoice(singleChoice: Boolean): T
 
-        fun defaultChoosePos(defaultChoosePos: List<Int>): T
+        fun defaultChosenPos(defaultChosenPos: List<Int>): T
 
         fun confirmBtnLabel(confirmBtnLabel: String): T
 
@@ -80,10 +87,12 @@ interface ChooseListDialogFacade {
         ): T
 
 
-        fun confirmBtnListener(confirmBtnListener: Function2<DialogInterface, List<ChosenItem>, Unit>):
+        fun confirmBtnListener(confirmBtnListener: ItemChosenListener):
                 T
 
         fun cancelBtnLabel(cancelBtnLabel: String): T
+
+        fun cancelBtnLabelResource(@StringRes cancelBtnLabelResource: Int): T
 
         fun cancelBtnLabelStyle(
             @ColorInt color: Int,
@@ -91,6 +100,6 @@ interface ChooseListDialogFacade {
             bold: Boolean,
         ): T
 
-        fun cancelBtnListener(cancelBtnListener: Function1<DialogInterface, Unit>): T
+        fun cancelBtnListener(cancelBtnListener: CancelBtnListener): T
     }
 }

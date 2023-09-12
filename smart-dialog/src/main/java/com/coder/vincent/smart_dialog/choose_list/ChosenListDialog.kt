@@ -24,21 +24,21 @@ import com.coder.vincent.smart_dialog.DialogDefinition
 import com.coder.vincent.smart_dialog.ItemChosenListener
 import com.coder.vincent.smart_dialog.databinding.SmartShowChooseListDialogBinding
 
-@CustomizedDialog(alias = "chooseList")
-class ChooseListDialog : DialogDefinition<ChooseListDialog.Config> {
+@CustomizedDialog(alias = "chosenList")
+class ChosenListDialog : DialogDefinition<ChosenListDialog.Config> {
     @CustomizedConfig
     class Config : DialogConfig() {
-        @DataItem
+        @DataItem(supportedResource = ResourceType.STRING)
         val title = KData("")
 
         @DataItem
         val titleStyle = KData<TextStyle>()
 
-        @DataItem
+        @DataItem(supportedResource = ResourceType.STRING_ARRAY)
         val items = KData<List<String>>()
 
         @DataItem
-        val itemCenter = KData<Boolean>()
+        val itemCenter = KData(false)
 
         @DataItem
         val itemLabelStyle = KData<TextStyle>()
@@ -53,7 +53,7 @@ class ChooseListDialog : DialogDefinition<ChooseListDialog.Config> {
         val singleChoice = KData(true)
 
         @DataItem
-        val defaultChoosePos = KData(listOf(0))
+        val defaultChosenPos = KData(listOf(0))
 
         @DataItem(supportedResource = ResourceType.STRING)
         val confirmBtnLabel = KData<String>()
@@ -64,7 +64,7 @@ class ChooseListDialog : DialogDefinition<ChooseListDialog.Config> {
         @DataItem
         val confirmBtnListener = KData<ItemChosenListener>()
 
-        @DataItem
+        @DataItem(supportedResource = ResourceType.STRING)
         val cancelBtnLabel = KData<String>()
 
         @DataItem
@@ -88,36 +88,35 @@ class ChooseListDialog : DialogDefinition<ChooseListDialog.Config> {
         config.titleStyle.dataProcessor {
             it.applyToView(smartShowDialogTitleView)
         }
-        val adapter = ChooseListAdapter()
+        val adapter = ChosenListAdapter()
         config.items.dataProcessor {
-            adapter.setItems(it, true)
+            adapter.setItems(it)
         }
         config.itemCenter.dataProcessor {
-            adapter.setItemCenter(it, true)
+            adapter.setItemCenter(it)
         }
         config.itemLabelStyle.dataProcessor {
-            adapter.setItemLabelStyle(it, true)
+            adapter.setItemLabelStyle(it)
         }
         config.iconColor.dataProcessor {
-            adapter.setIconColor(it, true)
+            adapter.setIconColor(it)
         }
         config.iconPosition.dataProcessor {
-            adapter.setIconPosition(it, true)
+            adapter.setIconPosition(it)
         }
         config.singleChoice.dataProcessor {
             smartShowListView.choiceMode =
                 if (it) ListView.CHOICE_MODE_SINGLE else ListView.CHOICE_MODE_MULTIPLE
             adapter.setIconStyle(if (it) IconStyle.CIRCLE else IconStyle.CUBE)
-            adapter.notifyDataSetChanged()
         }
         smartShowListView.let {
             it.selector = ColorDrawable(Color.TRANSPARENT)
             it.selector = ColorDrawable(Color.TRANSPARENT)
             it.divider = ColorDrawable(Color.parseColor("#cccccc"))
             it.dividerHeight = 0.5f.dpToPx()
-            it.adapter = adapter
+            adapter.attach(it)
         }
-        config.defaultChoosePos.dataProcessor {
+        config.defaultChosenPos.dataProcessor {
             for (pos in 0..adapter.count) {
                 smartShowListView.setItemChecked(pos, it.contains(pos))
             }

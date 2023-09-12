@@ -7,10 +7,10 @@ import android.widget.FrameLayout
 import com.coder.vincent.series.common_lib.Toolkit
 import com.coder.vincent.smart_dialog.createDialogInstance
 
-internal class ChooseListDialogFactory {
-    private val definition: ChooseListDialog = ChooseListDialog()
+internal class ChosenListDialogFactory {
+    private val definition: ChosenListDialog = ChosenListDialog()
 
-    fun produceDialog(activity: Activity, config: ChooseListDialog.Config): Dialog =
+    fun produceDialog(activity: Activity, config: ChosenListDialog.Config): Dialog =
         activity.createDialogInstance(definition.dialogStyle()).apply {
             definition.setupWindowAttributes(window!!)
             config.dimBehind.dataProcessor {
