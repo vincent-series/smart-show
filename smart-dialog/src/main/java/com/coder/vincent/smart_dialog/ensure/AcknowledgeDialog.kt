@@ -18,8 +18,8 @@ import com.coder.vincent.smart_dialog.DialogConfig
 import com.coder.vincent.smart_dialog.DialogDefinition
 import com.coder.vincent.smart_dialog.databinding.SmartShowEnsureDialogBinding
 
-@CustomizedDialog(alias = "ensure")
-class EnsureDialog : DialogDefinition<EnsureDialog.Config> {
+@CustomizedDialog(alias = "acknowledge")
+class AcknowledgeDialog : DialogDefinition<AcknowledgeDialog.Config> {
     @CustomizedConfig
     class Config : DialogConfig() {
         @DataItem(supportedResource = ResourceType.STRING)

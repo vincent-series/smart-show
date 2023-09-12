@@ -7,7 +7,7 @@ import androidx.annotation.StringRes
 import com.coder.vincent.smart_dialog.CancelBtnListener
 import com.coder.vincent.smart_dialog.ConfirmBtnListener
 
-interface EnsureDialogFacade {
+interface AcknowledgeDialogFacade {
     interface Builder : ConfigSetter<Builder> {
         fun build(activity: Activity): Handle
     }

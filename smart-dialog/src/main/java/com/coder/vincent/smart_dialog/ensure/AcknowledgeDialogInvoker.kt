@@ -12,17 +12,15 @@ import com.coder.vincent.smart_dialog.CancelBtnListener
 import com.coder.vincent.smart_dialog.ConfirmBtnListener
 import kotlin.Boolean
 import kotlin.Float
-import kotlin.Function1
 import kotlin.Int
 import kotlin.String
-import kotlin.Unit
 
-internal class EnsureDialogInvoker : EnsureDialogFacade.Builder, EnsureDialogFacade.Handle {
-  private val config: EnsureDialog.Config = EnsureDialog.Config()
+internal class AcknowledgeDialogInvoker : AcknowledgeDialogFacade.Builder, AcknowledgeDialogFacade.Handle {
+  private val config: AcknowledgeDialog.Config = AcknowledgeDialog.Config()
 
-  private val updater: EnsureDialogFacade.Updater = InnerClass()
+  private val updater: AcknowledgeDialogFacade.Updater = InnerClass()
 
-  private val dialogFactory: EnsureDialogFactory = EnsureDialogFactory()
+  private val dialogFactory: AcknowledgeDialogFactory = AcknowledgeDialogFactory()
 
   private var dialog: Dialog? = null
 
@@ -42,7 +40,7 @@ internal class EnsureDialogInvoker : EnsureDialogFacade.Builder, EnsureDialogFac
 
   override fun isShowing(): Boolean = dialog?.isShowing() == true
 
-  override fun build(activity: Activity): EnsureDialogFacade.Handle {
+  override fun build(activity: Activity): AcknowledgeDialogFacade.Handle {
     if (!activity.canShowDialog()) {
       return this
     }
@@ -52,41 +50,41 @@ internal class EnsureDialogInvoker : EnsureDialogFacade.Builder, EnsureDialogFac
     return this
   }
 
-  override fun updater(): EnsureDialogFacade.Updater = updater
+  override fun updater(): AcknowledgeDialogFacade.Updater = updater
 
-  override fun dimBehind(dim: Boolean): EnsureDialogFacade.Builder = this.apply {
+  override fun dimBehind(dim: Boolean): AcknowledgeDialogFacade.Builder = this.apply {
     config.dimBehind.update(value = dim, employ = false)
   }
 
-  override fun cancelable(cancelable: Boolean): EnsureDialogFacade.Builder = this.apply {
+  override fun cancelable(cancelable: Boolean): AcknowledgeDialogFacade.Builder = this.apply {
     config.cancelable.update(value = cancelable, employ = false)
   }
 
-  override fun cancelOnTouchOutside(cancelOnTouchOutside: Boolean): EnsureDialogFacade.Builder =
+  override fun cancelOnTouchOutside(cancelOnTouchOutside: Boolean): AcknowledgeDialogFacade.Builder =
       this.apply {
     config.cancelOnTouchOutside.update(value = cancelOnTouchOutside, employ = false)
   }
 
   override fun dialogShowListener(onShowListener: DialogInterface.OnShowListener):
-      EnsureDialogFacade.Builder = this.apply {
+      AcknowledgeDialogFacade.Builder = this.apply {
     config.dialogShowListener.update(value = onShowListener, employ = false)
   }
 
   override fun dialogDismissListener(onDismissListener: DialogInterface.OnDismissListener):
-      EnsureDialogFacade.Builder = this.apply {
+      AcknowledgeDialogFacade.Builder = this.apply {
     config.dialogDismissListener.update(value = onDismissListener, employ = false)
   }
 
   override fun dialogCancelListener(onCancelListener: DialogInterface.OnCancelListener):
-      EnsureDialogFacade.Builder = this.apply {
+      AcknowledgeDialogFacade.Builder = this.apply {
     config.dialogCancelListener.update(value = onCancelListener, employ = false)
   }
 
-  override fun title(title: String): EnsureDialogFacade.Builder = this.apply {
+  override fun title(title: String): AcknowledgeDialogFacade.Builder = this.apply {
           config.title.update(value = title, employ = false)
   }
 
-  override fun titleResource(@StringRes titleResource: Int): EnsureDialogFacade.Builder =
+  override fun titleResource(@StringRes titleResource: Int): AcknowledgeDialogFacade.Builder =
       this.apply {
           config.title.update(value = titleResource.resourceToString(), employ = false)
   }
@@ -95,15 +93,15 @@ internal class EnsureDialogInvoker : EnsureDialogFacade.Builder, EnsureDialogFac
     @ColorInt color: Int,
     size: Float,
     bold: Boolean,
-  ): EnsureDialogFacade.Builder = this.apply {
+  ): AcknowledgeDialogFacade.Builder = this.apply {
           config.titleStyle.update(value = TextStyle(color, size, bold), employ = false)
   }
 
-  override fun message(message: String): EnsureDialogFacade.Builder = this.apply {
+  override fun message(message: String): AcknowledgeDialogFacade.Builder = this.apply {
           config.message.update(value = message, employ = false)
   }
 
-  override fun messageResource(@StringRes messageResource: Int): EnsureDialogFacade.Builder =
+  override fun messageResource(@StringRes messageResource: Int): AcknowledgeDialogFacade.Builder =
       this.apply {
           config.message.update(value = messageResource.resourceToString(), employ = false)
   }
@@ -112,16 +110,16 @@ internal class EnsureDialogInvoker : EnsureDialogFacade.Builder, EnsureDialogFac
     @ColorInt color: Int,
     size: Float,
     bold: Boolean,
-  ): EnsureDialogFacade.Builder = this.apply {
+  ): AcknowledgeDialogFacade.Builder = this.apply {
           config.messageStyle.update(value = TextStyle(color, size, bold), employ = false)
   }
 
-  override fun confirmBtnLabel(confirmBtnLabel: String): EnsureDialogFacade.Builder = this.apply {
+  override fun confirmBtnLabel(confirmBtnLabel: String): AcknowledgeDialogFacade.Builder = this.apply {
           config.confirmBtnLabel.update(value = confirmBtnLabel, employ = false)
   }
 
   override fun confirmBtnLabelResource(@StringRes confirmBtnLabelResource: Int):
-      EnsureDialogFacade.Builder = this.apply {
+      AcknowledgeDialogFacade.Builder = this.apply {
           config.confirmBtnLabel.update(value = confirmBtnLabelResource.resourceToString(), employ =
         false)
   }
@@ -130,25 +128,25 @@ internal class EnsureDialogInvoker : EnsureDialogFacade.Builder, EnsureDialogFac
     @ColorInt color: Int,
     size: Float,
     bold: Boolean,
-  ): EnsureDialogFacade.Builder = this.apply {
+  ): AcknowledgeDialogFacade.Builder = this.apply {
           config.confirmBtnLabelStyle.update(value = TextStyle(color, size, bold), employ = false)
   }
 
   override fun confirmBtnListener(confirmBtnListener: ConfirmBtnListener):
-      EnsureDialogFacade.Builder = this.apply {
+      AcknowledgeDialogFacade.Builder = this.apply {
           config.confirmBtnListener.update(value = confirmBtnListener, employ = false)
   }
 
-  override fun delayToConfirm(delayToConfirm: Int): EnsureDialogFacade.Builder = this.apply {
+  override fun delayToConfirm(delayToConfirm: Int): AcknowledgeDialogFacade.Builder = this.apply {
           config.delayToConfirm.update(value = delayToConfirm, employ = false)
   }
 
-  override fun cancelBtnLabel(cancelBtnLabel: String): EnsureDialogFacade.Builder = this.apply {
+  override fun cancelBtnLabel(cancelBtnLabel: String): AcknowledgeDialogFacade.Builder = this.apply {
           config.cancelBtnLabel.update(value = cancelBtnLabel, employ = false)
   }
 
   override fun cancelBtnLabelResource(@StringRes cancelBtnLabelResource: Int):
-      EnsureDialogFacade.Builder = this.apply {
+      AcknowledgeDialogFacade.Builder = this.apply {
           config.cancelBtnLabel.update(value = cancelBtnLabelResource.resourceToString(), employ =
         false)
   }
@@ -157,12 +155,12 @@ internal class EnsureDialogInvoker : EnsureDialogFacade.Builder, EnsureDialogFac
     @ColorInt color: Int,
     size: Float,
     bold: Boolean,
-  ): EnsureDialogFacade.Builder = this.apply {
+  ): AcknowledgeDialogFacade.Builder = this.apply {
           config.cancelBtnLabelStyle.update(value = TextStyle(color, size, bold), employ = false)
   }
 
   override fun cancelBtnListener(cancelBtnListener: CancelBtnListener):
-      EnsureDialogFacade.Builder = this.apply {
+      AcknowledgeDialogFacade.Builder = this.apply {
           config.cancelBtnListener.update(value = cancelBtnListener, employ = false)
   }
 
@@ -186,40 +184,40 @@ internal class EnsureDialogInvoker : EnsureDialogFacade.Builder, EnsureDialogFac
     config.cancelBtnListener.employIfChanged()
   }
 
-  private inner class InnerClass : EnsureDialogFacade.Updater {
-    override fun dimBehind(dim: Boolean): EnsureDialogFacade.Updater = this.apply {
+  private inner class InnerClass : AcknowledgeDialogFacade.Updater {
+    override fun dimBehind(dim: Boolean): AcknowledgeDialogFacade.Updater = this.apply {
       config.dimBehind.update(value = dim, employ = false)
     }
 
-    override fun cancelable(cancelable: Boolean): EnsureDialogFacade.Updater = this.apply {
+    override fun cancelable(cancelable: Boolean): AcknowledgeDialogFacade.Updater = this.apply {
       config.cancelable.update(value = cancelable, employ = false)
     }
 
-    override fun cancelOnTouchOutside(cancelOnTouchOutside: Boolean): EnsureDialogFacade.Updater =
+    override fun cancelOnTouchOutside(cancelOnTouchOutside: Boolean): AcknowledgeDialogFacade.Updater =
         this.apply {
       config.cancelOnTouchOutside.update(value = cancelOnTouchOutside, employ = false)
     }
 
     override fun dialogShowListener(onShowListener: DialogInterface.OnShowListener):
-        EnsureDialogFacade.Updater = this.apply {
+        AcknowledgeDialogFacade.Updater = this.apply {
       config.dialogShowListener.update(value = onShowListener, employ = false)
     }
 
     override fun dialogDismissListener(onDismissListener: DialogInterface.OnDismissListener):
-        EnsureDialogFacade.Updater = this.apply {
+        AcknowledgeDialogFacade.Updater = this.apply {
       config.dialogDismissListener.update(value = onDismissListener, employ = false)
     }
 
     override fun dialogCancelListener(onCancelListener: DialogInterface.OnCancelListener):
-        EnsureDialogFacade.Updater = this.apply {
+        AcknowledgeDialogFacade.Updater = this.apply {
       config.dialogCancelListener.update(value = onCancelListener, employ = false)
     }
 
-    override fun title(title: String): EnsureDialogFacade.Updater = this.apply {
+    override fun title(title: String): AcknowledgeDialogFacade.Updater = this.apply {
             config.title.update(value = title, employ = false)
     }
 
-    override fun titleResource(@StringRes titleResource: Int): EnsureDialogFacade.Updater =
+    override fun titleResource(@StringRes titleResource: Int): AcknowledgeDialogFacade.Updater =
         this.apply {
             config.title.update(value = titleResource.resourceToString(), employ = false)
     }
@@ -228,15 +226,15 @@ internal class EnsureDialogInvoker : EnsureDialogFacade.Builder, EnsureDialogFac
       @ColorInt color: Int,
       size: Float,
       bold: Boolean,
-    ): EnsureDialogFacade.Updater = this.apply {
+    ): AcknowledgeDialogFacade.Updater = this.apply {
             config.titleStyle.update(value = TextStyle(color, size, bold), employ = false)
     }
 
-    override fun message(message: String): EnsureDialogFacade.Updater = this.apply {
+    override fun message(message: String): AcknowledgeDialogFacade.Updater = this.apply {
             config.message.update(value = message, employ = false)
     }
 
-    override fun messageResource(@StringRes messageResource: Int): EnsureDialogFacade.Updater =
+    override fun messageResource(@StringRes messageResource: Int): AcknowledgeDialogFacade.Updater =
         this.apply {
             config.message.update(value = messageResource.resourceToString(), employ = false)
     }
@@ -245,16 +243,16 @@ internal class EnsureDialogInvoker : EnsureDialogFacade.Builder, EnsureDialogFac
       @ColorInt color: Int,
       size: Float,
       bold: Boolean,
-    ): EnsureDialogFacade.Updater = this.apply {
+    ): AcknowledgeDialogFacade.Updater = this.apply {
             config.messageStyle.update(value = TextStyle(color, size, bold), employ = false)
     }
 
-    override fun confirmBtnLabel(confirmBtnLabel: String): EnsureDialogFacade.Updater = this.apply {
+    override fun confirmBtnLabel(confirmBtnLabel: String): AcknowledgeDialogFacade.Updater = this.apply {
             config.confirmBtnLabel.update(value = confirmBtnLabel, employ = false)
     }
 
     override fun confirmBtnLabelResource(@StringRes confirmBtnLabelResource: Int):
-        EnsureDialogFacade.Updater = this.apply {
+        AcknowledgeDialogFacade.Updater = this.apply {
             config.confirmBtnLabel.update(value = confirmBtnLabelResource.resourceToString(), employ
           = false)
     }
@@ -263,25 +261,25 @@ internal class EnsureDialogInvoker : EnsureDialogFacade.Builder, EnsureDialogFac
       @ColorInt color: Int,
       size: Float,
       bold: Boolean,
-    ): EnsureDialogFacade.Updater = this.apply {
+    ): AcknowledgeDialogFacade.Updater = this.apply {
             config.confirmBtnLabelStyle.update(value = TextStyle(color, size, bold), employ = false)
     }
 
     override fun confirmBtnListener(confirmBtnListener: ConfirmBtnListener):
-        EnsureDialogFacade.Updater = this.apply {
+        AcknowledgeDialogFacade.Updater = this.apply {
             config.confirmBtnListener.update(value = confirmBtnListener, employ = false)
     }
 
-    override fun delayToConfirm(delayToConfirm: Int): EnsureDialogFacade.Updater = this.apply {
+    override fun delayToConfirm(delayToConfirm: Int): AcknowledgeDialogFacade.Updater = this.apply {
             config.delayToConfirm.update(value = delayToConfirm, employ = false)
     }
 
-    override fun cancelBtnLabel(cancelBtnLabel: String): EnsureDialogFacade.Updater = this.apply {
+    override fun cancelBtnLabel(cancelBtnLabel: String): AcknowledgeDialogFacade.Updater = this.apply {
             config.cancelBtnLabel.update(value = cancelBtnLabel, employ = false)
     }
 
     override fun cancelBtnLabelResource(@StringRes cancelBtnLabelResource: Int):
-        EnsureDialogFacade.Updater = this.apply {
+        AcknowledgeDialogFacade.Updater = this.apply {
             config.cancelBtnLabel.update(value = cancelBtnLabelResource.resourceToString(), employ =
           false)
     }
@@ -290,18 +288,18 @@ internal class EnsureDialogInvoker : EnsureDialogFacade.Builder, EnsureDialogFac
       @ColorInt color: Int,
       size: Float,
       bold: Boolean,
-    ): EnsureDialogFacade.Updater = this.apply {
+    ): AcknowledgeDialogFacade.Updater = this.apply {
             config.cancelBtnLabelStyle.update(value = TextStyle(color, size, bold), employ = false)
     }
 
     override fun cancelBtnListener(cancelBtnListener: CancelBtnListener):
-        EnsureDialogFacade.Updater = this.apply {
+        AcknowledgeDialogFacade.Updater = this.apply {
             config.cancelBtnListener.update(value = cancelBtnListener, employ = false)
     }
 
-    override fun commit(): EnsureDialogFacade.Handle {
+    override fun commit(): AcknowledgeDialogFacade.Handle {
       employConfig()
-      return this@EnsureDialogInvoker
+      return this@AcknowledgeDialogInvoker
     }
   }
 }

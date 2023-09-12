@@ -7,10 +7,10 @@ import android.widget.FrameLayout
 import com.coder.vincent.series.common_lib.Toolkit
 import com.coder.vincent.smart_dialog.createDialogInstance
 
-internal class EnsureDialogFactory {
-  private val definition: EnsureDialog = EnsureDialog()
+internal class AcknowledgeDialogFactory {
+  private val definition: AcknowledgeDialog = AcknowledgeDialog()
 
-   fun produceDialog(activity: Activity, config: EnsureDialog.Config): Dialog =
+   fun produceDialog(activity: Activity, config: AcknowledgeDialog.Config): Dialog =
       activity.createDialogInstance(definition.dialogStyle()).apply {
               definition.setupWindowAttributes(window!!)
               config.dimBehind.dataProcessor {
