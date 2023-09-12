@@ -10,6 +10,7 @@ import com.coder.vincent.series.common_lib.bean.TextStyle
 import com.coder.vincent.series.common_lib.canShowDialog
 import com.coder.vincent.series.common_lib.resourceToColor
 import com.coder.vincent.series.common_lib.resourceToString
+import com.coder.vincent.smart_dialog.InputTextConfirmListener
 
 internal class InputTextDialogInvoker : InputTextDialogFacade.Builder,
     InputTextDialogFacade.Handle {
@@ -108,19 +109,19 @@ internal class InputTextDialogInvoker : InputTextDialogFacade.Builder,
             config.hint.update(value = hintResource.resourceToString(), employ = false)
         }
 
-    override fun mostInputNum(mostInputNum: Int): InputTextDialogFacade.Builder = this.apply {
-        config.mostInputNum.update(value = mostInputNum, employ = false)
+    override fun maxInputLength(maxInputLength: Int): InputTextDialogFacade.Builder = this.apply {
+        config.maxInputLength.update(value = maxInputLength, employ = false)
     }
 
-    override fun inputNumMarkColor(inputNumMarkColor: Int): InputTextDialogFacade.Builder =
+    override fun inputCounterColor(inputCounterColor: Int): InputTextDialogFacade.Builder =
         this.apply {
-            config.inputNumMarkColor.update(value = inputNumMarkColor, employ = false)
+            config.inputCounterColor.update(value = inputCounterColor, employ = false)
         }
 
-    override fun inputNumMarkColorResource(@ColorRes inputNumMarkColorResource: Int):
+    override fun inputCounterColorResource(@ColorRes inputCounterColorResource: Int):
             InputTextDialogFacade.Builder = this.apply {
-        config.inputNumMarkColor.update(
-            value = inputNumMarkColorResource.resourceToColor(),
+        config.inputCounterColor.update(
+            value = inputCounterColorResource.resourceToColor(),
             employ = false
         )
     }
@@ -188,8 +189,8 @@ internal class InputTextDialogInvoker : InputTextDialogFacade.Builder,
         config.titleStyle.employIfChanged()
         config.defaultFilledText.employIfChanged()
         config.hint.employIfChanged()
-        config.mostInputNum.employIfChanged()
-        config.inputNumMarkColor.employIfChanged()
+        config.maxInputLength.employIfChanged()
+        config.inputCounterColor.employIfChanged()
         config.confirmBtnLabel.employIfChanged()
         config.confirmBtnLabelStyle.employIfChanged()
         config.confirmBtnListener.employIfChanged()
@@ -258,19 +259,20 @@ internal class InputTextDialogInvoker : InputTextDialogFacade.Builder,
                 config.hint.update(value = hintResource.resourceToString(), employ = false)
             }
 
-        override fun mostInputNum(mostInputNum: Int): InputTextDialogFacade.Updater = this.apply {
-            config.mostInputNum.update(value = mostInputNum, employ = false)
-        }
-
-        override fun inputNumMarkColor(inputNumMarkColor: Int): InputTextDialogFacade.Updater =
+        override fun maxInputLength(maxInputLength: Int): InputTextDialogFacade.Updater =
             this.apply {
-                config.inputNumMarkColor.update(value = inputNumMarkColor, employ = false)
+                config.maxInputLength.update(value = maxInputLength, employ = false)
             }
 
-        override fun inputNumMarkColorResource(@ColorRes inputNumMarkColorResource: Int):
+        override fun inputCounterColor(inputCounterColor: Int): InputTextDialogFacade.Updater =
+            this.apply {
+                config.inputCounterColor.update(value = inputCounterColor, employ = false)
+            }
+
+        override fun inputCounterColorResource(@ColorRes inputCounterColorResource: Int):
                 InputTextDialogFacade.Updater = this.apply {
-            config.inputNumMarkColor.update(
-                value = inputNumMarkColorResource.resourceToColor(),
+            config.inputCounterColor.update(
+                value = inputCounterColorResource.resourceToColor(),
                 employ = false
             )
         }

@@ -5,6 +5,7 @@ import android.content.DialogInterface
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
+import com.coder.vincent.smart_dialog.InputTextConfirmListener
 
 interface InputTextDialogFacade {
     interface Builder : ConfigSetter<Builder> {
@@ -56,11 +57,11 @@ interface InputTextDialogFacade {
 
         fun hintResource(@StringRes hintResource: Int): T
 
-        fun mostInputNum(mostInputNum: Int): T
+        fun maxInputLength(maxInputLength: Int): T
 
-        fun inputNumMarkColor(inputNumMarkColor: Int): T
+        fun inputCounterColor(inputCounterColor: Int): T
 
-        fun inputNumMarkColorResource(@ColorRes inputNumMarkColorResource: Int): T
+        fun inputCounterColorResource(@ColorRes inputCounterColorResource: Int): T
 
         fun confirmBtnLabel(confirmBtnLabel: String): T
 

@@ -15,6 +15,7 @@ import com.coder.vincent.smart_dialog.CancelBtnListener
 import com.coder.vincent.smart_dialog.DefaultCancelBtnListener
 import com.coder.vincent.smart_dialog.DialogConfig
 import com.coder.vincent.smart_dialog.DialogDefinition
+import com.coder.vincent.smart_dialog.InputTextConfirmListener
 import com.coder.vincent.smart_dialog.databinding.SmartShowInputTextDialogBinding
 
 @CustomizedDialog(alias = "inputText")
@@ -34,10 +35,10 @@ class InputTextDialog : DialogDefinition<InputTextDialog.Config> {
         val hint = KData<String>()
 
         @DataItem
-        val mostInputNum = KData(30)
+        val maxInputLength = KData(30)
 
         @DataItem(supportedResource = ResourceType.COLOR)
-        val inputNumMarkColor = KData<Int>()
+        val inputCounterColor = KData<Int>()
 
         @DataItem(supportedResource = ResourceType.STRING)
         val confirmBtnLabel = KData<String>()
@@ -78,11 +79,11 @@ class InputTextDialog : DialogDefinition<InputTextDialog.Config> {
 
         smartShowInputEdt.addTextChangedListener(afterTextChanged = {
             (it?.length ?: 0).let { length ->
-                if (config.mostInputNum.existsData()) {
+                if (config.maxInputLength.existsData()) {
                     smartShowInputCountMark.text =
-                        if (config.mostInputNum.data() == INPUT_NUM_NO_LIMIT) "$length" else "$length/${config.mostInputNum.data()}"
-                    if (config.mostInputNum.data() != INPUT_NUM_NO_LIMIT && config.mostInputNum.data() < length) {
-                        smartShowInputEdt.setText(it?.substring(0, config.mostInputNum.data()))
+                        if (config.maxInputLength.data() == INPUT_NUM_NO_LIMIT) "$length" else "$length/${config.maxInputLength.data()}"
+                    if (config.maxInputLength.data() != INPUT_NUM_NO_LIMIT && config.maxInputLength.data() < length) {
+                        smartShowInputEdt.setText(it?.substring(0, config.maxInputLength.data()))
                     }
                 }
                 smartShowInputEdt.setSelection(smartShowInputEdt.length())
@@ -95,14 +96,14 @@ class InputTextDialog : DialogDefinition<InputTextDialog.Config> {
 
         smartShowInputEdt.requestFocus()
 
-        config.mostInputNum.dataProcessor { mostInput ->
+        config.maxInputLength.dataProcessor { mostInput ->
             smartShowInputCountMark.text = smartShowInputEdt.text.length.let {
                 if (mostInput == INPUT_NUM_NO_LIMIT) "$it" else "$it/$mostInput"
             }
         }
 
 
-        config.inputNumMarkColor.dataProcessor {
+        config.inputCounterColor.dataProcessor {
             smartShowInputCountMark.setTextColor(it)
         }
 
@@ -141,5 +142,3 @@ class InputTextDialog : DialogDefinition<InputTextDialog.Config> {
 }
 
 const val INPUT_NUM_NO_LIMIT = -1
-
-typealias InputTextConfirmListener = (dialog: DialogInterface, content: String) -> Unit
