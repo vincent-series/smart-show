@@ -3,13 +3,13 @@ package com.coder.vincent.smart_dialog.click_list
 import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.BaseAdapter
 import android.widget.FrameLayout
+import android.widget.ListView
 import android.widget.TextView
 import com.coder.vincent.series.annotations.CustomizedConfig
 import com.coder.vincent.series.annotations.DataItem
@@ -25,8 +25,8 @@ import com.coder.vincent.smart_dialog.ItemClickedListener
 import com.coder.vincent.smart_dialog.databinding.ListItemClickBinding
 import com.coder.vincent.smart_dialog.databinding.SmartShowClickListDialogBinding
 
-@CustomizedDialog(alias = "clickList")
-class ClickListDialog : DialogDefinition<ClickListDialog.Config> {
+@CustomizedDialog(alias = "clickedList")
+class ClickedListDialog : DialogDefinition<ClickedListDialog.Config> {
     @CustomizedConfig
     class Config : DialogConfig() {
         @DataItem(supportedResource = ResourceType.STRING)
@@ -35,11 +35,8 @@ class ClickListDialog : DialogDefinition<ClickListDialog.Config> {
         @DataItem
         val titleStyle = KData<TextStyle>()
 
-        @DataItem
+        @DataItem(supportedResource = ResourceType.STRING_ARRAY)
         val items = KData<List<String>>()
-
-        @DataItem
-        val itemCenter = KData(true)
 
         @DataItem
         val itemStyle = KData<TextStyle>()
@@ -49,27 +46,21 @@ class ClickListDialog : DialogDefinition<ClickListDialog.Config> {
     }
 
     override fun dialogView(
-        inflater: LayoutInflater,
-        config: Config,
-        dialog: DialogInterface
+        inflater: LayoutInflater, config: Config, dialog: DialogInterface
     ): View = SmartShowClickListDialogBinding.inflate(inflater).apply {
         config.title.dataProcessor {
             smartShowDialogTitleView.text = it
-            smartShowDialogTitleView.visibility =
-                if (it.isBlank()) View.GONE else View.VISIBLE
+            smartShowDialogTitleView.visibility = if (it.isBlank()) View.GONE else View.VISIBLE
         }
         config.titleStyle.dataProcessor {
             it.applyToView(smartShowDialogTitleView)
         }
         val adapter = ClickListAdapter()
         config.items.dataProcessor {
-            adapter.setItems(it, true)
-        }
-        config.itemCenter.dataProcessor {
-            adapter.setItemCenter(it, true)
+            adapter.setItems(it)
         }
         config.itemStyle.dataProcessor {
-            adapter.setItemStyle(it, true)
+            adapter.setItemStyle(it)
         }
         smartShowListView.selector = ColorDrawable(Color.TRANSPARENT)
         smartShowListView.divider = ColorDrawable(Color.parseColor("#cccccc"))
@@ -79,8 +70,7 @@ class ClickListDialog : DialogDefinition<ClickListDialog.Config> {
             smartShowListView.onItemClickListener =
                 AdapterView.OnItemClickListener { _, _, position, _ ->
                     listener.invoke(
-                        dialog,
-                        ClickedItem(position, config.items.data()[position])
+                        dialog, ClickedItem(position, config.items.data()[position])
                     )
                 }
         }
@@ -97,25 +87,26 @@ class ClickListDialog : DialogDefinition<ClickListDialog.Config> {
 
 class ClickListAdapter : BaseAdapter() {
     private var items = emptyList<String>()
-    private var itemCenter = true
     private var itemLabelStyle: TextStyle? = null
-    fun setItems(items: List<String>, notify: Boolean = true) {
+    private var attached = false
+
+    fun attach(listView: ListView) {
+        listView.adapter = this
+        attached = true
+    }
+
+    fun setItems(items: List<String>) {
+        val changed = this.items != items
         this.items = items
-        if (notify) {
+        if (attached && changed) {
             notifyDataSetChanged()
         }
     }
 
-    fun setItemCenter(itemCenter: Boolean, notify: Boolean = true) {
-        this.itemCenter = itemCenter
-        if (notify) {
-            notifyDataSetChanged()
-        }
-    }
-
-    fun setItemStyle(style: TextStyle, notify: Boolean = true) {
+    fun setItemStyle(style: TextStyle) {
+        val changed = this.itemLabelStyle != style
         itemLabelStyle = style
-        if (notify) {
+        if (attached && changed) {
             notifyDataSetChanged()
         }
     }
@@ -128,12 +119,9 @@ class ClickListAdapter : BaseAdapter() {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val itemView = convertView ?: ListItemClickBinding.inflate(
-            Toolkit.layoutInflater(),
-            parent,
-            false
+            Toolkit.layoutInflater(), parent, false
         ).root
         return (itemView as TextView).apply {
-            gravity = if (itemCenter) Gravity.CENTER else Gravity.LEFT or Gravity.CENTER_VERTICAL
             text = items[position]
             itemLabelStyle?.applyToView(this)
         }

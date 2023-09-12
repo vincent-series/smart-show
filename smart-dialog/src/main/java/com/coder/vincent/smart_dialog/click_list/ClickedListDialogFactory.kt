@@ -7,10 +7,10 @@ import android.widget.FrameLayout
 import com.coder.vincent.series.common_lib.Toolkit
 import com.coder.vincent.smart_dialog.createDialogInstance
 
-internal class ClickListDialogFactory {
-    private val definition: ClickListDialog = ClickListDialog()
+internal class ClickedListDialogFactory {
+    private val definition: ClickedListDialog = ClickedListDialog()
 
-    fun produceDialog(activity: Activity, config: ClickListDialog.Config): Dialog =
+    fun produceDialog(activity: Activity, config: ClickedListDialog.Config): Dialog =
         activity.createDialogInstance(definition.dialogStyle()).apply {
             definition.setupWindowAttributes(window!!)
             config.dimBehind.dataProcessor {

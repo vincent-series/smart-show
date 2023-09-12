@@ -2,10 +2,12 @@ package com.coder.vincent.smart_dialog.click_list
 
 import android.app.Activity
 import android.content.DialogInterface
+import androidx.annotation.ArrayRes
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
+import com.coder.vincent.smart_dialog.ItemClickedListener
 
-interface ClickListDialogFacade {
+interface ClickedListDialogFacade {
     interface Builder : ConfigSetter<Builder> {
         fun build(activity: Activity): Handle
     }
@@ -51,7 +53,7 @@ interface ClickListDialogFacade {
 
         fun items(items: List<String>): T
 
-        fun itemCenter(itemCenter: Boolean): T
+        fun itemsResource(@ArrayRes itemsResource: Int): T
 
         fun itemStyle(
             @ColorInt color: Int,
@@ -60,7 +62,7 @@ interface ClickListDialogFacade {
         ): T
 
 
-        fun itemClickedListener(itemClickedListener: Function2<DialogInterface, ClickedItem, Unit>):
+        fun itemClickedListener(itemClickedListener: ItemClickedListener):
                 T
     }
 }
