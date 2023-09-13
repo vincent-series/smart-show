@@ -123,7 +123,7 @@ implementation "io.github.vincent-series:smart-dialog:4.1.3"
 ### 历史版本
 [查看历史版本](https://github.com/vincent-series/smart-show/wiki/SmartDialog%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC)
 
-#### 效果图
+### 效果图
 
 <img src="https://images.gitee.com/uploads/images/2022/0326/221516_8764c1c9_10660313.jpeg" width="30%"/>    <img src="https://images.gitee.com/uploads/images/2022/0326/221601_14f6ae57_10660313.jpeg" width="30%">    <img src="https://images.gitee.com/uploads/images/2022/0326/221636_67d59b13_10660313.jpeg" width="30%">
 <hr/>
