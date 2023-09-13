@@ -3,6 +3,8 @@ package com.coder.vincent.smart_dialog.input_text
 import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import androidx.core.widget.addTextChangedListener
 import com.coder.vincent.series.annotations.CustomizedConfig
 import com.coder.vincent.series.annotations.DataItem
@@ -139,6 +141,11 @@ class InputTextDialog : DialogDefinition<InputTextDialog.Config> {
             smartShowInputEdt.setText("")
         }
     }.root
+
+    override fun setupWindowAttributes(window: Window) {
+        super.setupWindowAttributes(window)
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
+    }
 }
 
 const val INPUT_NUM_NO_LIMIT = -1

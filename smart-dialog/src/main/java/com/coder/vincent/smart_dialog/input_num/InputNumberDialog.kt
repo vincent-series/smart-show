@@ -3,6 +3,8 @@ package com.coder.vincent.smart_dialog.input_num
 import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
 import com.coder.vincent.series.annotations.CustomizedConfig
 import com.coder.vincent.series.annotations.DataItem
@@ -145,4 +147,9 @@ class InputNumberDialog : DialogDefinition<InputNumberDialog.Config> {
 
         smartShowInputEdt.requestFocus()
     }.root
+
+    override fun setupWindowAttributes(window: Window) {
+        super.setupWindowAttributes(window)
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
+    }
 }
