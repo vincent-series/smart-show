@@ -53,7 +53,7 @@ implementation "io.github.vincent-series:smart-toast:4.1.3"
 
 ### API
 
-[查看API文档](https://github.com/vincent-series/smart-show/tree/master/smart-toast)
+[Kotlin User Document](https://github.com/vincent-series/smart-show/wiki/smart-toast-API-for-Kotlin)
 
 ### 历史版本
 [查看历史版本](https://github.com/vincent-series/smart-show/wiki/SmartToast%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC)
@@ -126,25 +126,25 @@ implementation "io.github.vincent-series:smart-dialog:4.1.4"
 ### 效果图
 | 通知对话框| 确认对话框 | 延时确认对话框|
 |:------:|:-------:|:--------:|
-|显示一条通知消息，只有确认按钮 </center>| 确认用户操作 | 延时启用确认按钮，一般用于提示用户谨慎操作 |
-| <img src="https://gitee.com/vincent-resources/resources/raw/master/notification_dialog.jpg"> | <img src="https://gitee.com/vincent-resources/resources/raw/master/acknowledge_dialog.jpg">     | <img src="https://gitee.com/vincent-resources/resources/raw/master/acknowledge_delay_dialog.jpg">|
+|显示一条通知消息，只有确认按钮|确认用户操作|延时启用确认按钮<br/>一般用于提示用户谨慎操作|
+| <img src="images/notification_dialog.jpg"> | <img src="images/acknowledge_dialog.jpg">|<img src="images/acknowledge_delay_dialog.jpg">|
 
 <hr/>
 
 | 文本输入对话框 | 数字输入对话框 |
 |:------:|:------:|
-| <img src="https://gitee.com/vincent-resources/resources/raw/master/input_text_dialog.jpg">       |    <img src="https://gitee.com/vincent-resources/resources/raw/master/input_number_dialog.jpg">    |
+| <img src="images/input_text_dialog.jpg">|<img src="images/input_number_dialog.jpg">    |
 
 <hr/>
 
 | 点击即选列表对话框   | 单选列表对话框 | 多选列表对话框 |
 |:-------------:|:---------:|:---------:|
 | 通过点击列表项完成选择 | 常规单选列表  | 常规多选列表  |
-| <img src="https://gitee.com/vincent-resources/resources/raw/master/clicked_list_dialog.jpg">           | <img src="https://gitee.com/vincent-resources/resources/raw/master/single_choice_dialog.jpg">       | <img src="https://gitee.com/vincent-resources/resources/raw/master/multiple_choice_dialog.jpg">       |
+| <img src="images/clicked_list_dialog.jpg">|<img src="images/single_choice_dialog.jpg">|<img src="images/multiple_choice_dialog.jpg">|
 
 <hr/>
 
 |     加载对话框     |     加载对话框      |     加载对话框     |
 |:-------------:|:--------------:|:-------------:|
-| BoxSize.LARGE | BoxSize.MIDDLE | BoxSize.SMALL |
-|       <img src="https://gitee.com/vincent-resources/resources/raw/master/large_box_loading_dialog.jpg">       |       <img src="https://gitee.com/vincent-resources/resources/raw/master/middle_box_loading_dialog.jpg">        |       <img src="https://gitee.com/vincent-resources/resources/raw/master/small_box_loading_dialog.jpg">       |
+| `BoxSize.LARGE` | `BoxSize.MIDDLE` | `BoxSize.SMALL` |
+|       <img src="images/large_box_loading_dialog.jpg">|<img src="images/middle_box_loading_dialog.jpg">|<img src="images/small_box_loading_dialog.jpg">|
