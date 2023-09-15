@@ -124,17 +124,27 @@ implementation "io.github.vincent-series:smart-dialog:4.1.4"
 [查看历史版本](https://github.com/vincent-series/smart-show/wiki/SmartDialog%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC)
 
 ### 效果图
+| 通知对话框| 确认对话框 | 延时确认对话框|
+|:------:|:-------:|:--------:|
+|显示一条通知消息，只有确认按钮 </center>| 确认用户操作 | 延时启用确认按钮，一般用于提示用户谨慎操作 |
+| <img src="https://gitee.com/vincent-resources/resources/raw/master/notification_dialog.jpg"> | <img src="https://gitee.com/vincent-resources/resources/raw/master/acknowledge_dialog.jpg">     | <img src="https://gitee.com/vincent-resources/resources/raw/master/acknowledge_delay_dialog.jpg">|
 
-<img src="https://images.gitee.com/uploads/images/2022/0326/221516_8764c1c9_10660313.jpeg" width="30%"/>    <img src="https://images.gitee.com/uploads/images/2022/0326/221601_14f6ae57_10660313.jpeg" width="30%">    <img src="https://images.gitee.com/uploads/images/2022/0326/221636_67d59b13_10660313.jpeg" width="30%">
 <hr/>
 
-<img src="https://images.gitee.com/uploads/images/2022/0326/221835_c61500f8_10660313.jpeg" width="30%"/>    <img src="https://images.gitee.com/uploads/images/2022/0326/221939_6f5d683f_10660313.jpeg" width="30%"/>    <img src="https://images.gitee.com/uploads/images/2022/0326/222033_7c956d43_10660313.jpeg" width="30%">
+| 文本输入对话框 | 数字输入对话框 |
+|:------:|:------:|
+| <img src="https://gitee.com/vincent-resources/resources/raw/master/input_text_dialog.jpg">       |    <img src="https://gitee.com/vincent-resources/resources/raw/master/input_number_dialog.jpg">    |
+
 <hr/>
 
-<img src="https://images.gitee.com/uploads/images/2022/0326/222108_c1998f70_10660313.jpeg" width="30%">    <img src="https://images.gitee.com/uploads/images/2022/0326/222138_2fa6d358_10660313.jpeg" width="30%"/>     <img src="https://images.gitee.com/uploads/images/2022/0326/222313_6802d83e_10660313.jpeg" width="30%">
+| 点击即选列表对话框   | 单选列表对话框 | 多选列表对话框 |
+|:-------------:|:---------:|:---------:|
+| 通过点击列表项完成选择 | 常规单选列表  | 常规多选列表  |
+| <img src="https://gitee.com/vincent-resources/resources/raw/master/clicked_list_dialog.jpg">           | <img src="https://gitee.com/vincent-resources/resources/raw/master/single_choice_dialog.jpg">       | <img src="https://gitee.com/vincent-resources/resources/raw/master/multiple_choice_dialog.jpg">       |
+
 <hr/>
 
-<img src="https://images.gitee.com/uploads/images/2022/0326/222230_af42b43a_10660313.jpeg" width="30%">    <img src="https://images.gitee.com/uploads/images/2022/0326/222349_6bdaea3c_10660313.jpeg" width="30%"/>
-
-
-
+|     加载对话框     |     加载对话框      |     加载对话框     |
+|:-------------:|:--------------:|:-------------:|
+| BoxSize.LARGE | BoxSize.MIDDLE | BoxSize.SMALL |
+|       <img src="https://gitee.com/vincent-resources/resources/raw/master/large_box_loading_dialog.jpg">       |       <img src="https://gitee.com/vincent-resources/resources/raw/master/middle_box_loading_dialog.jpg">        |       <img src="https://gitee.com/vincent-resources/resources/raw/master/small_box_loading_dialog.jpg">       |
