@@ -11,20 +11,31 @@ import android.widget.Space
 import android.widget.TextView
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.get
-import com.coder.vincent.series.common_lib.bean.TextStyle
 import com.coder.vincent.series.common_lib.resourceToDrawable
 import com.coder.vincent.smart_snackbar.SNACK_BAR_ICON_POSITION_LEFT
 import com.coder.vincent.smart_snackbar.SNACK_BAR_ICON_POSITION_RIGHT
-import com.coder.vincent.smart_snackbar.SnackBarConfig
 import com.coder.vincent.smart_snackbar.SnackBar
+import com.coder.vincent.smart_snackbar.SnackBarConfig
 import kotlin.math.max
 import kotlin.math.roundToInt
 
 internal class ScheduledSnackBarImpl(private var config: SnackBarConfig) : ScheduledSnackBar {
     private val bar: SnackBar =
-        SnackBar.make(config.targetParent, config.message, config.duration.value,config.style,config.position)
+        SnackBar.make(
+            config.targetParent,
+            config.message,
+            config.duration.value,
+            config.style,
+            config.position
+        )
     private val messageView: TextView
     private val actionView: Button
+    private var srcMessageSize: Float = 0F
+    private var srcMessageColor: Int = 0
+    private var srcMessageBold: Boolean = false
+    private var srcActionSize: Float = 0F
+    private var srcActionColor: Int = 0
+    private var srcActionBold: Boolean = false
 
     init {
         bar.view.background.mutate()
@@ -33,7 +44,9 @@ internal class ScheduledSnackBarImpl(private var config: SnackBarConfig) : Sched
         messageView.let {
             (it.layoutParams as LinearLayout.LayoutParams).weight = 0f
             messageView.gravity = Gravity.CENTER_VERTICAL
-            it.tag = TextStyle(it.textColors.defaultColor, it.textSize, it.paint.isFakeBoldText)
+            srcMessageSize = it.textSize
+            srcMessageColor = it.textColors.defaultColor
+            srcMessageBold = it.paint.isFakeBoldText
         }
         val spaceLp = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -43,7 +56,9 @@ internal class ScheduledSnackBarImpl(private var config: SnackBarConfig) : Sched
         parent.addView(Space(parent.context), 1, spaceLp)
         actionView = parent[2] as Button
         actionView.let {
-            it.tag = TextStyle(it.textColors.defaultColor, it.textSize, it.paint.isFakeBoldText)
+            srcActionSize = it.textSize
+            srcActionColor = it.textColors.defaultColor
+            srcActionBold = it.paint.isFakeBoldText
         }
         setupBarStyle()
     }
@@ -52,10 +67,10 @@ internal class ScheduledSnackBarImpl(private var config: SnackBarConfig) : Sched
         bar.setAction(config.actionLabel, config.actionReaction)
         bar.animationMode = config.animationMode.value
         DrawableCompat.setTint(bar.view.background, config.backgroundColor)
-        messageView.setTextColor(config.messageColor ?: (messageView.tag as TextStyle).color)
+        messageView.setTextColor(config.messageColor ?: srcMessageColor)
         messageView.setTextSize(
             TypedValue.COMPLEX_UNIT_PX,
-            config.messageSize ?: (messageView.tag as TextStyle).size
+            config.messageSize ?: srcMessageSize
         )
         val iconDrawable: Drawable? = config.icon?.resourceToDrawable()?.apply {
             val iconSize = calculateIconSize(this)
@@ -67,14 +82,14 @@ internal class ScheduledSnackBarImpl(private var config: SnackBarConfig) : Sched
             if (config.iconPosition == SNACK_BAR_ICON_POSITION_RIGHT) iconDrawable else null
         messageView.setCompoundDrawables(leftIcon, null, rightIcon, null)
         messageView.compoundDrawablePadding = config.iconPadding
-        messageView.paint.isFakeBoldText = config.messageBold ?: (messageView.tag as TextStyle).bold
-        actionView.setTextColor(config.actionLabelColor ?: (actionView.tag as TextStyle).color)
+        messageView.paint.isFakeBoldText = config.messageBold ?: srcMessageBold
+        actionView.setTextColor(config.actionLabelColor ?: srcActionColor)
         actionView.setTextSize(
             TypedValue.COMPLEX_UNIT_PX,
-            config.actionLabelSize ?: (actionView.tag as TextStyle).size
+            config.actionLabelSize ?: srcActionSize
         )
         actionView.paint.isFakeBoldText =
-            config.actionLabelBold ?: (actionView.tag as TextStyle).bold
+            config.actionLabelBold ?: srcActionBold
     }
 
     private fun calculateIconSize(iconDrawable: Drawable): Int =
@@ -82,6 +97,7 @@ internal class ScheduledSnackBarImpl(private var config: SnackBarConfig) : Sched
             config.iconSize > 0 -> config.iconSize
             iconDrawable.intrinsicWidth > 0 && iconDrawable.intrinsicHeight > 0 ->
                 max(iconDrawable.intrinsicWidth, iconDrawable.intrinsicHeight)
+
             else -> {
                 (messageView.textSize * 1.4).roundToInt()
             }
@@ -102,7 +118,7 @@ internal class ScheduledSnackBarImpl(private var config: SnackBarConfig) : Sched
     }
 
     override fun dismiss() {
-        if (bar.isShown){
+        if (bar.isShown) {
             bar.dismiss()
         }
     }
