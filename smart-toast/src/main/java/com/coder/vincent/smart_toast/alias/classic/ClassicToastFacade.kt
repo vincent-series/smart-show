@@ -27,7 +27,7 @@ interface ClassicToastFacade {
 
         fun iconResource(@DrawableRes iconResource: Int): ConfigSetter
 
-        fun iconSize(size: Float): ConfigSetter
+        fun iconSize(size: Float?): ConfigSetter
 
         fun marginBetweenIconAndMsg(margin: Float): ConfigSetter
 

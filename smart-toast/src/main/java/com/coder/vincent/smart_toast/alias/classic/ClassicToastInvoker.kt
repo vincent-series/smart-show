@@ -177,7 +177,7 @@ class ClassicToastInvoker : ClassicToastFacade.Overall, ClassicToastFacade.Confi
             config.iconDrawable = iconResource.resourceToDrawable()
         }
 
-    override fun iconSize(size: Float): ClassicToastFacade.ConfigSetter = this.apply {
+    override fun iconSize(size: Float?): ClassicToastFacade.ConfigSetter = this.apply {
         config.iconSize = size
     }
 

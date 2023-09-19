@@ -46,8 +46,8 @@ internal class ClassicToast : ToastDefinition<ClassicToast.Config> {
             smartToastMessage.text = config.message
             config.messageStyle.applyToView(smartToastMessage)
             val icon = config.iconDrawable?.apply {
-                val iconSize = config.iconSize.dpToPx()
-                setBounds(0, 0, iconSize, iconSize)
+                val iconSize = config.iconSize ?: (config.messageStyle.size + 3)
+                setBounds(0, 0, iconSize.dpToPx(), iconSize.dpToPx())
             }
             val iconLeft = if (config.iconPosition == IconPosition.LEFT) icon else null
             val iconRight = if (config.iconPosition == IconPosition.RIGHT) icon else null
