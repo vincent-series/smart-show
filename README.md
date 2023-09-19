@@ -73,7 +73,7 @@ implementation "io.github.vincent-series:smart-toast:4.1.3"
 |emotion toast|emotion toast|emotion toast|
 |:------:|:-------:|:--------:|
 |失败|完成|任意一种都可配置背景，如|
-| <img src="images/emotion_toast_fail.jpg"> | <img src="images/classic_toast_complete.jpg">|<img src="images/classic_toast_custom_bg.jpg">|
+| <img src="images/emotion_toast_fail.jpg"> | <img src="images/emotion_toast_complete.jpg">|<img src="images/emotion_toast_custom_bg.jpg">|
 ## SmartSnackBar部分
 
 [回到模块导航](#模块导航)<br/><br/>
