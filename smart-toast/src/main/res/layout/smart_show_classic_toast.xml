@@ -1,23 +1,25 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/vincent_series_smart_toast_default_bg">
+
     <TextView
         android:id="@+id/smart_toast_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_gravity="center"
         android:drawablePadding="10dp"
         android:ellipsize="end"
         android:gravity="center"
         android:lineSpacingExtra="2dp"
-        android:layout_centerInParent="true"
         android:maxLines="3"
+        android:paddingLeft="16dp"
+        android:paddingTop="10dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="10dp"
         android:text="I'm a Toast"
+        android:textAlignment="center"
         android:textColor="#ffffff"
         android:textSize="14sp" />
+</FrameLayout>
 
-</RelativeLayout>
