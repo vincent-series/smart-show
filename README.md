@@ -46,9 +46,8 @@ implementation "io.github.vincent-series:smart-toast:4.1.4"
 </code></pre>
 
 ### API
-
 [Kotlin User Document](https://github.com/vincent-series/smart-show/wiki/smart-toast-API-for-Kotlin)
-
+[Java User Document](https://github.com/vincent-series/smart-show/wiki/smart-toast-API-for-Java)
 ### 历史版本
 [查看历史版本](https://github.com/vincent-series/smart-show/wiki/SmartToast%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC)
 ### 效果图
