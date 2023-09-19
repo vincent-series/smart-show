@@ -56,7 +56,21 @@ implementation "io.github.vincent-series:smart-toast:4.1.3"
 |:------:|:-------:|:--------:|
 |默认背景|配置背景和Icon<br/>Icon居于文本左侧|配置背景和Icon<br/>Icon居于文本右侧|
 | <img src="images/classic_toast_normal.jpg"> | <img src="images/classic_toast_success.jpg">|<img src="images/classic_toast_error.jpg">|
-
+<hr/>
+|emotion toast|emotion toast|emotion toast|
+|:------:|:-------:|:--------:|
+|信息|成功|错误|
+| <img src="images/emotion_toast_info.jpg"> | <img src="images/emotion_toast_success.jpg">|<img src="images/emotion_toast_error.jpg">|
+<hr/>
+|emotion toast|emotion toast|emotion toast|
+|:------:|:-------:|:--------:|
+|警告|等待|禁止|
+| <img src="images/emotion_toast_warning.jpg"> | <img src="images/emotion_toast_wait.jpg">|<img src="images/emotion_toast_forbid.jpg">|
+<hr/>
+|emotion toast|emotion toast|emotion toast|
+|:------:|:-------:|:--------:|
+|失败|完成|任意一种都可配置背景，如|
+| <img src="images/emotion_toast_fail.jpg"> | <img src="images/classic_toast_complete.jpg">|<img src="images/classic_toast_custom_bg.jpg">|
 ## SmartSnackBar部分
 
 [回到模块导航](#模块导航)<br/><br/>
