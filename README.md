@@ -1,11 +1,5 @@
 ##### 试试作者其他的开源库? 
 * [sharp-retrofit](https://github.com/vincent-series/sharp-retrofit)
-## SmartShow
-★★★ 4.x版起，库的发布迁移至`mavenCentral`，不再发布到`jitpack.io`。 请使用新的依赖方式拉取依赖。<br/>
-★★★ `android studio`会默认为新建项目添加`mavenCentral`仓库，老项目请自行添加`mavenCentral`仓库。<br/>
-★★★ 4.x版及后续版本全部使用`kotlin`实现。<br/>
-★★★ SmartTopBar并入SmartSnackBar，SmartSnackBar现在既支持顶部弹出也支持底部弹出。<br/>
-★★★ 4.x版及后续版本不再需要显式初始化，旧版本迁移到4.x版直接将初始化相关代码删除即可。
 ### 模块导航：
 
 * [SmartToast（latest version：4.1.3）](https://github.com/vincent-series/smart-show#smarttoast%E9%83%A8%E5%88%86)
