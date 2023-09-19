@@ -57,15 +57,11 @@ implementation "io.github.vincent-series:smart-toast:4.1.3"
 
 ### 历史版本
 [查看历史版本](https://github.com/vincent-series/smart-show/wiki/SmartToast%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC)
-
-### Classic Toast
-<img src="https://images.gitee.com/uploads/images/2022/0326/202943_7d421501_10660313.jpeg" width="30%"/>    <img src="https://images.gitee.com/uploads/images/2022/0326/203654_925de088_10660313.jpeg" width="30%">    <img src="https://images.gitee.com/uploads/images/2022/0326/204003_19eca69c_10660313.jpeg" width="30%"/>
-
-### Emotion Toast
-<img src="https://images.gitee.com/uploads/images/2022/0326/204345_9baf83b2_10660313.jpeg" width="30%"/>    <img src="https://images.gitee.com/uploads/images/2022/0326/205052_3b6119bf_10660313.jpeg" width="30%">    <img src="https://images.gitee.com/uploads/images/2022/0326/205201_7cd7163e_10660313.jpeg" width="30%">
-<hr/>
-
-<img src="https://images.gitee.com/uploads/images/2022/0326/205226_7fbd0f17_10660313.jpeg" width="30%"/>    <img src="https://images.gitee.com/uploads/images/2022/0326/205303_45649a11_10660313.jpeg" width="30%">    <img src="https://images.gitee.com/uploads/images/2022/0326/214221_46bf3210_10660313.jpeg" width="30%">
+### 效果图
+|classic toast|classic toast|classic toast|
+|:------:|:-------:|:--------:|
+|默认背景|配置背景和Icon<br/>指定Icon居于文本左侧|配置背景和Icon<br/>指定Icon居于文本右侧|
+| <img src="images/classic_toast_normal.jpg"> | <img src="images/classic_toast_success.jpg">|<img src="images/classic_toast_error.jpg">|
 
 ## SmartSnackBar部分
 
