@@ -24,10 +24,6 @@ internal class EmotionToast : ToastDefinition<EmotionToast.Config>,
     ShowToastApiProvider<ShowEmotionToast> {
     @CustomizedConfig
     class Config : ToastConfig() {
-        init {
-            iconSize = 30f
-        }
-
         var emotion = EMOTION_INFO
 
         @ColorInt
@@ -47,7 +43,7 @@ internal class EmotionToast : ToastDefinition<EmotionToast.Config>,
             }
             root.background = background
             config.iconDrawable ?: parseDefaultIcon(config.emotion).let {
-                config.iconSize.dpToPx().let { size ->
+                (config.iconSize ?: 30f).dpToPx().let { size ->
                     emotionIcon.layoutParams.height = size
                     emotionIcon.layoutParams.width = size
                     it.setBounds(0, 0, size, size)
