@@ -60,7 +60,7 @@ implementation "io.github.vincent-series:smart-toast:4.1.3"
 ### 效果图
 |classic toast|classic toast|classic toast|
 |:------:|:-------:|:--------:|
-|默认背景|配置背景和Icon<br/>指定Icon居于文本左侧|配置背景和Icon<br/>指定Icon居于文本右侧|
+|默认背景|配置背景和Icon<br/>Icon居于文本左侧|配置背景和Icon<br/>Icon居于文本右侧|
 | <img src="images/classic_toast_normal.jpg"> | <img src="images/classic_toast_success.jpg">|<img src="images/classic_toast_error.jpg">|
 
 ## SmartSnackBar部分
