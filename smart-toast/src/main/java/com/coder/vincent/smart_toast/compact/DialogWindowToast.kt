@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDialog
 import com.coder.vincent.series.common_lib.Toolkit
+import com.coder.vincent.series.common_lib.bean.ActivityItem
 import com.coder.vincent.series.common_lib.lifecycle.ActivityStack
 import com.coder.vincent.series.common_lib.lifecycle.ActivityState
 import com.coder.vincent.smart_toast.R
@@ -26,16 +27,12 @@ internal class DialogWindowToast(
         handler.postDelayed(ShowRunnable(), 100)
     }
 
-    private fun showToast(activity: Activity) {
-        Toolkit.logD("show dialog toast:${activity}")
-        kotlin.runCatching {
-            toast = createToast(activity)
-            toast.show()
-            handler.postDelayed(
-                { toast.dismiss() },
-                if (config().duration == Toast.LENGTH_SHORT) TOAST_DURATION_SHORT else TOAST_DURATION_LONG
-            )
+    override fun cancel() {
+        if(!toast.isShowing){
+            Toolkit.logD("no need dismiss since dialog is not showing")
+            return
         }
+        kotlin.runCatching { toast.dismiss() }
     }
 
     private inner class ShowRunnable : Runnable {
@@ -44,7 +41,7 @@ internal class DialogWindowToast(
                 return
             }
             chooseAppropriateActivity()?.let {
-                this@DialogWindowToast.showToast(it.activity)
+                this@DialogWindowToast.showToast(it)
                 return@run
             }
             Toolkit.logD("proper activity not found! delay 250ms")
@@ -60,10 +57,24 @@ internal class DialogWindowToast(
         }
     }
 
-    override fun cancel() {
-        kotlin.runCatching { toast.dismiss() }
+    private fun showToast(activityItem: ActivityItem) {
+        Toolkit.logD("show dialog toast:${activityItem.activity}")
+        kotlin.runCatching {
+            toast = createToast(activityItem.activity)
+            toast.show()
+            handler.postDelayed(
+                { cancel() },
+                if (config().duration == Toast.LENGTH_SHORT) TOAST_DURATION_SHORT else TOAST_DURATION_LONG
+            )
+            activityItem.addStateChangeCallback {
+                if (it == ActivityState.DESTROYED) {
+                    cancel()
+                    handler.removeCallbacksAndMessages(null)
+                    Toolkit.logD("auto close dialog when activity is destroyed")
+                }
+            }
+        }
     }
-
 
     private fun createToast(activity: Activity): Dialog {
         val dialog =
