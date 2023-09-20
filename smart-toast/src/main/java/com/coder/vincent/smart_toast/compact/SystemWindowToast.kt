@@ -35,7 +35,7 @@ internal class SystemWindowToast(
             }
             Toolkit.windowManager().addView(view(), lp)
             handler.postDelayed(
-                { kotlin.runCatching { Toolkit.windowManager().removeView(view()) } },
+                { cancel() },
                 if (config().duration == Toast.LENGTH_SHORT) TOAST_DURATION_SHORT else TOAST_DURATION_LONG
             )
         }
