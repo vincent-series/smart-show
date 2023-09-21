@@ -37,7 +37,7 @@ dependencies {
 }
 afterEvaluate {
     publishing {
-        def stagingVersion = "4.1.1"
+        def stagingVersion = "4.1.2"
         def snapshotsVersion = "4.0.1-1.0.1-SNAPSHOT"
         def uploadVersion = stagingVersion
         publications {
