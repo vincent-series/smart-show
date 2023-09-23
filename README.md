@@ -100,13 +100,18 @@ implementation 'com.google.android.material:material:x.y.z'
 
 [查看历史版本](https://github.com/vincent-series/smart-show/wiki/SmartSnackBar%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC)
 
-#### bottom snackbar
+### 效果图
+|             bottom snackbar              |             bottom snackbar              |             bottom snackbar              |
+|:----------------------------------------:|:----------------------------------------:|:----------------------------------------:|
+|              classic风格，默认背景              |             classic风格，自定义背景              |             material风格，自定义背景             |
+| <img src="images/snackbar_demo_001.png"> | <img src="images/snackbar_demo_002.png"> | <img src="images/snackbar_demo_003.png"> |
 
-<img src="https://images.gitee.com/uploads/images/2022/0326/214954_49b611b9_10660313.jpeg" width="30%"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://images.gitee.com/uploads/images/2022/0326/215134_489eb2d9_10660313.jpeg" width="30%"/>
-<hr/> 
+<hr/>
 
-#### top snackbar
-<img src="https://images.gitee.com/uploads/images/2022/0326/215408_897ffe72_10660313.jpeg" width="30%"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://images.gitee.com/uploads/images/2022/0326/215707_6e8ef9fe_10660313.jpeg" width="30%"/>
+|               top snackbar               |               top snackbar               |               top snackbar               |
+|:----------------------------------------:|:----------------------------------------:|:----------------------------------------:|
+|              classic风格，默认背景              |             classic风格，自定义背景              |             material风格，自定义背景             |
+| <img src="images/snackbar_demo_004.png"> | <img src="images/snackbar_demo_005.png"> | <img src="images/snackbar_demo_006.png"> |
 
 ## SmartDialog部分
 
