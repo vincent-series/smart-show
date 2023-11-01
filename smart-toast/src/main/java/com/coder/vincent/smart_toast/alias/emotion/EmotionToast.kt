@@ -42,7 +42,7 @@ internal class EmotionToast : ToastDefinition<EmotionToast.Config>,
                 background.setColor(config.backgroundColor)
             }
             root.background = background
-            config.iconDrawable ?: parseDefaultIcon(config.emotion).let {
+            (config.iconDrawable ?: parseDefaultIcon(config.emotion)).let {
                 (config.iconSize ?: 30f).dpToPx().let { size ->
                     emotionIcon.layoutParams.height = size
                     emotionIcon.layoutParams.width = size
