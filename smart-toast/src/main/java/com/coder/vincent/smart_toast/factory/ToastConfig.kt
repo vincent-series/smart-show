@@ -3,11 +3,11 @@ package com.coder.vincent.smart_toast.factory
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.view.Gravity
-import android.widget.Toast
 import com.coder.vincent.series.common_lib.bean.TextStyle
 import com.coder.vincent.series.common_lib.resourceToDrawable
 import com.coder.vincent.smart_toast.DEFAULT_TOAST_Y_OFFSET
 import com.coder.vincent.smart_toast.R
+import com.coder.vincent.smart_toast.bean.Duration
 
 open class ToastConfig {
     var alias: String = ""
@@ -18,7 +18,13 @@ open class ToastConfig {
     var iconDrawable: Drawable? = null
     var iconSize: Float? = null
     var marginBetweenIconAndMsg = 10f
-    var duration: Int = Toast.LENGTH_SHORT
+    var duration: Duration = Duration.SHORT
+        set(d) {
+            if (d.value < 0) {
+                throw IllegalArgumentException("duration must >= 0")
+            }
+            field = d
+        }
     var location: Location =
         Location(Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL, 0, DEFAULT_TOAST_Y_OFFSET)
 }
