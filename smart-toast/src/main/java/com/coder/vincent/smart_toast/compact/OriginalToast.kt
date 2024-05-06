@@ -15,7 +15,8 @@ internal class OriginalToast(
 ) : AbsCompactToast(toastView, config, configApplyCallback) {
     private val toast = Toast(Toolkit.context()).apply {
         view = view()
-        duration = config().duration
+        duration =
+            if (config.duration.value.toLong() == TOAST_DURATION_LONG) Toast.LENGTH_LONG else Toast.LENGTH_SHORT
         setGravity(config().location.gravity, config().location.xOffset, config().location.yOffset)
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
             injectSafeHandler(this)
