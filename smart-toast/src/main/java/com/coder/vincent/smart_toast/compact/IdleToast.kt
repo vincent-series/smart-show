@@ -6,7 +6,7 @@ import com.coder.vincent.smart_toast.factory.ToastConfig
 /**
  * Fake Toast When no Toast to Show
  */
-class PlaceholderToast : CompactToast {
+class IdleToast : CompactToast {
     override fun config() = ToastConfig()
 
     override fun updateConfig(config: ToastConfig) {

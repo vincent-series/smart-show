@@ -4,13 +4,13 @@ import android.view.View
 import com.coder.vincent.series.common_lib.Toolkit
 import com.coder.vincent.smart_toast.factory.ToastConfig
 import com.coder.vincent.smart_toast.compact.CompactToast
-import com.coder.vincent.smart_toast.compact.PlaceholderToast
+import com.coder.vincent.smart_toast.compact.IdleToast
 import com.coder.vincent.smart_toast.compact.ToastVisibilityObserver
 import com.coder.vincent.smart_toast.factory.ToastFactory
 
 object ToastScheduler : ToastVisibilityObserver {
-    private val placeholder = PlaceholderToast()
-    private var currentToast: CompactToast = placeholder
+    private val idleToast = IdleToast()
+    private var currentToast: CompactToast = idleToast
 
     private fun canReuseToast(toastConfig: ToastConfig): Boolean {
         val isShowing = currentToast.isShowing()
@@ -47,7 +47,7 @@ object ToastScheduler : ToastVisibilityObserver {
     override fun onToastVisibilityChanged(view: View, visible: Boolean) {
         if (!visible && view == currentToast.view()) {
             Toolkit.logD("release current toast because of natural dismiss:$currentToast")
-            currentToast = PlaceholderToast()
+            currentToast = IdleToast()
         }
     }
 
