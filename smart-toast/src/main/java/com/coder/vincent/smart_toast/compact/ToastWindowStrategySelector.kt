@@ -2,6 +2,7 @@ package com.coder.vincent.smart_toast.compact
 
 import android.view.View
 import com.coder.vincent.series.common_lib.Toolkit
+import com.coder.vincent.smart_toast.bean.Duration
 import com.coder.vincent.smart_toast.factory.ToastConfig
 
 class ToastWindowStrategySelector {
@@ -17,7 +18,7 @@ class ToastWindowStrategySelector {
                 configApplyCallback
             )
 
-            Toolkit.isNotificationPermitted() -> OriginalToast(
+            !isCustomDuration(config.duration) && Toolkit.isNotificationPermitted() -> OriginalToast(
                 toastView,
                 config,
                 configApplyCallback
@@ -30,3 +31,6 @@ class ToastWindowStrategySelector {
             )
         }
 }
+
+fun isCustomDuration(duration: Duration): Boolean =
+    duration.value.toLong().let { (it != TOAST_DURATION_SHORT) and (it != TOAST_DURATION_LONG) }
