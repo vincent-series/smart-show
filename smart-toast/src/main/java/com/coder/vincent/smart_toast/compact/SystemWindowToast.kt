@@ -6,7 +6,6 @@ import android.view.View
 import android.view.WindowManager
 import android.view.WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
 import android.view.WindowManager.LayoutParams.TYPE_SYSTEM_ALERT
-import android.widget.Toast
 import com.coder.vincent.series.common_lib.Toolkit
 import com.coder.vincent.smart_toast.factory.ToastConfig
 import com.coder.vincent.smart_toast.handler
@@ -34,10 +33,9 @@ internal class SystemWindowToast(
                     if (Toolkit.sdkVersionBelow(Build.VERSION_CODES.O)) TYPE_SYSTEM_ALERT else TYPE_APPLICATION_OVERLAY
             }
             Toolkit.windowManager().addView(view(), lp)
-            handler.postDelayed(
-                { cancel() },
-                if (config().duration == Toast.LENGTH_SHORT) TOAST_DURATION_SHORT else TOAST_DURATION_LONG
-            )
+            if (config().duration.value.toLong() != TOAST_DURATION_INDEFINITE){
+                handler.postDelayed({ cancel() }, config().duration.value.toLong())
+            }
         }
     }
 

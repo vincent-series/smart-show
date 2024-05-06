@@ -5,7 +5,6 @@ import android.app.Dialog
 import android.os.SystemClock
 import android.view.View
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDialog
 import com.coder.vincent.series.common_lib.Toolkit
@@ -28,7 +27,7 @@ internal class DialogWindowToast(
     }
 
     override fun cancel() {
-        if(!toast.isShowing){
+        if (!toast.isShowing) {
             Toolkit.logD("no need dismiss since dialog is not showing")
             return
         }
@@ -62,10 +61,9 @@ internal class DialogWindowToast(
         kotlin.runCatching {
             toast = createToast(activityItem.activity)
             toast.show()
-            handler.postDelayed(
-                { cancel() },
-                if (config().duration == Toast.LENGTH_SHORT) TOAST_DURATION_SHORT else TOAST_DURATION_LONG
-            )
+            if (config().duration.value.toLong() != TOAST_DURATION_INDEFINITE){
+                handler.postDelayed({ cancel() }, config().duration.value.toLong())
+            }
             activityItem.addStateChangeCallback {
                 if (it == ActivityState.DESTROYED) {
                     cancel()
