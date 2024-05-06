@@ -14,12 +14,20 @@ interface ShowToast {
     fun showAtLocation(@StringRes msg: Int, gravity: Int, xOffsetDp: Float, yOffsetDp: Float)
 
     // long text toast
+    @Deprecated("use config().duration(Duration.LONG) instead.")
     fun showLong(msg: CharSequence)
+    @Deprecated("use config().duration(Duration.LONG) instead.")
     fun showLong(@StringRes msg: Int)
+    @Deprecated("use config().duration(Duration.LONG) instead.")
     fun showLongAtTop(msg: CharSequence)
+    @Deprecated("use config().duration(Duration.LONG) instead.")
     fun showLongAtTop(@StringRes msg: Int)
+    @Deprecated("use config().duration(Duration.LONG) instead.")
     fun showLongInCenter(msg: CharSequence)
+    @Deprecated("use config().duration(Duration.LONG) instead.")
     fun showLongInCenter(@StringRes msg: Int)
+    @Deprecated("use config().duration(Duration.LONG) instead.")
     fun showLongAtLocation(msg: CharSequence, gravity: Int, xOffsetDp: Float, yOffsetDp: Float)
+    @Deprecated("use config().duration(Duration.LONG) instead.")
     fun showLongAtLocation(@StringRes msg: Int, gravity: Int, xOffsetDp: Float, yOffsetDp: Float)
 }
