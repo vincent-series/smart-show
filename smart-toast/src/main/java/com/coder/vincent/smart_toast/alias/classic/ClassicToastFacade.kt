@@ -6,6 +6,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import com.coder.vincent.series.common_lib.bean.IconPosition
 import com.coder.vincent.smart_toast.ShowToast
+import com.coder.vincent.smart_toast.bean.Duration
 
 interface ClassicToastFacade {
     interface Overall : ShowToast {
@@ -36,6 +37,8 @@ interface ClassicToastFacade {
         fun backgroundColorResource(@ColorRes backgroundColorResource: Int): ConfigSetter
 
         fun iconPosition(iconPosition: IconPosition): ConfigSetter
+
+        fun duration(duration: Duration): ConfigSetter
 
         fun commit(): ShowToast
     }

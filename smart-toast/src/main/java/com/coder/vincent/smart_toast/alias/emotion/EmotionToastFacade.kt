@@ -5,6 +5,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import com.coder.vincent.smart_toast.ShowEmotionToast
+import com.coder.vincent.smart_toast.bean.Duration
 
 interface EmotionToastFacade {
     interface Overall : ShowEmotionToast {
@@ -33,6 +34,8 @@ interface EmotionToastFacade {
         fun backgroundColor(@ColorInt backgroundColor: Int): ConfigSetter
 
         fun backgroundColorResource(@ColorRes backgroundColorResource: Int): ConfigSetter
+
+        fun duration(duration: Duration): ConfigSetter
 
         fun commit(): ShowEmotionToast
     }

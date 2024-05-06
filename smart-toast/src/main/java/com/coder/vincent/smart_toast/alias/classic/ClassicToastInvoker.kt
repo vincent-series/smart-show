@@ -2,7 +2,6 @@ package com.coder.vincent.smart_toast.alias.classic
 
 import android.graphics.drawable.Drawable
 import android.view.Gravity
-import android.widget.Toast
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
@@ -16,6 +15,7 @@ import com.coder.vincent.series.common_lib.resourceToDrawable
 import com.coder.vincent.series.common_lib.resourceToString
 import com.coder.vincent.smart_toast.DEFAULT_TOAST_Y_OFFSET
 import com.coder.vincent.smart_toast.ShowToast
+import com.coder.vincent.smart_toast.bean.Duration
 import com.coder.vincent.smart_toast.factory.Location
 import com.coder.vincent.smart_toast.schedule.ToastScheduler
 
@@ -26,7 +26,7 @@ class ClassicToastInvoker : ClassicToastFacade.Overall, ClassicToastFacade.Confi
 
     override fun show(msg: CharSequence) {
         showHelper(
-            msg, Toast.LENGTH_SHORT, Location(
+            msg, config.duration, Location(
                 Gravity.BOTTOM or
                         Gravity.CENTER_HORIZONTAL, 0, DEFAULT_TOAST_Y_OFFSET
             )
@@ -39,7 +39,7 @@ class ClassicToastInvoker : ClassicToastFacade.Overall, ClassicToastFacade.Confi
 
     override fun showAtTop(msg: CharSequence) {
         showHelper(
-            msg, Toast.LENGTH_SHORT,
+            msg, config.duration,
             Location(
                 Gravity.TOP or
                         Gravity.CENTER_HORIZONTAL, 0, Toolkit.getToolbarHeight() + 40f.dpToPx()
@@ -52,7 +52,7 @@ class ClassicToastInvoker : ClassicToastFacade.Overall, ClassicToastFacade.Confi
     }
 
     override fun showInCenter(msg: CharSequence) {
-        showHelper(msg, Toast.LENGTH_SHORT, Location(Gravity.CENTER, 0, 0))
+        showHelper(msg, config.duration, Location(Gravity.CENTER, 0, 0))
     }
 
     override fun showInCenter(@StringRes msg: Int) {
@@ -67,7 +67,7 @@ class ClassicToastInvoker : ClassicToastFacade.Overall, ClassicToastFacade.Confi
     ) {
         showHelper(
             msg,
-            Toast.LENGTH_SHORT,
+            config.duration,
             Location(gravity, xOffsetDp.dpToPx(), yOffsetDp.dpToPx())
         )
     }
@@ -81,9 +81,10 @@ class ClassicToastInvoker : ClassicToastFacade.Overall, ClassicToastFacade.Confi
         showAtLocation(msg.resourceToString(), gravity, xOffsetDp, yOffsetDp)
     }
 
+    @Deprecated("use config().duration(Duration.LONG) instead.")
     override fun showLong(msg: CharSequence) {
         showHelper(
-            msg, Toast.LENGTH_LONG,
+            msg, Duration.LONG,
             Location(
                 Gravity.BOTTOM or
                         Gravity.CENTER_HORIZONTAL, 0, DEFAULT_TOAST_Y_OFFSET
@@ -91,31 +92,37 @@ class ClassicToastInvoker : ClassicToastFacade.Overall, ClassicToastFacade.Confi
         )
     }
 
+    @Deprecated("use config().duration(Duration.LONG) instead.")
     override fun showLong(@StringRes msg: Int) {
         showLong(msg.resourceToString())
     }
 
+    @Deprecated("use config().duration(Duration.LONG) instead.")
     override fun showLongAtTop(msg: CharSequence) {
         showHelper(
-            msg, Toast.LENGTH_LONG, Location(
+            msg, Duration.LONG, Location(
                 Gravity.TOP or Gravity.CENTER_HORIZONTAL, 0,
                 Toolkit.getToolbarHeight() + 40f.dpToPx()
             )
         )
     }
 
+    @Deprecated("use config().duration(Duration.LONG) instead.")
     override fun showLongAtTop(@StringRes msg: Int) {
         showLongAtTop(msg.resourceToString())
     }
 
+    @Deprecated("use config().duration(Duration.LONG) instead.")
     override fun showLongInCenter(msg: CharSequence) {
-        showHelper(msg, Toast.LENGTH_LONG, Location(Gravity.CENTER, 0, 0))
+        showHelper(msg, Duration.LONG, Location(Gravity.CENTER, 0, 0))
     }
 
+    @Deprecated("use config().duration(Duration.LONG) instead.")
     override fun showLongInCenter(@StringRes msg: Int) {
         showLongInCenter(msg.resourceToString())
     }
 
+    @Deprecated("use config().duration(Duration.LONG) instead.")
     override fun showLongAtLocation(
         msg: CharSequence,
         gravity: Int,
@@ -124,11 +131,12 @@ class ClassicToastInvoker : ClassicToastFacade.Overall, ClassicToastFacade.Confi
     ) {
         showHelper(
             msg,
-            Toast.LENGTH_LONG,
+            Duration.LONG,
             Location(gravity, xOffsetDp.dpToPx(), yOffsetDp.dpToPx())
         )
     }
 
+    @Deprecated("use config().duration(Duration.LONG) instead.")
     override fun showLongAtLocation(
         @StringRes msg: Int,
         gravity: Int,
@@ -140,7 +148,7 @@ class ClassicToastInvoker : ClassicToastFacade.Overall, ClassicToastFacade.Confi
 
     private fun showHelper(
         msg: CharSequence,
-        duration: Int,
+        duration: Duration,
         location: Location,
     ) {
         config.message = msg
@@ -200,6 +208,12 @@ class ClassicToastInvoker : ClassicToastFacade.Overall, ClassicToastFacade.Confi
         this.apply {
             config.iconPosition = iconPosition
         }
+
+    override fun duration(duration: Duration): ClassicToastFacade.ConfigSetter =
+        this.apply {
+            config.duration = duration
+        }
+
 
     override fun commit(): ShowToast = this
 }
