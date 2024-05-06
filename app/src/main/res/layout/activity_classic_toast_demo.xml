@@ -1,302 +1,316 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.coder.zzq.smartshowdemo.ClassicToastDemoActivity">
+    android:layout_height="match_parent">
 
-    <include layout="@layout/copyright_toolbar" />
-
-    <RadioGroup
-        android:id="@+id/position_group"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        tools:context="com.coder.zzq.smartshowdemo.ClassicToastDemoActivity">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
+        <include layout="@layout/copyright_toolbar" />
+
+        <RadioGroup
+            android:id="@+id/position_group"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:labelFor="@id/position_group"
-            android:paddingLeft="16dp"
-            android:text="position :"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
 
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/position_bottom"
-            android:layout_width="wrap_content"
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:labelFor="@id/position_group"
+                android:paddingLeft="16dp"
+                android:text="position :"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/position_bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:checked="true"
+                android:text="bottom" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/position_top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:text="top" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/position_center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:text="center" />
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/bg_color_group"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginEnd="3dp"
-            android:checked="true"
-            android:text="bottom" />
+            android:orientation="horizontal">
 
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/position_top"
-            android:layout_width="wrap_content"
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:labelFor="@id/position_group"
+                android:paddingLeft="16dp"
+                android:text="bgColor :"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/bg_color_default"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:checked="true"
+                android:text="default" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/bg_color_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:text="#3F51B5" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/bg_color_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:text="#FF4081" />
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/icon_group"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginEnd="3dp"
-            android:text="top" />
+            android:orientation="horizontal">
 
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/position_center"
-            android:layout_width="wrap_content"
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:labelFor="@id/position_group"
+                android:paddingLeft="16dp"
+                android:text="icon :"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/icon_none"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:checked="true"
+                android:text="none" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/with_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:text="with icon" />
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/icon_position_group"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginEnd="3dp"
-            android:text="center" />
-    </RadioGroup>
+            android:orientation="horizontal">
 
-    <RadioGroup
-        android:id="@+id/bg_color_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:labelFor="@id/position_group"
+                android:paddingLeft="16dp"
+                android:text="icon position :"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/icon_position_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:checked="true"
+                android:text="left" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/icon_position_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:text="right" />
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/msg_color_group"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:labelFor="@id/position_group"
-            android:paddingLeft="16dp"
-            android:text="bgColor :"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:orientation="horizontal">
 
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/bg_color_default"
-            android:layout_width="wrap_content"
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:labelFor="@id/msg_color_group"
+                android:paddingLeft="16dp"
+                android:text="msg color :"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/color_default"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:checked="true"
+                android:text="white(default)" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/color_red"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:text="red" />
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/msg_size_group"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginEnd="3dp"
-            android:checked="true"
-            android:text="default" />
+            android:orientation="horizontal">
 
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/bg_color_one"
-            android:layout_width="wrap_content"
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:labelFor="@id/msg_size_group"
+                android:paddingLeft="16dp"
+                android:text="msg size :"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/size_default"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:checked="true"
+                android:text="14sp(default)" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/size_20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:text="20sp" />
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/msg_bold_group"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginEnd="3dp"
-            android:text="#3F51B5" />
+            android:orientation="horizontal">
 
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/bg_color_two"
-            android:layout_width="wrap_content"
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:labelFor="@id/msg_bold_group"
+                android:paddingLeft="16dp"
+                android:text="msg bold :"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:text="bold" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/not_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:checked="true"
+                android:text="not bold" />
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/duration_group"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginEnd="3dp"
-            android:text="#FF4081" />
-    </RadioGroup>
+            android:orientation="horizontal">
 
-    <RadioGroup
-        android:id="@+id/icon_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:labelFor="@id/duration_group"
+                android:paddingLeft="16dp"
+                android:text="duration :"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:labelFor="@id/position_group"
-            android:paddingLeft="16dp"
-            android:text="icon :"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/duration_short"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:checked="true"
+                android:text="short" />
 
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/icon_none"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginEnd="3dp"
-            android:checked="true"
-            android:text="none" />
-
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/with_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginEnd="3dp"
-            android:text="with icon" />
-    </RadioGroup>
-
-    <RadioGroup
-        android:id="@+id/icon_position_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:labelFor="@id/position_group"
-            android:paddingLeft="16dp"
-            android:text="icon position :"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/icon_position_left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginEnd="3dp"
-            android:checked="true"
-            android:text="left" />
-
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/icon_position_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginEnd="3dp"
-            android:text="right" />
-    </RadioGroup>
-
-    <RadioGroup
-        android:id="@+id/msg_color_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:labelFor="@id/msg_color_group"
-            android:paddingLeft="16dp"
-            android:text="msg color :"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/color_default"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginEnd="3dp"
-            android:checked="true"
-            android:text="white(default)" />
-
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/color_red"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginEnd="3dp"
-            android:text="red" />
-    </RadioGroup>
-
-    <RadioGroup
-        android:id="@+id/msg_size_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:labelFor="@id/msg_size_group"
-            android:paddingLeft="16dp"
-            android:text="msg size :"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/size_default"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginEnd="3dp"
-            android:checked="true"
-            android:text="14sp(default)" />
-
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/size_20"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginEnd="3dp"
-            android:text="20sp" />
-    </RadioGroup>
-
-    <RadioGroup
-        android:id="@+id/msg_bold_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:labelFor="@id/msg_bold_group"
-            android:paddingLeft="16dp"
-            android:text="msg bold :"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginEnd="3dp"
-            android:text="bold" />
-
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/not_bold"
-            android:checked="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginEnd="3dp"
-            android:text="not bold" />
-    </RadioGroup>
-
-    <RadioGroup
-        android:id="@+id/duration_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:labelFor="@id/duration_group"
-            android:paddingLeft="16dp"
-            android:text="duration :"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/duration_short"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginEnd="3dp"
-            android:checked="true"
-            android:text="short" />
-
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/duration_long"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginEnd="3dp"
-            android:text="long" />
-    </RadioGroup>
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/duration_long"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:text="long" />
+        </RadioGroup>
 
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/show_toast"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="20dp"
-        android:text="Show" />
-</LinearLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/show_toast"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="20dp"
+            android:text="Show" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/dismiss_toast"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="20dp"
+            android:text="Dismiss" />
+    </LinearLayout>
+</ScrollView>

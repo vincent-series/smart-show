@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.coder.vincent.series.common_lib.resourceToColor
 import com.coder.vincent.smart_toast.SmartToast
+import com.coder.vincent.smart_toast.bean.Duration
 import com.coder.zzq.smartshowdemo.databinding.ActivityEmotionToastDemoBinding
 
 class EmotionToastDemoActivity : AppCompatActivity() {
@@ -27,56 +28,19 @@ class EmotionToastDemoActivity : AppCompatActivity() {
                     .config()
                     .backgroundColor(bgColor)
                     .messageStyle(msgColor, msgSize, msgBoldGroup.checkedRadioButtonId == R.id.bold)
+//                    .duration(if (shorDuration) Duration.SHORT else Duration.LONG)
+                    .duration(Duration.INDEFINITE)
                     .commit()
                     .apply {
                         when (emotionGroup.checkedRadioButtonId) {
-                            R.id.emotion_info ->
-                                if (shorDuration)
-                                    info(R.string.net_fine)
-                                else
-                                    infoLong(R.string.net_fine)
-
-                            R.id.emotion_success ->
-                                if (shorDuration)
-                                    success(R.string.delete_succ)
-                                else
-                                    successLong(R.string.delete_succ)
-
-                            R.id.emotion_error ->
-                                if (shorDuration)
-                                    error(R.string.data_parse_error)
-                                else
-                                    errorLong(R.string.data_parse_error)
-
-                            R.id.emotion_warning ->
-                                if (shorDuration)
-                                    warning(R.string.power_low)
-                                else
-                                    warningLong(R.string.power_low)
-
-                            R.id.emotion_waiting ->
-                                if (shorDuration)
-                                    waiting(R.string.wait_to_download)
-                                else
-                                    waitingLong(R.string.wait_to_download)
-
-                            R.id.emotion_fail ->
-                                if (shorDuration)
-                                    fail(R.string.save_fail)
-                                else
-                                    failLong(R.string.save_fail)
-
-                            R.id.emotion_complete ->
-                                if (shorDuration)
-                                    complete(R.string.download_complete)
-                                else
-                                    completeLong(R.string.download_complete)
-
-                            R.id.emotion_forbid ->
-                                if (shorDuration)
-                                    forbid(R.string.forbid_op)
-                                else
-                                    forbidLong(R.string.forbid_op)
+                            R.id.emotion_info -> info(R.string.net_fine)
+                            R.id.emotion_success -> success(R.string.delete_succ)
+                            R.id.emotion_error -> error(R.string.data_parse_error)
+                            R.id.emotion_warning -> warning(R.string.power_low)
+                            R.id.emotion_waiting -> waiting(R.string.wait_to_download)
+                            R.id.emotion_fail -> fail(R.string.save_fail)
+                            R.id.emotion_complete -> complete(R.string.download_complete)
+                            R.id.emotion_forbid -> forbid(R.string.forbid_op)
                         }
                     }
             }

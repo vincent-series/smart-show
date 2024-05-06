@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.coder.vincent.series.common_lib.bean.IconPosition
 import com.coder.vincent.series.common_lib.resourceToColor
 import com.coder.vincent.smart_toast.SmartToast
+import com.coder.vincent.smart_toast.bean.Duration
 import com.coder.zzq.smartshowdemo.databinding.ActivityClassicToastDemoBinding
 
 
@@ -43,28 +44,19 @@ class ClassicToastDemoActivity : AppCompatActivity() {
                             msgSize,
                             msgBoldGroup.checkedRadioButtonId == R.id.bold
                         )
+                        .duration(if (shorDuration)Duration.SHORT else Duration.LONG)
+//                        .duration(Duration.INDEFINITE)
                         .commit()
                         .apply {
                             when (positionGroup.checkedRadioButtonId) {
-                                R.id.position_top -> if (shorDuration) {
-                                    showAtTop("classic toast")
-                                } else {
-                                    showLongAtTop("classic toast")
-                                }
-
-                                R.id.position_center -> if (shorDuration) {
-                                    showInCenter("classic toast")
-                                } else {
-                                    showLongInCenter("classic toast")
-                                }
-
-                                else -> if (shorDuration) {
-                                    show("classic toast")
-                                } else {
-                                    showLong("classic toast")
-                                }
+                                R.id.position_top -> showAtTop("classic toast")
+                                R.id.position_center -> showInCenter("classic toast")
+                                else -> show("classic toast")
                             }
                         }
+                }
+                dismissToast.setOnClickListener {
+                    SmartToast.dismiss()
                 }
             }.root
         )

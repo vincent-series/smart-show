@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.AdapterView.OnItemClickListener
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.coder.vincent.smart_dialog.click_list.ClickListAdapter
 import com.coder.zzq.smartshowdemo.databinding.ActivitySmartShowDemoBinding
 
@@ -32,6 +33,7 @@ class SmartShowDemoActivity : AppCompatActivity() {
                     }
                 }
         }.root)
+        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.SYSTEM_ALERT_WINDOW),0)
     }
 
     fun onToastClick() {
