@@ -2,9 +2,9 @@
 * [sharp-retrofit](https://github.com/vincent-series/sharp-retrofit)
 ### 模块导航：
 
-* [SmartToast（latest version：4.1.6）](https://github.com/vincent-series/smart-show#smarttoast%E9%83%A8%E5%88%86)
-* [SmartSnackBar（latest version：4.1.2）](https://github.com/vincent-series/smart-show#smartsnackbar%E9%83%A8%E5%88%86)
-* [SmartDialog（latest version：4.1.4）](https://github.com/vincent-series/smart-show#smartdialog%E9%83%A8%E5%88%86)
+* [SmartToast（latest version：4.1.7）](#SmartToast部分)
+* [SmartSnackBar（latest version：4.1.2）](#SmartSnackBar部分)
+* [SmartDialog（latest version：4.1.4）](#SmartDialog部分)
 * [关于实现](#代码实现)
 * [关于作者及技术交流](#关于作者)
 
@@ -42,7 +42,7 @@
 ### 引入依赖
 
 <pre><code>
-implementation "io.github.vincent-series:smart-toast:4.1.6"
+implementation "io.github.vincent-series:smart-toast:4.1.7"
 </code></pre>
 
 ### API
