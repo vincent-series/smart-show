@@ -32,10 +32,10 @@
 1. 三种Toast实现策略:系统window + Toast + dialog,根据情况动态择优选择
 2. 合理的复用策略，避免Toast重复弹跳
 3. 解决Android 7.1的系统bug——Toast BadTokenException
-4. 可修改Toast默认布局的风格，如背景颜色，文字大小和颜色等
+4. 配置Toast风格，如背景颜色，文字大小和颜色等
 5. 完美解决应用关闭通知权限后Toast不显示问题
 6. 适配android 11对toast的相关限制
-7. 配置Toast风格，如背景颜色或文字大小
+7. 自定义toast显示时长
 8. 通过注解快速自定义新的Toast
 8. 结合主流app消息提示的效果，提供info、success、error、warning、complete、forbid、wait、fail 8 种类型的Emotion Toast
 
