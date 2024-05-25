@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.IntDef
+import com.coder.vincent.series.common_lib.bean.IconPosition
 import com.coder.vincent.series.common_lib.dpToPx
 import com.coder.vincent.smart_snackbar.bean.AnimationMode
 import com.coder.vincent.smart_snackbar.bean.Duration
@@ -23,8 +24,7 @@ internal class SnackBarConfig {
     @DrawableRes
     var icon: Int? = null
 
-    @SnackBarIconPosition
-    var iconPosition: Int = SNACK_BAR_ICON_POSITION_LEFT
+    var iconPosition: IconPosition = IconPosition.LEFT
     var iconSize: Int = 0
     var iconPadding: Int = 10f.dpToPx()
 
@@ -51,10 +51,3 @@ annotation class SnackBarPosition
 
 internal const val SNACK_BAR_POSITION_TOP = 0
 internal const val SNACK_BAR_POSITION_BOTTOM = 1
-
-@Retention(AnnotationRetention.SOURCE)
-@IntDef(SNACK_BAR_ICON_POSITION_LEFT, SNACK_BAR_ICON_POSITION_RIGHT)
-internal annotation class SnackBarIconPosition
-
-const val SNACK_BAR_ICON_POSITION_LEFT = 0
-const val SNACK_BAR_ICON_POSITION_RIGHT = 1

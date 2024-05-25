@@ -17,3 +17,4 @@ dependencyResolutionManagement {
 rootProject.name = "smart-show"
 include ':app'
 include ':smart-toast', ':smart-dialog', ':smart-snackbar'
+include ':sample'

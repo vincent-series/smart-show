@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:ns1="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools">
+    <color name="design_snackbar_background_color">#323232</color>
+    <color name="design_default_color_surface">#FFFFFF</color>
+    <dimen name="design_snackbar_action_inline_max_width">128dp</dimen>
+    <item name="design_snackbar_action_text_color_alpha" format="float" type="dimen">1.0</item>
+    <dimen name="design_snackbar_background_corner_radius">0dp</dimen>
+    <dimen name="design_snackbar_elevation">6dp</dimen>
+    <dimen name="design_snackbar_extra_spacing_horizontal">0dp</dimen>
+    <dimen name="design_snackbar_max_width">-1px</dimen>
+    <dimen name="design_snackbar_min_width">-1px</dimen>
+    <dimen name="design_snackbar_padding_horizontal">12dp</dimen>
+    <dimen name="design_snackbar_padding_vertical">14dp</dimen>
+    <dimen name="design_snackbar_padding_vertical_2lines">16dp</dimen>
+    <dimen name="design_snackbar_text_size">14sp</dimen>
+    <item name="m3_snackbar_action_text_color_alpha" format="float" type="dimen">1.0</item>
+    <dimen name="m3_snackbar_margin">8dp</dimen>
+    <dimen name="mtrl_btn_snackbar_margin_horizontal">8dp</dimen>
+    <item name="mtrl_snackbar_action_text_color_alpha" format="float" type="dimen">0.5</item>
+    <dimen name="mtrl_snackbar_background_corner_radius">4dp</dimen>
+    <item name="mtrl_snackbar_background_overlay_color_alpha" format="float" type="dimen">0.8</item>
+    <dimen name="mtrl_snackbar_margin">8dp</dimen>
+    <dimen name="mtrl_snackbar_message_margin_horizontal">8dp</dimen>
+    <dimen name="mtrl_snackbar_padding_horizontal">8dp</dimen>
+    <item name="snackbar_action" type="id" />
+    <item name="snackbar_text" type="id" />
+    <integer name="design_snackbar_text_max_lines">2</integer>
+    <item name="material_emphasis_high_type" format="float" type="dimen">0.87</item>
+
+    <style name="TextAppearance.Design.Snackbar.Message" parent="android:TextAppearance">
+        <item name="android:textSize">@dimen/design_snackbar_text_size</item>
+        <item name="android:textColor">?android:textColorPrimary</item>
+    </style>
+
+    <style name="Widget.Design.Snackbar" parent="android:Widget">
+        <item name="android:minWidth">@dimen/design_snackbar_min_width</item>
+        <item name="android:maxWidth">@dimen/design_snackbar_max_width</item>
+        <item name="android:background">@drawable/design_snackbar_background</item>
+        <item name="android:paddingLeft">@dimen/design_snackbar_padding_horizontal</item>
+        <item name="android:paddingRight">@dimen/design_snackbar_padding_horizontal</item>
+        <item name="elevation">@dimen/design_snackbar_elevation</item>
+        <item name="maxActionInlineWidth">@dimen/design_snackbar_action_inline_max_width</item>
+        <item name="animationMode">slide</item>
+        <item name="actionTextColorAlpha">@dimen/design_snackbar_action_text_color_alpha</item>
+    </style>
+
+
+    <dimen name="mtrl_btn_padding_left">16dp</dimen>
+    <dimen name="mtrl_btn_padding_right">16dp</dimen>
+    <dimen name="mtrl_btn_padding_top">4dp</dimen>
+    <dimen name="mtrl_btn_padding_bottom">4dp</dimen>
+    <dimen name="mtrl_btn_inset">6dp</dimen>
+    <dimen name="mtrl_btn_max_width">320dp</dimen>
+    <dimen name="mtrl_btn_elevation">2dp</dimen>
+    <dimen name="mtrl_btn_text_btn_padding_left">8dp</dimen>
+    <dimen name="mtrl_btn_text_btn_padding_right">8dp</dimen>
+    <integer name="mtrl_btn_anim_duration_ms">100</integer>
+    <dimen name="mtrl_btn_pressed_z">6dp</dimen>
+    <dimen name="mtrl_btn_hovered_z">2dp</dimen>
+    <dimen name="mtrl_btn_focused_z">2dp</dimen>
+    <integer name="mtrl_badge_max_character_count">4</integer>
+    <integer name="mtrl_btn_anim_delay_ms">100</integer>
+    <dimen name="mtrl_btn_z">0dp</dimen>
+    <dimen name="mtrl_btn_disabled_elevation">0dp</dimen>
+    <dimen name="mtrl_btn_disabled_z">0dp</dimen>
+
+    <style name="Widget.MaterialComponents.Button" parent="Widget.AppCompat.Button">
+        <item name="android:background">@null</item>
+<!--        <item name="android:textAppearance">?attr/textAppearanceButton</item>-->
+        <item name="android:textColor">@color/mtrl_btn_text_color_selector</item>
+        <item name="android:paddingLeft">@dimen/mtrl_btn_padding_left</item>
+        <item name="android:paddingRight">@dimen/mtrl_btn_padding_right</item>
+        <item name="android:paddingTop">@dimen/mtrl_btn_padding_top</item>
+        <item name="android:paddingBottom">@dimen/mtrl_btn_padding_bottom</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:insetTop">@dimen/mtrl_btn_inset</item>
+        <item name="android:insetBottom">@dimen/mtrl_btn_inset</item>
+        <item name="android:maxWidth">@dimen/mtrl_btn_max_width</item>
+        <item name="android:stateListAnimator" tools:ignore="NewApi">
+            @animator/mtrl_btn_state_list_anim
+        </item>
+        <item name="elevation">@dimen/mtrl_btn_elevation</item>
+        <item name="iconTint">@color/mtrl_btn_text_color_selector</item>
+        <item name="backgroundTint">@color/mtrl_btn_bg_color_selector</item>
+    </style>
+
+    <style name="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:stateListAnimator" tools:ignore="NewApi">
+            @animator/mtrl_btn_unelevated_state_list_anim
+        </item>
+        <item name="elevation">0dp</item>
+    </style>
+
+    <style name="Widget.MaterialComponents.Button.TextButton" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:textColor">@color/mtrl_text_btn_text_color_selector</item>
+        <item name="android:paddingLeft">@dimen/mtrl_btn_text_btn_padding_left</item>
+        <item name="android:paddingRight">@dimen/mtrl_btn_text_btn_padding_right</item>
+        <item name="iconTint">@color/mtrl_text_btn_text_color_selector</item>
+        <item name="backgroundTint">@color/mtrl_btn_text_btn_bg_color_selector</item>
+    </style>
+
+    <style name="Widget.MaterialComponents.Button.TextButton.Snackbar">
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
+
+    <style name="Widget.MaterialComponents.Snackbar" parent="Base.Widget.MaterialComponents.Snackbar">
+        <item name="android:background">@null</item>
+        <item name="android:layout_margin">@dimen/mtrl_snackbar_margin</item>
+        <item name="animationMode">fade</item>
+    </style>
+
+    <style name="Base.Widget.MaterialComponents.Snackbar" parent="Widget.Design.Snackbar">
+
+        <item name="android:paddingLeft">@dimen/mtrl_snackbar_padding_horizontal</item>
+        <item name="android:paddingRight">@dimen/mtrl_snackbar_padding_horizontal</item>
+        <item name="backgroundOverlayColorAlpha">
+            @dimen/mtrl_snackbar_background_overlay_color_alpha
+        </item>
+        <item name="actionTextColorAlpha">@dimen/mtrl_snackbar_action_text_color_alpha</item>
+    </style>
+
+    <style name="Widget.MaterialComponents.Snackbar.TextView" parent="Widget.AppCompat.TextView">
+        <item name="android:alpha">@dimen/material_emphasis_high_type</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">@integer/design_snackbar_text_max_lines</item>
+        <item name="android:textAlignment" ns1:ignore="NewApi">viewStart</item>
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Body2</item>
+        <item name="android:textColor">@color/design_default_color_surface</item>
+        <item name="android:paddingTop">@dimen/design_snackbar_padding_vertical</item>
+        <item name="android:paddingBottom">@dimen/design_snackbar_padding_vertical</item>
+        <item name="android:layout_marginLeft">@dimen/mtrl_snackbar_message_margin_horizontal</item>
+        <item name="android:layout_marginRight">@dimen/mtrl_snackbar_message_margin_horizontal
+        </item>
+    </style>
+
+    <style name="TextAppearance.MaterialComponents.Body2" parent="TextAppearance.AppCompat.Body1">
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing" tools:targetApi="21">0.0178571429</item>
+    </style>
+
+    <declare-styleable name="Snackbar">
+
+        <attr name="snackbarStyle" format="reference" />
+
+        <attr name="snackbarButtonStyle" format="reference" />
+
+        <attr name="snackbarTextViewStyle" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="SnackbarLayout">
+        <attr name="android:maxWidth" />
+        <attr name="elevation" />
+        <attr name="maxActionInlineWidth" format="dimension" />
+
+        <attr name="animationMode" format="enum">
+            <!-- Mode that corresponds to the slide in and out animations. -->
+            <enum name="slide" value="0" />
+            <!-- Mode that corresponds to the fade in and out animations. -->
+            <enum name="fade" value="1" />
+        </attr>
+
+        <attr name="backgroundOverlayColorAlpha" format="float" />
+
+        <attr name="backgroundTint" />
+
+        <attr name="backgroundTintMode" />
+
+        <attr name="actionTextColorAlpha" format="float" />
+
+        <attr name="shapeAppearance" />
+
+        <attr name="shapeAppearanceOverlay" />
+    </declare-styleable>
+    <attr name="colorSurface" format="color" />
+    <attr name="colorOnSurface" format="color" />
+    <attr name="motionDurationLong2" format="integer" />
+    <attr name="motionDurationMedium1" format="integer" />
+    <attr name="motionEasingEmphasizedInterpolator" format="reference" />
+    <attr name="colorPrimary" format="color" />
+    <attr name="colorPrimaryVariant" format="color" />
+    <attr name="theme" format="reference" />
+    <attr name="materialThemeOverlay" format="reference" />
+    <attr name="minTouchTargetSize" format="dimension" />
+    <dimen name="mtrl_min_touch_target_size">48dp</dimen>
+    <declare-styleable name="MaterialShape">
+        <attr name="shapeAppearance" format="reference" />
+        <attr name="shapeAppearanceOverlay" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="ShapeAppearance">
+
+        <attr name="cornerSize" format="dimension|fraction" />
+
+        <attr name="cornerSizeTopLeft" format="dimension|fraction" />
+
+        <attr name="cornerSizeTopRight" format="dimension|fraction" />
+
+        <attr name="cornerSizeBottomRight" format="dimension|fraction" />
+
+        <attr name="cornerSizeBottomLeft" format="dimension|fraction" />
+
+
+        <attr name="cornerFamily" format="enum">
+            <enum name="rounded" value="0" />
+            <enum name="cut" value="1" />
+        </attr>
+
+        <attr name="cornerFamilyTopLeft" format="enum">
+            <enum name="rounded" value="0" />
+            <enum name="cut" value="1" />
+        </attr>
+
+        <attr name="cornerFamilyTopRight" format="enum">
+            <enum name="rounded" value="0" />
+            <enum name="cut" value="1" />
+        </attr>
+
+        <attr name="cornerFamilyBottomRight" format="enum">
+            <enum name="rounded" value="0" />
+            <enum name="cut" value="1" />
+        </attr>
+
+        <attr name="cornerFamilyBottomLeft" format="enum">
+            <enum name="rounded" value="0" />
+            <enum name="cut" value="1" />
+        </attr>
+    </declare-styleable>
+</resources>

@@ -2,6 +2,7 @@ package com.coder.vincent.smart_snackbar
 
 import android.view.View
 import android.view.ViewGroup
+import com.coder.vincent.series.common_lib.bean.IconPosition
 import com.coder.vincent.series.common_lib.dpToPx
 import com.coder.vincent.series.common_lib.resourceToColor
 import com.coder.vincent.series.common_lib.resourceToString
@@ -35,7 +36,7 @@ internal class SnackBarInvoker(
         config.icon = iconResId
     }
 
-    override fun iconPosition(iconPosition: Int): SnackBarFacade.ConfigSetter =
+    override fun iconPosition(iconPosition: IconPosition): SnackBarFacade.ConfigSetter =
         this.apply {
             config.iconPosition = iconPosition
         }
@@ -87,7 +88,7 @@ internal class SnackBarInvoker(
             config.actionLabelSize = size.spToPx()
         }
 
-    override fun apply(): SnackBarFacade.ShowApi = this
+    override fun commit(): SnackBarFacade.ShowApi = this
 
     override fun show(msg: String) {
         showHelper(msg, "", emptyActionReaction, Duration.SHORT)

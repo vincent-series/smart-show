@@ -1,4 +1,4 @@
-package com.coder.vincent.smart_snackbar.bean
+package com.coder.vincent_series.smart_snackbar.bean
 
 enum class SnackBarStyle {
     CLASSIC,

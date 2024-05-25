@@ -3,9 +3,8 @@ package com.coder.zzq.smartshowdemo
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.coder.vincent.series.common_lib.bean.IconPosition
 import com.coder.vincent.series.common_lib.resourceToColor
-import com.coder.vincent.smart_snackbar.SNACK_BAR_ICON_POSITION_LEFT
-import com.coder.vincent.smart_snackbar.SNACK_BAR_ICON_POSITION_RIGHT
 import com.coder.vincent.smart_snackbar.SmartSnackBar
 import com.coder.vincent.smart_snackbar.bean.SnackBarStyle
 import com.coder.zzq.smartshowdemo.databinding.ActivitySnackbarDemoBinding
@@ -30,7 +29,7 @@ class SnackbarDemoActivity : AppCompatActivity() {
                     else
                         0
                     val iconPosition =
-                        if (iconPositionGroup.checkedRadioButtonId == R.id.icon_position_left) SNACK_BAR_ICON_POSITION_LEFT else SNACK_BAR_ICON_POSITION_RIGHT
+                        if (iconPositionGroup.checkedRadioButtonId == R.id.icon_position_left) IconPosition.LEFT else IconPosition.RIGHT
                     if (positionGroup.checkedRadioButtonId == R.id.position_top) {
                         SmartSnackBar.top(this@SnackbarDemoActivity)
                             .config()
@@ -39,7 +38,7 @@ class SnackbarDemoActivity : AppCompatActivity() {
                             .icon(icon)
                             .iconSizeDp(18f)
                             .iconPosition(iconPosition)
-                            .apply()
+                            .commit()
                             .show("top snackbar")
                     } else {
                         SmartSnackBar.bottom(this@SnackbarDemoActivity)
@@ -49,8 +48,8 @@ class SnackbarDemoActivity : AppCompatActivity() {
                             .icon(icon)
                             .iconSizeDp(18f)
                             .iconPosition(iconPosition)
-                            .apply()
-                            .show("bottom snackbar")
+                            .commit()
+                            .show("bottom snackbar","你好")
                     }
                 }
             }.root

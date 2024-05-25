@@ -11,9 +11,8 @@ import android.widget.Space
 import android.widget.TextView
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.get
+import com.coder.vincent.series.common_lib.bean.IconPosition
 import com.coder.vincent.series.common_lib.resourceToDrawable
-import com.coder.vincent.smart_snackbar.SNACK_BAR_ICON_POSITION_LEFT
-import com.coder.vincent.smart_snackbar.SNACK_BAR_ICON_POSITION_RIGHT
 import com.coder.vincent.smart_snackbar.SnackBar
 import com.coder.vincent.smart_snackbar.SnackBarConfig
 import kotlin.math.max
@@ -77,9 +76,9 @@ internal class ScheduledSnackBarImpl(private var config: SnackBarConfig) : Sched
             setBounds(0, 0, iconSize, iconSize)
         }
         val leftIcon: Drawable? =
-            if (config.iconPosition == SNACK_BAR_ICON_POSITION_LEFT) iconDrawable else null
+            if (config.iconPosition == IconPosition.LEFT) iconDrawable else null
         val rightIcon: Drawable? =
-            if (config.iconPosition == SNACK_BAR_ICON_POSITION_RIGHT) iconDrawable else null
+            if (config.iconPosition == IconPosition.RIGHT) iconDrawable else null
         messageView.setCompoundDrawables(leftIcon, null, rightIcon, null)
         messageView.compoundDrawablePadding = config.iconPadding
         messageView.paint.isFakeBoldText = config.messageBold ?: srcMessageBold
