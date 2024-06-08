@@ -29,7 +29,7 @@
 
 [回到模块导航](#模块导航)
 
-1. 三种Toast实现策略:系统window + Toast + dialog,根据情况动态择优选择
+1. 三种Toast实现策略:系统window + Toast + dialog,根据情况动态择优选择，以适配兼容各种问题
 2. 合理的复用策略，避免Toast重复弹跳
 3. 解决Android 7.1的系统bug——Toast BadTokenException
 4. 配置Toast风格，如背景颜色，文字大小和颜色等
