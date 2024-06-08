@@ -3,10 +3,10 @@ package com.coder.vincent.smart_toast.compact
 import android.app.Activity
 import android.app.Dialog
 import android.os.SystemClock
-import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDialog
+import androidx.viewbinding.ViewBinding
 import com.coder.vincent.series.common_lib.Toolkit
 import com.coder.vincent.series.common_lib.bean.ActivityItem
 import com.coder.vincent.series.common_lib.lifecycle.ActivityStack
@@ -16,9 +16,9 @@ import com.coder.vincent.smart_toast.factory.ToastConfig
 import com.coder.vincent.smart_toast.handler
 
 internal class DialogWindowToast(
-    toastView: View,
+    toastView: ViewBinding,
     config: ToastConfig,
-    configApplyCallback: (View, ToastConfig) -> Unit
+    configApplyCallback: (ViewBinding, ToastConfig) -> Unit
 ) : AbsCompactToast(toastView, config, configApplyCallback) {
     lateinit var toast: Dialog
     override fun show() {
@@ -61,7 +61,7 @@ internal class DialogWindowToast(
         kotlin.runCatching {
             toast = createToast(activityItem.activity)
             toast.show()
-            if (config().duration.value.toLong() != TOAST_DURATION_INDEFINITE){
+            if (config().duration.value.toLong() != TOAST_DURATION_INDEFINITE) {
                 handler.postDelayed({ cancel() }, config().duration.value.toLong())
             }
             activityItem.addStateChangeCallback {

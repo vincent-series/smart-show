@@ -2,10 +2,10 @@ package com.coder.vincent.smart_toast.schedule
 
 import android.view.View
 import com.coder.vincent.series.common_lib.Toolkit
-import com.coder.vincent.smart_toast.factory.ToastConfig
 import com.coder.vincent.smart_toast.compact.CompactToast
 import com.coder.vincent.smart_toast.compact.IdleToast
 import com.coder.vincent.smart_toast.compact.ToastVisibilityObserver
+import com.coder.vincent.smart_toast.factory.ToastConfig
 import com.coder.vincent.smart_toast.factory.ToastFactory
 
 object ToastScheduler : ToastVisibilityObserver {

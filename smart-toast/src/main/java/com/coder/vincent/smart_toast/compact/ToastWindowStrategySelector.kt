@@ -1,15 +1,17 @@
 package com.coder.vincent.smart_toast.compact
 
-import android.view.View
+import android.os.Build
+import androidx.viewbinding.ViewBinding
 import com.coder.vincent.series.common_lib.Toolkit
+import com.coder.vincent.series.common_lib.lifecycle.ActivityStack
 import com.coder.vincent.smart_toast.bean.Duration
 import com.coder.vincent.smart_toast.factory.ToastConfig
 
 class ToastWindowStrategySelector {
     fun select(
-        toastView: View,
+        toastView: ViewBinding,
         config: ToastConfig,
-        configApplyCallback: (View, ToastConfig) -> Unit
+        configApplyCallback: (ViewBinding, ToastConfig) -> Unit
     ): CompactToast =
         when {
             Toolkit.isSystemAlertWindowEnabled() -> SystemWindowToast(
@@ -18,7 +20,12 @@ class ToastWindowStrategySelector {
                 configApplyCallback
             )
 
-            !isCustomDuration(config.duration) && Toolkit.isNotificationPermitted() -> OriginalToast(
+            ActivityStack.isInBackground() && !Toolkit.sdkVersionBelow(Build.VERSION_CODES.R) -> OriginalToast(
+                toastView.root,
+                config
+            )
+
+            !isDurationCustomized(config.duration) && Toolkit.isNotificationPermitted() -> DecoratedToast(
                 toastView,
                 config,
                 configApplyCallback
@@ -32,5 +39,5 @@ class ToastWindowStrategySelector {
         }
 }
 
-fun isCustomDuration(duration: Duration): Boolean =
+fun isDurationCustomized(duration: Duration): Boolean =
     duration.value.toLong().let { (it != TOAST_DURATION_SHORT) and (it != TOAST_DURATION_LONG) }

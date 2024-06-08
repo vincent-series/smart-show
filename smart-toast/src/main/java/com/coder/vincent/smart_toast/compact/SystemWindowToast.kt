@@ -2,19 +2,19 @@ package com.coder.vincent.smart_toast.compact
 
 import android.graphics.PixelFormat
 import android.os.Build
-import android.view.View
 import android.view.WindowManager
 import android.view.WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
 import android.view.WindowManager.LayoutParams.TYPE_SYSTEM_ALERT
+import androidx.viewbinding.ViewBinding
 import com.coder.vincent.series.common_lib.Toolkit
 import com.coder.vincent.smart_toast.factory.ToastConfig
 import com.coder.vincent.smart_toast.handler
 
 @Suppress("DEPRECATION")
 internal class SystemWindowToast(
-    toastView: View,
+    toastView: ViewBinding,
     config: ToastConfig,
-    configApplyCallback: (View, ToastConfig) -> Unit
+    configApplyCallback: (ViewBinding, ToastConfig) -> Unit
 ) : AbsCompactToast(toastView, config, configApplyCallback) {
     override fun show() {
         kotlin.runCatching {
@@ -33,7 +33,7 @@ internal class SystemWindowToast(
                     if (Toolkit.sdkVersionBelow(Build.VERSION_CODES.O)) TYPE_SYSTEM_ALERT else TYPE_APPLICATION_OVERLAY
             }
             Toolkit.windowManager().addView(view(), lp)
-            if (config().duration.value.toLong() != TOAST_DURATION_INDEFINITE){
+            if (config().duration.value.toLong() != TOAST_DURATION_INDEFINITE) {
                 handler.postDelayed({ cancel() }, config().duration.value.toLong())
             }
         }

@@ -1,12 +1,13 @@
 package com.coder.vincent.smart_toast.compact
 
 import android.view.View
+import androidx.viewbinding.ViewBinding
 import com.coder.vincent.smart_toast.factory.ToastConfig
 
 internal abstract class AbsCompactToast(
-    private val toastView: View,
+    private val toastView: ViewBinding,
     private var config: ToastConfig,
-    private var configApplyCallback: (View, ToastConfig) -> Unit
+    private var configApplyCallback: (ViewBinding, ToastConfig) -> Unit
 ) : CompactToast {
     init {
         configApplyCallback.invoke(this.toastView, this.config)
@@ -21,20 +22,20 @@ internal abstract class AbsCompactToast(
         configApplyCallback.invoke(this.toastView, this.config)
     }
 
-    override fun view() = toastView
+    override fun view() = toastView.root
 
-    override fun isShowing() = toastView.windowVisibility == View.VISIBLE
+    override fun isShowing() = toastView.root.windowVisibility == View.VISIBLE
 
     override fun setVisibilityObserver(visibilityObserver: ToastVisibilityObserver) {
         viewAttachListener?.let {
-            toastView.removeOnAttachStateChangeListener(viewAttachListener)
+            toastView.root.removeOnAttachStateChangeListener(viewAttachListener)
         }
         viewAttachListener = ViewAttachListener(visibilityObserver)
-        toastView.addOnAttachStateChangeListener(viewAttachListener)
+        toastView.root.addOnAttachStateChangeListener(viewAttachListener)
     }
 
     override fun removeVisibilityObserver(visibilityObserver: ToastVisibilityObserver) {
-        toastView.removeOnAttachStateChangeListener(viewAttachListener)
+        toastView.root.removeOnAttachStateChangeListener(viewAttachListener)
     }
 }
 
