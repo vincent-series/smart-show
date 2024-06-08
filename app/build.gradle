@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -49,5 +50,6 @@ dependencies {
     implementation project(path: ':smart-dialog')
     implementation project(path: ':smart-snackbar')
     implementation project(path: ':smart-toast')
+    kapt "io.github.vincent-series:annotation-compiler:1.1.1"
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
 }
