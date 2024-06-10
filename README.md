@@ -50,7 +50,7 @@ implementation "io.github.vincent-series:smart-toast:4.1.8"
 [Java User Document](https://github.com/vincent-series/smart-show/wiki/smart-toast-API-for-Java)
 ### 历史版本
 [查看历史版本](https://github.com/vincent-series/smart-show/wiki/SmartToast%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC)
-### 效果图
+### 部分效果图
 |classic toast|classic toast|classic toast|
 |:------:|:-------:|:--------:|
 |默认背景|配置背景和Icon<br/>Icon居于文本左侧|配置背景和Icon<br/>Icon居于文本右侧|
@@ -59,20 +59,9 @@ implementation "io.github.vincent-series:smart-toast:4.1.8"
 
 |emotion toast|emotion toast|emotion toast|
 |:------:|:-------:|:--------:|
-|信息|成功|错误|
-| <img src="images/emotion_toast_info.jpg"> | <img src="images/emotion_toast_success.jpg">|<img src="images/emotion_toast_error.jpg">|
+|成功|警告|禁止|
+| <img src="images/emotion_toast_success.jpg"> | <img src="images/emotion_toast_warning.jpg">|<img src="images/emotion_toast_forbid.jpg">|
 <hr/>
-
-|emotion toast|emotion toast|emotion toast|
-|:------:|:-------:|:--------:|
-|警告|等待|禁止|
-| <img src="images/emotion_toast_warning.jpg"> | <img src="images/emotion_toast_wait.jpg">|<img src="images/emotion_toast_forbid.jpg">|
-<hr/>
-
-|emotion toast|emotion toast|emotion toast|
-|:------:|:-------:|:--------:|
-|失败|完成|任意一种都可配置背景，如|
-| <img src="images/emotion_toast_fail.jpg"> | <img src="images/emotion_toast_complete.jpg">|<img src="images/emotion_toast_custom_bg.jpg">|
 ## SmartSnackBar部分
 
 [回到模块导航](#模块导航)<br/><br/>
