@@ -42,7 +42,7 @@
 ### 引入依赖
 
 <pre><code>
-implementation "io.github.vincent-series:smart-toast:4.1.8"
+implementation "io.github.vincent-series:smart-toast:4.1.9"
 </code></pre>
 
 ### API
