@@ -15,12 +15,14 @@ import com.coder.vincent.series.common_lib.resourceToDrawable
 import com.coder.vincent.series.common_lib.resourceToString
 import com.coder.vincent.smart_toast.DEFAULT_TOAST_Y_OFFSET
 import com.coder.vincent.smart_toast.ShowToast
+import com.coder.vincent.smart_toast.TOAST_ALIAS_CLASSIC
 import com.coder.vincent.smart_toast.bean.Duration
 import com.coder.vincent.smart_toast.factory.Location
 import com.coder.vincent.smart_toast.schedule.ToastScheduler
 
 class ClassicToastInvoker : ClassicToastFacade.Overall, ClassicToastFacade.ConfigSetter {
-    private val config: ClassicToast.Config = ClassicToast.Config()
+    private val config: ClassicToast.Config =
+        ClassicToast.Config().apply { alias = TOAST_ALIAS_CLASSIC }
 
     override fun config(): ClassicToastFacade.ConfigSetter = this
 

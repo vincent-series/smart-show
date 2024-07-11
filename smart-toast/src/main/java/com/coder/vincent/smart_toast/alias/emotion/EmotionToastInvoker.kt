@@ -19,12 +19,14 @@ import com.coder.vincent.smart_toast.EMOTION_SUCCESS
 import com.coder.vincent.smart_toast.EMOTION_WAITING
 import com.coder.vincent.smart_toast.EMOTION_WARNING
 import com.coder.vincent.smart_toast.ShowEmotionToast
+import com.coder.vincent.smart_toast.TOAST_ALIAS_EMOTION
 import com.coder.vincent.smart_toast.bean.Duration
 import com.coder.vincent.smart_toast.factory.Location
 import com.coder.vincent.smart_toast.schedule.ToastScheduler
 
 class EmotionToastInvoker : EmotionToastFacade.Overall, EmotionToastFacade.ConfigSetter {
-    private val config: EmotionToast.Config = EmotionToast.Config()
+    private val config: EmotionToast.Config =
+        EmotionToast.Config().apply { alias = TOAST_ALIAS_EMOTION }
 
     override fun config(): EmotionToastFacade.ConfigSetter = this
 
